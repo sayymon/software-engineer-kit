@@ -1,0 +1,475 @@
+{
+  "title": "guia-pratico",
+  "x-translatable": [
+    "nome",
+    "descricao",
+    "body",
+    "exemplo",
+    "quando_usar",
+    "quando_evitar",
+    "objetivo",
+    "preRequisitos",
+    "armadilhas",
+    "validacao",
+    "perguntasDecisao",
+    "passos"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+    },
+    "nome": {
+      "type": "string",
+      "minLength": 1
+    },
+    "descricao": {
+      "type": "string"
+    },
+    "publico": {
+      "default": false,
+      "type": "boolean"
+    },
+    "fontes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "livro",
+              "artigo",
+              "curso"
+            ]
+          },
+          "titulo": {
+            "type": "string",
+            "minLength": 1
+          },
+          "link": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status_revisao": {
+            "type": "string",
+            "enum": [
+              "pendente",
+              "em_revisao",
+              "revisada"
+            ]
+          },
+          "proxima_revisao": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          }
+        },
+        "required": [
+          "id",
+          "tipo",
+          "titulo",
+          "link",
+          "status_revisao",
+          "proxima_revisao"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "fonte_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dataVerificacao": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "guia_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+      }
+    },
+    "exemplo": {
+      "type": "string"
+    },
+    "quando_usar": {
+      "minItems": 2,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "quando_evitar": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "status": {
+      "default": "rascunho",
+      "type": "string",
+      "enum": [
+        "rascunho",
+        "revisado",
+        "publicado"
+      ]
+    },
+    "tipo": {
+      "type": "string",
+      "const": "guia-pratico"
+    },
+    "sigla": {
+      "type": "string",
+      "pattern": "^[a-z]{3}$"
+    },
+    "grupo": {
+      "type": "string",
+      "enum": [
+        "Configurar o ambiente",
+        "Construir software",
+        "IA aplicada",
+        "Qualidade entrega e operação",
+        "Segurança"
+      ]
+    },
+    "objetivo": {
+      "type": "string"
+    },
+    "preRequisitos": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "perguntasDecisao": {
+      "minItems": 3,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^q\\.[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+          },
+          "pergunta": {
+            "type": "string",
+            "minLength": 1
+          },
+          "eixo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "pergunta"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "raias": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+          },
+          "nome": {
+            "type": "string",
+            "minLength": 1
+          },
+          "responsabilidade": {
+            "type": "string"
+          },
+          "cor": {
+            "type": "string",
+            "pattern": "^#[0-9a-fA-F]{6}$"
+          },
+          "orquestradora": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "nome",
+          "cor"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "nos": {
+      "minItems": 2,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+          },
+          "raia": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "inicio",
+              "tarefa",
+              "bifurcacao",
+              "chamada",
+              "fim"
+            ]
+          },
+          "rotulo": {
+            "type": "string"
+          },
+          "proximo": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "para": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+                },
+                "condicao": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "para",
+                "condicao"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "raia_chamada": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+          },
+          "retorno": {
+            "type": "string"
+          },
+          "eixo": {
+            "type": "string"
+          },
+          "pergunta": {
+            "type": "string"
+          },
+          "passos": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "saida": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {}
+          },
+          "laco": {}
+        },
+        "required": [
+          "id",
+          "raia",
+          "tipo",
+          "rotulo"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "passos": {
+      "minItems": 6,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^(ctx|prep|exec|val|ent|ops)\\.[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+          },
+          "titulo": {
+            "type": "string",
+            "minLength": 1
+          },
+          "descricao": {
+            "type": "string",
+            "minLength": 1
+          },
+          "verificacao": {
+            "type": "string",
+            "minLength": 1
+          },
+          "depende": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "titulo",
+          "descricao",
+          "verificacao"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "comoFazerHoje": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "passo": {
+            "type": "string"
+          },
+          "variante": {
+            "type": "string"
+          },
+          "comandos": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "versaoTestada": {
+            "type": "string"
+          },
+          "dataVerificacao": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "fonteUrl": {
+            "type": "string",
+            "pattern": "^https:\\/\\/\\S+$"
+          }
+        },
+        "required": [
+          "passo",
+          "comandos",
+          "versaoTestada",
+          "dataVerificacao",
+          "fonteUrl"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "checklistRefs": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "armadilhas": {
+      "minItems": 3,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "validacao": {
+      "minItems": 3,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "padroes": {
+      "minItems": 2,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+      }
+    },
+    "categorias": {
+      "minItems": 3,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+      }
+    },
+    "stacks": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+      }
+    },
+    "ferramentas": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^(\\[\\[[^\\[\\]\\n]+\\]\\]|tabela:[a-z0-9_-]+)$"
+      }
+    },
+    "casosDeUso": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+      }
+    },
+    "variacoes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "certificacoes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "nome",
+    "tipo",
+    "sigla",
+    "grupo",
+    "raias",
+    "nos"
+  ],
+  "additionalProperties": false
+}

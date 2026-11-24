@@ -1,0 +1,18 @@
+id: tec_spec_driven_development
+tipo: tecnica
+nome: Spec-Driven Development
+descricao: "Desenvolvimento guiado por spec: requisitos, design e tarefas escritos antes do código, servindo de contrato para pessoas e agentes."
+quando_usar:
+  - Features com mais de uma pessoa ou agente
+  - Uso de agentes de código
+quando_evitar:
+  - Correção trivial de uma linha
+exemplo: requirements.md, design.md e tasks.md aprovados antes de delegar as tarefas aos agentes.
+como_aplicar:
+  - Escreva os requisitos com critérios
+  - Desenhe a solução
+  - Quebre em tarefas verificáveis
+  - Execute e valide contra a spec
+resultado_esperado: Spec versionada que guia a execução e a validação.
+status: rascunho
+publico: false

@@ -1,0 +1,18 @@
+id: tec_x5_whys
+tipo: tecnica
+nome: 5 Whys
+descricao: Perguntar por que algumas vezes seguidas para chegar à causa ou à necessidade real por trás de um pedido ou de uma falha.
+quando_usar:
+  - Incerteza alta sobre a necessidade
+  - Causa raiz de um problema
+quando_evitar:
+  - Causas múltiplas e sistêmicas, que pedem análise mais ampla
+exemplo: "Pedido: cupom para recorrentes. Por quê? Recompra caiu. Por quê? Checkout longo para quem já comprou."
+como_aplicar:
+  - Escreva o pedido ou o problema
+  - Pergunte por que e anote a resposta
+  - Repita até chegar a algo acionável
+  - Valide com dados
+resultado_esperado: Necessidade ou causa real registrada.
+status: rascunho
+publico: false

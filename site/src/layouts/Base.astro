@@ -1,0 +1,44 @@
+---
+// SPDX-License-Identifier: MIT
+import '../styles/tokens.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Diagram from '../components/Diagram.astro';
+import { makeT } from '../i18n';
+interface Props {
+  locale: 'pt-BR' | 'en';
+  title: string;
+  slug: string;
+  base: string;
+  description?: string;
+  layer?: string;
+  tipo?: string;
+  fallback?: boolean;
+  hasDiagram?: boolean;
+  searchPage?: boolean;
+}
+const { locale, title, slug, base, description = '', layer = 'site', tipo = 'page', fallback = false, hasDiagram = false } = Astro.props;
+const t = makeT(locale);
+const site = t('site.title');
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title === site ? site : `${title} | ${site}`}</title>
+    {description && <meta name="description" content={description.slice(0, 200)} />}
+    <link rel="alternate" hreflang="pt-BR" href={`${base}/pt-BR/${slug ? `${slug}/` : ''}`} />
+    <link rel="alternate" hreflang="en" href={`${base}/en/${slug ? `${slug}/` : ''}`} />
+  </head>
+  <body>
+    <Header locale={locale} base={base} slug={slug} t={t} />
+    <main id="main" data-pagefind-body data-pagefind-filter="layer[data-layer]" data-fallback={fallback ? 'true' : 'false'} data-layer={layer} data-tipo={tipo}>
+      {fallback && <p class="banner" role="note" data-pagefind-ignore>{t('fallback.banner')}</p>}
+      <slot />
+    </main>
+    <Footer locale={locale} base={base} t={t} />
+    {hasDiagram && <Diagram base={base} />}
+  </body>
+</html>

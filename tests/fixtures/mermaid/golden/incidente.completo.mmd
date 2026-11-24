@@ -1,0 +1,277 @@
+flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"])
+  end
+  subgraph z_SG_inc_orq["<b>Orquestração do incidente</b>"]
+    direction LR
+    inc_orq_s0(["<small><b>inc_orq_s0</b></small><br/>Alerta ou relato de falha em produção"])
+    inc_orq_c1[["<small><b>inc_orq_c1</b></small><br/>Detectar e triar o alerta"]]
+    inc_orq_c2[["<small><b>inc_orq_c2</b></small><br/>Classificar a severidade"]]
+    inc_orq_e1(["<small><b>inc_orq_e1</b></small><br/>Alarme falso registrado e alerta ajustado<br/><i>retorno: alarme_falso</i>"])
+    inc_orq_c3[["<small><b>inc_orq_c3</b></small><br/>Assumir o comando e decidir a escalada"]]
+    inc_orq_c4[["<small><b>inc_orq_c4</b></small><br/>Comunicar conforme a severidade"]]
+    inc_orq_c7[["<small><b>inc_orq_c7</b></small><br/>Escalar para outro time ou para a liderança"]]
+    inc_orq_c5[["<small><b>inc_orq_c5</b></small><br/>Conter danos conforme a severidade"]]
+    inc_orq_c8[["<small><b>inc_orq_c8</b></small><br/>Reavaliar a severidade"]]
+    inc_orq_c6[["<small><b>inc_orq_c6</b></small><br/>Mitigar e verificar o serviço (até 3 tentativas)"]]
+    inc_orq_c9[["<small><b>inc_orq_c9</b></small><br/>Encerrar o incidente"]]
+    inc_orq_c10[["<small><b>inc_orq_c10</b></small><br/>Aprender com o incidente"]]
+    inc_orq_e2(["<small><b>inc_orq_e2</b></small><br/>Serviço restaurado e aprendizado registrado<br/><i>retorno: restaurado</i>"])
+  end
+  subgraph z_SG_inc_tri["<b>Detecção e triagem</b>"]
+    direction LR
+    inc_tri_s0(["<small><b>inc_tri_s0</b></small><br/>Alerta recebido para triagem"])
+    inc_tri_t1["<small><b>inc_tri_t1</b></small><br/>Detecção e triagem inicial<br/><i>▸ 3 subtarefas</i>"]
+    inc_tri_g1{"<small><b>inc_tri_g1</b></small><br/>Impacto real no<br/>cliente?"}
+    inc_tri_e1(["<small><b>inc_tri_e1</b></small><br/>Impacto confirmado<br/><i>retorno: impacto_confirmado</i>"])
+    inc_tri_t2["<small><b>inc_tri_t2</b></small><br/>Registrar o alarme falso e ajustar o alerta<br/><i>▸ 2 subtarefas</i>"]
+    inc_tri_e2(["<small><b>inc_tri_e2</b></small><br/>Alarme falso ou sem impacto<br/><i>retorno: alarme_falso</i>"])
+  end
+  subgraph z_SG_inc_cls["<b>Classificação de severidade</b>"]
+    direction LR
+    inc_cls_s0(["<small><b>inc_cls_s0</b></small><br/>Impacto confirmado, classificar"])
+    inc_cls_t1["<small><b>inc_cls_t1</b></small><br/>Classificar a severidade (SEV1 a SEV3)<br/><i>▸ 3 subtarefas</i>"]
+    inc_cls_g1{"<small><b>inc_cls_g1</b></small><br/>Afetado por janela<br/>crítica ou<br/>sazonalidade?"}
+    inc_cls_g2{"<small><b>inc_cls_g2</b></small><br/>Qual a severidade?"}
+    inc_cls_t2["<small><b>inc_cls_t2</b></small><br/>Janela crítica: reavaliar severidade e contenção<br/><i>▸ 3 subtarefas</i>"]
+    inc_cls_e1(["<small><b>inc_cls_e1</b></small><br/>Severidade SEV1<br/><i>retorno: sev1</i>"])
+    inc_cls_e2(["<small><b>inc_cls_e2</b></small><br/>Severidade SEV2<br/><i>retorno: sev2</i>"])
+    inc_cls_e3(["<small><b>inc_cls_e3</b></small><br/>Severidade SEV3<br/><i>retorno: sev3</i>"])
+  end
+  subgraph z_SG_inc_cmd["<b>Comando do incidente</b>"]
+    direction LR
+    inc_cmd_s0(["<small><b>inc_cmd_s0</b></small><br/>Incidente classificado, definir o comando"])
+    inc_cmd_g1{"<small><b>inc_cmd_g1</b></small><br/>Severidade é SEV3?"}
+    inc_cmd_g2{"<small><b>inc_cmd_g2</b></small><br/>Qual a estrutura do<br/>time?"}
+    inc_cmd_t1["<small><b>inc_cmd_t1</b></small><br/>SEV3: registrar ticket e identificar o dono do serviço<br/><i>▸ 2 subtarefas</i>"]
+    inc_cmd_t2["<small><b>inc_cmd_t2</b></small><br/>On-call: acionar plantão e assumir incident commander<br/><i>▸ 2 subtarefas</i>"]
+    inc_cmd_t3["<small><b>inc_cmd_t3</b></small><br/>You-build-you-run: dono assume e monta rodízio informal<br/><i>▸ 2 subtarefas</i>"]
+    inc_cmd_t4["<small><b>inc_cmd_t4</b></small><br/>Time pequeno: tech lead comanda e aciona cobertura<br/><i>▸ 2 subtarefas</i>"]
+    inc_cmd_t5["<small><b>inc_cmd_t5</b></small><br/>Follow-the-sun: responsável do turno comanda, com handoff<br/><i>▸ 2 subtarefas</i>"]
+    inc_cmd_e1(["<small><b>inc_cmd_e1</b></small><br/>Seguir sem escalada<br/><i>retorno: seguir</i>"])
+    inc_cmd_g3{"<small><b>inc_cmd_g3</b></small><br/>Precisa escalar para<br/>outro time?"}
+    inc_cmd_e2(["<small><b>inc_cmd_e2</b></small><br/>Escalar<br/><i>retorno: escalar</i>"])
+  end
+  subgraph z_SG_inc_com["<b>Comunicação por severidade</b>"]
+    direction LR
+    inc_com_s0(["<small><b>inc_com_s0</b></small><br/>Severidade definida, comunicar"])
+    inc_com_g1{"<small><b>inc_com_g1</b></small><br/>Qual a severidade<br/>(define a<br/>comunicação)?"}
+    inc_com_t1["<small><b>inc_com_t1</b></small><br/>SEV1: war room, IC e comunicado a cada 30 minutos<br/><i>▸ 4 subtarefas</i>"]
+    inc_com_t2["<small><b>inc_com_t2</b></small><br/>SEV2: atualizar stakeholders afetados a cada 60 minutos<br/><i>▸ 2 subtarefas</i>"]
+    inc_com_t3["<small><b>inc_com_t3</b></small><br/>SEV3: avisar o dono do serviço<br/><i>▸ 1 subtarefa</i>"]
+    inc_com_e1(["<small><b>inc_com_e1</b></small><br/>Comunicação feita<br/><i>retorno: comunicado</i>"])
+  end
+  subgraph z_SG_inc_esc["<b>Escalada</b>"]
+    direction LR
+    inc_esc_s0(["<small><b>inc_esc_s0</b></small><br/>Escalada necessária"])
+    inc_esc_t1["<small><b>inc_esc_t1</b></small><br/>Escalar para o time dono ou para a liderança<br/><i>▸ 2 subtarefas</i>"]
+    inc_esc_e1(["<small><b>inc_esc_e1</b></small><br/>Escalada feita<br/><i>retorno: escalado</i>"])
+  end
+  subgraph z_SG_inc_con["<b>Contenção de danos</b>"]
+    direction LR
+    inc_con_s0(["<small><b>inc_con_s0</b></small><br/>Comunicação feita, conter danos"])
+    inc_con_g1{"<small><b>inc_con_g1</b></small><br/>Qual a severidade<br/>(define a<br/>contenção)?"}
+    inc_con_t1["<small><b>inc_con_t1</b></small><br/>SEV1: contenção agressiva (rollback, flag, isolamento)<br/><i>▸ 2 subtarefas</i>"]
+    inc_con_t2["<small><b>inc_con_t2</b></small><br/>SEV2: contenção seletiva (flag e degradação controlada)<br/><i>▸ 2 subtarefas</i>"]
+    inc_con_t3["<small><b>inc_con_t3</b></small><br/>SEV3: conter só se houver risco de escalada<br/><i>▸ 1 subtarefa</i>"]
+    inc_con_e1(["<small><b>inc_con_e1</b></small><br/>Contenção aplicada<br/><i>retorno: contido</i>"])
+  end
+  subgraph z_SG_inc_rcl["<b>Reavaliação de severidade</b>"]
+    direction LR
+    inc_rcl_s0(["<small><b>inc_rcl_s0</b></small><br/>Escalada concluída ou nova informação"])
+    inc_rcl_t1["<small><b>inc_rcl_t1</b></small><br/>Reclassificar após escalada ou nova informação<br/><i>▸ 2 subtarefas</i>"]
+    inc_rcl_g1{"<small><b>inc_rcl_g1</b></small><br/>A severidade mudou?"}
+    inc_rcl_e1(["<small><b>inc_rcl_e1</b></small><br/>Severidade mudou<br/><i>retorno: severidade_mudou</i>"])
+    inc_rcl_e2(["<small><b>inc_rcl_e2</b></small><br/>Severidade mantida<br/><i>retorno: severidade_mantida</i>"])
+  end
+  subgraph z_SG_inc_mit["<b>Mitigação e verificação</b>"]
+    direction LR
+    inc_mit_s0(["<small><b>inc_mit_s0</b></small><br/>Comunicação e contenção feitas, mitigar"])
+    inc_mit_t1["<small><b>inc_mit_t1</b></small><br/>Mitigar primeiro: restaurar o serviço antes de diagnosticar<br/><i>▸ 3 subtarefas</i>"]
+    inc_mit_g1{"<small><b>inc_mit_g1</b></small><br/>A mitigação<br/>funcionou?"}
+    inc_mit_e2(["<small><b>inc_mit_e2</b></small><br/>3 tentativas esgotadas, escalar<br/><i>retorno: tentativas_esgotadas</i>"])
+    inc_mit_t2["<small><b>inc_mit_t2</b></small><br/>Verificar que o serviço voltou<br/><i>▸ 2 subtarefas</i>"]
+    inc_mit_t3["<small><b>inc_mit_t3</b></small><br/>Diagnosticar para achar nova mitigação<br/><i>▸ 2 subtarefas</i>"]
+    inc_mit_g2{"<small><b>inc_mit_g2</b></small><br/>Serviço estável na<br/>janela de<br/>observação?"}
+    inc_mit_e1(["<small><b>inc_mit_e1</b></small><br/>Serviço estável<br/><i>retorno: estavel</i>"])
+  end
+  subgraph z_SG_inc_enc["<b>Encerramento</b>"]
+    direction LR
+    inc_enc_s0(["<small><b>inc_enc_s0</b></small><br/>Serviço estável, encerrar"])
+    inc_enc_t1["<small><b>inc_enc_t1</b></small><br/>Encaminhar a correção da causa e encerrar o incidente<br/><i>▸ 2 subtarefas</i>"]
+    inc_enc_t2["<small><b>inc_enc_t2</b></small><br/>Comunicar a resolução<br/><i>▸ 1 subtarefa</i>"]
+    inc_enc_e1(["<small><b>inc_enc_e1</b></small><br/>Incidente encerrado<br/><i>retorno: encerrado</i>"])
+  end
+  subgraph z_SG_inc_pos["<b>Aprendizado pós-incidente</b>"]
+    direction LR
+    inc_pos_s0(["<small><b>inc_pos_s0</b></small><br/>Incidente encerrado, aprender"])
+    inc_pos_g1{"<small><b>inc_pos_g1</b></small><br/>Exige post-mortem<br/>formal?"}
+    inc_pos_t1["<small><b>inc_pos_t1</b></small><br/>Post-mortem blameless com linha do tempo<br/><i>▸ 3 subtarefas</i>"]
+    inc_pos_t4["<small><b>inc_pos_t4</b></small><br/>Registro leve: nota no ticket e ajuste de runbook ou alerta<br/><i>▸ 2 subtarefas</i>"]
+    inc_pos_t2["<small><b>inc_pos_t2</b></small><br/>Definir ações corretivas com dono e prazo<br/><i>▸ 1 subtarefa</i>"]
+    inc_pos_e2(["<small><b>inc_pos_e2</b></small><br/>Registro leve feito<br/><i>retorno: registro_leve</i>"])
+    inc_pos_t3["<small><b>inc_pos_t3</b></small><br/>Acompanhar as ações até concluir (follow-up)<br/><i>▸ 2 subtarefas</i>"]
+    inc_pos_e1(["<small><b>inc_pos_e1</b></small><br/>Post-mortem formal concluído<br/><i>retorno: formal</i>"])
+  end
+  inc_orq_s0 --> inc_orq_c1
+  inc_tri_s0 --> inc_tri_t1
+  inc_tri_t1 --> inc_tri_g1
+  inc_tri_g1 -->|"sim, há impacto confirmado"| inc_tri_e1
+  inc_tri_g1 -->|"não, alarme falso ou sem impacto"| inc_tri_t2
+  inc_tri_t2 --> inc_tri_e2
+  inc_cls_s0 --> inc_cls_t1
+  inc_cls_t1 --> inc_cls_g1
+  inc_cls_g1 -->|"sim, há janela crítica ativa"| inc_cls_t2
+  inc_cls_g1 -->|"não, sem janela crítica"| inc_cls_g2
+  inc_cls_g2 -->|"SEV1"| inc_cls_e1
+  inc_cls_g2 -->|"SEV2"| inc_cls_e2
+  inc_cls_g2 -->|"SEV3"| inc_cls_e3
+  inc_cls_t2 --> inc_cls_g2
+  inc_cmd_s0 --> inc_cmd_g1
+  inc_cmd_g1 -->|"sim, SEV3"| inc_cmd_t1
+  inc_cmd_g1 -->|"não, SEV1 ou SEV2"| inc_cmd_g2
+  inc_cmd_g2 -->|"on-call dedicado com SRE ou plataforma"| inc_cmd_t2
+  inc_cmd_g2 -->|"you-build-you-run sem on-call formal"| inc_cmd_t3
+  inc_cmd_g2 -->|"time pequeno em horário comercial"| inc_cmd_t4
+  inc_cmd_g2 -->|"follow-the-sun (fusos que se revezam)"| inc_cmd_t5
+  inc_cmd_t1 --> inc_cmd_e1
+  inc_cmd_t2 --> inc_cmd_g3
+  inc_cmd_t3 --> inc_cmd_g3
+  inc_cmd_t4 --> inc_cmd_g3
+  inc_cmd_t5 --> inc_cmd_g3
+  inc_cmd_g3 -->|"sim, dependência fora do time ou sem progresso"| inc_cmd_e2
+  inc_cmd_g3 -->|"não, o time resolve sozinho"| inc_cmd_e1
+  inc_com_s0 --> inc_com_g1
+  inc_com_g1 -->|"SEV1"| inc_com_t1
+  inc_com_g1 -->|"SEV2"| inc_com_t2
+  inc_com_g1 -->|"SEV3"| inc_com_t3
+  inc_com_t1 --> inc_com_e1
+  inc_com_t2 --> inc_com_e1
+  inc_com_t3 --> inc_com_e1
+  inc_esc_s0 --> inc_esc_t1
+  inc_esc_t1 --> inc_esc_e1
+  inc_con_s0 --> inc_con_g1
+  inc_con_g1 -->|"SEV1"| inc_con_t1
+  inc_con_g1 -->|"SEV2"| inc_con_t2
+  inc_con_g1 -->|"SEV3"| inc_con_t3
+  inc_con_t1 --> inc_con_e1
+  inc_con_t2 --> inc_con_e1
+  inc_con_t3 --> inc_con_e1
+  inc_rcl_s0 --> inc_rcl_t1
+  inc_rcl_t1 --> inc_rcl_g1
+  inc_rcl_g1 -->|"sim, diferente da severidade anterior"| inc_rcl_e1
+  inc_rcl_g1 -->|"não, igual à severidade anterior"| inc_rcl_e2
+  inc_mit_s0 --> inc_mit_t1
+  inc_mit_t1 --> inc_mit_g1
+  inc_mit_g1 -->|"sim, o impacto caiu"| inc_mit_t2
+  inc_mit_g1 -->|"não e tentativas #lt; 3: diagnosticar de novo"| inc_mit_t3
+  inc_mit_g1 -->|"não e tentativas #gt;= 3: escalada obrigatória"| inc_mit_e2
+  inc_mit_t2 --> inc_mit_g2
+  inc_mit_t3 --> inc_mit_t1
+  inc_mit_g2 -->|"sim, estável"| inc_mit_e1
+  inc_mit_g2 -->|"não, voltou a degradar e tentativas #lt; 3"| inc_mit_t1
+  inc_mit_g2 -->|"não, voltou a degradar e tentativas #gt;= 3"| inc_mit_e2
+  inc_enc_s0 --> inc_enc_t1
+  inc_enc_t1 --> inc_enc_t2
+  inc_enc_t2 --> inc_enc_e1
+  inc_pos_s0 --> inc_pos_g1
+  inc_pos_g1 -->|"sim, SEV1 ou SEV2, ou orçamento de erro estourado"| inc_pos_t1
+  inc_pos_g1 -->|"não, SEV3 sem recorrência"| inc_pos_t4
+  inc_pos_t1 --> inc_pos_t2
+  inc_pos_t4 --> inc_pos_e2
+  inc_pos_t2 --> inc_pos_t3
+  inc_pos_t3 --> inc_pos_e1
+  inc_orq_c1 -.->|"chama"| inc_tri_s0
+  inc_tri_e1 -.->|"retorno: impacto_confirmado"| inc_orq_c2
+  inc_tri_e2 -.->|"retorno: alarme_falso"| inc_orq_e1
+  inc_orq_c2 -.->|"chama"| inc_cls_s0
+  inc_cls_e1 -.->|"retorno: sev1"| inc_orq_c3
+  inc_cls_e2 -.->|"retorno: sev2"| inc_orq_c3
+  inc_cls_e3 -.->|"retorno: sev3"| inc_orq_c3
+  inc_orq_c3 -.->|"chama"| inc_cmd_s0
+  inc_cmd_e1 -.->|"retorno: seguir"| inc_orq_c4
+  inc_cmd_e2 -.->|"retorno: escalar"| inc_orq_c7
+  inc_orq_c4 -.->|"chama"| inc_com_s0
+  inc_com_e1 -.->|"retorno: comunicado"| inc_orq_c5
+  inc_orq_c7 -.->|"chama"| inc_esc_s0
+  inc_esc_e1 -.->|"retorno: escalado"| inc_orq_c8
+  inc_orq_c5 -.->|"chama"| inc_con_s0
+  inc_con_e1 -.->|"retorno: contido"| inc_orq_c6
+  inc_orq_c8 -.->|"chama"| inc_rcl_s0
+  inc_rcl_e1 -.->|"retorno: severidade_mudou"| inc_orq_c4
+  inc_rcl_e2 -.->|"retorno: severidade_mantida"| inc_orq_c6
+  inc_orq_c6 -.->|"chama"| inc_mit_s0
+  inc_mit_e2 -.->|"retorno: tentativas_esgotadas"| inc_orq_c7
+  inc_mit_e1 -.->|"retorno: estavel"| inc_orq_c9
+  inc_orq_c9 -.->|"chama"| inc_enc_s0
+  inc_enc_e1 -.->|"retorno: encerrado"| inc_orq_c10
+  inc_orq_c10 -.->|"chama"| inc_pos_s0
+  inc_pos_e2 -.->|"retorno: registro_leve"| inc_orq_e2
+  inc_pos_e1 -.->|"retorno: formal"| inc_orq_e2
+  z_LIG_inc_enc_t1_0{{"<b>Correção definitiva segue como bug</b><br/>demanda: Bug<br/>nó: bug_orq_s0"}}
+  z_LIG_inc_pos_t2_0{{"<b>Post-mortem alimenta a prevenção de bugs</b><br/>demanda: Bug<br/>nó: bug_pre_t7"}}
+  inc_enc_t1 -.->|"aciona"| z_LIG_inc_enc_t1_0
+  inc_pos_t2 -.->|"alimenta"| z_LIG_inc_pos_t2_0
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#0072B2,stroke:#00446B,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#E69F00,stroke:#8A5F00,stroke-width:1px,color:#000000
+  classDef z_R_3 fill:#009E73,stroke:#005F45,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_R_5 fill:#D55E00,stroke:#803800,stroke-width:1px,color:#000000
+  classDef z_R_6 fill:#882255,stroke:#521433,stroke-width:1px,color:#FFFFFF
+  classDef z_R_7 fill:#CC79A7,stroke:#7A4964,stroke-width:1px,color:#000000
+  classDef z_R_8 fill:#999933,stroke:#5C5C1F,stroke-width:1px,color:#000000
+  classDef z_R_9 fill:#44AA99,stroke:#29665C,stroke-width:1px,color:#000000
+  classDef z_R_10 fill:#332288,stroke:#1F1452,stroke-width:1px,color:#FFFFFF
+  classDef z_C_0_1 fill:#0072B2,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_2 fill:#E69F00,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_3 fill:#009E73,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_4 fill:#56B4E9,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_5 fill:#D55E00,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_6 fill:#882255,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_7 fill:#CC79A7,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_8 fill:#999933,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_9 fill:#44AA99,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_10 fill:#332288,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
+  class inc_orq_c1 z_C_0_1
+  class inc_orq_c2 z_C_0_2
+  class inc_orq_c3 z_C_0_3
+  class inc_orq_c4 z_C_0_4
+  class inc_orq_c7 z_C_0_5
+  class inc_orq_c5 z_C_0_6
+  class inc_orq_c8 z_C_0_7
+  class inc_orq_c6 z_C_0_8
+  class inc_orq_c9 z_C_0_9
+  class inc_orq_c10 z_C_0_10
+  class inc_orq_s0,inc_orq_e1,inc_orq_e2 z_R_0
+  class inc_tri_s0,inc_tri_t1,inc_tri_g1,inc_tri_e1,inc_tri_t2,inc_tri_e2 z_R_1
+  class inc_cls_s0,inc_cls_t1,inc_cls_g1,inc_cls_g2,inc_cls_t2,inc_cls_e1,inc_cls_e2,inc_cls_e3 z_R_2
+  class inc_cmd_s0,inc_cmd_g1,inc_cmd_g2,inc_cmd_t1,inc_cmd_t2,inc_cmd_t3,inc_cmd_t4,inc_cmd_t5,inc_cmd_e1,inc_cmd_g3,inc_cmd_e2 z_R_3
+  class inc_com_s0,inc_com_g1,inc_com_t1,inc_com_t2,inc_com_t3,inc_com_e1 z_R_4
+  class inc_esc_s0,inc_esc_t1,inc_esc_e1 z_R_5
+  class inc_con_s0,inc_con_g1,inc_con_t1,inc_con_t2,inc_con_t3,inc_con_e1 z_R_6
+  class inc_rcl_s0,inc_rcl_t1,inc_rcl_g1,inc_rcl_e1,inc_rcl_e2 z_R_7
+  class inc_mit_s0,inc_mit_t1,inc_mit_g1,inc_mit_e2,inc_mit_t2,inc_mit_t3,inc_mit_g2,inc_mit_e1 z_R_8
+  class inc_enc_s0,inc_enc_t1,inc_enc_t2,inc_enc_e1 z_R_9
+  class inc_pos_s0,inc_pos_g1,inc_pos_t1,inc_pos_t4,inc_pos_t2,inc_pos_e2,inc_pos_t3,inc_pos_e1 z_R_10
+  class inc_tri_g1,inc_cls_g1,inc_cls_g2,inc_cmd_g1,inc_cmd_g2,inc_cmd_g3,inc_com_g1,inc_con_g1,inc_rcl_g1,inc_mit_g1,inc_mit_g2,inc_pos_g1 gw
+  class z_LIG_inc_enc_t1_0,z_LIG_inc_pos_t2_0 ponte
+  style z_SG_inc_orq fill:#E7ECEE,stroke:#607D8B,stroke-width:3px,color:#000000
+  style z_SG_inc_tri fill:#D9EAF3,stroke:#0072B2,stroke-width:3px,color:#000000
+  style z_SG_inc_cls fill:#FBF1D9,stroke:#E69F00,stroke-width:3px,color:#000000
+  style z_SG_inc_cmd fill:#D9F0EA,stroke:#009E73,stroke-width:3px,color:#000000
+  style z_SG_inc_com fill:#E6F4FC,stroke:#56B4E9,stroke-width:3px,color:#000000
+  style z_SG_inc_esc fill:#F9E7D9,stroke:#D55E00,stroke-width:3px,color:#000000
+  style z_SG_inc_con fill:#EDDEE6,stroke:#882255,stroke-width:3px,color:#000000
+  style z_SG_inc_rcl fill:#F7EBF2,stroke:#CC79A7,stroke-width:3px,color:#000000
+  style z_SG_inc_mit fill:#F0F0E0,stroke:#999933,stroke-width:3px,color:#000000
+  style z_SG_inc_enc fill:#E3F2F0,stroke:#44AA99,stroke-width:3px,color:#000000
+  style z_SG_inc_pos fill:#E0DEED,stroke:#332288,stroke-width:3px,color:#000000

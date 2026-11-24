@@ -1,0 +1,25 @@
+id: competencia_era_ia
+tipo: competencia
+nome: "Era IA: meia-vida ~6 meses"
+descricao: Cultive aprender rápido, não memorizar. O que você sabe importa menos que quão rápido você reaprende.
+publico: false
+area: "Era IA: meia-vida ~6 meses"
+meiaVida: ~6 meses
+estudo: Cultive aprender rápido, não memorizar. O que você sabe importa menos que quão rápido você reaprende.
+itens:
+  - nome: LLMs e limites
+    detalhe: O que eles fazem bem, onde alucinam, custo por token
+  - nome: Prompt & spec engineering
+    detalhe: Contexto, exemplos, restrições, critérios de sucesso
+  - nome: RAG
+    detalhe: Chunking, embeddings, reranking, avaliação de retrieval
+  - nome: Agentes
+    detalhe: Tools, memória, orquestração, multi-agent
+  - nome: Evals
+    detalhe: Golden sets, regressão, LLM-as-judge com cuidado
+  - nome: Guardrails
+    detalhe: PII, jailbreak, formato, validação de saída
+  - nome: LLMOps
+    detalhe: Custo, caching semântico, observabilidade, drift
+  - nome: MCP / tool-calling
+    detalhe: Integração de agentes com sistemas externos

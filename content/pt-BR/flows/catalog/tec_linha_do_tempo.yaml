@@ -1,0 +1,12 @@
+id: tec_linha_do_tempo
+tipo: tecnica
+nome: Linha do tempo do incidente
+descricao: Registro cronológico de detecção, ações e decisões, com horários reais.
+quando_usar:
+  - Base do post-mortem
+  - Durante o incidente, por um anotador
+quando_evitar:
+  - Reconstruir de memória dias depois
+status: rascunho
+publico: false
+exemplo: 14:02 alerta; 14:05 incidente aberto; 14:12 flag desligada; 14:20 serviço normal.

@@ -1,0 +1,154 @@
+[
+  {
+    "id": "git",
+    "nome": "Git",
+    "categorias": [
+      "Controle de versão e colaboração"
+    ],
+    "empresa": "Git Project",
+    "url": "https://git-scm.com/",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://git-scm.com/about",
+      "data": "2026-11-23"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Sistema de controle de versão distribuído, base de todo fluxo de colaboração em código."
+  },
+  {
+    "id": "curl",
+    "nome": "curl",
+    "categorias": [
+      "Testes e documentação de APIs"
+    ],
+    "empresa": "curl project",
+    "url": "https://curl.se/",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://curl.se/docs/copyright.html",
+      "data": "2026-11-23"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Cliente de linha de comando para chamar APIs e transferir dados por HTTP e outros protocolos."
+  },
+  {
+    "id": "anthropic-sdk",
+    "nome": "Anthropic SDK",
+    "categorias": [
+      "Orquestração de LLM"
+    ],
+    "empresa": "Anthropic",
+    "url": "https://github.com/anthropics/anthropic-sdk-python",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/anthropics/anthropic-sdk-python",
+      "data": "2026-11-23"
+    },
+    "plataformas": [
+      "api",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "SDK oficial para chamar a API do Claude; a biblioteca é gratuita e o uso da API é cobrado à parte."
+  },
+  {
+    "id": "openai-sdk",
+    "nome": "OpenAI SDK",
+    "categorias": [
+      "Orquestração de LLM"
+    ],
+    "empresa": "OpenAI",
+    "url": "https://github.com/openai/openai-python",
+    "preco": {
+      "modelo": [
+        "free",
+        "api-pay-per-token"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-23"
+    },
+    "plataformas": [
+      "api",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "SDK oficial para chamar a API da OpenAI; o formato é adotado por vários provedores compatíveis."
+  }
+]

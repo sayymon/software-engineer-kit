@@ -1,0 +1,12 @@
+id: tec_evals
+tipo: tecnica
+nome: Evals de IA
+descricao: Conjunto de avaliações automáticas que mede a qualidade, o custo e os desvios da saída de um modelo.
+quando_usar:
+  - Feature que usa IA ou modelo probabilístico
+  - Comparar versões de prompt ou de modelo
+quando_evitar:
+  - Lógica determinística, onde um teste com resultado exato basta
+status: rascunho
+publico: false
+exemplo: 50 casos de sugestão de cupom avaliados a cada versão; aceite com 90% de sugestões válidas.

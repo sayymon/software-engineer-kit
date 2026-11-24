@@ -1,0 +1,16 @@
+id: tec_gemba_observa_o
+tipo: tecnica
+nome: Gemba / observação
+descricao: "Gemba, do Lean: ir ao lugar onde o trabalho acontece e observar o processo real, em vez de confiar no relato."
+quando_usar:
+  - Existe um processo atual, manual ou sistêmico, para observar
+quando_evitar:
+  - Necessidade totalmente nova, sem processo atual
+exemplo: Atendimento aplica cupons manualmente por planilha para 30 compradores por dia, com 2 conferências.
+como_aplicar:
+  - Combine a observação com quem executa
+  - Observe sem interromper e anote passos, esperas e contornos
+  - Valide o que viu com quem executa
+resultado_esperado: Fluxo real descrito, com dores e contornos não relatados.
+status: rascunho
+publico: false

@@ -1,0 +1,12 @@
+id: tec_error_budget
+tipo: tecnica
+nome: Orçamento de erro
+descricao: Margem de falha permitida pelo SLO. Quando acaba, a prioridade passa para confiabilidade.
+quando_usar:
+  - Decidir entre entregar feature e investir em confiabilidade
+  - Gatilho para post-mortem
+quando_evitar:
+  - Serviços sem SLO definido
+status: rascunho
+publico: false
+exemplo: Com 70% do orçamento de erro consumido, novas liberações arriscadas ficam suspensas até o fim do mês.

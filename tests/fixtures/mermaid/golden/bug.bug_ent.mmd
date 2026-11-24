@@ -1,0 +1,66 @@
+flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"]) ~~~ z_LEG_r0["<b>Review humano</b><br/>raia chamada"] ~~~ z_LEG_r1["<b>Implantação</b><br/>raia chamada"] ~~~ z_LEG_r2["<b>Validação em produção e monitoramento</b><br/>raia chamada"]
+  end
+  subgraph z_SG_bug_ent["<b>Validação e entrega</b>"]
+    direction LR
+    bug_ent_s0(["<small><b>bug_ent_s0</b></small><br/>Correção pronta, validar"])
+    bug_ent_c1[["<small><b>bug_ent_c1</b></small><br/>Review humano da correção"]]
+    bug_ent_e2(["<small><b>bug_ent_e2</b></small><br/>Volta para a correção<br/><i>retorno: nao_corrigido</i>"])
+    bug_ent_g1{"<small><b>bug_ent_g1</b></small><br/>Existe QA dedicado<br/>no time?"}
+    bug_ent_t2["<small><b>bug_ent_t2</b></small><br/>QA valida a correção e explora cenários vizinhos<br/><i>▸ 2 subtarefas</i>"]
+    bug_ent_t3["<small><b>bug_ent_t3</b></small><br/>Validação por par: autor demonstra a correção<br/><i>▸ 2 subtarefas</i>"]
+    bug_ent_c2[["<small><b>bug_ent_c2</b></small><br/>Implantar a correção"]]
+    bug_ent_t5["<small><b>bug_ent_t5</b></small><br/>Verificar em produção que o defeito não acontece mais<br/><i>▸ 2 subtarefas</i>"]
+    bug_ent_g2{"<small><b>bug_ent_g2</b></small><br/>Corrigido em<br/>produção?"}
+    bug_ent_c3[["<small><b>bug_ent_c3</b></small><br/>Monitorar que nada degradou"]]
+    bug_ent_t6["<small><b>bug_ent_t6</b></small><br/>Fechar o bug e avisar quem reportou<br/><i>▸ 2 subtarefas</i>"]
+    bug_ent_e1(["<small><b>bug_ent_e1</b></small><br/>Corrigido e fechado<br/><i>retorno: verificado</i>"])
+  end
+  bug_ent_s0 --> bug_ent_c1
+  bug_ent_c1 -->|"aprovado_pelo_humano"| bug_ent_g1
+  bug_ent_c1 -->|"ajustes_solicitados"| bug_ent_e2
+  bug_ent_g1 -->|"sim, com QA dedicado"| bug_ent_t2
+  bug_ent_g1 -->|"não, sem QA dedicado"| bug_ent_t3
+  bug_ent_t2 --> bug_ent_c2
+  bug_ent_t3 --> bug_ent_c2
+  bug_ent_c2 -->|"implantado"| bug_ent_t5
+  bug_ent_c2 -->|"implantacao_revertida"| bug_ent_e2
+  bug_ent_t5 --> bug_ent_g2
+  bug_ent_g2 -->|"sim"| bug_ent_c3
+  bug_ent_g2 -->|"não, reabrir o isolamento da causa"| bug_ent_e2
+  bug_ent_c3 -->|"feature_validada"| bug_ent_t6
+  bug_ent_c3 -->|"incidente_acionado"| bug_ent_e2
+  bug_ent_t6 --> bug_ent_e1
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#0072B2,stroke:#00446B,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#E69F00,stroke:#8A5F00,stroke-width:1px,color:#000000
+  classDef z_R_3 fill:#009E73,stroke:#005F45,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#BBCC33,stroke:#707A1F,stroke-width:1px,color:#000000
+  classDef z_R_5 fill:#117733,stroke:#0A471F,stroke-width:1px,color:#FFFFFF
+  classDef z_R_6 fill:#D55E00,stroke:#803800,stroke-width:1px,color:#000000
+  classDef z_R_7 fill:#CC79A7,stroke:#7A4964,stroke-width:1px,color:#000000
+  classDef z_R_8 fill:#F0E442,stroke:#908928,stroke-width:1px,color:#000000
+  classDef z_R_9 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_R_10 fill:#999933,stroke:#5C5C1F,stroke-width:1px,color:#000000
+  classDef z_R_11 fill:#77AADD,stroke:#476685,stroke-width:1px,color:#000000
+  classDef z_C_5_9 fill:#56B4E9,stroke:#117733,stroke-width:4px,color:#000000
+  classDef z_C_5_10 fill:#999933,stroke:#117733,stroke-width:4px,color:#000000
+  classDef z_C_5_11 fill:#77AADD,stroke:#117733,stroke-width:4px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  class z_LEG_r0 z_R_9
+  class z_LEG_r1 z_R_10
+  class z_LEG_r2 z_R_11
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
+  class bug_ent_c1 z_C_5_9
+  class bug_ent_c2 z_C_5_10
+  class bug_ent_c3 z_C_5_11
+  class bug_ent_s0,bug_ent_e2,bug_ent_g1,bug_ent_t2,bug_ent_t3,bug_ent_t5,bug_ent_g2,bug_ent_t6,bug_ent_e1 z_R_5
+  class bug_ent_g1,bug_ent_g2 gw
+  style z_SG_bug_ent fill:#DBEBE0,stroke:#117733,stroke-width:3px,color:#000000

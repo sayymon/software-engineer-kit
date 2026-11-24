@@ -1,0 +1,13 @@
+id: tec_canary_release
+tipo: tecnica
+nome: Canary release
+descricao: Liberar a mudança para uma pequena fração do tráfego e comparar indicadores antes de ampliar.
+quando_usar:
+  - Mudanças de risco
+  - Bug cuja origem foi mudança sem proteção
+quando_evitar:
+  - Serviços sem métricas para comparar
+  - Sistemas sem roteamento por fração
+status: rascunho
+publico: false
+exemplo: 1% do tráfego na versão nova por 1 hora antes de ampliar.

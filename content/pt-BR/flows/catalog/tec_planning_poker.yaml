@@ -1,0 +1,16 @@
+id: tec_planning_poker
+tipo: tecnica
+nome: Planning Poker
+descricao: Estimativa em grupo com cartas, que revela diferenças de entendimento antes de começar.
+quando_usar:
+  - Refinamento de histórias com o time
+quando_evitar:
+  - Times que não estimam ou usam só vazão
+exemplo: Votos 3 e 13 revelaram que só uma pessoa sabia da integração com Pagamentos.
+como_aplicar:
+  - Leia a história
+  - Cada pessoa vota em segredo
+  - Discuta os extremos e vote de novo
+resultado_esperado: Estimativa acordada e dúvidas registradas.
+status: rascunho
+publico: false

@@ -1,0 +1,142 @@
+{
+  "title": "hub",
+  "x-translatable": [
+    "nome",
+    "descricao",
+    "body"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+    },
+    "nome": {
+      "type": "string",
+      "minLength": 1
+    },
+    "descricao": {
+      "type": "string"
+    },
+    "publico": {
+      "default": false,
+      "type": "boolean"
+    },
+    "fontes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "livro",
+              "artigo",
+              "curso"
+            ]
+          },
+          "titulo": {
+            "type": "string",
+            "minLength": 1
+          },
+          "link": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status_revisao": {
+            "type": "string",
+            "enum": [
+              "pendente",
+              "em_revisao",
+              "revisada"
+            ]
+          },
+          "proxima_revisao": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          }
+        },
+        "required": [
+          "id",
+          "tipo",
+          "titulo",
+          "link",
+          "status_revisao",
+          "proxima_revisao"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "fonte_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dataVerificacao": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "guia_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+      }
+    },
+    "tipo": {
+      "type": "string",
+      "const": "hub"
+    },
+    "camada": {
+      "type": "string",
+      "enum": [
+        "tools",
+        "ai",
+        "fundamentals",
+        "stacks",
+        "guides",
+        "certifications",
+        "flows",
+        "journeys"
+      ]
+    },
+    "ordem": {
+      "type": "integer",
+      "minimum": -9007199254740991,
+      "maximum": 9007199254740991
+    },
+    "itens": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "nome",
+    "tipo",
+    "camada"
+  ],
+  "additionalProperties": false
+}

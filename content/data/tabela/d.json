@@ -1,0 +1,1710 @@
+[
+  {
+    "id": "traefik",
+    "nome": "Traefik",
+    "categorias": [
+      "Gateway de API e service mesh"
+    ],
+    "empresa": "Traefik Labs",
+    "url": "https://traefik.io/traefik",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/traefik/traefik",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "devops-infra"
+    ],
+    "nota": "Proxy reverso e gateway nativo de contêineres com descoberta automática de serviços."
+  },
+  {
+    "id": "nginx",
+    "nome": "NGINX",
+    "categorias": [
+      "Gateway de API e service mesh"
+    ],
+    "empresa": "F5",
+    "url": "https://nginx.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/nginx/nginx",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "devops-infra"
+    ],
+    "nota": "Servidor web, proxy reverso e balanceador usado como gateway de borda."
+  },
+  {
+    "id": "apache-apisix",
+    "nome": "Apache APISIX",
+    "categorias": [
+      "Gateway de API e service mesh"
+    ],
+    "empresa": "Apache Software Foundation",
+    "url": "https://apisix.apache.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/apache/apisix",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "devops-infra"
+    ],
+    "nota": "Gateway de API dinâmico com plugins para autenticação, limite de taxa e observabilidade."
+  },
+  {
+    "id": "envoy",
+    "nome": "Envoy",
+    "categorias": [
+      "Gateway de API e service mesh"
+    ],
+    "empresa": "Cloud Native Computing Foundation",
+    "url": "https://www.envoyproxy.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/envoyproxy/envoy",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "devops-infra"
+    ],
+    "nota": "Proxy L4 e L7 que sustenta service meshes e gateways modernos."
+  },
+  {
+    "id": "istio",
+    "nome": "Istio",
+    "categorias": [
+      "Gateway de API e service mesh"
+    ],
+    "empresa": "Cloud Native Computing Foundation",
+    "url": "https://istio.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/istio/istio",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "devops-infra"
+    ],
+    "nota": "Service mesh com mTLS, roteamento, retry, timeout e circuit breaking sem alterar o código."
+  },
+  {
+    "id": "linkerd",
+    "nome": "Linkerd",
+    "categorias": [
+      "Gateway de API e service mesh"
+    ],
+    "empresa": "Cloud Native Computing Foundation",
+    "url": "https://linkerd.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/linkerd/linkerd2",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "devops-infra"
+    ],
+    "nota": "Service mesh leve para Kubernetes com mTLS automático e métricas por rota."
+  },
+  {
+    "id": "amazon-api-gateway",
+    "nome": "Amazon API Gateway",
+    "categorias": [
+      "Gateway de API e service mesh"
+    ],
+    "empresa": "Amazon Web Services",
+    "url": "https://aws.amazon.com/api-gateway/",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "cloud",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "devops-infra"
+    ],
+    "nota": "Gateway gerenciado da AWS para APIs REST, HTTP e WebSocket."
+  },
+  {
+    "id": "tyk",
+    "nome": "Tyk",
+    "categorias": [
+      "Gateway de API e service mesh"
+    ],
+    "empresa": "Tyk Technologies",
+    "url": "https://tyk.io",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "devops-infra"
+    ],
+    "nota": "Gateway de API open source com portal de desenvolvedores e GraphQL."
+  },
+  {
+    "id": "conductor",
+    "nome": "Conductor",
+    "categorias": [
+      "Orquestração de workflows e sagas"
+    ],
+    "empresa": "Orkes",
+    "url": "https://conductor-oss.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/conductor-oss/conductor",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "java",
+      "kotlin",
+      "python",
+      "javascript",
+      "go"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "software-saas"
+    ],
+    "nota": "Orquestrador de workflows originado na Netflix, usado para sagas e processos de longa duração."
+  },
+  {
+    "id": "camunda",
+    "nome": "Camunda",
+    "categorias": [
+      "Orquestração de workflows e sagas"
+    ],
+    "empresa": "Camunda",
+    "url": "https://camunda.com",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "software-saas"
+    ],
+    "nota": "Plataforma de orquestração de processos com BPMN para sagas e fluxos de negócio."
+  },
+  {
+    "id": "axon-framework",
+    "nome": "Axon Framework",
+    "categorias": [
+      "Orquestração de workflows e sagas"
+    ],
+    "empresa": "AxonIQ",
+    "url": "https://www.axoniq.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/AxonFramework/AxonFramework",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "java",
+      "kotlin"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "software-saas"
+    ],
+    "nota": "Framework JVM para CQRS, Event Sourcing e sagas orientadas a eventos."
+  },
+  {
+    "id": "aws-step-functions",
+    "nome": "AWS Step Functions",
+    "categorias": [
+      "Orquestração de workflows e sagas"
+    ],
+    "empresa": "Amazon Web Services",
+    "url": "https://aws.amazon.com/step-functions/",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "cloud",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "software-saas"
+    ],
+    "nota": "Orquestrador serverless de máquinas de estado que coordena serviços AWS e sagas."
+  },
+  {
+    "id": "azure-durable-functions",
+    "nome": "Azure Durable Functions",
+    "categorias": [
+      "Orquestração de workflows e sagas"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-overview",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "cloud",
+      "api"
+    ],
+    "linguagens": [
+      "csharp",
+      "javascript",
+      "python",
+      "java"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "software-saas"
+    ],
+    "nota": "Orquestração com estado sobre Azure Functions, em código, para sagas e fan-out."
+  },
+  {
+    "id": "google-cloud-workflows",
+    "nome": "Google Cloud Workflows",
+    "categorias": [
+      "Orquestração de workflows e sagas"
+    ],
+    "empresa": "Google",
+    "url": "https://cloud.google.com/workflows",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "cloud",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "software-saas"
+    ],
+    "nota": "Orquestrador serverless de chamadas HTTP e serviços do Google Cloud."
+  },
+  {
+    "id": "guardrails-ai",
+    "nome": "Guardrails AI",
+    "categorias": [
+      "Guardrails e segurança de LLM"
+    ],
+    "empresa": "Guardrails AI",
+    "url": "https://www.guardrailsai.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/guardrails-ai/guardrails",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "python"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "desenvolvimento-software"
+    ],
+    "nota": "Validadores de entrada e saída de LLM com saída estruturada e hub de checagens."
+  },
+  {
+    "id": "nemo-guardrails",
+    "nome": "NeMo Guardrails",
+    "categorias": [
+      "Guardrails e segurança de LLM"
+    ],
+    "empresa": "NVIDIA",
+    "url": "https://github.com/NVIDIA-NeMo/Guardrails",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "python"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "desenvolvimento-software"
+    ],
+    "nota": "Toolkit open source para trilhos programáveis em conversas com LLM."
+  },
+  {
+    "id": "llm-guard",
+    "nome": "LLM Guard",
+    "categorias": [
+      "Guardrails e segurança de LLM"
+    ],
+    "empresa": "Protect AI",
+    "url": "https://github.com/protectai/llm-guard",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/protectai/llm-guard",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "python"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "seguranca"
+    ],
+    "nota": "Scanners de prompt e resposta para PII, injeção de prompt e toxicidade."
+  },
+  {
+    "id": "llama-guard",
+    "nome": "Llama Guard",
+    "categorias": [
+      "Guardrails e segurança de LLM"
+    ],
+    "empresa": "Meta",
+    "url": "https://github.com/meta-llama/PurpleLlama",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "api",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "python"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "seguranca"
+    ],
+    "nota": "Modelo de moderação de entrada e saída da família PurpleLlama."
+  },
+  {
+    "id": "openai-moderation",
+    "nome": "OpenAI Moderation API",
+    "categorias": [
+      "Guardrails e segurança de LLM"
+    ],
+    "empresa": "OpenAI",
+    "url": "https://platform.openai.com/docs/guides/moderation",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "seguranca"
+    ],
+    "nota": "API de classificação de conteúdo para moderar entradas e saídas."
+  },
+  {
+    "id": "google-model-armor",
+    "nome": "Google Cloud Model Armor",
+    "categorias": [
+      "Guardrails e segurança de LLM"
+    ],
+    "empresa": "Google",
+    "url": "https://cloud.google.com/security-command-center/docs/model-armor-overview",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "cloud",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "seguranca"
+    ],
+    "nota": "Serviço gerenciado que filtra prompts e respostas contra injeção e vazamento de dados."
+  },
+  {
+    "id": "lakera-guard",
+    "nome": "Lakera Guard",
+    "categorias": [
+      "Guardrails e segurança de LLM"
+    ],
+    "empresa": "Lakera",
+    "url": "https://www.lakera.ai",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "api",
+      "cloud"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "seguranca"
+    ],
+    "nota": "API de proteção em tempo de execução contra injeção de prompt e vazamento."
+  },
+  {
+    "id": "azure-ai-content-safety",
+    "nome": "Azure AI Content Safety",
+    "categorias": [
+      "Guardrails e segurança de LLM"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://azure.microsoft.com/en-us/products/ai-services/ai-content-safety",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "cloud",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "seguranca"
+    ],
+    "nota": "Detecção de conteúdo nocivo e ataques de prompt para aplicações com IA generativa."
+  },
+  {
+    "id": "marten",
+    "nome": "Marten",
+    "categorias": [
+      "Captura de mudanças e event store"
+    ],
+    "empresa": "JasperFx",
+    "url": "https://martendb.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/JasperFx/marten",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "csharp"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "software-saas"
+    ],
+    "nota": "Event store e banco de documentos sobre PostgreSQL para .NET."
+  },
+  {
+    "id": "kafka-connect",
+    "nome": "Kafka Connect",
+    "categorias": [
+      "Captura de mudanças e event store"
+    ],
+    "empresa": "Apache Software Foundation",
+    "url": "https://kafka.apache.org/documentation/#connect",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/apache/kafka",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "java",
+      "kotlin"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "dados-analytics"
+    ],
+    "nota": "Framework de conectores do Apache Kafka para mover dados de e para sistemas externos."
+  },
+  {
+    "id": "kurrent-eventstoredb",
+    "nome": "Kurrent (EventStoreDB)",
+    "categorias": [
+      "Captura de mudanças e event store"
+    ],
+    "empresa": "Kurrent",
+    "url": "https://www.kurrent.io",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "csharp",
+      "java",
+      "python",
+      "go",
+      "javascript"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "software-saas"
+    ],
+    "nota": "Banco de dados de eventos para Event Sourcing, antes chamado EventStoreDB."
+  },
+  {
+    "id": "airbyte",
+    "nome": "Airbyte",
+    "categorias": [
+      "Captura de mudanças e event store",
+      "Pipelines e orquestração de dados"
+    ],
+    "empresa": "Airbyte",
+    "url": "https://airbyte.com",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "python",
+      "java"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "dados-analytics"
+    ],
+    "nota": "Plataforma de integração de dados com conectores e replicação incremental."
+  },
+  {
+    "id": "axon-server",
+    "nome": "Axon Server",
+    "categorias": [
+      "Captura de mudanças e event store"
+    ],
+    "empresa": "AxonIQ",
+    "url": "https://www.axoniq.io/products/axon-server",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "java",
+      "kotlin"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "software-saas"
+    ],
+    "nota": "Event store e roteador de mensagens do ecossistema Axon."
+  },
+  {
+    "id": "aws-dms",
+    "nome": "AWS Database Migration Service",
+    "categorias": [
+      "Captura de mudanças e event store"
+    ],
+    "empresa": "Amazon Web Services",
+    "url": "https://aws.amazon.com/dms/",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "cloud",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "dados-analytics"
+    ],
+    "nota": "Serviço gerenciado de migração e replicação contínua (CDC) entre bancos."
+  },
+  {
+    "id": "striim",
+    "nome": "Striim",
+    "categorias": [
+      "Captura de mudanças e event store"
+    ],
+    "empresa": "Striim",
+    "url": "https://www.striim.com",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "dados-analytics"
+    ],
+    "nota": "Plataforma de streaming e CDC em tempo real para pipelines de dados."
+  },
+  {
+    "id": "apache-pulsar",
+    "nome": "Apache Pulsar",
+    "categorias": [
+      "Mensageria e streaming"
+    ],
+    "empresa": "Apache Software Foundation",
+    "url": "https://pulsar.apache.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/apache/pulsar",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "java",
+      "kotlin",
+      "python",
+      "go"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "software-saas"
+    ],
+    "nota": "Plataforma de mensageria e streaming com multi-tenancy e geo-replicação."
+  },
+  {
+    "id": "amazon-sns",
+    "nome": "Amazon SNS",
+    "categorias": [
+      "Mensageria e streaming"
+    ],
+    "empresa": "Amazon Web Services",
+    "url": "https://aws.amazon.com/sns/",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "cloud",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "software-saas"
+    ],
+    "nota": "Pub/Sub gerenciado da AWS para fan-out de mensagens a filas, funções e HTTP."
+  },
+  {
+    "id": "amazon-eventbridge",
+    "nome": "Amazon EventBridge",
+    "categorias": [
+      "Mensageria e streaming"
+    ],
+    "empresa": "Amazon Web Services",
+    "url": "https://aws.amazon.com/eventbridge/",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "cloud",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "software-saas"
+    ],
+    "nota": "Barramento de eventos serverless com regras de roteamento e integrações SaaS."
+  },
+  {
+    "id": "memcached",
+    "nome": "Memcached",
+    "categorias": [
+      "Chave-valor e cache"
+    ],
+    "empresa": "Memcached",
+    "url": "https://memcached.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/memcached/memcached",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "devops-infra"
+    ],
+    "nota": "Cache em memória distribuído e simples, usado em cache-aside."
+  },
+  {
+    "id": "etcd",
+    "nome": "etcd",
+    "categorias": [
+      "Chave-valor e cache"
+    ],
+    "empresa": "Cloud Native Computing Foundation",
+    "url": "https://etcd.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/etcd-io/etcd",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "go"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "devops-infra"
+    ],
+    "nota": "Armazenamento chave-valor consistente com locks e eleição de líder (base do Kubernetes)."
+  },
+  {
+    "id": "apache-zookeeper",
+    "nome": "Apache ZooKeeper",
+    "categorias": [
+      "Chave-valor e cache"
+    ],
+    "empresa": "Apache Software Foundation",
+    "url": "https://zookeeper.apache.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/apache/zookeeper",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "java"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "devops-infra"
+    ],
+    "nota": "Serviço de coordenação distribuída para locks, configuração e eleição de líder."
+  },
+  {
+    "id": "vitess",
+    "nome": "Vitess",
+    "categorias": [
+      "Banco relacional"
+    ],
+    "empresa": "Cloud Native Computing Foundation",
+    "url": "https://vitess.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/vitessio/vitess",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "go",
+      "sql"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "dados-analytics"
+    ],
+    "nota": "Camada de sharding horizontal para MySQL em larga escala."
+  },
+  {
+    "id": "citus",
+    "nome": "Citus",
+    "categorias": [
+      "Banco relacional"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://www.citusdata.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/citusdata/citus",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "sql"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "dados-analytics"
+    ],
+    "nota": "Extensão do PostgreSQL para sharding e consultas distribuídas."
+  },
+  {
+    "id": "resilience4j",
+    "nome": "Resilience4j",
+    "categorias": [
+      "Frameworks de backend"
+    ],
+    "empresa": "Resilience4j",
+    "url": "https://resilience4j.readme.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/resilience4j/resilience4j",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "java",
+      "kotlin"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "desenvolvimento-software"
+    ],
+    "nota": "Biblioteca JVM de circuit breaker, retry, bulkhead, rate limiter e time limiter."
+  },
+  {
+    "id": "polly",
+    "nome": "Polly",
+    "categorias": [
+      "Frameworks de backend"
+    ],
+    "empresa": "Polly Project",
+    "url": "https://www.pollydocs.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/App-vNext/Polly",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "csharp"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "desenvolvimento-software"
+    ],
+    "nota": "Biblioteca .NET de resiliência: retry, circuit breaker, timeout, bulkhead e hedging."
+  },
+  {
+    "id": "archunit",
+    "nome": "ArchUnit",
+    "categorias": [
+      "Frameworks de testes"
+    ],
+    "empresa": "TNG Technology Consulting",
+    "url": "https://www.archunit.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/TNG/ArchUnit",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "java"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "desenvolvimento-software"
+    ],
+    "nota": "Testa regras de arquitetura (camadas, ciclos, dependências) como testes unitários em Java."
+  },
+  {
+    "id": "spring-modulith",
+    "nome": "Spring Modulith",
+    "categorias": [
+      "Frameworks de backend"
+    ],
+    "empresa": "VMware",
+    "url": "https://spring.io/projects/spring-modulith",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/spring-projects/spring-modulith",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "java",
+      "kotlin"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "desenvolvimento-software"
+    ],
+    "nota": "Estrutura e verifica módulos de um monolito modular Spring Boot."
+  },
+  {
+    "id": "instructor",
+    "nome": "Instructor",
+    "categorias": [
+      "Validação e schemas"
+    ],
+    "empresa": "Instructor",
+    "url": "https://python.useinstructor.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/567-labs/instructor",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "python",
+      "javascript"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "desenvolvimento-software"
+    ],
+    "nota": "Extrai saída estruturada validada de LLMs com Pydantic ou Zod."
+  },
+  {
+    "id": "gptcache",
+    "nome": "GPTCache",
+    "categorias": [
+      "Orquestração de LLM"
+    ],
+    "empresa": "Zilliz",
+    "url": "https://github.com/zilliztech/GPTCache",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/zilliztech/GPTCache",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "python"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "desenvolvimento-software"
+    ],
+    "nota": "Cache semântico para respostas de LLM baseado em embeddings."
+  },
+  {
+    "id": "microsoft-graphrag",
+    "nome": "Microsoft GraphRAG",
+    "categorias": [
+      "Ferramentas de RAG"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://microsoft.github.io/graphrag/",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/microsoft/graphrag",
+      "data": "2026-11-22"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "python"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "pesquisa-conhecimento"
+    ],
+    "nota": "Pipeline de RAG com grafo de conhecimento e resumos de comunidades."
+  }
+]

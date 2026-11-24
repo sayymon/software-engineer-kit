@@ -1,0 +1,34 @@
+---
+// SPDX-License-Identifier: MIT
+// Mermaid island loader. Pages with diagrams render <figure data-island="mermaid"> blocks (see render/util.ts diagram())
+// and include this component once. The bundle is loaded only here, from the vendored local copy.
+interface Props { base: string }
+const { base } = Astro.props;
+const src = `${base}/vendor/mermaid/mermaid.min.js`;
+---
+<script is:inline define:vars={{ src }}>
+  (function () {
+    var figures = document.querySelectorAll('[data-island="mermaid"]');
+    if (!figures.length) return;
+    var tag = document.createElement('script');
+    tag.src = src;
+    tag.async = true;
+    tag.onload = function () {
+      var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      window.mermaid.initialize({ startOnLoad: false, securityLevel: 'strict', theme: dark ? 'dark' : 'default', flowchart: { useMaxWidth: false } });
+      figures.forEach(function (fig, i) {
+        var pre = fig.querySelector('pre.mermaid-source');
+        if (!pre) return;
+        window.mermaid.render('mmd-' + i, pre.textContent || '').then(function (out) {
+          var holder = document.createElement('div');
+          holder.className = 'mermaid-render';
+          holder.innerHTML = out.svg;
+          fig.insertBefore(holder, pre);
+          pre.hidden = true;
+          fig.setAttribute('data-rendered', 'true');
+        }).catch(function () { fig.setAttribute('data-rendered', 'error'); });
+      });
+    };
+    document.head.appendChild(tag);
+  })();
+</script>

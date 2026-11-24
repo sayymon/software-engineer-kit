@@ -1,0 +1,10 @@
+id: jornada_system_design
+tipo: jornada
+nome: System Design end-to-end
+descricao: Do requisito à produção, com ramo probabilístico para IA
+publico: false
+perfil: Engenheiro de software
+etapas:
+  - id: foco
+    titulo: Foco da jornada
+    descricao: Do requisito à produção, com ramo probabilístico para IA

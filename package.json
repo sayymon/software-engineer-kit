@@ -1,0 +1,42 @@
+{
+  "name": "software-engineer-kit",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "description": "Kit de engenharia de software e IA: ferramentas, fundamentos, stacks, guias praticos, jornadas e certificacoes.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "validate": "tsx tools/validate/index.ts",
+    "test": "vitest run",
+    "schema:gen": "tsx tools/schema/generate.ts",
+    "migrate": "tsx tools/private/run.ts tools/migrate/index.ts",
+    "linkback": "tsx tools/private/run.ts tools/linkback/linkback.ts",
+    "build": "tsx tools/site/build.ts",
+    "build:pt-BR": "tsx tools/site/build.ts pt-BR",
+    "build:en": "tsx tools/site/build.ts en",
+    "preview": "astro preview --root site",
+    "smoke": "tsx tools/preview/smoke.ts"
+  },
+  "dependencies": {
+    "ajv": "^8.20.0",
+    "astro": "^5.18.2",
+    "gray-matter": "^4.0.3",
+    "pagefind": "^1.6.0",
+    "rehype-stringify": "^10.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
+    "unified": "^11.0.5",
+    "yaml": "^2.9.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vitest": "^5.1.1"
+  }
+}

@@ -1,0 +1,11 @@
+id: tec_mapa_de_interessados
+tipo: tecnica
+nome: Mapa de interessados
+descricao: Lista quem pede, usa, decide, opera e é afetado, com o interesse e a influência de cada um.
+quando_usar:
+  - Início de qualquer feature com mais de um time ou público envolvido
+quando_evitar:
+  - Ajuste pequeno com um único interessado conhecido
+status: rascunho
+publico: false
+exemplo: "Pede: liderança comercial. Usa: compradores. Decide: PM. Opera: Pagamentos. Afetado: atendimento."

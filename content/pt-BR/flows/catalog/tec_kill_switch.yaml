@@ -1,0 +1,12 @@
+id: tec_kill_switch
+tipo: tecnica
+nome: Kill switch
+descricao: Chave de desligamento rápido de uma funcionalidade, sem novo deploy. Costuma ser uma feature flag de segurança.
+quando_usar:
+  - Funcionalidade suspeita de causar dano
+  - Contenção rápida e reversível em SEV1
+quando_evitar:
+  - Funcionalidade sem chave pronta (crie antes do incidente)
+status: rascunho
+publico: false
+exemplo: Flag desligada em 1 minuto; o checkout volta ao fluxo sem cupom recorrente.

@@ -1,0 +1,10 @@
+id: jornada_staff
+tipo: jornada
+nome: De executor a referência
+descricao: Externalizar, multiplicar, arquétipos e presença pública
+publico: false
+perfil: Engenheiro de software
+etapas:
+  - id: foco
+    titulo: Foco da jornada
+    descricao: Externalizar, multiplicar, arquétipos e presença pública

@@ -1,0 +1,91 @@
+{
+  "origem": "scripts/guia-decisao/guia/comum.yaml, chave decisor_construir_comprar_assinar (linhas 2878 a 2887). Copiado, não importado.",
+  "opcoes": {
+    "construir": "Montar e operar com componentes próprios ou abertos, sob a sua responsabilidade.",
+    "comprar": "Adquirir produto ou licença para operar no seu ambiente.",
+    "assinar": "Usar serviço hospedado por assinatura ou por uso."
+  },
+  "criterios": [
+    "diferenciacao",
+    "tempo_ate_valor",
+    "custo_total",
+    "dependencia_fornecedor",
+    "risco"
+  ],
+  "escala": {
+    "min": 1,
+    "max": 5
+  },
+  "leitura_da_nota": "Nota 5 é a melhor para quem decide. Em custo_total, dependencia_fornecedor e risco, nota alta significa custo, dependência e risco baixos.",
+  "ordem_desempate": [
+    "assinar",
+    "comprar",
+    "construir"
+  ],
+  "tolerancia_empate": 1e-9,
+  "pesos": {
+    "cumprir_prazo": {
+      "diferenciacao": 0.1,
+      "tempo_ate_valor": 0.4,
+      "custo_total": 0.2,
+      "dependencia_fornecedor": 0.1,
+      "risco": 0.2
+    },
+    "diferenciar_produto": {
+      "diferenciacao": 0.4,
+      "tempo_ate_valor": 0.15,
+      "custo_total": 0.15,
+      "dependencia_fornecedor": 0.15,
+      "risco": 0.15
+    },
+    "reduzir_custo": {
+      "diferenciacao": 0.1,
+      "tempo_ate_valor": 0.15,
+      "custo_total": 0.4,
+      "dependencia_fornecedor": 0.15,
+      "risco": 0.2
+    },
+    "validar_hipotese": {
+      "diferenciacao": 0.1,
+      "tempo_ate_valor": 0.35,
+      "custo_total": 0.2,
+      "dependencia_fornecedor": 0.1,
+      "risco": 0.25
+    }
+  },
+  "eixos": [
+    "time_maturidade",
+    "escala_volume",
+    "orcamento",
+    "latencia",
+    "compliance_dados",
+    "prazo_entrega",
+    "lock_in"
+  ],
+  "eixo_alimenta_criterio": {
+    "time_maturidade": [
+      "risco",
+      "tempo_ate_valor"
+    ],
+    "escala_volume": [
+      "custo_total"
+    ],
+    "orcamento": [
+      "custo_total"
+    ],
+    "latencia": [
+      "diferenciacao",
+      "risco"
+    ],
+    "compliance_dados": [
+      "risco",
+      "dependencia_fornecedor"
+    ],
+    "prazo_entrega": [
+      "tempo_ate_valor"
+    ],
+    "lock_in": [
+      "dependencia_fornecedor"
+    ]
+  }
+}

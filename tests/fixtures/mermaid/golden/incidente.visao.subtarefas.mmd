@@ -1,0 +1,70 @@
+flowchart LR
+  subgraph z_SG_inc_orq["<b>Orquestração do incidente</b>"]
+    direction LR
+    inc_orq_s0(["<small><b>inc_orq_s0</b></small><br/>Alerta ou relato de falha em produção"])
+    inc_orq_c1[["<small><b>inc_orq_c1</b></small><br/>Detectar e triar o alerta"]]
+    inc_orq_c2[["<small><b>inc_orq_c2</b></small><br/>Classificar a severidade"]]
+    inc_orq_e1(["<small><b>inc_orq_e1</b></small><br/>Alarme falso registrado e alerta ajustado<br/><i>retorno: alarme_falso</i>"])
+    inc_orq_c3[["<small><b>inc_orq_c3</b></small><br/>Assumir o comando e decidir a escalada"]]
+    inc_orq_c4[["<small><b>inc_orq_c4</b></small><br/>Comunicar conforme a severidade"]]
+    inc_orq_c7[["<small><b>inc_orq_c7</b></small><br/>Escalar para outro time ou para a liderança"]]
+    inc_orq_c5[["<small><b>inc_orq_c5</b></small><br/>Conter danos conforme a severidade"]]
+    inc_orq_c8[["<small><b>inc_orq_c8</b></small><br/>Reavaliar a severidade"]]
+    inc_orq_c6[["<small><b>inc_orq_c6</b></small><br/>Mitigar e verificar o serviço (até 3 tentativas)"]]
+    inc_orq_c9[["<small><b>inc_orq_c9</b></small><br/>Encerrar o incidente"]]
+    inc_orq_c10[["<small><b>inc_orq_c10</b></small><br/>Aprender com o incidente"]]
+    inc_orq_e2(["<small><b>inc_orq_e2</b></small><br/>Serviço restaurado e aprendizado registrado<br/><i>retorno: restaurado</i>"])
+  end
+  inc_orq_s0 --> inc_orq_c1
+  inc_orq_c1 -->|"impacto_confirmado"| inc_orq_c2
+  inc_orq_c1 -->|"alarme_falso"| inc_orq_e1
+  inc_orq_c2 -->|"sev1"| inc_orq_c3
+  inc_orq_c2 -->|"sev2"| inc_orq_c3
+  inc_orq_c2 -->|"sev3"| inc_orq_c3
+  inc_orq_c3 -->|"seguir"| inc_orq_c4
+  inc_orq_c3 -->|"escalar"| inc_orq_c7
+  inc_orq_c4 -->|"comunicado"| inc_orq_c5
+  inc_orq_c7 -->|"escalado"| inc_orq_c8
+  inc_orq_c5 -->|"contido"| inc_orq_c6
+  inc_orq_c8 -->|"severidade_mudou"| inc_orq_c4
+  inc_orq_c8 -->|"severidade_mantida"| inc_orq_c6
+  inc_orq_c6 -->|"estavel"| inc_orq_c9
+  inc_orq_c6 -->|"tentativas_esgotadas"| inc_orq_c7
+  inc_orq_c9 -->|"encerrado"| inc_orq_c10
+  inc_orq_c10 -->|"formal"| inc_orq_e2
+  inc_orq_c10 -->|"registro_leve"| inc_orq_e2
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#0072B2,stroke:#00446B,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#E69F00,stroke:#8A5F00,stroke-width:1px,color:#000000
+  classDef z_R_3 fill:#009E73,stroke:#005F45,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_R_5 fill:#D55E00,stroke:#803800,stroke-width:1px,color:#000000
+  classDef z_R_6 fill:#882255,stroke:#521433,stroke-width:1px,color:#FFFFFF
+  classDef z_R_7 fill:#CC79A7,stroke:#7A4964,stroke-width:1px,color:#000000
+  classDef z_R_8 fill:#999933,stroke:#5C5C1F,stroke-width:1px,color:#000000
+  classDef z_R_9 fill:#44AA99,stroke:#29665C,stroke-width:1px,color:#000000
+  classDef z_R_10 fill:#332288,stroke:#1F1452,stroke-width:1px,color:#FFFFFF
+  classDef z_C_0_1 fill:#0072B2,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_2 fill:#E69F00,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_3 fill:#009E73,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_4 fill:#56B4E9,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_5 fill:#D55E00,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_6 fill:#882255,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_7 fill:#CC79A7,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_8 fill:#999933,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_9 fill:#44AA99,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_10 fill:#332288,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  class inc_orq_c1 z_C_0_1
+  class inc_orq_c2 z_C_0_2
+  class inc_orq_c3 z_C_0_3
+  class inc_orq_c4 z_C_0_4
+  class inc_orq_c7 z_C_0_5
+  class inc_orq_c5 z_C_0_6
+  class inc_orq_c8 z_C_0_7
+  class inc_orq_c6 z_C_0_8
+  class inc_orq_c9 z_C_0_9
+  class inc_orq_c10 z_C_0_10
+  class inc_orq_s0,inc_orq_e1,inc_orq_e2 z_R_0
+  style z_SG_inc_orq fill:#E7ECEE,stroke:#607D8B,stroke-width:3px,color:#000000

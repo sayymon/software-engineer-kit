@@ -1,0 +1,11 @@
+id: tec_teste_regressao
+tipo: tecnica
+nome: Teste de regressão
+descricao: Teste automatizado que falha com o bug e passa com a correção, mantido na suíte.
+quando_usar:
+  - Todo bug corrigido
+quando_evitar:
+  - Teste frágil que depende de ambiente instável
+status: rascunho
+publico: false
+exemplo: Teste novo garante que o cupom expirado nunca mais devolve erro 500.

@@ -1,0 +1,17 @@
+id: tec_modelagem_de_ameacas
+tipo: tecnica
+nome: Modelagem de ameaças
+descricao: Análise estruturada de como um atacante poderia abusar da solução, por categoria de ameaça, antes de testar.
+quando_usar:
+  - Mudança em autenticação, autorização ou dados sensíveis
+  - Correção de uma vulnerabilidade
+quando_evitar:
+  - Mudança sem superfície de ataque nova
+como_aplicar:
+  - Desenhar o fluxo de dados e as fronteiras de confiança
+  - Listar as ameaças por categoria (falsificação, adulteração, repúdio, vazamento, negação de serviço, elevação de privilégio)
+  - Ligar cada ameaça a um controle e a um teste
+resultado_esperado: Lista de ameaças com controle e teste, revisada antes da liberação.
+status: rascunho
+publico: false
+exemplo: Recuperação de senha com 6 ameaças mapeadas; o limite de tentativas virou teste automatizado.

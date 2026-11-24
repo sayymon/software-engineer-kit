@@ -1,0 +1,92 @@
+flowchart LR
+  subgraph z_SG_git_orq["<b>Orquestração do Git com GitHub</b>"]
+    direction LR
+    git_orq_s0(["<small><b>git_orq_s0</b></small><br/>Necessidade de trabalhar com repositórios no GitHub"])
+    git_orq_c1[["<small><b>git_orq_c1</b></small><br/>Definir contas, políticas e identidades"]]
+    git_orq_c2[["<small><b>git_orq_c2</b></small><br/>Escolher a forma de autenticação e de identidade"]]
+    git_orq_c3[["<small><b>git_orq_c3</b></small><br/>Instalar, autenticar, conectar e proteger"]]
+    git_orq_c4[["<small><b>git_orq_c4</b></small><br/>Instalar, autenticar, conectar e proteger"]]
+    git_orq_c5[["<small><b>git_orq_c5</b></small><br/>Instalar, autenticar, conectar e proteger"]]
+    git_orq_c6[["<small><b>git_orq_c6</b></small><br/>Instalar, autenticar, conectar e proteger"]]
+    git_orq_e1(["<small><b>git_orq_e1</b></small><br/>SSH configurado com uma chave por identidade<br/><i>retorno: ssh_varias_identidades</i>"])
+    git_orq_e2(["<small><b>git_orq_e2</b></small><br/>SSH com commits assinados configurado<br/><i>retorno: ssh_com_assinatura</i>"])
+    git_orq_e3(["<small><b>git_orq_e3</b></small><br/>GitHub com SSO e políticas centrais contratado<br/><i>retorno: github_enterprise</i>"])
+    git_orq_e4(["<small><b>git_orq_e4</b></small><br/>HTTPS com GitHub CLI configurado<br/><i>retorno: https_com_github_cli</i>"])
+  end
+  subgraph z_SG_git_ctx["<b>Contexto e requisitos</b>"]
+    direction LR
+    git_ctx_s0(["<small><b>git_ctx_s0</b></small><br/>Início do levantamento"])
+    git_ctx_t1["<small><b>git_ctx_t1</b></small><br/>Mapear contas, políticas e identidades"]
+    git_ctx_t2["<small><b>git_ctx_t2</b></small><br/>Escolher autenticação e identidade"]
+    git_ctx_e1(["<small><b>git_ctx_e1</b></small><br/>Contas e políticas registradas<br/><i>retorno: contas_definidas</i>"])
+  end
+  subgraph z_SG_git_stk["<b>Stack por contexto</b>"]
+    direction LR
+    git_stk_s0(["<small><b>git_stk_s0</b></small><br/>Início da escolha da autenticação"])
+    git_stk_g1{"<small><b>git_stk_g1</b></small><br/>Mais de uma conta na<br/>máquina?"}
+    git_stk_e1(["<small><b>git_stk_e1</b></small><br/>SSH com várias identidades<br/><i>retorno: ssh_varias_identidades</i>"])
+    git_stk_g2{"<small><b>git_stk_g2</b></small><br/>Chaves SSH e commits<br/>assinados exigidos?"}
+    git_stk_e2(["<small><b>git_stk_e2</b></small><br/>SSH com commits assinados<br/><i>retorno: ssh_com_assinatura</i>"])
+    git_stk_g3{"<small><b>git_stk_g3</b></small><br/>SSO e políticas<br/>centrais?"}
+    git_stk_e3(["<small><b>git_stk_e3</b></small><br/>GitHub com SSO e políticas centrais<br/><i>retorno: github_enterprise</i>"])
+    git_stk_e4(["<small><b>git_stk_e4</b></small><br/>HTTPS com GitHub CLI<br/><i>retorno: https_com_github_cli</i>"])
+  end
+  subgraph z_SG_git_ent["<b>Implementação e entrega</b>"]
+    direction LR
+    git_ent_s0(["<small><b>git_ent_s0</b></small><br/>Início da configuração"])
+    git_ent_t1["<small><b>git_ent_t1</b></small><br/>Instalar, autenticar e conectar"]
+    git_ent_t2["<small><b>git_ent_t2</b></small><br/>Validar identidade e acesso"]
+    git_ent_t3["<small><b>git_ent_t3</b></small><br/>Proteger e revisar"]
+    git_ent_e1(["<small><b>git_ent_e1</b></small><br/>Git configurado, conectado e protegido<br/><i>retorno: pronta</i>"])
+  end
+  git_orq_s0 --> git_orq_c1
+  git_ctx_s0 --> git_ctx_t1
+  git_ctx_t1 --> git_ctx_t2
+  git_ctx_t2 --> git_ctx_e1
+  git_stk_s0 --> git_stk_g1
+  git_stk_g1 -->|"sim"| git_stk_e1
+  git_stk_g1 -->|"não"| git_stk_g2
+  git_stk_g2 -->|"sim"| git_stk_e2
+  git_stk_g2 -->|"não"| git_stk_g3
+  git_stk_g3 -->|"sim"| git_stk_e3
+  git_stk_g3 -->|"não"| git_stk_e4
+  git_ent_s0 --> git_ent_t1
+  git_ent_t1 --> git_ent_t2
+  git_ent_t2 --> git_ent_t3
+  git_ent_t3 --> git_ent_e1
+  git_orq_c1 -.->|"chama"| git_ctx_s0
+  git_ctx_e1 -.->|"retorno: contas_definidas"| git_orq_c2
+  git_orq_c2 -.->|"chama"| git_stk_s0
+  git_stk_e1 -.->|"retorno: ssh_varias_identidades"| git_orq_c3
+  git_stk_e2 -.->|"retorno: ssh_com_assinatura"| git_orq_c4
+  git_stk_e3 -.->|"retorno: github_enterprise"| git_orq_c5
+  git_stk_e4 -.->|"retorno: https_com_github_cli"| git_orq_c6
+  git_orq_c3 -.->|"chama"| git_ent_s0
+  git_ent_e1 -.->|"retorno: pronta (git_orq_c3)"| git_orq_e1
+  git_orq_c4 -.->|"chama"| git_ent_s0
+  git_ent_e1 -.->|"retorno: pronta (git_orq_c4)"| git_orq_e2
+  git_orq_c5 -.->|"chama"| git_ent_s0
+  git_ent_e1 -.->|"retorno: pronta (git_orq_c5)"| git_orq_e3
+  git_orq_c6 -.->|"chama"| git_ent_s0
+  git_ent_e1 -.->|"retorno: pronta (git_orq_c6)"| git_orq_e4
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#0072B2,stroke:#00446B,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#E69F00,stroke:#8A5F00,stroke-width:1px,color:#000000
+  classDef z_R_3 fill:#009E73,stroke:#005F45,stroke-width:1px,color:#000000
+  classDef z_C_0_1 fill:#0072B2,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_2 fill:#E69F00,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_3 fill:#009E73,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  class git_orq_c1 z_C_0_1
+  class git_orq_c2 z_C_0_2
+  class git_orq_c3,git_orq_c4,git_orq_c5,git_orq_c6 z_C_0_3
+  class git_orq_s0,git_orq_e1,git_orq_e2,git_orq_e3,git_orq_e4 z_R_0
+  class git_ctx_s0,git_ctx_t1,git_ctx_t2,git_ctx_e1 z_R_1
+  class git_stk_s0,git_stk_g1,git_stk_e1,git_stk_g2,git_stk_e2,git_stk_g3,git_stk_e3,git_stk_e4 z_R_2
+  class git_ent_s0,git_ent_t1,git_ent_t2,git_ent_t3,git_ent_e1 z_R_3
+  class git_stk_g1,git_stk_g2,git_stk_g3 gw
+  style z_SG_git_orq fill:#E7ECEE,stroke:#607D8B,stroke-width:3px,color:#000000
+  style z_SG_git_ctx fill:#D9EAF3,stroke:#0072B2,stroke-width:3px,color:#000000
+  style z_SG_git_stk fill:#FBF1D9,stroke:#E69F00,stroke-width:3px,color:#000000
+  style z_SG_git_ent fill:#D9F0EA,stroke:#009E73,stroke-width:3px,color:#000000

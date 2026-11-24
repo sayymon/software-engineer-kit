@@ -1,0 +1,466 @@
+id: migracao
+tipo: demanda
+nome: Migração e upgrade
+sigla: mig
+publico: false
+artefatos:
+  - id: inventario_da_migracao
+    nome: Inventário da migração
+    descricao: Componentes, dados e consumidores afetados
+    tipo: documento
+    exemplo: Banco de pedidos na versão antiga, 4 serviços leem direto da tabela, 2 relatórios dependem do formato atual
+    status: rascunho
+    publico: false
+  - id: plano_de_migracao
+    nome: Plano de migração
+    descricao: Passos reversíveis, critério de avanço e rollback de cada passo
+    tipo: documento
+    exemplo: "Expandir: coluna nova; migrar: escrita dupla e cópia em lotes; contrair: leitura só da nova; rollback em cada passo"
+    status: rascunho
+    publico: false
+  - id: remocao_do_legado
+    nome: Remoção do legado
+    descricao: PR que remove o caminho antigo e as flags de transição
+    tipo: pull_request
+    exemplo: PR que remove a coluna antiga, a escrita dupla e a flag de transição
+    status: rascunho
+    publico: false
+raias:
+  - id: mig_orq
+    nome: "Orquestração: migração e upgrade"
+    demanda: migracao
+    responsabilidade: Conduzir a demanda de migração e upgrade do início ao fim, delegando cada etapa a uma raia
+    cor: "#607D8B"
+    orquestradora: true
+    status: rascunho
+    publico: false
+  - id: mig_ava
+    nome: Avaliação e plano de migração
+    demanda: migracao
+    responsabilidade: Inventariar o que muda, checar compatibilidade e planejar passos reversíveis
+    cor: "#332288"
+    status: rascunho
+    publico: false
+  - id: mig_lim
+    nome: Limpeza pós-migração
+    demanda: migracao
+    responsabilidade: Remover o caminho antigo depois que o novo está provado em produção
+    cor: "#117733"
+    status: rascunho
+    publico: false
+decisoes:
+  - id: mig_ava_s0
+    raia: mig_ava
+    tipo: inicio
+    rotulo: "Iniciar: avaliação e plano de migração"
+    condicao: ""
+    proximo:
+      - para: mig_ava_t1
+        condicao: ""
+    estado: {}
+    playbook: pb_mig_ava_s0
+    status: rascunho
+    publico: false
+  - id: mig_ava_t1
+    raia: mig_ava
+    tipo: tarefa
+    rotulo: Inventariar o que muda e quem depende
+    condicao: ""
+    proximo:
+      - para: mig_ava_t2
+        condicao: ""
+    estado: {}
+    saidas:
+      - inventario_da_migracao
+    papel: arquiteto
+    apoio:
+      - dev
+      - engenheiro_de_dados
+      - times_dependentes
+    playbook: pb_mig_ava_t1
+    status: rascunho
+    publico: false
+  - id: mig_ava_t2
+    raia: mig_ava
+    tipo: tarefa
+    rotulo: Planejar expandir, migrar e contrair com rollback
+    condicao: ""
+    proximo:
+      - para: mig_ava_e1
+        condicao: ""
+    estado: {}
+    entradas:
+      - inventario_da_migracao
+    saidas:
+      - plano_de_migracao
+    papel: arquiteto
+    apoio:
+      - sre
+      - engenheiro_de_plataforma
+    playbook: pb_mig_ava_t2
+    status: rascunho
+    publico: false
+  - id: mig_ava_e1
+    raia: mig_ava
+    tipo: fim
+    retorno: plano_de_migracao_pronto
+    rotulo: Plano de migração pronto
+    condicao: ""
+    proximo: []
+    estado: {}
+    saidas:
+      - plano_de_migracao
+    playbook: pb_mig_ava_e1
+    status: rascunho
+    publico: false
+  - id: mig_lim_s0
+    raia: mig_lim
+    tipo: inicio
+    rotulo: "Iniciar: limpeza pós-migração"
+    condicao: ""
+    proximo:
+      - para: mig_lim_t1
+        condicao: ""
+    estado: {}
+    playbook: pb_mig_lim_s0
+    status: rascunho
+    publico: false
+  - id: mig_lim_t1
+    raia: mig_lim
+    tipo: tarefa
+    rotulo: Remover o caminho antigo e o código de transição
+    condicao: ""
+    proximo:
+      - para: mig_lim_e1
+        condicao: ""
+    estado: {}
+    saidas:
+      - remocao_do_legado
+    papel: dev
+    apoio:
+      - tech_lead
+    playbook: pb_mig_lim_t1
+    status: rascunho
+    publico: false
+  - id: mig_lim_e1
+    raia: mig_lim
+    tipo: fim
+    retorno: legado_removido
+    rotulo: Legado removido
+    condicao: ""
+    proximo: []
+    estado: {}
+    saidas:
+      - remocao_do_legado
+    playbook: pb_mig_lim_e1
+    status: rascunho
+    publico: false
+  - id: mig_orq_s0
+    raia: mig_orq
+    tipo: inicio
+    rotulo: Migração ou upgrade necessário
+    condicao: ""
+    proximo:
+      - para: mig_orq_c1
+        condicao: ""
+    estado: {}
+    playbook: pb_mig_orq_s0
+    status: rascunho
+    publico: false
+  - id: mig_orq_c1
+    raia: mig_orq
+    tipo: chamada
+    raia_chamada: mig_ava
+    rotulo: Avaliação e plano de migração
+    condicao: ""
+    proximo:
+      - para: mig_orq_c2
+        condicao: plano_de_migracao_pronto
+    estado: {}
+    saidas:
+      - plano_de_migracao
+    playbook: pb_mig_orq_c1
+    status: rascunho
+    publico: false
+  - id: mig_orq_c2
+    raia: mig_orq
+    tipo: chamada
+    raia_chamada: com_pro
+    rotulo: Verificar a prontidão (Definition of Ready)
+    condicao: ""
+    proximo:
+      - para: mig_orq_c3
+        condicao: pronto_para_iniciar
+    estado: {}
+    entradas:
+      - plano_de_migracao
+    playbook: pb_mig_orq_c2
+    status: rascunho
+    publico: false
+  - id: mig_orq_c3
+    raia: mig_orq
+    tipo: chamada
+    raia_chamada: com_exe
+    rotulo: Execução das tarefas
+    condicao: ""
+    proximo:
+      - para: mig_orq_c4
+        condicao: execucao_integrada
+    estado: {}
+    playbook: pb_mig_orq_c3
+    status: rascunho
+    publico: false
+  - id: mig_orq_c4
+    raia: mig_orq
+    tipo: chamada
+    raia_chamada: com_val
+    rotulo: Testes automatizados
+    condicao: ""
+    proximo:
+      - para: mig_orq_c5
+        condicao: testes_aprovados
+      - para: mig_orq_c3
+        condicao: testes_reprovados
+    estado: {}
+    playbook: pb_mig_orq_c4
+    status: rascunho
+    publico: false
+  - id: mig_orq_c5
+    raia: mig_orq
+    tipo: chamada
+    raia_chamada: com_prf
+    rotulo: Testes de performance
+    condicao: ""
+    proximo:
+      - para: mig_orq_c6
+        condicao: aprovado
+      - para: mig_orq_c3
+        condicao: reprovado
+      - para: mig_orq_c6
+        condicao: nao_aplicavel
+    estado: {}
+    playbook: pb_mig_orq_c5
+    status: rascunho
+    publico: false
+  - id: mig_orq_c6
+    raia: mig_orq
+    tipo: chamada
+    raia_chamada: com_hml
+    rotulo: Testes integrados
+    condicao: ""
+    proximo:
+      - para: mig_orq_c7
+        condicao: testes_integrados_aprovados
+      - para: mig_orq_c3
+        condicao: reprovado
+    estado: {}
+    playbook: pb_mig_orq_c6
+    status: rascunho
+    publico: false
+  - id: mig_orq_c7
+    raia: mig_orq
+    tipo: chamada
+    raia_chamada: com_etg
+    rotulo: Implantação
+    condicao: ""
+    proximo:
+      - para: mig_orq_c8
+        condicao: implantado
+      - para: mig_orq_c3
+        condicao: implantacao_revertida
+    estado: {}
+    playbook: pb_mig_orq_c7
+    status: rascunho
+    publico: false
+  - id: mig_orq_c8
+    raia: mig_orq
+    tipo: chamada
+    raia_chamada: com_mon
+    rotulo: Validação em produção e monitoramento
+    condicao: ""
+    proximo:
+      - para: mig_orq_c9
+        condicao: feature_validada
+      - para: mig_orq_e2
+        condicao: incidente_acionado
+    estado: {}
+    playbook: pb_mig_orq_c8
+    status: rascunho
+    publico: false
+  - id: mig_orq_c9
+    raia: mig_orq
+    tipo: chamada
+    raia_chamada: mig_lim
+    rotulo: Limpeza pós-migração
+    condicao: ""
+    proximo:
+      - para: mig_orq_e1
+        condicao: legado_removido
+    estado: {}
+    saidas:
+      - remocao_do_legado
+    playbook: pb_mig_orq_c9
+    status: rascunho
+    publico: false
+  - id: mig_orq_e1
+    raia: mig_orq
+    tipo: fim
+    retorno: migracao_concluida
+    rotulo: Migração concluída e legado removido
+    condicao: ""
+    proximo: []
+    estado: {}
+    playbook: pb_mig_orq_e1
+    status: rascunho
+    publico: false
+    entradas:
+      - remocao_do_legado
+  - id: mig_orq_e2
+    raia: mig_orq
+    tipo: fim
+    retorno: incidente_acionado
+    rotulo: Incidente acionado em produção
+    condicao: ""
+    proximo: []
+    estado: {}
+    playbook: pb_mig_orq_e2
+    status: rascunho
+    publico: false
+playbooks:
+  - id: pb_mig_ava_s0
+    resumo: "Início da raia Avaliação e plano de migração. Responsabilidade: inventariar o que muda, checar compatibilidade e planejar passos reversíveis."
+    status: rascunho
+    publico: false
+  - id: pb_mig_ava_t1
+    resumo: "Inventariar o que muda e quem depende. Entrega: componentes, dados e consumidores afetados."
+    perguntas_chave:
+      - '"O que precisa estar claro para inventariar o que muda e quem depende?"'
+    status: rascunho
+    publico: false
+  - id: pb_mig_ava_t2
+    resumo: "Planejar expandir, migrar e contrair com rollback. Entrega: passos reversíveis, critério de avanço e rollback de cada passo."
+    perguntas_chave:
+      - '"O que precisa estar claro para planejar expandir, migrar e contrair com rollback?"'
+    status: rascunho
+    publico: false
+  - id: pb_mig_ava_e1
+    resumo: Retorno «plano_de_migracao_pronto» da raia Avaliação e plano de migração. Quem chamou a raia segue por este retorno.
+    status: rascunho
+    publico: false
+  - id: pb_mig_lim_s0
+    resumo: "Início da raia Limpeza pós-migração. Responsabilidade: remover o caminho antigo depois que o novo está provado em produção."
+    status: rascunho
+    publico: false
+  - id: pb_mig_lim_t1
+    resumo: "Remover o caminho antigo e o código de transição. Entrega: pR que remove o caminho antigo e as flags de transição."
+    perguntas_chave:
+      - '"O que precisa estar claro para remover o caminho antigo e o código de transição?"'
+    status: rascunho
+    publico: false
+  - id: pb_mig_lim_e1
+    resumo: Retorno «legado_removido» da raia Limpeza pós-migração. Quem chamou a raia segue por este retorno.
+    status: rascunho
+    publico: false
+  - id: pb_mig_orq_s0
+    resumo: "Migração boa é reversível em cada passo: expandir, migrar, contrair. O caminho antigo só sai quando o novo está provado."
+    status: rascunho
+    publico: false
+  - id: pb_mig_orq_c1
+    resumo: Chama a raia Avaliação e plano de migração. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - "Retornos possíveis: plano_de_migracao_pronto"
+    status: rascunho
+    publico: false
+  - id: pb_mig_orq_c2
+    resumo: Chama a raia Verificar a prontidão (Definition of Ready). O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - "Retornos possíveis: pronto_para_iniciar"
+    status: rascunho
+    publico: false
+  - id: pb_mig_orq_c3
+    resumo: Chama a raia Execução das tarefas. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - "Retornos possíveis: execucao_integrada"
+    status: rascunho
+    publico: false
+  - id: pb_mig_orq_c4
+    resumo: Chama a raia Testes automatizados. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - "Retornos possíveis: testes_aprovados, testes_reprovados"
+    status: rascunho
+    publico: false
+  - id: pb_mig_orq_c5
+    resumo: Chama a raia Testes de performance. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - "Retornos possíveis: aprovado, reprovado, nao_aplicavel"
+    status: rascunho
+    publico: false
+  - id: pb_mig_orq_c6
+    resumo: Chama a raia Testes integrados. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - "Retornos possíveis: testes_integrados_aprovados, reprovado"
+    status: rascunho
+    publico: false
+  - id: pb_mig_orq_c7
+    resumo: Chama a raia Implantação. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - "Retornos possíveis: implantado, implantacao_revertida"
+    status: rascunho
+    publico: false
+  - id: pb_mig_orq_c8
+    resumo: Chama a raia Validação em produção e monitoramento. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - "Retornos possíveis: feature_validada, incidente_acionado"
+    status: rascunho
+    publico: false
+  - id: pb_mig_orq_c9
+    resumo: Chama a raia Limpeza pós-migração. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - "Retornos possíveis: legado_removido"
+    status: rascunho
+    publico: false
+  - id: pb_mig_orq_e1
+    resumo: Migração concluída e legado removido. Fim da demanda.
+    status: rascunho
+    publico: false
+  - id: pb_mig_orq_e2
+    resumo: Incidente acionado em produção. Fim da demanda.
+    status: rascunho
+    publico: false
+celulas:
+  - demanda: migracao
+    requisito: funcional
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: migracao
+    requisito: nao_funcional
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: migracao
+    requisito: restricao
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: migracao
+    requisito: probabilistico_ia
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false

@@ -1,0 +1,12 @@
+---
+// SPDX-License-Identifier: MIT
+import type { T } from '../i18n';
+interface Props { locale: 'pt-BR' | 'en'; base: string; t: T }
+const { locale, base, t } = Astro.props;
+---
+<footer class="site-footer">
+  <div class="inner">
+    <p>{t('footer.license')}</p>
+    <p><a href={`${base}/${locale}/fundamentals/licenses/`}>{t('footer.licenseLink')}</a></p>
+  </div>
+</footer>

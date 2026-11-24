@@ -1,0 +1,11 @@
+id: tec_teste_de_carga
+tipo: tecnica
+nome: Teste de carga e estresse
+descricao: Mede latência, vazão e ponto de ruptura sob carga controlada.
+quando_usar:
+  - Requisito de performance ou pico esperado
+quando_evitar:
+  - Funcionalidade interna de baixo uso
+status: rascunho
+publico: false
+exemplo: 500 requisições por segundo por 15 minutos; p95 de 240 ms.

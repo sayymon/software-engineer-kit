@@ -1,0 +1,11 @@
+id: tec_caso_de_negocio
+tipo: tecnica
+nome: Caso de negócio
+descricao: Compara retorno esperado, custo, risco e custo de adiar para decidir se a oportunidade segue.
+quando_usar:
+  - Oportunidade de negócio que disputa prioridade com outras iniciativas
+quando_evitar:
+  - Exigência regulatória, que segue de qualquer forma
+status: rascunho
+publico: false
+exemplo: "Retorno de 4% de recompra em 6 meses, custo de 2 sprints, custo de adiar: perder a campanha."

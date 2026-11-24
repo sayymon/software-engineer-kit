@@ -1,0 +1,17 @@
+id: tec_logs_e_rastreamento
+tipo: tecnica
+nome: Logs estruturados e rastreamento distribuído
+descricao: Logs com campos padronizados e um id de correlação que liga a requisição por todos os serviços que ela atravessa.
+quando_usar:
+  - Investigar um erro que aconteceu em produção
+  - Bug que atravessa mais de um serviço
+quando_evitar:
+  - Registrar dados pessoais ou segredos nos logs
+como_aplicar:
+  - Partir do horário e do id de correlação do relato
+  - Seguir o rastro pelos serviços até o primeiro erro
+  - Anexar ao bug só os trechos relevantes
+resultado_esperado: Caminho da requisição com o ponto exato da falha, anexado ao bug.
+status: rascunho
+publico: false
+exemplo: O rastro 7f3a mostra o checkout chamando cupons, que espera 3 s pelo saldo e devolve erro 500.

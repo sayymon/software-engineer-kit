@@ -1,0 +1,12 @@
+id: tec_matriz_de_alocacao
+tipo: tecnica
+nome: Matriz de alocação agente x pessoa
+descricao: Critério escrito que decide, tarefa a tarefa, se o agente, a pessoa ou os dois executam.
+quando_usar:
+  - Decompor uma spec em tarefas para agentes e pessoas
+  - Revisar delegações que deram errado
+quando_evitar:
+  - Delegar por conveniência, sem checar verificabilidade e risco
+status: rascunho
+publico: false
+exemplo: "Endpoint verificável por testes: agente Dev. Decisão de contrato com Pagamentos: Arquiteto pessoa."

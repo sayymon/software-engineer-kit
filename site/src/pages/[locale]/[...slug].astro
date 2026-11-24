@@ -1,0 +1,70 @@
+---
+// SPDX-License-Identifier: MIT
+// One route for every page of a locale: entity pages and the generated listings (see render/routes.ts).
+import Base from '../../layouts/Base.astro';
+import { buildLocales, ctxFor, siteIndex } from '../../kit';
+import { siteRoutes } from '../../render/routes';
+import { renderEntity } from '../../render/entity';
+import { renderLayer, renderLicenses, renderJourneys, renderSection } from '../../render/layers';
+export function getStaticPaths() {
+  return buildLocales().flatMap((locale) =>
+    siteRoutes(siteIndex(locale)).map((route) => ({ params: { locale, slug: route.slug }, props: { route } })),
+  );
+}
+const locale = Astro.params.locale as 'pt-BR' | 'en';
+const { route } = Astro.props;
+const ctx = ctxFor(locale);
+let html = '';
+let title = '';
+let description = '';
+let layer = 'site';
+let tipo = 'page';
+let fallback = false;
+let diagrams = 0;
+switch (route.kind) {
+  case 'entity': {
+    const page = ctx.index.byId.get(route.id)!;
+    const r = renderEntity(ctx, page);
+    html = r.html;
+    diagrams = r.diagrams;
+    title = page.nome;
+    description = String(page.entity.data.descricao ?? '');
+    layer = page.layer;
+    tipo = page.tipo;
+    fallback = page.entity.fallback;
+    break;
+  }
+  case 'layer':
+    html = renderLayer(ctx, route.layer);
+    title = ctx.t(`layer.${route.layer}`);
+    description = ctx.t(`layerdesc.${route.layer}`);
+    layer = route.layer;
+    tipo = 'layer';
+    break;
+  case 'section':
+    html = renderSection(ctx, route.layer, route.dir);
+    title = route.dir;
+    layer = route.layer;
+    tipo = 'section';
+    break;
+  case 'licenses':
+    html = renderLicenses(ctx);
+    title = ctx.t('licenses.title');
+    description = ctx.t('licenses.lede');
+    layer = 'fundamentals';
+    tipo = 'licenses';
+    break;
+  case 'journeys':
+    html = renderJourneys(ctx);
+    title = ctx.t('layer.journeys');
+    description = ctx.t('layerdesc.journeys');
+    layer = 'journeys';
+    tipo = 'journeys';
+    break;
+}
+---
+<Base locale={locale} title={title} slug={route.slug} base={ctx.base} description={description} layer={layer} tipo={tipo} fallback={fallback} hasDiagram={diagrams > 0}>
+  <article>
+    <Fragment set:html={html} />
+  </article>
+</Base>

@@ -1,0 +1,16 @@
+id: tec_little_s_law
+tipo: tecnica
+nome: Little's Law
+descricao: "Lei de Little: itens em andamento = vazão x tempo de ciclo. Mostra por que reduzir o trabalho em paralelo reduz o prazo."
+quando_usar:
+  - Diagnosticar prazos longos em fluxo contínuo
+quando_evitar:
+  - Times sem fluxo estável para medir
+exemplo: Com 12 itens em andamento e vazão de 3 por semana, o ciclo médio é de 4 semanas; com 6 itens, cai para 2.
+como_aplicar:
+  - Meça itens em andamento e vazão
+  - Calcule o tempo de ciclo
+  - Reduza o trabalho em paralelo e meça de novo
+resultado_esperado: Limite de trabalho em andamento justificado por números.
+status: rascunho
+publico: false

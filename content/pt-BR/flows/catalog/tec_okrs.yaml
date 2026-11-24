@@ -1,0 +1,16 @@
+id: tec_okrs
+tipo: tecnica
+nome: OKRs
+descricao: "Objetivos e resultados-chave: um objetivo qualitativo com 2 a 4 resultados mensuráveis que dizem se ele foi atingido."
+quando_usar:
+  - Ligar uma iniciativa aos objetivos da empresa ou do demandante
+quando_evitar:
+  - Tarefas operacionais sem resultado a medir
+exemplo: "Objetivo: fidelizar compradores. KR: recompra em 30 dias de 18% para 20% no trimestre."
+como_aplicar:
+  - Identifique o objetivo que a iniciativa serve
+  - Escolha o KR que ela move
+  - Defina a meta e o prazo
+resultado_esperado: Métricas de sucesso ligadas a um KR.
+status: rascunho
+publico: false

@@ -1,0 +1,36 @@
+---
+// SPDX-License-Identifier: MIT
+// Search page. The Pagefind bundle is generated after the build and loaded from the built files (works offline).
+import Base from '../../layouts/Base.astro';
+import { buildLocales, ctxFor } from '../../kit';
+import { LAYER_PAGES } from '../../render/routes';
+export function getStaticPaths() {
+  return buildLocales().map((locale) => ({ params: { locale } }));
+}
+const locale = Astro.params.locale as 'pt-BR' | 'en';
+const ctx = ctxFor(locale);
+const t = ctx.t;
+---
+<Base locale={locale} title={t('search.title')} slug="search" base={ctx.base} layer="search" tipo="search">
+  <div data-pagefind-ignore>
+    <h1>{t('search.title')}</h1>
+    <p class="lede">{t('search.lede')}</p>
+    <form class="search-controls" role="search" id="search-form" data-base={ctx.base} data-locale={locale}
+      data-msg-loading={t('search.loading')} data-msg-none={t('search.none')} data-msg-error={t('search.error')} data-msg-count={t('search.count')}>
+      <label for="search-q" class="sr-only">{t('search.label')}</label>
+      <input id="search-q" type="search" name="q" placeholder={t('search.placeholder')} autocomplete="off" />
+      <label for="search-layer">{t('search.filterLayer')}</label>
+      <select id="search-layer" name="layer">
+        <option value="">{t('search.allLayers')}</option>
+        {LAYER_PAGES.concat(['hubs']).map((l) => <option value={l}>{t(`layer.${l}`)}</option>)}
+      </select>
+      <button type="submit">{t('search.button')}</button>
+    </form>
+    <p id="search-status" class="muted" role="status" aria-live="polite"></p>
+    <ol id="search-results" class="search-results"></ol>
+    <noscript><p class="banner">{t('search.noscript')}</p></noscript>
+  </div>
+</Base>
+<script>
+  import '../../scripts/search';
+</script>

@@ -1,0 +1,11 @@
+id: tec_agente_de_codigo
+tipo: tecnica
+nome: Agente de código
+publico: false
+descricao: Agente de IA que lê o repositório, executa comandos e propõe código, testes e documentação, numa IDE ou no terminal.
+quando_usar:
+  - Tarefas verificáveis por testes, com spec e contexto do projeto
+  - Refatorações e testes repetitivos
+quando_evitar:
+  - Decisões de arquitetura, segurança ou negociação sem uma pessoa do papel
+exemplo: O agente implementa o endpoint de validação com 12 testes a partir da spec e abre o PR para revisão.

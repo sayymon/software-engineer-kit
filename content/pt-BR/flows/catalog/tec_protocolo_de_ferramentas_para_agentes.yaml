@@ -1,0 +1,10 @@
+id: tec_protocolo_de_ferramentas_para_agentes
+tipo: tecnica
+nome: Protocolo padrão de ferramentas para agentes
+publico: false
+descricao: Protocolo aberto que padroniza como agentes acessam ferramentas, dados e contexto, como o Model Context Protocol.
+quando_usar:
+  - Dar a agentes acesso controlado a sistemas e documentação
+quando_evitar:
+  - Acesso que não pode ser restrito por permissão
+exemplo: O agente acessa a documentação e o controle de versão por um protocolo padrão, só com leitura e abertura de PR.

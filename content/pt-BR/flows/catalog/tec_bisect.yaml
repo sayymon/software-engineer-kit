@@ -1,0 +1,11 @@
+id: tec_bisect
+tipo: tecnica
+nome: Bisseção do histórico
+descricao: Busca binária no histórico de commits ou dados para achar a mudança que introduziu a falha.
+quando_usar:
+  - Regressões com histórico conhecido
+quando_evitar:
+  - Falhas intermitentes sem teste confiável
+status: rascunho
+publico: false
+exemplo: Bisseção em 9 commits achou a mudança que introduziu o erro de arredondamento.

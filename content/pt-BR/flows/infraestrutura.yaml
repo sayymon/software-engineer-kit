@@ -1,0 +1,348 @@
+id: infraestrutura
+tipo: demanda
+nome: Infraestrutura e DevOps
+sigla: inf
+publico: false
+artefatos:
+  - id: mudanca_de_infraestrutura
+    nome: Mudança de infraestrutura
+    descricao: Definição versionada da mudança, revisável como qualquer código
+    tipo: configuracao
+    exemplo: Arquivo versionado que aumenta o pool de conexões do banco e adiciona uma réplica de leitura
+    status: rascunho
+    publico: false
+  - id: plano_de_mudanca
+    nome: Plano de mudança
+    descricao: Serviços afetados, janela de execução e passos para voltar
+    tipo: documento
+    exemplo: Afeta pedidos e relatórios; janela de baixo tráfego às 4h; rollback volta a configuração anterior em 5 minutos
+    status: rascunho
+    publico: false
+raias:
+  - id: inf_orq
+    nome: "Orquestração: infraestrutura e DevOps"
+    demanda: infraestrutura
+    responsabilidade: Conduzir a demanda de infraestrutura e DevOps do início ao fim, delegando cada etapa a uma raia
+    cor: "#607D8B"
+    orquestradora: true
+    status: rascunho
+    publico: false
+  - id: inf_pla
+    nome: Plano da mudança de infraestrutura
+    demanda: infraestrutura
+    responsabilidade: Descrever a mudança como código, avaliar o impacto e definir janela e rollback
+    cor: "#332288"
+    status: rascunho
+    publico: false
+decisoes:
+  - id: inf_pla_s0
+    raia: inf_pla
+    tipo: inicio
+    rotulo: "Iniciar: plano da mudança de infraestrutura"
+    condicao: ""
+    proximo:
+      - para: inf_pla_t1
+        condicao: ""
+    estado: {}
+    playbook: pb_inf_pla_s0
+    status: rascunho
+    publico: false
+  - id: inf_pla_t1
+    raia: inf_pla
+    tipo: tarefa
+    rotulo: Descrever a mudança como infraestrutura como código
+    condicao: ""
+    proximo:
+      - para: inf_pla_t2
+        condicao: ""
+    estado: {}
+    saidas:
+      - mudanca_de_infraestrutura
+    papel: engenheiro_de_plataforma
+    apoio:
+      - sre
+    playbook: pb_inf_pla_t1
+    status: rascunho
+    publico: false
+  - id: inf_pla_t2
+    raia: inf_pla
+    tipo: tarefa
+    rotulo: Avaliar impacto, janela e plano de rollback
+    condicao: ""
+    proximo:
+      - para: inf_pla_e1
+        condicao: ""
+    estado: {}
+    entradas:
+      - mudanca_de_infraestrutura
+    saidas:
+      - plano_de_mudanca
+    papel: engenheiro_de_plataforma
+    apoio:
+      - sre
+      - devsecops
+    playbook: pb_inf_pla_t2
+    status: rascunho
+    publico: false
+  - id: inf_pla_e1
+    raia: inf_pla
+    tipo: fim
+    retorno: plano_aprovado
+    rotulo: Plano aprovado
+    condicao: ""
+    proximo: []
+    estado: {}
+    saidas:
+      - plano_de_mudanca
+    playbook: pb_inf_pla_e1
+    status: rascunho
+    publico: false
+  - id: inf_orq_s0
+    raia: inf_orq
+    tipo: inicio
+    rotulo: Mudança de infraestrutura necessária
+    condicao: ""
+    proximo:
+      - para: inf_orq_c1
+        condicao: ""
+    estado: {}
+    playbook: pb_inf_orq_s0
+    status: rascunho
+    publico: false
+  - id: inf_orq_c1
+    raia: inf_orq
+    tipo: chamada
+    raia_chamada: inf_pla
+    rotulo: Plano da mudança de infraestrutura
+    condicao: ""
+    proximo:
+      - para: inf_orq_c2
+        condicao: plano_aprovado
+    estado: {}
+    saidas:
+      - plano_de_mudanca
+    playbook: pb_inf_orq_c1
+    status: rascunho
+    publico: false
+  - id: inf_orq_c2
+    raia: inf_orq
+    tipo: chamada
+    raia_chamada: com_pro
+    rotulo: Verificar a prontidão (Definition of Ready)
+    condicao: ""
+    proximo:
+      - para: inf_orq_c3
+        condicao: pronto_para_iniciar
+    estado: {}
+    entradas:
+      - plano_de_mudanca
+    playbook: pb_inf_orq_c2
+    status: rascunho
+    publico: false
+  - id: inf_orq_c3
+    raia: inf_orq
+    tipo: chamada
+    raia_chamada: com_exe
+    rotulo: Execução das tarefas
+    condicao: ""
+    proximo:
+      - para: inf_orq_c4
+        condicao: execucao_integrada
+    estado: {}
+    playbook: pb_inf_orq_c3
+    status: rascunho
+    publico: false
+  - id: inf_orq_c4
+    raia: inf_orq
+    tipo: chamada
+    raia_chamada: com_seg
+    rotulo: Testes de segurança
+    condicao: ""
+    proximo:
+      - para: inf_orq_c5
+        condicao: aprovado
+      - para: inf_orq_c3
+        condicao: reprovado
+    estado: {}
+    playbook: pb_inf_orq_c4
+    status: rascunho
+    publico: false
+  - id: inf_orq_c5
+    raia: inf_orq
+    tipo: chamada
+    raia_chamada: com_rev
+    rotulo: Review humano
+    condicao: ""
+    proximo:
+      - para: inf_orq_c6
+        condicao: aprovado_pelo_humano
+      - para: inf_orq_c3
+        condicao: ajustes_solicitados
+    estado: {}
+    playbook: pb_inf_orq_c5
+    status: rascunho
+    publico: false
+  - id: inf_orq_c6
+    raia: inf_orq
+    tipo: chamada
+    raia_chamada: com_etg
+    rotulo: Implantação
+    condicao: ""
+    proximo:
+      - para: inf_orq_c7
+        condicao: implantado
+      - para: inf_orq_c3
+        condicao: implantacao_revertida
+    estado: {}
+    playbook: pb_inf_orq_c6
+    status: rascunho
+    publico: false
+  - id: inf_orq_c7
+    raia: inf_orq
+    tipo: chamada
+    raia_chamada: com_mon
+    rotulo: Validação em produção e monitoramento
+    condicao: ""
+    proximo:
+      - para: inf_orq_e1
+        condicao: feature_validada
+      - para: inf_orq_e2
+        condicao: incidente_acionado
+    estado: {}
+    playbook: pb_inf_orq_c7
+    status: rascunho
+    publico: false
+  - id: inf_orq_e1
+    raia: inf_orq
+    tipo: fim
+    retorno: infraestrutura_estavel
+    rotulo: Mudança aplicada e estável
+    condicao: ""
+    proximo: []
+    estado: {}
+    playbook: pb_inf_orq_e1
+    status: rascunho
+    publico: false
+  - id: inf_orq_e2
+    raia: inf_orq
+    tipo: fim
+    retorno: incidente_acionado
+    rotulo: Incidente acionado em produção
+    condicao: ""
+    proximo: []
+    estado: {}
+    playbook: pb_inf_orq_e2
+    status: rascunho
+    publico: false
+playbooks:
+  - id: pb_inf_pla_s0
+    resumo: "Início da raia Plano da mudança de infraestrutura. Responsabilidade: descrever a mudança como código, avaliar o impacto e definir janela e rollback."
+    status: rascunho
+    publico: false
+  - id: pb_inf_pla_t1
+    resumo: "Descrever a mudança como infraestrutura como código. Entrega: definição versionada da mudança, revisável como qualquer código."
+    perguntas_chave:
+      - '"O que precisa estar claro para descrever a mudança como infraestrutura como código?"'
+    status: rascunho
+    publico: false
+  - id: pb_inf_pla_t2
+    resumo: "Avaliar impacto, janela e plano de rollback. Entrega: serviços afetados, janela de execução e passos para voltar."
+    perguntas_chave:
+      - '"O que precisa estar claro para avaliar impacto, janela e plano de rollback?"'
+    status: rascunho
+    publico: false
+  - id: pb_inf_pla_e1
+    resumo: Retorno «plano_aprovado» da raia Plano da mudança de infraestrutura. Quem chamou a raia segue por este retorno.
+    status: rascunho
+    publico: false
+  - id: pb_inf_orq_s0
+    resumo: "Mudança de infraestrutura afeta tudo que roda em cima dela. Trate como código: versionada, revisada, testada e com caminho de volta."
+    status: rascunho
+    publico: false
+  - id: pb_inf_orq_c1
+    resumo: Chama a raia Plano da mudança de infraestrutura. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - "Retornos possíveis: plano_aprovado"
+    status: rascunho
+    publico: false
+  - id: pb_inf_orq_c2
+    resumo: Chama a raia Verificar a prontidão (Definition of Ready). O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - "Retornos possíveis: pronto_para_iniciar"
+    status: rascunho
+    publico: false
+  - id: pb_inf_orq_c3
+    resumo: Chama a raia Execução das tarefas. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - "Retornos possíveis: execucao_integrada"
+    status: rascunho
+    publico: false
+  - id: pb_inf_orq_c4
+    resumo: Chama a raia Testes de segurança. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - "Retornos possíveis: aprovado, reprovado"
+    status: rascunho
+    publico: false
+  - id: pb_inf_orq_c5
+    resumo: Chama a raia Review humano. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - "Retornos possíveis: aprovado_pelo_humano, ajustes_solicitados"
+    status: rascunho
+    publico: false
+  - id: pb_inf_orq_c6
+    resumo: Chama a raia Implantação. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - "Retornos possíveis: implantado, implantacao_revertida"
+    status: rascunho
+    publico: false
+  - id: pb_inf_orq_c7
+    resumo: Chama a raia Validação em produção e monitoramento. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - "Retornos possíveis: feature_validada, incidente_acionado"
+    status: rascunho
+    publico: false
+  - id: pb_inf_orq_e1
+    resumo: Mudança aplicada e estável. Fim da demanda.
+    status: rascunho
+    publico: false
+  - id: pb_inf_orq_e2
+    resumo: Incidente acionado em produção. Fim da demanda.
+    status: rascunho
+    publico: false
+celulas:
+  - demanda: infraestrutura
+    requisito: funcional
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: infraestrutura
+    requisito: nao_funcional
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: infraestrutura
+    requisito: restricao
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: infraestrutura
+    requisito: probabilistico_ia
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false

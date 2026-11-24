@@ -1,0 +1,25 @@
+id: competencia_soft_skills
+tipo: competencia
+nome: "Soft Skills: transversais (nunca expiram)"
+descricao: O multiplicador. 1 ponto de comunicação rende mais que 3 pontos de técnica nova.
+publico: false
+area: "Soft Skills: transversais (nunca expiram)"
+meiaVida: nunca expira
+estudo: O multiplicador. 1 ponto de comunicação rende mais que 3 pontos de técnica nova.
+itens:
+  - nome: Comunicação técnica
+    detalhe: Escrita, fala, visualização
+  - nome: Elicitação de requisitos
+    detalhe: Perguntar certo, ouvir, observar
+  - nome: Escrita de docs
+    detalhe: ADRs, RFCs, runbooks
+  - nome: Influência sem autoridade
+    detalhe: Convencer, não comandar
+  - nome: Mentoria
+    detalhe: Ensinar, dar feedback
+  - nome: Gestão de energia
+    detalhe: Limites, foco, sustentabilidade
+  - nome: Negociação
+    detalhe: Trade-offs, expectativas
+  - nome: Pensamento crítico
+    detalhe: Questionar, validar, decidir

@@ -1,0 +1,7470 @@
+[
+  {
+    "id": "mariadb",
+    "nome": "MariaDB",
+    "categorias": [
+      "Banco relacional"
+    ],
+    "empresa": "MariaDB Foundation",
+    "url": "https://mariadb.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/MariaDB/server",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "cli"
+    ],
+    "linguagens": [
+      "sql"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Banco relacional open source compatível com MySQL."
+  },
+  {
+    "id": "sqlite",
+    "nome": "SQLite",
+    "categorias": [
+      "Banco relacional"
+    ],
+    "empresa": "SQLite Consortium",
+    "url": "https://www.sqlite.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://www.sqlite.org/copyright.html",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "android",
+      "ios",
+      "cli"
+    ],
+    "linguagens": [
+      "sql"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Banco relacional embutido em arquivo único, de domínio público."
+  },
+  {
+    "id": "planetscale",
+    "nome": "PlanetScale",
+    "categorias": [
+      "Banco relacional"
+    ],
+    "empresa": "PlanetScale Inc",
+    "url": "https://planetscale.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "web",
+      "api"
+    ],
+    "linguagens": [
+      "sql"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "MySQL e Postgres gerenciados com branches e alta disponibilidade."
+  },
+  {
+    "id": "cockroachdb",
+    "nome": "CockroachDB",
+    "categorias": [
+      "Banco relacional"
+    ],
+    "empresa": "Cockroach Labs",
+    "url": "https://www.cockroachlabs.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 0.092,
+      "unidade": "vCPU por hora",
+      "status": "verificado",
+      "fonte": "https://www.cockroachlabs.com/pricing/",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "cli"
+    ],
+    "linguagens": [
+      "sql"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "SQL distribuído compatível com Postgres, com escala horizontal e multirregião."
+  },
+  {
+    "id": "google-cloud-spanner",
+    "nome": "Google Cloud Spanner",
+    "categorias": [
+      "Banco relacional"
+    ],
+    "empresa": "Google",
+    "url": "https://cloud.google.com/spanner",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "cli"
+    ],
+    "linguagens": [
+      "sql"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Banco SQL globalmente distribuído com consistência forte."
+  },
+  {
+    "id": "azure-sql-database",
+    "nome": "Azure SQL Database",
+    "categorias": [
+      "Banco relacional"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://azure.microsoft.com/products/azure-sql/database",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "cli"
+    ],
+    "linguagens": [
+      "sql"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "SQL Server gerenciado na nuvem da Microsoft."
+  },
+  {
+    "id": "couchdb",
+    "nome": "Apache CouchDB",
+    "categorias": [
+      "Banco de documentos"
+    ],
+    "empresa": "Apache Software Foundation",
+    "url": "https://couchdb.apache.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/apache/couchdb",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Banco de documentos com API HTTP e replicação multimestre."
+  },
+  {
+    "id": "ferretdb",
+    "nome": "FerretDB",
+    "categorias": [
+      "Banco de documentos"
+    ],
+    "empresa": "FerretDB (comunidade)",
+    "url": "https://www.ferretdb.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/FerretDB/FerretDB",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Camada compatível com o protocolo do MongoDB sobre Postgres, em licença aberta."
+  },
+  {
+    "id": "firestore",
+    "nome": "Cloud Firestore",
+    "categorias": [
+      "Banco de documentos"
+    ],
+    "empresa": "Google",
+    "url": "https://firebase.google.com/products/firestore",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "web",
+      "android",
+      "ios",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Banco de documentos serverless do Firebase com sincronização em tempo real."
+  },
+  {
+    "id": "couchbase-capella",
+    "nome": "Couchbase Capella",
+    "categorias": [
+      "Banco de documentos"
+    ],
+    "empresa": "Couchbase Inc",
+    "url": "https://www.couchbase.com/products/capella/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 0.15,
+      "unidade": "nó por hora (a partir de)",
+      "status": "verificado",
+      "fonte": "https://www.couchbase.com/pricing/",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Banco de documentos gerenciado com SQL++ e cache integrado."
+  },
+  {
+    "id": "ravendb",
+    "nome": "RavenDB",
+    "categorias": [
+      "Banco de documentos"
+    ],
+    "empresa": "Hibernating Rhinos",
+    "url": "https://ravendb.net",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Banco de documentos ACID com licença comunitária gratuita e planos pagos."
+  },
+  {
+    "id": "valkey",
+    "nome": "Valkey",
+    "categorias": [
+      "Chave-valor e cache"
+    ],
+    "empresa": "Linux Foundation",
+    "url": "https://valkey.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/valkey-io/valkey",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Fork aberto do Redis mantido pela Linux Foundation."
+  },
+  {
+    "id": "dragonfly",
+    "nome": "DragonflyDB",
+    "categorias": [
+      "Chave-valor e cache"
+    ],
+    "empresa": "DragonflyDB Ltd",
+    "url": "https://www.dragonflydb.io",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/dragonflydb/dragonfly",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Armazenamento em memória compatível com Redis e Memcached, com foco em multi-thread."
+  },
+  {
+    "id": "redis-cloud",
+    "nome": "Redis Cloud",
+    "categorias": [
+      "Chave-valor e cache"
+    ],
+    "empresa": "Redis Ltd",
+    "url": "https://redis.io/cloud/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 5,
+      "unidade": "mês (a partir de)",
+      "status": "verificado",
+      "fonte": "https://redis.io/pricing/",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Redis gerenciado pela própria Redis em várias nuvens."
+  },
+  {
+    "id": "amazon-elasticache",
+    "nome": "Amazon ElastiCache",
+    "categorias": [
+      "Chave-valor e cache"
+    ],
+    "empresa": "Amazon Web Services",
+    "url": "https://aws.amazon.com/elasticache/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Redis e Valkey gerenciados da AWS."
+  },
+  {
+    "id": "azure-managed-redis",
+    "nome": "Azure Managed Redis",
+    "categorias": [
+      "Chave-valor e cache"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://azure.microsoft.com/products/managed-redis",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Redis gerenciado da Microsoft com recursos empresariais."
+  },
+  {
+    "id": "google-memorystore",
+    "nome": "Google Memorystore",
+    "categorias": [
+      "Chave-valor e cache"
+    ],
+    "empresa": "Google",
+    "url": "https://cloud.google.com/memorystore",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Redis e Valkey gerenciados do Google Cloud."
+  },
+  {
+    "id": "meilisearch",
+    "nome": "Meilisearch",
+    "categorias": [
+      "Busca e analítico"
+    ],
+    "empresa": "Meili SAS",
+    "url": "https://www.meilisearch.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/meilisearch/meilisearch",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Busca textual rápida e tolerante a erros de digitação."
+  },
+  {
+    "id": "typesense",
+    "nome": "Typesense",
+    "categorias": [
+      "Busca e analítico"
+    ],
+    "empresa": "Typesense Inc",
+    "url": "https://typesense.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/typesense/typesense",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Motor de busca open source em memória, alternativa ao Algolia."
+  },
+  {
+    "id": "elastic-cloud",
+    "nome": "Elastic Cloud",
+    "categorias": [
+      "Busca e analítico"
+    ],
+    "empresa": "Elastic NV",
+    "url": "https://www.elastic.co/cloud",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Elasticsearch gerenciado com Kibana e observabilidade."
+  },
+  {
+    "id": "clickhouse-cloud",
+    "nome": "ClickHouse Cloud",
+    "categorias": [
+      "Busca e analítico"
+    ],
+    "empresa": "ClickHouse Inc",
+    "url": "https://clickhouse.com/cloud",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "ClickHouse gerenciado para analítico em tempo real."
+  },
+  {
+    "id": "azure-ai-search",
+    "nome": "Azure AI Search",
+    "categorias": [
+      "Busca e analítico"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://azure.microsoft.com/products/ai-services/ai-search",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Busca textual e vetorial gerenciada da Microsoft."
+  },
+  {
+    "id": "google-vertex-ai-search",
+    "nome": "Google Vertex AI Search",
+    "categorias": [
+      "Busca e analítico"
+    ],
+    "empresa": "Google",
+    "url": "https://cloud.google.com/enterprise-search",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Busca empresarial e para aplicativos com IA no Google Cloud."
+  },
+  {
+    "id": "victoriametrics",
+    "nome": "VictoriaMetrics",
+    "categorias": [
+      "Série temporal"
+    ],
+    "empresa": "VictoriaMetrics Inc",
+    "url": "https://victoriametrics.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/VictoriaMetrics/VictoriaMetrics",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "api"
+    ],
+    "linguagens": [
+      "sql"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Banco de séries temporais compatível com Prometheus, com baixo consumo de recursos."
+  },
+  {
+    "id": "questdb",
+    "nome": "QuestDB",
+    "categorias": [
+      "Série temporal"
+    ],
+    "empresa": "QuestDB Ltd",
+    "url": "https://questdb.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/questdb/questdb",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "api"
+    ],
+    "linguagens": [
+      "sql"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Banco de séries temporais de alto desempenho com SQL."
+  },
+  {
+    "id": "timescale-cloud",
+    "nome": "Timescale Cloud",
+    "categorias": [
+      "Série temporal"
+    ],
+    "empresa": "Tiger Data",
+    "url": "https://www.timescale.com/cloud",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 30,
+      "unidade": "mês (a partir de)",
+      "status": "verificado",
+      "fonte": "https://www.timescale.com/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "api"
+    ],
+    "linguagens": [
+      "sql"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Postgres gerenciado com extensões de séries temporais."
+  },
+  {
+    "id": "google-cloud-bigtable",
+    "nome": "Google Cloud Bigtable",
+    "categorias": [
+      "Série temporal"
+    ],
+    "empresa": "Google",
+    "url": "https://cloud.google.com/bigtable",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "api"
+    ],
+    "linguagens": [
+      "sql"
+    ],
+    "porte": [
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Banco wide-column de baixa latência para séries temporais em escala."
+  },
+  {
+    "id": "kdb-insights",
+    "nome": "KX kdb Insights",
+    "categorias": [
+      "Série temporal"
+    ],
+    "empresa": "KX Systems",
+    "url": "https://kx.com",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "api"
+    ],
+    "linguagens": [
+      "sql"
+    ],
+    "porte": [
+      "grande"
+    ],
+    "segmentos": [
+      "financeiro-fintech"
+    ],
+    "nota": "Banco de séries temporais usado em mercado financeiro de alta frequência."
+  },
+  {
+    "id": "trino",
+    "nome": "Trino",
+    "categorias": [
+      "Data warehouse e lakehouse"
+    ],
+    "empresa": "Trino Software Foundation",
+    "url": "https://trino.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/trinodb/trino",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "web",
+      "cli"
+    ],
+    "linguagens": [
+      "sql"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Motor SQL distribuído que consulta vários data lakes e bancos."
+  },
+  {
+    "id": "databricks",
+    "nome": "Databricks",
+    "categorias": [
+      "Data warehouse e lakehouse",
+      "Pipelines e orquestração de dados"
+    ],
+    "empresa": "Databricks Inc",
+    "url": "https://www.databricks.com",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "web",
+      "cli"
+    ],
+    "linguagens": [
+      "sql"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Plataforma de lakehouse com Spark, SQL e ML."
+  },
+  {
+    "id": "flyway",
+    "nome": "Flyway",
+    "categorias": [
+      "Migração e administração de banco"
+    ],
+    "empresa": "Redgate",
+    "url": "https://www.red-gate.com/products/flyway/",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/flyway/flyway",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows",
+      "macos",
+      "linux",
+      "cli"
+    ],
+    "linguagens": [
+      "sql"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Migração de esquema de banco com scripts SQL versionados."
+  },
+  {
+    "id": "datagrip",
+    "nome": "DataGrip",
+    "categorias": [
+      "Migração e administração de banco"
+    ],
+    "empresa": "JetBrains",
+    "url": "https://www.jetbrains.com/datagrip/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows",
+      "macos",
+      "linux",
+      "cli"
+    ],
+    "linguagens": [
+      "sql"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "IDE de banco de dados da JetBrains com autocomplete avançado."
+  },
+  {
+    "id": "beekeeper-studio",
+    "nome": "Beekeeper Studio",
+    "categorias": [
+      "Migração e administração de banco"
+    ],
+    "empresa": "Beekeeper Studio Inc",
+    "url": "https://www.beekeeperstudio.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/beekeeper-studio/beekeeper-studio",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows",
+      "macos",
+      "linux",
+      "cli"
+    ],
+    "linguagens": [
+      "sql"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Cliente SQL multiplataforma com edição simples e versão paga."
+  },
+  {
+    "id": "dbvisualizer",
+    "nome": "DbVisualizer",
+    "categorias": [
+      "Migração e administração de banco"
+    ],
+    "empresa": "DbVis Software",
+    "url": "https://www.dbvis.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 199,
+      "unidade": "usuário (primeiro ano)",
+      "status": "verificado",
+      "fonte": "https://www.dbvis.com/pricing/",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows",
+      "macos",
+      "linux",
+      "cli"
+    ],
+    "linguagens": [
+      "sql"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Cliente de banco universal com plano gratuito e versão Pro."
+  },
+  {
+    "id": "redgate-sql-toolbelt",
+    "nome": "Redgate SQL Toolbelt",
+    "categorias": [
+      "Migração e administração de banco"
+    ],
+    "empresa": "Redgate",
+    "url": "https://www.red-gate.com/products/sql-toolbelt-essentials/",
+    "preco": {
+      "modelo": [
+        "per-seat"
+      ],
+      "usd": 117.5,
+      "unidade": "usuário/mês (US$ 1.410 por usuário/ano)",
+      "status": "verificado",
+      "fonte": "https://www.red-gate.com/products/sql-toolbelt-essentials/",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows",
+      "macos",
+      "linux",
+      "cli"
+    ],
+    "linguagens": [
+      "sql"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Conjunto de ferramentas de produtividade e entrega de banco SQL Server."
+  },
+  {
+    "id": "scaleway",
+    "nome": "Scaleway",
+    "categorias": [
+      "Nuvem pública generalista"
+    ],
+    "empresa": "Scaleway SAS",
+    "url": "https://www.scaleway.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "web",
+      "cli",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Nuvem europeia com computação, containers e GPU."
+  },
+  {
+    "id": "ibm-cloud",
+    "nome": "IBM Cloud",
+    "categorias": [
+      "Nuvem pública generalista"
+    ],
+    "empresa": "IBM",
+    "url": "https://www.ibm.com/cloud",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "web",
+      "cli",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Nuvem da IBM com plano Lite gratuito e foco empresarial."
+  },
+  {
+    "id": "alibaba-cloud",
+    "nome": "Alibaba Cloud",
+    "categorias": [
+      "Nuvem pública generalista"
+    ],
+    "empresa": "Alibaba",
+    "url": "https://www.alibabacloud.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "web",
+      "cli",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Maior nuvem da Ásia, com amplo catálogo de serviços."
+  },
+  {
+    "id": "tencent-cloud",
+    "nome": "Tencent Cloud",
+    "categorias": [
+      "Nuvem pública generalista"
+    ],
+    "empresa": "Tencent",
+    "url": "https://www.tencentcloud.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "web",
+      "cli",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Nuvem da Tencent com forte presença na Ásia."
+  },
+  {
+    "id": "microsoft-azure",
+    "nome": "Microsoft Azure",
+    "categorias": [
+      "Nuvem pública generalista"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://azure.microsoft.com",
+    "preco": {
+      "modelo": [
+        "subscription",
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "web",
+      "cli",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Nuvem da Microsoft, forte em ambientes corporativos e híbridos."
+  },
+  {
+    "id": "contabo",
+    "nome": "Contabo",
+    "categorias": [
+      "VPS e nuvem de baixo custo"
+    ],
+    "empresa": "Contabo GmbH",
+    "url": "https://contabo.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "linux",
+      "web",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "VPS e servidores dedicados com muita memória por pouco dinheiro."
+  },
+  {
+    "id": "hostinger-vps",
+    "nome": "Hostinger VPS",
+    "categorias": [
+      "VPS e nuvem de baixo custo"
+    ],
+    "empresa": "Hostinger",
+    "url": "https://www.hostinger.com/vps-hosting",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 6.49,
+      "unidade": "mês (preço promocional; regular US$ 19,49)",
+      "status": "verificado",
+      "fonte": "https://www.hostinger.com/vps-hosting",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "linux",
+      "web",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "VPS de entrada com painel simples e suporte em português."
+  },
+  {
+    "id": "vultr",
+    "nome": "Vultr",
+    "categorias": [
+      "VPS e nuvem de baixo custo"
+    ],
+    "empresa": "Vultr",
+    "url": "https://www.vultr.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "linux",
+      "web",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "VPS e bare metal em dezenas de regiões."
+  },
+  {
+    "id": "linode",
+    "nome": "Akamai Cloud (Linode)",
+    "categorias": [
+      "VPS e nuvem de baixo custo"
+    ],
+    "empresa": "Akamai",
+    "url": "https://www.linode.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "linux",
+      "web",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "VPS e Kubernetes com preço simples, agora sob a Akamai."
+  },
+  {
+    "id": "aws-lightsail",
+    "nome": "Amazon Lightsail",
+    "categorias": [
+      "VPS e nuvem de baixo custo"
+    ],
+    "empresa": "Amazon Web Services",
+    "url": "https://aws.amazon.com/lightsail/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 5,
+      "unidade": "mês",
+      "status": "verificado",
+      "fonte": "https://aws.amazon.com/lightsail/pricing/",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "linux",
+      "web",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "VPS simplificada da AWS com preço mensal fixo."
+  },
+  {
+    "id": "latitude-sh",
+    "nome": "Latitude.sh",
+    "categorias": [
+      "VPS e nuvem de baixo custo"
+    ],
+    "empresa": "Latitude.sh",
+    "url": "https://www.latitude.sh",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "linux",
+      "web",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Servidores bare metal sob demanda com regiões na América Latina."
+  },
+  {
+    "id": "deno-deploy",
+    "nome": "Deno Deploy",
+    "categorias": [
+      "Serverless e edge"
+    ],
+    "empresa": "Deno Land Inc",
+    "url": "https://deno.com/deploy",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 20,
+      "unidade": "mês",
+      "status": "verificado",
+      "fonte": "https://deno.com/deploy/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "cli",
+      "api"
+    ],
+    "linguagens": [
+      "javascript",
+      "typescript"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Hospedagem de JavaScript e TypeScript na borda com plano gratuito."
+  },
+  {
+    "id": "bunny-edge-scripting",
+    "nome": "Bunny Edge Scripting",
+    "categorias": [
+      "Serverless e edge"
+    ],
+    "empresa": "Bunny.net",
+    "url": "https://bunny.net/edge-scripting/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "cli",
+      "api"
+    ],
+    "linguagens": [
+      "javascript",
+      "typescript"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Scripts na borda da CDN Bunny com cobrança por requisição."
+  },
+  {
+    "id": "google-cloud-run",
+    "nome": "Google Cloud Run",
+    "categorias": [
+      "Serverless e edge"
+    ],
+    "empresa": "Google",
+    "url": "https://cloud.google.com/run",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "cli",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Containers serverless com escala até zero."
+  },
+  {
+    "id": "azure-functions",
+    "nome": "Azure Functions",
+    "categorias": [
+      "Serverless e edge"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://azure.microsoft.com/products/functions",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "cli",
+      "api"
+    ],
+    "linguagens": [
+      "csharp",
+      "javascript",
+      "typescript",
+      "python",
+      "java"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Funções serverless da Microsoft com integração a eventos do Azure."
+  },
+  {
+    "id": "akamai-edgeworkers",
+    "nome": "Akamai EdgeWorkers",
+    "categorias": [
+      "Serverless e edge"
+    ],
+    "empresa": "Akamai",
+    "url": "https://www.akamai.com/products/edgeworkers",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "cli",
+      "api"
+    ],
+    "linguagens": [
+      "javascript"
+    ],
+    "porte": [
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Código na borda da maior CDN do mundo."
+  },
+  {
+    "id": "lambda-edge",
+    "nome": "Lambda@Edge",
+    "categorias": [
+      "Serverless e edge"
+    ],
+    "empresa": "Amazon Web Services",
+    "url": "https://aws.amazon.com/lambda/edge/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "cli",
+      "api"
+    ],
+    "linguagens": [
+      "javascript",
+      "python"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Funções executadas nos pontos da CloudFront."
+  },
+  {
+    "id": "backblaze-b2",
+    "nome": "Backblaze B2",
+    "categorias": [
+      "Armazenamento de objetos e CDN"
+    ],
+    "empresa": "Backblaze Inc",
+    "url": "https://www.backblaze.com/cloud-storage",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "api",
+      "web",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Armazenamento de objetos compatível com S3 de baixo custo."
+  },
+  {
+    "id": "minio",
+    "nome": "MinIO",
+    "categorias": [
+      "Armazenamento de objetos e CDN"
+    ],
+    "empresa": "MinIO Inc",
+    "url": "https://min.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/minio/minio",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "self-hosted",
+      "linux",
+      "cli",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Armazenamento de objetos compatível com S3, para rodar em servidor próprio."
+  },
+  {
+    "id": "bunny-net",
+    "nome": "Bunny.net",
+    "categorias": [
+      "Armazenamento de objetos e CDN"
+    ],
+    "empresa": "BunnyWay",
+    "url": "https://bunny.net",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 0.01,
+      "unidade": "GB (CDN Standard, Europa e América do Norte)",
+      "status": "verificado",
+      "fonte": "https://bunny.net/pricing/",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "api",
+      "web",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "CDN e armazenamento com preço baixo por GB."
+  },
+  {
+    "id": "wasabi",
+    "nome": "Wasabi",
+    "categorias": [
+      "Armazenamento de objetos e CDN"
+    ],
+    "empresa": "Wasabi Technologies",
+    "url": "https://wasabi.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 7.99,
+      "unidade": "TB por mês",
+      "status": "verificado",
+      "fonte": "https://wasabi.com/cloud-storage-pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "api",
+      "web",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Armazenamento de objetos com preço fixo e sem taxa de saída."
+  },
+  {
+    "id": "akamai-cdn",
+    "nome": "Akamai CDN",
+    "categorias": [
+      "Armazenamento de objetos e CDN"
+    ],
+    "empresa": "Akamai",
+    "url": "https://www.akamai.com/products/content-delivery-network",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "api",
+      "web",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "CDN de maior capacidade, usada em escala empresarial."
+  },
+  {
+    "id": "fastly-cdn",
+    "nome": "Fastly CDN",
+    "categorias": [
+      "Armazenamento de objetos e CDN"
+    ],
+    "empresa": "Fastly Inc",
+    "url": "https://www.fastly.com/products/cdn",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "api",
+      "web",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "CDN com configuração em tempo real e cache programável."
+  },
+  {
+    "id": "nats",
+    "nome": "NATS",
+    "categorias": [
+      "Mensageria e streaming"
+    ],
+    "empresa": "Synadia",
+    "url": "https://nats.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/nats-io/nats-server",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Mensageria leve e rápida com JetStream para persistência."
+  },
+  {
+    "id": "apache-kafka",
+    "nome": "Apache Kafka",
+    "categorias": [
+      "Mensageria e streaming"
+    ],
+    "empresa": "Apache Software Foundation",
+    "url": "https://kafka.apache.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/apache/kafka",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Plataforma de streaming de eventos distribuída, padrão de mercado."
+  },
+  {
+    "id": "google-pubsub",
+    "nome": "Google Pub/Sub",
+    "categorias": [
+      "Mensageria e streaming"
+    ],
+    "empresa": "Google",
+    "url": "https://cloud.google.com/pubsub",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Mensageria global assíncrona do Google Cloud."
+  },
+  {
+    "id": "redpanda",
+    "nome": "Redpanda",
+    "categorias": [
+      "Mensageria e streaming"
+    ],
+    "empresa": "Redpanda Data",
+    "url": "https://www.redpanda.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Streaming compatível com Kafka escrito em C++, com edição comunitária."
+  },
+  {
+    "id": "azure-event-hubs",
+    "nome": "Azure Event Hubs",
+    "categorias": [
+      "Mensageria e streaming"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://azure.microsoft.com/products/event-hubs",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "self-hosted",
+      "linux",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Ingestão de eventos em escala, compatível com Kafka."
+  },
+  {
+    "id": "duckdns",
+    "nome": "DuckDNS",
+    "categorias": [
+      "DNS e domínios"
+    ],
+    "empresa": "DuckDNS",
+    "url": "https://www.duckdns.org",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://www.duckdns.org",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "DNS dinâmico gratuito para subdomínios."
+  },
+  {
+    "id": "hurricane-electric-dns",
+    "nome": "Hurricane Electric DNS",
+    "categorias": [
+      "DNS e domínios"
+    ],
+    "empresa": "Hurricane Electric",
+    "url": "https://dns.he.net",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://dns.he.net",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Hospedagem de DNS gratuita com servidores globais."
+  },
+  {
+    "id": "namecheap",
+    "nome": "Namecheap",
+    "categorias": [
+      "DNS e domínios"
+    ],
+    "empresa": "Namecheap Inc",
+    "url": "https://www.namecheap.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 8.98,
+      "unidade": "ano (registro de domínio .com)",
+      "status": "verificado",
+      "fonte": "https://www.namecheap.com/domains/",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Registrador popular com preços baixos e DNS premium."
+  },
+  {
+    "id": "cloudflare-registrar",
+    "nome": "Cloudflare Registrar",
+    "categorias": [
+      "DNS e domínios"
+    ],
+    "empresa": "Cloudflare",
+    "url": "https://www.cloudflare.com/products/registrar/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Registro de domínios ao preço de custo."
+  },
+  {
+    "id": "ns1",
+    "nome": "NS1 (IBM)",
+    "categorias": [
+      "DNS e domínios"
+    ],
+    "empresa": "IBM",
+    "url": "https://ns1.com",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": 108,
+      "unidade": "mês (a partir de)",
+      "status": "verificado",
+      "fonte": "https://ns1.com/products/managed-dns",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "DNS programável com roteamento de tráfego avançado."
+  },
+  {
+    "id": "azure-dns",
+    "nome": "Azure DNS",
+    "categorias": [
+      "DNS e domínios"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://azure.microsoft.com/products/dns",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Hospedagem de zonas DNS na Azure."
+  },
+  {
+    "id": "dokku",
+    "nome": "Dokku",
+    "categorias": [
+      "PaaS de aplicações"
+    ],
+    "empresa": "Dokku (comunidade)",
+    "url": "https://dokku.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/dokku/dokku",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "self-hosted",
+      "linux",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Mini-PaaS self-hosted baseado em Docker, com git push para deploy."
+  },
+  {
+    "id": "caprover",
+    "nome": "CapRover",
+    "categorias": [
+      "PaaS de aplicações"
+    ],
+    "empresa": "CapRover (comunidade)",
+    "url": "https://caprover.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/caprover/caprover",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "self-hosted",
+      "web",
+      "linux"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "PaaS self-hosted com interface web e one-click apps."
+  },
+  {
+    "id": "railway",
+    "nome": "Railway",
+    "categorias": [
+      "PaaS de aplicações"
+    ],
+    "empresa": "Railway Corp",
+    "url": "https://railway.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 0,
+      "unidade": "plano Free; uso cobrado",
+      "status": "verificado",
+      "fonte": "https://railway.com/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "cli",
+      "cloud",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "PaaS com deploy a partir do GitHub e cobrança por uso."
+  },
+  {
+    "id": "flyio",
+    "nome": "Fly.io",
+    "categorias": [
+      "PaaS de aplicações"
+    ],
+    "empresa": "Fly.io",
+    "url": "https://fly.io",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 2.19,
+      "unidade": "30 dias (menor máquina)",
+      "status": "verificado",
+      "fonte": "https://fly.io/docs/about/pricing/",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "cli",
+      "cloud",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Máquinas virtuais leves distribuídas perto do usuário."
+  },
+  {
+    "id": "heroku",
+    "nome": "Heroku",
+    "categorias": [
+      "PaaS de aplicações"
+    ],
+    "empresa": "Salesforce",
+    "url": "https://www.heroku.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 5,
+      "unidade": "mês (dyno Eco)",
+      "status": "verificado",
+      "fonte": "https://www.heroku.com/pricing/",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "cli",
+      "cloud",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "PaaS clássico com buildpacks e add-ons."
+  },
+  {
+    "id": "platform-sh",
+    "nome": "Platform.sh",
+    "categorias": [
+      "PaaS de aplicações"
+    ],
+    "empresa": "Platform.sh",
+    "url": "https://platform.sh",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "cli",
+      "cloud",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "PaaS com ambientes clonáveis e foco corporativo."
+  },
+  {
+    "id": "appwrite",
+    "nome": "Appwrite",
+    "categorias": [
+      "BaaS e backend pronto"
+    ],
+    "empresa": "Appwrite Ltd",
+    "url": "https://appwrite.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/appwrite/appwrite",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "cloud",
+      "self-hosted",
+      "api",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Backend open source com auth, banco, storage e funções."
+  },
+  {
+    "id": "nhost",
+    "nome": "Nhost",
+    "categorias": [
+      "BaaS e backend pronto"
+    ],
+    "empresa": "Nhost AB",
+    "url": "https://nhost.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/nhost/nhost",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "cloud",
+      "self-hosted",
+      "api",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Backend com Postgres, GraphQL (Hasura), auth e storage."
+  },
+  {
+    "id": "convex",
+    "nome": "Convex",
+    "categorias": [
+      "BaaS e backend pronto"
+    ],
+    "empresa": "Convex Inc",
+    "url": "https://www.convex.dev",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 0,
+      "unidade": "plano Starter gratuito; Professional a US$ 25 por desenvolvedor/mês",
+      "status": "verificado",
+      "fonte": "https://www.convex.dev/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "cloud",
+      "self-hosted",
+      "api",
+      "cli"
+    ],
+    "linguagens": [
+      "typescript"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Backend reativo em TypeScript com banco e funções integrados."
+  },
+  {
+    "id": "hasura-cloud",
+    "nome": "Hasura Cloud",
+    "categorias": [
+      "BaaS e backend pronto"
+    ],
+    "empresa": "Hasura Inc",
+    "url": "https://hasura.io",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 0,
+      "unidade": "plano DDN Free; excedente cobrado por uso",
+      "status": "verificado",
+      "fonte": "https://hasura.io/pricing/",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "cloud",
+      "self-hosted",
+      "api",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "API GraphQL instantânea sobre bancos de dados, gerenciada."
+  },
+  {
+    "id": "xano",
+    "nome": "Xano",
+    "categorias": [
+      "BaaS e backend pronto"
+    ],
+    "empresa": "Xano Inc",
+    "url": "https://www.xano.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 85,
+      "unidade": "mês (cobrança anual; US$ 99 no mensal)",
+      "status": "verificado",
+      "fonte": "https://www.xano.com/pricing/",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "cloud",
+      "self-hosted",
+      "api",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Backend no-code com banco, APIs e lógica visual."
+  },
+  {
+    "id": "authentik",
+    "nome": "authentik",
+    "categorias": [
+      "Autenticação e identidade"
+    ],
+    "empresa": "authentik Security",
+    "url": "https://goauthentik.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/goauthentik/authentik",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Provedor de identidade open source moderno e self-hosted."
+  },
+  {
+    "id": "auth0",
+    "nome": "Auth0",
+    "categorias": [
+      "Autenticação e identidade"
+    ],
+    "empresa": "Okta",
+    "url": "https://auth0.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 35,
+      "unidade": "mês",
+      "status": "verificado",
+      "fonte": "https://auth0.com/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Plataforma de identidade para login de clientes, com plano gratuito."
+  },
+  {
+    "id": "firebase-auth",
+    "nome": "Firebase Authentication",
+    "categorias": [
+      "Autenticação e identidade"
+    ],
+    "empresa": "Google",
+    "url": "https://firebase.google.com/products/auth",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Login por e-mail, redes sociais e telefone integrado ao Firebase."
+  },
+  {
+    "id": "microsoft-entra-id",
+    "nome": "Microsoft Entra ID",
+    "categorias": [
+      "Autenticação e identidade"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://www.microsoft.com/security/business/identity-access/microsoft-entra-id",
+    "preco": {
+      "modelo": [
+        "per-seat",
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Identidade corporativa da Microsoft integrada ao Microsoft 365 e Azure."
+  },
+  {
+    "id": "ping-identity",
+    "nome": "PingOne",
+    "categorias": [
+      "Autenticação e identidade"
+    ],
+    "empresa": "Ping Identity",
+    "url": "https://www.pingidentity.com",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Identidade para grandes empresas, com federação e MFA."
+  },
+  {
+    "id": "pagbank",
+    "nome": "PagBank PagSeguro",
+    "categorias": [
+      "Pagamentos"
+    ],
+    "empresa": "PagSeguro",
+    "url": "https://pagseguro.uol.com.br",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media"
+    ],
+    "segmentos": [
+      "varejo-ecommerce"
+    ],
+    "nota": "Maquininhas, link de pagamento e gateway brasileiro."
+  },
+  {
+    "id": "asaas",
+    "nome": "Asaas",
+    "categorias": [
+      "Pagamentos"
+    ],
+    "empresa": "Asaas Gestão Financeira",
+    "url": "https://www.asaas.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pequena",
+      "media"
+    ],
+    "segmentos": [
+      "servicos-profissionais"
+    ],
+    "nota": "Cobranças por boleto, Pix e cartão, com conta digital."
+  },
+  {
+    "id": "paypal",
+    "nome": "PayPal",
+    "categorias": [
+      "Pagamentos"
+    ],
+    "empresa": "PayPal Holdings",
+    "url": "https://www.paypal.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Carteira digital e checkout global amplamente reconhecido."
+  },
+  {
+    "id": "paddle",
+    "nome": "Paddle",
+    "categorias": [
+      "Pagamentos"
+    ],
+    "empresa": "Paddle.com",
+    "url": "https://www.paddle.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pequena",
+      "media"
+    ],
+    "segmentos": [
+      "software-saas"
+    ],
+    "nota": "Merchant of record para SaaS que cuida de impostos globais."
+  },
+  {
+    "id": "braintree",
+    "nome": "Braintree",
+    "categorias": [
+      "Pagamentos"
+    ],
+    "empresa": "PayPal Holdings",
+    "url": "https://www.braintreepayments.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gateway da PayPal com cartões, PayPal e carteiras."
+  },
+  {
+    "id": "checkout-com",
+    "nome": "Checkout.com",
+    "categorias": [
+      "Pagamentos"
+    ],
+    "empresa": "Checkout.com",
+    "url": "https://www.checkout.com",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Adquirência global para empresas de grande porte."
+  },
+  {
+    "id": "resend",
+    "nome": "Resend",
+    "categorias": [
+      "E-mail transacional e marketing"
+    ],
+    "empresa": "Resend Inc",
+    "url": "https://resend.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "typescript",
+      "javascript",
+      "python",
+      "go"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "API de e-mail para desenvolvedores com React Email."
+  },
+  {
+    "id": "listmonk",
+    "nome": "listmonk",
+    "categorias": [
+      "E-mail transacional e marketing"
+    ],
+    "empresa": "listmonk (comunidade)",
+    "url": "https://listmonk.app",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/knadh/listmonk",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "self-hosted",
+      "web",
+      "linux"
+    ],
+    "linguagens": [
+      "go"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gerenciador de newsletters e listas self-hosted em Go."
+  },
+  {
+    "id": "brevo",
+    "nome": "Brevo",
+    "categorias": [
+      "E-mail transacional e marketing"
+    ],
+    "empresa": "Sendinblue SAS",
+    "url": "https://www.brevo.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 9,
+      "unidade": "mês",
+      "status": "verificado",
+      "fonte": "https://www.brevo.com/pricing/",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "E-mail, SMS e CRM com plano gratuito de envios diários."
+  },
+  {
+    "id": "mailersend",
+    "nome": "MailerSend",
+    "categorias": [
+      "E-mail transacional e marketing"
+    ],
+    "empresa": "MailerLite",
+    "url": "https://www.mailersend.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "E-mail transacional com plano gratuito para começar."
+  },
+  {
+    "id": "mailgun",
+    "nome": "Mailgun",
+    "categorias": [
+      "E-mail transacional e marketing"
+    ],
+    "empresa": "Sinch",
+    "url": "https://www.mailgun.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 15,
+      "unidade": "mês",
+      "status": "verificado",
+      "fonte": "https://www.mailgun.com/pricing/",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "API de e-mail com validação e roteamento de entrada."
+  },
+  {
+    "id": "customer-io",
+    "nome": "Customer.io",
+    "categorias": [
+      "E-mail transacional e marketing"
+    ],
+    "empresa": "Customer.io",
+    "url": "https://customer.io",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 100,
+      "unidade": "mês",
+      "status": "verificado",
+      "fonte": "https://customer.io/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Mensagens por evento para e-mail, push e SMS."
+  },
+  {
+    "id": "zulip",
+    "nome": "Zulip",
+    "categorias": [
+      "Comunicação de equipe"
+    ],
+    "empresa": "Zulip (comunidade)",
+    "url": "https://zulip.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/zulip/zulip",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "windows",
+      "macos",
+      "linux",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Chat organizado por tópicos, open source."
+  },
+  {
+    "id": "rocket-chat",
+    "nome": "Rocket.Chat",
+    "categorias": [
+      "Comunicação de equipe"
+    ],
+    "empresa": "Rocket.Chat Technologies",
+    "url": "https://www.rocket.chat",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/RocketChat/Rocket.Chat",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "windows",
+      "macos",
+      "linux",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Comunicação de equipe open source com omnichannel."
+  },
+  {
+    "id": "discord",
+    "nome": "Discord",
+    "categorias": [
+      "Comunicação de equipe"
+    ],
+    "empresa": "Discord Inc",
+    "url": "https://discord.com",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://discord.com/nitro",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "windows",
+      "macos",
+      "linux",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Chat e voz com servidores, amplamente usado por comunidades."
+  },
+  {
+    "id": "zoom",
+    "nome": "Zoom Workplace",
+    "categorias": [
+      "Comunicação de equipe"
+    ],
+    "empresa": "Zoom Communications",
+    "url": "https://zoom.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "windows",
+      "macos",
+      "linux",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Videochamadas, chat e telefonia."
+  },
+  {
+    "id": "google-workspace",
+    "nome": "Google Workspace",
+    "categorias": [
+      "Comunicação de equipe"
+    ],
+    "empresa": "Google",
+    "url": "https://workspace.google.com",
+    "preco": {
+      "modelo": [
+        "per-seat"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "windows",
+      "macos",
+      "linux",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gmail, Meet, Chat, Drive e documentos colaborativos."
+  },
+  {
+    "id": "webex",
+    "nome": "Cisco Webex",
+    "categorias": [
+      "Comunicação de equipe"
+    ],
+    "empresa": "Cisco",
+    "url": "https://www.webex.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 0,
+      "unidade": "plano gratuito",
+      "status": "verificado",
+      "fonte": "https://www.webex.com/pricing/index.html",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "windows",
+      "macos",
+      "linux",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Reuniões e colaboração corporativa com segurança forte."
+  },
+  {
+    "id": "taiga",
+    "nome": "Taiga",
+    "categorias": [
+      "Gestão de projetos"
+    ],
+    "empresa": "Kaleidos",
+    "url": "https://taiga.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/taigaio/taiga-back",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "android",
+      "ios",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gestão ágil open source com Scrum e Kanban."
+  },
+  {
+    "id": "openproject",
+    "nome": "OpenProject",
+    "categorias": [
+      "Gestão de projetos"
+    ],
+    "empresa": "OpenProject GmbH",
+    "url": "https://www.openproject.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/opf/openproject",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "android",
+      "ios",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gestão de projetos open source com Gantt e custos."
+  },
+  {
+    "id": "clickup",
+    "nome": "ClickUp",
+    "categorias": [
+      "Gestão de projetos"
+    ],
+    "empresa": "Mango Technologies",
+    "url": "https://clickup.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 9,
+      "unidade": "usuário/mês (cobrança anual; US$ 12 regular)",
+      "status": "verificado",
+      "fonte": "https://clickup.com/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "android",
+      "ios",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Plataforma tudo em um para tarefas, docs e metas."
+  },
+  {
+    "id": "trello",
+    "nome": "Trello",
+    "categorias": [
+      "Gestão de projetos"
+    ],
+    "empresa": "Atlassian",
+    "url": "https://trello.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 5,
+      "unidade": "usuário/mês (cobrança anual; US$ 6 no mensal)",
+      "status": "verificado",
+      "fonte": "https://trello.com/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "android",
+      "ios",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Quadros Kanban simples, com plano gratuito."
+  },
+  {
+    "id": "asana",
+    "nome": "Asana",
+    "categorias": [
+      "Gestão de projetos"
+    ],
+    "empresa": "Asana Inc",
+    "url": "https://asana.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 10.99,
+      "unidade": "usuário/mês (cobrança anual)",
+      "status": "verificado",
+      "fonte": "https://asana.com/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "android",
+      "ios",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gestão de trabalho com portfólios e automações."
+  },
+  {
+    "id": "monday",
+    "nome": "monday.com",
+    "categorias": [
+      "Gestão de projetos"
+    ],
+    "empresa": "monday.com Ltd",
+    "url": "https://monday.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "android",
+      "ios",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Plataforma visual de gestão de trabalho."
+  },
+  {
+    "id": "outline",
+    "nome": "Outline",
+    "categorias": [
+      "Wiki e base de conhecimento"
+    ],
+    "empresa": "General Outline Inc",
+    "url": "https://www.getoutline.com",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/outline/outline",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Base de conhecimento open source com editor rápido."
+  },
+  {
+    "id": "docmost",
+    "nome": "Docmost",
+    "categorias": [
+      "Wiki e base de conhecimento"
+    ],
+    "empresa": "Docmost (comunidade)",
+    "url": "https://docmost.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/docmost/docmost",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Wiki e documentação colaborativa open source."
+  },
+  {
+    "id": "slite",
+    "nome": "Slite",
+    "categorias": [
+      "Wiki e base de conhecimento"
+    ],
+    "empresa": "Slite SAS",
+    "url": "https://slite.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 10,
+      "unidade": "usuário/mês (cobrança anual)",
+      "status": "verificado",
+      "fonte": "https://slite.com/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Base de conhecimento simples para equipes."
+  },
+  {
+    "id": "coda",
+    "nome": "Coda",
+    "categorias": [
+      "Wiki e base de conhecimento"
+    ],
+    "empresa": "Coda Project Inc",
+    "url": "https://coda.io",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Documentos com tabelas e automações embutidas."
+  },
+  {
+    "id": "guru",
+    "nome": "Guru",
+    "categorias": [
+      "Wiki e base de conhecimento"
+    ],
+    "empresa": "Guru Technologies",
+    "url": "https://www.getguru.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Base de conhecimento com IA para equipes de suporte e vendas."
+  },
+  {
+    "id": "microsoft-sharepoint",
+    "nome": "Microsoft SharePoint",
+    "categorias": [
+      "Wiki e base de conhecimento"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://www.microsoft.com/microsoft-365/sharepoint/collaboration",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Intranet e gestão de conteúdo do Microsoft 365."
+  },
+  {
+    "id": "zammad",
+    "nome": "Zammad",
+    "categorias": [
+      "Suporte e atendimento"
+    ],
+    "empresa": "Zammad GmbH",
+    "url": "https://zammad.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/zammad/zammad",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Help desk open source com e-mail, chat e telefone."
+  },
+  {
+    "id": "freescout",
+    "nome": "FreeScout",
+    "categorias": [
+      "Suporte e atendimento"
+    ],
+    "empresa": "FreeScout (comunidade)",
+    "url": "https://freescout.net",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/freescout-help-desk/freescout",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "php"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Help desk open source leve, alternativa ao Help Scout."
+  },
+  {
+    "id": "help-scout",
+    "nome": "Help Scout",
+    "categorias": [
+      "Suporte e atendimento"
+    ],
+    "empresa": "Help Scout PBC",
+    "url": "https://www.helpscout.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Caixa de entrada compartilhada com base de conhecimento."
+  },
+  {
+    "id": "crisp",
+    "nome": "Crisp",
+    "categorias": [
+      "Suporte e atendimento"
+    ],
+    "empresa": "Crisp IM",
+    "url": "https://crisp.chat",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 45,
+      "unidade": "mês por workspace",
+      "status": "verificado",
+      "fonte": "https://crisp.chat/en/pricing/",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Chat ao vivo e inbox unificada para pequenas equipes."
+  },
+  {
+    "id": "intercom",
+    "nome": "Intercom",
+    "categorias": [
+      "Suporte e atendimento"
+    ],
+    "empresa": "Intercom Inc",
+    "url": "https://www.intercom.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 29,
+      "unidade": "assento/mês",
+      "status": "verificado",
+      "fonte": "https://www.intercom.com/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Mensageria com agente de IA e help center."
+  },
+  {
+    "id": "servicenow",
+    "nome": "ServiceNow",
+    "categorias": [
+      "Suporte e atendimento"
+    ],
+    "empresa": "ServiceNow Inc",
+    "url": "https://www.servicenow.com",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gestão de serviços de TI e fluxos de trabalho corporativos."
+  },
+  {
+    "id": "plausible",
+    "nome": "Plausible",
+    "categorias": [
+      "Analytics de produto e web"
+    ],
+    "empresa": "Plausible Insights",
+    "url": "https://plausible.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/plausible/analytics",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Analytics leve sem cookies e com foco em privacidade."
+  },
+  {
+    "id": "matomo",
+    "nome": "Matomo",
+    "categorias": [
+      "Analytics de produto e web"
+    ],
+    "empresa": "InnoCraft",
+    "url": "https://matomo.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/matomo-org/matomo",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "api"
+    ],
+    "linguagens": [
+      "php",
+      "javascript"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Analytics web completo, open source e self-hosted."
+  },
+  {
+    "id": "google-analytics",
+    "nome": "Google Analytics",
+    "categorias": [
+      "Analytics de produto e web"
+    ],
+    "empresa": "Google",
+    "url": "https://marketingplatform.google.com/about/analytics/",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://marketingplatform.google.com/about/analytics/",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Analytics web gratuito do Google."
+  },
+  {
+    "id": "fathom",
+    "nome": "Fathom Analytics",
+    "categorias": [
+      "Analytics de produto e web"
+    ],
+    "empresa": "Conva Ventures",
+    "url": "https://usefathom.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 15,
+      "unidade": "mês",
+      "status": "verificado",
+      "fonte": "https://usefathom.com/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Analytics web simples e privado."
+  },
+  {
+    "id": "mixpanel",
+    "nome": "Mixpanel",
+    "categorias": [
+      "Analytics de produto e web"
+    ],
+    "empresa": "Mixpanel Inc",
+    "url": "https://mixpanel.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 0,
+      "unidade": "plano com início em US$ 0",
+      "status": "verificado",
+      "fonte": "https://mixpanel.com/pricing/",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Analytics orientado a eventos com plano gratuito."
+  },
+  {
+    "id": "heap",
+    "nome": "Heap",
+    "categorias": [
+      "Analytics de produto e web"
+    ],
+    "empresa": "Contentsquare",
+    "url": "https://www.heap.io",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Captura automática de eventos de produto."
+  },
+  {
+    "id": "flagsmith",
+    "nome": "Flagsmith",
+    "categorias": [
+      "Feature flags e experimentação"
+    ],
+    "empresa": "Flagsmith Ltd",
+    "url": "https://www.flagsmith.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/Flagsmith/flagsmith",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Feature flags open source com SaaS e self-hosted."
+  },
+  {
+    "id": "flipt",
+    "nome": "Flipt",
+    "categorias": [
+      "Feature flags e experimentação"
+    ],
+    "empresa": "Flipt Inc",
+    "url": "https://www.flipt.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/flipt-io/flipt",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "api"
+    ],
+    "linguagens": [
+      "go"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Feature flags open source com Git como fonte da verdade."
+  },
+  {
+    "id": "configcat",
+    "nome": "ConfigCat",
+    "categorias": [
+      "Feature flags e experimentação"
+    ],
+    "empresa": "ConfigCat Kft",
+    "url": "https://configcat.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Feature flags simples com SDKs para muitas linguagens."
+  },
+  {
+    "id": "devcycle",
+    "nome": "DevCycle",
+    "categorias": [
+      "Feature flags e experimentação"
+    ],
+    "empresa": "Taplytics",
+    "url": "https://www.devcycle.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 0,
+      "unidade": "plano gratuito",
+      "status": "verificado",
+      "fonte": "https://www.devcycle.com/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Feature flags com liberação progressiva."
+  },
+  {
+    "id": "optimizely",
+    "nome": "Optimizely",
+    "categorias": [
+      "Feature flags e experimentação"
+    ],
+    "empresa": "Optimizely Inc",
+    "url": "https://www.optimizely.com",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Experimentação e personalização em escala."
+  },
+  {
+    "id": "split",
+    "nome": "Split by Harness",
+    "categorias": [
+      "Feature flags e experimentação"
+    ],
+    "empresa": "Harness Inc",
+    "url": "https://www.split.io",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Feature flags e experimentação integrados ao Harness."
+  },
+  {
+    "id": "documenso",
+    "nome": "Documenso",
+    "categorias": [
+      "Assinatura eletrônica"
+    ],
+    "empresa": "Documenso Inc",
+    "url": "https://documenso.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/documenso/documenso",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api",
+      "android",
+      "ios",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Assinatura eletrônica open source, alternativa ao DocuSign."
+  },
+  {
+    "id": "opensign",
+    "nome": "OpenSign",
+    "categorias": [
+      "Assinatura eletrônica"
+    ],
+    "empresa": "OpenSign Labs",
+    "url": "https://www.opensignlabs.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/OpenSignLabs/OpenSign",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api",
+      "android",
+      "ios",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Assinatura eletrônica open source."
+  },
+  {
+    "id": "d4sign",
+    "nome": "D4Sign",
+    "categorias": [
+      "Assinatura eletrônica"
+    ],
+    "empresa": "D4Sign",
+    "url": "https://d4sign.com.br",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api",
+      "android",
+      "ios",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pequena",
+      "media"
+    ],
+    "segmentos": [
+      "servicos-profissionais"
+    ],
+    "nota": "Assinatura eletrônica brasileira com certificação ICP-Brasil."
+  },
+  {
+    "id": "autentique",
+    "nome": "Autentique",
+    "categorias": [
+      "Assinatura eletrônica"
+    ],
+    "empresa": "Autentique",
+    "url": "https://www.autentique.com.br",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api",
+      "android",
+      "ios",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Assinatura eletrônica brasileira com plano gratuito."
+  },
+  {
+    "id": "adobe-sign",
+    "nome": "Adobe Acrobat Sign",
+    "categorias": [
+      "Assinatura eletrônica"
+    ],
+    "empresa": "Adobe",
+    "url": "https://www.adobe.com/acrobat/business/sign.html",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api",
+      "android",
+      "ios",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Assinatura eletrônica integrada ao ecossistema Adobe."
+  },
+  {
+    "id": "clicksign",
+    "nome": "Clicksign",
+    "categorias": [
+      "Assinatura eletrônica"
+    ],
+    "empresa": "Clicksign",
+    "url": "https://www.clicksign.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api",
+      "android",
+      "ios",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "servicos-profissionais"
+    ],
+    "nota": "Assinatura eletrônica brasileira usada por grandes empresas."
+  },
+  {
+    "id": "apache-superset",
+    "nome": "Apache Superset",
+    "categorias": [
+      "BI e dashboards"
+    ],
+    "empresa": "Apache Software Foundation",
+    "url": "https://superset.apache.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/apache/superset",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "windows"
+    ],
+    "linguagens": [
+      "sql",
+      "python"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "BI open source para exploração e dashboards em escala."
+  },
+  {
+    "id": "evidence",
+    "nome": "Evidence",
+    "categorias": [
+      "BI e dashboards"
+    ],
+    "empresa": "Evidence Dev",
+    "url": "https://evidence.dev",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/evidence-dev/evidence",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "windows"
+    ],
+    "linguagens": [
+      "sql"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Relatórios como código, em Markdown e SQL."
+  },
+  {
+    "id": "power-bi",
+    "nome": "Power BI",
+    "categorias": [
+      "BI e dashboards"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://www.microsoft.com/power-platform/products/power-bi",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "windows"
+    ],
+    "linguagens": [
+      "sql"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "BI da Microsoft com forte integração ao Excel e Azure."
+  },
+  {
+    "id": "sigma-computing",
+    "nome": "Sigma Computing",
+    "categorias": [
+      "BI e dashboards"
+    ],
+    "empresa": "Sigma Computing Inc",
+    "url": "https://www.sigmacomputing.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "windows"
+    ],
+    "linguagens": [
+      "sql"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "BI com interface de planilha sobre o data warehouse."
+  },
+  {
+    "id": "looker",
+    "nome": "Looker",
+    "categorias": [
+      "BI e dashboards"
+    ],
+    "empresa": "Google",
+    "url": "https://cloud.google.com/looker",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "windows"
+    ],
+    "linguagens": [
+      "sql"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "BI com camada semântica no Google Cloud."
+  },
+  {
+    "id": "keepassxc",
+    "nome": "KeePassXC",
+    "categorias": [
+      "Gerenciador de senhas e segredos"
+    ],
+    "empresa": "KeePassXC (comunidade)",
+    "url": "https://keepassxc.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/keepassxreboot/keepassxc",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows",
+      "macos",
+      "linux",
+      "extensao-navegador"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Cofre de senhas local e gratuito, em arquivo."
+  },
+  {
+    "id": "infisical",
+    "nome": "Infisical",
+    "categorias": [
+      "Gerenciador de senhas e segredos"
+    ],
+    "empresa": "Infisical Inc",
+    "url": "https://infisical.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/Infisical/infisical",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "cli",
+      "self-hosted",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gestão de segredos open source para times de desenvolvimento."
+  },
+  {
+    "id": "proton-pass",
+    "nome": "Proton Pass",
+    "categorias": [
+      "Gerenciador de senhas e segredos"
+    ],
+    "empresa": "Proton AG",
+    "url": "https://proton.me/pass",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "windows",
+      "macos",
+      "linux",
+      "android",
+      "ios",
+      "cli",
+      "extensao-navegador"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gerenciador de senhas com aliases de e-mail e plano gratuito."
+  },
+  {
+    "id": "doppler",
+    "nome": "Doppler",
+    "categorias": [
+      "Gerenciador de senhas e segredos"
+    ],
+    "empresa": "Doppler Inc",
+    "url": "https://www.doppler.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 0,
+      "unidade": "gratuito para 3 usuários; US$ 8/mês por usuário adicional",
+      "status": "verificado",
+      "fonte": "https://www.doppler.com/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "cli",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gestão de segredos centralizada para times de engenharia."
+  },
+  {
+    "id": "cyberark",
+    "nome": "CyberArk Secrets Manager",
+    "categorias": [
+      "Gerenciador de senhas e segredos"
+    ],
+    "empresa": "CyberArk",
+    "url": "https://www.cyberark.com",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "windows",
+      "macos",
+      "linux",
+      "android",
+      "ios",
+      "cli",
+      "extensao-navegador"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gestão de acesso privilegiado e segredos em grandes empresas."
+  },
+  {
+    "id": "erpnext",
+    "nome": "ERPNext",
+    "categorias": [
+      "ERP"
+    ],
+    "empresa": "Frappe Technologies",
+    "url": "https://erpnext.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/frappe/erpnext",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "cloud"
+    ],
+    "linguagens": [
+      "python"
+    ],
+    "porte": [
+      "pequena",
+      "media"
+    ],
+    "segmentos": [
+      "geral",
+      "industria",
+      "varejo-ecommerce"
+    ],
+    "nota": "ERP open source completo para pequenas e médias empresas."
+  },
+  {
+    "id": "dolibarr",
+    "nome": "Dolibarr",
+    "categorias": [
+      "ERP"
+    ],
+    "empresa": "Dolibarr Foundation",
+    "url": "https://www.dolibarr.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/Dolibarr/dolibarr",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "cloud"
+    ],
+    "linguagens": [
+      "php"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena"
+    ],
+    "segmentos": [
+      "geral",
+      "servicos-profissionais"
+    ],
+    "nota": "ERP e CRM open source leve para pequenas empresas."
+  },
+  {
+    "id": "bling",
+    "nome": "Bling",
+    "categorias": [
+      "ERP"
+    ],
+    "empresa": "Bling Tecnologia",
+    "url": "https://www.bling.com.br",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "cloud"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pequena"
+    ],
+    "segmentos": [
+      "varejo-ecommerce"
+    ],
+    "nota": "ERP brasileiro com foco em e-commerce e emissão de notas."
+  },
+  {
+    "id": "conta-azul",
+    "nome": "Conta Azul",
+    "categorias": [
+      "ERP"
+    ],
+    "empresa": "Conta Azul",
+    "url": "https://contaazul.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "cloud"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pequena",
+      "media"
+    ],
+    "segmentos": [
+      "servicos-profissionais",
+      "geral"
+    ],
+    "nota": "ERP financeiro e contábil brasileiro para pequenas empresas."
+  },
+  {
+    "id": "oracle-netsuite",
+    "nome": "Oracle NetSuite",
+    "categorias": [
+      "ERP"
+    ],
+    "empresa": "Oracle",
+    "url": "https://www.netsuite.com",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "cloud"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "ERP em nuvem para médias e grandes empresas em crescimento."
+  },
+  {
+    "id": "totvs-protheus",
+    "nome": "TOTVS Protheus",
+    "categorias": [
+      "ERP"
+    ],
+    "empresa": "TOTVS",
+    "url": "https://www.totvs.com/protheus/",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "cloud"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "industria",
+      "varejo-ecommerce",
+      "logistica"
+    ],
+    "nota": "ERP brasileiro líder em médias e grandes empresas."
+  },
+  {
+    "id": "suitecrm",
+    "nome": "SuiteCRM",
+    "categorias": [
+      "CRM"
+    ],
+    "empresa": "SalesAgility",
+    "url": "https://suitecrm.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/salesagility/SuiteCRM",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "android",
+      "ios",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "php"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "CRM open source maduro com automações e relatórios."
+  },
+  {
+    "id": "espocrm",
+    "nome": "EspoCRM",
+    "categorias": [
+      "CRM"
+    ],
+    "empresa": "EspoCRM",
+    "url": "https://www.espocrm.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/espocrm/espocrm",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "android",
+      "ios",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "php"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "CRM open source leve e personalizável."
+  },
+  {
+    "id": "pipedrive",
+    "nome": "Pipedrive",
+    "categorias": [
+      "CRM"
+    ],
+    "empresa": "Pipedrive OÜ",
+    "url": "https://www.pipedrive.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 14,
+      "unidade": "assento/mês (cobrança anual)",
+      "status": "verificado",
+      "fonte": "https://www.pipedrive.com/en/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "android",
+      "ios",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "CRM focado em funil de vendas visual."
+  },
+  {
+    "id": "rd-station-crm",
+    "nome": "RD Station CRM",
+    "categorias": [
+      "CRM"
+    ],
+    "empresa": "TOTVS RD Station",
+    "url": "https://www.rdstation.com/crm/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "android",
+      "ios",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pequena",
+      "media"
+    ],
+    "segmentos": [
+      "geral",
+      "marketing-agencias"
+    ],
+    "nota": "CRM brasileiro com plano gratuito e integração ao RD Station Marketing."
+  },
+  {
+    "id": "dynamics-365-sales",
+    "nome": "Dynamics 365 Sales",
+    "categorias": [
+      "CRM"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://www.microsoft.com/dynamics-365/products/sales",
+    "preco": {
+      "modelo": [
+        "per-seat",
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "android",
+      "ios",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "CRM da Microsoft integrado ao Microsoft 365."
+  },
+  {
+    "id": "sap-sales-cloud",
+    "nome": "SAP Sales Cloud",
+    "categorias": [
+      "CRM"
+    ],
+    "empresa": "SAP SE",
+    "url": "https://www.sap.com/products/crm/sales-cloud.html",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "android",
+      "ios",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "CRM da SAP integrado ao S/4HANA."
+  },
+  {
+    "id": "woocommerce",
+    "nome": "WooCommerce",
+    "categorias": [
+      "E-commerce e lojas"
+    ],
+    "empresa": "Automattic",
+    "url": "https://woocommerce.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/woocommerce/woocommerce",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "php"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "varejo-ecommerce"
+    ],
+    "nota": "Plugin de e-commerce para WordPress, o mais usado do mundo."
+  },
+  {
+    "id": "prestashop",
+    "nome": "PrestaShop",
+    "categorias": [
+      "E-commerce e lojas"
+    ],
+    "empresa": "PrestaShop SA",
+    "url": "https://prestashop.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/PrestaShop/PrestaShop",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "php"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "varejo-ecommerce"
+    ],
+    "nota": "Plataforma de e-commerce open source em PHP."
+  },
+  {
+    "id": "nuvemshop",
+    "nome": "Nuvemshop",
+    "categorias": [
+      "E-commerce e lojas"
+    ],
+    "empresa": "Nuvemshop",
+    "url": "https://www.nuvemshop.com.br",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media"
+    ],
+    "segmentos": [
+      "varejo-ecommerce"
+    ],
+    "nota": "Plataforma de lojas virtuais brasileira, líder na América Latina."
+  },
+  {
+    "id": "bigcommerce",
+    "nome": "BigCommerce",
+    "categorias": [
+      "E-commerce e lojas"
+    ],
+    "empresa": "BigCommerce Holdings",
+    "url": "https://www.bigcommerce.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "varejo-ecommerce"
+    ],
+    "nota": "E-commerce SaaS com APIs abertas para médias empresas."
+  },
+  {
+    "id": "salesforce-commerce-cloud",
+    "nome": "Salesforce Commerce Cloud",
+    "categorias": [
+      "E-commerce e lojas"
+    ],
+    "empresa": "Salesforce",
+    "url": "https://www.salesforce.com/commerce/",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "grande"
+    ],
+    "segmentos": [
+      "varejo-ecommerce"
+    ],
+    "nota": "Comércio digital corporativo da Salesforce."
+  },
+  {
+    "id": "vtex",
+    "nome": "VTEX",
+    "categorias": [
+      "E-commerce e lojas"
+    ],
+    "empresa": "VTEX",
+    "url": "https://vtex.com",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "varejo-ecommerce"
+    ],
+    "nota": "Plataforma brasileira de commerce para grandes varejistas."
+  },
+  {
+    "id": "ghost",
+    "nome": "Ghost",
+    "categorias": [
+      "CMS"
+    ],
+    "empresa": "Ghost Foundation",
+    "url": "https://ghost.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/TryGhost/Ghost",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "javascript"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "midia-criadores"
+    ],
+    "nota": "Plataforma de publicação e newsletters open source."
+  },
+  {
+    "id": "strapi",
+    "nome": "Strapi",
+    "categorias": [
+      "CMS"
+    ],
+    "empresa": "Strapi SAS",
+    "url": "https://strapi.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/strapi/strapi",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "javascript",
+      "typescript"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "CMS headless open source em Node."
+  },
+  {
+    "id": "sanity",
+    "nome": "Sanity",
+    "categorias": [
+      "CMS"
+    ],
+    "empresa": "Sanity AS",
+    "url": "https://www.sanity.io",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 0,
+      "unidade": "plano gratuito; Growth a US$ 15 por assento/mês",
+      "status": "verificado",
+      "fonte": "https://www.sanity.io/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "javascript",
+      "typescript"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "CMS headless com conteúdo estruturado e editor customizável."
+  },
+  {
+    "id": "directus-cloud",
+    "nome": "Directus Cloud",
+    "categorias": [
+      "CMS"
+    ],
+    "empresa": "Monospace Inc",
+    "url": "https://directus.io",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 89,
+      "unidade": "mês (cobrança anual; US$ 99 no mensal)",
+      "status": "verificado",
+      "fonte": "https://directus.io/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "CMS e API sobre bancos SQL, com opção open source."
+  },
+  {
+    "id": "adobe-experience-manager",
+    "nome": "Adobe Experience Manager",
+    "categorias": [
+      "CMS"
+    ],
+    "empresa": "Adobe",
+    "url": "https://business.adobe.com/products/experience-manager/adobe-experience-manager.html",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "CMS corporativo para experiências digitais em escala."
+  },
+  {
+    "id": "contentstack",
+    "nome": "Contentstack",
+    "categorias": [
+      "CMS"
+    ],
+    "empresa": "Contentstack Inc",
+    "url": "https://www.contentstack.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 0,
+      "unidade": "plano gratuito; Build a US$ 29/mês",
+      "status": "verificado",
+      "fonte": "https://www.contentstack.com/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "CMS headless corporativo com governança."
+  },
+  {
+    "id": "emissor-nacional-nfse",
+    "nome": "Emissor Nacional de NFS-e",
+    "categorias": [
+      "Fiscal e contabilidade (Brasil)"
+    ],
+    "empresa": "Governo Federal do Brasil",
+    "url": "https://www.gov.br/nfse/pt-br",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media"
+    ],
+    "segmentos": [
+      "servicos-profissionais"
+    ],
+    "nota": "Emissor gratuito de nota fiscal de serviço padronizado nacionalmente."
+  },
+  {
+    "id": "receita-federal-ecac",
+    "nome": "Centro Virtual de Atendimento e-CAC",
+    "categorias": [
+      "Fiscal e contabilidade (Brasil)"
+    ],
+    "empresa": "Receita Federal",
+    "url": "https://cav.receita.fazenda.gov.br",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Portal da Receita Federal para consultas fiscais e declarações."
+  },
+  {
+    "id": "nibo",
+    "nome": "Nibo",
+    "categorias": [
+      "Fiscal e contabilidade (Brasil)"
+    ],
+    "empresa": "Nibo",
+    "url": "https://www.nibo.com.br",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pequena",
+      "media"
+    ],
+    "segmentos": [
+      "servicos-profissionais"
+    ],
+    "nota": "Gestão financeira e contábil para escritórios e empresas."
+  },
+  {
+    "id": "arquivei",
+    "nome": "Arquivei",
+    "categorias": [
+      "Fiscal e contabilidade (Brasil)"
+    ],
+    "empresa": "Arquivei",
+    "url": "https://arquivei.com.br",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gestão de documentos fiscais eletrônicos em volume."
+  },
+  {
+    "id": "sovos-brasil",
+    "nome": "Sovos Brasil",
+    "categorias": [
+      "Fiscal e contabilidade (Brasil)"
+    ],
+    "empresa": "Sovos Compliance",
+    "url": "https://sovos.com/br/",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Conformidade fiscal e emissão de documentos para grandes empresas."
+  },
+  {
+    "id": "frappe-hr",
+    "nome": "Frappe HR",
+    "categorias": [
+      "RH e folha"
+    ],
+    "empresa": "Frappe Technologies",
+    "url": "https://frappe.io/hr",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/frappe/hrms",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "python"
+    ],
+    "porte": [
+      "pequena",
+      "media"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "RH e folha open source integrado ao ERPNext."
+  },
+  {
+    "id": "jorani",
+    "nome": "Jorani",
+    "categorias": [
+      "RH e folha"
+    ],
+    "empresa": "Jorani (comunidade)",
+    "url": "https://jorani.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/bbalet/jorani",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "php"
+    ],
+    "porte": [
+      "pequena"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gestão de férias e ausências open source."
+  },
+  {
+    "id": "factorial",
+    "nome": "Factorial",
+    "categorias": [
+      "RH e folha"
+    ],
+    "empresa": "Factorial HR",
+    "url": "https://factorialhr.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 8,
+      "unidade": "usuário/mês (a partir de)",
+      "status": "verificado",
+      "fonte": "https://factorialhr.com/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pequena",
+      "media"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "RH, ponto e folha para pequenas e médias empresas."
+  },
+  {
+    "id": "deel",
+    "nome": "Deel",
+    "categorias": [
+      "RH e folha"
+    ],
+    "empresa": "Deel Inc",
+    "url": "https://www.deel.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 14,
+      "unidade": "trabalhador/mês (a partir de)",
+      "status": "verificado",
+      "fonte": "https://www.deel.com/pricing/",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Contratação e pagamento de equipes globais."
+  },
+  {
+    "id": "sap-successfactors",
+    "nome": "SAP SuccessFactors",
+    "categorias": [
+      "RH e folha"
+    ],
+    "empresa": "SAP SE",
+    "url": "https://www.sap.com/products/hcm.html",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gestão de capital humano para grandes empresas."
+  },
+  {
+    "id": "adp",
+    "nome": "ADP",
+    "categorias": [
+      "RH e folha"
+    ],
+    "empresa": "ADP Inc",
+    "url": "https://www.adp.com",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Folha e RH corporativos, com presença global."
+  },
+  {
+    "id": "mailtrain",
+    "nome": "Mailtrain",
+    "categorias": [
+      "Automação de marketing"
+    ],
+    "empresa": "Mailtrain (comunidade)",
+    "url": "https://mailtrain.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/Mailtrain-org/mailtrain",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "javascript"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gerenciador de newsletters open source."
+  },
+  {
+    "id": "activecampaign",
+    "nome": "ActiveCampaign",
+    "categorias": [
+      "Automação de marketing"
+    ],
+    "empresa": "ActiveCampaign LLC",
+    "url": "https://www.activecampaign.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Automação de marketing e CRM com jornadas."
+  },
+  {
+    "id": "rd-station-marketing",
+    "nome": "RD Station Marketing",
+    "categorias": [
+      "Automação de marketing"
+    ],
+    "empresa": "TOTVS RD Station",
+    "url": "https://www.rdstation.com/produtos/marketing/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pequena",
+      "media"
+    ],
+    "segmentos": [
+      "marketing-agencias"
+    ],
+    "nota": "Automação de marketing brasileira com landing pages e CRM."
+  },
+  {
+    "id": "marketo",
+    "nome": "Adobe Marketo Engage",
+    "categorias": [
+      "Automação de marketing"
+    ],
+    "empresa": "Adobe",
+    "url": "https://business.adobe.com/products/marketo/adobe-marketo.html",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Automação de marketing B2B corporativa."
+  },
+  {
+    "id": "salesforce-marketing-cloud",
+    "nome": "Salesforce Marketing Cloud",
+    "categorias": [
+      "Automação de marketing"
+    ],
+    "empresa": "Salesforce",
+    "url": "https://www.salesforce.com/marketing/",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Marketing multicanal em escala corporativa."
+  },
+  {
+    "id": "killbill",
+    "nome": "Kill Bill",
+    "categorias": [
+      "Cobrança e assinaturas (billing)"
+    ],
+    "empresa": "Kill Bill LLC",
+    "url": "https://killbill.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/killbill/killbill",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "java"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Plataforma de billing e assinaturas open source em Java."
+  },
+  {
+    "id": "openmeter",
+    "nome": "OpenMeter",
+    "categorias": [
+      "Cobrança e assinaturas (billing)"
+    ],
+    "empresa": "OpenMeter Inc",
+    "url": "https://openmeter.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/openmeterio/openmeter",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "go"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Medição de uso e billing open source para APIs e IA."
+  },
+  {
+    "id": "chargebee",
+    "nome": "Chargebee",
+    "categorias": [
+      "Cobrança e assinaturas (billing)"
+    ],
+    "empresa": "Chargebee Inc",
+    "url": "https://www.chargebee.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gestão de assinaturas e receita recorrente."
+  },
+  {
+    "id": "recurly",
+    "nome": "Recurly",
+    "categorias": [
+      "Cobrança e assinaturas (billing)"
+    ],
+    "empresa": "Recurly Inc",
+    "url": "https://recurly.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 249,
+      "unidade": "mês mais 0,9% do volume de cobrança",
+      "status": "verificado",
+      "fonte": "https://recurly.com/pricing/",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Billing de assinaturas com recuperação de falhas de pagamento."
+  },
+  {
+    "id": "maxio",
+    "nome": "Maxio",
+    "categorias": [
+      "Cobrança e assinaturas (billing)"
+    ],
+    "empresa": "Maxio LLC",
+    "url": "https://www.maxio.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 599,
+      "unidade": "mês (até US$ 100 mil em faturamento mensal)",
+      "status": "verificado",
+      "fonte": "https://www.maxio.com/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Billing e relatórios financeiros para SaaS B2B."
+  },
+  {
+    "id": "metronome",
+    "nome": "Metronome",
+    "categorias": [
+      "Cobrança e assinaturas (billing)"
+    ],
+    "empresa": "Metronome Inc",
+    "url": "https://metronome.com",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Billing por uso para empresas de infraestrutura e IA."
+  },
+  {
+    "id": "baserow",
+    "nome": "Baserow",
+    "categorias": [
+      "Formulários e bancos no-code"
+    ],
+    "empresa": "Baserow BV",
+    "url": "https://baserow.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Banco no-code open source e self-hosted."
+  },
+  {
+    "id": "formbricks",
+    "nome": "Formbricks",
+    "categorias": [
+      "Formulários e bancos no-code"
+    ],
+    "empresa": "Formbricks GmbH",
+    "url": "https://formbricks.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/formbricks/formbricks",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Pesquisas e formulários open source."
+  },
+  {
+    "id": "tally",
+    "nome": "Tally",
+    "categorias": [
+      "Formulários e bancos no-code"
+    ],
+    "empresa": "Tally BV",
+    "url": "https://tally.so",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 24,
+      "unidade": "mês",
+      "status": "verificado",
+      "fonte": "https://tally.so/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Formulários com plano gratuito generoso."
+  },
+  {
+    "id": "typeform",
+    "nome": "Typeform",
+    "categorias": [
+      "Formulários e bancos no-code"
+    ],
+    "empresa": "Typeform SL",
+    "url": "https://www.typeform.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 25,
+      "unidade": "mês (cobrança anual; US$ 29 no mensal)",
+      "status": "verificado",
+      "fonte": "https://www.typeform.com/pricing/",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Formulários conversacionais."
+  },
+  {
+    "id": "microsoft-power-apps",
+    "nome": "Microsoft Power Apps",
+    "categorias": [
+      "Formulários e bancos no-code"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://www.microsoft.com/power-platform/products/power-apps",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Apps de baixo código integrados ao Microsoft 365."
+  },
+  {
+    "id": "outsystems",
+    "nome": "OutSystems",
+    "categorias": [
+      "Formulários e bancos no-code"
+    ],
+    "empresa": "OutSystems",
+    "url": "https://www.outsystems.com",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Plataforma de baixo código para aplicações corporativas."
+  }
+]

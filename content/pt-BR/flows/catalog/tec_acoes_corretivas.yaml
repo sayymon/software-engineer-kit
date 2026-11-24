@@ -1,0 +1,11 @@
+id: tec_acoes_corretivas
+tipo: tecnica
+nome: Ações corretivas
+descricao: Ações priorizadas que removem a causa ou detectam mais cedo, com dono, prazo e critério de pronto.
+quando_usar:
+  - Todo post-mortem
+quando_evitar:
+  - Ações genéricas sem dono
+status: rascunho
+publico: false
+exemplo: "Ação: teste de carga obrigatório para mudanças no checkout; dono: SRE; prazo: 2 semanas."

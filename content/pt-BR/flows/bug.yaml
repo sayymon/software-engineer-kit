@@ -1,0 +1,3013 @@
+id: bug
+tipo: demanda
+nome: Bug
+sigla: bug
+publico: false
+raias:
+  - id: bug_orq
+    nome: Orquestração do bug
+    demanda: bug
+    responsabilidade: Conduzir o bug do relato ao fechamento, delegando cada etapa a uma raia
+    cor: "#607D8B"
+    orquestradora: true
+    status: rascunho
+    publico: false
+  - id: bug_rep
+    nome: Reprodução
+    demanda: bug
+    responsabilidade: Reproduzir o problema relatado
+    cor: "#0072B2"
+    entradas:
+      - relato_do_bug
+    status: rascunho
+    publico: false
+  - id: bug_tri
+    nome: Triagem e classificação
+    demanda: bug
+    responsabilidade: Classificar o relato e priorizar a correção
+    cor: "#E69F00"
+    entradas:
+      - relato_do_bug
+      - passos_de_reproducao
+      - ambiente_do_bug
+      - logs_do_bug
+      - registro_visual_do_bug
+    status: rascunho
+    publico: false
+  - id: bug_cor
+    nome: Correção
+    demanda: bug
+    responsabilidade: Isolar a causa raiz e corrigir com teste de regressão
+    cor: "#009E73"
+    status: rascunho
+    publico: false
+    entradas:
+      - passos_de_reproducao
+      - logs_do_bug
+      - estado_dos_dados
+      - teste_que_reproduz
+      - prioridade
+      - hotfix_aberto
+      - mitigacao_paliativa
+      - paliativo_aplicado
+  - id: bug_ent
+    nome: Validação e entrega
+    demanda: bug
+    responsabilidade: Validar a correção, entregá-la e verificar em produção
+    cor: "#117733"
+    status: rascunho
+    publico: false
+    entradas:
+      - entrega_integrada
+      - teste_que_reproduz
+      - causa_raiz
+      - passos_de_reproducao
+      - logs_do_bug
+      - tem_qa_dedicado
+  - id: bug_pre
+    nome: Prevenção
+    demanda: bug
+    responsabilidade: Descobrir por que o bug escapou e registrar a ação preventiva
+    cor: "#CC79A7"
+    status: rascunho
+    publico: false
+    entradas:
+      - causa_raiz
+      - relato_do_bug
+      - verificacao_em_producao
+decisoes:
+  - id: bug_orq_s0
+    raia: bug_orq
+    tipo: inicio
+    rotulo: Bug reportado
+    condicao: ""
+    proximo:
+      - para: bug_orq_c1
+        condicao: ""
+    estado:
+      corrige_defeito: sim
+    saidas:
+      - relato_do_bug
+    playbook: pb_bug_orq_s0
+    layout:
+      coluna: 0
+    status: rascunho
+    publico: false
+  - id: bug_orq_c1
+    raia: bug_orq
+    tipo: chamada
+    raia_chamada: bug_rep
+    rotulo: Reproduzir o problema
+    condicao: ""
+    proximo:
+      - para: bug_orq_c2
+        condicao: reproduzido
+      - para: bug_orq_e1
+        condicao: nao_reproduzido
+    estado: {}
+    entradas:
+      - relato_do_bug
+    saidas:
+      - ambiente_do_bug
+      - logs_do_bug
+      - estado_dos_dados
+      - registro_visual_do_bug
+      - passos_de_reproducao
+      - teste_que_reproduz
+      - reproduzido
+    playbook: pb_bug_orq_c1
+    layout:
+      coluna: 1
+    status: rascunho
+    publico: false
+  - id: bug_orq_c2
+    raia: bug_orq
+    tipo: chamada
+    raia_chamada: bug_tri
+    rotulo: Triar e classificar o bug
+    condicao: ""
+    proximo:
+      - para: bug_orq_c3
+        condicao: hotfix
+      - para: bug_orq_c3
+        condicao: backlog
+      - para: bug_orq_e2
+        condicao: comportamento_esperado
+      - para: bug_orq_e3
+        condicao: pedido_feature
+    estado: {}
+    entradas:
+      - relato_do_bug
+      - passos_de_reproducao
+      - ambiente_do_bug
+      - logs_do_bug
+      - registro_visual_do_bug
+    saidas:
+      - tipo_defeito
+      - severidade_bug
+      - prioridade
+      - hotfix_aberto
+      - item_de_backlog
+      - resposta_ao_relator
+      - demanda_de_feature
+      - muda_jornada
+      - justificativa_da_severidade
+      - paliativo_aplicado
+      - mitigacao_paliativa
+    playbook: pb_bug_orq_c2
+    layout:
+      coluna: 2
+    status: rascunho
+    publico: false
+  - id: bug_orq_c3
+    raia: bug_orq
+    tipo: chamada
+    raia_chamada: bug_cor
+    rotulo: Corrigir a causa raiz
+    condicao: ""
+    proximo:
+      - para: bug_orq_g1
+        condicao: correcao_pronta
+    estado: {}
+    entradas:
+      - passos_de_reproducao
+      - logs_do_bug
+      - estado_dos_dados
+      - teste_que_reproduz
+      - prioridade
+      - hotfix_aberto
+      - mitigacao_paliativa
+      - paliativo_aplicado
+    saidas:
+      - entrega_integrada
+      - causa_raiz
+      - teste_que_reproduz
+    playbook: pb_bug_orq_c3
+    layout:
+      coluna: 3
+    status: rascunho
+    publico: false
+  - id: bug_orq_g1
+    raia: bug_orq
+    tipo: bifurcacao
+    rotulo: É hotfix?
+    condicao: A triagem abriu a correção como hotfix?
+    proximo:
+      - para: bug_orq_c7
+        condicao: "sim: hotfix segue direto para a validação e entrega"
+      - para: bug_orq_c4
+        condicao: "não: publicar e rodar a regressão"
+    estado: {}
+    entradas:
+      - prioridade
+    papel: tech_lead
+    informado:
+      - suporte
+      - stakeholder
+    playbook: pb_bug_orq_g1
+    layout:
+      coluna: 4
+    status: rascunho
+    publico: false
+  - id: bug_orq_c4
+    raia: bug_orq
+    tipo: chamada
+    raia_chamada: com_pub
+    rotulo: Publicar a correção em ambiente de testes
+    condicao: ""
+    proximo:
+      - para: bug_orq_c5
+        condicao: publicado
+      - para: bug_orq_c3
+        condicao: falha_na_publicacao
+    estado: {}
+    entradas:
+      - entrega_integrada
+    playbook: pb_bug_orq_c4
+    layout:
+      coluna: 4
+    status: rascunho
+    publico: false
+  - id: bug_orq_c5
+    raia: bug_orq
+    tipo: chamada
+    raia_chamada: com_val
+    rotulo: Testes regressivos do bug e das funcionalidades core
+    condicao: ""
+    proximo:
+      - para: bug_orq_c6
+        condicao: testes_aprovados
+      - para: bug_orq_c3
+        condicao: testes_reprovados
+    estado: {}
+    entradas:
+      - entrega_integrada
+      - teste_que_reproduz
+    playbook: pb_bug_orq_c5
+    layout:
+      coluna: 5
+    status: rascunho
+    publico: false
+  - id: bug_orq_c6
+    raia: bug_orq
+    tipo: chamada
+    raia_chamada: com_e2e
+    rotulo: Regressão das jornadas afetadas e das jornadas core
+    condicao: ""
+    proximo:
+      - para: bug_orq_c7
+        condicao: aprovado
+      - para: bug_orq_c7
+        condicao: nao_aplicavel
+      - para: bug_orq_c3
+        condicao: reprovado
+    estado: {}
+    entradas:
+      - entrega_integrada
+      - muda_jornada
+    playbook: pb_bug_orq_c6
+    layout:
+      coluna: 6
+    status: rascunho
+    publico: false
+  - id: bug_orq_c7
+    raia: bug_orq
+    tipo: chamada
+    raia_chamada: bug_ent
+    rotulo: Validar, entregar e verificar em produção
+    condicao: ""
+    proximo:
+      - para: bug_orq_c8
+        condicao: verificado
+      - para: bug_orq_c3
+        condicao: nao_corrigido
+    estado: {}
+    entradas:
+      - entrega_integrada
+      - causa_raiz
+      - teste_que_reproduz
+    saidas:
+      - aviso_de_correcao
+      - verificacao_em_producao
+    playbook: pb_bug_orq_c7
+    layout:
+      coluna: 7
+    status: rascunho
+    publico: false
+  - id: bug_orq_c8
+    raia: bug_orq
+    tipo: chamada
+    raia_chamada: bug_pre
+    rotulo: Analisar o escape e registrar a prevenção
+    condicao: ""
+    proximo:
+      - para: bug_orq_e4
+        condicao: acao_registrada
+    estado: {}
+    entradas:
+      - causa_raiz
+      - verificacao_em_producao
+    saidas:
+      - registro_da_acao_preventiva
+      - acao_preventiva
+    playbook: pb_bug_orq_c8
+    layout:
+      coluna: 8
+    status: rascunho
+    publico: false
+  - id: bug_orq_e1
+    raia: bug_orq
+    tipo: fim
+    retorno: fechado_sem_reproducao
+    rotulo: Fechado sem reprodução (reabrir se reaparecer)
+    condicao: ""
+    proximo: []
+    estado: {}
+    playbook: pb_bug_orq_e1
+    layout:
+      coluna: 2
+    status: rascunho
+    publico: false
+  - id: bug_orq_e2
+    raia: bug_orq
+    tipo: fim
+    retorno: esclarecido
+    rotulo: Esclarecido como comportamento esperado
+    condicao: ""
+    proximo: []
+    estado: {}
+    playbook: pb_bug_orq_e2
+    layout:
+      coluna: 3
+    status: rascunho
+    publico: false
+  - id: bug_orq_e3
+    raia: bug_orq
+    tipo: fim
+    retorno: encaminhado
+    rotulo: Encaminhado ao fluxo de feature
+    condicao: ""
+    proximo: []
+    estado: {}
+    playbook: pb_bug_orq_e3
+    layout:
+      coluna: 3
+    status: rascunho
+    publico: false
+  - id: bug_orq_e4
+    raia: bug_orq
+    tipo: fim
+    retorno: corrigido_e_fechado
+    rotulo: Bug corrigido, verificado e fechado
+    condicao: ""
+    proximo: []
+    estado: {}
+    entradas:
+      - registro_da_acao_preventiva
+      - acao_preventiva
+      - aviso_de_correcao
+    playbook: pb_bug_orq_e4
+    layout:
+      coluna: 6
+    status: rascunho
+    publico: false
+  - id: bug_rep_s0
+    raia: bug_rep
+    tipo: inicio
+    rotulo: Bug a reproduzir
+    condicao: ""
+    proximo:
+      - para: bug_rep_t1
+        condicao: ""
+    estado: {}
+    entradas:
+      - relato_do_bug
+    playbook: pb_bug_rep_s0
+    layout:
+      coluna: 0
+    status: rascunho
+    publico: false
+  - id: bug_rep_t1
+    raia: bug_rep
+    tipo: tarefa
+    rotulo: Reproduzir o problema
+    condicao: ""
+    proximo:
+      - para: bug_rep_g1
+        condicao: ""
+    estado:
+      reproduzido: sim|nao
+    entradas:
+      - relato_do_bug
+    saidas:
+      - ambiente_do_bug
+      - logs_do_bug
+      - estado_dos_dados
+      - registro_visual_do_bug
+      - passos_de_reproducao
+      - teste_que_reproduz
+      - reproduzido
+    subtarefas:
+      - id: bug_rep_t1_st1
+        rotulo: Reunir o contexto do relato
+        descricao: Versão, dispositivo, navegador, conta, flags ativas e horário em que o bug aconteceu
+        papel: suporte
+        apoio:
+          - qa
+        entradas:
+          - relato_do_bug
+        saidas:
+          - ambiente_do_bug
+        exemplo: Versão 4.12.0, iPhone 13, conta comprador_recorrente_02, flag de cupom ligada, 14h32.
+        status: rascunho
+      - id: bug_rep_t1_st2
+        rotulo: Coletar logs, rastros e métricas do horário do erro
+        papel: dev
+        apoio:
+          - sre
+        entradas:
+          - ambiente_do_bug
+        saidas:
+          - logs_do_bug
+        tecnicas:
+          - tecnica: tec_logs_e_rastreamento
+            uso: obrigatoria
+            porque: o rastro mostra onde a requisição falhou sem depender da memória de quem relatou
+        exemplo: Erro 500 no serviço de cupons, id de correlação 7f3a, timeout na consulta de saldo.
+        status: rascunho
+      - id: bug_rep_t1_st3
+        rotulo: Capturar o estado dos dados envolvidos
+        papel: dev
+        apoio:
+          - engenheiro_de_dados
+        entradas:
+          - ambiente_do_bug
+          - logs_do_bug
+        saidas:
+          - estado_dos_dados
+        tecnicas:
+          - tecnica: tec_mascaramento_de_dados
+            uso: obrigatoria
+            porque: a evidência sai de produção e não pode expor dados de pessoas
+        exemplo: Pedido 98213 com cupom expirado e status pendente, dados do comprador mascarados.
+        status: rascunho
+      - id: bug_rep_t1_st4
+        rotulo: Reproduzir em ambiente controlado e registrar os passos
+        papel: qa
+        entradas:
+          - ambiente_do_bug
+          - logs_do_bug
+          - estado_dos_dados
+        saidas:
+          - passos_de_reproducao
+          - registro_visual_do_bug
+          - reproduzido
+        tecnicas:
+          - tecnica: tec_reproducao_minima
+            uso: obrigatoria
+            porque: o menor caso que mostra a falha acelera o isolamento da causa
+        exemplo: 3 passos com carrinho de 1 item e cupom expirado; gravação de 20 s anexada.
+        status: rascunho
+      - id: bug_rep_t1_st5
+        rotulo: Escrever o teste automatizado que falha com o bug
+        papel: dev
+        quando:
+          todos:
+            - var: reproduzido
+              igual: sim
+        porque: o teste prova o defeito antes da correção e vira regressão depois dela
+        entradas:
+          - passos_de_reproducao
+        saidas:
+          - teste_que_reproduz
+        tecnicas:
+          - tecnica: tec_teste_regressao
+            uso: obrigatoria
+            porque: o mesmo teste falha agora e protege contra a volta do defeito
+        exemplo: Teste de integração do checkout com cupom expirado falha com erro 500.
+        status: rascunho
+    playbook: pb_bug_rep_t1
+    layout:
+      coluna: 1
+    status: rascunho
+    publico: false
+  - id: bug_rep_g1
+    raia: bug_rep
+    tipo: bifurcacao
+    rotulo: Reproduziu?
+    condicao: Reproduziu?
+    proximo:
+      - para: bug_rep_e1
+        condicao: sim
+      - para: bug_rep_t2
+        condicao: não
+    estado:
+      reproduzido: sim|nao
+    entradas:
+      - reproduzido
+      - passos_de_reproducao
+    papel: qa
+    playbook: pb_bug_rep_g1
+    layout:
+      coluna: 2
+    status: rascunho
+    publico: false
+  - id: bug_rep_t2
+    raia: bug_rep
+    tipo: tarefa
+    rotulo: Coletar evidências e tentar de novo
+    condicao: ""
+    proximo:
+      - para: bug_rep_g2
+        condicao: ""
+    estado:
+      reproduzido: nao
+    entradas:
+      - relato_do_bug
+      - ambiente_do_bug
+      - logs_do_bug
+    saidas:
+      - logs_do_bug
+      - estado_dos_dados
+      - registro_visual_do_bug
+      - passos_de_reproducao
+    subtarefas:
+      - id: bug_rep_t2_st1
+        rotulo: Ampliar a coleta para outros serviços e um período maior
+        papel: dev
+        apoio:
+          - sre
+        entradas:
+          - logs_do_bug
+        saidas:
+          - logs_do_bug
+        tecnicas:
+          - tecnica: tec_logs_e_rastreamento
+            uso: obrigatoria
+            porque: a causa pode estar num serviço vizinho ou começar antes do horário relatado
+        exemplo: Rastros de pagamentos e cupons nas 2 horas anteriores; 4 erros parecidos em outras contas.
+        status: rascunho
+      - id: bug_rep_t2_st2
+        rotulo: Pedir ao relator gravação de tela ou dados adicionais
+        papel: suporte
+        entradas:
+          - relato_do_bug
+        saidas:
+          - registro_visual_do_bug
+        exemplo: O comprador enviou a gravação; o erro só aparece com o cupom aplicado depois do frete.
+        status: rascunho
+      - id: bug_rep_t2_st3
+        rotulo: Tentar em ambiente próximo de produção com dados mascarados
+        papel: qa
+        apoio:
+          - dev
+        entradas:
+          - logs_do_bug
+          - registro_visual_do_bug
+        saidas:
+          - estado_dos_dados
+          - passos_de_reproducao
+        tecnicas:
+          - tecnica: tec_mascaramento_de_dados
+            uso: obrigatoria
+            porque: dados próximos dos reais reproduzem sem expor pessoas
+        exemplo: Reproduzido em homologação com cópia mascarada do pedido 98213.
+        status: rascunho
+    playbook: pb_bug_rep_t2
+    layout:
+      coluna: 3
+    status: rascunho
+    publico: false
+  - id: bug_rep_g2
+    raia: bug_rep
+    tipo: bifurcacao
+    rotulo: Reproduz com as novas evidências?
+    condicao: Reproduz com as novas evidências?
+    proximo:
+      - para: bug_rep_e1
+        condicao: sim
+      - para: bug_rep_e2
+        condicao: não
+    estado:
+      reproduzido: sim|nao
+    entradas:
+      - passos_de_reproducao
+      - registro_visual_do_bug
+    papel: qa
+    apoio:
+      - dev
+    playbook: pb_bug_rep_g2
+    layout:
+      coluna: 4
+    status: rascunho
+    publico: false
+  - id: bug_rep_e1
+    raia: bug_rep
+    tipo: fim
+    retorno: reproduzido
+    rotulo: Reproduzido
+    condicao: ""
+    proximo: []
+    estado: {}
+    saidas:
+      - passos_de_reproducao
+      - reproduzido
+      - ambiente_do_bug
+      - logs_do_bug
+      - estado_dos_dados
+      - registro_visual_do_bug
+      - teste_que_reproduz
+    playbook: pb_bug_rep_e1
+    layout:
+      coluna: 5
+    status: rascunho
+    publico: false
+  - id: bug_rep_e2
+    raia: bug_rep
+    tipo: fim
+    retorno: nao_reproduzido
+    rotulo: Não reproduzido
+    condicao: ""
+    proximo: []
+    estado: {}
+    saidas:
+      - reproduzido
+      - ambiente_do_bug
+      - logs_do_bug
+    playbook: pb_bug_rep_e2
+    layout:
+      coluna: 5
+    status: rascunho
+    publico: false
+  - id: bug_tri_s0
+    raia: bug_tri
+    tipo: inicio
+    rotulo: Bug reproduzido, triar
+    condicao: ""
+    proximo:
+      - para: bug_tri_g1
+        condicao: ""
+    estado: {}
+    entradas:
+      - relato_do_bug
+      - passos_de_reproducao
+    playbook: pb_bug_tri_s0
+    layout:
+      coluna: 0
+    status: rascunho
+    publico: false
+  - id: bug_tri_g1
+    raia: bug_tri
+    tipo: bifurcacao
+    rotulo: Defeito, comportamento esperado ou feature?
+    condicao: É defeito, comportamento esperado ou pedido de feature?
+    proximo:
+      - para: bug_tri_g2
+        condicao: "defeito: o sistema contraria o requisito"
+      - para: bug_tri_t1
+        condicao: comportamento esperado conforme o requisito
+      - para: bug_tri_t2
+        condicao: "pedido de feature: o requisito não existia"
+    estado:
+      tipo_defeito: defeito|comportamento_esperado|pedido_feature
+    entradas:
+      - relato_do_bug
+      - passos_de_reproducao
+    saidas:
+      - tipo_defeito
+      - requisito_de_referencia
+    tecnicas:
+      - tecnica: tec_criterios_aceitacao
+        uso: recomendada
+        porque: o critério de aceite diz o que o sistema deveria fazer
+      - tecnica: tec_x3_amigos
+        uso: opcional
+        porque: na dúvida, alinhe com produto e qualidade antes de decidir
+    papel: pm
+    apoio:
+      - qa
+    consultado:
+      - suporte
+    playbook: pb_bug_tri_g1
+    layout:
+      coluna: 1
+    status: rascunho
+    publico: false
+  - id: bug_tri_t1
+    raia: bug_tri
+    tipo: tarefa
+    rotulo: Responder e documentar o comportamento esperado
+    condicao: ""
+    proximo:
+      - para: bug_tri_e3
+        condicao: ""
+    estado:
+      tipo_defeito: comportamento_esperado
+    entradas:
+      - relato_do_bug
+      - requisito_de_referencia
+    saidas:
+      - resposta_ao_relator
+    subtarefas:
+      - id: bug_tri_t1_st1
+        exemplo: 'Resposta ao relator: "Este é o comportamento previsto no requisito RF-12: o cupom só vale para a primeira compra. Segue o link da regra".'
+        rotulo: Redigir a resposta citando o requisito
+        papel: qa
+        apoio:
+          - pm
+        entradas:
+          - relato_do_bug
+          - requisito_de_referencia
+        saidas:
+          - resposta_ao_relator
+        status: rascunho
+      - id: bug_tri_t1_st2
+        exemplo: A resposta foi enviada em 1 hora. Como é a 3ª vez no mês que chega essa dúvida, abre-se uma tarefa para deixar a regra visível na tela do cupom.
+        rotulo: Enviar a resposta e avaliar a melhoria de UX
+        papel: pm
+        entradas:
+          - resposta_ao_relator
+        saidas:
+          - resposta_ao_relator
+        status: rascunho
+    playbook: pb_bug_tri_t1
+    layout:
+      coluna: 2
+    status: rascunho
+    publico: false
+  - id: bug_tri_t2
+    raia: bug_tri
+    tipo: tarefa
+    rotulo: Encaminhar como demanda de feature
+    condicao: ""
+    proximo:
+      - para: bug_tri_e4
+        condicao: ""
+    estado:
+      tipo_defeito: pedido_feature
+    entradas:
+      - relato_do_bug
+      - requisito_de_referencia
+    saidas:
+      - demanda_de_feature
+      - resposta_ao_relator
+    subtarefas:
+      - id: bug_tri_t2_st1
+        exemplo: O ticket "quero pagar com carteira digital" vira uma demanda de produto, com o relato original, o print e a lista de quem pediu.
+        rotulo: Converter o ticket em demanda de produto
+        papel: pm
+        entradas:
+          - relato_do_bug
+          - requisito_de_referencia
+        saidas:
+          - demanda_de_feature
+        tecnicas:
+          - tecnica: tec_jobs_to_be_done
+            uso: opcional
+            porque: descreve o problema do usuário em vez de só a solução pedida
+        status: rascunho
+      - id: bug_tri_t2_st2
+        exemplo: 'Mensagem ao relator: "Isso é uma melhoria, não um defeito. Ela entrou no fluxo de produtos e você acompanha pelo novo link".'
+        rotulo: Avisar o relator sobre o novo caminho
+        papel: pm
+        entradas:
+          - demanda_de_feature
+        saidas:
+          - resposta_ao_relator
+        status: rascunho
+    playbook: pb_bug_tri_t2
+    layout:
+      coluna: 2
+    status: rascunho
+    publico: false
+  - id: bug_tri_g2
+    raia: bug_tri
+    tipo: bifurcacao
+    rotulo: É um potencial incidente?
+    condicao: É um potencial incidente?
+    proximo:
+      - para: bug_tri_t3
+        condicao: sim, pelo menos um critério atendido
+      - para: bug_tri_t4
+        condicao: não, nenhum critério atendido
+    estado:
+      potencial_incidente: sim|nao
+      criterios_incidente: "lista dos critérios atendidos: raio_impacto, perda_corrupcao_dados, seguranca_compliance, dinheiro, degradacao_crescente_ou_sem_contorno, janela_critica"
+      janela_critica: sim|nao
+      tipo_janela: sazonal|repentina|freeze|manutencao|nenhuma
+    entradas:
+      - relato_do_bug
+      - passos_de_reproducao
+      - logs_do_bug
+    saidas:
+      - potencial_incidente
+      - criterios_incidente
+      - janela_critica
+      - tipo_janela
+    tecnicas:
+      - tecnica: tec_blast_radius
+        uso: obrigatoria
+        porque: o critério de raio de impacto pede número, não impressão
+      - tecnica: tec_matriz_severidade
+        uso: recomendada
+        porque: o mesmo critério de gravidade usado no incidente evita dois pesos e duas medidas
+      - tecnica: tec_slo_sli
+        uso: opcional
+        porque: mostra se o indicador do serviço já está degradado
+    papel: qa
+    apoio:
+      - sre
+    consultado:
+      - pm
+    playbook: pb_bug_tri_g2
+    layout:
+      coluna: 2
+    status: rascunho
+    publico: false
+  - id: bug_tri_t3
+    raia: bug_tri
+    tipo: tarefa
+    rotulo: Acionar o incidente e seguir com a correção em paralelo
+    condicao: ""
+    proximo:
+      - para: bug_tri_t4
+        condicao: ""
+    estado:
+      potencial_incidente: sim
+      criterios_incidente: registrar os critérios atendidos no ticket do bug e do incidente
+    ligacoes:
+      - demanda_destino: incidente
+        para: inc_orq_s0
+        condicao: "pelo menos um critério: raio de impacto (quantos usuários, creators ou compras afetados), perda ou corrupção de dados, segurança ou compliance, dinheiro (pagamentos, repasses), degradação crescente ou sem contorno"
+        tipo: aciona
+        rotulo: Bug vira potencial incidente
+    entradas:
+      - passos_de_reproducao
+      - criterios_incidente
+      - potencial_incidente
+      - logs_do_bug
+      - ambiente_do_bug
+    saidas:
+      - incidente_aberto
+      - relato_do_bug
+    subtarefas:
+      - id: bug_tri_t3_st1
+        exemplo: "Critérios atendidos no ticket: o defeito afeta o fluxo de pagamento e atinge mais de 5% dos clientes."
+        rotulo: Registrar os critérios atendidos no ticket
+        papel: qa
+        entradas:
+          - criterios_incidente
+          - potencial_incidente
+        saidas:
+          - relato_do_bug
+        status: rascunho
+      - id: bug_tri_t3_st2
+        exemplo: O incidente é aberto com o título "Falha no pagamento com cartão" e os dois tickets ficam ligados um ao outro.
+        rotulo: Abrir o incidente e linkar os dois tickets
+        papel: sre
+        apoio:
+          - tech_lead
+        entradas:
+          - criterios_incidente
+        saidas:
+          - incidente_aberto
+        status: rascunho
+      - id: bug_tri_t3_st3
+        exemplo: "Para o incidente seguem 4 evidências: horário da primeira falha, versão afetada, identificador de 3 compras e o trecho do log."
+        rotulo: Passar as evidências ao incidente
+        papel: qa
+        apoio:
+          - dev
+        entradas:
+          - incidente_aberto
+          - passos_de_reproducao
+          - criterios_incidente
+          - logs_do_bug
+          - ambiente_do_bug
+        tecnicas:
+          - tecnica: tec_linha_do_tempo
+            uso: opcional
+            porque: ajuda o incidente a reconstruir quando o defeito começou
+        saidas:
+          - incidente_aberto
+        status: rascunho
+    playbook: pb_bug_tri_t3
+    layout:
+      coluna: 3
+    status: rascunho
+    publico: false
+  - id: bug_tri_t4
+    raia: bug_tri
+    tipo: tarefa
+    rotulo: Avaliar severidade e prioridade
+    condicao: ""
+    proximo:
+      - para: bug_tri_g3
+        condicao: ""
+    estado:
+      severidade_bug: bloqueante|alta|media|baixa
+      prioridade: hotfix|backlog
+    entradas:
+      - relato_do_bug
+      - passos_de_reproducao
+      - potencial_incidente
+      - logs_do_bug
+      - ambiente_do_bug
+    saidas:
+      - avaliacao_de_impacto
+      - severidade_bug
+      - prioridade
+      - muda_jornada
+      - justificativa_da_severidade
+    subtarefas:
+      - id: bug_tri_t4_st1
+        exemplo: O defeito atinge cerca de 2% dos pedidos, todos no checkout, que é um fluxo crítico para a receita.
+        rotulo: Medir o alcance e a criticidade do fluxo
+        papel: qa
+        apoio:
+          - dev
+        entradas:
+          - relato_do_bug
+          - passos_de_reproducao
+          - logs_do_bug
+          - ambiente_do_bug
+        saidas:
+          - avaliacao_de_impacto
+          - muda_jornada
+        tecnicas:
+          - tecnica: tec_blast_radius
+            uso: recomendada
+            porque: mede quantos usuários e qual fluxo o defeito atinge
+        status: rascunho
+      - id: bug_tri_t4_st2
+        exemplo: "Existe contorno: o cliente consegue concluir a compra pelo aplicativo. O contorno exige uma etapa extra, mas é aceitável por alguns dias."
+        rotulo: Verificar se há contorno aceitável
+        papel: pm
+        apoio:
+          - qa
+        entradas:
+          - avaliacao_de_impacto
+        saidas:
+          - avaliacao_de_impacto
+        status: rascunho
+      - id: bug_tri_t4_st3
+        exemplo: "Severidade alta, por afetar o checkout, e prioridade média, porque há contorno: tratar na sprint atual."
+        rotulo: Definir a severidade e a prioridade
+        papel: pm
+        apoio:
+          - tech_lead
+        entradas:
+          - avaliacao_de_impacto
+        saidas:
+          - severidade_bug
+          - prioridade
+          - justificativa_da_severidade
+        tecnicas:
+          - tecnica: tec_matriz_severidade
+            uso: obrigatoria
+            porque: severidade é o dano e precisa de critério escrito
+          - tecnica: tec_classes_de_servi_o
+            uso: recomendada
+            porque: a classe de serviço define o prazo de tratamento
+        consultado:
+          - suporte
+        status: rascunho
+    playbook: pb_bug_tri_t4
+    layout:
+      coluna: 4
+    status: rascunho
+    publico: false
+  - id: bug_tri_g3
+    raia: bug_tri
+    tipo: bifurcacao
+    rotulo: Afetado por janela crítica ou sazonalidade?
+    condicao: O fluxo é afetado por janela crítica, evento repentino ou sazonalidade?
+    proximo:
+      - para: bug_tri_g4
+        condicao: sim, há janela crítica ativa
+      - para: bug_tri_g5
+        condicao: não, sem janela crítica
+    estado:
+      janela_critica: sim|nao
+      tipo_janela: sazonal|repentina|freeze|manutencao|nenhuma
+    entradas:
+      - janela_critica
+      - tipo_janela
+    saidas:
+      - janela_critica
+      - tipo_janela
+    tecnicas:
+      - tecnica: tec_calendario_eventos_criticos
+        uso: obrigatoria
+        porque: a janela crítica só aparece quando alguém consulta o calendário
+      - tecnica: tec_status_de_janela
+        uso: recomendada
+        porque: mostra se há freeze ou manutenção em vigor agora
+    papel: tech_lead
+    apoio:
+      - pm
+    playbook: pb_bug_tri_g3
+    layout:
+      coluna: 5
+    status: rascunho
+    publico: false
+  - id: bug_tri_g4
+    raia: bug_tri
+    tipo: bifurcacao
+    rotulo: A janela pede correção imediata ou adiamento?
+    condicao: A janela pede correção imediata ou adiamento?
+    proximo:
+      - para: bug_tri_t6
+        condicao: correção imediata (hotfix)
+      - para: bug_tri_t5
+        condicao: adiar com mitigação paliativa
+      - para: bug_tri_g5
+        condicao: a janela não altera a decisão
+    estado:
+      prioridade: hotfix|backlog
+      tipo_janela: sazonal|repentina|freeze|manutencao
+    entradas:
+      - tipo_janela
+      - avaliacao_de_impacto
+      - severidade_bug
+    saidas:
+      - prioridade
+    tecnicas:
+      - tecnica: tec_code_freeze
+        uso: condicional
+        quando:
+          todos:
+            - var: tipo_janela
+              em:
+                - freeze
+                - manutencao
+        porque: em freeze, o hotfix só sai com exceção aprovada
+      - tecnica: tec_hotfix
+        uso: recomendada
+        porque: a correção imediata é a menor mudança que resolve
+    papel: tech_lead
+    aprova: pm
+    playbook: pb_bug_tri_g4
+    layout:
+      coluna: 6
+    status: rascunho
+    publico: false
+  - id: bug_tri_t5
+    raia: bug_tri
+    tipo: tarefa
+    rotulo: Aplicar paliativo e adiar a correção para depois da janela
+    condicao: ""
+    proximo:
+      - para: bug_tri_t7
+        condicao: ""
+    estado:
+      prioridade: backlog
+      mitigacao_paliativa: sim
+    entradas:
+      - tipo_janela
+      - avaliacao_de_impacto
+    saidas:
+      - paliativo_aplicado
+      - mitigacao_paliativa
+      - prioridade
+      - item_de_backlog
+    subtarefas:
+      - id: bug_tri_t5_st1
+        exemplo: O paliativo é desligar a flag do novo botão de pagamento, o que devolve o fluxo antigo sem mexer no código.
+        rotulo: Aplicar o paliativo seguro
+        papel: dev
+        apoio:
+          - sre
+        entradas:
+          - avaliacao_de_impacto
+          - tipo_janela
+        saidas:
+          - paliativo_aplicado
+          - mitigacao_paliativa
+        tecnicas:
+          - tecnica: tec_feature_flags
+            uso: recomendada
+            porque: a flag reduz o dano sem mexer no código em plena janela
+          - tecnica: tec_degradacao_controlada
+            uso: opcional
+            porque: alternativa quando não há flag para o trecho afetado
+        status: rascunho
+      - id: bug_tri_t5_st2
+        exemplo: Retomada marcada para 10 dias após o fim da janela, com a pessoa responsável pelo checkout como dona e o ticket linkado.
+        rotulo: Registrar a data de retomada e o dono
+        papel: tech_lead
+        entradas:
+          - paliativo_aplicado
+          - tipo_janela
+        saidas:
+          - prioridade
+          - item_de_backlog
+        tecnicas:
+          - tecnica: tec_code_freeze
+            uso: condicional
+            quando:
+              todos:
+                - var: tipo_janela
+                  em:
+                    - freeze
+                    - manutencao
+            porque: a retomada acompanha o fim do freeze ou da manutenção
+        status: rascunho
+    playbook: pb_bug_tri_t5
+    layout:
+      coluna: 7
+    status: rascunho
+    publico: false
+  - id: bug_tri_g5
+    raia: bug_tri
+    tipo: bifurcacao
+    rotulo: Bloqueante ou de alto impacto?
+    condicao: Bloqueante ou de alto impacto?
+    proximo:
+      - para: bug_tri_t6
+        condicao: "sim: tratar como hotfix"
+      - para: bug_tri_t7
+        condicao: "não: priorizar no backlog"
+    estado:
+      prioridade: hotfix|backlog
+    entradas:
+      - avaliacao_de_impacto
+      - severidade_bug
+    saidas:
+      - prioridade
+    tecnicas:
+      - tecnica: tec_matriz_severidade
+        uso: recomendada
+        porque: hotfix só para o que o critério classifica como bloqueante ou de alto impacto
+    papel: pm
+    apoio:
+      - tech_lead
+    consultado:
+      - suporte
+    playbook: pb_bug_tri_g5
+    layout:
+      coluna: 7
+    status: rascunho
+    publico: false
+  - id: bug_tri_t6
+    raia: bug_tri
+    tipo: tarefa
+    rotulo: Abrir hotfix com escopo mínimo
+    condicao: ""
+    proximo:
+      - para: bug_tri_e1
+        condicao: ""
+    estado:
+      prioridade: hotfix
+    entradas:
+      - relato_do_bug
+      - passos_de_reproducao
+      - prioridade
+    saidas:
+      - hotfix_aberto
+    subtarefas:
+      - id: bug_tri_t6_st1
+        exemplo: Branch criada a partir da tag da versão que está em produção, com o nome hotfix/pagamento-duplicado.
+        rotulo: Criar a branch a partir do que está em produção
+        papel: dev
+        entradas:
+          - relato_do_bug
+          - passos_de_reproducao
+        saidas:
+          - hotfix_aberto
+        tecnicas:
+          - tecnica: tec_hotfix
+            uso: obrigatoria
+            porque: hotfix é a menor mudança que resolve, partindo do que roda em produção
+        status: rascunho
+      - id: bug_tri_t6_st2
+        exemplo: "Antes de codar, avalia-se desligar a flag da funcionalidade: leva 2 minutos e resolve 90% dos casos, então vira o contorno imediato."
+        rotulo: Avaliar o contorno imediato
+        papel: tech_lead
+        apoio:
+          - sre
+        entradas:
+          - passos_de_reproducao
+          - hotfix_aberto
+        saidas:
+          - hotfix_aberto
+        tecnicas:
+          - tecnica: tec_feature_flags
+            uso: condicional
+            quando:
+              todos:
+                - var: janela_critica
+                  igual: sim
+            porque: em janela crítica, a flag contorna o defeito sem deploy grande
+          - tecnica: tec_rollback
+            uso: opcional
+            porque: alternativa quando não existe flag para o trecho
+        status: rascunho
+      - id: bug_tri_t6_st3
+        exemplo: 'Escopo fixado em corrigir só a validação do valor. O time recebe o aviso no canal de engenharia: "hotfix em andamento, sem outras mudanças no checkout".'
+        rotulo: Fixar o escopo mínimo e avisar o time
+        papel: tech_lead
+        entradas:
+          - hotfix_aberto
+          - prioridade
+        saidas:
+          - hotfix_aberto
+        tecnicas:
+          - tecnica: tec_code_review
+            uso: recomendada
+            porque: mudança de pressa precisa de um segundo par de olhos
+        status: rascunho
+    playbook: pb_bug_tri_t6
+    layout:
+      coluna: 8
+    status: rascunho
+    publico: false
+  - id: bug_tri_t7
+    raia: bug_tri
+    tipo: tarefa
+    rotulo: Priorizar no backlog com prazo
+    condicao: ""
+    proximo:
+      - para: bug_tri_e2
+        condicao: ""
+    estado:
+      prioridade: backlog
+    entradas:
+      - avaliacao_de_impacto
+      - severidade_bug
+      - prioridade
+    saidas:
+      - item_de_backlog
+      - prioridade
+    subtarefas:
+      - id: bug_tri_t7_st1
+        exemplo: O bug entra na fila atrás de 2 demandas de maior impacto e à frente de 4 melhorias.
+        rotulo: Ordenar junto com as demais demandas
+        papel: pm
+        entradas:
+          - avaliacao_de_impacto
+          - severidade_bug
+        saidas:
+          - item_de_backlog
+        tecnicas:
+          - tecnica: tec_wsjf
+            uso: opcional
+            porque: ajuda a comparar o bug com o restante do backlog
+        status: rascunho
+      - id: bug_tri_t7_st2
+        exemplo: Para um bug de severidade média, o prazo é de 2 sprints. O ticket recebe a data e a pessoa responsável.
+        rotulo: Definir o prazo pela classe de serviço
+        papel: tech_lead
+        apoio:
+          - pm
+        entradas:
+          - item_de_backlog
+          - severidade_bug
+        saidas:
+          - item_de_backlog
+          - prioridade
+        tecnicas:
+          - tecnica: tec_classes_de_servi_o
+            uso: obrigatoria
+            porque: sem prazo o bug no backlog apodrece
+        status: rascunho
+    playbook: pb_bug_tri_t7
+    layout:
+      coluna: 8
+    status: rascunho
+    publico: false
+  - id: bug_tri_e1
+    raia: bug_tri
+    tipo: fim
+    retorno: hotfix
+    rotulo: Hotfix
+    condicao: ""
+    proximo: []
+    estado: {}
+    entradas:
+      - hotfix_aberto
+      - prioridade
+      - severidade_bug
+      - tipo_defeito
+    saidas:
+      - tipo_defeito
+      - severidade_bug
+      - prioridade
+      - hotfix_aberto
+      - justificativa_da_severidade
+    playbook: pb_bug_tri_e1
+    layout:
+      coluna: 9
+    status: rascunho
+    publico: false
+  - id: bug_tri_e2
+    raia: bug_tri
+    tipo: fim
+    retorno: backlog
+    rotulo: Backlog
+    condicao: ""
+    proximo: []
+    estado: {}
+    entradas:
+      - item_de_backlog
+      - prioridade
+      - severidade_bug
+      - tipo_defeito
+    saidas:
+      - tipo_defeito
+      - severidade_bug
+      - prioridade
+      - item_de_backlog
+      - justificativa_da_severidade
+    playbook: pb_bug_tri_e2
+    layout:
+      coluna: 9
+    status: rascunho
+    publico: false
+  - id: bug_tri_e3
+    raia: bug_tri
+    tipo: fim
+    retorno: comportamento_esperado
+    rotulo: Comportamento esperado
+    condicao: ""
+    proximo: []
+    estado: {}
+    entradas:
+      - resposta_ao_relator
+      - tipo_defeito
+    saidas:
+      - tipo_defeito
+      - resposta_ao_relator
+    playbook: pb_bug_tri_e3
+    layout:
+      coluna: 3
+    status: rascunho
+    publico: false
+  - id: bug_tri_e4
+    raia: bug_tri
+    tipo: fim
+    retorno: pedido_feature
+    rotulo: Pedido de feature
+    condicao: ""
+    proximo: []
+    estado: {}
+    entradas:
+      - demanda_de_feature
+      - tipo_defeito
+    saidas:
+      - tipo_defeito
+      - demanda_de_feature
+    playbook: pb_bug_tri_e4
+    layout:
+      coluna: 3
+    status: rascunho
+    publico: false
+  - id: bug_cor_s0
+    raia: bug_cor
+    tipo: inicio
+    rotulo: Bug priorizado, corrigir
+    condicao: ""
+    proximo:
+      - para: bug_cor_t1
+        condicao: ""
+    estado: {}
+    playbook: pb_bug_cor_s0
+    layout:
+      coluna: 0
+    status: rascunho
+    publico: false
+  - id: bug_cor_t1
+    raia: bug_cor
+    tipo: tarefa
+    rotulo: Isolar a causa raiz
+    condicao: ""
+    proximo:
+      - para: bug_cor_t2
+        condicao: ""
+    estado: {}
+    entradas:
+      - passos_de_reproducao
+      - logs_do_bug
+      - estado_dos_dados
+      - teste_que_reproduz
+    saidas:
+      - hipoteses_de_causa
+      - causa_raiz
+    subtarefas:
+      - id: bug_cor_t1_st1
+        rotulo: Levantar hipóteses a partir das evidências
+        papel: dev
+        apoio:
+          - qa
+        entradas:
+          - logs_do_bug
+          - estado_dos_dados
+          - passos_de_reproducao
+        saidas:
+          - hipoteses_de_causa
+        tecnicas:
+          - tecnica: tec_x5_whys
+            uso: recomendada
+            porque: cada porquê aproxima do mecanismo, não do sintoma
+        exemplo: H1 cache de cupons sem tratar expiração; H2 fuso no cálculo de validade.
+        status: rascunho
+      - id: bug_cor_t1_st2
+        rotulo: Localizar a mudança que introduziu o defeito
+        papel: dev
+        quando:
+          todos:
+            - var: reproduzido
+              igual: sim
+        porque: só dá para buscar no histórico quando o teste reproduz o defeito
+        entradas:
+          - hipoteses_de_causa
+          - teste_que_reproduz
+        saidas:
+          - hipoteses_de_causa
+        tecnicas:
+          - tecnica: tec_bisect
+            uso: recomendada
+            porque: com um teste que reproduz, a busca binária no histórico acha o commit em poucos passos
+        exemplo: A busca binária entre as versões 4.10 e 4.12 aponta o commit do cache de cupons.
+        status: rascunho
+      - id: bug_cor_t1_st3
+        rotulo: Confirmar a causa raiz com o teste que reproduz
+        papel: dev
+        apoio:
+          - tech_lead
+        entradas:
+          - hipoteses_de_causa
+          - teste_que_reproduz
+        saidas:
+          - causa_raiz
+        exemplo: "Desligando o cache, o teste passa; ligando, falha: causa confirmada."
+        status: rascunho
+      - id: bug_cor_t1_st4
+        rotulo: Procurar outros pontos com a mesma causa
+        papel: tech_lead
+        apoio:
+          - arquiteto
+        entradas:
+          - causa_raiz
+        saidas:
+          - causa_raiz
+        exemplo: O mesmo cache atende vale-presente; o caso entra na correção.
+        status: rascunho
+    playbook: pb_bug_cor_t1
+    layout:
+      coluna: 1
+    status: rascunho
+    publico: false
+  - id: bug_cor_t2
+    raia: bug_cor
+    tipo: tarefa
+    rotulo: Corrigir com teste de regressão
+    condicao: ""
+    proximo:
+      - para: bug_cor_e1
+        condicao: ""
+    estado: {}
+    saidas:
+      - teste_que_reproduz
+      - codigo_da_correcao
+      - entrega_integrada
+    entradas:
+      - causa_raiz
+      - teste_que_reproduz
+      - hotfix_aberto
+      - paliativo_aplicado
+    subtarefas:
+      - id: bug_cor_t2_st1
+        rotulo: Garantir o teste que falha antes de corrigir
+        papel: dev
+        entradas:
+          - teste_que_reproduz
+          - causa_raiz
+        saidas:
+          - teste_que_reproduz
+        tecnicas:
+          - tecnica: tec_tdd
+            uso: obrigatoria
+            porque: vermelho antes do verde prova que a correção trata o defeito
+        exemplo: O teste do cupom expirado existe e falha; o caso do vale-presente ganha o seu.
+        status: rascunho
+      - id: bug_cor_t2_st2
+        rotulo: Corrigir na branch do hotfix com escopo mínimo
+        papel: dev
+        quando:
+          todos:
+            - var: prioridade
+              igual: hotfix
+        porque: o hotfix não pode carregar mudanças que ainda não estão em produção
+        entradas:
+          - hotfix_aberto
+          - causa_raiz
+        saidas:
+          - codigo_da_correcao
+        tecnicas:
+          - tecnica: tec_hotfix
+            uso: obrigatoria
+            porque: a branch parte do que está em produção e leva só a correção
+        exemplo: Branch hotfix/cupom-expirado a partir da versão em produção, só com o tratamento da expiração.
+        status: rascunho
+      - id: bug_cor_t2_st3
+        rotulo: Implementar a correção mínima na causa raiz
+        papel: dev
+        quando:
+          todos:
+            - var: prioridade
+              igual: backlog
+        porque: fora do hotfix, a correção segue o fluxo normal do time
+        entradas:
+          - causa_raiz
+          - teste_que_reproduz
+        saidas:
+          - codigo_da_correcao
+        exemplo: Tratamento de cupom expirado na consulta de saldo, 14 linhas.
+        status: rascunho
+      - id: bug_cor_t2_st4
+        rotulo: Remover o paliativo aplicado na triagem
+        papel: dev
+        quando:
+          todos:
+            - var: mitigacao_paliativa
+              igual: sim
+        porque: paliativo esquecido vira dívida e esconde a próxima falha
+        entradas:
+          - paliativo_aplicado
+          - codigo_da_correcao
+        saidas:
+          - codigo_da_correcao
+        exemplo: A flag que escondia o campo de cupom no checkout é removida junto com a correção.
+        status: rascunho
+      - id: bug_cor_t2_st5
+        rotulo: Abrir o PR com causa, correção e risco
+        papel: dev
+        entradas:
+          - codigo_da_correcao
+          - teste_que_reproduz
+          - causa_raiz
+        saidas:
+          - entrega_integrada
+        tecnicas:
+          - tecnica: tec_code_review
+            uso: obrigatoria
+            porque: o PR leva o contexto para a revisão chegar à causa
+        exemplo: PR com link do bug, causa raiz, o teste que falhava e o risco de efeito colateral no vale-presente.
+        status: rascunho
+    playbook: pb_bug_cor_t2
+    layout:
+      coluna: 2
+    status: rascunho
+    publico: false
+  - id: bug_cor_e1
+    raia: bug_cor
+    tipo: fim
+    retorno: correcao_pronta
+    rotulo: Correção pronta com teste de regressão
+    condicao: ""
+    proximo: []
+    estado: {}
+    saidas:
+      - entrega_integrada
+      - causa_raiz
+      - teste_que_reproduz
+    playbook: pb_bug_cor_e1
+    layout:
+      coluna: 3
+    status: rascunho
+    publico: false
+  - id: bug_ent_s0
+    raia: bug_ent
+    tipo: inicio
+    rotulo: Correção pronta, validar
+    condicao: ""
+    proximo:
+      - para: bug_ent_c1
+        condicao: ""
+    estado: {}
+    playbook: pb_bug_ent_s0
+    layout:
+      coluna: 0
+    status: rascunho
+    publico: false
+  - id: bug_ent_c1
+    raia: bug_ent
+    tipo: chamada
+    raia_chamada: com_rev
+    rotulo: Review humano da correção
+    condicao: ""
+    proximo:
+      - para: bug_ent_g1
+        condicao: aprovado_pelo_humano
+      - para: bug_ent_e2
+        condicao: ajustes_solicitados
+    estado: {}
+    entradas:
+      - entrega_integrada
+    playbook: pb_bug_ent_c1
+    layout:
+      coluna: 1
+    status: rascunho
+    publico: false
+  - id: bug_ent_g1
+    raia: bug_ent
+    tipo: bifurcacao
+    rotulo: Existe QA dedicado no time?
+    condicao: Existe QA dedicado no time?
+    proximo:
+      - para: bug_ent_t2
+        condicao: sim, com QA dedicado
+      - para: bug_ent_t3
+        condicao: não, sem QA dedicado
+    estado:
+      tem_qa_dedicado: sim|nao
+    entradas:
+      - tem_qa_dedicado
+    papel: tech_lead
+    playbook: pb_bug_ent_g1
+    layout:
+      coluna: 2
+    status: rascunho
+    publico: false
+  - id: bug_ent_t2
+    raia: bug_ent
+    tipo: tarefa
+    rotulo: QA valida a correção e explora cenários vizinhos
+    condicao: ""
+    proximo:
+      - para: bug_ent_c2
+        condicao: ""
+    estado:
+      tem_qa_dedicado: sim
+    saidas:
+      - validacao_da_correcao
+    entradas:
+      - entrega_integrada
+      - passos_de_reproducao
+      - causa_raiz
+    subtarefas:
+      - id: bug_ent_t2_st1
+        rotulo: Repetir o cenário do relato
+        papel: qa
+        entradas:
+          - passos_de_reproducao
+          - entrega_integrada
+        saidas:
+          - validacao_da_correcao
+        exemplo: "Os 3 passos do relato no ambiente de testes: mensagem de cupom inválido, sem erro."
+        status: rascunho
+      - id: bug_ent_t2_st2
+        rotulo: Explorar cenários vizinhos onde a mesma causa pode aparecer
+        papel: qa
+        entradas:
+          - causa_raiz
+          - validacao_da_correcao
+        saidas:
+          - validacao_da_correcao
+        tecnicas:
+          - tecnica: tec_teste_exploratorio
+            uso: obrigatoria
+            porque: a mesma causa costuma aparecer em variações que a suíte não cobre
+        exemplo: Cupom vencendo hoje, ontem e amanhã, em dois fusos, e o vale-presente.
+        status: rascunho
+    playbook: pb_bug_ent_t2
+    layout:
+      coluna: 3
+    status: rascunho
+    publico: false
+  - id: bug_ent_t3
+    raia: bug_ent
+    tipo: tarefa
+    rotulo: "Validação por par: autor demonstra a correção"
+    condicao: ""
+    proximo:
+      - para: bug_ent_c2
+        condicao: ""
+    estado:
+      tem_qa_dedicado: nao
+    saidas:
+      - validacao_da_correcao
+    entradas:
+      - entrega_integrada
+      - passos_de_reproducao
+      - teste_que_reproduz
+    subtarefas:
+      - id: bug_ent_t3_st1
+        rotulo: Demonstrar a correção a um par repetindo o relato
+        papel: dev
+        entradas:
+          - passos_de_reproducao
+          - entrega_integrada
+        saidas:
+          - validacao_da_correcao
+        exemplo: O autor repete os 3 passos do relato com outra pessoa do time olhando.
+        status: rascunho
+      - id: bug_ent_t3_st2
+        rotulo: Par revisa a cobertura do teste automatizado
+        papel: dev
+        entradas:
+          - teste_que_reproduz
+          - validacao_da_correcao
+        saidas:
+          - validacao_da_correcao
+        tecnicas:
+          - tecnica: tec_code_review
+            uso: obrigatoria
+            porque: outra pessoa confirma que o teste prova o que diz provar
+        exemplo: O par confere que o teste cobre o caso do relato e o do vale-presente.
+        status: rascunho
+    playbook: pb_bug_ent_t3
+    layout:
+      coluna: 3
+    status: rascunho
+    publico: false
+  - id: bug_ent_c2
+    raia: bug_ent
+    tipo: chamada
+    raia_chamada: com_etg
+    rotulo: Implantar a correção
+    condicao: ""
+    proximo:
+      - para: bug_ent_t5
+        condicao: implantado
+      - para: bug_ent_e2
+        condicao: implantacao_revertida
+    estado: {}
+    entradas:
+      - validacao_da_correcao
+      - entrega_integrada
+    playbook: pb_bug_ent_c2
+    layout:
+      coluna: 4
+    status: rascunho
+    publico: false
+  - id: bug_ent_t5
+    raia: bug_ent
+    tipo: tarefa
+    rotulo: Verificar em produção que o defeito não acontece mais
+    condicao: ""
+    proximo:
+      - para: bug_ent_g2
+        condicao: ""
+    estado:
+      corrigido_em_producao: sim|nao
+    saidas:
+      - verificacao_em_producao
+      - corrigido_em_producao
+    entradas:
+      - passos_de_reproducao
+      - logs_do_bug
+    subtarefas:
+      - id: bug_ent_t5_st1
+        rotulo: Repetir o cenário do relato em produção
+        papel: qa
+        apoio:
+          - suporte
+        entradas:
+          - passos_de_reproducao
+        saidas:
+          - verificacao_em_producao
+          - corrigido_em_producao
+        exemplo: Com a conta de teste, o cupom expirado mostra a mensagem certa em produção.
+        status: rascunho
+      - id: bug_ent_t5_st2
+        rotulo: Comparar a métrica de erro antes e depois da correção
+        papel: sre
+        entradas:
+          - logs_do_bug
+          - verificacao_em_producao
+        saidas:
+          - verificacao_em_producao
+        tecnicas:
+          - tecnica: tec_telemetria_padronizada
+            uso: obrigatoria
+            porque: a mesma métrica do relato mostra se o sintoma sumiu
+        exemplo: "Erros 500 no checkout com cupom: 40 por hora antes, zero nas 24 horas seguintes."
+        status: rascunho
+    playbook: pb_bug_ent_t5
+    layout:
+      coluna: 5
+    status: rascunho
+    publico: false
+  - id: bug_ent_g2
+    raia: bug_ent
+    tipo: bifurcacao
+    rotulo: Corrigido em produção?
+    condicao: Corrigido em produção?
+    proximo:
+      - para: bug_ent_c3
+        condicao: sim
+      - para: bug_ent_e2
+        condicao: não, reabrir o isolamento da causa
+    estado:
+      corrigido_em_producao: sim|nao
+    entradas:
+      - verificacao_em_producao
+      - corrigido_em_producao
+    papel: qa
+    apoio:
+      - sre
+    playbook: pb_bug_ent_g2
+    layout:
+      coluna: 6
+    status: rascunho
+    publico: false
+  - id: bug_ent_c3
+    raia: bug_ent
+    tipo: chamada
+    raia_chamada: com_mon
+    rotulo: Monitorar que nada degradou
+    condicao: ""
+    proximo:
+      - para: bug_ent_t6
+        condicao: feature_validada
+      - para: bug_ent_e2
+        condicao: incidente_acionado
+    estado: {}
+    entradas:
+      - verificacao_em_producao
+    playbook: pb_bug_ent_c3
+    layout:
+      coluna: 7
+    status: rascunho
+    publico: false
+  - id: bug_ent_t6
+    raia: bug_ent
+    tipo: tarefa
+    rotulo: Fechar o bug e avisar quem reportou
+    condicao: ""
+    proximo:
+      - para: bug_ent_e1
+        condicao: ""
+    estado: {}
+    entradas:
+      - verificacao_em_producao
+      - causa_raiz
+    saidas:
+      - relato_do_bug
+      - aviso_de_correcao
+    subtarefas:
+      - id: bug_ent_t6_st1
+        rotulo: Atualizar o ticket com causa, correção e versão
+        papel: dev
+        entradas:
+          - causa_raiz
+          - verificacao_em_producao
+        saidas:
+          - relato_do_bug
+        exemplo: Ticket fechado com a causa raiz, o link do PR e a versão 4.12.1.
+        status: rascunho
+      - id: bug_ent_t6_st2
+        rotulo: Avisar quem reportou e o suporte
+        papel: suporte
+        entradas:
+          - relato_do_bug
+        saidas:
+          - aviso_de_correcao
+        exemplo: "Mensagem ao comprador e ao suporte: corrigido na versão 4.12.1."
+        status: rascunho
+    playbook: pb_bug_ent_t6
+    layout:
+      coluna: 8
+    status: rascunho
+    publico: false
+  - id: bug_ent_e1
+    raia: bug_ent
+    tipo: fim
+    retorno: verificado
+    rotulo: Corrigido e fechado
+    condicao: ""
+    proximo: []
+    estado: {}
+    saidas:
+      - aviso_de_correcao
+      - verificacao_em_producao
+    playbook: pb_bug_ent_e1
+    layout:
+      coluna: 9
+    status: rascunho
+    publico: false
+  - id: bug_ent_e2
+    raia: bug_ent
+    tipo: fim
+    retorno: nao_corrigido
+    rotulo: Volta para a correção
+    condicao: ""
+    proximo: []
+    estado: {}
+    playbook: pb_bug_ent_e2
+    layout:
+      coluna: 7
+    status: rascunho
+    publico: false
+  - id: bug_pre_s0
+    raia: bug_pre
+    tipo: inicio
+    rotulo: Bug fechado, analisar o escape
+    condicao: ""
+    proximo:
+      - para: bug_pre_t1
+        condicao: ""
+    estado: {}
+    playbook: pb_bug_pre_s0
+    layout:
+      coluna: 0
+    status: rascunho
+    publico: false
+  - id: bug_pre_t1
+    raia: bug_pre
+    tipo: tarefa
+    rotulo: Analisar por onde o defeito escapou
+    condicao: ""
+    proximo:
+      - para: bug_pre_g1
+        condicao: ""
+    estado: {}
+    entradas:
+      - causa_raiz
+      - relato_do_bug
+      - verificacao_em_producao
+    saidas:
+      - analise_de_escape
+      - origem_escape
+    subtarefas:
+      - id: bug_pre_t1_st1
+        rotulo: Reconstruir o caminho do defeito até produção
+        papel: tech_lead
+        apoio:
+          - qa
+          - dev
+        entradas:
+          - causa_raiz
+          - relato_do_bug
+        saidas:
+          - analise_de_escape
+        tecnicas:
+          - tecnica: tec_blameless_postmortem
+            uso: obrigatoria
+            porque: o foco é a barreira que falhou, não a pessoa
+        exemplo: O defeito entrou com o cache de cupons, passou pelo review, pelos testes e pela homologação sem nenhum caso de expiração.
+        status: rascunho
+      - id: bug_pre_t1_st2
+        rotulo: Classificar a origem do escape
+        papel: tech_lead
+        entradas:
+          - analise_de_escape
+        saidas:
+          - analise_de_escape
+          - origem_escape
+        tecnicas:
+          - tecnica: tec_x5_whys
+            uso: recomendada
+            porque: chega à barreira certa, não à mais próxima
+        exemplo: "Origem: teste (o contrato não cobria datas)."
+        status: rascunho
+    playbook: pb_bug_pre_t1
+    layout:
+      coluna: 1
+    status: rascunho
+    publico: false
+  - id: bug_pre_g1
+    raia: bug_pre
+    tipo: bifurcacao
+    rotulo: "Análise de escape: por que este bug chegou à produção?"
+    condicao: "Análise de escape: por que este bug chegou à produção?"
+    proximo:
+      - para: bug_pre_t2
+        condicao: faltou teste
+      - para: bug_pre_t3
+        condicao: requisito ambíguo
+      - para: bug_pre_t4
+        condicao: a revisão não pegou
+      - para: bug_pre_t5
+        condicao: sem observabilidade ou alerta
+      - para: bug_pre_t6
+        condicao: mudança sem proteção
+    estado:
+      origem_escape: teste|requisito|revisao|observabilidade|protecao_mudanca
+    entradas:
+      - origem_escape
+      - analise_de_escape
+    papel: tech_lead
+    apoio:
+      - qa
+    playbook: pb_bug_pre_g1
+    layout:
+      coluna: 1
+    status: rascunho
+    publico: false
+  - id: bug_pre_t2
+    raia: bug_pre
+    tipo: tarefa
+    rotulo: Criar teste de regressão ou de contrato para a lacuna
+    condicao: ""
+    proximo:
+      - para: bug_pre_t7
+        condicao: ""
+    estado:
+      origem_escape: teste
+      acao_preventiva: teste_regressao|teste_contrato
+    entradas:
+      - analise_de_escape
+    saidas:
+      - teste_preventivo
+    subtarefas:
+      - id: bug_pre_t2_st1
+        rotulo: Escrever o teste que teria pego o defeito
+        papel: dev
+        apoio:
+          - qa
+        entradas:
+          - analise_de_escape
+        saidas:
+          - teste_preventivo
+        tecnicas:
+          - tecnica: tec_contract_testing
+            uso: recomendada
+            porque: a lacuna estava na fronteira entre dois serviços
+          - tecnica: tec_teste_regressao
+            uso: obrigatoria
+            porque: o teste entra na suíte e roda em toda entrega
+        exemplo: Teste de contrato entre checkout e cupons com expirado, esgotado e de outro produto.
+        status: rascunho
+    playbook: pb_bug_pre_t2
+    layout:
+      coluna: 2
+    status: rascunho
+    publico: false
+  - id: bug_pre_t3
+    raia: bug_pre
+    tipo: tarefa
+    rotulo: Refinar o requisito e os critérios de aceitação
+    condicao: ""
+    proximo:
+      - para: bug_pre_t7
+        condicao: ""
+    estado:
+      origem_escape: requisito
+      acao_preventiva: criterios_aceitacao
+    entradas:
+      - analise_de_escape
+    saidas:
+      - criterios_de_aceite
+    subtarefas:
+      - id: bug_pre_t3_st1
+        rotulo: Reescrever o requisito ambíguo com critérios testáveis
+        papel: pm
+        apoio:
+          - qa
+        entradas:
+          - analise_de_escape
+        saidas:
+          - criterios_de_aceite
+        exemplo: "Critério novo: cupom vencido no dia exato da validade é aceito até 23h59 no fuso do comprador."
+        status: rascunho
+    playbook: pb_bug_pre_t3
+    layout:
+      coluna: 2
+    status: rascunho
+    publico: false
+  - id: bug_pre_t4
+    raia: bug_pre
+    tipo: tarefa
+    rotulo: Atualizar checklist de revisão ou regra de análise estática
+    condicao: ""
+    proximo:
+      - para: bug_pre_t7
+        condicao: ""
+    estado:
+      origem_escape: revisao
+      acao_preventiva: checklist_revisao|regra_analise_estatica
+    entradas:
+      - analise_de_escape
+    saidas:
+      - regra_de_revisao
+    subtarefas:
+      - id: bug_pre_t4_st1
+        rotulo: Criar o item de revisão ou a regra de análise estática
+        papel: tech_lead
+        entradas:
+          - analise_de_escape
+        saidas:
+          - regra_de_revisao
+        tecnicas:
+          - tecnica: tec_checklist_revisao
+            uso: recomendada
+            porque: o item lembra o revisor do caso que escapou
+          - tecnica: tec_analise_estatica
+            uso: recomendada
+            porque: quando o padrão é detectável no código, a máquina pega sempre
+        exemplo: "Item no checklist: toda regra com data de validade tem teste para o dia exato da expiração."
+        status: rascunho
+    playbook: pb_bug_pre_t4
+    layout:
+      coluna: 2
+    status: rascunho
+    publico: false
+  - id: bug_pre_t5
+    raia: bug_pre
+    tipo: tarefa
+    rotulo: Criar alerta e SLO para detectar o problema mais cedo
+    condicao: ""
+    proximo:
+      - para: bug_pre_t7
+        condicao: ""
+    estado:
+      origem_escape: observabilidade
+      acao_preventiva: alerta_slo
+    entradas:
+      - analise_de_escape
+    saidas:
+      - alerta_e_slo
+    subtarefas:
+      - id: bug_pre_t5_st1
+        rotulo: Criar o alerta ligado a um indicador de serviço
+        papel: sre
+        entradas:
+          - analise_de_escape
+        saidas:
+          - alerta_e_slo
+        tecnicas:
+          - tecnica: tec_slo_sli
+            uso: obrigatoria
+            porque: o indicador diz o que é normal; o alerta dispara quando sai disso
+          - tecnica: tec_alertas
+            uso: obrigatoria
+            porque: o time sabe antes do cliente
+        exemplo: Alerta quando a taxa de erro do checkout com cupom passa de 0,5% em 5 minutos.
+        status: rascunho
+    playbook: pb_bug_pre_t5
+    layout:
+      coluna: 2
+    status: rascunho
+    publico: false
+  - id: bug_pre_t6
+    raia: bug_pre
+    tipo: tarefa
+    rotulo: Proteger a mudança com flag, canary ou rollout gradual
+    condicao: ""
+    proximo:
+      - para: bug_pre_t7
+        condicao: ""
+    estado:
+      origem_escape: protecao_mudanca
+      acao_preventiva: flag|canary|rollout_gradual
+    entradas:
+      - analise_de_escape
+    saidas:
+      - protecao_da_mudanca
+    subtarefas:
+      - id: bug_pre_t6_st1
+        rotulo: Configurar a proteção para a próxima mudança na área
+        papel: dev
+        apoio:
+          - sre
+        entradas:
+          - analise_de_escape
+        saidas:
+          - protecao_da_mudanca
+        tecnicas:
+          - tecnica: tec_feature_flags
+            uso: recomendada
+            porque: desliga a mudança sem novo deploy
+          - tecnica: tec_canary_release
+            uso: recomendada
+            porque: expõe a mudança a pouca gente antes de todos
+        exemplo: Mudanças no cálculo de cupons saem atrás de flag, para 5% do tráfego primeiro.
+        status: rascunho
+    playbook: pb_bug_pre_t6
+    layout:
+      coluna: 2
+    status: rascunho
+    publico: false
+  - id: bug_pre_t7
+    raia: bug_pre
+    tipo: tarefa
+    rotulo: Registrar ação preventiva e acompanhar
+    condicao: ""
+    proximo:
+      - para: bug_pre_e1
+        condicao: ""
+    estado:
+      acao_preventiva: registrada com dono, prazo e critério de pronto
+    entradas:
+      - analise_de_escape
+      - teste_preventivo
+      - criterios_de_aceite
+      - regra_de_revisao
+      - alerta_e_slo
+      - protecao_da_mudanca
+    saidas:
+      - registro_da_acao_preventiva
+      - acao_preventiva
+      - aprendizado_do_escape
+    subtarefas:
+      - id: bug_pre_t7_st1
+        rotulo: Registrar a ação com dono, prazo e critério de pronto
+        papel: tech_lead
+        entradas:
+          - analise_de_escape
+          - teste_preventivo
+          - criterios_de_aceite
+          - regra_de_revisao
+          - alerta_e_slo
+          - protecao_da_mudanca
+        saidas:
+          - registro_da_acao_preventiva
+          - acao_preventiva
+        exemplo: Card do teste de contrato de cupons, dono do time de checkout, prazo de 2 semanas.
+        status: rascunho
+      - id: bug_pre_t7_st2
+        rotulo: Compartilhar o aprendizado com os times
+        papel: tech_lead
+        entradas:
+          - analise_de_escape
+          - registro_da_acao_preventiva
+        saidas:
+          - aprendizado_do_escape
+        exemplo: "Mensagem aos times: o que escapou, por quê e o que mudou, sem culpados."
+        status: rascunho
+    playbook: pb_bug_pre_t7
+    layout:
+      coluna: 3
+    status: rascunho
+    publico: false
+  - id: bug_pre_e1
+    raia: bug_pre
+    tipo: fim
+    retorno: acao_registrada
+    rotulo: Ação preventiva registrada
+    condicao: ""
+    proximo: []
+    estado: {}
+    saidas:
+      - registro_da_acao_preventiva
+      - acao_preventiva
+    playbook: pb_bug_pre_e1
+    layout:
+      coluna: 4
+    status: rascunho
+    publico: false
+playbooks:
+  - evitar:
+      - Começar a corrigir antes de reproduzir
+    fazer:
+      - Registre quem reportou, versão, ambiente e passos
+    id: pb_bug_orq_s0
+    publico: false
+    resumo: Um relato de bug é uma hipótese. Antes de corrigir, confirme que existe e que é defeito.
+    status: rascunho
+  - id: pb_bug_orq_c1
+    resumo: "Chama a raia Reprodução: reproduzir o problema relatado. O fluxo segue pelo retorno que a raia devolver."
+    fazer:
+      - "Retornos possíveis: reproduzido, nao_reproduzido"
+      - Siga a saída que corresponde ao retorno da raia chamada
+    status: rascunho
+    publico: false
+  - id: pb_bug_orq_c2
+    resumo: "Chama a raia Triagem e classificação: classificar o relato e priorizar a correção. O fluxo segue pelo retorno que a raia devolver."
+    fazer:
+      - "Retornos possíveis: hotfix, backlog, comportamento_esperado, pedido_feature"
+      - Siga a saída que corresponde ao retorno da raia chamada
+    status: rascunho
+    publico: false
+  - id: pb_bug_orq_c3
+    resumo: "Chama a raia Correção: isolar a causa raiz e corrigir com teste de regressão. O fluxo segue pelo retorno que a raia devolver."
+    fazer:
+      - "Retornos possíveis: correcao_pronta"
+      - Siga a saída que corresponde ao retorno da raia chamada
+    status: rascunho
+    publico: false
+  - id: pb_bug_orq_c4
+    resumo: A correção sobe para um ambiente de testes pela mesma estratégia de versionamento das outras entregas, antes de qualquer teste integrado. Falha na publicação volta para a correção.
+    perguntas_chave:
+      - '"A correção está numa versão identificável e reversível?"'
+    fazer:
+      - "Retornos possíveis: publicado, falha_na_publicacao"
+    status: rascunho
+    publico: false
+  - id: pb_bug_orq_c5
+    resumo: "Testes regressivos em duas frentes: o teste que reproduzia o defeito agora passa, e a suíte das funcionalidades core continua verde. Reprovação volta para a correção."
+    perguntas_chave:
+      - '"O teste que falhava com o bug agora passa?"'
+      - '"Alguma funcionalidade core mudou de resultado?"'
+    fazer:
+      - "Retornos possíveis: testes_aprovados, testes_reprovados"
+    evitar:
+      - Rodar só o teste do bug e pular a suíte core
+    exemplo: Teste do cupom expirado verde; 85 testes core verdes em 7 minutos.
+    status: rascunho
+    publico: false
+  - id: pb_bug_orq_c6
+    resumo: Regressão de ponta a ponta das jornadas que o bug afeta e das jornadas core que não podem quebrar. Reprovação volta para a correção.
+    perguntas_chave:
+      - '"A jornada onde o bug aparecia funciona de ponta a ponta?"'
+    fazer:
+      - "Retornos possíveis: aprovado, reprovado, nao_aplicavel"
+    status: rascunho
+    publico: false
+  - id: pb_bug_orq_c7
+    resumo: "Chama a raia Validação e entrega: validar a correção, entregá-la e verificar em produção. O fluxo segue pelo retorno que a raia devolver."
+    fazer:
+      - "Retornos possíveis: verificado, nao_corrigido"
+      - Siga a saída que corresponde ao retorno da raia chamada
+    status: rascunho
+    publico: false
+  - id: pb_bug_orq_c8
+    resumo: "Chama a raia Prevenção: descobrir por que o bug escapou e registrar a ação preventiva. O fluxo segue pelo retorno que a raia devolver."
+    fazer:
+      - "Retornos possíveis: acao_registrada"
+      - Siga a saída que corresponde ao retorno da raia chamada
+    status: rascunho
+    publico: false
+  - evitar:
+      - Fechar sem avisar o reporter
+    fazer:
+      - Documente o que foi tentado e peça para reabrir se voltar com novas evidências
+    id: pb_bug_orq_e1
+    publico: false
+    resumo: Fechar sem reprodução é decisão consciente, com registro do que foi tentado.
+    status: rascunho
+  - evitar:
+      - Deixar a dúvida só em conversa privada
+    fazer:
+      - Linke o ticket à documentação
+    id: pb_bug_orq_e2
+    publico: false
+    resumo: Registre a resposta para consultas futuras.
+    status: rascunho
+  - evitar:
+      - Perder o histórico do relato
+    fazer:
+      - Confirme que o PM recebeu
+    id: pb_bug_orq_e3
+    publico: false
+    resumo: O pedido segue o caminho de requisitos e priorização de produto.
+    status: rascunho
+  - evitar:
+      - Esquecer de reportar padrões recorrentes
+    fazer:
+      - Registre o aprendizado se a causa revelar lacuna de processo
+    id: pb_bug_orq_e4
+    publico: false
+    resumo: Correção com teste de regressão, verificação e ação preventiva registrada é o que impede o retorno do problema.
+    status: rascunho
+  - id: pb_bug_rep_s0
+    resumo: "Início da raia Reprodução. Responsabilidade: reproduzir o problema relatado."
+    status: rascunho
+    publico: false
+  - evitar:
+      - Corrigir "no escuro" por intuição
+      - Descartar o relato por não reproduzir de primeira
+    fazer:
+      - Siga os passos do relato no ambiente equivalente
+      - Reduza ao caso mínimo (menos dados, menos passos)
+      - Anote o resultado esperado e o observado
+    id: pb_bug_rep_t1
+    exemplo: Com o passo a passo do relator, o time reproduz o erro em ambiente de teste usando só um cupom e um produto, o menor caso possível.
+    perguntas_chave:
+      - '"Quais passos, dados e ambiente levam à falha?"'
+      - '"Falha sempre ou às vezes?"'
+    publico: false
+    resumo: Sem reprodução não há correção verificável. Procure o menor caso que mostra a falha.
+    status: rascunho
+    tecnicas:
+      - tec_reproducao_minima
+  - evitar:
+      - Fechar na primeira tentativa
+    fazer:
+      - Se não reproduziu, colete mais evidências antes de desistir
+    id: pb_bug_rep_g1
+    exemplo: O erro apareceu duas vezes em 5 tentativas no ambiente de teste, então foi reproduzido e o fluxo segue para a triagem.
+    publico: false
+    resumo: Reproduzir é a porta de entrada do fluxo.
+    status: rascunho
+  - evitar:
+      - Pedir informação sem dizer qual
+      - Usar dados reais de clientes em ambiente de teste
+    fazer:
+      - Peça ao reporter passos, captura e horário
+      - Procure o rastro nos logs e traços
+      - Tente com dados e configuração de produção (sem copiar dados sensíveis)
+    id: pb_bug_rep_t2
+    exemplo: O time pede ao relator o horário exato, o identificador da compra e a versão do aplicativo, e acha o rastro nos registros do mesmo minuto.
+    publico: false
+    resumo: Peça logs, horário, identificador da operação, versão e dados. Procure o rastro nos registros de produção.
+    status: rascunho
+    tecnicas:
+      - tec_reproducao_minima
+      - tec_telemetria_padronizada
+  - evitar:
+      - Manter o bug aberto para sempre sem ação
+    fazer:
+      - Se não reproduz, feche com o motivo e deixe a porta aberta para reabrir
+    id: pb_bug_rep_g2
+    exemplo: 'Mesmo com horário e identificador, o erro não aparece em 10 tentativas: o ticket é fechado com o motivo "não reproduzido".'
+    publico: false
+    resumo: Segunda e última tentativa antes de fechar por falta de reprodução.
+    status: rascunho
+  - id: pb_bug_rep_e1
+    resumo: "Retorno «reproduzido» da raia Reprodução: reproduzido. Quem chamou a raia segue por este retorno."
+    status: rascunho
+    publico: false
+  - id: pb_bug_rep_e2
+    resumo: "Retorno «nao_reproduzido» da raia Reprodução: não reproduzido. Quem chamou a raia segue por este retorno."
+    status: rascunho
+    publico: false
+  - id: pb_bug_tri_s0
+    resumo: "Início da raia Triagem e classificação. Responsabilidade: classificar o relato e priorizar a correção."
+    status: rascunho
+    publico: false
+  - evitar:
+      - Chamar de "bug" tudo o que incomoda
+      - Chamar de "não é bug" sem checar a spec
+    fazer:
+      - Consulte a spec, o critério de aceitação e a documentação
+      - Se há dúvida, converse com o PM em vez de decidir sozinho
+    id: pb_bug_tri_g1
+    exemplo: O relator esperava um desconto que nenhum requisito prevê. Como não há requisito, a pergunta deixa de ser de defeito e vira de produto.
+    perguntas_chave:
+      - '"O que a spec ou o critério de aceitação diz?"'
+      - '"O usuário esperava algo razoável que nunca prometemos?"'
+    publico: false
+    resumo: Compare o comportamento com o requisito ou a spec. Se não há requisito, a discussão é de produto, não de defeito.
+    status: rascunho
+  - evitar:
+      - Resposta seca, sem explicação
+    fazer:
+      - Se mais de uma pessoa se confundiu, a melhoria de UX ou de texto vira item de backlog
+    id: pb_bug_tri_t1
+    exemplo: O time responde que o cupom só vale para a primeira compra, cita o requisito e propõe uma mensagem mais clara na tela.
+    publico: false
+    resumo: Explique ao reporter por que é esperado e, se a surpresa for frequente, melhore a documentação ou a interface.
+    status: rascunho
+  - evitar:
+      - Segurar o ticket como "bug" para fugir da priorização de produto
+    fazer:
+      - Leve o contexto do relator (quem, quando, o que esperava) para a demanda de produto
+    id: pb_bug_tri_t2
+    exemplo: O pedido "aceitar carteira digital" sai do fluxo de bug e entra no de feature, com o relato e o print do relator.
+    publico: false
+    resumo: Reclassifique e envie ao fluxo de feature, com o contexto do reporter.
+    status: rascunho
+  - id: pb_bug_tri_g2
+    exemplo: O defeito de pagamento duplicado pode estar afetando outros clientes agora, então é tratado como um potencial incidente.
+    resumo: "Mapeamento: este defeito pode ser um incidente em formação? Se sim, o fluxo de incidente é acionado e o bug segue em paralelo para a correção."
+    perguntas_chave:
+      - '"Quantos usuários, creators ou compras são afetados?"'
+      - '"Há perda ou corrupção de dados?"'
+      - '"Há risco de segurança ou compliance?"'
+      - '"Há dinheiro envolvido (pagamentos, repasses)?"'
+      - '"A degradação cresce ou não tem contorno?"'
+    fazer:
+      - Marque sim se pelo menos um critério for atendido
+      - Considere também a janela crítica (pico sazonal, evento repentino) como critério adicional e registre janela_critica e tipo_janela
+      - Registre potencial_incidente e os critérios atendidos no ticket
+      - Na dúvida, trate como potencial incidente e reavalie em 10 minutos
+      - "Critério da saída «sim, pelo menos um critério atendido»: sim, pelo menos um critério: raio de impacto (quantos usuários, creators ou compras afetados), perda ou corrupção de dados, segurança ou compliance, dinheiro (pagamentos, repasses), degradação crescente ou sem contorno, ou janela crítica ativa (pico sazonal, evento repentino) que amplia o dano"
+    evitar:
+      - Decidir pela gravidade do relato e não pelo impacto medido
+      - Esperar a correção para avisar o plantão
+    tecnicas:
+      - tec_matriz_severidade
+      - tec_slo_sli
+    status: rascunho
+    publico: false
+  - id: pb_bug_tri_t3
+    exemplo: O incidente é aberto para acompanhar o impacto, e o bug segue em paralelo para a equipe de correção.
+    resumo: Este bug atende a critério de incidente. O fluxo de incidente é acionado pela ligação e o fluxo de bug continua em paralelo, com a correção.
+    perguntas_chave:
+      - '"O incidente já foi aberto e quem é o incident commander?"'
+    fazer:
+      - "Siga com a correção do bug em paralelo: o incidente restaura o serviço, o bug corrige a causa"
+      - Quando o incidente mitigar, a correção do bug continua normalmente
+    evitar:
+      - Parar a correção do bug porque o incidente foi aberto
+      - Tratar os dois fluxos como se fossem um só
+    tecnicas:
+      - tec_incident_command
+      - tec_matriz_severidade
+    status: rascunho
+    publico: false
+  - evitar:
+      - Priorizar por quem reclama mais alto
+      - Rebaixar bug de segurança por ser raro
+    fazer:
+      - "Registre as duas coisas: severidade é o dano e prioridade é a ordem de tratamento"
+      - Se algum critério de incidente foi atendido, o mapeamento anterior já acionou o fluxo de incidente; aqui a severidade orienta a prioridade da correção
+    id: pb_bug_tri_t4
+    exemplo: "Defeito no checkout, atingindo cerca de 2% dos pedidos e com contorno pelo aplicativo: severidade alta e prioridade média."
+    perguntas_chave:
+      - '"Quantos usuários e qual fluxo?"'
+      - '"Há contorno?"'
+      - '"Há risco de dados ou segurança?"'
+    publico: false
+    resumo: Severidade é o dano; prioridade é a ordem de tratamento. Combine impacto, alcance e existência de contorno.
+    status: rascunho
+    tecnicas:
+      - tec_matriz_severidade
+      - tec_classes_de_servi_o
+  - id: pb_bug_tri_g3
+    exemplo: O bug foi relatado em plena semana de um lançamento de creator, então a janela crítica está ativa e o fluxo segue pelo caminho "sim".
+    resumo: Janela crítica altera a prioridade do bug. Confira o calendário antes de decidir hotfix ou backlog.
+    perguntas_chave:
+      - '"Estamos em pico sazonal, lançamento de creator, fechamento financeiro de período ou data promocional?"'
+      - '"Há freeze ou manutenção em vigor?"'
+    fazer:
+      - Use o valor de janela_critica registrado no mapeamento de potencial incidente e reconfirme
+      - Confira o calendário de eventos críticos e o status de janela
+      - "Critério da saída «sim, há janela crítica ativa»: (pico sazonal, lançamento de creator, fechamento financeiro de período, datas promocionais, freeze, manutenção ou evento repentino)"
+      - "Critério da saída «não, sem janela crítica»: avaliar bloqueio e impacto normalmente"
+    evitar:
+      - Priorizar sem olhar o calendário
+      - Tratar freeze como regra sem exceção para bug grave
+    tecnicas:
+      - tec_calendario_eventos_criticos
+      - tec_status_de_janela
+      - tec_code_freeze
+    status: rascunho
+    publico: false
+  - id: pb_bug_tri_g4
+    exemplo: "Na janela de lançamento, o bug não bloqueia compras e há paliativo seguro: adiar a correção para depois da janela."
+    resumo: Na janela, um bug não bloqueante pode virar hotfix. Em freeze, a correção pode esperar com mitigação paliativa.
+    perguntas_chave:
+      - '"O bug degrada receita ou experiência durante a janela?"'
+      - '"Existe paliativo seguro até o fim do freeze?"'
+    fazer:
+      - "Imediata: hotfix com escopo mínimo; em freeze, só com exceção aprovada"
+      - "Adiar: aplique o paliativo e marque a data de retomada"
+      - "Sem efeito da janela: siga para a avaliação normal de bloqueio e impacto"
+      - "Critério da saída «correção imediata (hotfix)»: correção imediata: o bug degrada receita ou experiência na janela de pico ou evento repentino, mesmo sem ser bloqueante (hotfix; em freeze, só com exceção aprovada)"
+      - "Critério da saída «adiar com mitigação paliativa»: adiar: freeze ou manutenção em vigor e existe mitigação paliativa segura; corrigir depois da janela"
+      - "Critério da saída «a janela não altera a decisão»: avaliar bloqueio e impacto normalmente"
+    evitar:
+      - Adiar sem paliativo
+      - Hotfix grande em plena janela de pico
+    tecnicas:
+      - tec_hotfix
+      - tec_code_freeze
+      - tec_feature_flags
+      - tec_capacity_planning_sazonal
+    status: rascunho
+    publico: false
+  - id: pb_bug_tri_t5
+    exemplo: A flag da novidade é desligada durante a janela e a correção é agendada para 10 dias depois, com dono definido.
+    resumo: O paliativo reduz o dano até o fim da janela. A correção entra no backlog com data de retomada logo depois.
+    fazer:
+      - O paliativo pode ser feature flag, ajuste de configuração ou orientação ao suporte
+      - Reavalie se a janela se estender
+    evitar:
+      - Esquecer o bug depois da janela
+      - Paliativo sem dono nem data de remoção
+    tecnicas:
+      - tec_feature_flags
+      - tec_code_freeze
+    status: rascunho
+    publico: false
+  - evitar:
+      - Transformar todo bug em hotfix
+    fazer:
+      - "Hotfix: bloqueio de fluxo crítico, perda de dados, falha de segurança"
+      - "Backlog: demais casos, com prazo conforme a classe de serviço"
+      - A janela crítica já foi avaliada na bifurcação anterior (hotfix antecipado ou adiamento com paliativo)
+    id: pb_bug_tri_g5
+    exemplo: "O pagamento duplicado atinge 3% dos clientes e gera estorno: é bloqueante e vai para hotfix."
+    publico: false
+    resumo: Hotfix interrompe o planejado e custa risco de pressa. Reserve para o que realmente não pode esperar.
+    status: rascunho
+  - evitar:
+      - Aproveitar o hotfix para "arrumar de passagem"
+    fazer:
+      - "Escopo mínimo é regra: o que não resolve o defeito vai para outro ticket"
+      - Uma flag desligada pode ser o contorno mais rápido
+    id: pb_bug_tri_t6
+    exemplo: A flag do novo fluxo de pagamento é desligada em 2 minutos, e o hotfix corrige só a validação do valor.
+    publico: false
+    resumo: Hotfix é a menor mudança que resolve. Uma flag desligada pode ser o contorno mais rápido.
+    status: rascunho
+    tecnicas:
+      - tec_hotfix
+      - tec_feature_flags
+  - evitar:
+      - Backlog de bugs eterno
+    fazer:
+      - "Revise os prazos na cadência de planejamento: bug sem dono e sem prazo apodrece"
+    id: pb_bug_tri_t7
+    exemplo: O bug de severidade média entra no backlog com prazo de 2 sprints e a pessoa responsável pelo checkout como dona.
+    publico: false
+    resumo: Bug no backlog tem dono, prioridade e prazo, senão apodrece.
+    status: rascunho
+    tecnicas:
+      - tec_classes_de_servi_o
+  - id: pb_bug_tri_e1
+    resumo: "Retorno «hotfix» da raia Triagem e classificação: hotfix. Quem chamou a raia segue por este retorno."
+    status: rascunho
+    publico: false
+  - id: pb_bug_tri_e2
+    resumo: "Retorno «backlog» da raia Triagem e classificação: backlog. Quem chamou a raia segue por este retorno."
+    status: rascunho
+    publico: false
+  - id: pb_bug_tri_e3
+    resumo: "Retorno «comportamento_esperado» da raia Triagem e classificação: comportamento esperado. Quem chamou a raia segue por este retorno."
+    status: rascunho
+    publico: false
+  - id: pb_bug_tri_e4
+    resumo: "Retorno «pedido_feature» da raia Triagem e classificação: pedido de feature. Quem chamou a raia segue por este retorno."
+    status: rascunho
+    publico: false
+  - id: pb_bug_cor_s0
+    resumo: "Início da raia Correção. Responsabilidade: isolar a causa raiz e corrigir com teste de regressão."
+    status: rascunho
+    publico: false
+  - evitar:
+      - Tratar o sintoma e esquecer a causa
+      - Mudar várias coisas ao mesmo tempo
+    fazer:
+      - Reduza o problema por bisseção (histórico de commits e dados)
+      - Use logs, traços e depurador
+      - Faça 5 porquês até a causa do processo
+    id: pb_bug_cor_t1
+    perguntas_chave:
+      - '"Qual foi a última mudança que funcionou?"'
+      - '"Por que a falha não foi pega antes?"'
+    publico: false
+    resumo: Encontre onde e por que falha, não apenas onde aparece.
+    status: rascunho
+    tecnicas:
+      - tec_x5_whys
+      - tec_bisect
+  - evitar:
+      - Corrigir sem teste
+      - Teste que passa antes e depois da correção
+    fazer:
+      - Escreva o teste de regressão que reproduz o bug
+      - Corrija no menor escopo possível
+      - Rode a suíte completa
+    id: pb_bug_cor_t2
+    perguntas_chave:
+      - '"O teste falha sem a correção?"'
+    publico: false
+    resumo: Escreva primeiro o teste que falha com o bug e passe com a correção. Ele protege contra a volta.
+    status: rascunho
+    tecnicas:
+      - tec_teste_regressao
+      - tec_tdd
+  - id: pb_bug_cor_e1
+    resumo: "Retorno «correcao_pronta» da raia Correção: correção pronta com teste de regressão. Quem chamou a raia segue por este retorno."
+    status: rascunho
+    publico: false
+  - id: pb_bug_ent_s0
+    resumo: "Início da raia Validação e entrega. Responsabilidade: validar a correção, entregá-la e verificar em produção."
+    status: rascunho
+    publico: false
+  - evitar:
+      - Aprovar por pressa
+      - PR sem contexto da causa
+    fazer:
+      - Peça revisão de alguém que conheça a área
+      - Descreva causa, correção e risco no PR
+      - Confirme que o teste de regressão está incluído
+    id: pb_bug_ent_c1
+    publico: false
+    resumo: "Chama a raia comum Review humano: a revisão confirma que a correção trata a causa e não cria efeito colateral. Pedido de ajuste volta para a correção."
+    status: rascunho
+    tecnicas:
+      - tec_code_review
+  - evitar:
+      - Pular a validação por falta de QA
+    fazer:
+      - "Com QA: ele valida o cenário e testa vizinhanças"
+      - "Sem QA: o autor demonstra a correção a um par"
+    id: pb_bug_ent_g1
+    publico: false
+    resumo: Quem valida depende de como o time é organizado. Sem QA, o time assume a validação.
+    status: rascunho
+  - evitar:
+      - Validar só o caminho feliz
+    fazer:
+      - Execute o cenário do relato
+      - Explore casos vizinhos (dados limite, perfis diferentes)
+      - Confirme que o teste automatizado cobre o caso
+    id: pb_bug_ent_t2
+    publico: false
+    resumo: QA verifica o cenário original e testa variações próximas onde a mesma causa pode aparecer.
+    status: rascunho
+    tecnicas:
+      - tec_teste_regressao
+  - evitar:
+      - Autor validar sozinho a própria correção sem demonstrar
+    fazer:
+      - Autor e par repetem os passos do relato
+      - Revise a cobertura do teste automatizado
+    id: pb_bug_ent_t3
+    publico: false
+    resumo: Sem QA dedicado, outra pessoa do time reproduz o bug e confirma a correção.
+    status: rascunho
+    tecnicas:
+      - tec_teste_regressao
+      - tec_code_review
+  - evitar:
+      - Atalhar a esteira sem motivo registrado
+    fazer:
+      - Passe pela esteira de CI/CD
+      - Prefira liberar gradualmente quando possível
+      - Tenha plano de reversão
+    id: pb_bug_ent_c2
+    publico: false
+    resumo: "Chama a raia comum Implantação: entregue com o mesmo cuidado de qualquer mudança; em hotfix, prefira deploy gradual. Implantação revertida volta para a correção."
+    status: rascunho
+    tecnicas:
+      - tec_ci_cd
+      - tec_deploy_gradual
+      - tec_rollback
+  - evitar:
+      - Dar como resolvido apenas porque o deploy passou
+    fazer:
+      - Repita o cenário do relato
+      - Observe erros e métricas por uma janela
+    id: pb_bug_ent_t5
+    publico: false
+    resumo: Confirme em produção que o sintoma sumiu e que nada novo apareceu.
+    status: rascunho
+    tecnicas:
+      - tec_telemetria_padronizada
+  - evitar:
+      - Repetir a mesma correção esperando outro resultado
+    fazer:
+      - Compare a hipótese inicial com o que foi observado
+    id: pb_bug_ent_g2
+    publico: false
+    resumo: Se não está corrigido, volte à causa. Revise a hipótese em vez de repetir a mesma correção.
+    status: rascunho
+  - evitar:
+      - Fechar sem avisar quem reportou
+    fazer:
+      - Atualize o ticket com causa, correção e versão
+      - Avise o reporter e o suporte
+      - Em seguida, faça a análise de escape para evitar que o mesmo tipo de bug volte
+    id: pb_bug_ent_t6
+    publico: false
+    resumo: "Feche o ciclo com o reporter e deixe o rastro: causa, correção e link do PR."
+    status: rascunho
+  - id: pb_bug_ent_e1
+    resumo: "Retorno «verificado» da raia Validação e entrega: corrigido e fechado. Quem chamou a raia segue por este retorno."
+    status: rascunho
+    publico: false
+  - id: pb_bug_ent_e2
+    resumo: "Retorno «nao_corrigido» da raia Validação e entrega: não corrigido, reabrir a causa raiz. Quem chamou a raia segue por este retorno."
+    status: rascunho
+    publico: false
+  - id: pb_bug_pre_s0
+    resumo: "Início da raia Prevenção. Responsabilidade: descobrir por que o bug escapou e registrar a ação preventiva."
+    status: rascunho
+    publico: false
+  - id: pb_bug_pre_g1
+    resumo: Todo defeito que chegou à produção passou por uma defesa que falhou. Descubra qual, para fechar a porta e não só o bug.
+    perguntas_chave:
+      - '"Que teste teria pego isso?"'
+      - '"O requisito estava claro?"'
+      - '"O que a revisão deixou passar?"'
+      - '"Como soubemos do bug: monitoramento ou reclamação?"'
+      - '"A mudança tinha proteção (flag, canary)?"'
+    fazer:
+      - Escolha a origem principal; se houver mais de uma, abra ações extras
+      - Meça a taxa de escape de defeitos (defect escape rate) ao longo do tempo
+      - Use os 5 porquês para sair do sintoma e chegar à defesa que faltou
+      - "Critério da saída «requisito ambíguo»: a spec ou os critérios de aceitação deixavam dúvida"
+      - "Critério da saída «sem observabilidade ou alerta»: o problema ficou invisível até alguém reportar"
+      - "Critério da saída «mudança sem proteção»: foi para todos os usuários de uma vez, sem flag, canary ou rollout gradual"
+    evitar:
+      - Procurar quem errou
+      - Pular a análise por ser um bug pequeno
+    tecnicas:
+      - tec_escape_analysis
+      - tec_x5_whys
+    status: rascunho
+    publico: false
+  - evitar:
+      - Teste que repete a correção sem proteger a classe de falha
+      - Teste frágil que depende de ambiente instável
+    fazer:
+      - Crie teste de regressão para o caso, se ainda não existir
+      - Crie teste de contrato quando a falha veio da integração entre serviços
+      - Cubra casos vizinhos da mesma causa
+    id: pb_bug_pre_t2
+    perguntas_chave:
+      - '"O limite entre serviços tem teste de contrato?"'
+    publico: false
+    resumo: "O teste de regressão já cobre este bug. Aqui você olha a lacuna maior: o que mais, na mesma área, está sem teste?"
+    status: rascunho
+    tecnicas:
+      - tec_teste_regressao
+      - tec_contract_testing
+  - evitar:
+      - Corrigir só o código e deixar a spec vaga
+      - Critério de aceitação que não dá para testar
+    fazer:
+      - Reescreva o requisito com critérios de aceitação em exemplos
+      - Valide com o PM e com quem testa
+      - Registre a decisão na documentação
+    id: pb_bug_pre_t3
+    perguntas_chave:
+      - '"Dois engenheiros leriam isto da mesma forma?"'
+    publico: false
+    resumo: Requisito ambíguo gera bug de interpretação. Reescreva com critérios de aceitação verificáveis.
+    status: rascunho
+    tecnicas:
+      - tec_criterios_aceitacao
+      - tec_bdd_gherkin
+  - id: pb_bug_pre_t4
+    resumo: A revisão não pegou. Transforme o que escapou em item de checklist ou em regra automática.
+    perguntas_chave:
+      - '"Uma máquina poderia ter pego isso?"'
+    fazer:
+      - Se é padrão detectável, crie regra de lint ou análise estática
+      - Se depende de julgamento, acrescente item ao checklist de revisão
+      - Compartilhe o caso com o time
+      - "Passo completo: Atualizar o checklist de revisão ou criar regra de lint ou análise estática"
+    evitar:
+      - Culpar o revisor
+      - Checklist enorme que ninguém lê
+    tecnicas:
+      - tec_analise_estatica
+      - tec_checklist_revisao
+      - tec_linters
+      - tec_code_review
+    status: rascunho
+    publico: false
+  - evitar:
+      - Alerta que dispara sem ação possível
+      - Dashboard sem alerta
+    fazer:
+      - Defina um SLI para o comportamento e um SLO com meta
+      - Crie alerta acionável com dono e runbook
+      - Teste o alerta provocando a falha em ambiente seguro
+    id: pb_bug_pre_t5
+    perguntas_chave:
+      - '"Que métrica teria mudado quando isto começou?"'
+    publico: false
+    resumo: O bug ficou invisível. Crie o sinal que o teria revelado antes do cliente.
+    status: rascunho
+    tecnicas:
+      - tec_slo_sli
+      - tec_alertas
+      - tec_telemetria_padronizada
+  - id: pb_bug_pre_t6
+    resumo: A mudança foi para todos de uma vez. Reduza o raio de impacto das próximas com liberação gradual.
+    perguntas_chave:
+      - '"Se esta mudança falhar, quantos usuários sentem?"'
+    fazer:
+      - Use feature flag para ligar e desligar rápido
+      - Libere por canary ou rollout gradual, olhando os indicadores
+      - Tenha um plano de reversão pronto
+      - "Passo completo: Proteger a mudança com feature flag, canary ou rollout gradual"
+    evitar:
+      - Flags que ficam para sempre no código
+      - Canary sem métricas para comparar
+    tecnicas:
+      - tec_feature_flags
+      - tec_canary_release
+      - tec_deploy_gradual
+    status: rascunho
+    publico: false
+  - evitar:
+      - Ação genérica ("melhorar testes")
+      - Registrar e não acompanhar
+    fazer:
+      - Registre a ação no backlog com dono, prazo e critério de pronto
+      - Acompanhe a taxa de escape de defeitos
+      - Este nó também recebe ações vindas de post-mortems de incidente (ligação alimenta de inc_pos_t2)
+    id: pb_bug_pre_t7
+    perguntas_chave:
+      - '"Quem faz, até quando e como saberemos que funcionou?"'
+    publico: false
+    resumo: Ação preventiva sem dono vira boa intenção. Registre com prazo, critério de pronto e acompanhe até concluir.
+    status: rascunho
+    tecnicas:
+      - tec_escape_analysis
+      - tec_acoes_corretivas
+  - id: pb_bug_pre_e1
+    resumo: "Retorno «acao_registrada» da raia Prevenção: ação preventiva registrada. Quem chamou a raia segue por este retorno."
+    status: rascunho
+    publico: false
+  - id: pb_bug_g_jan
+    resumo: Janela crítica altera a prioridade do bug. Confira o calendário antes de decidir hotfix ou backlog.
+    perguntas_chave:
+      - '"Estamos em pico sazonal, lançamento de creator, fechamento financeiro de período ou data promocional?"'
+      - '"Há freeze ou manutenção em vigor?"'
+    fazer:
+      - Use o valor de janela_critica registrado no mapeamento de potencial incidente e reconfirme
+      - Confira o calendário de eventos críticos e o status de janela
+    evitar:
+      - Priorizar sem olhar o calendário
+      - Tratar freeze como regra sem exceção para bug grave
+    tecnicas:
+      - tec_calendario_eventos_criticos
+      - tec_status_de_janela
+      - tec_code_freeze
+    status: rascunho
+    publico: false
+  - id: pb_bug_g_jan_dec
+    resumo: Na janela, um bug não bloqueante pode virar hotfix. Em freeze, a correção pode esperar com mitigação paliativa.
+    perguntas_chave:
+      - '"O bug degrada receita ou experiência durante a janela?"'
+      - '"Existe paliativo seguro até o fim do freeze?"'
+    fazer:
+      - "Imediata: hotfix com escopo mínimo; em freeze, só com exceção aprovada"
+      - "Adiar: aplique o paliativo e marque a data de retomada"
+      - "Sem efeito da janela: siga para a avaliação normal de bloqueio e impacto"
+    evitar:
+      - Adiar sem paliativo
+      - Hotfix grande em plena janela de pico
+    tecnicas:
+      - tec_hotfix
+      - tec_code_freeze
+      - tec_feature_flags
+      - tec_capacity_planning_sazonal
+    status: rascunho
+    publico: false
+  - id: pb_bug_t_adiar
+    resumo: O paliativo reduz o dano até o fim da janela. A correção entra no backlog com data de retomada logo depois.
+    fazer:
+      - Aplique o paliativo (feature flag, ajuste de configuração ou orientação ao suporte)
+      - Registre a data de retomada e o dono
+      - Reavalie se a janela se estender
+    evitar:
+      - Esquecer o bug depois da janela
+      - Paliativo sem dono nem data de remoção
+    tecnicas:
+      - tec_feature_flags
+      - tec_code_freeze
+    status: rascunho
+    publico: false
+  - id: pb_bug_orq_g1
+    resumo: "O hotfix tem escopo mínimo e urgência: segue direto para a validação e entrega, com review, validação de QA ou por par, implantação e verificação em produção. A correção de backlog passa antes pela publicação em ambiente de testes e pela regressão."
+    perguntas_chave:
+      - '"O impacto justifica pular a publicação em testes e a regressão completa?"'
+      - '"O teste que reproduz o defeito já roda no pipeline do hotfix?"'
+    fazer:
+      - Manter o teste de regressão do defeito mesmo no hotfix
+    evitar:
+      - Usar o hotfix para encaixar mudanças fora do escopo mínimo
+    exemplo: Hotfix da tela branca no checkout vai direto para o review e a implantação; depois da implantação, o monitoramento confirma que nada degradou.
+    status: rascunho
+    publico: false
+  - id: pb_bug_ent_c3
+    resumo: "Chama a raia comum Validação em produção e monitoramento: confirma que a correção não degradou nada. Se a correção causar incidente, a raia aciona o fluxo de incidente e o bug volta para a correção."
+    perguntas_chave:
+      - '"Os indicadores da área corrigida voltaram ao normal sem piorar outros?"'
+    fazer:
+      - "Retornos possíveis: feature_validada, incidente_acionado"
+    status: rascunho
+    publico: false
+  - id: pb_bug_pre_t1
+    resumo: "Antes de escolher a ação, descubra por qual barreira o defeito passou: teste, requisito, revisão, observabilidade ou proteção da mudança. A ação certa fecha a barreira que falhou."
+    perguntas_chave:
+      - '"Em qual etapa este defeito deveria ter parado?"'
+      - '"O que faria a mesma classe de defeito parar ali da próxima vez?"'
+    fazer:
+      - Reconstrua o caminho do defeito com datas e versões
+      - Discuta barreiras, nunca pessoas
+    evitar:
+      - Escolher a ação mais fácil em vez da barreira que falhou
+    exemplo: O defeito passou pelo review e pelos testes; a barreira certa era o teste de contrato entre checkout e cupons.
+    status: rascunho
+    publico: false
+celulas:
+  - demanda: bug
+    requisito: funcional
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: bug
+    requisito: nao_funcional
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: bug
+    requisito: restricao
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: bug
+    requisito: probabilistico_ia
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false

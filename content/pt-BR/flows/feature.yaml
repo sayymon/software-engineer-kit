@@ -1,0 +1,3112 @@
+id: feature
+tipo: demanda
+nome: Feature
+sigla: feat
+publico: false
+raias:
+  - id: feat_orq
+    nome: Orquestração da feature
+    demanda: feature
+    responsabilidade: Conduzir a feature da necessidade percebida à entrega monitorada, delegando cada etapa a uma raia
+    cor: "#607D8B"
+    orquestradora: true
+    status: rascunho
+    publico: false
+  - id: feat_ent
+    nome: Entendimento da necessidade e contexto
+    demanda: feature
+    responsabilidade: Entender a necessidade ou oportunidade e o contexto em que ela surge
+    cor: "#332288"
+    status: rascunho
+    publico: false
+    entradas:
+      - resultado_da_validacao
+  - id: feat_lev
+    nome: Levantamento e enriquecimento de requisitos
+    demanda: feature
+    responsabilidade: Levantar os requisitos e enriquecê-los até ficarem claros e completos
+    cor: "#117733"
+    status: rascunho
+    publico: false
+    entradas:
+      - registro_da_necessidade
+      - mapa_de_interessados
+      - metricas_de_sucesso
+      - origem_da_demanda
+      - nivel_de_incerteza
+      - mapa_de_impacto
+      - caso_de_negocio
+  - id: feat_cls
+    nome: Classificação, escopo e prontidão
+    demanda: feature
+    responsabilidade: Classificar os requisitos, delimitar o escopo e confirmar a Definition of Ready antes de especificar
+    cor: "#CC6677"
+    status: rascunho
+    publico: false
+    entradas:
+      - requisitos_levantados
+      - historias_refinadas
+      - contrato_funcional_e_tecnico
+      - tipo_de_feature
+  - id: feat_spc
+    nome: "Especificação (SDD): requirements e design"
+    demanda: feature
+    responsabilidade: Escrever o requirements.md e o design.md com DDD, diagramas de arquitetura e de sequência, stack, padrões e ADRs aprovados com os stakeholders
+    cor: "#44AA99"
+    status: rascunho
+    publico: false
+    entradas:
+      - requisitos_classificados
+      - criterios_de_aceite
+      - registro_da_necessidade
+      - historias_refinadas
+      - contrato_funcional_e_tecnico
+      - escopo_da_feature
+  - id: feat_alo
+    nome: Decomposição e mapeamento de tarefas
+    demanda: feature
+    responsabilidade: Decompor o design em tarefas, mapear as dependências e os papéis necessários para cada uma
+    cor: "#0072B2"
+    entradas:
+      - spec_pronta
+      - requirements_md
+      - design_md
+      - adrs_da_feature
+      - requisitos_classificados
+      - criterios_de_aceite
+      - usa_ia
+      - tem_integracao
+      - ajuste_da_spec
+      - cards_da_feature
+    status: rascunho
+    publico: false
+  - id: feat_ite
+    nome: Análise da reprovação e iteração
+    demanda: feature
+    responsabilidade: Encontrar a causa de uma reprovação e devolvê-la à spec ou à implementação
+    cor: "#CC79A7"
+    status: rascunho
+    publico: false
+decisoes:
+  - id: feat_orq_s0
+    raia: feat_orq
+    tipo: inicio
+    rotulo: Necessidade percebida
+    condicao: ""
+    proximo:
+      - para: feat_orq_c1
+        condicao: ""
+    estado:
+      tentativas_iteracao: 0
+    playbook: pb_feat_orq_s0
+    layout:
+      coluna: 0
+    status: rascunho
+    publico: false
+  - id: feat_orq_c1
+    raia: feat_orq
+    tipo: chamada
+    raia_chamada: feat_ent
+    rotulo: Entender a necessidade e o contexto
+    condicao: ""
+    proximo:
+      - para: feat_orq_c2
+        condicao: necessidade_entendida
+      - para: feat_orq_e2
+        condicao: reutilizar_existente
+      - para: feat_orq_e3
+        condicao: fora_dos_objetivos
+    estado: {}
+    playbook: pb_feat_orq_c1
+    layout:
+      coluna: 1
+    status: rascunho
+    publico: false
+    saidas:
+      - registro_da_necessidade
+      - mapa_de_interessados
+      - metricas_de_sucesso
+      - precisa_de_experimento
+  - id: feat_orq_c2
+    raia: feat_orq
+    tipo: chamada
+    raia_chamada: feat_lev
+    rotulo: Levantar e enriquecer os requisitos
+    condicao: ""
+    proximo:
+      - para: feat_orq_c3
+        condicao: requisitos_claros
+    estado: {}
+    playbook: pb_feat_orq_c2
+    layout:
+      coluna: 2
+    status: rascunho
+    publico: false
+    saidas:
+      - requisitos_levantados
+      - historias_refinadas
+      - criterios_de_aceite
+      - definition_of_done
+      - cards_da_feature
+      - contrato_funcional_e_tecnico
+  - id: feat_orq_c3
+    raia: feat_orq
+    tipo: chamada
+    raia_chamada: feat_cls
+    rotulo: Classificar, delimitar o escopo e verificar a prontidão
+    condicao: ""
+    proximo:
+      - para: feat_orq_c4
+        condicao: pronto_para_especificar
+    estado: {}
+    saidas:
+      - requisitos_classificados
+      - escopo_da_feature
+      - criterios_de_aceite
+      - checklist_de_prontidao
+      - tem_requisito_de_performance
+      - precisa_de_experimento
+      - tem_integracao
+      - tem_requisito_de_acessibilidade
+      - exige_seguranca_reforcada
+      - altera_comportamento_existente
+    playbook: pb_feat_orq_c3
+    layout:
+      coluna: 3
+    status: rascunho
+    publico: false
+  - id: feat_orq_c4
+    raia: feat_orq
+    tipo: chamada
+    raia_chamada: feat_spc
+    rotulo: "Especificar: requirements, design e ADRs"
+    condicao: ""
+    proximo:
+      - para: feat_orq_c5
+        condicao: spec_pronta
+    estado: {}
+    saidas:
+      - spec_pronta
+      - requirements_md
+      - design_md
+      - adrs_da_feature
+      - usa_ia
+      - tem_integracao
+      - risco_de_liberacao
+    playbook: pb_feat_orq_c4
+    layout:
+      coluna: 5
+    status: rascunho
+    publico: false
+  - id: feat_orq_c5
+    raia: feat_orq
+    tipo: chamada
+    raia_chamada: feat_alo
+    rotulo: Decompor em tarefas, papéis e dependências
+    condicao: ""
+    proximo:
+      - para: feat_orq_c6
+        condicao: tarefas_mapeadas
+    estado: {}
+    entradas:
+      - spec_pronta
+      - requirements_md
+      - design_md
+      - requisitos_classificados
+      - criterios_de_aceite
+      - usa_ia
+      - tem_integracao
+    saidas:
+      - lista_de_tarefas
+      - mapa_de_dependencias
+      - matriz_de_papeis
+      - ordem_execucao
+      - decisoes_bloqueantes
+      - mapa_de_tarefas
+      - dependencia_humana
+    playbook: pb_feat_orq_c5
+    layout:
+      coluna: 6
+    status: rascunho
+    publico: false
+  - id: feat_orq_c6
+    raia: feat_orq
+    tipo: chamada
+    raia_chamada: com_set
+    rotulo: Preparar a execução (setup)
+    condicao: ""
+    proximo:
+      - para: feat_orq_c7
+        condicao: pronto_para_executar
+    estado: {}
+    entradas:
+      - lista_de_tarefas
+      - matriz_de_papeis
+      - mapa_de_tarefas
+      - design_md
+    saidas:
+      - plano_de_alocacao
+      - plano_de_agentes
+      - tipo_alocacao
+      - ambiente_de_execucao
+      - contexto_de_execucao
+    playbook: pb_feat_orq_c6
+    layout:
+      coluna: 7
+    status: rascunho
+    publico: false
+  - id: feat_orq_c7
+    raia: feat_orq
+    tipo: chamada
+    raia_chamada: com_exe
+    rotulo: Execução das tarefas
+    condicao: ""
+    proximo:
+      - para: feat_orq_c8
+        condicao: execucao_integrada
+    estado: {}
+    entradas:
+      - plano_de_alocacao
+      - plano_de_agentes
+      - ordem_execucao
+    saidas:
+      - entrega_integrada
+    playbook: pb_feat_orq_c7
+    layout:
+      coluna: 8
+    status: rascunho
+    publico: false
+  - id: feat_orq_c8
+    raia: feat_orq
+    tipo: chamada
+    raia_chamada: com_pub
+    rotulo: Publicar em ambiente de testes
+    condicao: ""
+    proximo:
+      - para: feat_orq_c9
+        condicao: publicado
+      - para: feat_orq_c19
+        condicao: falha_na_publicacao
+    estado: {}
+    entradas:
+      - entrega_integrada
+    saidas:
+      - versao_da_feature
+    playbook: pb_feat_orq_c8
+    layout:
+      coluna: 9
+    status: rascunho
+    publico: false
+  - id: feat_orq_c9
+    raia: feat_orq
+    tipo: chamada
+    raia_chamada: com_val
+    rotulo: Testes da feature
+    condicao: ""
+    proximo:
+      - para: feat_orq_c10
+        condicao: testes_aprovados
+      - para: feat_orq_c19
+        condicao: testes_reprovados
+    estado: {}
+    entradas:
+      - entrega_integrada
+    playbook: pb_feat_orq_c9
+    layout:
+      coluna: 10
+    status: rascunho
+    publico: false
+  - id: feat_orq_c10
+    raia: feat_orq
+    tipo: chamada
+    raia_chamada: com_e2e
+    rotulo: Testes de ponta a ponta (E2E)
+    condicao: ""
+    proximo:
+      - para: feat_orq_c11
+        condicao: aprovado
+      - para: feat_orq_c11
+        condicao: nao_aplicavel
+      - para: feat_orq_c19
+        condicao: reprovado
+    estado: {}
+    playbook: pb_feat_orq_c10
+    layout:
+      coluna: 11
+    status: rascunho
+    publico: false
+  - id: feat_orq_c11
+    raia: feat_orq
+    tipo: chamada
+    raia_chamada: com_evl
+    rotulo: Avaliação de IA (evals)
+    condicao: ""
+    proximo:
+      - para: feat_orq_c12
+        condicao: aprovado
+      - para: feat_orq_c12
+        condicao: nao_aplicavel
+      - para: feat_orq_c19
+        condicao: reprovado
+    estado: {}
+    playbook: pb_feat_orq_c11
+    layout:
+      coluna: 12
+    status: rascunho
+    publico: false
+  - id: feat_orq_c12
+    raia: feat_orq
+    tipo: chamada
+    raia_chamada: com_prf
+    rotulo: Testes de performance
+    condicao: ""
+    proximo:
+      - para: feat_orq_c13
+        condicao: aprovado
+      - para: feat_orq_c13
+        condicao: nao_aplicavel
+      - para: feat_orq_c19
+        condicao: reprovado
+    estado: {}
+    playbook: pb_feat_orq_c12
+    layout:
+      coluna: 13
+    status: rascunho
+    publico: false
+  - id: feat_orq_c13
+    raia: feat_orq
+    tipo: chamada
+    raia_chamada: com_seg
+    rotulo: Testes de segurança
+    condicao: ""
+    proximo:
+      - para: feat_orq_c14
+        condicao: aprovado
+      - para: feat_orq_c19
+        condicao: reprovado
+    estado: {}
+    playbook: pb_feat_orq_c13
+    layout:
+      coluna: 14
+    status: rascunho
+    publico: false
+  - id: feat_orq_c14
+    raia: feat_orq
+    tipo: chamada
+    raia_chamada: com_rev
+    rotulo: Review humano da entrega
+    condicao: ""
+    proximo:
+      - para: feat_orq_c15
+        condicao: aprovado_pelo_humano
+      - para: feat_orq_c19
+        condicao: ajustes_solicitados
+    estado: {}
+    playbook: pb_feat_orq_c14
+    layout:
+      coluna: 15
+    status: rascunho
+    publico: false
+  - id: feat_orq_c15
+    raia: feat_orq
+    tipo: chamada
+    raia_chamada: com_hml
+    rotulo: Testes integrados
+    condicao: ""
+    proximo:
+      - para: feat_orq_c16
+        condicao: testes_integrados_aprovados
+      - para: feat_orq_c19
+        condicao: reprovado
+    estado: {}
+    entradas:
+      - versao_da_feature
+    playbook: pb_feat_orq_c15
+    layout:
+      coluna: 16
+    status: rascunho
+    publico: false
+  - id: feat_orq_c16
+    raia: feat_orq
+    tipo: chamada
+    raia_chamada: com_etg
+    rotulo: Implantação
+    condicao: ""
+    proximo:
+      - para: feat_orq_c17
+        condicao: implantado
+      - para: feat_orq_c19
+        condicao: implantacao_revertida
+    estado: {}
+    entradas:
+      - versao_da_feature
+    playbook: pb_feat_orq_c16
+    layout:
+      coluna: 17
+    status: rascunho
+    publico: false
+  - id: feat_orq_c17
+    raia: feat_orq
+    tipo: chamada
+    raia_chamada: com_lib
+    rotulo: Liberação e comunicação aos stakeholders
+    condicao: ""
+    proximo:
+      - para: feat_orq_c18
+        condicao: liberado
+    estado: {}
+    playbook: pb_feat_orq_c17
+    layout:
+      coluna: 18
+    status: rascunho
+    publico: false
+  - id: feat_orq_c18
+    raia: feat_orq
+    tipo: chamada
+    raia_chamada: com_mon
+    rotulo: Validação em produção e monitoramento
+    condicao: ""
+    proximo:
+      - para: feat_orq_e1
+        condicao: feature_validada
+      - para: feat_orq_c19
+        condicao: incidente_acionado
+    estado: {}
+    playbook: pb_feat_orq_c18
+    layout:
+      coluna: 19
+    status: rascunho
+    publico: false
+  - id: feat_orq_c19
+    raia: feat_orq
+    tipo: chamada
+    raia_chamada: feat_ite
+    rotulo: Analisar a reprovação e iterar
+    condicao: ""
+    proximo:
+      - para: feat_orq_c5
+        condicao: spec_ajustada
+      - para: feat_orq_c7
+        condicao: correcao_na_implementacao
+      - para: feat_orq_c7
+        condicao: incidente_acionado
+    estado: {}
+    playbook: pb_feat_orq_c19
+    layout:
+      coluna: 16
+    status: rascunho
+    publico: false
+  - id: feat_orq_e1
+    raia: feat_orq
+    tipo: fim
+    retorno: feature_validada
+    rotulo: Feature validada em produção
+    condicao: ""
+    proximo: []
+    estado: {}
+    playbook: pb_feat_orq_e1
+    layout:
+      coluna: 20
+    status: rascunho
+    publico: false
+    saidas:
+      - resultado_da_validacao
+  - id: feat_orq_e2
+    raia: feat_orq
+    tipo: fim
+    retorno: reutilizar_existente
+    rotulo: Reutilizar a solução que já existe
+    condicao: ""
+    proximo: []
+    estado: {}
+    saidas:
+      - levantamento_de_reuso
+    playbook: pb_feat_orq_e2
+    layout:
+      coluna: 2
+    status: rascunho
+    publico: false
+  - id: feat_orq_e3
+    raia: feat_orq
+    tipo: fim
+    retorno: fora_dos_objetivos
+    rotulo: Devolvida ao demandante, fora dos objetivos atuais
+    condicao: ""
+    proximo: []
+    estado: {}
+    saidas:
+      - registro_da_necessidade
+    playbook: pb_feat_orq_e3
+    layout:
+      coluna: 2
+    status: rascunho
+    publico: false
+  - id: feat_ent_s0
+    raia: feat_ent
+    tipo: inicio
+    rotulo: Necessidade ou oportunidade percebida
+    condicao: ""
+    proximo:
+      - para: feat_ent_t1
+        condicao: ""
+    estado: {}
+    playbook: pb_feat_ent_s0
+    layout:
+      coluna: 0
+    status: rascunho
+    publico: false
+  - id: feat_ent_t1
+    raia: feat_ent
+    tipo: tarefa
+    rotulo: Registrar a necessidade ou oportunidade
+    condicao: ""
+    proximo:
+      - para: feat_ent_t2
+        condicao: ""
+    estado: {}
+    saidas:
+      - registro_da_necessidade
+      - origem_da_demanda
+      - modelo_de_trabalho
+      - modelo_de_trabalho_complementar
+      - nivel_de_incerteza
+      - tipo_de_feature
+    subtarefas:
+      - id: feat_ent_t1_st1
+        rotulo: Abrir o registro com a origem e quem traz a demanda
+        papel: pm
+        saidas:
+          - registro_da_necessidade
+          - origem_da_demanda
+        exemplo: "Registro aberto: oportunidade de negócio trazida pela liderança comercial, aumentar a conversão de compradores recorrentes."
+        status: rascunho
+      - id: feat_ent_t1_st2
+        rotulo: Classificar o modelo de trabalho e a incerteza
+        papel: pm
+        apoio:
+          - tech_lead
+        entradas:
+          - registro_da_necessidade
+        saidas:
+          - registro_da_necessidade
+          - modelo_de_trabalho
+          - modelo_de_trabalho_complementar
+          - nivel_de_incerteza
+          - tipo_de_feature
+        exemplo: Time de produto com PM, apoio do time de dados; incerteza média, porque o público é conhecido e a solução não; tipo melhoria_funcional.
+        status: rascunho
+      - id: feat_ent_t1_st3
+        rotulo: Escolher o formato do registro conforme o modelo do time
+        papel: pm
+        entradas:
+          - registro_da_necessidade
+          - modelo_de_trabalho
+          - modelo_de_trabalho_complementar
+          - origem_da_demanda
+        saidas:
+          - registro_da_necessidade
+        tecnicas:
+          - tecnica: tec_design_docs
+            uso: condicional
+            quando:
+              algum:
+                - var: modelo_de_trabalho
+                  em:
+                    - plataforma
+                    - dados
+                - var: modelo_de_trabalho_complementar
+                  em:
+                    - plataforma
+                    - dados
+            porque: times de plataforma e de dados registram a necessidade como documento de visão
+          - tecnica: tec_caso_de_negocio
+            uso: condicional
+            quando:
+              todos:
+                - var: origem_da_demanda
+                  igual: oportunidade_de_negocio
+            porque: oportunidade de negócio precisa de retorno esperado e custo estimado antes de seguir
+        exemplo: Como é time de produto com PM, o registro vira um PRD curto; o card no fluxo do time aponta para ele.
+        status: rascunho
+    playbook: pb_feat_ent_t1
+    layout:
+      coluna: 1
+    status: rascunho
+    publico: false
+  - id: feat_ent_t2
+    raia: feat_ent
+    tipo: tarefa
+    rotulo: Buscar o que já existe para reutilizar
+    condicao: ""
+    proximo:
+      - para: feat_ent_g1
+        condicao: ""
+    estado: {}
+    entradas:
+      - registro_da_necessidade
+    saidas:
+      - levantamento_de_reuso
+      - existe_solucao_reutilizavel
+    subtarefas:
+      - id: feat_ent_t2_st1
+        rotulo: Pesquisar soluções, componentes e serviços existentes
+        papel: arquiteto
+        apoio:
+          - dev
+        entradas:
+          - registro_da_necessidade
+        saidas:
+          - levantamento_de_reuso
+        exemplo: "Encontrados: um serviço de recomendação já usado na vitrine e um componente de cupom que aceita regras por público."
+        status: rascunho
+      - id: feat_ent_t2_st2
+        rotulo: Avaliar o encaixe com quem conhece cada solução
+        papel: arquiteto
+        apoio:
+          - tech_lead
+        entradas:
+          - levantamento_de_reuso
+        saidas:
+          - levantamento_de_reuso
+          - existe_solucao_reutilizavel
+        tecnicas:
+          - tecnica: tec_adrs
+            uso: recomendada
+            porque: decisões anteriores explicam limites e escolhas das soluções existentes
+        exemplo: "O componente de cupom atende 70% da necessidade; falta a regra por histórico de compra. Resultado: parcial."
+        status: rascunho
+    playbook: pb_feat_ent_t2
+    layout:
+      coluna: 2
+    status: rascunho
+    publico: false
+  - id: feat_ent_g1
+    raia: feat_ent
+    tipo: bifurcacao
+    rotulo: Já existe solução que atende?
+    condicao: Já existe solução que atende a necessidade?
+    proximo:
+      - para: feat_ent_e2
+        condicao: atende por completo
+      - para: feat_ent_t3
+        condicao: atende em parte ou não existe
+    estado:
+      existe_solucao_reutilizavel: atende
+    entradas:
+      - existe_solucao_reutilizavel
+      - levantamento_de_reuso
+    papel: arquiteto
+    apoio:
+      - pm
+    consultado:
+      - tech_lead
+    playbook: pb_feat_ent_g1
+    layout:
+      coluna: 3
+    status: rascunho
+    publico: false
+  - id: feat_ent_t3
+    raia: feat_ent
+    tipo: tarefa
+    rotulo: Entender interessados, impacto e resultados
+    condicao: ""
+    proximo:
+      - para: feat_ent_g2
+        condicao: ""
+    estado: {}
+    entradas:
+      - registro_da_necessidade
+      - origem_da_demanda
+      - nivel_de_incerteza
+      - levantamento_de_reuso
+    saidas:
+      - mapa_de_interessados
+      - mapa_de_impacto
+      - caso_de_negocio
+      - metricas_de_sucesso
+      - alinhada_aos_objetivos
+      - registro_da_necessidade
+      - precisa_de_experimento
+    subtarefas:
+      - id: feat_ent_t3_st1
+        rotulo: Mapear os interessados
+        papel: pm
+        entradas:
+          - registro_da_necessidade
+        saidas:
+          - mapa_de_interessados
+        tecnicas:
+          - tecnica: tec_mapa_de_interessados
+            uso: obrigatoria
+            porque: quem pede, usa, decide, opera e é afetado define as validações e as prioridades
+        exemplo: "Pede: liderança comercial. Usa: compradores recorrentes. Decide: PM. Opera: time de pagamentos. Afetado: atendimento."
+        status: rascunho
+      - id: feat_ent_t3_st2
+        rotulo: Entender o trabalho que o usuário quer realizar
+        papel: pm
+        apoio:
+          - designer
+        quando:
+          todos:
+            - var: origem_da_demanda
+              igual: necessidade_de_usuario
+        porque: necessidade vinda de usuário pede entender o objetivo dele antes da solução
+        entradas:
+          - registro_da_necessidade
+          - nivel_de_incerteza
+        saidas:
+          - registro_da_necessidade
+        tecnicas:
+          - tecnica: tec_jobs_to_be_done
+            uso: obrigatoria
+            porque: descreve o resultado que o usuário busca, sem amarrar a solução
+          - tecnica: tec_x5_whys
+            uso: condicional
+            quando:
+              todos:
+                - var: nivel_de_incerteza
+                  igual: alta
+            porque: com incerteza alta, perguntar por que algumas vezes chega à necessidade real por trás do pedido
+        exemplo: Quando compro de novo do mesmo criador, quero reaproveitar meus dados de pagamento para concluir em menos de um minuto.
+        status: rascunho
+      - id: feat_ent_t3_st3
+        rotulo: Ligar a entrega ao impacto esperado
+        papel: pm
+        apoio:
+          - tech_lead
+        quando:
+          todos:
+            - var: nivel_de_incerteza
+              em:
+                - media
+                - alta
+        porque: com incerteza média ou alta, o mapa evita construir algo que não move o resultado
+        entradas:
+          - mapa_de_interessados
+        saidas:
+          - mapa_de_impacto
+        tecnicas:
+          - tecnica: tec_impact_mapping
+            uso: obrigatoria
+            porque: liga objetivo, atores, impactos e entregas em um único desenho
+        exemplo: "Objetivo: mais recompra. Ator: comprador recorrente. Impacto: concluir mais rápido. Entrega: pagamento em um clique."
+        status: rascunho
+      - id: feat_ent_t3_st4
+        rotulo: Montar o caso de negócio
+        papel: pm
+        apoio:
+          - stakeholder
+        quando:
+          todos:
+            - var: origem_da_demanda
+              igual: oportunidade_de_negocio
+        porque: oportunidade de negócio só segue com retorno esperado e custo estimado
+        entradas:
+          - registro_da_necessidade
+          - levantamento_de_reuso
+        saidas:
+          - caso_de_negocio
+        tecnicas:
+          - tecnica: tec_caso_de_negocio
+            uso: obrigatoria
+            porque: compara retorno, custo, risco e custo de adiar
+        exemplo: "Retorno estimado: mais 4% de recompra em 6 meses. Custo: 2 sprints. Custo de adiar: perder a campanha do próximo trimestre."
+        status: rascunho
+      - id: feat_ent_t3_st5
+        rotulo: Definir as métricas de sucesso e o OKR e o KPI
+        papel: pm
+        apoio:
+          - stakeholder
+        entradas:
+          - registro_da_necessidade
+        saidas:
+          - metricas_de_sucesso
+          - alinhada_aos_objetivos
+          - precisa_de_experimento
+        tecnicas:
+          - tecnica: tec_okrs
+            uso: obrigatoria
+            porque: a iniciativa precisa mover um objetivo real da empresa
+        exemplo: "Move o KR de recompra do trimestre. KPI: taxa de recompra em 30 dias, de 18% para 20%."
+        status: rascunho
+    playbook: pb_feat_ent_t3
+    layout:
+      coluna: 4
+    status: rascunho
+    publico: false
+  - id: feat_ent_g2
+    raia: feat_ent
+    tipo: bifurcacao
+    rotulo: Alinhada aos objetivos do demandante?
+    condicao: A iniciativa está alinhada aos OKRs e KPIs do demandante?
+    proximo:
+      - para: feat_ent_t4
+        condicao: sim
+      - para: feat_ent_e3
+        condicao: não
+    estado:
+      alinhada_aos_objetivos: sim
+    entradas:
+      - alinhada_aos_objetivos
+      - metricas_de_sucesso
+    papel: pm
+    aprova: stakeholder
+    playbook: pb_feat_ent_g2
+    layout:
+      coluna: 5
+    status: rascunho
+    publico: false
+  - id: feat_ent_t4
+    raia: feat_ent
+    tipo: tarefa
+    rotulo: Validar o entendimento com os interessados
+    condicao: ""
+    proximo:
+      - para: feat_ent_e1
+        condicao: ""
+    estado: {}
+    entradas:
+      - registro_da_necessidade
+      - mapa_de_interessados
+      - metricas_de_sucesso
+    saidas:
+      - necessidade_validada
+      - comunicado_da_necessidade
+    subtarefas:
+      - id: feat_ent_t4_st1
+        rotulo: Apresentar o entendimento e registrar a aprovação
+        papel: pm
+        apoio:
+          - stakeholder
+        entradas:
+          - registro_da_necessidade
+          - mapa_de_interessados
+          - metricas_de_sucesso
+        saidas:
+          - necessidade_validada
+        exemplo: Revisão de 15 minutos com PM e liderança comercial; aprovação registrada no próprio registro da necessidade.
+        status: rascunho
+      - id: feat_ent_t4_st2
+        rotulo: Publicar o registro e avisar o time
+        papel: pm
+        entradas:
+          - necessidade_validada
+        saidas:
+          - comunicado_da_necessidade
+        exemplo: "Mensagem no canal do time com o link do registro, o KPI alvo e o próximo passo: levantamento de requisitos."
+        status: rascunho
+    playbook: pb_feat_ent_t4
+    layout:
+      coluna: 6
+    status: rascunho
+    publico: false
+  - id: feat_ent_e1
+    raia: feat_ent
+    tipo: fim
+    retorno: necessidade_entendida
+    rotulo: Necessidade e contexto entendidos
+    condicao: ""
+    proximo: []
+    estado: {}
+    saidas:
+      - registro_da_necessidade
+      - mapa_de_interessados
+      - mapa_de_impacto
+      - caso_de_negocio
+      - metricas_de_sucesso
+      - origem_da_demanda
+      - modelo_de_trabalho
+      - modelo_de_trabalho_complementar
+      - nivel_de_incerteza
+      - precisa_de_experimento
+    playbook: pb_feat_ent_e1
+    layout:
+      coluna: 7
+    status: rascunho
+    publico: false
+  - id: feat_ent_e2
+    raia: feat_ent
+    tipo: fim
+    retorno: reutilizar_existente
+    rotulo: Solução existente atende, reutilizar
+    condicao: ""
+    proximo: []
+    estado: {}
+    saidas:
+      - levantamento_de_reuso
+    playbook: pb_feat_ent_e2
+    layout:
+      coluna: 4
+    status: rascunho
+    publico: false
+  - id: feat_ent_e3
+    raia: feat_ent
+    tipo: fim
+    retorno: fora_dos_objetivos
+    rotulo: Fora dos objetivos atuais, devolver ao demandante
+    condicao: ""
+    proximo: []
+    estado: {}
+    saidas:
+      - registro_da_necessidade
+    playbook: pb_feat_ent_e3
+    layout:
+      coluna: 6
+    status: rascunho
+    publico: false
+  - id: feat_lev_s0
+    raia: feat_lev
+    tipo: inicio
+    rotulo: Necessidade entendida, levantar requisitos
+    condicao: ""
+    proximo:
+      - para: feat_lev_t1
+        condicao: ""
+    estado: {}
+    entradas:
+      - registro_da_necessidade
+      - mapa_de_interessados
+      - metricas_de_sucesso
+    playbook: pb_feat_lev_s0
+    layout:
+      coluna: 0
+    status: rascunho
+    publico: false
+  - id: feat_lev_t1
+    raia: feat_lev
+    tipo: tarefa
+    rotulo: Elicitar com as técnicas que o contexto pede
+    condicao: ""
+    proximo:
+      - para: feat_lev_g1
+        condicao: ""
+    estado: {}
+    entradas:
+      - registro_da_necessidade
+      - mapa_de_interessados
+      - origem_da_demanda
+      - nivel_de_incerteza
+      - mapa_de_impacto
+      - caso_de_negocio
+    saidas:
+      - requisitos_levantados
+      - tipo_de_contexto
+      - tem_muitos_dependentes
+      - complexidade_do_fluxo
+      - existe_processo_atual
+      - ha_dados_disponiveis
+    subtarefas:
+      - id: feat_lev_t1_st1
+        rotulo: Classificar o contexto da elicitação
+        papel: pm
+        apoio:
+          - arquiteto
+        saidas:
+          - requisitos_levantados
+          - tipo_de_contexto
+          - tem_muitos_dependentes
+          - complexidade_do_fluxo
+          - existe_processo_atual
+          - ha_dados_disponiveis
+        exemplo: Contexto core, 4 sistemas dependentes, fluxo com variações por meio de pagamento, processo atual manual, dados de compra disponíveis.
+        status: rascunho
+      - id: feat_lev_t1_st2
+        rotulo: Chegar à necessidade real com 5 porquês
+        papel: pm
+        quando:
+          todos:
+            - var: nivel_de_incerteza
+              igual: alta
+        porque: com incerteza alta, o pedido inicial raramente é a necessidade real
+        saidas:
+          - requisitos_levantados
+        tecnicas:
+          - tecnica: tec_x5_whys
+            uso: obrigatoria
+            porque: perguntar por que algumas vezes chega à causa por trás do pedido
+        exemplo: "Pedido: cupom para recorrentes. Por quê? Recompra caiu. Por quê? Checkout longo para quem já comprou."
+        status: rascunho
+      - id: feat_lev_t1_st3
+        rotulo: Mapear os impactos entre sistemas
+        papel: arquiteto
+        apoio:
+          - pm
+        quando:
+          todos:
+            - var: tem_muitos_dependentes
+              igual: sim
+            - var: tipo_de_contexto
+              igual: core
+        porque: em contexto core com muitos sistemas dependentes, o mapa evita efeitos colaterais não previstos
+        saidas:
+          - mapa_de_impacto
+          - requisitos_levantados
+        tecnicas:
+          - tecnica: tec_impact_mapping
+            uso: obrigatoria
+            porque: liga objetivo, atores, impactos e entregas, inclusive nos sistemas vizinhos
+        exemplo: "Impactos: Pedidos publica evento novo, Pagamentos recalcula total, Atendimento recebe novos motivos de contato."
+        status: rascunho
+      - id: feat_lev_t1_st4
+        rotulo: Mapear o fluxo e as variações com Event Storming
+        papel: arquiteto
+        apoio:
+          - pm
+          - dev
+        quando:
+          todos:
+            - var: complexidade_do_fluxo
+              em:
+                - complexo
+                - com_variacoes
+        porque: fluxo complexo ou com variações esconde regras que só aparecem quando os eventos são colocados em ordem
+        saidas:
+          - requisitos_levantados
+          - modelo_de_dominio
+        tecnicas:
+          - tecnica: tec_event_storming
+            uso: obrigatoria
+            porque: revela eventos, regras, exceções e variações do fluxo em uma sessão
+        exemplo: "Variações: cupom com cartão, com boleto e com saldo; boleto vencido devolve o cupom ao comprador."
+        status: rascunho
+      - id: feat_lev_t1_st5
+        rotulo: Entender o trabalho que o usuário quer realizar
+        papel: pm
+        apoio:
+          - designer
+        quando:
+          todos:
+            - var: origem_da_demanda
+              igual: necessidade_de_usuario
+        porque: necessidade vinda de usuário pede o objetivo dele, não a solução pedida
+        saidas:
+          - requisitos_levantados
+        tecnicas:
+          - tecnica: tec_jobs_to_be_done
+            uso: obrigatoria
+            porque: descreve o resultado que o usuário busca sem amarrar a solução
+        exemplo: Quando volto a comprar do mesmo criador, quero concluir sem preencher tudo de novo.
+        status: rascunho
+      - id: feat_lev_t1_st6
+        rotulo: Observar o trabalho real onde ele acontece
+        papel: designer
+        apoio:
+          - pm
+        quando:
+          todos:
+            - var: existe_processo_atual
+              igual: sim
+        porque: o processo relatado e o processo real costumam ser diferentes
+        saidas:
+          - requisitos_levantados
+        tecnicas:
+          - tecnica: tec_gemba_observa_o
+            uso: obrigatoria
+            porque: observar o uso real revela atalhos, contornos e dores não relatados
+        exemplo: Atendimento aplica cupons manualmente por planilha para 30 compradores por dia.
+        status: rascunho
+      - id: feat_lev_t1_st7
+        rotulo: Validar as percepções com dados
+        papel: engenheiro_de_dados
+        apoio:
+          - pm
+        quando:
+          todos:
+            - var: ha_dados_disponiveis
+              igual: sim
+        porque: dados confirmam ou derrubam o que as entrevistas sugerem
+        saidas:
+          - requisitos_levantados
+        tecnicas:
+          - tecnica: tec_an_lise_de_dados
+            uso: obrigatoria
+            porque: logs, métricas e funis medem o tamanho real da necessidade
+        exemplo: "Funil: 38% dos compradores recorrentes abandonam na etapa de pagamento."
+        status: rascunho
+    playbook: pb_feat_lev_t1
+    layout:
+      coluna: 1
+    status: rascunho
+    publico: false
+  - id: feat_lev_g1
+    raia: feat_lev
+    tipo: bifurcacao
+    rotulo: Requisitos claros e completos?
+    condicao: Requisitos claros e completos?
+    proximo:
+      - para: feat_lev_t2
+        condicao: não
+      - para: feat_lev_t3
+        condicao: sim
+    estado: {}
+    entradas:
+      - requisitos_levantados
+    papel: pm
+    apoio:
+      - qa
+    consultado:
+      - tech_lead
+    playbook: pb_feat_lev_g1
+    layout:
+      coluna: 2
+    status: rascunho
+    publico: false
+  - id: feat_lev_t2
+    raia: feat_lev
+    tipo: tarefa
+    rotulo: "Enriquecer: INVEST, 3 Amigos, BDD e DoD"
+    condicao: ""
+    proximo:
+      - para: feat_lev_g1
+        condicao: ""
+    estado: {}
+    entradas:
+      - requisitos_levantados
+    saidas:
+      - historias_refinadas
+      - criterios_de_aceite
+      - definition_of_done
+    subtarefas:
+      - id: feat_lev_t2_st1
+        rotulo: Fatiar em histórias pequenas e independentes
+        papel: pm
+        apoio:
+          - tech_lead
+        saidas:
+          - historias_refinadas
+        tecnicas:
+          - tecnica: tec_invest
+            uso: obrigatoria
+            porque: histórias independentes, valiosas, estimáveis, pequenas e testáveis
+          - tecnica: tec_slicing_vertical
+            uso: recomendada
+            porque: cada fatia entrega valor de ponta a ponta
+        exemplo: "6 histórias: elegibilidade, aplicação, recusa com motivo, painel, notificação e relatório."
+        status: rascunho
+      - id: feat_lev_t2_st2
+        rotulo: Destrinchar as histórias com os 3 Amigos
+        papel: pm
+        apoio:
+          - dev
+          - qa
+        entradas:
+          - historias_refinadas
+        saidas:
+          - historias_refinadas
+        tecnicas:
+          - tecnica: tec_x3_amigos
+            uso: recomendada
+            porque: negócio, desenvolvimento e qualidade encontram as lacunas juntos
+        exemplo: "Sessão de 40 minutos: 3 casos de borda novos e 1 história quebrada em duas."
+        status: rascunho
+      - id: feat_lev_t2_st3
+        rotulo: Escrever os critérios de aceite como exemplos
+        papel: qa
+        apoio:
+          - pm
+        entradas:
+          - historias_refinadas
+        saidas:
+          - historias_refinadas
+          - criterios_de_aceite
+        tecnicas:
+          - tecnica: tec_criterios_aceitacao
+            uso: obrigatoria
+            porque: critério verificável é a base dos testes
+          - tecnica: tec_bdd_gherkin
+            uso: recomendada
+            porque: exemplos concretos deixam o comportamento sem ambiguidade
+        exemplo: Dado um comprador com 2 compras, quando aplica o cupom, então o desconto aparece no total.
+        status: rascunho
+      - id: feat_lev_t2_st4
+        rotulo: Definir a Definition of Done mínima
+        papel: tech_lead
+        apoio:
+          - qa
+          - devsecops
+        saidas:
+          - definition_of_done
+        exemplo: "Pronto quando: critérios de aceite atendidos, gates de qualidade e segurança aprovados, requisitos funcionais e não funcionais cobertos por testes."
+        status: rascunho
+    playbook: pb_feat_lev_t2
+    layout:
+      coluna: 3
+    status: rascunho
+    publico: false
+  - id: feat_lev_t3
+    raia: feat_lev
+    tipo: tarefa
+    rotulo: Registrar os cards e o contrato de pronto
+    condicao: ""
+    proximo:
+      - para: feat_lev_e1
+        condicao: ""
+    estado: {}
+    entradas:
+      - requisitos_levantados
+      - historias_refinadas
+      - criterios_de_aceite
+      - definition_of_done
+    saidas:
+      - cards_da_feature
+      - contrato_funcional_e_tecnico
+    subtarefas:
+      - id: feat_lev_t3_st1
+        rotulo: Descrever os cards na ferramenta de gestão do fluxo
+        papel: pm
+        apoio:
+          - tech_lead
+        saidas:
+          - cards_da_feature
+        exemplo: 6 cards, um por história, com descrição, critérios de aceite, dependências e link para o registro da necessidade.
+        status: rascunho
+      - id: feat_lev_t3_st2
+        rotulo: Registrar o contrato funcional e técnico de pronto
+        papel: qa
+        apoio:
+          - arquiteto
+          - devsecops
+        saidas:
+          - contrato_funcional_e_tecnico
+        exemplo: "Contrato: critérios de aceite, testes esperados por nível, análise de vulnerabilidades, metas não funcionais e o que fica fora."
+        status: rascunho
+    playbook: pb_feat_lev_t3
+    layout:
+      coluna: 3
+    status: rascunho
+    publico: false
+  - id: feat_lev_e1
+    raia: feat_lev
+    tipo: fim
+    retorno: requisitos_claros
+    rotulo: Requisitos claros e completos
+    condicao: ""
+    proximo: []
+    estado: {}
+    saidas:
+      - requisitos_levantados
+      - historias_refinadas
+      - criterios_de_aceite
+      - definition_of_done
+      - cards_da_feature
+      - contrato_funcional_e_tecnico
+    playbook: pb_feat_lev_e1
+    layout:
+      coluna: 4
+    status: rascunho
+    publico: false
+  - id: feat_cls_s0
+    raia: feat_cls
+    tipo: inicio
+    rotulo: Requisitos claros, classificar
+    condicao: ""
+    proximo:
+      - para: feat_cls_t1
+        condicao: ""
+    estado: {}
+    playbook: pb_feat_cls_s0
+    layout:
+      coluna: 0
+    status: rascunho
+    publico: false
+    entradas:
+      - requisitos_levantados
+      - historias_refinadas
+      - contrato_funcional_e_tecnico
+  - id: feat_cls_t1
+    raia: feat_cls
+    tipo: tarefa
+    rotulo: Classificar os requisitos e delimitar o escopo
+    condicao: ""
+    proximo:
+      - para: feat_cls_c1
+        condicao: ""
+    estado: {}
+    playbook: pb_feat_cls_t1
+    layout:
+      coluna: 1
+    status: rascunho
+    publico: false
+    entradas:
+      - requisitos_levantados
+      - historias_refinadas
+      - contrato_funcional_e_tecnico
+      - tipo_de_feature
+    saidas:
+      - requisitos_classificados
+      - escopo_da_feature
+      - tem_requisito_de_performance
+      - precisa_de_experimento
+      - tem_integracao
+      - tem_requisito_de_acessibilidade
+      - exige_seguranca_reforcada
+      - altera_comportamento_existente
+    subtarefas:
+      - id: feat_cls_t1_st1
+        rotulo: Classificar em funcional, não funcional, restrição ou inverso
+        papel: pm
+        apoio:
+          - arquiteto
+        saidas:
+          - requisitos_classificados
+        tecnicas:
+          - tecnica: tec_requisitos_funcionais
+            uso: recomendada
+            porque: o que o sistema faz
+          - tecnica: tec_requisitos_n_o_funcionais
+            uso: obrigatoria
+            porque: "como o sistema se comporta: desempenho, segurança, disponibilidade"
+        exemplo: 9 funcionais, 4 não funcionais, 1 restrição (sem dado pessoal fora do país) e 1 inverso (não aplicar cupom em assinatura).
+        status: rascunho
+      - id: feat_cls_t1_st2
+        rotulo: Priorizar os requisitos
+        papel: pm
+        apoio:
+          - stakeholder
+        entradas:
+          - requisitos_classificados
+        saidas:
+          - requisitos_classificados
+        tecnicas:
+          - tecnica: tec_moscow
+            uso: recomendada
+            porque: separa o que precisa entrar do que pode esperar
+          - tecnica: tec_wsjf
+            uso: condicional
+            quando:
+              todos:
+                - var: origem_da_demanda
+                  igual: oportunidade_de_negocio
+            porque: oportunidade de negócio compete por prioridade pelo custo do atraso
+          - tecnica: tec_kano_model
+            uso: opcional
+            porque: mostra o que encanta e o que só evita insatisfação
+        exemplo: "Precisa: elegibilidade e recusa com motivo. Deveria: painel. Poderia: notificação. Não agora: relatório."
+        status: rascunho
+      - id: feat_cls_t1_st3
+        rotulo: Registrar o que entra e o que fica fora do escopo
+        papel: pm
+        apoio:
+          - tech_lead
+        entradas:
+          - requisitos_classificados
+        saidas:
+          - escopo_da_feature
+        exemplo: "Fora do escopo: cupom para assinaturas e relatório, registrados para a próxima iteração."
+        status: rascunho
+      - id: feat_cls_t1_st4
+        rotulo: Derivar as variáveis genéricas dos requisitos no escopo
+        descricao: "Os requisitos não funcionais que ficaram no escopo ligam as variáveis que as raias comuns leem, e o tipo de feature serve de ponto de partida: performance sugere tem_requisito_de_performance; experimento sugere precisa_de_experimento; integracao sugere tem_integracao; acessibilidade sugere tem_requisito_de_acessibilidade; seguranca sugere exige_seguranca_reforcada; melhoria_funcional, performance e acessibilidade sugerem altera_comportamento_existente. Vale o que os requisitos mostram; a spec confirma."
+        porque: mantém as raias comuns desacopladas da feature, porque elas leem só as variáveis genéricas e nunca o tipo
+        papel: tech_lead
+        apoio:
+          - pm
+          - arquiteto
+        entradas:
+          - requisitos_classificados
+          - escopo_da_feature
+          - tipo_de_feature
+        saidas:
+          - requisitos_classificados
+          - tem_requisito_de_performance
+          - precisa_de_experimento
+          - tem_integracao
+          - tem_requisito_de_acessibilidade
+          - exige_seguranca_reforcada
+          - altera_comportamento_existente
+        exemplo: "Tipo melhoria_funcional, mas o escopo traz meta de p95 abaixo de 300 ms: altera_comportamento_existente e tem_requisito_de_performance ficam sim."
+        status: rascunho
+  - id: feat_cls_c1
+    raia: feat_cls
+    tipo: chamada
+    raia_chamada: com_pro
+    rotulo: Verificar a prontidão (Definition of Ready)
+    condicao: ""
+    proximo:
+      - para: feat_cls_e1
+        condicao: pronto_para_iniciar
+    estado: {}
+    entradas:
+      - escopo_da_feature
+    saidas:
+      - criterios_de_aceite
+      - checklist_de_prontidao
+    playbook: pb_feat_cls_c1
+    layout:
+      coluna: 2
+    status: rascunho
+    publico: false
+  - id: feat_cls_e1
+    raia: feat_cls
+    tipo: fim
+    retorno: pronto_para_especificar
+    rotulo: Escopo delimitado e pronto para especificar
+    condicao: ""
+    proximo: []
+    estado: {}
+    saidas:
+      - requisitos_classificados
+      - escopo_da_feature
+      - criterios_de_aceite
+      - checklist_de_prontidao
+    playbook: pb_feat_cls_e1
+    layout:
+      coluna: 3
+    status: rascunho
+    publico: false
+  - id: feat_spc_s0
+    raia: feat_spc
+    tipo: inicio
+    rotulo: Pronto para especificar, escrever a spec
+    condicao: ""
+    proximo:
+      - para: feat_spc_g1
+        condicao: ""
+    estado: {}
+    playbook: pb_feat_spc_s0
+    layout:
+      coluna: 0
+    status: rascunho
+    publico: false
+  - id: feat_spc_g1
+    raia: feat_spc
+    tipo: bifurcacao
+    rotulo: A feature usa IA ou modelo probabilístico?
+    condicao: A feature usa IA ou modelo probabilístico?
+    proximo:
+      - para: feat_spc_t1
+        condicao: sim, usa IA
+      - para: feat_spc_t2
+        condicao: não, só lógica determinística
+    estado:
+      usa_ia: sim
+    saidas:
+      - usa_ia
+    papel: arquiteto
+    apoio:
+      - engenheiro_de_ia
+    consultado:
+      - pm
+    playbook: pb_feat_spc_g1
+    layout:
+      coluna: 1
+    status: rascunho
+    publico: false
+  - id: feat_spc_t1
+    raia: feat_spc
+    tipo: tarefa
+    rotulo: Especificar o requisito probabilístico (IA)
+    condicao: ""
+    proximo:
+      - para: feat_spc_t2
+        condicao: ""
+    estado:
+      usa_ia: sim
+    entradas:
+      - requisitos_classificados
+    saidas:
+      - requisitos_de_ia
+    subtarefas:
+      - id: feat_spc_t1_st1
+        rotulo: Definir os casos de avaliação e o limiar de aceite
+        papel: qa
+        apoio:
+          - pm
+        saidas:
+          - requisitos_de_ia
+        tecnicas:
+          - tecnica: tec_evals
+            uso: obrigatoria
+            porque: saída probabilística pede casos de avaliação no lugar de asserts exatos
+        exemplo: 50 casos de sugestão de cupom, 10 de borda; aceite quando 90% das sugestões forem válidas.
+        status: rascunho
+      - id: feat_spc_t1_st2
+        rotulo: Definir o orçamento de custo por chamada e o plano B
+        papel: arquiteto
+        saidas:
+          - requisitos_de_ia
+        exemplo: Teto de custo por chamada e regra fixa de fallback se o modelo cair ou passar do teto.
+        status: rascunho
+      - id: feat_spc_t1_st3
+        rotulo: Mapear alucinação e dependência de fornecedor do modelo
+        papel: arquiteto
+        apoio:
+          - devsecops
+        saidas:
+          - requisitos_de_ia
+        exemplo: "Risco: sugerir cupom inexistente. Mitigação: validar contra o catálogo antes de exibir."
+        status: rascunho
+    playbook: pb_feat_spc_t1
+    layout:
+      coluna: 2
+    status: rascunho
+    publico: false
+  - id: feat_spc_t2
+    raia: feat_spc
+    tipo: tarefa
+    rotulo: Escrever o requirements.md
+    condicao: ""
+    proximo:
+      - para: feat_spc_t3
+        condicao: ""
+    estado: {}
+    entradas:
+      - requisitos_classificados
+      - criterios_de_aceite
+      - registro_da_necessidade
+      - requisitos_de_ia
+    saidas:
+      - requirements_md
+      - muda_jornada
+      - tem_requisito_de_performance
+    subtarefas:
+      - id: feat_spc_t2_st1
+        rotulo: Escrever as histórias e os critérios de aceite em EARS
+        papel: pm
+        apoio:
+          - qa
+        saidas:
+          - requirements_md
+          - muda_jornada
+        tecnicas:
+          - tecnica: tec_criterios_aceitacao
+            uso: obrigatoria
+            porque: critério verificável é a base dos testes e da delegação
+          - tecnica: tec_bdd_gherkin
+            uso: opcional
+            porque: cenários ajudam quando o critério é comportamental
+        exemplo: WHEN o comprador recorrente aplica o cupom THE sistema SHALL validar o histórico em até 300 ms.
+        status: rascunho
+      - id: feat_spc_t2_st2
+        rotulo: Registrar os requisitos não funcionais com metas
+        papel: arquiteto
+        saidas:
+          - requirements_md
+          - tem_requisito_de_performance
+        tecnicas:
+          - tecnica: tec_requisitos_n_o_funcionais
+            uso: obrigatoria
+            porque: desempenho, segurança e disponibilidade precisam de metas numéricas
+        exemplo: p95 abaixo de 300 ms com 500 requisições por segundo; disponibilidade de 99,9%.
+        status: rascunho
+      - id: feat_spc_t2_st3
+        rotulo: Incluir o requisito probabilístico
+        papel: pm
+        apoio:
+          - arquiteto
+        quando:
+          todos:
+            - var: usa_ia
+              igual: sim
+        porque: só features com IA têm requisito probabilístico
+        entradas:
+          - requisitos_de_ia
+        saidas:
+          - requirements_md
+        exemplo: Seção de requisitos de IA com os casos de avaliação, o limiar e o teto de custo.
+        status: rascunho
+      - id: feat_spc_t2_st4
+        rotulo: Revisar o requirements.md com os interessados
+        papel: pm
+        apoio:
+          - stakeholder
+        entradas:
+          - requirements_md
+        saidas:
+          - requirements_md
+        exemplo: Revisão de 30 minutos com o PM e a liderança comercial; dois critérios ajustados.
+        status: rascunho
+    playbook: pb_feat_spc_t2
+    layout:
+      coluna: 3
+    status: rascunho
+    publico: false
+  - id: feat_spc_t3
+    raia: feat_spc
+    tipo: tarefa
+    rotulo: Modelar o domínio com DDD
+    condicao: ""
+    proximo:
+      - para: feat_spc_t4
+        condicao: ""
+    estado: {}
+    entradas:
+      - requirements_md
+    saidas:
+      - modelo_de_dominio
+      - mapa_de_contextos
+    subtarefas:
+      - id: feat_spc_t3_st1
+        rotulo: Descobrir eventos, comandos e regras do domínio
+        papel: arquiteto
+        apoio:
+          - pm
+          - dev
+        quando:
+          todos:
+            - var: nivel_de_incerteza
+              em:
+                - media
+                - alta
+        porque: com incerteza média ou alta, descobrir o domínio com quem o conhece evita modelos errados
+        saidas:
+          - modelo_de_dominio
+        tecnicas:
+          - tecnica: tec_event_storming
+            uso: obrigatoria
+            porque: revela eventos, regras e fronteiras do domínio em uma sessão
+        exemplo: "Eventos: CupomAplicado, HistoricoConsultado, CupomRecusado. Regra: só compradores com 2 compras."
+        status: rascunho
+      - id: feat_spc_t3_st2
+        rotulo: Delimitar os contextos e a linguagem ubíqua
+        papel: arquiteto
+        saidas:
+          - mapa_de_contextos
+          - modelo_de_dominio
+        tecnicas:
+          - tecnica: tec_ddd_estrategico
+            uso: obrigatoria
+            porque: contextos delimitados definem módulos e donos
+        exemplo: "Contextos: Promoções (dono do cupom) e Pedidos (dono do histórico). Termo único: comprador recorrente."
+        status: rascunho
+      - id: feat_spc_t3_st3
+        rotulo: Mapear módulos e integrações entre contextos
+        papel: arquiteto
+        apoio:
+          - tech_lead
+        saidas:
+          - mapa_de_contextos
+        tecnicas:
+          - tecnica: tec_ddd_estrategico
+            uso: obrigatoria
+            porque: o mapa de contextos mostra quem depende de quem e como
+        exemplo: Promoções consome eventos de Pedidos por mensageria; não há chamada síncrona entre os contextos.
+        status: rascunho
+    playbook: pb_feat_spc_t3
+    layout:
+      coluna: 4
+    status: rascunho
+    publico: false
+  - id: feat_spc_t4
+    raia: feat_spc
+    tipo: tarefa
+    rotulo: Desenhar a arquitetura no design.md
+    condicao: ""
+    proximo:
+      - para: feat_spc_t5
+        condicao: ""
+    estado: {}
+    entradas:
+      - requirements_md
+      - modelo_de_dominio
+      - mapa_de_contextos
+    saidas:
+      - design_md
+      - diagrama_de_arquitetura
+      - diagrama_de_sequencia
+      - visao_de_tecnologia
+      - tem_integracao
+      - expoe_interface_externa
+      - risco_de_liberacao
+    subtarefas:
+      - id: feat_spc_t4_st1
+        rotulo: Desenhar a arquitetura em contexto, contêineres e componentes
+        papel: arquiteto
+        saidas:
+          - diagrama_de_arquitetura
+        tecnicas:
+          - tecnica: tec_modelo_c4
+            uso: recomendada
+            porque: níveis de zoom deixam a arquitetura legível para cada público
+        exemplo: "Contêineres: API de promoções, consumidor de eventos de pedidos, cache de histórico."
+        status: rascunho
+      - id: feat_spc_t4_st2
+        rotulo: Desenhar os diagramas de sequência dos fluxos principais
+        papel: arquiteto
+        apoio:
+          - dev
+        saidas:
+          - diagrama_de_sequencia
+        tecnicas:
+          - tecnica: tec_uml_sequencia
+            uso: obrigatoria
+            porque: mostra a ordem das chamadas, os tempos e os pontos de falha
+        exemplo: "Sequência: checkout chama promoções, promoções lê o cache de histórico e devolve o desconto."
+        status: rascunho
+      - id: feat_spc_t4_st3
+        rotulo: Definir modelos de dados e contratos de integração
+        papel: arquiteto
+        apoio:
+          - engenheiro_de_dados
+        saidas:
+          - design_md
+          - tem_integracao
+          - expoe_interface_externa
+        tecnicas:
+          - tecnica: tec_contract_testing
+            uso: condicional
+            quando:
+              todos:
+                - var: tem_integracao
+                  igual: sim
+            porque: contratos definidos aqui viram testes de contrato
+        exemplo: "Contrato: POST /cupons/validar com comprador, carrinho e código; resposta com desconto ou motivo."
+        status: rascunho
+      - id: feat_spc_t4_st4
+        rotulo: Definir tecnologias, stack e estrutura do projeto
+        papel: arquiteto
+        apoio:
+          - tech_lead
+        saidas:
+          - visao_de_tecnologia
+        exemplo: Mesmo stack do contexto de Promoções; novo módulo de elegibilidade com camadas de domínio e aplicação.
+        status: rascunho
+      - id: feat_spc_t4_st5
+        rotulo: Definir padrões de projeto e boas práticas
+        papel: arquiteto
+        apoio:
+          - dev
+        saidas:
+          - visao_de_tecnologia
+          - design_md
+        tecnicas:
+          - tecnica: tec_padroes_de_projeto
+            uso: recomendada
+            porque: padrões conhecidos reduzem decisões repetidas e revisões longas
+        exemplo: Strategy para regras de elegibilidade; repositório para o histórico; idempotência no consumidor.
+        status: rascunho
+      - id: feat_spc_t4_st6
+        rotulo: Consolidar a visão arquitetural no design.md
+        papel: arquiteto
+        entradas:
+          - diagrama_de_arquitetura
+          - diagrama_de_sequencia
+          - visao_de_tecnologia
+        saidas:
+          - design_md
+          - risco_de_liberacao
+        tecnicas:
+          - tecnica: tec_design_docs
+            uso: obrigatoria
+            porque: um único documento permite decompor a arquitetura em tarefas
+        exemplo: design.md com contexto, diagramas, contratos, dados, stack, padrões, riscos e alternativas.
+        status: rascunho
+    playbook: pb_feat_spc_t4
+    layout:
+      coluna: 5
+    status: rascunho
+    publico: false
+  - id: feat_spc_t5
+    raia: feat_spc
+    tipo: tarefa
+    rotulo: Registrar as decisões de arquitetura
+    condicao: ""
+    proximo:
+      - para: feat_spc_g2
+        condicao: ""
+    estado: {}
+    entradas:
+      - design_md
+      - diagrama_de_arquitetura
+      - diagrama_de_sequencia
+      - visao_de_tecnologia
+    saidas:
+      - adrs_da_feature
+      - decisoes_com_stakeholders
+      - comunicado_da_spec
+    subtarefas:
+      - id: feat_spc_t5_st1
+        rotulo: Escrever um ADR por decisão relevante
+        papel: arquiteto
+        apoio:
+          - tech_lead
+        saidas:
+          - adrs_da_feature
+        tecnicas:
+          - tecnica: tec_adrs
+            uso: obrigatoria
+            porque: decisão sem registro é rediscutida a cada sprint
+        exemplo: "ADR: integrar Promoções e Pedidos por eventos em vez de chamada síncrona."
+        status: rascunho
+      - id: feat_spc_t5_st2
+        rotulo: Reunir os stakeholders para as decisões que os afetam
+        papel: arquiteto
+        apoio:
+          - pm
+          - stakeholder
+        entradas:
+          - adrs_da_feature
+        saidas:
+          - decisoes_com_stakeholders
+        exemplo: Reunião de 45 minutos com Pedidos e Pagamentos; ADR de eventos aprovado, prazo de consumo combinado.
+        status: rascunho
+      - id: feat_spc_t5_st3
+        rotulo: Publicar a spec e avisar o time
+        papel: tech_lead
+        entradas:
+          - decisoes_com_stakeholders
+        saidas:
+          - comunicado_da_spec
+        exemplo: Mensagem no canal do time com links do requirements.md, do design.md e dos ADRs.
+        status: rascunho
+    playbook: pb_feat_spc_t5
+    layout:
+      coluna: 6
+    status: rascunho
+    publico: false
+  - id: feat_spc_g2
+    raia: feat_spc
+    tipo: bifurcacao
+    rotulo: A spec está aprovada para decompor?
+    condicao: Requirements, design e ADRs estão aprovados para decompor em tarefas?
+    proximo:
+      - para: feat_spc_e1
+        condicao: sim
+      - para: feat_spc_t4
+        condicao: não, rever o design
+    estado: {}
+    entradas:
+      - decisoes_com_stakeholders
+    papel: tech_lead
+    apoio:
+      - stakeholder
+    aprova: arquiteto
+    informado:
+      - times_dependentes
+      - suporte
+    playbook: pb_feat_spc_g2
+    layout:
+      coluna: 7
+    status: rascunho
+    publico: false
+  - id: feat_spc_e1
+    raia: feat_spc
+    tipo: fim
+    retorno: spec_pronta
+    rotulo: "Spec pronta: requirements, design e ADRs"
+    condicao: ""
+    proximo: []
+    estado: {}
+    saidas:
+      - spec_pronta
+      - requirements_md
+      - design_md
+      - adrs_da_feature
+      - usa_ia
+      - tem_integracao
+      - requisitos_de_ia
+      - risco_de_liberacao
+    playbook: pb_feat_spc_e1
+    layout:
+      coluna: 8
+    status: rascunho
+    publico: false
+  - id: feat_alo_s0
+    raia: feat_alo
+    tipo: inicio
+    rotulo: Spec pronta, decompor em tarefas
+    condicao: ""
+    proximo:
+      - para: feat_alo_t1
+        condicao: ""
+    estado: {}
+    playbook: pb_feat_alo_s0
+    layout:
+      coluna: 0
+    status: rascunho
+    publico: false
+    entradas:
+      - spec_pronta
+      - requirements_md
+      - design_md
+      - requisitos_classificados
+      - criterios_de_aceite
+      - usa_ia
+      - tem_integracao
+  - id: feat_alo_t1
+    raia: feat_alo
+    tipo: tarefa
+    rotulo: Quebra o design em tarefas pequenas e verificáveis
+    condicao: ""
+    proximo:
+      - para: feat_alo_t2
+        condicao: ""
+    estado: {}
+    entradas:
+      - spec_pronta
+      - requirements_md
+      - design_md
+      - requisitos_classificados
+      - criterios_de_aceite
+      - usa_ia
+      - tem_integracao
+    saidas:
+      - lista_de_tarefas
+      - mapa_de_dependencias
+    subtarefas:
+      - id: feat_alo_t1_st1
+        exemplo: "A spec de cupom de desconto vira 9 tarefas: modelo de dados, regra de validade, endpoint, tela de aplicação e testes, cada uma com menos de um dia de trabalho."
+        rotulo: Fatiar a spec em tarefas pequenas
+        papel: tech_lead
+        apoio:
+          - dev
+        entradas:
+          - spec_pronta
+          - requisitos_classificados
+        saidas:
+          - lista_de_tarefas
+        tecnicas:
+          - tecnica: tec_slicing_vertical
+            uso: obrigatoria
+            porque: fatias verticais entregam valor e cabem em uma única revisão
+          - tecnica: tec_spec_driven_development
+            uso: recomendada
+            porque: a spec é o contrato que guia o recorte
+        status: rascunho
+      - id: feat_alo_t1_st2
+        exemplo: 'Tarefa "validar cupom expirado": pronta quando o endpoint devolve erro 422 com a mensagem certa e o teste automatizado cobre a data limite.'
+        rotulo: Definir o critério de pronto de cada tarefa
+        papel: qa
+        apoio:
+          - pm
+        entradas:
+          - lista_de_tarefas
+          - criterios_de_aceite
+        saidas:
+          - lista_de_tarefas
+        tecnicas:
+          - tecnica: tec_criterios_aceitacao
+            uso: obrigatoria
+            porque: sem critério verificável a tarefa não pode ser delegada nem revisada
+          - tecnica: tec_bdd_gherkin
+            uso: opcional
+            porque: cenários escritos ajudam quando o critério é comportamental
+          - tecnica: tec_contract_testing
+            uso: condicional
+            quando:
+              todos:
+                - var: usa_ia
+                  igual: nao
+                - var: tem_integracao
+                  igual: sim
+            porque: integração com outro sistema precisa de um contrato verificável por teste
+        status: rascunho
+      - id: feat_alo_t1_st3
+        exemplo: A tela de aplicação depende do endpoint, que depende do modelo de dados. As tarefas de teste dependem de todas as outras.
+        rotulo: Registrar as dependências entre tarefas
+        papel: tech_lead
+        entradas:
+          - lista_de_tarefas
+        saidas:
+          - mapa_de_dependencias
+        status: rascunho
+      - id: feat_alo_t1_st4
+        exemplo: "Como o recurso sugere cupons por IA, entram 3 tarefas extras: avaliação com 50 casos, teto de custo por chamada e fallback para regra fixa se o modelo cair."
+        rotulo: Incluir tarefas de evals, custo e plano B (se usa IA)
+        papel: arquiteto
+        apoio:
+          - qa
+        entradas:
+          - lista_de_tarefas
+          - spec_pronta
+        saidas:
+          - lista_de_tarefas
+        tecnicas:
+          - tecnica: tec_evals
+            uso: condicional
+            quando:
+              todos:
+                - var: usa_ia
+                  igual: sim
+            porque: saída probabilística pede evals no lugar de asserts exatos
+          - tecnica: tec_observabilidade_de_llm
+            uso: condicional
+            quando:
+              todos:
+                - var: usa_ia
+                  igual: sim
+            porque: mede custo e qualidade por chamada ao modelo
+        status: rascunho
+    playbook: pb_feat_alo_t1
+    layout:
+      coluna: 1
+    status: rascunho
+    publico: false
+  - id: feat_alo_t2
+    raia: feat_alo
+    tipo: tarefa
+    rotulo: Define os papéis necessários para cada tarefa
+    condicao: ""
+    proximo:
+      - para: feat_alo_t3
+        condicao: ""
+    estado: {}
+    entradas:
+      - lista_de_tarefas
+      - design_md
+    saidas:
+      - matriz_de_papeis
+    subtarefas:
+      - id: feat_alo_t2_st1
+        rotulo: Definir o papel principal e os de apoio de cada tarefa
+        papel: tech_lead
+        apoio:
+          - arquiteto
+        saidas:
+          - matriz_de_papeis
+        exemplo: "Endpoint de validação: Dev, apoio QA. Consumidor de eventos: Dev, apoio Engenharia de dados."
+        status: rascunho
+      - id: feat_alo_t2_st2
+        rotulo: "Marcar tarefas sensíveis: segurança, dados e arquitetura"
+        papel: arquiteto
+        apoio:
+          - devsecops
+        entradas:
+          - matriz_de_papeis
+        saidas:
+          - matriz_de_papeis
+        tecnicas:
+          - tecnica: tec_adrs
+            uso: recomendada
+            porque: tarefas que mudam uma decisão registrada pedem o Arquiteto
+          - tecnica: tec_x3_amigos
+            uso: opcional
+            porque: ajuda a esclarecer tarefas ambíguas antes de mapear o papel
+        exemplo: "Acesso ao histórico de compras: dado pessoal, apoio obrigatório de DevSecOps."
+        status: rascunho
+      - id: feat_alo_t2_st3
+        rotulo: Consolidar os papéis que a feature precisa
+        papel: tech_lead
+        entradas:
+          - matriz_de_papeis
+        saidas:
+          - matriz_de_papeis
+        exemplo: "Papéis: Dev, QA, Arquiteto, DevSecOps e Engenharia de dados; sem Designer nesta feature."
+        status: rascunho
+    playbook: pb_feat_alo_t2
+    layout:
+      coluna: 2
+    status: rascunho
+    publico: false
+  - id: feat_alo_t3
+    raia: feat_alo
+    tipo: tarefa
+    rotulo: Mapeia as dependências e a ordem das tarefas
+    condicao: ""
+    proximo:
+      - para: feat_alo_e1
+        condicao: ""
+    estado: {}
+    entradas:
+      - lista_de_tarefas
+      - mapa_de_dependencias
+      - matriz_de_papeis
+    saidas:
+      - decisoes_bloqueantes
+      - ordem_execucao
+      - mapa_de_tarefas
+      - mapa_de_dependencias
+      - dependencia_humana
+    subtarefas:
+      - id: feat_alo_t3_st1
+        rotulo: Marcar as decisões que bloqueiam outras tarefas
+        papel: tech_lead
+        apoio:
+          - pm
+        saidas:
+          - decisoes_bloqueantes
+          - dependencia_humana
+        exemplo: O formato do evento de pedido bloqueia o consumidor e os testes de contrato.
+        status: rascunho
+      - id: feat_alo_t3_st2
+        rotulo: Ordenar decisões, execução e integração
+        papel: tech_lead
+        entradas:
+          - decisoes_bloqueantes
+        saidas:
+          - ordem_execucao
+          - mapa_de_dependencias
+        tecnicas:
+          - tecnica: tec_wip_limits
+            uso: opcional
+            porque: limita o trabalho em paralelo quando o time é pequeno
+        exemplo: 1. Contrato do evento. 2. Modelo de dados. 3. Endpoint, consumidor e testes em paralelo. 4. Integração.
+        status: rascunho
+      - id: feat_alo_t3_st3
+        rotulo: Consolidar o mapa de tarefas, papéis e dependências
+        papel: tech_lead
+        entradas:
+          - ordem_execucao
+          - decisoes_bloqueantes
+        saidas:
+          - mapa_de_tarefas
+        exemplo: 9 tarefas, 5 papéis, 3 dependências e 1 decisão bloqueante, em um único mapa.
+        status: rascunho
+    playbook: pb_feat_alo_t3
+    layout:
+      coluna: 3
+    status: rascunho
+    publico: false
+  - id: feat_alo_e1
+    raia: feat_alo
+    tipo: fim
+    retorno: tarefas_mapeadas
+    rotulo: Tarefas mapeadas com papéis e dependências
+    condicao: ""
+    proximo: []
+    estado: {}
+    saidas:
+      - lista_de_tarefas
+      - mapa_de_dependencias
+      - matriz_de_papeis
+      - ordem_execucao
+      - decisoes_bloqueantes
+      - mapa_de_tarefas
+      - dependencia_humana
+    playbook: pb_feat_alo_e1
+    layout:
+      coluna: 4
+    status: rascunho
+    publico: false
+  - id: feat_ite_s0
+    raia: feat_ite
+    tipo: inicio
+    rotulo: Reprovação recebida, analisar a causa
+    condicao: ""
+    proximo:
+      - para: feat_ite_t1
+        condicao: ""
+    estado: {}
+    playbook: pb_feat_ite_s0
+    layout:
+      coluna: 0
+    status: rascunho
+    publico: false
+  - id: feat_ite_t1
+    raia: feat_ite
+    tipo: tarefa
+    rotulo: Analisar a causa da reprovação
+    condicao: ""
+    proximo:
+      - para: feat_ite_g1
+        condicao: ""
+    estado: {}
+    saidas:
+      - analise_da_reprovacao
+      - causa_da_reprovacao
+      - impacto_da_falha
+    subtarefas:
+      - id: feat_ite_t1_st1
+        rotulo: Reunir as evidências da reprovação
+        papel: qa
+        saidas:
+          - analise_da_reprovacao
+        exemplo: "Reprovação em performance: p95 de 900 ms no cenário de pico, com o perfil de execução anexado."
+        status: rascunho
+      - id: feat_ite_t1_st2
+        rotulo: Identificar a causa e o alcance da falha
+        papel: tech_lead
+        apoio:
+          - arquiteto
+        entradas:
+          - analise_da_reprovacao
+        saidas:
+          - analise_da_reprovacao
+          - causa_da_reprovacao
+          - impacto_da_falha
+        exemplo: "Causa na implementação: consulta ao histórico sem cache. Alcance: só a feature, ainda em homologação."
+        status: rascunho
+    playbook: pb_feat_ite_t1
+    layout:
+      coluna: 1
+    status: rascunho
+    publico: false
+  - id: feat_ite_g1
+    raia: feat_ite
+    tipo: bifurcacao
+    rotulo: A causa está na spec?
+    condicao: A causa da reprovação está na spec ou no contexto?
+    proximo:
+      - para: feat_ite_t2
+        condicao: sim, spec ou contexto
+      - para: feat_ite_g2
+        condicao: não, implementação
+    estado:
+      causa_da_reprovacao: spec
+    entradas:
+      - causa_da_reprovacao
+    papel: tech_lead
+    apoio:
+      - arquiteto
+    playbook: pb_feat_ite_g1
+    layout:
+      coluna: 2
+    status: rascunho
+    publico: false
+  - id: feat_ite_t2
+    raia: feat_ite
+    tipo: tarefa
+    rotulo: Ajustar a spec e o contexto
+    condicao: ""
+    proximo:
+      - para: feat_ite_e1
+        condicao: ""
+    estado: {}
+    entradas:
+      - analise_da_reprovacao
+    saidas:
+      - ajuste_da_spec
+      - contexto_de_execucao
+    subtarefas:
+      - id: feat_ite_t2_st1
+        rotulo: Ajustar requirements, design ou ADR
+        papel: arquiteto
+        apoio:
+          - pm
+        saidas:
+          - ajuste_da_spec
+        exemplo: "Critério ajustado: recusa de cupom sempre informa o motivo; design atualizado."
+        status: rascunho
+      - id: feat_ite_t2_st2
+        rotulo: Atualizar o contexto dos agentes
+        papel: arquiteto
+        saidas:
+          - contexto_de_execucao
+        exemplo: Contexto do projeto atualizado com a nova regra antes da próxima execução.
+        status: rascunho
+    playbook: pb_feat_ite_t2
+    layout:
+      coluna: 3
+    status: rascunho
+    publico: false
+  - id: feat_ite_t3
+    raia: feat_ite
+    tipo: tarefa
+    rotulo: Abrir o bug da correção
+    condicao: ""
+    proximo:
+      - para: feat_ite_e2
+        condicao: ""
+    estado: {}
+    entradas:
+      - analise_da_reprovacao
+    saidas:
+      - tarefa_de_correcao
+      - relato_do_bug
+    subtarefas:
+      - id: feat_ite_t3_st1
+        rotulo: Registrar o bug com o teste que falhou
+        papel: tech_lead
+        apoio:
+          - qa
+        saidas:
+          - relato_do_bug
+          - tarefa_de_correcao
+        exemplo: "Bug: validação de cupom sem cache estoura a meta de latência; pronto quando o teste de carga passar."
+        status: rascunho
+    playbook: pb_feat_ite_t3
+    layout:
+      coluna: 4
+    status: rascunho
+    publico: false
+    ligacoes:
+      - demanda_destino: bug
+        para: bug_orq_s0
+        condicao: a causa da reprovação está na implementação
+        tipo: aciona
+        rotulo: Correção na implementação abre o fluxo de bug
+  - id: feat_ite_e1
+    raia: feat_ite
+    tipo: fim
+    retorno: spec_ajustada
+    rotulo: Spec e contexto ajustados
+    condicao: ""
+    proximo: []
+    estado: {}
+    saidas:
+      - ajuste_da_spec
+    playbook: pb_feat_ite_e1
+    layout:
+      coluna: 4
+    status: rascunho
+    publico: false
+  - id: feat_ite_e2
+    raia: feat_ite
+    tipo: fim
+    retorno: correcao_na_implementacao
+    rotulo: Correção aberta para a execução
+    condicao: ""
+    proximo: []
+    estado: {}
+    saidas:
+      - tarefa_de_correcao
+    playbook: pb_feat_ite_e2
+    layout:
+      coluna: 4
+    status: rascunho
+    publico: false
+  - id: feat_ite_g2
+    raia: feat_ite
+    tipo: bifurcacao
+    rotulo: A falha impactou vários usuários?
+    condicao: A falha ficou só na feature ou impactou vários usuários em produção?
+    proximo:
+      - para: feat_ite_t3
+        condicao: não, só na feature
+      - para: feat_ite_t4
+        condicao: sim, impacto em vários usuários
+    estado:
+      impacto_da_falha: so_na_feature
+    entradas:
+      - impacto_da_falha
+    papel: sre
+    apoio:
+      - tech_lead
+    playbook: pb_feat_ite_g2
+    layout:
+      coluna: 3
+    status: rascunho
+    publico: false
+  - id: feat_ite_t4
+    raia: feat_ite
+    tipo: tarefa
+    rotulo: Acionar o fluxo de incidente
+    condicao: ""
+    proximo:
+      - para: feat_ite_e3
+        condicao: ""
+    estado: {}
+    entradas:
+      - analise_da_reprovacao
+    saidas:
+      - incidente_aberto
+      - tarefa_de_correcao
+    ligacoes:
+      - demanda_destino: incidente
+        para: inc_orq_s0
+        condicao: a falha impactou vários usuários em produção
+        tipo: aciona
+        rotulo: Falha da feature com impacto amplo abre o incidente
+    subtarefas:
+      - id: feat_ite_t4_st1
+        rotulo: Abrir o incidente ou vincular ao que já está aberto
+        papel: sre
+        apoio:
+          - tech_lead
+        saidas:
+          - incidente_aberto
+        exemplo: "Incidente já aberto pelo monitoramento: a análise é vinculada a ele, sem abrir outro."
+        status: rascunho
+      - id: feat_ite_t4_st2
+        rotulo: Registrar a correção que a feature vai precisar
+        papel: tech_lead
+        saidas:
+          - tarefa_de_correcao
+        exemplo: "Card: cache do histórico, com o teste de carga como critério de pronto; entra depois da mitigação."
+        status: rascunho
+    playbook: pb_feat_ite_t4
+    layout:
+      coluna: 4
+    status: rascunho
+    publico: false
+  - id: feat_ite_e3
+    raia: feat_ite
+    tipo: fim
+    retorno: incidente_acionado
+    rotulo: Incidente acionado, correção registrada
+    condicao: ""
+    proximo: []
+    estado: {}
+    saidas:
+      - incidente_aberto
+      - tarefa_de_correcao
+    playbook: pb_feat_ite_e3
+    layout:
+      coluna: 5
+    status: rascunho
+    publico: false
+playbooks:
+  - id: pb_feat_orq_s0
+    resumo: Toda feature nasce de uma necessidade ou de uma oportunidade. Antes de pensar no que construir, entenda o porquê e verifique se já não existe algo que possa ser reutilizado. Em uma empresa, confirme também se a iniciativa está dentro dos objetivos reais, considerando os OKRs e os KPIs.
+    perguntas_chave:
+      - '"Qual é a necessidade ou a oportunidade por trás desta demanda?"'
+      - '"Já existe algo que possamos reutilizar ou adaptar?"'
+      - '"Qual OKR e qual KPI esta iniciativa move?"'
+      - '"Quem se beneficia e o que muda para essas pessoas?"'
+      - '"Como vamos medir o sucesso?"'
+    fazer:
+      - Descreva a necessidade ou a oportunidade em uma frase antes de falar de solução
+      - Procure o que já existe (produto, serviço ou componente) e avalie reutilizar
+      - Ligue a demanda a um OKR e a um KPI existentes
+      - Identifique quem se beneficia e qual resultado esperar
+      - Anote a hipótese de impacto e como vamos saber que funcionou
+      - Inicie tentativas_iteracao em 0 (limite de 3 iterações de spec e contexto, no laço de validação)
+    evitar:
+      - Aceitar soluções prontas sem entender a necessidade ou a oportunidade
+      - Construir antes de verificar o que já existe
+      - Iniciativa sem OKR ou KPI que a sustente
+      - Requisitos sem métrica de sucesso
+      - Elicitação por e-mail apenas
+    status: rascunho
+    publico: false
+  - id: pb_feat_orq_c1
+    resumo: "Chama a raia Entendimento da necessidade e contexto: entender a necessidade ou oportunidade e o contexto em que ela surge. O fluxo segue pelo retorno que a raia devolver."
+    perguntas_chave:
+      - '"Qual resultado de negócio ou de usuário muda, e como vamos saber (métricas e metas)?"'
+      - '"Quem pede, quem usa, quem decide, quem opera e quem é afetado?"'
+      - '"Como a iniciativa se alinha aos OKRs e aos KPIs?"'
+      - '"Já existe algo para reutilizar, ou vale construir, comprar ou assinar?"'
+      - '"Qual o custo de adiar e qual a prioridade em relação ao restante?"'
+      - '"Que riscos existem e qual a janela de oportunidade?"'
+      - '"Quem se beneficia e o que muda para essas pessoas?"'
+    fazer:
+      - "Retornos possíveis: necessidade_entendida"
+      - Registre o impacto esperado com métrica e meta
+      - Mapeie os interessados (pede, usa, decide, opera, é afetado)
+      - Decida de forma estratégica como atender (reutilizar, construir, comprar ou assinar)
+    evitar:
+      - Seguir sem saber qual resultado muda e como será medido
+      - Esquecer quem opera ou é afetado
+      - Escolher construir sem comparar com reutilizar, comprar ou assinar
+    status: rascunho
+    publico: false
+  - id: pb_feat_orq_c3
+    resumo: "Chama a raia Classificação e escopo dos requisitos: classificar os requisitos para delimitar o escopo. O fluxo segue pelo retorno que a raia devolver."
+    perguntas_chave:
+      - '"O que está dentro e o que está fora do escopo desta entrega?"'
+    fazer:
+      - "Retornos possíveis: requisitos_classificados"
+    status: rascunho
+    publico: false
+  - id: pb_feat_orq_c4
+    resumo: "A spec sai com requirements.md e design.md completos: DDD para extrair módulos, contextos e integrações, diagramas de arquitetura e de sequência, tecnologias, stack, estrutura do projeto, padrões e boas práticas, e os ADRs aprovados com os stakeholders."
+    perguntas_chave:
+      - '"A visão arquitetural é suficiente para decompor em tarefas?"'
+      - '"Quais decisões de arquitetura precisam de ADR e de aprovação?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_orq_c5
+    resumo: Decompor o design em tarefas, mapear as dependências entre elas e os papéis que cada uma precisa. Quem exerce cada papel é decidido no setup.
+    perguntas_chave:
+      - '"Toda tarefa tem papel e dependências mapeadas?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_orq_c6
+    resumo: "Setup: ferramentas, ambiente, revisão de contexto, agentes e skills, tudo que é necessário para iniciar a execução das tarefas."
+    perguntas_chave:
+      - '"O que falta para a execução começar sem bloqueio?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_orq_c7
+    resumo: "Execução das tarefas: toda a coordenação entre agentes e pessoas por papel fica dentro da raia de execução."
+    perguntas_chave:
+      - '"As entregas foram integradas?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_orq_c2
+    resumo: "Chama a raia Levantamento e enriquecimento de requisitos: levantar os requisitos e enriquecê-los até ficarem claros e completos. O fluxo segue pelo retorno que a raia devolver."
+    perguntas_chave:
+      - '"Quem precisa ser ouvido para os requisitos ficarem claros e completos?"'
+      - '"Quais são os usuários e as jornadas envolvidas?"'
+      - '"Quais regras de negócio se aplicam?"'
+      - '"Quais são os requisitos funcionais e não funcionais?"'
+      - '"Quais restrições, dados e integrações precisamos considerar?"'
+      - '"Que riscos e dependências existem?"'
+      - '"Quais são os critérios de aceitação preliminares e as métricas de sucesso?"'
+      - '"Que exemplos concretos e casos de borda ilustram o comportamento esperado?"'
+      - '"O que fica fora do escopo?"'
+    fazer:
+      - "Retornos possíveis: requisitos_claros"
+      - Levante usuários, jornadas e regras de negócio
+      - Separe requisitos funcionais e não funcionais
+      - Registre restrições, dados, integrações, riscos e dependências
+      - Escreva critérios de aceitação preliminares com exemplos concretos
+      - Declare o que fica fora do escopo
+      - Cada técnica de elicitação é uma subtarefa condicionada ao contexto da demanda
+    evitar:
+      - Requisitos sem métrica de sucesso
+      - Casos de borda deixados para depois
+      - Escopo sem limite declarado
+    status: rascunho
+    publico: false
+  - id: pb_feat_orq_c8
+    resumo: Depois da revisão dos PRs e da execução, a feature é versionada pela estratégia do time e publicada em um ambiente de testes, como o staging de desenvolvimento.
+    perguntas_chave:
+      - '"A versão publicada é a mesma que será implantada?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_orq_c9
+    resumo: "Testes da feature: unitários, de integração e de contrato, sempre revisados e aprimorados com TDD e a pirâmide de testes. O limite de tentativas fica dentro da raia."
+    perguntas_chave:
+      - '"Cada critério de aceite tem teste?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_orq_c10
+    resumo: Testes de ponta a ponta das jornadas críticas. Não se aplica quando a feature não muda uma jornada.
+    perguntas_chave:
+      - '"Quais jornadas a feature toca?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_orq_c11
+    resumo: "Evals só para features com IA aplicada: qualidade, alucinação, custo por chamada e latência."
+    perguntas_chave:
+      - '"A feature usa IA?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_orq_c12
+    resumo: Testes de performance contra as metas dos requisitos não funcionais.
+    perguntas_chave:
+      - '"Há meta de latência ou de carga?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_orq_c13
+    resumo: "Testes de segurança: análise estática, dependências, segredos e testes da aplicação em execução."
+    perguntas_chave:
+      - '"Há vulnerabilidade alta ou crítica aberta?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_orq_c14
+    resumo: Review humano da entrega, inclusive do que os agentes geraram. Ajustes solicitados voltam para a análise da reprovação.
+    perguntas_chave:
+      - '"O review aprovou sem pendências?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_orq_c15
+    resumo: "Testes integrados no ambiente que a feature pede: staging, homologação ou produção controlada, com feature flag, teste A/B e o aceite do negócio."
+    perguntas_chave:
+      - '"Em qual ambiente esta feature precisa ser testada?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_orq_c16
+    resumo: "Implantação em produção com o checklist: versão, saúde, indicadores de monitoramento, logs e negócio. Implantação doente é revertida."
+    perguntas_chave:
+      - '"O checklist de implantação está verde?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_orq_c17
+    resumo: Depois de implantada, os stakeholders são acionados e, com estratégia de rollout, a feature é liberada por tipo de usuário ou região.
+    perguntas_chave:
+      - '"Quem precisa saber e quando cada público recebe a feature?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_orq_c18
+    resumo: Ciclo de validação em produção com monitoramento técnico e de negócio. Incidente causado pela feature aciona o fluxo de incidente.
+    perguntas_chave:
+      - '"As metas de sucesso foram atingidas na janela de validação?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_orq_c19
+    resumo: "Toda reprovação passa por análise de causa: na spec ou no contexto, volta à decomposição; na implementação, volta à execução."
+    perguntas_chave:
+      - '"A causa está na spec ou na implementação?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_orq_e1
+    resumo: "Retorno «feature_validada»: a feature está em produção, liberada, monitorada e com o resultado registrado contra as metas de sucesso."
+    perguntas_chave:
+      - '"Que sinal mostra que o requisito virou entrega previsível?"'
+      - '"Quem acompanha qualidade, custo e drift depois da entrega, quando a feature usa IA?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_orq_e2
+    resumo: "Retorno «reutilizar_existente»: uma solução que já existe atende a necessidade. A melhor feature é a que não precisa ser construída."
+    perguntas_chave:
+      - '"Quem é o dono da solução existente e como ela será disponibilizada?"'
+      - '"O que precisa ser comunicado aos interessados?"'
+    fazer:
+      - Combine com o dono da solução como o time vai usá-la
+      - Atualize o registro da necessidade com a decisão e avise os interessados
+    exemplo: "O componente de cupom já aceita regra por público: o time só configura a campanha, sem desenvolvimento novo."
+    status: rascunho
+    publico: false
+  - id: pb_feat_orq_e3
+    resumo: "Retorno «fora_dos_objetivos»: a iniciativa não move um OKR nem um KPI atual. Ela volta ao demandante com o motivo registrado e pode voltar quando os objetivos mudarem."
+    perguntas_chave:
+      - '"Qual objetivo futuro tornaria esta iniciativa prioritária?"'
+      - '"O demandante entendeu o motivo e o caminho para trazê-la de volta?"'
+    fazer:
+      - Registre o motivo no registro da necessidade
+      - Combine com o demandante quando reavaliar
+    exemplo: Ideia de programa de pontos registrada para o planejamento do próximo semestre, quando entra o objetivo de fidelização.
+    status: rascunho
+    publico: false
+  - id: pb_feat_lev_s0
+    resumo: "Início da raia Levantamento e enriquecimento de requisitos. Responsabilidade: levantar os requisitos e enriquecê-los até ficarem claros e completos."
+    perguntas_chave:
+      - '"O que já sabemos da necessidade?"'
+      - '"Qual é o registro de origem (ticket, documento ou conversa)?"'
+      - '"Quais lacunas de informação ainda existem?"'
+      - '"Quem precisamos consultar?"'
+      - '"Qual é o prazo desejado?"'
+    fazer:
+      - Reúna o que já se sabe e aponte o registro de origem
+      - Liste as lacunas de informação
+      - Defina quem consultar e em que ordem
+      - Combine o prazo desejado com as pessoas envolvidas
+    evitar:
+      - Começar a levantar sem ler o registro de origem
+      - Consultar só quem está mais à mão
+    status: rascunho
+    publico: false
+    exemplo: Registro da necessidade em PRD, mapa de interessados e métricas de sucesso já validados.
+  - id: pb_feat_lev_t1
+    resumo: Entrevista não basta. A primeira subtarefa classifica o contexto, e cada técnica só entra quando o contexto pede.
+    perguntas_chave:
+      - '"O que o usuário faz hoje para atender essa necessidade?"'
+      - '"Quais fluxos alternativos e erros já foram mapeados?"'
+      - '"O contexto é core, de suporte ou genérico?"'
+      - '"Quantos sistemas dependem desta mudança?"'
+    fazer:
+      - Classifique o contexto antes de escolher as técnicas
+      - 5 porquês com incerteza alta
+      - Impact Mapping em contexto core com muitos dependentes
+      - Event Storming em fluxo complexo ou com variações
+      - Jobs to Be Done para necessidade de usuário
+      - Observação do trabalho real quando há processo atual
+      - Análise de dados quando há dados disponíveis
+    evitar:
+      - Elicitação só com quem fala mais alto
+      - Confundir o que pedem com o que precisam
+      - Aplicar todas as técnicas em toda demanda
+    exemplo: "Contexto core com 4 dependentes e fluxo com variações: Impact Mapping, Event Storming e análise de dados."
+    status: rascunho
+    publico: false
+  - id: pb_feat_lev_g1
+    resumo: Requisitos claros seguem para o registro dos cards; incompletos voltam ao enriquecimento.
+    perguntas_chave:
+      - '"Os requisitos estão claros e completos?"'
+    exemplo: "Faltava o comportamento para boleto vencido: volta ao enriquecimento."
+    status: rascunho
+    publico: false
+  - id: pb_feat_lev_t2
+    resumo: "Transformar requisitos em trabalho previsível: histórias INVEST, 3 Amigos, critérios como exemplos e a Definition of Done mínima."
+    perguntas_chave:
+      - '"Como sabemos que está pronto?"'
+      - '"Qual o comportamento quando falha?"'
+      - '"Isso cabe numa sprint? Senão, como fatiamos?"'
+    fazer:
+      - "DoD mínima: critérios de aceite atendidos, gates de qualidade e segurança aprovados, requisitos funcionais e não funcionais cobertos por testes"
+    evitar:
+      - História gigante
+      - Critério genérico como «deve ser rápido»
+    exemplo: 6 histórias INVEST, 14 critérios em exemplos e a DoD mínima acordada com o time.
+    status: rascunho
+    publico: false
+  - id: pb_feat_lev_t3
+    resumo: Os requisitos saem registrados como cards na ferramenta de gestão do fluxo do time e como um contrato funcional e técnico de pronto, da visão de negócio aos testes e à análise de vulnerabilidades.
+    perguntas_chave:
+      - '"Cada card tem critérios de aceite e dependências?"'
+      - '"O contrato diz quais testes e quais análises de segurança provam o pronto?"'
+    exemplo: 6 cards com critérios e o contrato de pronto anexado ao registro da necessidade.
+    status: rascunho
+    publico: false
+  - id: pb_feat_lev_e1
+    resumo: "Retorno «requisitos_claros»: requisitos levantados, histórias refinadas, critérios de aceite, DoD, cards e contrato de pronto."
+    perguntas_chave:
+      - '"Os critérios de aceite estão em exemplos que dá para testar?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_spc_s0
+    resumo: "Início da raia Especificação (SDD). Responsabilidade: escrever a spec que serve de contrato para o time e para agentes."
+    perguntas_chave:
+      - '"O requisito pronto traz contexto, exemplos e critérios para virar spec?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_spc_g1
+    exemplo: A feature sugere produtos com um modelo de recomendação, então a saída varia e o fluxo segue pelo caminho com IA.
+    resumo: "Define usa_ia. Com IA, a saída varia: a spec precisa de critérios de avaliação (evals) e de custo, e a validação e a entrega herdam isso."
+    perguntas_chave:
+      - '"A saída da feature varia para a mesma entrada (LLM, classificador, recomendação)?"'
+    fazer:
+      - Registre usa_ia (sim|nao); ele ativa o requisito probabilistico_ia na spec, na validação (evals) e na entrega (observabilidade de IA)
+      - "Critério da saída «sim, usa IA»: há LLM, agente de IA, classificador, recomendação ou outro modelo cuja saída é probabilística"
+      - "Critério da saída «não, só lógica determinística»: a mesma entrada sempre produz a mesma saída"
+      - "O fato de um agente ESCREVER o código não faz a feature usar IA: usa_ia trata do que a feature faz em produção, não de quem a construiu"
+    evitar:
+      - Marcar usa_ia só porque um agente vai codar a feature
+      - Descobrir o custo por chamada depois do deploy
+    status: rascunho
+    publico: false
+  - id: pb_feat_spc_t1
+    resumo: Com IA, a spec precisa de critérios de avaliação (evals), orçamento de custo por chamada, plano B e riscos de alucinação e de dependência de fornecedor do modelo.
+    perguntas_chave:
+      - '"Qual conjunto de casos prova que a saída é boa o suficiente?"'
+      - '"Qual o teto de custo por chamada e o que acontece se for ultrapassado?"'
+      - '"Qual o plano B se o modelo ou o fornecedor ficar indisponível?"'
+    fazer:
+      - Defina os casos de avaliação e o limiar de aceite
+      - Registre o custo por chamada e por tarefa
+      - Liste casos conhecidos de alucinação
+    exemplo: Aceite com 90% de sugestões válidas em 50 casos; teto de custo por chamada; fallback para regra fixa.
+    status: rascunho
+    publico: false
+  - id: pb_feat_spc_t2
+    resumo: "O requirements.md é o contrato do que a feature faz: histórias, critérios de aceite em EARS, requisitos não funcionais com metas e, com IA, o requisito probabilístico."
+    perguntas_chave:
+      - '"Cada critério de aceite é verificável por um teste?"'
+      - '"Os requisitos não funcionais têm metas numéricas?"'
+      - '"A feature muda uma jornada de usuário?"'
+    evitar:
+      - Critério genérico como «deve ser rápido»
+    exemplo: requirements.md com 6 histórias, 14 critérios em EARS e 4 requisitos não funcionais.
+    status: rascunho
+    publico: false
+  - id: pb_feat_spc_t3
+    resumo: O DDD é a base para extrair módulos, contextos e integrações. Os contextos delimitados viram módulos com dono, e o mapa de contextos mostra as integrações.
+    perguntas_chave:
+      - '"Quais contextos a feature toca e quem é o dono de cada um?"'
+      - '"A linguagem do negócio está igual no código e na conversa?"'
+      - '"Quais integrações entre contextos surgem?"'
+    exemplo: "Contextos Promoções e Pedidos, integração por eventos, termo único: comprador recorrente."
+    status: rascunho
+    publico: false
+  - id: pb_feat_spc_t4
+    resumo: "O design.md reúne a visão arquitetural completa: diagramas de arquitetura e de sequência, dados, contratos, tecnologias, stack, estrutura do projeto, padrões e boas práticas. É dele que saem as tarefas."
+    perguntas_chave:
+      - '"Dá para decompor o design em tarefas sem voltar a perguntar?"'
+      - '"Os fluxos principais têm diagrama de sequência?"'
+      - '"As alternativas descartadas e os riscos estão registrados?"'
+    evitar:
+      - Design só com texto, sem diagramas
+      - Decidir stack sem considerar o que o time já opera
+    status: rascunho
+    publico: false
+    exemplo: "design.md do cupom recorrente: C4 com 3 contêineres, 2 diagramas de sequência, contrato de validação, stack e padrões."
+  - id: pb_feat_spc_t5
+    resumo: Nesta fase começam as principais decisões de arquitetura. Cada decisão relevante vira ADR, e as que afetam outros times são aprovadas com os stakeholders.
+    perguntas_chave:
+      - '"Quais decisões são difíceis de reverter?"'
+      - '"Quais stakeholders precisam aprovar cada decisão?"'
+    fazer:
+      - Um ADR por decisão, com contexto, alternativas e consequências
+      - Reunião curta com quem a decisão afeta
+    exemplo: ADR de integração por eventos aprovado com Pedidos e Pagamentos.
+    status: rascunho
+    publico: false
+  - id: pb_feat_spc_g2
+    resumo: A spec só segue para a decomposição com requirements, design e ADRs aprovados. Sem aprovação, o design é revisto.
+    perguntas_chave:
+      - '"Os stakeholders aprovaram as decisões que os afetam?"'
+    status: rascunho
+    publico: false
+    exemplo: "Aprovada: ADR de eventos aceito por Pedidos e Pagamentos; segue para a decomposição."
+  - id: pb_feat_spc_e1
+    resumo: "Retorno «spec_pronta»: requirements.md, design.md e ADRs prontos e aprovados, com a visão arquitetural completa para decompor em tarefas."
+    perguntas_chave:
+      - '"A spec tem tudo o que a decomposição precisa?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_alo_s0
+    resumo: "Início da raia Decomposição e alocação de tarefas. Responsabilidade: decompor a spec em tarefas e alocar cada uma ao agente, a pessoas ou a ambos."
+    perguntas_chave:
+      - '"A spec está clara o bastante para ser quebrada em tarefas verificáveis?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_alo_t1
+    exemplo: A spec do cupom é quebrada em 9 tarefas de até um dia, cada uma com um teste que mostra se está pronta.
+    resumo: Depois do ciclo de SDD, a spec vira um conjunto de tarefas. Tarefa pequena e verificável é a unidade que dá para delegar, testar e revisar.
+    perguntas_chave:
+      - '"Cada tarefa tem um critério de pronto que um teste ou uma pessoa consegue checar?"'
+    fazer:
+      - Cada tarefa precisa de entrada, saída e critério de aceite que um teste ou uma pessoa consiga checar
+      - "Tamanho de referência: uma tarefa cabe em uma única revisão"
+      - "A decomposição é uma proposta: o agente pode rascunhar e a pessoa valida o recorte"
+    evitar:
+      - Tarefa gigante que mistura decisão e implementação
+      - Tarefa sem critério de aceite verificável
+    tecnicas:
+      - tec_slicing_vertical
+    status: rascunho
+    publico: false
+  - id: pb_feat_alo_t2
+    resumo: Cada tarefa precisa de um papel principal e dos papéis de apoio. Quem exerce cada papel, uma pessoa ou um agente do papel, é decidido depois, no setup.
+    perguntas_chave:
+      - '"Qual papel é dono de cada tarefa?"'
+      - '"Quais tarefas tocam segurança, dados pessoais ou decisões de arquitetura?"'
+    evitar:
+      - Decidir agente ou pessoa antes de saber o papel
+    status: rascunho
+    publico: false
+    exemplo: "9 tarefas: 5 com papel Dev, 2 com QA, 1 com Arquiteto e 1 com Engenharia de dados; 2 marcadas como sensíveis."
+  - id: pb_feat_alo_t3
+    resumo: "Dependências e ordem: decisões que bloqueiam vêm primeiro, depois a execução em paralelo onde possível, depois a integração."
+    perguntas_chave:
+      - '"Quais tarefas dependem de uma decisão ainda aberta?"'
+      - '"O que pode rodar em paralelo?"'
+    status: rascunho
+    publico: false
+    exemplo: Contrato do evento primeiro; endpoint, consumidor e testes em paralelo; integração por último.
+  - id: pb_feat_alo_e1
+    resumo: "Retorno «tarefas_mapeadas»: tarefas, papéis, dependências e ordem prontos para o setup da execução."
+    perguntas_chave:
+      - '"Toda tarefa tem papel, critério de pronto e dependências?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_ite_s0
+    resumo: "Início da raia. Toda reprovação tem uma causa: na spec ou no contexto, volta à decomposição; na implementação, volta à execução com a correção aberta."
+    perguntas_chave:
+      - '"O que esta raia recebe de quem a chamou?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_ite_t1
+    resumo: "Analisar a causa da reprovação. Toda reprovação tem uma causa: na spec ou no contexto, volta à decomposição; na implementação, volta à execução com a correção aberta."
+    perguntas_chave:
+      - '"Qual artefato esta tarefa entrega?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_ite_g1
+    resumo: "A causa na spec ou no contexto volta à decomposição; na implementação, segue para avaliar o impacto: bug ou incidente."
+    perguntas_chave:
+      - '"A causa está na spec ou na implementação?"'
+    status: rascunho
+    publico: false
+    exemplo: "Critério de recusa ambíguo: causa na spec."
+  - id: pb_feat_ite_t2
+    resumo: "Ajustar a spec e o contexto. Toda reprovação tem uma causa: na spec ou no contexto, volta à decomposição; na implementação, volta à execução com a correção aberta."
+    perguntas_chave:
+      - '"Qual artefato esta tarefa entrega?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_ite_t3
+    resumo: "Abrir a correção na implementação. Toda reprovação tem uma causa: na spec ou no contexto, volta à decomposição; na implementação, volta à execução com a correção aberta."
+    perguntas_chave:
+      - '"Qual artefato esta tarefa entrega?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_ite_e1
+    resumo: "Retorno «spec_ajustada»: spec e contexto ajustados."
+    perguntas_chave:
+      - '"O retorno entrega: Ajuste da spec?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_ite_e2
+    resumo: "Retorno «correcao_na_implementacao»: correção aberta para a execução."
+    perguntas_chave:
+      - '"O retorno entrega: Tarefa de correção?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_ite_g2
+    resumo: "Falha na implementação que ficou só na feature segue como bug. Se impactou vários usuários em produção, vira incidente: primeiro restaurar o serviço, depois corrigir."
+    perguntas_chave:
+      - '"A falha chegou a usuários em produção?"'
+      - '"Quantos usuários, compras ou regiões foram afetados?"'
+      - '"Já existe um incidente aberto para esta falha?"'
+    fazer:
+      - "Use os critérios de incidente: raio de impacto, perda de dados, segurança, dinheiro ou degradação sem contorno"
+    exemplo: "Erro só em homologação: bug. Erro em 4% dos checkouts de uma região em produção: incidente."
+    status: rascunho
+    publico: false
+  - id: pb_feat_ite_t4
+    resumo: Com impacto amplo, o fluxo de incidente assume a mitigação. A feature registra a correção que vai precisar e volta à execução depois.
+    perguntas_chave:
+      - '"O incidente já foi aberto pelo monitoramento?"'
+      - '"Quem é o incident commander?"'
+    evitar:
+      - Abrir um segundo incidente para a mesma falha
+      - Corrigir a feature antes de mitigar o impacto
+    exemplo: Incidente vinculado; flag desligada pelo incidente; card de correção criado para a feature.
+    status: rascunho
+    publico: false
+  - id: pb_feat_ite_e3
+    resumo: "Retorno «incidente_acionado»: o incidente cuida da mitigação e a correção da feature volta à execução."
+    perguntas_chave:
+      - '"A correção registrada tem o teste que comprova o pronto?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_ent_s0
+    resumo: Toda feature nasce de uma necessidade ou de uma oportunidade. Antes de pensar no que construir, entenda o porquê e verifique se já não existe algo que possa ser reutilizado. Em uma empresa, confirme também se a iniciativa está dentro dos objetivos reais, considerando os OKRs e os KPIs.
+    perguntas_chave:
+      - '"Esta demanda nasce de uma necessidade ou de uma oportunidade?"'
+      - '"Já existe algo que possamos reutilizar ou adaptar?"'
+      - '"Qual OKR e qual KPI esta iniciativa move?"'
+      - '"Quem se beneficia e em que contexto?"'
+    fazer:
+      - Registre se é necessidade ou oportunidade e quem a trouxe
+      - Pesquise o que já existe antes de propor algo novo
+      - Confirme o OKR e o KPI que a iniciativa move
+      - Liste as pessoas que se beneficiam
+    evitar:
+      - Pular o porquê e ir direto para a solução
+      - Ignorar o que já existe e poderia ser reutilizado
+      - Seguir sem alinhar a iniciativa aos objetivos da empresa
+    status: rascunho
+    publico: false
+  - id: pb_feat_ent_t1
+    resumo: "Registrar a necessidade ou oportunidade no formato que o time usa. O modelo de trabalho do time define o formato: PRD, documento de visão, termo de abertura, plano de negócio ou card no fluxo."
+    perguntas_chave:
+      - '"É necessidade de usuário, oportunidade de negócio, objetivo estratégico, exigência regulatória ou melhoria interna?"'
+      - '"Qual time vai atender e qual é o modelo de trabalho dele?"'
+      - '"Há um segundo modelo envolvido, como um time de dados apoiando um time de produto?"'
+      - '"Quanto já sabemos: a incerteza é baixa, média ou alta?"'
+      - '"Qual formato de registro esse time usa e lê?"'
+    fazer:
+      - Registre quem trouxe a demanda e a origem dela
+      - Classifique o modelo de trabalho e a incerteza no próprio registro
+      - Use o formato que o time já lê; o card no fluxo aponta para o documento quando houver
+    evitar:
+      - Escrever um documento longo para uma demanda de baixa incerteza
+      - Seguir com a demanda só na conversa, sem registro
+    exemplo: "Oportunidade de negócio, time de produto com PM apoiado pelo time de dados, incerteza média: PRD curto e card no fluxo do time."
+    status: rascunho
+    publico: false
+  - id: pb_feat_ent_t2
+    resumo: "Antes de propor algo novo, procure o que já existe: serviços, componentes, bibliotecas, dados e decisões anteriores. Reutilizar reduz custo, prazo e risco."
+    perguntas_chave:
+      - '"Algum time já resolveu algo parecido?"'
+      - '"Existe serviço, componente ou dado que atende parte da necessidade?"'
+      - '"Por que a solução existente não foi usada até agora?"'
+      - '"Adaptar o que existe custa menos que construir?"'
+    fazer:
+      - Pesquise no catálogo de serviços e nas decisões registradas
+      - Confirme o encaixe com quem conhece cada solução
+      - Classifique o resultado como atende, parcial ou não existe
+    evitar:
+      - Concluir que nada serve sem perguntar a quem conhece
+      - Copiar uma solução sem entender os limites dela
+    exemplo: O componente de cupom atende 70% da necessidade; a regra por histórico de compra é a única parte nova.
+    status: rascunho
+    publico: false
+  - id: pb_feat_ent_g1
+    resumo: Se uma solução existente atende por completo, a raia termina com «reutilizar_existente». Se atende em parte, o que existe entra como restrição e o entendimento continua.
+    perguntas_chave:
+      - '"A solução existente atende a necessidade inteira ou só uma parte?"'
+      - '"O dono da solução concorda com o novo uso?"'
+    exemplo: "Atende em parte: o componente de cupom entra como base, e a regra por histórico vira o escopo novo."
+    status: rascunho
+    publico: false
+  - id: pb_feat_ent_t3
+    resumo: O PM traz o porquê; o engenheiro garante que o porquê vira resultado verificável. As subtarefas mudam conforme a origem e a incerteza da demanda.
+    perguntas_chave:
+      - '"Qual resultado de negócio ou de usuário muda, e como saberemos?"'
+      - '"Quem pede, quem usa, quem decide, quem opera e quem é afetado?"'
+      - '"Qual OKR e qual KPI a iniciativa move, e qual a meta?"'
+      - '"Qual o custo de adiar?"'
+      - '"Quais restrições já são conhecidas: prazo, compliance, custo?"'
+    fazer:
+      - Escreva o objetivo como "queremos [resultado] medido por [métrica]"
+      - Execute só as subtarefas que a origem e a incerteza pedem
+    evitar:
+      - Pular direto para a solução técnica
+      - Aceitar "precisa ser rápido" sem número
+      - Ignorar custo como requisito
+    exemplo: Queremos aumentar a recompra em 30 dias de 18% para 20%, medida pelo painel de recompra, até o fim do trimestre.
+    status: rascunho
+    publico: false
+  - id: pb_feat_ent_g2
+    resumo: Uma iniciativa que não move um objetivo atual do demandante volta a ele com o motivo registrado. Isso protege o foco do time e deixa a porta aberta para o futuro.
+    perguntas_chave:
+      - '"Qual KR ou KPI esta iniciativa move de forma mensurável?"'
+      - '"Existe uma exigência regulatória que torna a iniciativa obrigatória mesmo sem OKR?"'
+    exemplo: "Exigência regulatória sem OKR associado: segue como alinhada, porque cumprir a regra é objetivo do demandante."
+    status: rascunho
+    publico: false
+  - id: pb_feat_ent_t4
+    resumo: Validar o entendimento com os interessados antes de levantar requisitos evita retrabalho. A validação termina com uma aprovação registrada e o time avisado.
+    perguntas_chave:
+      - '"Os interessados reconhecem a necessidade como foi escrita?"'
+      - '"A métrica de sucesso é a que eles vão acompanhar?"'
+    fazer:
+      - Faça uma revisão curta e registre a aprovação no registro da necessidade
+      - Avise o time com o link do registro e o próximo passo
+    evitar:
+      - Seguir com aprovação só verbal
+    exemplo: Aprovação registrada pelo PM e pela liderança comercial; mensagem publicada no canal do time.
+    status: rascunho
+    publico: false
+  - id: pb_feat_ent_e1
+    resumo: "Retorno «necessidade_entendida»: a necessidade está registrada no formato do time, com interessados, métricas de sucesso, modelo de trabalho e incerteza. Esses itens são a entrada do levantamento de requisitos."
+    perguntas_chave:
+      - '"O objetivo está escrito como resultado medido por uma métrica?"'
+      - '"O registro diz qual modelo de trabalho e qual incerteza orientam os próximos passos?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_ent_e2
+    resumo: "Retorno «reutilizar_existente»: o levantamento de reuso mostrou uma solução que atende por completo."
+    perguntas_chave:
+      - '"O levantamento registra a solução escolhida e o dono dela?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_ent_e3
+    resumo: "Retorno «fora_dos_objetivos»: a iniciativa não está alinhada aos OKRs e KPIs atuais e volta ao demandante com o motivo."
+    perguntas_chave:
+      - '"O motivo está registrado de forma que o demandante entenda?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_cls_s0
+    resumo: "Início da raia Classificação e escopo dos requisitos. Responsabilidade: classificar os requisitos para delimitar o escopo."
+    perguntas_chave:
+      - '"O requisito já está claro o bastante para ser classificado?"'
+    status: rascunho
+    publico: false
+  - id: pb_feat_cls_t1
+    exemplo: 15 requisitos classificados, 4 fora do escopo registrados para a próxima iteração.
+    resumo: Classificar mostra o que é comportamento, o que é qualidade e o que é limite. Priorizar e registrar o que fica fora protege o prazo e o foco.
+    perguntas_chave:
+      - '"Cada requisito é funcional, não funcional, restrição ou inverso?"'
+      - '"O que precisa entrar agora e o que pode esperar?"'
+      - '"O que fica fora do escopo está escrito e combinado?"'
+    fazer:
+      - "Funcional: o que o sistema deve fazer"
+      - "NFR: performance, segurança, escalabilidade, custo"
+      - "Restrição: tecnologia, prazo, compliance"
+      - "Inverso: o que NÃO deve acontecer (tão importante quanto)"
+    evitar:
+      - Tratar requisito não funcional como detalhe de implementação
+      - Escopo aberto sem a lista do que fica fora
+    tecnicas:
+      - tec_requisitos_funcionais
+      - tec_requisitos_n_o_funcionais
+      - tec_moscow
+    status: rascunho
+    publico: false
+  - id: pb_feat_cls_c1
+    resumo: Chama a raia Prontidão (Definition of Ready) logo depois de classificar e delimitar o escopo. Costuma ser uma confirmação rápida com o time; quando falta algo, a própria raia de prontidão refina até atender.
+    perguntas_chave:
+      - '"O time puxaria este item hoje sem perguntas pendentes?"'
+    fazer:
+      - "Retorno possível: pronto_para_iniciar"
+    status: rascunho
+    publico: false
+  - id: pb_feat_cls_e1
+    resumo: "Retorno «pronto_para_especificar» da raia Classificação, escopo e prontidão: requisitos classificados em funcional, NFR, restrição e inverso, escopo delimitado e Definition of Ready confirmada. Quem chamou a raia segue por este retorno."
+    perguntas_chave:
+      - '"Algum NFR ou restrição ficou de fora da classificação?"'
+    status: rascunho
+    publico: false
+celulas:
+  - demanda: feature
+    requisito: funcional
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: feature
+    requisito: nao_funcional
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: feature
+    requisito: restricao
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: feature
+    requisito: probabilistico_ia
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false

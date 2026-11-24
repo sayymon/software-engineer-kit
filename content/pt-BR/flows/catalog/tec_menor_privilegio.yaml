@@ -1,0 +1,12 @@
+id: tec_menor_privilegio
+tipo: tecnica
+nome: Menor privilégio
+descricao: Cada agente ou pessoa recebe só o acesso que a tarefa exige.
+quando_usar:
+  - Configurar ferramentas e permissões de agentes
+  - Liberar acesso para uma tarefa nova
+quando_evitar:
+  - Ambiente descartável e isolado de experimentação
+status: rascunho
+publico: false
+exemplo: Agente Dev pode abrir PR, não pode fazer merge nem acessar dados de produção.

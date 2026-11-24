@@ -1,0 +1,12 @@
+id: tec_deploy_gradual
+tipo: tecnica
+nome: Deploy gradual
+descricao: Liberação para uma fração dos usuários, ampliando conforme os indicadores.
+quando_usar:
+  - Mudanças de risco
+  - Hotfix em serviço crítico
+quando_evitar:
+  - Sistemas sem capacidade de rotear por fração
+status: rascunho
+publico: false
+exemplo: Versão nova recebe 5%, 25% e 100% do tráfego, com 30 minutos de observação entre as etapas.

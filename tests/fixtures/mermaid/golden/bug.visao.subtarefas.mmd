@@ -1,0 +1,71 @@
+flowchart LR
+  subgraph z_SG_bug_orq["<b>Orquestração do bug</b>"]
+    direction LR
+    bug_orq_s0(["<small><b>bug_orq_s0</b></small><br/>Bug reportado"])
+    bug_orq_c1[["<small><b>bug_orq_c1</b></small><br/>Reproduzir o problema"]]
+    bug_orq_c2[["<small><b>bug_orq_c2</b></small><br/>Triar e classificar o bug"]]
+    bug_orq_e1(["<small><b>bug_orq_e1</b></small><br/>Fechado sem reprodução (reabrir se reaparecer)<br/><i>retorno: fechado_sem_reproducao</i>"])
+    bug_orq_c3[["<small><b>bug_orq_c3</b></small><br/>Corrigir a causa raiz"]]
+    bug_orq_e2(["<small><b>bug_orq_e2</b></small><br/>Esclarecido como comportamento esperado<br/><i>retorno: esclarecido</i>"])
+    bug_orq_e3(["<small><b>bug_orq_e3</b></small><br/>Encaminhado ao fluxo de feature<br/><i>retorno: encaminhado</i>"])
+    bug_orq_g1{"<small><b>bug_orq_g1</b></small><br/>É hotfix?"}
+    bug_orq_c4[["<small><b>bug_orq_c4</b></small><br/>Publicar a correção em ambiente de testes"]]
+    bug_orq_c7[["<small><b>bug_orq_c7</b></small><br/>Validar, entregar e verificar em produção"]]
+    bug_orq_c5[["<small><b>bug_orq_c5</b></small><br/>Testes regressivos do bug e das funcionalidades core"]]
+    bug_orq_c8[["<small><b>bug_orq_c8</b></small><br/>Analisar o escape e registrar a prevenção"]]
+    bug_orq_c6[["<small><b>bug_orq_c6</b></small><br/>Regressão das jornadas afetadas e das jornadas core"]]
+    bug_orq_e4(["<small><b>bug_orq_e4</b></small><br/>Bug corrigido, verificado e fechado<br/><i>retorno: corrigido_e_fechado</i>"])
+  end
+  bug_orq_s0 --> bug_orq_c1
+  bug_orq_c1 -->|"reproduzido"| bug_orq_c2
+  bug_orq_c1 -->|"nao_reproduzido"| bug_orq_e1
+  bug_orq_c2 -->|"hotfix"| bug_orq_c3
+  bug_orq_c2 -->|"backlog"| bug_orq_c3
+  bug_orq_c2 -->|"comportamento_esperado"| bug_orq_e2
+  bug_orq_c2 -->|"pedido_feature"| bug_orq_e3
+  bug_orq_c3 -->|"correcao_pronta"| bug_orq_g1
+  bug_orq_g1 -->|"sim: hotfix segue direto para a validação e entrega"| bug_orq_c7
+  bug_orq_g1 -->|"não: publicar e rodar a regressão"| bug_orq_c4
+  bug_orq_c4 -->|"publicado"| bug_orq_c5
+  bug_orq_c4 -->|"falha_na_publicacao"| bug_orq_c3
+  bug_orq_c7 -->|"verificado"| bug_orq_c8
+  bug_orq_c7 -->|"nao_corrigido"| bug_orq_c3
+  bug_orq_c5 -->|"testes_aprovados"| bug_orq_c6
+  bug_orq_c5 -->|"testes_reprovados"| bug_orq_c3
+  bug_orq_c8 -->|"acao_registrada"| bug_orq_e4
+  bug_orq_c6 -->|"aprovado"| bug_orq_c7
+  bug_orq_c6 -->|"nao_aplicavel"| bug_orq_c7
+  bug_orq_c6 -->|"reprovado"| bug_orq_c3
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#0072B2,stroke:#00446B,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#E69F00,stroke:#8A5F00,stroke-width:1px,color:#000000
+  classDef z_R_3 fill:#009E73,stroke:#005F45,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#BBCC33,stroke:#707A1F,stroke-width:1px,color:#000000
+  classDef z_R_5 fill:#117733,stroke:#0A471F,stroke-width:1px,color:#FFFFFF
+  classDef z_R_6 fill:#D55E00,stroke:#803800,stroke-width:1px,color:#000000
+  classDef z_R_7 fill:#CC79A7,stroke:#7A4964,stroke-width:1px,color:#000000
+  classDef z_R_8 fill:#F0E442,stroke:#908928,stroke-width:1px,color:#000000
+  classDef z_R_9 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_R_10 fill:#999933,stroke:#5C5C1F,stroke-width:1px,color:#000000
+  classDef z_R_11 fill:#77AADD,stroke:#476685,stroke-width:1px,color:#000000
+  classDef z_C_0_1 fill:#0072B2,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_2 fill:#E69F00,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_3 fill:#009E73,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_4 fill:#BBCC33,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_5 fill:#117733,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_6 fill:#D55E00,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_7 fill:#CC79A7,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_8 fill:#F0E442,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  class bug_orq_c1 z_C_0_1
+  class bug_orq_c2 z_C_0_2
+  class bug_orq_c3 z_C_0_3
+  class bug_orq_c4 z_C_0_4
+  class bug_orq_c7 z_C_0_5
+  class bug_orq_c5 z_C_0_6
+  class bug_orq_c8 z_C_0_7
+  class bug_orq_c6 z_C_0_8
+  class bug_orq_s0,bug_orq_e1,bug_orq_e2,bug_orq_e3,bug_orq_g1,bug_orq_e4 z_R_0
+  class bug_orq_g1 gw
+  style z_SG_bug_orq fill:#E7ECEE,stroke:#607D8B,stroke-width:3px,color:#000000

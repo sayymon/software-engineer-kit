@@ -1,0 +1,323 @@
+{
+  "title": "caso-de-uso",
+  "x-translatable": [
+    "nome",
+    "descricao",
+    "body",
+    "nicho"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+    },
+    "nome": {
+      "type": "string",
+      "minLength": 1
+    },
+    "descricao": {
+      "type": "string"
+    },
+    "publico": {
+      "default": false,
+      "type": "boolean"
+    },
+    "fontes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "livro",
+              "artigo",
+              "curso"
+            ]
+          },
+          "titulo": {
+            "type": "string",
+            "minLength": 1
+          },
+          "link": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status_revisao": {
+            "type": "string",
+            "enum": [
+              "pendente",
+              "em_revisao",
+              "revisada"
+            ]
+          },
+          "proxima_revisao": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          }
+        },
+        "required": [
+          "id",
+          "tipo",
+          "titulo",
+          "link",
+          "status_revisao",
+          "proxima_revisao"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "fonte_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dataVerificacao": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "guia_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+      }
+    },
+    "tipo": {
+      "type": "string",
+      "const": "caso-de-uso"
+    },
+    "nivel": {
+      "type": "string",
+      "enum": [
+        "macro",
+        "caso"
+      ]
+    },
+    "eixo": {
+      "type": "string",
+      "enum": [
+        "tarefa",
+        "cenario"
+      ]
+    },
+    "macro": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+        },
+        {
+          "type": "string",
+          "const": ""
+        }
+      ]
+    },
+    "funcionalidadesNecessarias": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+      }
+    },
+    "categoriasRelacionadas": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+      }
+    },
+    "ferramentasRecomendadas": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+      }
+    },
+    "modelosRecomendados": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+      }
+    },
+    "criteriosDesempate": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "criterioPadrao": {
+      "type": "string",
+      "enum": [
+        "custo",
+        "privacidade-de-dados",
+        "lock-in"
+      ]
+    },
+    "porte": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "segmentos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "nicho": {
+      "type": "string"
+    },
+    "faixasPadrao": {
+      "type": "object",
+      "properties": {
+        "maisBarata": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(\\[\\[[^\\[\\]\\n]+\\]\\]|tabela:[a-z0-9_-]+)$"
+          }
+        },
+        "custoBeneficio": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(\\[\\[[^\\[\\]\\n]+\\]\\]|tabela:[a-z0-9_-]+)$"
+          }
+        },
+        "qualidadeMaxima": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(\\[\\[[^\\[\\]\\n]+\\]\\]|tabela:[a-z0-9_-]+)$"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "variacoes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+          },
+          "nome": {
+            "type": "string",
+            "minLength": 1
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "funcionalidades": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+            }
+          },
+          "herdaFerramentas": {
+            "type": "boolean"
+          },
+          "maisBarata": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^(\\[\\[[^\\[\\]\\n]+\\]\\]|tabela:[a-z0-9_-]+)$"
+            }
+          },
+          "custoBeneficio": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^(\\[\\[[^\\[\\]\\n]+\\]\\]|tabela:[a-z0-9_-]+)$"
+            }
+          },
+          "qualidadeMaxima": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^(\\[\\[[^\\[\\]\\n]+\\]\\]|tabela:[a-z0-9_-]+)$"
+            }
+          },
+          "justificativaFerramentas": {
+            "type": "string"
+          },
+          "excecao": {
+            "type": "string"
+          },
+          "parametros": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "chave": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "valor": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean"
+                  ]
+                },
+                "fonte": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "chave",
+                "valor",
+                "fonte"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "verificadoEm": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          }
+        },
+        "required": [
+          "id",
+          "nome",
+          "herdaFerramentas"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "id",
+    "nome",
+    "tipo",
+    "nivel"
+  ],
+  "additionalProperties": false
+}

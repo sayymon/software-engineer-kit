@@ -1,0 +1,17 @@
+id: tec_prompt_engineering
+tipo: tecnica
+nome: Prompt engineering
+descricao: Escrever instruções, contexto e exemplos para que o modelo ou o agente produza a saída esperada de forma estável.
+quando_usar:
+  - Definir agentes e features com IA
+  - Corrigir desvios de instrução ou contexto
+quando_evitar:
+  - Problemas cuja causa é a spec ambígua
+exemplo: Instrução do agente Dev passou a exigir a leitura da spec de datas antes de tocar em campos de data.
+como_aplicar:
+  - Defina papel, objetivo e limites
+  - Dê contexto e exemplos
+  - Teste com casos de avaliação e itere
+resultado_esperado: Instrução versionada e testada por evals.
+status: rascunho
+publico: false

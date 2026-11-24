@@ -1,0 +1,27 @@
+name: Content suggestion / Sugestão de conteúdo
+description: Propose a new note, a fix or a translation.
+labels: [content]
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind / Tipo
+      options:
+        - New note / Nova nota
+        - Fix to an existing note / Correção
+        - English translation / Tradução para inglês
+    validations:
+      required: true
+  - type: input
+    id: target
+    attributes:
+      label: Note id or page / Id da nota ou página
+    validations:
+      required: false
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal / Proposta
+      description: What to add or change, with sources when you have them.
+    validations:
+      required: true

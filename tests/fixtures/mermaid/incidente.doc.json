@@ -1,0 +1,2532 @@
+{
+ "demandas": [
+  {
+   "id": "comum",
+   "nome": "Raias comuns",
+   "sigla": "com",
+   "biblioteca": true
+  },
+  {
+   "id": "feature",
+   "nome": "Feature",
+   "sigla": "feat"
+  },
+  {
+   "id": "bug",
+   "nome": "Bug",
+   "sigla": "bug"
+  },
+  {
+   "id": "incidente",
+   "nome": "Incidente",
+   "sigla": "inc"
+  },
+  {
+   "id": "chore",
+   "nome": "Tarefa operacional (chore)",
+   "sigla": "cho"
+  },
+  {
+   "id": "divida_tecnica",
+   "nome": "Dívida técnica e refatoração",
+   "sigla": "dvt"
+  },
+  {
+   "id": "infraestrutura",
+   "nome": "Infraestrutura e DevOps",
+   "sigla": "inf"
+  },
+  {
+   "id": "teste_qa",
+   "nome": "Teste e qualidade",
+   "sigla": "tqa"
+  },
+  {
+   "id": "documentacao",
+   "nome": "Documentação",
+   "sigla": "doc"
+  },
+  {
+   "id": "migracao",
+   "nome": "Migração e upgrade",
+   "sigla": "mig"
+  },
+  {
+   "id": "descontinuacao",
+   "nome": "Descontinuação e deprecação",
+   "sigla": "dsc"
+  }
+ ],
+ "raias": [
+  {
+   "id": "inc_orq",
+   "nome": "Orquestração do incidente",
+   "demanda": "incidente",
+   "responsabilidade": "Conduzir o incidente do alerta ao serviço restaurado, delegando cada etapa a uma raia",
+   "cor": "#607D8B",
+   "orquestradora": true
+  },
+  {
+   "id": "inc_tri",
+   "nome": "Detecção e triagem",
+   "demanda": "incidente",
+   "responsabilidade": "Confirmar se o alerta tem impacto real no cliente",
+   "cor": "#0072B2"
+  },
+  {
+   "id": "inc_cls",
+   "nome": "Classificação de severidade",
+   "demanda": "incidente",
+   "responsabilidade": "Classificar a severidade do incidente, considerando janelas críticas",
+   "cor": "#E69F00"
+  },
+  {
+   "id": "inc_cmd",
+   "nome": "Comando do incidente",
+   "demanda": "incidente",
+   "responsabilidade": "Definir o comando conforme a estrutura do time e sinalizar a necessidade de escalada",
+   "cor": "#009E73"
+  },
+  {
+   "id": "inc_esc",
+   "nome": "Escalada",
+   "demanda": "incidente",
+   "responsabilidade": "Escalar o incidente para outro time ou para a liderança",
+   "cor": "#D55E00"
+  },
+  {
+   "id": "inc_rcl",
+   "nome": "Reavaliação de severidade",
+   "demanda": "incidente",
+   "responsabilidade": "Reavaliar a severidade e dizer se ela mudou",
+   "cor": "#CC79A7"
+  },
+  {
+   "id": "inc_com",
+   "nome": "Comunicação por severidade",
+   "demanda": "incidente",
+   "responsabilidade": "Comunicar o incidente na cadência da severidade",
+   "cor": "#56B4E9"
+  },
+  {
+   "id": "inc_con",
+   "nome": "Contenção de danos",
+   "demanda": "incidente",
+   "responsabilidade": "Conter os danos na intensidade da severidade",
+   "cor": "#882255"
+  },
+  {
+   "id": "inc_mit",
+   "nome": "Mitigação e verificação",
+   "demanda": "incidente",
+   "responsabilidade": "Restaurar o serviço e verificar a estabilidade em até 3 tentativas",
+   "cor": "#999933"
+  },
+  {
+   "id": "inc_enc",
+   "nome": "Encerramento",
+   "demanda": "incidente",
+   "responsabilidade": "Encerrar o incidente com a causa tratada e a resolução comunicada",
+   "cor": "#44AA99"
+  },
+  {
+   "id": "inc_pos",
+   "nome": "Aprendizado pós-incidente",
+   "demanda": "incidente",
+   "responsabilidade": "Transformar o incidente em aprendizado e ações corretivas",
+   "cor": "#332288"
+  }
+ ],
+ "decisoes": [
+  {
+   "id": "inc_orq_s0",
+   "raia": "inc_orq",
+   "tipo": "inicio",
+   "rotulo": "Alerta ou relato de falha em produção",
+   "proximo": [
+    {
+     "para": "inc_orq_c1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "inc_orq_c1",
+   "raia": "inc_orq",
+   "tipo": "chamada",
+   "rotulo": "Detectar e triar o alerta",
+   "proximo": [
+    {
+     "para": "inc_orq_c2",
+     "condicao": "impacto_confirmado"
+    },
+    {
+     "para": "inc_orq_e1",
+     "condicao": "alarme_falso"
+    }
+   ],
+   "raia_chamada": "inc_tri"
+  },
+  {
+   "id": "inc_orq_c2",
+   "raia": "inc_orq",
+   "tipo": "chamada",
+   "rotulo": "Classificar a severidade",
+   "proximo": [
+    {
+     "para": "inc_orq_c3",
+     "condicao": "sev1"
+    },
+    {
+     "para": "inc_orq_c3",
+     "condicao": "sev2"
+    },
+    {
+     "para": "inc_orq_c3",
+     "condicao": "sev3"
+    }
+   ],
+   "raia_chamada": "inc_cls"
+  },
+  {
+   "id": "inc_orq_c3",
+   "raia": "inc_orq",
+   "tipo": "chamada",
+   "rotulo": "Assumir o comando e decidir a escalada",
+   "proximo": [
+    {
+     "para": "inc_orq_c4",
+     "condicao": "seguir"
+    },
+    {
+     "para": "inc_orq_c7",
+     "condicao": "escalar"
+    }
+   ],
+   "raia_chamada": "inc_cmd"
+  },
+  {
+   "id": "inc_orq_c4",
+   "raia": "inc_orq",
+   "tipo": "chamada",
+   "rotulo": "Comunicar conforme a severidade",
+   "proximo": [
+    {
+     "para": "inc_orq_c5",
+     "condicao": "comunicado"
+    }
+   ],
+   "raia_chamada": "inc_com"
+  },
+  {
+   "id": "inc_orq_c5",
+   "raia": "inc_orq",
+   "tipo": "chamada",
+   "rotulo": "Conter danos conforme a severidade",
+   "proximo": [
+    {
+     "para": "inc_orq_c6",
+     "condicao": "contido"
+    }
+   ],
+   "raia_chamada": "inc_con"
+  },
+  {
+   "id": "inc_orq_c6",
+   "raia": "inc_orq",
+   "tipo": "chamada",
+   "rotulo": "Mitigar e verificar o serviço (até 3 tentativas)",
+   "proximo": [
+    {
+     "para": "inc_orq_c9",
+     "condicao": "estavel"
+    },
+    {
+     "para": "inc_orq_c7",
+     "condicao": "tentativas_esgotadas"
+    }
+   ],
+   "raia_chamada": "inc_mit"
+  },
+  {
+   "id": "inc_orq_c7",
+   "raia": "inc_orq",
+   "tipo": "chamada",
+   "rotulo": "Escalar para outro time ou para a liderança",
+   "proximo": [
+    {
+     "para": "inc_orq_c8",
+     "condicao": "escalado"
+    }
+   ],
+   "raia_chamada": "inc_esc"
+  },
+  {
+   "id": "inc_orq_c8",
+   "raia": "inc_orq",
+   "tipo": "chamada",
+   "rotulo": "Reavaliar a severidade",
+   "proximo": [
+    {
+     "para": "inc_orq_c4",
+     "condicao": "severidade_mudou"
+    },
+    {
+     "para": "inc_orq_c6",
+     "condicao": "severidade_mantida"
+    }
+   ],
+   "raia_chamada": "inc_rcl"
+  },
+  {
+   "id": "inc_orq_c9",
+   "raia": "inc_orq",
+   "tipo": "chamada",
+   "rotulo": "Encerrar o incidente",
+   "proximo": [
+    {
+     "para": "inc_orq_c10",
+     "condicao": "encerrado"
+    }
+   ],
+   "raia_chamada": "inc_enc"
+  },
+  {
+   "id": "inc_orq_c10",
+   "raia": "inc_orq",
+   "tipo": "chamada",
+   "rotulo": "Aprender com o incidente",
+   "proximo": [
+    {
+     "para": "inc_orq_e2",
+     "condicao": "formal"
+    },
+    {
+     "para": "inc_orq_e2",
+     "condicao": "registro_leve"
+    }
+   ],
+   "raia_chamada": "inc_pos"
+  },
+  {
+   "id": "inc_orq_e1",
+   "raia": "inc_orq",
+   "tipo": "fim",
+   "rotulo": "Alarme falso registrado e alerta ajustado",
+   "proximo": [],
+   "retorno": "alarme_falso"
+  },
+  {
+   "id": "inc_orq_e2",
+   "raia": "inc_orq",
+   "tipo": "fim",
+   "rotulo": "Serviço restaurado e aprendizado registrado",
+   "proximo": [],
+   "retorno": "restaurado"
+  },
+  {
+   "id": "inc_tri_s0",
+   "raia": "inc_tri",
+   "tipo": "inicio",
+   "rotulo": "Alerta recebido para triagem",
+   "proximo": [
+    {
+     "para": "inc_tri_t1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "inc_tri_t1",
+   "raia": "inc_tri",
+   "tipo": "tarefa",
+   "rotulo": "Detecção e triagem inicial",
+   "proximo": [
+    {
+     "para": "inc_tri_g1",
+     "condicao": ""
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_tri_t1_st1",
+     "rotulo": "Reconhecer o alerta e abrir a linha do tempo",
+     "papel": "sre",
+     "entradas": [
+      "alerta_de_falha"
+     ],
+     "saidas": [
+      "linha_do_tempo_do_incidente"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_linha_do_tempo",
+       "uso": "obrigatoria",
+       "porque": "registrar desde o primeiro minuto evita reconstruir de memória depois"
+      }
+     ],
+     "exemplo": "14h02: alerta reconhecido pelo plantonista; canal do incidente aberto com a linha do tempo.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_tri_t1_st2",
+     "rotulo": "Coletar os sinais: métricas, logs e mudanças recentes",
+     "papel": "sre",
+     "apoio": [
+      "dev"
+     ],
+     "entradas": [
+      "alerta_de_falha"
+     ],
+     "saidas": [
+      "sinais_do_alerta"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_telemetria_padronizada",
+       "uso": "obrigatoria",
+       "porque": "a mesma métrica para todos evita discussão sobre o que é normal"
+      },
+      {
+       "tecnica": "tec_logs_e_rastreamento",
+       "uso": "recomendada",
+       "porque": "o rastro mostra onde a requisição falha"
+      }
+     ],
+     "exemplo": "Erro 500 do checkout em 12% desde 14h00; deploy da 4.12 às 13h55.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_tri_t1_st3",
+     "rotulo": "Verificar se existe runbook para o alerta",
+     "papel": "sre",
+     "entradas": [
+      "alerta_de_falha",
+      "sinais_do_alerta"
+     ],
+     "saidas": [
+      "alerta_triado",
+      "tem_runbook"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_runbook",
+       "uso": "recomendada",
+       "porque": "o runbook encurta o caminho até a primeira mitigação"
+      }
+     ],
+     "exemplo": "Runbook do alerta de erro do checkout encontrado: passos de rollback e de desligar flags.",
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_tri_g1",
+   "raia": "inc_tri",
+   "tipo": "bifurcacao",
+   "rotulo": "Impacto real no cliente?",
+   "proximo": [
+    {
+     "para": "inc_tri_e1",
+     "condicao": "sim, há impacto confirmado"
+    },
+    {
+     "para": "inc_tri_t2",
+     "condicao": "não, alarme falso ou sem impacto"
+    }
+   ]
+  },
+  {
+   "id": "inc_tri_t2",
+   "raia": "inc_tri",
+   "tipo": "tarefa",
+   "rotulo": "Registrar o alarme falso e ajustar o alerta",
+   "proximo": [
+    {
+     "para": "inc_tri_e2",
+     "condicao": ""
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_tri_t2_st1",
+     "rotulo": "Registrar por que não havia impacto",
+     "papel": "sre",
+     "entradas": [
+      "sinais_do_alerta",
+      "linha_do_tempo_do_incidente"
+     ],
+     "saidas": [
+      "linha_do_tempo_do_incidente"
+     ],
+     "exemplo": "Pico de erro de 30 segundos num endpoint interno sem cliente afetado.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_tri_t2_st2",
+     "rotulo": "Ajustar o limite, a janela ou a rota do alerta",
+     "papel": "sre",
+     "entradas": [
+      "sinais_do_alerta"
+     ],
+     "saidas": [
+      "ajuste_de_runbook_ou_alerta"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_alertas",
+       "uso": "obrigatoria",
+       "porque": "alarme falso repetido ensina o time a ignorar o alerta"
+      }
+     ],
+     "exemplo": "Limite do alerta passa de 1% em 1 minuto para 2% em 5 minutos.",
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_tri_e1",
+   "raia": "inc_tri",
+   "tipo": "fim",
+   "rotulo": "Impacto confirmado",
+   "proximo": [],
+   "retorno": "impacto_confirmado"
+  },
+  {
+   "id": "inc_tri_e2",
+   "raia": "inc_tri",
+   "tipo": "fim",
+   "rotulo": "Alarme falso ou sem impacto",
+   "proximo": [],
+   "retorno": "alarme_falso"
+  },
+  {
+   "id": "inc_cls_s0",
+   "raia": "inc_cls",
+   "tipo": "inicio",
+   "rotulo": "Impacto confirmado, classificar",
+   "proximo": [
+    {
+     "para": "inc_cls_t1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "inc_cls_t1",
+   "raia": "inc_cls",
+   "tipo": "tarefa",
+   "rotulo": "Classificar a severidade (SEV1 a SEV3)",
+   "proximo": [
+    {
+     "para": "inc_cls_g1",
+     "condicao": ""
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_cls_t1_st1",
+     "exemplo": "Compras afetadas: 8 mil nos últimos 15 minutos, em 3 países, com cerca de 12% das tentativas de pagamento falhando.",
+     "rotulo": "Estimar o raio de impacto",
+     "papel": "sre",
+     "apoio": [
+      "dev"
+     ],
+     "entradas": [
+      "alerta_triado",
+      "impacto_confirmado"
+     ],
+     "saidas": [
+      "raio_de_impacto"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_blast_radius",
+       "uso": "obrigatoria",
+       "porque": "mede o alcance em clientes e receita, no lugar de palpite"
+      },
+      {
+       "tecnica": "tec_slo_sli",
+       "uso": "opcional",
+       "porque": "traduz o alerta em impacto percebido pelo cliente"
+      }
+     ],
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_cls_t1_st2",
+     "exemplo": "Indisponibilidade parcial do checkout com perda de receita relevante cai na linha de SEV2 da matriz. Se as vendas pararem por completo, sobe para SEV1.",
+     "rotulo": "Aplicar a matriz de severidade",
+     "papel": "sre",
+     "apoio": [
+      "tech_lead"
+     ],
+     "entradas": [
+      "raio_de_impacto",
+      "impacto_confirmado"
+     ],
+     "saidas": [
+      "severidade",
+      "orcamento_erro_estourado",
+      "justificativa_da_severidade"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_sla",
+       "uso": "condicional",
+       "quando": {
+        "todos": [
+         {
+          "var": "tem_sla",
+          "igual": "sim"
+         }
+        ]
+       },
+       "porque": "incidente que ameaça um compromisso contratual sobe na matriz"
+      },
+      {
+       "tecnica": "tec_matriz_severidade",
+       "uso": "obrigatoria",
+       "porque": "um critério escrito evita classificar por medo ou por intuição"
+      },
+      {
+       "tecnica": "tec_error_budget",
+       "uso": "condicional",
+       "quando": {
+        "todos": [
+         {
+          "var": "tem_slo",
+          "igual": "sim"
+         }
+        ]
+       },
+       "porque": "com SLO definido, o consumo do orçamento de erro mostra a gravidade"
+      }
+     ],
+     "consultado": [
+      "pm"
+     ],
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_cls_t1_st3",
+     "exemplo": "Severidade SEV2 registrada às 14h20, com a justificativa: 12% das compras falham, há contorno por outro meio de pagamento.",
+     "rotulo": "Registrar a severidade e a justificativa",
+     "papel": "sre",
+     "entradas": [
+      "severidade",
+      "raio_de_impacto"
+     ],
+     "saidas": [
+      "justificativa_da_severidade"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_linha_do_tempo",
+       "uso": "recomendada",
+       "porque": "a justificativa vira o primeiro item da linha do tempo do incidente"
+      },
+      {
+       "tecnica": "tec_blameless_postmortem",
+       "uso": "condicional",
+       "quando": {
+        "todos": [
+         {
+          "var": "severidade",
+          "em": [
+           "sev1",
+           "sev2"
+          ]
+         }
+        ]
+       },
+       "porque": "SEV1 e SEV2 pedem post-mortem formal, e fatos registrados sem culpa alimentam essa análise"
+      }
+     ],
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_cls_g1",
+   "raia": "inc_cls",
+   "tipo": "bifurcacao",
+   "rotulo": "Afetado por janela crítica ou sazonalidade?",
+   "proximo": [
+    {
+     "para": "inc_cls_t2",
+     "condicao": "sim, há janela crítica ativa"
+    },
+    {
+     "para": "inc_cls_g2",
+     "condicao": "não, sem janela crítica"
+    }
+   ]
+  },
+  {
+   "id": "inc_cls_t2",
+   "raia": "inc_cls",
+   "tipo": "tarefa",
+   "rotulo": "Janela crítica: reavaliar severidade e contenção",
+   "proximo": [
+    {
+     "para": "inc_cls_g2",
+     "condicao": ""
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_cls_t2_st1",
+     "exemplo": "É a semana de um grande lançamento de creator: um incidente que seria SEV3 passa a valer no mínimo SEV2 até o fim da janela.",
+     "rotulo": "Elevar a severidade mínima da janela",
+     "papel": "sre",
+     "apoio": [
+      "stakeholder"
+     ],
+     "entradas": [
+      "severidade",
+      "tipo_janela"
+     ],
+     "saidas": [
+      "severidade",
+      "justificativa_da_severidade"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_capacity_planning_sazonal",
+       "uso": "opcional",
+       "porque": "ajuda a calibrar a severidade mínima nos picos previsíveis"
+      }
+     ],
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_cls_t2_st2",
+     "exemplo": "Durante a janela, a reversão do release fica proibida sem aprovação do responsável. A contenção passa a ser desligar a flag da novidade.",
+     "rotulo": "Restringir a contenção arriscada",
+     "papel": "sre",
+     "apoio": [
+      "dev"
+     ],
+     "entradas": [
+      "severidade",
+      "raio_de_impacto",
+      "tipo_janela"
+     ],
+     "saidas": [
+      "contencao_restrita",
+      "justificativa_da_severidade"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_feature_flags",
+       "uso": "recomendada",
+       "porque": "desligar por flag evita deploy em plena janela"
+      },
+      {
+       "tecnica": "tec_canary_release",
+       "uso": "condicional",
+       "quando": {
+        "todos": [
+         {
+          "var": "janela_critica",
+          "igual": "sim"
+         },
+         {
+          "var": "tipo_janela",
+          "em": [
+           "sazonal",
+           "repentina"
+          ]
+         }
+        ]
+       },
+       "porque": "no pico, a mudança de contenção sobe aos poucos para limitar o dano"
+      },
+      {
+       "tecnica": "tec_code_freeze",
+       "uso": "condicional",
+       "quando": {
+        "todos": [
+         {
+          "var": "tipo_janela",
+          "em": [
+           "freeze",
+           "manutencao"
+          ]
+         }
+        ]
+       },
+       "porque": "em freeze ou manutenção, qualquer mudança exige exceção aprovada"
+      }
+     ],
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_cls_t2_st3",
+     "exemplo": "Na linha do tempo: \"14h35, severidade elevada de SEV3 para SEV2 por causa do lançamento em andamento\".",
+     "rotulo": "Registrar o motivo na linha do tempo",
+     "papel": "sre",
+     "entradas": [
+      "justificativa_da_severidade",
+      "severidade"
+     ],
+     "saidas": [
+      "justificativa_da_severidade"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_linha_do_tempo",
+       "uso": "recomendada",
+       "porque": "quem assume depois entende por que a severidade subiu"
+      }
+     ],
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_cls_g2",
+   "raia": "inc_cls",
+   "tipo": "bifurcacao",
+   "rotulo": "Qual a severidade?",
+   "proximo": [
+    {
+     "para": "inc_cls_e1",
+     "condicao": "SEV1"
+    },
+    {
+     "para": "inc_cls_e2",
+     "condicao": "SEV2"
+    },
+    {
+     "para": "inc_cls_e3",
+     "condicao": "SEV3"
+    }
+   ]
+  },
+  {
+   "id": "inc_cls_e1",
+   "raia": "inc_cls",
+   "tipo": "fim",
+   "rotulo": "Severidade SEV1",
+   "proximo": [],
+   "retorno": "sev1"
+  },
+  {
+   "id": "inc_cls_e2",
+   "raia": "inc_cls",
+   "tipo": "fim",
+   "rotulo": "Severidade SEV2",
+   "proximo": [],
+   "retorno": "sev2"
+  },
+  {
+   "id": "inc_cls_e3",
+   "raia": "inc_cls",
+   "tipo": "fim",
+   "rotulo": "Severidade SEV3",
+   "proximo": [],
+   "retorno": "sev3"
+  },
+  {
+   "id": "inc_cmd_s0",
+   "raia": "inc_cmd",
+   "tipo": "inicio",
+   "rotulo": "Incidente classificado, definir o comando",
+   "proximo": [
+    {
+     "para": "inc_cmd_g1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "inc_cmd_g1",
+   "raia": "inc_cmd",
+   "tipo": "bifurcacao",
+   "rotulo": "Severidade é SEV3?",
+   "proximo": [
+    {
+     "para": "inc_cmd_t1",
+     "condicao": "sim, SEV3"
+    },
+    {
+     "para": "inc_cmd_g2",
+     "condicao": "não, SEV1 ou SEV2"
+    }
+   ]
+  },
+  {
+   "id": "inc_cmd_t1",
+   "raia": "inc_cmd",
+   "tipo": "tarefa",
+   "rotulo": "SEV3: registrar ticket e identificar o dono do serviço",
+   "proximo": [
+    {
+     "para": "inc_cmd_e1",
+     "condicao": ""
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_cmd_t1_st1",
+     "rotulo": "Registrar o ticket com a linha do tempo",
+     "papel": "sre",
+     "entradas": [
+      "linha_do_tempo_do_incidente",
+      "severidade"
+     ],
+     "saidas": [
+      "linha_do_tempo_do_incidente"
+     ],
+     "exemplo": "Ticket SEV3 com o link da linha do tempo e o serviço afetado.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_cmd_t1_st2",
+     "rotulo": "Identificar e acionar o dono do serviço",
+     "papel": "sre",
+     "entradas": [
+      "linha_do_tempo_do_incidente"
+     ],
+     "saidas": [
+      "papeis_do_incidente"
+     ],
+     "exemplo": "Dono do serviço de relatórios acionado no horário comercial.",
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_cmd_g2",
+   "raia": "inc_cmd",
+   "tipo": "bifurcacao",
+   "rotulo": "Qual a estrutura do time?",
+   "proximo": [
+    {
+     "para": "inc_cmd_t2",
+     "condicao": "on-call dedicado com SRE ou plataforma"
+    },
+    {
+     "para": "inc_cmd_t3",
+     "condicao": "you-build-you-run sem on-call formal"
+    },
+    {
+     "para": "inc_cmd_t4",
+     "condicao": "time pequeno em horário comercial"
+    },
+    {
+     "para": "inc_cmd_t5",
+     "condicao": "follow-the-sun (fusos que se revezam)"
+    }
+   ]
+  },
+  {
+   "id": "inc_cmd_t2",
+   "raia": "inc_cmd",
+   "tipo": "tarefa",
+   "rotulo": "On-call: acionar plantão e assumir incident commander",
+   "proximo": [
+    {
+     "para": "inc_cmd_g3",
+     "condicao": ""
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_cmd_t2_st1",
+     "rotulo": "Acionar o plantão",
+     "papel": "sre",
+     "entradas": [
+      "linha_do_tempo_do_incidente"
+     ],
+     "saidas": [
+      "papeis_do_incidente"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_oncall_rotation",
+       "uso": "obrigatoria",
+       "porque": "o plantão garante alguém disponível a qualquer hora"
+      }
+     ],
+     "exemplo": "Plantonista de SRE acionado em 3 minutos.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_cmd_t2_st2",
+     "rotulo": "Assumir o comando e distribuir os papéis",
+     "papel": "sre",
+     "apoio": [
+      "tech_lead"
+     ],
+     "entradas": [
+      "papeis_do_incidente"
+     ],
+     "saidas": [
+      "papeis_do_incidente"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_incident_command",
+       "uso": "obrigatoria",
+       "porque": "um único comando evita decisões em paralelo"
+      }
+     ],
+     "exemplo": "IC no plantonista; comunicação com a PM; registro com um dev.",
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_cmd_t3",
+   "raia": "inc_cmd",
+   "tipo": "tarefa",
+   "rotulo": "You-build-you-run: dono assume e monta rodízio informal",
+   "proximo": [
+    {
+     "para": "inc_cmd_g3",
+     "condicao": ""
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_cmd_t3_st1",
+     "rotulo": "O dono do serviço assume o comando",
+     "papel": "dev",
+     "entradas": [
+      "linha_do_tempo_do_incidente"
+     ],
+     "saidas": [
+      "papeis_do_incidente"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_incident_command",
+       "uso": "obrigatoria",
+       "porque": "mesmo sem plantão formal, alguém comanda"
+      }
+     ],
+     "exemplo": "A dev que mantém o serviço de cupons assume o comando.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_cmd_t3_st2",
+     "rotulo": "Montar um rodízio informal se passar do horário",
+     "papel": "tech_lead",
+     "entradas": [
+      "papeis_do_incidente"
+     ],
+     "saidas": [
+      "papeis_do_incidente"
+     ],
+     "exemplo": "Duas pessoas do time se revezam a cada 2 horas até a resolução.",
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_cmd_t4",
+   "raia": "inc_cmd",
+   "tipo": "tarefa",
+   "rotulo": "Time pequeno: tech lead comanda e aciona cobertura",
+   "proximo": [
+    {
+     "para": "inc_cmd_g3",
+     "condicao": ""
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_cmd_t4_st1",
+     "rotulo": "Tech lead assume o comando",
+     "papel": "tech_lead",
+     "entradas": [
+      "linha_do_tempo_do_incidente"
+     ],
+     "saidas": [
+      "papeis_do_incidente"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_incident_command",
+       "uso": "obrigatoria",
+       "porque": "o time pequeno precisa de um comando claro"
+      }
+     ],
+     "exemplo": "O tech lead comanda e chama um dev para investigar.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_cmd_t4_st2",
+     "rotulo": "Acionar cobertura fora do horário",
+     "papel": "tech_lead",
+     "entradas": [
+      "papeis_do_incidente"
+     ],
+     "saidas": [
+      "papeis_do_incidente"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_escalonamento",
+       "uso": "recomendada",
+       "porque": "a cobertura é combinada antes de faltar gente"
+      }
+     ],
+     "exemplo": "Combinado com o time de plataforma: eles cobrem a noite se o incidente continuar.",
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_cmd_t5",
+   "raia": "inc_cmd",
+   "tipo": "tarefa",
+   "rotulo": "Follow-the-sun: responsável do turno comanda, com handoff",
+   "proximo": [
+    {
+     "para": "inc_cmd_g3",
+     "condicao": ""
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_cmd_t5_st1",
+     "rotulo": "Identificar o turno ativo e o responsável",
+     "papel": "sre",
+     "entradas": [
+      "linha_do_tempo_do_incidente"
+     ],
+     "saidas": [
+      "turno_ativo",
+      "papeis_do_incidente"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_follow_the_sun",
+       "uso": "obrigatoria",
+       "porque": "o comando acompanha o fuso que está trabalhando"
+      }
+     ],
+     "exemplo": "Turno de São Paulo detém o comando até 18h; IC no SRE de plantão.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_cmd_t5_st2",
+     "rotulo": "Confirmar o handoff com o próximo turno",
+     "papel": "sre",
+     "entradas": [
+      "turno_ativo",
+      "papeis_do_incidente"
+     ],
+     "saidas": [
+      "handoff_de_turno",
+      "handoff_confirmado",
+      "papeis_do_incidente"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_handoff_de_turno",
+       "uso": "obrigatoria",
+       "porque": "em SEV1 o comando só muda de mão com confirmação"
+      }
+     ],
+     "exemplo": "Handoff para Lisboa às 18h com estado, hipóteses e próximos passos; Lisboa confirma.",
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_cmd_g3",
+   "raia": "inc_cmd",
+   "tipo": "bifurcacao",
+   "rotulo": "Precisa escalar para outro time?",
+   "proximo": [
+    {
+     "para": "inc_cmd_e2",
+     "condicao": "sim, dependência fora do time ou sem progresso"
+    },
+    {
+     "para": "inc_cmd_e1",
+     "condicao": "não, o time resolve sozinho"
+    }
+   ]
+  },
+  {
+   "id": "inc_cmd_e1",
+   "raia": "inc_cmd",
+   "tipo": "fim",
+   "rotulo": "Seguir sem escalada",
+   "proximo": [],
+   "retorno": "seguir"
+  },
+  {
+   "id": "inc_cmd_e2",
+   "raia": "inc_cmd",
+   "tipo": "fim",
+   "rotulo": "Escalar",
+   "proximo": [],
+   "retorno": "escalar"
+  },
+  {
+   "id": "inc_esc_s0",
+   "raia": "inc_esc",
+   "tipo": "inicio",
+   "rotulo": "Escalada necessária",
+   "proximo": [
+    {
+     "para": "inc_esc_t1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "inc_esc_t1",
+   "raia": "inc_esc",
+   "tipo": "tarefa",
+   "rotulo": "Escalar para o time dono ou para a liderança",
+   "proximo": [
+    {
+     "para": "inc_esc_e1",
+     "condicao": ""
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_esc_t1_st1",
+     "rotulo": "Registrar o motivo da escalada",
+     "papel": "sre",
+     "entradas": [
+      "requer_escalada",
+      "registro_da_mitigacao",
+      "linha_do_tempo_do_incidente"
+     ],
+     "saidas": [
+      "motivo_escalada",
+      "linha_do_tempo_do_incidente"
+     ],
+     "exemplo": "Motivo: mitigação esgotada depois de 3 tentativas no gateway de pagamento.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_esc_t1_st2",
+     "rotulo": "Acionar o time dono ou a liderança com o contexto",
+     "papel": "sre",
+     "apoio": [
+      "tech_lead",
+      "gerente_de_engenharia",
+      "times_dependentes"
+     ],
+     "entradas": [
+      "motivo_escalada",
+      "papeis_do_incidente",
+      "linha_do_tempo_do_incidente"
+     ],
+     "saidas": [
+      "pedido_de_escalada"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_escalonamento",
+       "uso": "obrigatoria",
+       "porque": "a escalada leva o contexto para quem chega não começar do zero"
+      }
+     ],
+     "exemplo": "Para o time de pagamentos: SEV1, 3 mitigações sem efeito, link da linha do tempo.",
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_esc_e1",
+   "raia": "inc_esc",
+   "tipo": "fim",
+   "rotulo": "Escalada feita",
+   "proximo": [],
+   "retorno": "escalado"
+  },
+  {
+   "id": "inc_rcl_s0",
+   "raia": "inc_rcl",
+   "tipo": "inicio",
+   "rotulo": "Escalada concluída ou nova informação",
+   "proximo": [
+    {
+     "para": "inc_rcl_t1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "inc_rcl_t1",
+   "raia": "inc_rcl",
+   "tipo": "tarefa",
+   "rotulo": "Reclassificar após escalada ou nova informação",
+   "proximo": [
+    {
+     "para": "inc_rcl_g1",
+     "condicao": ""
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_rcl_t1_st1",
+     "rotulo": "Registrar a severidade vigente na linha do tempo",
+     "papel": "sre",
+     "entradas": [
+      "severidade",
+      "linha_do_tempo_do_incidente"
+     ],
+     "saidas": [
+      "severidade_anterior",
+      "linha_do_tempo_do_incidente"
+     ],
+     "exemplo": "15h10: severidade vigente SEV2, reavaliação pedida depois da escalada.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_rcl_t1_st2",
+     "rotulo": "Reaplicar a matriz com a informação nova",
+     "papel": "sre",
+     "entradas": [
+      "severidade_anterior",
+      "motivo_escalada",
+      "sinais_do_alerta"
+     ],
+     "saidas": [
+      "severidade_atual",
+      "justificativa_da_severidade"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_matriz_severidade",
+       "uso": "obrigatoria",
+       "porque": "a mesma matriz da classificação evita subir ou descer por sensação"
+      }
+     ],
+     "exemplo": "Com a falha atingindo também o PIX, a matriz aponta SEV1.",
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_rcl_g1",
+   "raia": "inc_rcl",
+   "tipo": "bifurcacao",
+   "rotulo": "A severidade mudou?",
+   "proximo": [
+    {
+     "para": "inc_rcl_e1",
+     "condicao": "sim, diferente da severidade anterior"
+    },
+    {
+     "para": "inc_rcl_e2",
+     "condicao": "não, igual à severidade anterior"
+    }
+   ]
+  },
+  {
+   "id": "inc_rcl_e1",
+   "raia": "inc_rcl",
+   "tipo": "fim",
+   "rotulo": "Severidade mudou",
+   "proximo": [],
+   "retorno": "severidade_mudou"
+  },
+  {
+   "id": "inc_rcl_e2",
+   "raia": "inc_rcl",
+   "tipo": "fim",
+   "rotulo": "Severidade mantida",
+   "proximo": [],
+   "retorno": "severidade_mantida"
+  },
+  {
+   "id": "inc_com_s0",
+   "raia": "inc_com",
+   "tipo": "inicio",
+   "rotulo": "Severidade definida, comunicar",
+   "proximo": [
+    {
+     "para": "inc_com_g1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "inc_com_g1",
+   "raia": "inc_com",
+   "tipo": "bifurcacao",
+   "rotulo": "Qual a severidade (define a comunicação)?",
+   "proximo": [
+    {
+     "para": "inc_com_t1",
+     "condicao": "SEV1"
+    },
+    {
+     "para": "inc_com_t2",
+     "condicao": "SEV2"
+    },
+    {
+     "para": "inc_com_t3",
+     "condicao": "SEV3"
+    }
+   ]
+  },
+  {
+   "id": "inc_com_t1",
+   "raia": "inc_com",
+   "tipo": "tarefa",
+   "rotulo": "SEV1: war room, IC e comunicado a cada 30 minutos",
+   "proximo": [
+    {
+     "para": "inc_com_e1",
+     "condicao": ""
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_com_t1_st1",
+     "rotulo": "Abrir a war room e confirmar o IC",
+     "papel": "sre",
+     "entradas": [
+      "papeis_do_incidente"
+     ],
+     "saidas": [
+      "comunicado_do_incidente"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_war_room",
+       "uso": "obrigatoria",
+       "porque": "SEV1 precisa de um lugar só para decidir rápido"
+      }
+     ],
+     "exemplo": "Sala aberta às 14h06 com IC, comunicação, registro e dois investigadores.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_com_t1_st2",
+     "rotulo": "Publicar o comunicado a cada 30 minutos",
+     "papel": "pm",
+     "apoio": [
+      "suporte"
+     ],
+     "entradas": [
+      "papeis_do_incidente",
+      "severidade"
+     ],
+     "saidas": [
+      "comunicado_do_incidente"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_sla",
+       "uso": "condicional",
+       "quando": {
+        "todos": [
+         {
+          "var": "tem_sla",
+          "igual": "sim"
+         }
+        ]
+       },
+       "porque": "contratos de SLA costumam ter prazo e canal obrigatórios para avisar o cliente"
+      },
+      {
+       "tecnica": "tec_comunicacao_incidente",
+       "uso": "obrigatoria",
+       "porque": "cadência fixa reduz perguntas paralelas ao time"
+      },
+      {
+       "tecnica": "tec_status_page",
+       "uso": "recomendada",
+       "porque": "clientes e suporte veem a mesma informação"
+      }
+     ],
+     "exemplo": "14h30: 12% dos pagamentos com cartão falham; rollback em andamento; próxima atualização às 15h.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_com_t1_st3",
+     "rotulo": "Explicar a mudança de severidade no comunicado",
+     "papel": "pm",
+     "quando": {
+      "todos": [
+       {
+        "var": "severidade_mudou",
+        "igual": "sim"
+       }
+      ]
+     },
+     "porque": "quem acompanha precisa saber por que o tratamento mudou",
+     "entradas": [
+      "comunicado_do_incidente"
+     ],
+     "saidas": [
+      "comunicado_do_incidente"
+     ],
+     "exemplo": "Atualização: o incidente subiu para SEV1 porque o PIX também foi afetado.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_com_t1_st4",
+     "rotulo": "Anunciar a troca de comando entre turnos",
+     "papel": "sre",
+     "quando": {
+      "todos": [
+       {
+        "var": "handoff_confirmado",
+        "igual": "sim"
+       }
+      ]
+     },
+     "porque": "todos precisam saber quem decide agora",
+     "entradas": [
+      "handoff_de_turno",
+      "turno_ativo"
+     ],
+     "saidas": [
+      "comunicado_do_incidente"
+     ],
+     "exemplo": "18h: o comando passa para Lisboa; IC agora é o SRE de plantão de lá.",
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_com_t2",
+   "raia": "inc_com",
+   "tipo": "tarefa",
+   "rotulo": "SEV2: atualizar stakeholders afetados a cada 60 minutos",
+   "proximo": [
+    {
+     "para": "inc_com_e1",
+     "condicao": ""
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_com_t2_st1",
+     "rotulo": "Atualizar os stakeholders afetados a cada 60 minutos",
+     "papel": "pm",
+     "apoio": [
+      "suporte"
+     ],
+     "entradas": [
+      "papeis_do_incidente",
+      "severidade"
+     ],
+     "saidas": [
+      "comunicado_do_incidente"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_comunicacao_incidente",
+       "uso": "obrigatoria",
+       "porque": "cadência combinada mantém a confiança sem travar o time"
+      }
+     ],
+     "exemplo": "15h: lentidão no relatório de vendas para creators; causa em investigação; próxima atualização às 16h.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_com_t2_st2",
+     "rotulo": "Explicar a mudança de severidade no comunicado",
+     "papel": "pm",
+     "quando": {
+      "todos": [
+       {
+        "var": "severidade_mudou",
+        "igual": "sim"
+       }
+      ]
+     },
+     "porque": "quem acompanha precisa saber por que o tratamento mudou",
+     "entradas": [
+      "comunicado_do_incidente"
+     ],
+     "saidas": [
+      "comunicado_do_incidente"
+     ],
+     "exemplo": "Atualização: o incidente desceu para SEV2 depois do rollback.",
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_com_t3",
+   "raia": "inc_com",
+   "tipo": "tarefa",
+   "rotulo": "SEV3: avisar o dono do serviço",
+   "proximo": [
+    {
+     "para": "inc_com_e1",
+     "condicao": ""
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_com_t3_st1",
+     "rotulo": "Avisar o dono do serviço pelo ticket",
+     "papel": "sre",
+     "entradas": [
+      "papeis_do_incidente"
+     ],
+     "saidas": [
+      "comunicado_do_incidente"
+     ],
+     "exemplo": "Ticket SEV3 atribuído ao dono do serviço de relatórios, com a linha do tempo.",
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_com_e1",
+   "raia": "inc_com",
+   "tipo": "fim",
+   "rotulo": "Comunicação feita",
+   "proximo": [],
+   "retorno": "comunicado"
+  },
+  {
+   "id": "inc_con_s0",
+   "raia": "inc_con",
+   "tipo": "inicio",
+   "rotulo": "Comunicação feita, conter danos",
+   "proximo": [
+    {
+     "para": "inc_con_g1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "inc_con_g1",
+   "raia": "inc_con",
+   "tipo": "bifurcacao",
+   "rotulo": "Qual a severidade (define a contenção)?",
+   "proximo": [
+    {
+     "para": "inc_con_t1",
+     "condicao": "SEV1"
+    },
+    {
+     "para": "inc_con_t2",
+     "condicao": "SEV2"
+    },
+    {
+     "para": "inc_con_t3",
+     "condicao": "SEV3"
+    }
+   ]
+  },
+  {
+   "id": "inc_con_t1",
+   "raia": "inc_con",
+   "tipo": "tarefa",
+   "rotulo": "SEV1: contenção agressiva (rollback, flag, isolamento)",
+   "proximo": [
+    {
+     "para": "inc_con_e1",
+     "condicao": ""
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_con_t1_st1",
+     "rotulo": "Reverter a última mudança",
+     "papel": "dev",
+     "apoio": [
+      "sre"
+     ],
+     "quando": {
+      "todos": [
+       {
+        "var": "contencao_restrita",
+        "igual": "nao"
+       }
+      ]
+     },
+     "porque": "fora de janela crítica, reverter é o caminho mais rápido",
+     "entradas": [
+      "sinais_do_alerta"
+     ],
+     "saidas": [
+      "acao_de_contencao",
+      "contencao"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_rollback",
+       "uso": "obrigatoria",
+       "porque": "volta ao último estado conhecido como bom"
+      }
+     ],
+     "exemplo": "Rollback da versão 4.12 às 14h12.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_con_t1_st2",
+     "rotulo": "Desligar a funcionalidade por flag ou isolar o componente",
+     "papel": "sre",
+     "apoio": [
+      "dev"
+     ],
+     "entradas": [
+      "sinais_do_alerta"
+     ],
+     "saidas": [
+      "acao_de_contencao",
+      "contencao"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_feature_flags",
+       "uso": "obrigatoria",
+       "porque": "desliga sem deploy, inclusive em janela crítica"
+      }
+     ],
+     "exemplo": "Flag do novo cálculo de frete desligada; serviço de frete isolado do checkout.",
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_con_t2",
+   "raia": "inc_con",
+   "tipo": "tarefa",
+   "rotulo": "SEV2: contenção seletiva (flag e degradação controlada)",
+   "proximo": [
+    {
+     "para": "inc_con_e1",
+     "condicao": ""
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_con_t2_st1",
+     "rotulo": "Desligar só a parte afetada por flag",
+     "papel": "dev",
+     "entradas": [
+      "sinais_do_alerta"
+     ],
+     "saidas": [
+      "acao_de_contencao",
+      "contencao"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_feature_flags",
+       "uso": "obrigatoria",
+       "porque": "contém sem tirar o que funciona"
+      }
+     ],
+     "exemplo": "Só o parcelamento em 12 vezes desligado; o resto do checkout segue.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_con_t2_st2",
+     "rotulo": "Degradar de forma controlada",
+     "papel": "sre",
+     "apoio": [
+      "dev"
+     ],
+     "entradas": [
+      "sinais_do_alerta"
+     ],
+     "saidas": [
+      "acao_de_contencao",
+      "contencao"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_degradacao_controlada",
+       "uso": "obrigatoria",
+       "porque": "o cliente perde um extra, não a compra"
+      }
+     ],
+     "exemplo": "Recomendações desligadas para aliviar o banco; vitrine continua.",
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_con_t3",
+   "raia": "inc_con",
+   "tipo": "tarefa",
+   "rotulo": "SEV3: conter só se houver risco de escalada",
+   "proximo": [
+    {
+     "para": "inc_con_e1",
+     "condicao": ""
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_con_t3_st1",
+     "rotulo": "Avaliar o risco de escalada e conter só se necessário",
+     "papel": "sre",
+     "entradas": [
+      "sinais_do_alerta",
+      "severidade"
+     ],
+     "saidas": [
+      "acao_de_contencao",
+      "contencao"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_blast_radius",
+       "uso": "recomendada",
+       "porque": "conter só quando o alcance pode crescer"
+      }
+     ],
+     "exemplo": "Lentidão estável e sem crescimento: sem contenção, só observação.",
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_con_e1",
+   "raia": "inc_con",
+   "tipo": "fim",
+   "rotulo": "Contenção aplicada",
+   "proximo": [],
+   "retorno": "contido"
+  },
+  {
+   "id": "inc_mit_s0",
+   "raia": "inc_mit",
+   "tipo": "inicio",
+   "rotulo": "Comunicação e contenção feitas, mitigar",
+   "proximo": [
+    {
+     "para": "inc_mit_t1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "inc_mit_t1",
+   "raia": "inc_mit",
+   "tipo": "tarefa",
+   "rotulo": "Mitigar primeiro: restaurar o serviço antes de diagnosticar",
+   "proximo": [
+    {
+     "para": "inc_mit_g1",
+     "condicao": ""
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_mit_t1_st1",
+     "rotulo": "Seguir o runbook do alerta",
+     "papel": "sre",
+     "quando": {
+      "todos": [
+       {
+        "var": "tem_runbook",
+        "igual": "sim"
+       }
+      ]
+     },
+     "porque": "o runbook já traz a mitigação testada",
+     "entradas": [
+      "sinais_do_alerta",
+      "contencao"
+     ],
+     "saidas": [
+      "registro_da_mitigacao"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_runbook",
+       "uso": "obrigatoria",
+       "porque": "passos conhecidos reduzem o tempo de restauração"
+      }
+     ],
+     "exemplo": "Runbook do checkout: reiniciar o pool de conexões e limpar o cache de cupons.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_mit_t1_st2",
+     "rotulo": "Aplicar a mitigação mais segura conhecida",
+     "papel": "sre",
+     "apoio": [
+      "dev"
+     ],
+     "quando": {
+      "todos": [
+       {
+        "var": "tem_runbook",
+        "igual": "nao"
+       }
+      ]
+     },
+     "porque": "sem runbook, a primeira mitigação é a mais reversível",
+     "entradas": [
+      "sinais_do_alerta",
+      "acao_de_contencao"
+     ],
+     "saidas": [
+      "registro_da_mitigacao"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_rollback",
+       "uso": "recomendada",
+       "porque": "reversível primeiro, diagnóstico depois"
+      }
+     ],
+     "exemplo": "Sem runbook: aumentar réplicas do serviço de cupons e trocar a rota para a região saudável.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_mit_t1_st3",
+     "rotulo": "Registrar a tentativa e medir o efeito",
+     "papel": "sre",
+     "entradas": [
+      "registro_da_mitigacao",
+      "linha_do_tempo_do_incidente"
+     ],
+     "saidas": [
+      "registro_da_mitigacao",
+      "servico_restaurado",
+      "linha_do_tempo_do_incidente"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_linha_do_tempo",
+       "uso": "obrigatoria",
+       "porque": "cada tentativa vira fato com horário"
+      }
+     ],
+     "exemplo": "Tentativa 1 às 14h15: erro caiu de 12% para 0,3%.",
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_mit_g1",
+   "raia": "inc_mit",
+   "tipo": "bifurcacao",
+   "rotulo": "A mitigação funcionou?",
+   "proximo": [
+    {
+     "para": "inc_mit_t2",
+     "condicao": "sim, o impacto caiu"
+    },
+    {
+     "para": "inc_mit_t3",
+     "condicao": "não e tentativas < 3: diagnosticar de novo"
+    },
+    {
+     "para": "inc_mit_e2",
+     "condicao": "não e tentativas >= 3: escalada obrigatória"
+    }
+   ]
+  },
+  {
+   "id": "inc_mit_t2",
+   "raia": "inc_mit",
+   "tipo": "tarefa",
+   "rotulo": "Verificar que o serviço voltou",
+   "proximo": [
+    {
+     "para": "inc_mit_g2",
+     "condicao": ""
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_mit_t2_st1",
+     "rotulo": "Confirmar pelos indicadores que o impacto acabou",
+     "papel": "sre",
+     "entradas": [
+      "sinais_do_alerta",
+      "registro_da_mitigacao"
+     ],
+     "saidas": [
+      "verificacao_de_estabilidade",
+      "servico_restaurado"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_slo_sli",
+       "uso": "obrigatoria",
+       "porque": "o indicador do cliente diz se o serviço voltou"
+      }
+     ],
+     "exemplo": "Taxa de erro de volta a 0,2% e conversão do checkout normal.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_mit_t2_st2",
+     "rotulo": "Observar a janela de estabilidade",
+     "papel": "sre",
+     "entradas": [
+      "verificacao_de_estabilidade"
+     ],
+     "saidas": [
+      "verificacao_de_estabilidade"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_telemetria_padronizada",
+       "uso": "obrigatoria",
+       "porque": "a mesma métrica antes e depois mostra se ficou estável"
+      }
+     ],
+     "exemplo": "30 minutos estáveis antes de declarar a mitigação concluída.",
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_mit_t3",
+   "raia": "inc_mit",
+   "tipo": "tarefa",
+   "rotulo": "Diagnosticar para achar nova mitigação",
+   "proximo": [
+    {
+     "para": "inc_mit_t1",
+     "condicao": ""
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_mit_t3_st1",
+     "rotulo": "Levantar hipóteses com os sinais e a linha do tempo",
+     "papel": "dev",
+     "apoio": [
+      "sre"
+     ],
+     "entradas": [
+      "sinais_do_alerta",
+      "registro_da_mitigacao"
+     ],
+     "saidas": [
+      "hipoteses_de_causa"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_logs_e_rastreamento",
+       "uso": "obrigatoria",
+       "porque": "o rastro aponta o serviço onde a falha começa"
+      }
+     ],
+     "exemplo": "Hipótese nova: o gateway de pagamento está recusando por limite de taxa.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_mit_t3_st2",
+     "rotulo": "Escolher a próxima mitigação e contar a tentativa",
+     "papel": "sre",
+     "entradas": [
+      "hipoteses_de_causa",
+      "tentativas_mitigacao"
+     ],
+     "saidas": [
+      "tentativas_mitigacao",
+      "registro_da_mitigacao"
+     ],
+     "exemplo": "Tentativa 2: reduzir a taxa de chamadas ao gateway; contador em 2 de 3.",
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_mit_g2",
+   "raia": "inc_mit",
+   "tipo": "bifurcacao",
+   "rotulo": "Serviço estável na janela de observação?",
+   "proximo": [
+    {
+     "para": "inc_mit_e1",
+     "condicao": "sim, estável"
+    },
+    {
+     "para": "inc_mit_t1",
+     "condicao": "não, voltou a degradar e tentativas < 3"
+    },
+    {
+     "para": "inc_mit_e2",
+     "condicao": "não, voltou a degradar e tentativas >= 3"
+    }
+   ]
+  },
+  {
+   "id": "inc_mit_e1",
+   "raia": "inc_mit",
+   "tipo": "fim",
+   "rotulo": "Serviço estável",
+   "proximo": [],
+   "retorno": "estavel"
+  },
+  {
+   "id": "inc_mit_e2",
+   "raia": "inc_mit",
+   "tipo": "fim",
+   "rotulo": "3 tentativas esgotadas, escalar",
+   "proximo": [],
+   "retorno": "tentativas_esgotadas"
+  },
+  {
+   "id": "inc_enc_s0",
+   "raia": "inc_enc",
+   "tipo": "inicio",
+   "rotulo": "Serviço estável, encerrar",
+   "proximo": [
+    {
+     "para": "inc_enc_t1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "inc_enc_t1",
+   "raia": "inc_enc",
+   "tipo": "tarefa",
+   "rotulo": "Encaminhar a correção da causa e encerrar o incidente",
+   "proximo": [
+    {
+     "para": "inc_enc_t2",
+     "condicao": ""
+    }
+   ],
+   "ligacoes": [
+    {
+     "demanda_destino": "bug",
+     "para": "bug_orq_s0",
+     "condicao": "a causa precisa de correção definitiva depois da mitigação",
+     "tipo": "aciona",
+     "rotulo": "Correção definitiva segue como bug"
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_enc_t1_st1",
+     "rotulo": "Abrir a correção definitiva como bug com as evidências",
+     "papel": "dev",
+     "apoio": [
+      "sre"
+     ],
+     "entradas": [
+      "registro_da_mitigacao",
+      "linha_do_tempo_do_incidente"
+     ],
+     "saidas": [
+      "relato_do_bug"
+     ],
+     "exemplo": "Bug aberto: cálculo de frete falha com CEP sem número; link da linha do tempo e dos rastros.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_enc_t1_st2",
+     "rotulo": "Encerrar o incidente na linha do tempo",
+     "papel": "sre",
+     "entradas": [
+      "verificacao_de_estabilidade",
+      "linha_do_tempo_do_incidente"
+     ],
+     "saidas": [
+      "linha_do_tempo_do_incidente"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_linha_do_tempo",
+       "uso": "obrigatoria",
+       "porque": "o fechamento com horário dá a duração real do incidente"
+      }
+     ],
+     "exemplo": "14h40: incidente encerrado; duração 38 minutos; bug de correção aberto.",
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_enc_t2",
+   "raia": "inc_enc",
+   "tipo": "tarefa",
+   "rotulo": "Comunicar a resolução",
+   "proximo": [
+    {
+     "para": "inc_enc_e1",
+     "condicao": ""
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_enc_t2_st1",
+     "rotulo": "Comunicar a resolução e o próximo passo",
+     "papel": "pm",
+     "apoio": [
+      "suporte"
+     ],
+     "entradas": [
+      "linha_do_tempo_do_incidente",
+      "comunicado_do_incidente"
+     ],
+     "saidas": [
+      "comunicado_de_resolucao"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_comunicacao_incidente",
+       "uso": "obrigatoria",
+       "porque": "o mesmo canal que avisou do problema avisa da resolução"
+      }
+     ],
+     "exemplo": "Resolvido às 14h40, 38 minutos de falha em 12% dos pagamentos; correção definitiva segue como bug.",
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_enc_e1",
+   "raia": "inc_enc",
+   "tipo": "fim",
+   "rotulo": "Incidente encerrado",
+   "proximo": [],
+   "retorno": "encerrado"
+  },
+  {
+   "id": "inc_pos_s0",
+   "raia": "inc_pos",
+   "tipo": "inicio",
+   "rotulo": "Incidente encerrado, aprender",
+   "proximo": [
+    {
+     "para": "inc_pos_g1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "inc_pos_g1",
+   "raia": "inc_pos",
+   "tipo": "bifurcacao",
+   "rotulo": "Exige post-mortem formal?",
+   "proximo": [
+    {
+     "para": "inc_pos_t1",
+     "condicao": "sim, SEV1 ou SEV2, ou orçamento de erro estourado"
+    },
+    {
+     "para": "inc_pos_t4",
+     "condicao": "não, SEV3 sem recorrência"
+    }
+   ]
+  },
+  {
+   "id": "inc_pos_t1",
+   "raia": "inc_pos",
+   "tipo": "tarefa",
+   "rotulo": "Post-mortem blameless com linha do tempo",
+   "proximo": [
+    {
+     "para": "inc_pos_t2",
+     "condicao": ""
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_pos_t1_st1",
+     "rotulo": "Reconstruir a linha do tempo com os fatos",
+     "papel": "sre",
+     "entradas": [
+      "linha_do_tempo_do_incidente"
+     ],
+     "saidas": [
+      "post_mortem"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_linha_do_tempo",
+       "uso": "obrigatoria",
+       "porque": "fatos com horário antes de qualquer opinião"
+      }
+     ],
+     "exemplo": "Linha do tempo completa: deploy, alerta, comando, rollback e estabilização, com horários.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_pos_t1_st2",
+     "rotulo": "Conduzir a análise sem culpados",
+     "papel": "tech_lead",
+     "apoio": [
+      "sre",
+      "dev"
+     ],
+     "entradas": [
+      "post_mortem"
+     ],
+     "saidas": [
+      "post_mortem"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_blameless_postmortem",
+       "uso": "obrigatoria",
+       "porque": "pessoas falam do que aconteceu sem medo"
+      },
+      {
+       "tecnica": "tec_x5_whys",
+       "uso": "recomendada",
+       "porque": "chega à causa de sistema, não à pessoa"
+      }
+     ],
+     "exemplo": "Causa: cálculo de frete sem flag; detecção boa (2 minutos); rollback demorou 10 minutos por falta de runbook.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_pos_t1_st3",
+     "rotulo": "Calcular o impacto no SLA e os avisos ou créditos devidos",
+     "papel": "sre",
+     "apoio": [
+      "pm"
+     ],
+     "quando": {
+      "todos": [
+       {
+        "var": "tem_sla",
+        "igual": "sim"
+       }
+      ]
+     },
+     "porque": "o contrato define o que o cliente recebe quando o compromisso é descumprido",
+     "entradas": [
+      "linha_do_tempo_do_incidente"
+     ],
+     "saidas": [
+      "impacto_no_sla"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_sla",
+       "uso": "obrigatoria",
+       "porque": "mede o tempo consumido contra o compromisso e os prazos contratuais"
+      }
+     ],
+     "exemplo": "38 minutos consumiram 88% do SLA do mês; sem violação; aviso contratual a 2 parceiros.",
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_pos_t2",
+   "raia": "inc_pos",
+   "tipo": "tarefa",
+   "rotulo": "Definir ações corretivas com dono e prazo",
+   "proximo": [
+    {
+     "para": "inc_pos_t3",
+     "condicao": ""
+    }
+   ],
+   "ligacoes": [
+    {
+     "demanda_destino": "bug",
+     "para": "bug_pre_t7",
+     "condicao": "ações corretivas que previnem uma classe de bug (teste, alerta, revisão ou proteção de mudança)",
+     "tipo": "alimenta",
+     "rotulo": "Post-mortem alimenta a prevenção de bugs"
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_pos_t2_st1",
+     "rotulo": "Definir as ações com dono, prazo e critério de pronto",
+     "papel": "tech_lead",
+     "apoio": [
+      "pm"
+     ],
+     "entradas": [
+      "post_mortem",
+      "impacto_no_sla"
+     ],
+     "saidas": [
+      "acoes_corretivas"
+     ],
+     "exemplo": "3 cards: flag obrigatória no frete, alerta por país, runbook de rollback do checkout.",
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_pos_t3",
+   "raia": "inc_pos",
+   "tipo": "tarefa",
+   "rotulo": "Acompanhar as ações até concluir (follow-up)",
+   "proximo": [
+    {
+     "para": "inc_pos_e1",
+     "condicao": ""
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_pos_t3_st1",
+     "rotulo": "Acompanhar as ações até concluir",
+     "papel": "tech_lead",
+     "apoio": [
+      "gerente_de_engenharia"
+     ],
+     "entradas": [
+      "acoes_corretivas"
+     ],
+     "saidas": [
+      "acoes_corretivas"
+     ],
+     "exemplo": "Revisão semanal dos 3 cards até o último fechar.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_pos_t3_st2",
+     "rotulo": "Compartilhar o aprendizado com os times",
+     "papel": "tech_lead",
+     "entradas": [
+      "post_mortem"
+     ],
+     "saidas": [
+      "aprendizado_do_incidente"
+     ],
+     "exemplo": "Resumo do post-mortem enviado aos times: toda mudança de cálculo sai atrás de flag.",
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_pos_t4",
+   "raia": "inc_pos",
+   "tipo": "tarefa",
+   "rotulo": "Registro leve: nota no ticket e ajuste de runbook ou alerta",
+   "proximo": [
+    {
+     "para": "inc_pos_e2",
+     "condicao": ""
+    }
+   ],
+   "subtarefas": [
+    {
+     "id": "inc_pos_t4_st1",
+     "rotulo": "Registrar a nota no ticket",
+     "papel": "sre",
+     "entradas": [
+      "linha_do_tempo_do_incidente"
+     ],
+     "saidas": [
+      "nota_do_incidente"
+     ],
+     "exemplo": "SEV3: lentidão de 20 minutos no relatório; cache reiniciado.",
+     "status": "rascunho"
+    },
+    {
+     "id": "inc_pos_t4_st2",
+     "rotulo": "Ajustar o runbook ou o alerta",
+     "papel": "sre",
+     "entradas": [
+      "nota_do_incidente"
+     ],
+     "saidas": [
+      "ajuste_de_runbook_ou_alerta"
+     ],
+     "tecnicas": [
+      {
+       "tecnica": "tec_runbook",
+       "uso": "recomendada",
+       "porque": "o próximo plantonista resolve mais rápido"
+      }
+     ],
+     "exemplo": "Passo de reiniciar o cache entrou no runbook do relatório.",
+     "status": "rascunho"
+    }
+   ]
+  },
+  {
+   "id": "inc_pos_e1",
+   "raia": "inc_pos",
+   "tipo": "fim",
+   "rotulo": "Post-mortem formal concluído",
+   "proximo": [],
+   "retorno": "formal"
+  },
+  {
+   "id": "inc_pos_e2",
+   "raia": "inc_pos",
+   "tipo": "fim",
+   "rotulo": "Registro leve feito",
+   "proximo": [],
+   "retorno": "registro_leve"
+  }
+ ],
+ "papeis": [
+  {
+   "id": "pm",
+   "nome": "PM"
+  },
+  {
+   "id": "stakeholder",
+   "nome": "Stakeholder"
+  },
+  {
+   "id": "tech_lead",
+   "nome": "Tech Lead"
+  },
+  {
+   "id": "arquiteto",
+   "nome": "Arquiteto de Software"
+  },
+  {
+   "id": "dev",
+   "nome": "Dev"
+  },
+  {
+   "id": "qa",
+   "nome": "QA"
+  },
+  {
+   "id": "devsecops",
+   "nome": "DevSecOps"
+  },
+  {
+   "id": "sre",
+   "nome": "SRE"
+  },
+  {
+   "id": "engenheiro_de_dados",
+   "nome": "Engenharia de dados"
+  },
+  {
+   "id": "designer",
+   "nome": "Designer"
+  },
+  {
+   "id": "suporte",
+   "nome": "Suporte e atendimento"
+  },
+  {
+   "id": "times_dependentes",
+   "nome": "Times dependentes"
+  },
+  {
+   "id": "engenheiro_de_plataforma",
+   "nome": "Engenharia de plataforma"
+  },
+  {
+   "id": "engenheiro_de_ia",
+   "nome": "Engenharia de IA"
+  },
+  {
+   "id": "gerente_de_engenharia",
+   "nome": "Gerente de engenharia"
+  },
+  {
+   "id": "redator_tecnico",
+   "nome": "Redação técnica"
+  }
+ ]
+}

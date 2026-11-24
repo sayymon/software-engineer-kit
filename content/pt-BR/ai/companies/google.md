@@ -1,0 +1,23 @@
+---
+id: google
+tipo: empresa
+nome: Google
+setor: Inteligência Artificial
+website: https://ai.google
+tags:
+  - empresa
+  - ia
+  - tecnologia
+---
+# Google
+## 📋 Informações Básicas
+- **Setor:** Inteligência Artificial
+- **Website:** https://ai.google
+- **Vínculo:** nenhum (empresa externa que publica modelos e ferramentas do mapa de IA)
+## 📝 Descrição
+Big tech com a divisão de IA Google DeepMind. Publica modelos, ferramentas de produtividade com IA e bibliotecas de desenvolvimento.
+## 🔗 Relacionamentos
+- **Contexto:** [[hub_ai|Inteligência Artificial]]
+- **Mapa:** [[hub_ai_tools|Mapa de Ferramentas de IA]]
+## 📝 Notas
+- As listas acima vêm de consultas Dataview sobre os links das notas de modelos e ferramentas, sem lista manual.

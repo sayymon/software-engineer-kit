@@ -1,0 +1,69 @@
+{
+  "aliases": {
+    "Google": [
+      "Google LLC",
+      "Google DeepMind",
+      "Google Cloud",
+      "Google AI",
+      "Alphabet"
+    ],
+    "Amazon Web Services": [
+      "AWS",
+      "Amazon",
+      "Amazon AWS"
+    ],
+    "Microsoft": [
+      "Microsoft Corporation",
+      "Microsoft Corp"
+    ],
+    "GitHub": [
+      "GitHub Inc"
+    ],
+    "Meta": [
+      "Meta AI",
+      "Meta Platforms"
+    ],
+    "Vercel": [
+      "Vercel Inc"
+    ],
+    "OpenAI": [
+      "OpenAI Inc",
+      "OpenAI OpCo"
+    ],
+    "Anthropic": [
+      "Anthropic PBC"
+    ],
+    "Cloud Native Computing Foundation": [
+      "CNCF"
+    ],
+    "Hugging Face": [
+      "Hugging Face Inc"
+    ],
+    "DeepSeek": [
+      "DeepSeek AI"
+    ],
+    "TypeSafe AI": [
+      "TypeSafe",
+      "Typed Safe"
+    ],
+    "Alibaba": [
+      "Alibaba Cloud",
+      "Alibaba Group"
+    ]
+  },
+  "sufixos": [
+    "Inc",
+    "Inc.",
+    "LLC",
+    "Ltd",
+    "Ltd.",
+    "GmbH",
+    "Corp",
+    "SE",
+    "AG",
+    "Pty",
+    "B.V.",
+    "e.V."
+  ],
+  "comunidade": "Projeto comunitário (sem empresa)"
+}

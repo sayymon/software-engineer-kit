@@ -1,0 +1,123 @@
+flowchart LR
+  subgraph z_SG_age_orq["<b>Orquestração do agente</b>"]
+    direction LR
+    age_orq_s0(["<small><b>age_orq_s0</b></small><br/>Necessidade de um agente para uma tarefa de várias etapas"])
+    age_orq_c1[["<small><b>age_orq_c1</b></small><br/>Delimitar a tarefa, as ações e a autonomia"]]
+    age_orq_c2[["<small><b>age_orq_c2</b></small><br/>Escolher a abordagem de entrega"]]
+    age_orq_c3[["<small><b>age_orq_c3</b></small><br/>Escolher a stack pelo tipo de trabalho"]]
+    age_orq_c8[["<small><b>age_orq_c8</b></small><br/>Implementar, avaliar e lançar o agente"]]
+    age_orq_c4[["<small><b>age_orq_c4</b></small><br/>Implementar, avaliar e lançar o agente"]]
+    age_orq_c5[["<small><b>age_orq_c5</b></small><br/>Implementar, avaliar e lançar o agente"]]
+    age_orq_c6[["<small><b>age_orq_c6</b></small><br/>Implementar, avaliar e lançar o agente"]]
+    age_orq_c7[["<small><b>age_orq_c7</b></small><br/>Implementar, avaliar e lançar o agente"]]
+    age_orq_e5(["<small><b>age_orq_e5</b></small><br/>Agente ativo em uma plataforma de automação assinada<br/><i>retorno: assinar_plataforma</i>"])
+    age_orq_e1(["<small><b>age_orq_e1</b></small><br/>Agente com ferramentas e estado da tarefa sobre a stack de agente com ferramentas e memória<br/><i>retorno: agente_ferramentas</i>"])
+    age_orq_e2(["<small><b>age_orq_e2</b></small><br/>Agentes lançados com orquestrador e subagentes sobre a stack de agente com ferramentas e memória<br/><i>retorno: agente_multiagente</i>"])
+    age_orq_e3(["<small><b>age_orq_e3</b></small><br/>Agente com memória duradoura sobre a stack de agente com ferramentas e memória<br/><i>retorno: agente_memoria_duradoura</i>"])
+    age_orq_e4(["<small><b>age_orq_e4</b></small><br/>Agente de código lançado sobre a stack de desenvolvimento assistido por IA<br/><i>retorno: fluxo_dev_assistido</i>"])
+  end
+  subgraph z_SG_age_ctx["<b>Contexto e requisitos</b>"]
+    direction LR
+    age_ctx_s0(["<small><b>age_ctx_s0</b></small><br/>Início do levantamento"])
+    age_ctx_t1["<small><b>age_ctx_t1</b></small><br/>Delimitar a tarefa e as ações"]
+    age_ctx_t2["<small><b>age_ctx_t2</b></small><br/>Preparar as tarefas de teste"]
+    age_ctx_e1(["<small><b>age_ctx_e1</b></small><br/>Tarefa, ações e autonomia acordadas<br/><i>retorno: tarefa_definida</i>"])
+  end
+  subgraph z_SG_age_abd["<b>Abordagem de entrega</b>"]
+    direction LR
+    age_abd_s0(["<small><b>age_abd_s0</b></small><br/>Início da escolha"])
+    age_abd_t1["<small><b>age_abd_t1</b></small><br/>Registrar premissas e pontuar as opções"]
+    age_abd_g1{"<small><b>age_abd_g1</b></small><br/>Controle próprio de<br/>dados e ações?"}
+    age_abd_e1(["<small><b>age_abd_e1</b></small><br/>Construir o agente<br/><i>retorno: construir</i>"])
+    age_abd_g2{"<small><b>age_abd_g2</b></small><br/>Ações irreversíveis<br/>com aprovação<br/>própria?"}
+    age_abd_g3{"<small><b>age_abd_g3</b></small><br/>Fluxo padronizado<br/>coberto por<br/>plataforma?"}
+    age_abd_e2(["<small><b>age_abd_e2</b></small><br/>Plataforma de automação com agente assinada<br/><i>retorno: assinar_plataforma</i>"])
+  end
+  subgraph z_SG_age_stk["<b>Stack por contexto</b>"]
+    direction LR
+    age_stk_s0(["<small><b>age_stk_s0</b></small><br/>Início da escolha da stack"])
+    age_stk_g1{"<small><b>age_stk_g1</b></small><br/>Trabalho sobre<br/>código?"}
+    age_stk_e1(["<small><b>age_stk_e1</b></small><br/>Stack de desenvolvimento assistido por IA<br/><i>retorno: fluxo_dev_assistido</i>"])
+    age_stk_g2{"<small><b>age_stk_g2</b></small><br/>Subtarefas<br/>independentes demais<br/>para um agente?"}
+    age_stk_e2(["<small><b>age_stk_e2</b></small><br/>Stack de orquestração com subagentes<br/><i>retorno: agente_multiagente</i>"])
+    age_stk_g3{"<small><b>age_stk_g3</b></small><br/>Memória entre<br/>sessões?"}
+    age_stk_e3(["<small><b>age_stk_e3</b></small><br/>Stack de agente com memória duradoura<br/><i>retorno: agente_memoria_duradoura</i>"])
+    age_stk_e4(["<small><b>age_stk_e4</b></small><br/>Stack de agente com ferramentas e estado da tarefa<br/><i>retorno: agente_ferramentas</i>"])
+  end
+  subgraph z_SG_age_ent["<b>Implementação e entrega</b>"]
+    direction LR
+    age_ent_s0(["<small><b>age_ent_s0</b></small><br/>Início da entrega"])
+    age_ent_t1["<small><b>age_ent_t1</b></small><br/>Implementar o laço, a memória e as proteções"]
+    age_ent_t2["<small><b>age_ent_t2</b></small><br/>Avaliar antes de lançar"]
+    age_ent_t3["<small><b>age_ent_t3</b></small><br/>Lançar e operar"]
+    age_ent_e1(["<small><b>age_ent_e1</b></small><br/>Agente lançado e acompanhado<br/><i>retorno: pronta</i>"])
+  end
+  age_orq_s0 --> age_orq_c1
+  age_ctx_s0 --> age_ctx_t1
+  age_ctx_t1 --> age_ctx_t2
+  age_ctx_t2 --> age_ctx_e1
+  age_abd_s0 --> age_abd_t1
+  age_abd_t1 --> age_abd_g1
+  age_abd_g1 -->|"sim"| age_abd_e1
+  age_abd_g1 -->|"não"| age_abd_g2
+  age_abd_g2 -->|"sim"| age_abd_e1
+  age_abd_g2 -->|"não"| age_abd_g3
+  age_abd_g3 -->|"sim"| age_abd_e2
+  age_abd_g3 -->|"não"| age_abd_e1
+  age_stk_s0 --> age_stk_g1
+  age_stk_g1 -->|"sim"| age_stk_e1
+  age_stk_g1 -->|"não"| age_stk_g2
+  age_stk_g2 -->|"sim"| age_stk_e2
+  age_stk_g2 -->|"não"| age_stk_g3
+  age_stk_g3 -->|"sim"| age_stk_e3
+  age_stk_g3 -->|"não"| age_stk_e4
+  age_ent_s0 --> age_ent_t1
+  age_ent_t1 --> age_ent_t2
+  age_ent_t2 --> age_ent_t3
+  age_ent_t3 --> age_ent_e1
+  age_orq_c1 -.->|"chama"| age_ctx_s0
+  age_ctx_e1 -.->|"retorno: tarefa_definida"| age_orq_c2
+  age_orq_c2 -.->|"chama"| age_abd_s0
+  age_abd_e1 -.->|"retorno: construir"| age_orq_c3
+  age_abd_e2 -.->|"retorno: assinar_plataforma"| age_orq_c8
+  age_orq_c3 -.->|"chama"| age_stk_s0
+  age_stk_e1 -.->|"retorno: fluxo_dev_assistido"| age_orq_c7
+  age_stk_e2 -.->|"retorno: agente_multiagente"| age_orq_c5
+  age_stk_e3 -.->|"retorno: agente_memoria_duradoura"| age_orq_c6
+  age_stk_e4 -.->|"retorno: agente_ferramentas"| age_orq_c4
+  age_orq_c8 -.->|"chama"| age_ent_s0
+  age_ent_e1 -.->|"retorno: pronta (age_orq_c8)"| age_orq_e5
+  age_orq_c4 -.->|"chama"| age_ent_s0
+  age_ent_e1 -.->|"retorno: pronta (age_orq_c4)"| age_orq_e1
+  age_orq_c5 -.->|"chama"| age_ent_s0
+  age_ent_e1 -.->|"retorno: pronta (age_orq_c5)"| age_orq_e2
+  age_orq_c6 -.->|"chama"| age_ent_s0
+  age_ent_e1 -.->|"retorno: pronta (age_orq_c6)"| age_orq_e3
+  age_orq_c7 -.->|"chama"| age_ent_s0
+  age_ent_e1 -.->|"retorno: pronta (age_orq_c7)"| age_orq_e4
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#0072B2,stroke:#00446B,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#E69F00,stroke:#8A5F00,stroke-width:1px,color:#000000
+  classDef z_R_3 fill:#009E73,stroke:#005F45,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_C_0_1 fill:#0072B2,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_2 fill:#E69F00,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_3 fill:#009E73,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_4 fill:#56B4E9,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  class age_orq_c1 z_C_0_1
+  class age_orq_c2 z_C_0_2
+  class age_orq_c3 z_C_0_3
+  class age_orq_c8,age_orq_c4,age_orq_c5,age_orq_c6,age_orq_c7 z_C_0_4
+  class age_orq_s0,age_orq_e5,age_orq_e1,age_orq_e2,age_orq_e3,age_orq_e4 z_R_0
+  class age_ctx_s0,age_ctx_t1,age_ctx_t2,age_ctx_e1 z_R_1
+  class age_abd_s0,age_abd_t1,age_abd_g1,age_abd_e1,age_abd_g2,age_abd_g3,age_abd_e2 z_R_2
+  class age_stk_s0,age_stk_g1,age_stk_e1,age_stk_g2,age_stk_e2,age_stk_g3,age_stk_e3,age_stk_e4 z_R_3
+  class age_ent_s0,age_ent_t1,age_ent_t2,age_ent_t3,age_ent_e1 z_R_4
+  class age_abd_g1,age_abd_g2,age_abd_g3,age_stk_g1,age_stk_g2,age_stk_g3 gw
+  style z_SG_age_orq fill:#E7ECEE,stroke:#607D8B,stroke-width:3px,color:#000000
+  style z_SG_age_ctx fill:#D9EAF3,stroke:#0072B2,stroke-width:3px,color:#000000
+  style z_SG_age_abd fill:#FBF1D9,stroke:#E69F00,stroke-width:3px,color:#000000
+  style z_SG_age_stk fill:#D9F0EA,stroke:#009E73,stroke-width:3px,color:#000000
+  style z_SG_age_ent fill:#E6F4FC,stroke:#56B4E9,stroke-width:3px,color:#000000

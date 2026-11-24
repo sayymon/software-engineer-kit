@@ -1,0 +1,41 @@
+{
+  "_nota": "Prefixo de URL (host + caminho) -> palavras que o parametro (chave + valor) precisa citar para a fonte valer. Fonte https fora desta lista falha nos validadores: use 'editorial' ou 'não verificado' quando nao houver fonte oficial da plataforma citada.",
+  "support.google.com/youtube": [
+    "youtube"
+  ],
+  "support.spotify.com": [
+    "spotify"
+  ],
+  "developer.android.com": [
+    "android",
+    "health connect"
+  ],
+  "docs.github.com/en/webhooks": [
+    "github"
+  ],
+  "docs.github.com/en/actions": [
+    "github actions"
+  ],
+  "github.com/pgvector": [
+    "pgvector"
+  ],
+  "playwright.dev": [
+    "playwright"
+  ],
+  "modelcontextprotocol.io": [
+    "mcp",
+    "model context protocol"
+  ],
+  "docs.n8n.io": [
+    "n8n"
+  ],
+  "docs.getdbt.com": [
+    "dbt"
+  ],
+  "docs.ollama.com": [
+    "ollama"
+  ],
+  "grafana.com/docs/k6": [
+    "k6"
+  ]
+}

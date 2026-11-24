@@ -1,0 +1,12 @@
+id: tec_ddd_estrategico
+tipo: tecnica
+nome: DDD estratégico
+descricao: Contextos delimitados, linguagem ubíqua e mapa de contextos para extrair módulos, donos e integrações.
+quando_usar:
+  - Feature que toca mais de um domínio ou time
+  - Definir módulos e fronteiras
+quando_evitar:
+  - Ajuste dentro de um único módulo bem conhecido
+status: rascunho
+publico: false
+exemplo: Contextos Promoções e Pedidos, cada um com dono, integrados por eventos.

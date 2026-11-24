@@ -1,0 +1,18 @@
+id: tec_an_lise_de_dados
+tipo: tecnica
+nome: Análise de dados
+descricao: Usar logs, métricas, funis e bases para confirmar ou derrubar percepções sobre a necessidade e dimensionar o problema.
+quando_usar:
+  - Há dados de uso, funil ou operação disponíveis
+  - Percepções conflitantes entre interessados
+quando_evitar:
+  - Não há dado confiável e coletar custaria mais que decidir
+exemplo: "Funil do checkout: 38% dos compradores recorrentes abandonam na etapa de pagamento."
+como_aplicar:
+  - Formule a pergunta que os dados devem responder
+  - Escolha a fonte e o recorte
+  - Compare com a percepção dos interessados
+  - Registre o número e a fonte
+resultado_esperado: Números com fonte anexados aos requisitos levantados.
+status: rascunho
+publico: false

@@ -1,0 +1,16 @@
+id: tec_sprint_goal
+tipo: tecnica
+nome: Sprint Goal
+descricao: "Objetivo da sprint: um compromisso único que dá foco e flexibilidade sobre como entregar."
+quando_usar:
+  - Times que trabalham em sprints
+quando_evitar:
+  - Fluxo contínuo sem iterações
+exemplo: "Objetivo: compradores recorrentes conseguem aplicar o cupom em homologação."
+como_aplicar:
+  - Defina o objetivo no planejamento
+  - Use-o para decidir trocas durante a sprint
+  - Revise-o na revisão
+resultado_esperado: Objetivo da sprint atingido ou não, com o motivo.
+status: rascunho
+publico: false

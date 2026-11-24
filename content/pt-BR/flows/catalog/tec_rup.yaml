@@ -1,0 +1,16 @@
+id: tec_rup
+tipo: tecnica
+nome: RUP
+descricao: "Rational Unified Process: processo iterativo dirigido por casos de uso, com fases de concepção, elaboração, construção e transição."
+quando_usar:
+  - Organizações que exigem artefatos formais por fase
+quando_evitar:
+  - Times pequenos de produto com entrega contínua
+exemplo: Projeto de integração com casos de uso aprovados na elaboração antes da construção.
+como_aplicar:
+  - Defina os casos de uso
+  - Itere por fases com marcos
+  - Valide a arquitetura na elaboração
+resultado_esperado: Casos de uso e arquitetura de referência por fase.
+status: rascunho
+publico: false

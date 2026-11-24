@@ -1,0 +1,18 @@
+id: tec_sla
+tipo: tecnica
+nome: SLA (acordo de nível de serviço)
+descricao: Compromisso contratual com o cliente sobre disponibilidade, desempenho ou tempo de resposta, com consequência quando é descumprido (créditos, multa, rescisão). Fica acima do SLO, com margem, e o SLO acima do SLI medido.
+quando_usar:
+  - Serviço com contrato de disponibilidade ou de tempo de resposta com clientes ou parceiros
+  - Classificar e comunicar um incidente que ameaça o compromisso contratual
+quando_evitar:
+  - SLA igual ao SLO, sem margem para o time reagir antes de violar o contrato
+  - Prometer SLA sem medir o SLI correspondente
+como_aplicar:
+  - Partir do SLI medido e do SLO interno, e fixar o SLA com margem abaixo do SLO
+  - Ligar cada SLA a um alerta que dispare antes da violação
+  - No incidente, medir o tempo consumido do SLA e os prazos contratuais de aviso
+resultado_esperado: Clientes sabem o que esperar, o time é alertado antes de violar o contrato e o impacto de cada incidente no SLA fica registrado.
+status: rascunho
+publico: false
+exemplo: "SLI: disponibilidade medida do checkout; SLO interno: 99,95% no mês; SLA com parceiros: 99,9%, com crédito de 10% da mensalidade abaixo disso."

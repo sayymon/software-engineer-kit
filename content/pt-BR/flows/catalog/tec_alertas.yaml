@@ -1,0 +1,12 @@
+id: tec_alertas
+tipo: tecnica
+nome: Alertas acionáveis
+descricao: Alertas ligados a SLO, com dono, severidade e runbook, que pedem ação humana.
+quando_usar:
+  - Bug que chegou à produção sem ser detectado
+  - Reduzir o tempo de detecção
+quando_evitar:
+  - Alerta sem ação possível, que cria ruído
+status: rascunho
+publico: false
+exemplo: Alerta quando erro do checkout passa de 1% por 5 minutos, com link para o runbook.

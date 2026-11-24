@@ -1,0 +1,12 @@
+id: tec_criterios_aceitacao
+tipo: tecnica
+nome: Critérios de aceitação
+descricao: Condições verificáveis, em geral em forma de exemplos, que dizem quando o requisito está atendido.
+quando_usar:
+  - Requisito ambíguo
+  - Definir o que testar antes de construir
+quando_evitar:
+  - Critério vago que não dá para testar
+status: rascunho
+publico: false
+exemplo: Recusa de cupom sempre informa o motivo e não altera o total do carrinho.

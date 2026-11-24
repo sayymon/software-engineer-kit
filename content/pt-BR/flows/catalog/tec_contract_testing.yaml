@@ -1,0 +1,12 @@
+id: tec_contract_testing
+tipo: tecnica
+nome: Contract testing
+descricao: Teste que verifica que consumidor e provedor respeitam o contrato combinado entre eles.
+quando_usar:
+  - Falhas na integração entre serviços
+  - Times independentes evoluindo APIs
+quando_evitar:
+  - Sistemas sem fronteira de serviço clara
+status: rascunho
+publico: false
+exemplo: "Contrato do evento de pedido testado nos dois lados: produtor e consumidor."

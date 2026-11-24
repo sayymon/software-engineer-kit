@@ -1,0 +1,11 @@
+id: tec_observabilidade_de_llm
+tipo: tecnica
+nome: Observabilidade de LLM
+publico: false
+descricao: Registra prompts, respostas, custo, latência, qualidade e falhas de cada chamada ao modelo.
+quando_usar:
+  - Features com IA em teste ou em produção
+  - Comparar versões de prompt ou de modelo
+quando_evitar:
+  - Features sem modelo probabilístico
+exemplo: Painel com custo por chamada, latência, taxa de fallback e avaliações por versão de prompt.

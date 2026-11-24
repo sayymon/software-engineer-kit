@@ -1,0 +1,10 @@
+id: jornada_metodologia
+tipo: jornada
+nome: Escolhendo a metodologia
+descricao: Scrum, Kanban, Scrumban, Shape Up e Waterfall por contexto
+publico: false
+perfil: Engenheiro de software
+etapas:
+  - id: foco
+    titulo: Foco da jornada
+    descricao: Scrum, Kanban, Scrumban, Shape Up e Waterfall por contexto

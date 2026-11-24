@@ -1,0 +1,871 @@
+{
+  "actix web": [
+    "rust"
+  ],
+  "adonisjs": [
+    "typescript"
+  ],
+  "ajv": [
+    "javascript",
+    "typescript"
+  ],
+  "akamai edgeworkers": [
+    "javascript"
+  ],
+  "amazon ses": [
+    "agnostica"
+  ],
+  "android studio": [
+    "kotlin",
+    "java"
+  ],
+  "angular": [
+    "typescript"
+  ],
+  "ansible": [
+    "agnostica"
+  ],
+  "ant design": [
+    "javascript",
+    "typescript"
+  ],
+  "apache airflow": [
+    "python"
+  ],
+  "apache pulsar": [
+    "java",
+    "kotlin",
+    "python",
+    "go"
+  ],
+  "apache spark": [
+    "python"
+  ],
+  "api platform": [
+    "php"
+  ],
+  "apollo client": [
+    "javascript",
+    "typescript"
+  ],
+  "applitools": [
+    "agnostica"
+  ],
+  "arktype": [
+    "typescript",
+    "javascript"
+  ],
+  "asp.net core": [
+    "csharp"
+  ],
+  "astro": [
+    "javascript",
+    "typescript"
+  ],
+  "auth.js": [
+    "javascript",
+    "typescript"
+  ],
+  "avalonia ui": [
+    "csharp"
+  ],
+  "aws cdk": [
+    "typescript",
+    "python",
+    "java",
+    "csharp",
+    "go"
+  ],
+  "aws lambda": [
+    "javascript",
+    "typescript",
+    "python",
+    "java",
+    "csharp",
+    "ruby",
+    "go"
+  ],
+  "axios": [
+    "javascript",
+    "typescript"
+  ],
+  "axum": [
+    "rust"
+  ],
+  "azure durable functions": [
+    "csharp",
+    "javascript",
+    "python",
+    "java"
+  ],
+  "azure functions": [
+    "csharp",
+    "javascript",
+    "typescript",
+    "python",
+    "java"
+  ],
+  "better auth": [
+    "javascript",
+    "typescript"
+  ],
+  "bottle": [
+    "python"
+  ],
+  "brevo": [
+    "agnostica"
+  ],
+  "browserstack": [
+    "agnostica"
+  ],
+  "bullmq": [
+    "javascript",
+    "typescript"
+  ],
+  "bunny edge scripting": [
+    "javascript",
+    "typescript"
+  ],
+  "cakephp": [
+    "php"
+  ],
+  "capacitor": [
+    "javascript",
+    "typescript"
+  ],
+  "carter": [
+    "csharp"
+  ],
+  "casbin": [
+    "go",
+    "java",
+    "javascript",
+    "typescript",
+    "python",
+    "csharp",
+    "php",
+    "rust"
+  ],
+  "celery": [
+    "python"
+  ],
+  "chakra ui": [
+    "javascript",
+    "typescript"
+  ],
+  "chi": [
+    "go"
+  ],
+  "class-validator": [
+    "javascript",
+    "typescript"
+  ],
+  "cloudflare workers": [
+    "javascript",
+    "typescript",
+    "rust",
+    "python"
+  ],
+  "codeigniter": [
+    "php"
+  ],
+  "compose multiplatform": [
+    "kotlin"
+  ],
+  "conductor": [
+    "java",
+    "kotlin",
+    "python",
+    "javascript",
+    "go"
+  ],
+  "connect rpc": [
+    "go"
+  ],
+  "cuba": [
+    "ruby"
+  ],
+  "customer.io": [
+    "agnostica"
+  ],
+  "cypress": [
+    "javascript",
+    "typescript"
+  ],
+  "daisyui": [
+    "javascript",
+    "typescript"
+  ],
+  "dapr": [
+    "agnostica"
+  ],
+  "dask": [
+    "python"
+  ],
+  "deepspeed": [
+    "python"
+  ],
+  "deno deploy": [
+    "javascript",
+    "typescript"
+  ],
+  "django": [
+    "python"
+  ],
+  "django rest framework": [
+    "python"
+  ],
+  "dotnet maui": [
+    "csharp"
+  ],
+  "dramatiq": [
+    "python"
+  ],
+  "drizzle orm": [
+    "typescript",
+    "javascript"
+  ],
+  "dry-rb": [
+    "ruby"
+  ],
+  "duckdb": [
+    "sql",
+    "python"
+  ],
+  "echo": [
+    "go"
+  ],
+  "eclipse vert.x": [
+    "java",
+    "kotlin"
+  ],
+  "electron": [
+    "javascript",
+    "typescript"
+  ],
+  "elysia": [
+    "typescript"
+  ],
+  "encore.ts": [
+    "typescript",
+    "go"
+  ],
+  "entity framework core": [
+    "csharp"
+  ],
+  "env0": [
+    "agnostica"
+  ],
+  "expo": [
+    "javascript",
+    "typescript"
+  ],
+  "express": [
+    "javascript",
+    "typescript"
+  ],
+  "fastapi": [
+    "python"
+  ],
+  "fastendpoints": [
+    "csharp"
+  ],
+  "fastify": [
+    "javascript",
+    "typescript"
+  ],
+  "fastly compute": [
+    "rust",
+    "javascript",
+    "go"
+  ],
+  "fiber": [
+    "go"
+  ],
+  "filament": [
+    "php"
+  ],
+  "flask": [
+    "python"
+  ],
+  "flutter": [
+    "dart"
+  ],
+  "gin": [
+    "go"
+  ],
+  "go kit": [
+    "go"
+  ],
+  "go-zero": [
+    "go"
+  ],
+  "google cloud run": [
+    "agnostica"
+  ],
+  "gorm": [
+    "go"
+  ],
+  "got": [
+    "javascript",
+    "typescript"
+  ],
+  "grafana k6": [
+    "javascript"
+  ],
+  "grape": [
+    "ruby"
+  ],
+  "grpc-go": [
+    "go"
+  ],
+  "hanami": [
+    "ruby"
+  ],
+  "hcp terraform": [
+    "agnostica"
+  ],
+  "headless ui": [
+    "javascript",
+    "typescript"
+  ],
+  "helidon": [
+    "java",
+    "kotlin"
+  ],
+  "hibernate orm": [
+    "java",
+    "kotlin"
+  ],
+  "hilt": [
+    "kotlin",
+    "java"
+  ],
+  "hono": [
+    "javascript",
+    "typescript"
+  ],
+  "hotwire": [
+    "ruby"
+  ],
+  "httpx": [
+    "python"
+  ],
+  "huma": [
+    "go"
+  ],
+  "hypothesis": [
+    "python"
+  ],
+  "inngest": [
+    "typescript",
+    "javascript",
+    "python",
+    "go"
+  ],
+  "javafx": [
+    "java",
+    "kotlin"
+  ],
+  "javalin": [
+    "java",
+    "kotlin"
+  ],
+  "jax": [
+    "python"
+  ],
+  "jest": [
+    "javascript",
+    "typescript"
+  ],
+  "jetpack compose": [
+    "kotlin"
+  ],
+  "joi": [
+    "javascript",
+    "typescript"
+  ],
+  "jotai": [
+    "javascript",
+    "typescript"
+  ],
+  "junit 5": [
+    "java",
+    "kotlin"
+  ],
+  "keras": [
+    "python"
+  ],
+  "knex.js": [
+    "javascript",
+    "typescript"
+  ],
+  "koa": [
+    "javascript",
+    "typescript"
+  ],
+  "kotest": [
+    "kotlin"
+  ],
+  "kotlin": [
+    "kotlin"
+  ],
+  "kotlin multiplatform": [
+    "kotlin"
+  ],
+  "ktor": [
+    "kotlin"
+  ],
+  "kurrent (eventstoredb)": [
+    "csharp",
+    "java",
+    "python",
+    "go",
+    "javascript"
+  ],
+  "ky": [
+    "javascript",
+    "typescript"
+  ],
+  "kysely": [
+    "typescript",
+    "javascript"
+  ],
+  "lambda@edge": [
+    "javascript",
+    "python"
+  ],
+  "laminas": [
+    "php"
+  ],
+  "laravel": [
+    "php"
+  ],
+  "leptos": [
+    "rust"
+  ],
+  "lightgbm": [
+    "python"
+  ],
+  "listmonk": [
+    "go"
+  ],
+  "litestar": [
+    "python"
+  ],
+  "livewire": [
+    "php"
+  ],
+  "loco": [
+    "rust"
+  ],
+  "locust": [
+    "python"
+  ],
+  "mabl": [
+    "agnostica"
+  ],
+  "mailersend": [
+    "agnostica"
+  ],
+  "mailgun": [
+    "agnostica"
+  ],
+  "mantine": [
+    "javascript",
+    "typescript"
+  ],
+  "masstransit": [
+    "csharp"
+  ],
+  "matplotlib": [
+    "python"
+  ],
+  "micronaut": [
+    "java",
+    "kotlin"
+  ],
+  "mobx": [
+    "javascript",
+    "typescript"
+  ],
+  "mui": [
+    "javascript",
+    "typescript"
+  ],
+  "nativescript": [
+    "javascript",
+    "typescript"
+  ],
+  "nestjs": [
+    "typescript"
+  ],
+  "next.js": [
+    "javascript",
+    "typescript"
+  ],
+  "numpy": [
+    "python"
+  ],
+  "nuxt": [
+    "javascript",
+    "typescript"
+  ],
+  "ofetch": [
+    "javascript",
+    "typescript"
+  ],
+  "okhttp": [
+    "kotlin",
+    "java"
+  ],
+  "openfga": [
+    "go",
+    "java",
+    "javascript",
+    "typescript",
+    "python",
+    "csharp"
+  ],
+  "openiddict": [
+    "csharp"
+  ],
+  "opentofu": [
+    "agnostica"
+  ],
+  "orleans": [
+    "csharp"
+  ],
+  "ory kratos": [
+    "agnostica"
+  ],
+  "pandas": [
+    "python"
+  ],
+  "passport": [
+    "javascript",
+    "typescript"
+  ],
+  "phpunit": [
+    "php"
+  ],
+  "playwright": [
+    "typescript",
+    "javascript",
+    "python",
+    "java",
+    "csharp"
+  ],
+  "plotly": [
+    "python"
+  ],
+  "poem": [
+    "rust"
+  ],
+  "polars": [
+    "python"
+  ],
+  "postmark": [
+    "agnostica"
+  ],
+  "prefect": [
+    "python"
+  ],
+  "prisma": [
+    "typescript",
+    "javascript"
+  ],
+  "pulumi": [
+    "typescript",
+    "python",
+    "go",
+    "csharp",
+    "java"
+  ],
+  "pydantic": [
+    "python"
+  ],
+  "pytest": [
+    "python"
+  ],
+  "pytorch": [
+    "python"
+  ],
+  "pytorch lightning": [
+    "python"
+  ],
+  "qt": [
+    "agnostica"
+  ],
+  "quarkus": [
+    "java",
+    "kotlin"
+  ],
+  "quasar": [
+    "javascript",
+    "typescript"
+  ],
+  "radix ui": [
+    "javascript",
+    "typescript"
+  ],
+  "ray": [
+    "python"
+  ],
+  "react": [
+    "javascript",
+    "typescript"
+  ],
+  "react native": [
+    "javascript",
+    "typescript"
+  ],
+  "redux toolkit": [
+    "javascript",
+    "typescript"
+  ],
+  "requests": [
+    "python"
+  ],
+  "reqwest": [
+    "rust"
+  ],
+  "resend": [
+    "typescript",
+    "javascript",
+    "python",
+    "go"
+  ],
+  "retrofit": [
+    "kotlin",
+    "java"
+  ],
+  "rocket": [
+    "rust"
+  ],
+  "roda": [
+    "ruby"
+  ],
+  "room": [
+    "kotlin",
+    "java"
+  ],
+  "rq": [
+    "python"
+  ],
+  "rspec": [
+    "ruby"
+  ],
+  "ruby on rails": [
+    "ruby"
+  ],
+  "rxjs": [
+    "javascript",
+    "typescript"
+  ],
+  "sanic": [
+    "python"
+  ],
+  "scikit-learn": [
+    "python"
+  ],
+  "selenium": [
+    "java",
+    "python",
+    "csharp",
+    "javascript",
+    "ruby"
+  ],
+  "sequelize": [
+    "javascript",
+    "typescript"
+  ],
+  "servicestack": [
+    "csharp"
+  ],
+  "shadcn-ui": [
+    "javascript",
+    "typescript"
+  ],
+  "sidekiq": [
+    "ruby"
+  ],
+  "signalr": [
+    "csharp"
+  ],
+  "sinatra": [
+    "ruby"
+  ],
+  "slim": [
+    "php"
+  ],
+  "solidjs": [
+    "javascript",
+    "typescript"
+  ],
+  "spacelift": [
+    "agnostica"
+  ],
+  "spring boot": [
+    "java",
+    "kotlin"
+  ],
+  "spring cloud": [
+    "java",
+    "kotlin"
+  ],
+  "spring framework": [
+    "java",
+    "kotlin"
+  ],
+  "spring security": [
+    "java",
+    "kotlin"
+  ],
+  "sqlalchemy": [
+    "python"
+  ],
+  "starlette": [
+    "python"
+  ],
+  "supertokens": [
+    "javascript",
+    "typescript",
+    "python",
+    "go"
+  ],
+  "svelte": [
+    "javascript",
+    "typescript"
+  ],
+  "sveltekit": [
+    "javascript",
+    "typescript"
+  ],
+  "swift": [
+    "swift"
+  ],
+  "swift composable architecture": [
+    "swift"
+  ],
+  "swiftui": [
+    "swift"
+  ],
+  "swr": [
+    "javascript",
+    "typescript"
+  ],
+  "symfony": [
+    "php"
+  ],
+  "tailwind css": [
+    "javascript",
+    "typescript"
+  ],
+  "tanstack query": [
+    "javascript",
+    "typescript"
+  ],
+  "tauri": [
+    "rust",
+    "javascript",
+    "typescript"
+  ],
+  "temporal": [
+    "go",
+    "java",
+    "csharp",
+    "php",
+    "python",
+    "ruby",
+    "rust",
+    "typescript",
+    "javascript"
+  ],
+  "tensorflow": [
+    "python"
+  ],
+  "terraform": [
+    "agnostica"
+  ],
+  "terragrunt": [
+    "agnostica"
+  ],
+  "testcontainers": [
+    "java",
+    "python",
+    "go",
+    "csharp",
+    "javascript"
+  ],
+  "tokio": [
+    "rust"
+  ],
+  "tonic": [
+    "rust"
+  ],
+  "trigger.dev": [
+    "javascript",
+    "typescript"
+  ],
+  "trpc": [
+    "typescript"
+  ],
+  "twilio sendgrid": [
+    "agnostica"
+  ],
+  "typebox": [
+    "typescript",
+    "javascript"
+  ],
+  "typeorm": [
+    "javascript",
+    "typescript"
+  ],
+  "valibot": [
+    "typescript",
+    "javascript"
+  ],
+  "valtio": [
+    "javascript",
+    "typescript"
+  ],
+  "vitest": [
+    "javascript",
+    "typescript"
+  ],
+  "vue.js": [
+    "javascript",
+    "typescript"
+  ],
+  "wagtail": [
+    "python"
+  ],
+  "warp (rust)": [
+    "rust"
+  ],
+  "wxwidgets": [
+    "agnostica"
+  ],
+  "xcode": [
+    "swift"
+  ],
+  "xgboost": [
+    "python"
+  ],
+  "xunit.net": [
+    "csharp"
+  ],
+  "yup": [
+    "javascript",
+    "typescript"
+  ],
+  "zod": [
+    "typescript",
+    "javascript"
+  ],
+  "zustand": [
+    "javascript",
+    "typescript"
+  ]
+}

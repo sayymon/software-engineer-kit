@@ -1,0 +1,363 @@
+{
+ "id": "configurar_git_github",
+ "nome": "Como configurar Git com GitHub",
+ "sigla": "git",
+ "raias": [
+  {
+   "id": "git_orq",
+   "nome": "Orquestração do Git com GitHub",
+   "responsabilidade": "Encadear contexto, escolha da autenticação e configuração até o desfecho.",
+   "cor": "#607D8B",
+   "orquestradora": true
+  },
+  {
+   "id": "git_ctx",
+   "nome": "Contexto e requisitos",
+   "responsabilidade": "Entender a necessidade e fixar escopo e critérios antes de escolher tecnologia.",
+   "cor": "#0072B2",
+   "orquestradora": false
+  },
+  {
+   "id": "git_stk",
+   "nome": "Stack por contexto",
+   "responsabilidade": "Escolher o arquétipo de stack ou o caminho de construção por contexto.",
+   "cor": "#E69F00",
+   "orquestradora": false
+  },
+  {
+   "id": "git_ent",
+   "nome": "Implementação e entrega",
+   "responsabilidade": "Implementar, validar, publicar e operar na abordagem escolhida.",
+   "cor": "#009E73",
+   "orquestradora": false
+  }
+ ],
+ "nos": [
+  {
+   "id": "git_orq_s0",
+   "raia": "git_orq",
+   "tipo": "inicio",
+   "rotulo": "Necessidade de trabalhar com repositórios no GitHub",
+   "proximo": [
+    {
+     "para": "git_orq_c1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "git_orq_c1",
+   "raia": "git_orq",
+   "tipo": "chamada",
+   "rotulo": "Definir contas, políticas e identidades",
+   "proximo": [
+    {
+     "para": "git_orq_c2",
+     "condicao": "contas_definidas"
+    }
+   ],
+   "raia_chamada": "git_ctx"
+  },
+  {
+   "id": "git_orq_c2",
+   "raia": "git_orq",
+   "tipo": "chamada",
+   "rotulo": "Escolher a forma de autenticação e de identidade",
+   "proximo": [
+    {
+     "para": "git_orq_c3",
+     "condicao": "ssh_varias_identidades"
+    },
+    {
+     "para": "git_orq_c4",
+     "condicao": "ssh_com_assinatura"
+    },
+    {
+     "para": "git_orq_c5",
+     "condicao": "github_enterprise"
+    },
+    {
+     "para": "git_orq_c6",
+     "condicao": "https_com_github_cli"
+    }
+   ],
+   "raia_chamada": "git_stk"
+  },
+  {
+   "id": "git_orq_c3",
+   "raia": "git_orq",
+   "tipo": "chamada",
+   "rotulo": "Instalar, autenticar, conectar e proteger",
+   "proximo": [
+    {
+     "para": "git_orq_e1",
+     "condicao": "pronta"
+    }
+   ],
+   "raia_chamada": "git_ent"
+  },
+  {
+   "id": "git_orq_c4",
+   "raia": "git_orq",
+   "tipo": "chamada",
+   "rotulo": "Instalar, autenticar, conectar e proteger",
+   "proximo": [
+    {
+     "para": "git_orq_e2",
+     "condicao": "pronta"
+    }
+   ],
+   "raia_chamada": "git_ent"
+  },
+  {
+   "id": "git_orq_c5",
+   "raia": "git_orq",
+   "tipo": "chamada",
+   "rotulo": "Instalar, autenticar, conectar e proteger",
+   "proximo": [
+    {
+     "para": "git_orq_e3",
+     "condicao": "pronta"
+    }
+   ],
+   "raia_chamada": "git_ent"
+  },
+  {
+   "id": "git_orq_c6",
+   "raia": "git_orq",
+   "tipo": "chamada",
+   "rotulo": "Instalar, autenticar, conectar e proteger",
+   "proximo": [
+    {
+     "para": "git_orq_e4",
+     "condicao": "pronta"
+    }
+   ],
+   "raia_chamada": "git_ent"
+  },
+  {
+   "id": "git_orq_e1",
+   "raia": "git_orq",
+   "tipo": "fim",
+   "rotulo": "SSH configurado com uma chave por identidade",
+   "proximo": [],
+   "retorno": "ssh_varias_identidades"
+  },
+  {
+   "id": "git_orq_e2",
+   "raia": "git_orq",
+   "tipo": "fim",
+   "rotulo": "SSH com commits assinados configurado",
+   "proximo": [],
+   "retorno": "ssh_com_assinatura"
+  },
+  {
+   "id": "git_orq_e3",
+   "raia": "git_orq",
+   "tipo": "fim",
+   "rotulo": "GitHub com SSO e políticas centrais contratado",
+   "proximo": [],
+   "retorno": "github_enterprise"
+  },
+  {
+   "id": "git_orq_e4",
+   "raia": "git_orq",
+   "tipo": "fim",
+   "rotulo": "HTTPS com GitHub CLI configurado",
+   "proximo": [],
+   "retorno": "https_com_github_cli"
+  },
+  {
+   "id": "git_ctx_s0",
+   "raia": "git_ctx",
+   "tipo": "inicio",
+   "rotulo": "Início do levantamento",
+   "proximo": [
+    {
+     "para": "git_ctx_t1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "git_ctx_t1",
+   "raia": "git_ctx",
+   "tipo": "tarefa",
+   "rotulo": "Mapear contas, políticas e identidades",
+   "proximo": [
+    {
+     "para": "git_ctx_t2",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "git_ctx_t2",
+   "raia": "git_ctx",
+   "tipo": "tarefa",
+   "rotulo": "Escolher autenticação e identidade",
+   "proximo": [
+    {
+     "para": "git_ctx_e1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "git_ctx_e1",
+   "raia": "git_ctx",
+   "tipo": "fim",
+   "rotulo": "Contas e políticas registradas",
+   "proximo": [],
+   "retorno": "contas_definidas"
+  },
+  {
+   "id": "git_stk_s0",
+   "raia": "git_stk",
+   "tipo": "inicio",
+   "rotulo": "Início da escolha da autenticação",
+   "proximo": [
+    {
+     "para": "git_stk_g1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "git_stk_g1",
+   "raia": "git_stk",
+   "tipo": "bifurcacao",
+   "rotulo": "Mais de uma conta na máquina?",
+   "proximo": [
+    {
+     "para": "git_stk_e1",
+     "condicao": "sim"
+    },
+    {
+     "para": "git_stk_g2",
+     "condicao": "não"
+    }
+   ]
+  },
+  {
+   "id": "git_stk_g2",
+   "raia": "git_stk",
+   "tipo": "bifurcacao",
+   "rotulo": "Chaves SSH e commits assinados exigidos?",
+   "proximo": [
+    {
+     "para": "git_stk_e2",
+     "condicao": "sim"
+    },
+    {
+     "para": "git_stk_g3",
+     "condicao": "não"
+    }
+   ]
+  },
+  {
+   "id": "git_stk_g3",
+   "raia": "git_stk",
+   "tipo": "bifurcacao",
+   "rotulo": "SSO e políticas centrais?",
+   "proximo": [
+    {
+     "para": "git_stk_e3",
+     "condicao": "sim"
+    },
+    {
+     "para": "git_stk_e4",
+     "condicao": "não"
+    }
+   ]
+  },
+  {
+   "id": "git_stk_e1",
+   "raia": "git_stk",
+   "tipo": "fim",
+   "rotulo": "SSH com várias identidades",
+   "proximo": [],
+   "retorno": "ssh_varias_identidades"
+  },
+  {
+   "id": "git_stk_e2",
+   "raia": "git_stk",
+   "tipo": "fim",
+   "rotulo": "SSH com commits assinados",
+   "proximo": [],
+   "retorno": "ssh_com_assinatura"
+  },
+  {
+   "id": "git_stk_e3",
+   "raia": "git_stk",
+   "tipo": "fim",
+   "rotulo": "GitHub com SSO e políticas centrais",
+   "proximo": [],
+   "retorno": "github_enterprise"
+  },
+  {
+   "id": "git_stk_e4",
+   "raia": "git_stk",
+   "tipo": "fim",
+   "rotulo": "HTTPS com GitHub CLI",
+   "proximo": [],
+   "retorno": "https_com_github_cli"
+  },
+  {
+   "id": "git_ent_s0",
+   "raia": "git_ent",
+   "tipo": "inicio",
+   "rotulo": "Início da configuração",
+   "proximo": [
+    {
+     "para": "git_ent_t1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "git_ent_t1",
+   "raia": "git_ent",
+   "tipo": "tarefa",
+   "rotulo": "Instalar, autenticar e conectar",
+   "proximo": [
+    {
+     "para": "git_ent_t2",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "git_ent_t2",
+   "raia": "git_ent",
+   "tipo": "tarefa",
+   "rotulo": "Validar identidade e acesso",
+   "proximo": [
+    {
+     "para": "git_ent_t3",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "git_ent_t3",
+   "raia": "git_ent",
+   "tipo": "tarefa",
+   "rotulo": "Proteger e revisar",
+   "proximo": [
+    {
+     "para": "git_ent_e1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "git_ent_e1",
+   "raia": "git_ent",
+   "tipo": "fim",
+   "rotulo": "Git configurado, conectado e protegido",
+   "proximo": [],
+   "retorno": "pronta"
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+id: tec_piramide_de_revisao_de_pr
+tipo: tecnica
+nome: Pirâmide de revisão de PR
+descricao: "Prioriza a revisão pelo impacto: funcionalidade e implementação na base, depois testabilidade e cobertura, legibilidade e manutenibilidade, e estilo no topo."
+quando_usar:
+  - Todo pull request, para gastar o tempo de revisão onde o risco é maior
+quando_evitar:
+  - Discutir estilo enquanto há falha lógica aberta
+niveis:
+  - nivel: 1
+    nome: Funcionalidade e implementação
+    pergunta: Isso faz o que deveria, de forma correta?
+  - nivel: 2
+    nome: Testabilidade e cobertura
+    pergunta: Consigo confiar nisso por meio de testes?
+  - nivel: 3
+    nome: Legibilidade e manutenibilidade
+    pergunta: Outra pessoa entenderá e conseguirá evoluir isso?
+  - nivel: 4
+    nome: Estilo e forma
+    pergunta: Está consistente com os padrões do time?
+classificacao_de_comentarios:
+  - "Bloqueante: risco de bug, segurança, quebra de contrato ou violação grave de padrão; impede o merge"
+  - "Importante: lacuna relevante, como teste faltando"
+  - "Sugestão: melhora a qualidade sem travar a entrega"
+  - "Menor: detalhe de nomenclatura ou forma"
+status: rascunho
+publico: false
+exemplo: Primeiro a regra de juros e os casos-limite, depois os testes, depois os nomes, por último a formatação.

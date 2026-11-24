@@ -1,0 +1,11 @@
+id: tec_piramide_de_testes
+tipo: tecnica
+nome: Pirâmide de testes
+descricao: Muitos testes unitários rápidos, menos de integração e contrato, poucos de ponta a ponta.
+quando_usar:
+  - Planejar e revisar a suíte de testes
+quando_evitar:
+  - Usar só testes de ponta a ponta para tudo
+status: rascunho
+publico: false
+exemplo: 120 unitários, 18 de integração, 6 de contrato e 6 de ponta a ponta.

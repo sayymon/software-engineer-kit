@@ -1,0 +1,27 @@
+id: competencia_fundamentos
+tipo: competencia
+nome: "Fundamentos: meia-vida 10+ anos"
+descricao: "Estude devagar e fundo. Compostos por décadas: não há atalho."
+publico: false
+area: "Fundamentos: meia-vida 10+ anos"
+meiaVida: 10+ anos
+estudo: "Estude devagar e fundo. Compostos por décadas: não há atalho."
+itens:
+  - nome: Lógica e resolução de problemas
+    detalhe: Decomposição, abstração
+  - nome: Estruturas de dados e algoritmos
+    detalhe: Trade-offs de complexidade
+  - nome: SOLID e clean code
+    detalhe: Manutenibilidade
+  - nome: Testes
+    detalhe: Unidade, integração, contrato
+  - nome: Git
+    detalhe: Rebase, bisect, cherry-pick, workflows
+  - nome: SQL e modelagem de dados
+    detalhe: Relacional, índices, transações
+  - nome: HTTP e APIs
+    detalhe: Protocolos, status codes, caching
+  - nome: Segurança básica
+    detalhe: OWASP Top 10, IAM, segredos
+  - nome: Depuração sistemática
+    detalhe: Hipótese → teste → conclusão

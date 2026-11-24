@@ -1,0 +1,10 @@
+id: jornada_ciclo_agil
+tipo: jornada
+nome: "O ciclo ágil: comportamentos por cerimônia"
+descricao: Dailies, planning, review, retro e refinement
+publico: false
+perfil: Engenheiro de software
+etapas:
+  - id: foco
+    titulo: Foco da jornada
+    descricao: Dailies, planning, review, retro e refinement

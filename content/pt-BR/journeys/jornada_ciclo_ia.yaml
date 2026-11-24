@@ -1,0 +1,10 @@
+id: jornada_ciclo_ia
+tipo: jornada
+nome: Ciclo de desenvolvimento com IA
+descricao: Spec, delegação, review humano e ship com observabilidade
+publico: false
+perfil: Engenheiro de software
+etapas:
+  - id: foco
+    titulo: Foco da jornada
+    descricao: Spec, delegação, review humano e ship com observabilidade

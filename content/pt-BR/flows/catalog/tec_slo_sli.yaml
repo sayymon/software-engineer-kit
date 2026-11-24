@@ -1,0 +1,11 @@
+id: tec_slo_sli
+tipo: tecnica
+nome: SLO e SLI
+descricao: Indicadores de nível de serviço (SLI) e o objetivo acordado (SLO), que definem o que é "voltou ao normal".
+quando_usar:
+  - Definir impacto, severidade e critério de recuperação
+quando_evitar:
+  - Serviços sem medição mínima (comece por medir)
+status: rascunho
+publico: false
+exemplo: "SLI: checkouts concluídos com sucesso; SLO: 99,9% em 30 dias."

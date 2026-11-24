@@ -1,0 +1,16 @@
+id: tec_scrum_guide
+tipo: tecnica
+nome: Scrum Guide
+descricao: "Scrum: iterações de tempo fixo com papéis, eventos e artefatos definidos pelo Guia do Scrum."
+quando_usar:
+  - Time dedicado a produto em descoberta, sem interrupções frequentes
+quando_evitar:
+  - Fluxo contínuo com muitas interrupções
+exemplo: Sprints de 2 semanas com objetivo, planejamento, revisão e retrospectiva.
+como_aplicar:
+  - Defina o objetivo da sprint
+  - Planeje e acompanhe diariamente
+  - Revise com interessados e faça a retrospectiva
+resultado_esperado: Incremento utilizável ao fim de cada sprint.
+status: rascunho
+publico: false

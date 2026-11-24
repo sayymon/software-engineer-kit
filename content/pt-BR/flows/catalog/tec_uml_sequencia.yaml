@@ -1,0 +1,11 @@
+id: tec_uml_sequencia
+tipo: tecnica
+nome: Diagrama de sequência (UML)
+descricao: Mostra a ordem das mensagens entre participantes de um fluxo.
+quando_usar:
+  - Fluxos com várias chamadas, assíncronas ou com pontos de falha
+quando_evitar:
+  - Fluxo trivial de uma chamada
+status: rascunho
+publico: false
+exemplo: Checkout chama promoções, que lê o cache de histórico e devolve desconto ou motivo.

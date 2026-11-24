@@ -1,0 +1,11 @@
+id: tec_padroes_de_projeto
+tipo: tecnica
+nome: Padrões de projeto
+descricao: Soluções conhecidas para problemas recorrentes de desenho de código.
+quando_usar:
+  - Regras que variam, integrações, extensibilidade
+quando_evitar:
+  - Aplicar padrão sem o problema que ele resolve
+status: rascunho
+publico: false
+exemplo: Strategy para as regras de elegibilidade; repositório para o histórico.

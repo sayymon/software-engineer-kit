@@ -1,0 +1,16 @@
+id: tec_requisitos_funcionais
+tipo: tecnica
+nome: Requisitos Funcionais
+descricao: "O que o sistema faz: comportamentos, regras e respostas a eventos."
+quando_usar:
+  - Levantar e classificar requisitos
+quando_evitar:
+  - Qualidades como desempenho e segurança, que são não funcionais
+exemplo: O sistema deve recusar cupom para quem tem menos de 2 compras e informar o motivo.
+como_aplicar:
+  - Escreva um comportamento por requisito
+  - Use critério verificável
+  - Ligue ao critério de aceite
+resultado_esperado: Requisitos funcionais com critérios de aceite.
+status: rascunho
+publico: false

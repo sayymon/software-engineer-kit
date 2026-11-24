@@ -1,0 +1,17 @@
+id: tec_bdd_gherkin
+tipo: tecnica
+nome: BDD/Gherkin
+descricao: "Behavior-Driven Development: critérios de aceite escritos como cenários concretos (Dado, Quando, Então) que viram testes."
+quando_usar:
+  - Comportamento com regras e exceções
+  - Alinhar negócio, desenvolvimento e qualidade sobre o mesmo exemplo
+quando_evitar:
+  - Detalhe técnico interno sem comportamento visível
+exemplo: Dado um comprador com 2 compras, quando aplica o cupom, então o desconto aparece no total.
+como_aplicar:
+  - Escolha os exemplos com o negócio
+  - Escreva um cenário por regra e por exceção
+  - Automatize os cenários como testes
+resultado_esperado: Cenários versionados que servem de critério de aceite e de teste.
+status: rascunho
+publico: false

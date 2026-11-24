@@ -1,0 +1,496 @@
+{
+ "id": "criar_agente",
+ "nome": "Como criar um agente",
+ "sigla": "age",
+ "raias": [
+  {
+   "id": "age_orq",
+   "nome": "Orquestração do agente",
+   "responsabilidade": "Encadear contexto, abordagem, stack e entrega até o desfecho.",
+   "cor": "#607D8B",
+   "orquestradora": true
+  },
+  {
+   "id": "age_ctx",
+   "nome": "Contexto e requisitos",
+   "responsabilidade": "Entender a necessidade e fixar escopo e critérios antes de escolher tecnologia.",
+   "cor": "#0072B2",
+   "orquestradora": false
+  },
+  {
+   "id": "age_abd",
+   "nome": "Abordagem de entrega",
+   "responsabilidade": "Decidir entre assinar, comprar ou construir a partir das premissas.",
+   "cor": "#E69F00",
+   "orquestradora": false
+  },
+  {
+   "id": "age_stk",
+   "nome": "Stack por contexto",
+   "responsabilidade": "Escolher o arquétipo de stack ou o caminho de construção por contexto.",
+   "cor": "#009E73",
+   "orquestradora": false
+  },
+  {
+   "id": "age_ent",
+   "nome": "Implementação e entrega",
+   "responsabilidade": "Implementar, validar, publicar e operar na abordagem escolhida.",
+   "cor": "#56B4E9",
+   "orquestradora": false
+  }
+ ],
+ "nos": [
+  {
+   "id": "age_orq_s0",
+   "raia": "age_orq",
+   "tipo": "inicio",
+   "rotulo": "Necessidade de um agente para uma tarefa de várias etapas",
+   "proximo": [
+    {
+     "para": "age_orq_c1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "age_orq_c1",
+   "raia": "age_orq",
+   "tipo": "chamada",
+   "rotulo": "Delimitar a tarefa, as ações e a autonomia",
+   "proximo": [
+    {
+     "para": "age_orq_c2",
+     "condicao": "tarefa_definida"
+    }
+   ],
+   "raia_chamada": "age_ctx"
+  },
+  {
+   "id": "age_orq_c2",
+   "raia": "age_orq",
+   "tipo": "chamada",
+   "rotulo": "Escolher a abordagem de entrega",
+   "proximo": [
+    {
+     "para": "age_orq_c3",
+     "condicao": "construir"
+    },
+    {
+     "para": "age_orq_c8",
+     "condicao": "assinar_plataforma"
+    }
+   ],
+   "raia_chamada": "age_abd"
+  },
+  {
+   "id": "age_orq_c3",
+   "raia": "age_orq",
+   "tipo": "chamada",
+   "rotulo": "Escolher a stack pelo tipo de trabalho",
+   "proximo": [
+    {
+     "para": "age_orq_c7",
+     "condicao": "fluxo_dev_assistido"
+    },
+    {
+     "para": "age_orq_c5",
+     "condicao": "agente_multiagente"
+    },
+    {
+     "para": "age_orq_c6",
+     "condicao": "agente_memoria_duradoura"
+    },
+    {
+     "para": "age_orq_c4",
+     "condicao": "agente_ferramentas"
+    }
+   ],
+   "raia_chamada": "age_stk"
+  },
+  {
+   "id": "age_orq_c4",
+   "raia": "age_orq",
+   "tipo": "chamada",
+   "rotulo": "Implementar, avaliar e lançar o agente",
+   "proximo": [
+    {
+     "para": "age_orq_e1",
+     "condicao": "pronta"
+    }
+   ],
+   "raia_chamada": "age_ent"
+  },
+  {
+   "id": "age_orq_c5",
+   "raia": "age_orq",
+   "tipo": "chamada",
+   "rotulo": "Implementar, avaliar e lançar o agente",
+   "proximo": [
+    {
+     "para": "age_orq_e2",
+     "condicao": "pronta"
+    }
+   ],
+   "raia_chamada": "age_ent"
+  },
+  {
+   "id": "age_orq_c6",
+   "raia": "age_orq",
+   "tipo": "chamada",
+   "rotulo": "Implementar, avaliar e lançar o agente",
+   "proximo": [
+    {
+     "para": "age_orq_e3",
+     "condicao": "pronta"
+    }
+   ],
+   "raia_chamada": "age_ent"
+  },
+  {
+   "id": "age_orq_c7",
+   "raia": "age_orq",
+   "tipo": "chamada",
+   "rotulo": "Implementar, avaliar e lançar o agente",
+   "proximo": [
+    {
+     "para": "age_orq_e4",
+     "condicao": "pronta"
+    }
+   ],
+   "raia_chamada": "age_ent"
+  },
+  {
+   "id": "age_orq_c8",
+   "raia": "age_orq",
+   "tipo": "chamada",
+   "rotulo": "Implementar, avaliar e lançar o agente",
+   "proximo": [
+    {
+     "para": "age_orq_e5",
+     "condicao": "pronta"
+    }
+   ],
+   "raia_chamada": "age_ent"
+  },
+  {
+   "id": "age_orq_e1",
+   "raia": "age_orq",
+   "tipo": "fim",
+   "rotulo": "Agente com ferramentas e estado da tarefa sobre a stack de agente com ferramentas e memória",
+   "proximo": [],
+   "retorno": "agente_ferramentas"
+  },
+  {
+   "id": "age_orq_e2",
+   "raia": "age_orq",
+   "tipo": "fim",
+   "rotulo": "Agentes lançados com orquestrador e subagentes sobre a stack de agente com ferramentas e memória",
+   "proximo": [],
+   "retorno": "agente_multiagente"
+  },
+  {
+   "id": "age_orq_e3",
+   "raia": "age_orq",
+   "tipo": "fim",
+   "rotulo": "Agente com memória duradoura sobre a stack de agente com ferramentas e memória",
+   "proximo": [],
+   "retorno": "agente_memoria_duradoura"
+  },
+  {
+   "id": "age_orq_e4",
+   "raia": "age_orq",
+   "tipo": "fim",
+   "rotulo": "Agente de código lançado sobre a stack de desenvolvimento assistido por IA",
+   "proximo": [],
+   "retorno": "fluxo_dev_assistido"
+  },
+  {
+   "id": "age_orq_e5",
+   "raia": "age_orq",
+   "tipo": "fim",
+   "rotulo": "Agente ativo em uma plataforma de automação assinada",
+   "proximo": [],
+   "retorno": "assinar_plataforma"
+  },
+  {
+   "id": "age_ctx_s0",
+   "raia": "age_ctx",
+   "tipo": "inicio",
+   "rotulo": "Início do levantamento",
+   "proximo": [
+    {
+     "para": "age_ctx_t1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "age_ctx_t1",
+   "raia": "age_ctx",
+   "tipo": "tarefa",
+   "rotulo": "Delimitar a tarefa e as ações",
+   "proximo": [
+    {
+     "para": "age_ctx_t2",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "age_ctx_t2",
+   "raia": "age_ctx",
+   "tipo": "tarefa",
+   "rotulo": "Preparar as tarefas de teste",
+   "proximo": [
+    {
+     "para": "age_ctx_e1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "age_ctx_e1",
+   "raia": "age_ctx",
+   "tipo": "fim",
+   "rotulo": "Tarefa, ações e autonomia acordadas",
+   "proximo": [],
+   "retorno": "tarefa_definida"
+  },
+  {
+   "id": "age_abd_s0",
+   "raia": "age_abd",
+   "tipo": "inicio",
+   "rotulo": "Início da escolha",
+   "proximo": [
+    {
+     "para": "age_abd_t1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "age_abd_t1",
+   "raia": "age_abd",
+   "tipo": "tarefa",
+   "rotulo": "Registrar premissas e pontuar as opções",
+   "proximo": [
+    {
+     "para": "age_abd_g1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "age_abd_g1",
+   "raia": "age_abd",
+   "tipo": "bifurcacao",
+   "rotulo": "Controle próprio de dados e ações?",
+   "proximo": [
+    {
+     "para": "age_abd_e1",
+     "condicao": "sim"
+    },
+    {
+     "para": "age_abd_g2",
+     "condicao": "não"
+    }
+   ]
+  },
+  {
+   "id": "age_abd_g2",
+   "raia": "age_abd",
+   "tipo": "bifurcacao",
+   "rotulo": "Ações irreversíveis com aprovação própria?",
+   "proximo": [
+    {
+     "para": "age_abd_e1",
+     "condicao": "sim"
+    },
+    {
+     "para": "age_abd_g3",
+     "condicao": "não"
+    }
+   ]
+  },
+  {
+   "id": "age_abd_g3",
+   "raia": "age_abd",
+   "tipo": "bifurcacao",
+   "rotulo": "Fluxo padronizado coberto por plataforma?",
+   "proximo": [
+    {
+     "para": "age_abd_e2",
+     "condicao": "sim"
+    },
+    {
+     "para": "age_abd_e1",
+     "condicao": "não"
+    }
+   ]
+  },
+  {
+   "id": "age_abd_e1",
+   "raia": "age_abd",
+   "tipo": "fim",
+   "rotulo": "Construir o agente",
+   "proximo": [],
+   "retorno": "construir"
+  },
+  {
+   "id": "age_abd_e2",
+   "raia": "age_abd",
+   "tipo": "fim",
+   "rotulo": "Plataforma de automação com agente assinada",
+   "proximo": [],
+   "retorno": "assinar_plataforma"
+  },
+  {
+   "id": "age_stk_s0",
+   "raia": "age_stk",
+   "tipo": "inicio",
+   "rotulo": "Início da escolha da stack",
+   "proximo": [
+    {
+     "para": "age_stk_g1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "age_stk_g1",
+   "raia": "age_stk",
+   "tipo": "bifurcacao",
+   "rotulo": "Trabalho sobre código?",
+   "proximo": [
+    {
+     "para": "age_stk_e1",
+     "condicao": "sim"
+    },
+    {
+     "para": "age_stk_g2",
+     "condicao": "não"
+    }
+   ]
+  },
+  {
+   "id": "age_stk_g2",
+   "raia": "age_stk",
+   "tipo": "bifurcacao",
+   "rotulo": "Subtarefas independentes demais para um agente?",
+   "proximo": [
+    {
+     "para": "age_stk_e2",
+     "condicao": "sim"
+    },
+    {
+     "para": "age_stk_g3",
+     "condicao": "não"
+    }
+   ]
+  },
+  {
+   "id": "age_stk_g3",
+   "raia": "age_stk",
+   "tipo": "bifurcacao",
+   "rotulo": "Memória entre sessões?",
+   "proximo": [
+    {
+     "para": "age_stk_e3",
+     "condicao": "sim"
+    },
+    {
+     "para": "age_stk_e4",
+     "condicao": "não"
+    }
+   ]
+  },
+  {
+   "id": "age_stk_e1",
+   "raia": "age_stk",
+   "tipo": "fim",
+   "rotulo": "Stack de desenvolvimento assistido por IA",
+   "proximo": [],
+   "retorno": "fluxo_dev_assistido"
+  },
+  {
+   "id": "age_stk_e2",
+   "raia": "age_stk",
+   "tipo": "fim",
+   "rotulo": "Stack de orquestração com subagentes",
+   "proximo": [],
+   "retorno": "agente_multiagente"
+  },
+  {
+   "id": "age_stk_e3",
+   "raia": "age_stk",
+   "tipo": "fim",
+   "rotulo": "Stack de agente com memória duradoura",
+   "proximo": [],
+   "retorno": "agente_memoria_duradoura"
+  },
+  {
+   "id": "age_stk_e4",
+   "raia": "age_stk",
+   "tipo": "fim",
+   "rotulo": "Stack de agente com ferramentas e estado da tarefa",
+   "proximo": [],
+   "retorno": "agente_ferramentas"
+  },
+  {
+   "id": "age_ent_s0",
+   "raia": "age_ent",
+   "tipo": "inicio",
+   "rotulo": "Início da entrega",
+   "proximo": [
+    {
+     "para": "age_ent_t1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "age_ent_t1",
+   "raia": "age_ent",
+   "tipo": "tarefa",
+   "rotulo": "Implementar o laço, a memória e as proteções",
+   "proximo": [
+    {
+     "para": "age_ent_t2",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "age_ent_t2",
+   "raia": "age_ent",
+   "tipo": "tarefa",
+   "rotulo": "Avaliar antes de lançar",
+   "proximo": [
+    {
+     "para": "age_ent_t3",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "age_ent_t3",
+   "raia": "age_ent",
+   "tipo": "tarefa",
+   "rotulo": "Lançar e operar",
+   "proximo": [
+    {
+     "para": "age_ent_e1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "age_ent_e1",
+   "raia": "age_ent",
+   "tipo": "fim",
+   "rotulo": "Agente lançado e acompanhado",
+   "proximo": [],
+   "retorno": "pronta"
+  }
+ ]
+}

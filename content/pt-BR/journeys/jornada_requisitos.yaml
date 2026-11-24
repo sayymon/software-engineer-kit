@@ -1,0 +1,10 @@
+id: jornada_requisitos
+tipo: jornada
+nome: Do problema ao requisito pronto
+descricao: Elucidar, enriquecer e especificar requisitos
+publico: false
+perfil: Engenheiro de software
+etapas:
+  - id: foco
+    titulo: Foco da jornada
+    descricao: Elucidar, enriquecer e especificar requisitos

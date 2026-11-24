@@ -1,0 +1,1128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sayymon.github.io/software-engineer-kit/schema/flows.schema.json",
+  "title": "Guia de Decisão de Engenharia (YAML_Fonte)",
+  "type": "object",
+  "required": [
+    "versao",
+    "demandas",
+    "raias",
+    "requisitos",
+    "decisoes",
+    "celulas",
+    "playbooks",
+    "abordagens",
+    "tecnicas",
+    "padroes",
+    "estrategias",
+    "categorias_ferramenta",
+    "fontes",
+    "decisor_construir_comprar_assinar"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "versao": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "demandas": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Eixo"
+      }
+    },
+    "raias": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Raia"
+      }
+    },
+    "artefatos": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Artefato"
+      }
+    },
+    "variaveis": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Variavel"
+      }
+    },
+    "papeis": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Papel"
+      }
+    },
+    "requisitos": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Eixo"
+      }
+    },
+    "decisoes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Decisao"
+      }
+    },
+    "celulas": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Celula"
+      }
+    },
+    "playbooks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Playbook"
+      }
+    },
+    "abordagens": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ItemConceitual"
+      }
+    },
+    "tecnicas": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ItemConceitual"
+      }
+    },
+    "padroes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ItemConceitual"
+      }
+    },
+    "estrategias": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Estrategia"
+      }
+    },
+    "categorias_ferramenta": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/CategoriaFerramenta"
+      }
+    },
+    "fontes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Fonte"
+      }
+    },
+    "decisor_construir_comprar_assinar": {
+      "$ref": "#/$defs/Decisor"
+    }
+  },
+  "$defs": {
+    "Id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+    },
+    "IdLista": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Id"
+      }
+    },
+    "Texto": {
+      "type": "string",
+      "minLength": 1
+    },
+    "TextoLista": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "Publico": {
+      "type": "boolean",
+      "default": false
+    },
+    "Nivel": {
+      "enum": [
+        "baixo",
+        "medio",
+        "alto"
+      ]
+    },
+    "Status": {
+      "enum": [
+        "rascunho",
+        "revisado",
+        "publicado"
+      ],
+      "default": "rascunho"
+    },
+    "Eixo": {
+      "description": "Demanda ou Requisito. Sem enum fechado: qualquer id em snake_case.",
+      "type": "object",
+      "required": [
+        "id",
+        "nome"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "nome": {
+          "$ref": "#/$defs/Texto"
+        },
+        "sigla": {
+          "$ref": "#/$defs/Id",
+          "description": "Id curto da demanda (ex.: inc, bug, feat), usado nos ids das raias e na legenda."
+        },
+        "publico": {
+          "$ref": "#/$defs/Publico"
+        },
+        "biblioteca": {
+          "type": "boolean",
+          "description": "Demanda que é só uma biblioteca de raias comuns: sem orquestradora, fora do seletor e da matriz; suas raias entram no diagrama de cada demanda que as chama."
+        }
+      }
+    },
+    "Raia": {
+      "description": "Raia com responsabilidade única (SRP) dentro de uma demanda. Cada raia tem um início, ao menos um fim (retorno) e só cruza para outra raia por um nó `chamada`.",
+      "type": "object",
+      "required": [
+        "id",
+        "nome",
+        "demanda",
+        "responsabilidade",
+        "cor"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "nome": {
+          "$ref": "#/$defs/Texto"
+        },
+        "demanda": {
+          "$ref": "#/$defs/Id"
+        },
+        "responsabilidade": {
+          "$ref": "#/$defs/Texto"
+        },
+        "cor": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "orquestradora": {
+          "type": "boolean",
+          "default": false
+        },
+        "entradas": {
+          "$ref": "#/$defs/IdLista",
+          "description": "Artefatos e variáveis que a raia recebe de quem a chama."
+        },
+        "status": {
+          "$ref": "#/$defs/Status"
+        },
+        "publico": {
+          "$ref": "#/$defs/Publico"
+        }
+      }
+    },
+    "Decisao": {
+      "type": "object",
+      "required": [
+        "id",
+        "raia",
+        "tipo",
+        "condicao",
+        "proximo",
+        "estado"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "raia": {
+          "$ref": "#/$defs/Id"
+        },
+        "demanda": {
+          "$ref": "#/$defs/Id"
+        },
+        "tipo": {
+          "enum": [
+            "inicio",
+            "tarefa",
+            "bifurcacao",
+            "chamada",
+            "fim"
+          ]
+        },
+        "raia_chamada": {
+          "$ref": "#/$defs/Id"
+        },
+        "retorno": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rotulo": {
+          "type": "string"
+        },
+        "condicao": {
+          "type": "string"
+        },
+        "proximo": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "para",
+              "condicao"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "para": {
+                "$ref": "#/$defs/Id"
+              },
+              "condicao": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "estado": {
+          "type": "object"
+        },
+        "ligacoes": {
+          "description": "Ligações opcionais para Decisões de OUTRA demanda. Não participam do fluxo interno nem da alcançabilidade.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Ligacao"
+          }
+        },
+        "playbook": {
+          "$ref": "#/$defs/Id"
+        },
+        "entradas": {
+          "$ref": "#/$defs/IdLista",
+          "description": "Ids de artefatos ou variáveis que o nó consome."
+        },
+        "saidas": {
+          "$ref": "#/$defs/IdLista",
+          "description": "Ids de artefatos ou variáveis que o nó produz. Em nó `fim`, é o que o retorno entrega a quem chamou."
+        },
+        "subtarefas": {
+          "description": "Passos da tarefa, na ordem de execução. Só em nós do tipo `tarefa`.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Subtarefa"
+          }
+        },
+        "tecnicas": {
+          "description": "Usos estruturados de técnicas do catálogo (obrigatória, recomendada, opcional ou condicional).",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UsoTecnica"
+          }
+        },
+        "layout": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "coluna": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "status": {
+          "$ref": "#/$defs/Status"
+        },
+        "publico": {
+          "$ref": "#/$defs/Publico"
+        },
+        "papel": {
+          "$ref": "#/$defs/Id",
+          "description": "Papel responsável pela tarefa (quando não há subtarefas) ou que decide no gateway."
+        },
+        "apoio": {
+          "$ref": "#/$defs/IdLista",
+          "description": "Papéis que apoiam a tarefa ou a decisão do gateway."
+        },
+        "aprova": {
+          "$ref": "#/$defs/Id",
+          "description": "RACI A: quem aprova a decisão do gateway de qualidade, só quando é diferente de quem decide."
+        },
+        "consultado": {
+          "$ref": "#/$defs/IdLista",
+          "description": "RACI C: papéis ouvidos antes, em conversa de mão dupla."
+        },
+        "informado": {
+          "$ref": "#/$defs/IdLista",
+          "description": "RACI I: papéis avisados depois, quando é relevante comunicar. Os destinatários dos comunicados produzidos entram automaticamente."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "tipo": {
+                "const": "fim"
+              }
+            },
+            "required": [
+              "tipo"
+            ]
+          },
+          "then": {},
+          "else": {
+            "properties": {
+              "proximo": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "tipo": {
+                "const": "fim"
+              }
+            },
+            "required": [
+              "tipo"
+            ]
+          },
+          "then": {
+            "required": [
+              "retorno"
+            ]
+          }
+        }
+      ]
+    },
+    "Artefato": {
+      "description": "Coisa produzida ou consumida pelo fluxo. `tipo` classifica o artefato; `subtipo` é um texto livre que o refina (ex.: design doc, PRD, teste de contrato). `acao` é algo que se faz sem produzir objeto durável (ex.: card atualizado, email enviado). `variantes` descreve o mesmo artefato em formatos diferentes conforme o contexto.",
+      "type": "object",
+      "required": [
+        "id",
+        "nome"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "nome": {
+          "$ref": "#/$defs/Texto"
+        },
+        "descricao": {
+          "type": "string"
+        },
+        "exemplo": {
+          "type": "string",
+          "description": "Exemplo curto e concreto do conteúdo do artefato."
+        },
+        "tipo": {
+          "enum": [
+            "documento",
+            "dado",
+            "evidencia",
+            "decisao",
+            "sinal",
+            "codigo",
+            "commit",
+            "pull_request",
+            "adr",
+            "teste",
+            "biblioteca",
+            "agente",
+            "skill",
+            "script",
+            "diagrama",
+            "card",
+            "comunicacao",
+            "acao",
+            "configuracao"
+          ]
+        },
+        "subtipo": {
+          "type": "string",
+          "description": "Refinamento livre do tipo (ex.: design doc, PRD, UML de sequência, teste de contrato, email)."
+        },
+        "variantes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/VarianteArtefato"
+          }
+        },
+        "status": {
+          "$ref": "#/$defs/Status"
+        },
+        "publico": {
+          "$ref": "#/$defs/Publico"
+        },
+        "destinatarios": {
+          "$ref": "#/$defs/IdLista",
+          "description": "Papéis que recebem a comunicação: stakeholders, outros times, suporte. Obrigatório na prática para o tipo comunicacao."
+        }
+      }
+    },
+    "VarianteArtefato": {
+      "description": "O mesmo artefato em outro formato, conforme o contexto. `quando` diz em que contexto esta variante vale; os nomes são únicos por artefato.",
+      "type": "object",
+      "required": [
+        "nome",
+        "quando"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "nome": {
+          "$ref": "#/$defs/Texto"
+        },
+        "descricao": {
+          "type": "string"
+        },
+        "quando": {
+          "$ref": "#/$defs/Condicao"
+        },
+        "exemplo": {
+          "type": "string"
+        }
+      }
+    },
+    "Variavel": {
+      "description": "Estado rastreável do fluxo. Para `booleano` os valores são \"sim\" e \"nao\"; para `enum` a lista `valores` é obrigatória (VARIAVEL_ENUM_SEM_VALORES).",
+      "type": "object",
+      "required": [
+        "id",
+        "nome",
+        "tipo"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "nome": {
+          "$ref": "#/$defs/Texto"
+        },
+        "descricao": {
+          "type": "string"
+        },
+        "exemplo": {
+          "type": "string",
+          "description": "Exemplo de valor ou frase real da variável."
+        },
+        "tipo": {
+          "enum": [
+            "booleano",
+            "enum",
+            "inteiro",
+            "texto"
+          ]
+        },
+        "valores": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "inicial": {
+          "type": [
+            "string",
+            "integer",
+            "boolean"
+          ]
+        },
+        "status": {
+          "$ref": "#/$defs/Status"
+        },
+        "publico": {
+          "$ref": "#/$defs/Publico"
+        }
+      }
+    },
+    "Subtarefa": {
+      "description": "Passo de uma tarefa. O id tem a forma `<id da tarefa>_st<n>` (n inteiro a partir de 1); a ordem da lista é a ordem de execução. `quando` diz QUANDO executar a subtarefa (sem `quando` ela sempre executa) e `porque` justifica; já `UsoTecnica.uso` diz o grau de exigência da técnica dentro da subtarefa.",
+      "type": "object",
+      "required": [
+        "id",
+        "rotulo"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "rotulo": {
+          "$ref": "#/$defs/Texto"
+        },
+        "descricao": {
+          "type": "string"
+        },
+        "exemplo": {
+          "type": "string"
+        },
+        "responsavel": {
+          "enum": [
+            "agente",
+            "pessoa",
+            "ambos"
+          ],
+          "default": "pessoa",
+          "description": "Legado: use `papel`. Mantido para documentos antigos."
+        },
+        "quando": {
+          "$ref": "#/$defs/Condicao"
+        },
+        "porque": {
+          "type": "string"
+        },
+        "entradas": {
+          "$ref": "#/$defs/IdLista"
+        },
+        "saidas": {
+          "$ref": "#/$defs/IdLista"
+        },
+        "tecnicas": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UsoTecnica"
+          }
+        },
+        "status": {
+          "$ref": "#/$defs/Status"
+        },
+        "papel": {
+          "$ref": "#/$defs/Id",
+          "description": "Papel principal que executa a subtarefa (id do catálogo `papeis`)"
+        },
+        "apoio": {
+          "$ref": "#/$defs/IdLista",
+          "description": "Papéis que apoiam a subtarefa"
+        },
+        "consultado": {
+          "$ref": "#/$defs/IdLista",
+          "description": "RACI C: papéis ouvidos antes, em conversa de mão dupla."
+        },
+        "informado": {
+          "$ref": "#/$defs/IdLista",
+          "description": "RACI I: papéis avisados depois, quando é relevante comunicar. Os destinatários dos comunicados produzidos entram automaticamente."
+        }
+      }
+    },
+    "UsoTecnica": {
+      "description": "Como uma técnica do catálogo se aplica ao nó ou à subtarefa. `uso: condicional` exige `quando`; nos outros usos `quando` restringe o contexto.",
+      "type": "object",
+      "required": [
+        "tecnica",
+        "uso"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "tecnica": {
+          "$ref": "#/$defs/Id"
+        },
+        "uso": {
+          "enum": [
+            "obrigatoria",
+            "recomendada",
+            "opcional",
+            "condicional"
+          ]
+        },
+        "quando": {
+          "$ref": "#/$defs/Condicao"
+        },
+        "porque": {
+          "type": "string"
+        }
+      }
+    },
+    "Condicao": {
+      "description": "Exatamente uma das chaves: `todos` (E) ou `algum` (OU), cada uma com uma lista não vazia de termos.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "todos": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/Termo"
+          }
+        },
+        "algum": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/Termo"
+          }
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "todos"
+          ]
+        },
+        {
+          "required": [
+            "algum"
+          ]
+        }
+      ]
+    },
+    "Termo": {
+      "description": "Comparação de uma variável com um valor. Exatamente um operador (igual, diferente, em, maior_que, maior_ou_igual, menor_que, menor_ou_igual); a regra do operador único e a compatibilidade com o tipo da variável são do validador (CONDICAO_INVALIDA).",
+      "type": "object",
+      "required": [
+        "var"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "var": {
+          "$ref": "#/$defs/Id"
+        },
+        "igual": {
+          "$ref": "#/$defs/Escalar"
+        },
+        "diferente": {
+          "$ref": "#/$defs/Escalar"
+        },
+        "em": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Escalar"
+          }
+        },
+        "maior_que": {
+          "$ref": "#/$defs/Escalar"
+        },
+        "maior_ou_igual": {
+          "$ref": "#/$defs/Escalar"
+        },
+        "menor_que": {
+          "$ref": "#/$defs/Escalar"
+        },
+        "menor_ou_igual": {
+          "$ref": "#/$defs/Escalar"
+        }
+      }
+    },
+    "Escalar": {
+      "type": [
+        "string",
+        "integer",
+        "boolean"
+      ]
+    },
+    "Ligacao": {
+      "description": "aciona: o fluxo de origem dispara o de destino. alimenta: a saída do fluxo de origem gera entrada do outro.",
+      "type": "object",
+      "required": [
+        "demanda_destino",
+        "para",
+        "condicao"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "demanda_destino": {
+          "$ref": "#/$defs/Id"
+        },
+        "para": {
+          "$ref": "#/$defs/Id"
+        },
+        "condicao": {
+          "type": "string"
+        },
+        "tipo": {
+          "enum": [
+            "aciona",
+            "alimenta"
+          ],
+          "default": "aciona"
+        },
+        "rotulo": {
+          "type": "string"
+        }
+      }
+    },
+    "Celula": {
+      "type": "object",
+      "required": [
+        "demanda",
+        "requisito"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "demanda": {
+          "$ref": "#/$defs/Id"
+        },
+        "requisito": {
+          "$ref": "#/$defs/Id"
+        },
+        "perguntas_chave": {
+          "$ref": "#/$defs/TextoLista"
+        },
+        "tecnicas": {
+          "$ref": "#/$defs/IdLista"
+        },
+        "abordagens": {
+          "$ref": "#/$defs/IdLista"
+        },
+        "padroes": {
+          "$ref": "#/$defs/IdLista"
+        },
+        "estrategias": {
+          "$ref": "#/$defs/IdLista"
+        },
+        "categorias_ferramenta": {
+          "$ref": "#/$defs/IdLista"
+        },
+        "status": {
+          "$ref": "#/$defs/Status"
+        },
+        "publico": {
+          "$ref": "#/$defs/Publico"
+        }
+      }
+    },
+    "Playbook": {
+      "type": "object",
+      "required": [
+        "id",
+        "resumo"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "resumo": {
+          "type": "string"
+        },
+        "exemplo": {
+          "type": "string"
+        },
+        "perguntas_chave": {
+          "$ref": "#/$defs/TextoLista"
+        },
+        "fazer": {
+          "$ref": "#/$defs/TextoLista"
+        },
+        "evitar": {
+          "$ref": "#/$defs/TextoLista"
+        },
+        "tecnicas": {
+          "$ref": "#/$defs/IdLista"
+        },
+        "abordagens": {
+          "$ref": "#/$defs/IdLista"
+        },
+        "padroes": {
+          "$ref": "#/$defs/IdLista"
+        },
+        "estrategias": {
+          "$ref": "#/$defs/IdLista"
+        },
+        "categorias_ferramenta": {
+          "$ref": "#/$defs/IdLista"
+        },
+        "status": {
+          "$ref": "#/$defs/Status"
+        },
+        "publico": {
+          "$ref": "#/$defs/Publico"
+        }
+      }
+    },
+    "ItemConceitual": {
+      "description": "Abordagem, Tecnica, Padrao ou Estrategia.",
+      "type": "object",
+      "required": [
+        "id",
+        "nome"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "nome": {
+          "$ref": "#/$defs/Texto"
+        },
+        "descricao": {
+          "type": "string"
+        },
+        "fonte_ids": {
+          "$ref": "#/$defs/IdLista"
+        },
+        "exemplo": {
+          "type": "string"
+        },
+        "quando_usar": {
+          "$ref": "#/$defs/TextoLista"
+        },
+        "quando_evitar": {
+          "$ref": "#/$defs/TextoLista"
+        },
+        "status": {
+          "$ref": "#/$defs/Status"
+        },
+        "publico": {
+          "$ref": "#/$defs/Publico"
+        }
+      }
+    },
+    "Estrategia": {
+      "description": "ItemConceitual com custo, beneficio e dependencia_fornecedor opcionais (enum baixo|medio|alto).",
+      "allOf": [
+        {
+          "$ref": "#/$defs/ItemConceitual"
+        }
+      ],
+      "properties": {
+        "custo": {
+          "$ref": "#/$defs/Nivel"
+        },
+        "beneficio": {
+          "$ref": "#/$defs/Nivel"
+        },
+        "dependencia_fornecedor": {
+          "$ref": "#/$defs/Nivel"
+        }
+      }
+    },
+    "CategoriaFerramenta": {
+      "type": "object",
+      "required": [
+        "id",
+        "nome",
+        "custo",
+        "beneficio",
+        "dependencia_fornecedor"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "nome": {
+          "$ref": "#/$defs/Texto"
+        },
+        "descricao": {
+          "type": "string"
+        },
+        "custo": {
+          "$ref": "#/$defs/Nivel"
+        },
+        "beneficio": {
+          "$ref": "#/$defs/Nivel"
+        },
+        "dependencia_fornecedor": {
+          "$ref": "#/$defs/Nivel"
+        },
+        "status": {
+          "$ref": "#/$defs/Status"
+        },
+        "publico": {
+          "$ref": "#/$defs/Publico"
+        }
+      }
+    },
+    "Fonte": {
+      "type": "object",
+      "required": [
+        "id",
+        "tipo",
+        "titulo",
+        "link",
+        "status_revisao",
+        "proxima_revisao"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "tipo": {
+          "enum": [
+            "curso",
+            "artigo",
+            "livro"
+          ]
+        },
+        "titulo": {
+          "$ref": "#/$defs/Texto"
+        },
+        "link": {
+          "$ref": "#/$defs/Texto"
+        },
+        "status_revisao": {
+          "enum": [
+            "pendente",
+            "em_revisao",
+            "revisada"
+          ]
+        },
+        "proxima_revisao": {
+          "type": "string",
+          "format": "date",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "itens": {
+          "$ref": "#/$defs/IdLista"
+        },
+        "publico": {
+          "$ref": "#/$defs/Publico"
+        }
+      }
+    },
+    "Pesos": {
+      "type": "object",
+      "required": [
+        "diferenciacao",
+        "tempo_ate_valor",
+        "custo_total",
+        "dependencia_fornecedor",
+        "risco"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "diferenciacao": {
+          "$ref": "#/$defs/Peso"
+        },
+        "tempo_ate_valor": {
+          "$ref": "#/$defs/Peso"
+        },
+        "custo_total": {
+          "$ref": "#/$defs/Peso"
+        },
+        "dependencia_fornecedor": {
+          "$ref": "#/$defs/Peso"
+        },
+        "risco": {
+          "$ref": "#/$defs/Peso"
+        }
+      }
+    },
+    "Peso": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "Decisor": {
+      "type": "object",
+      "required": [
+        "criterios",
+        "escala",
+        "opcoes",
+        "ordem_desempate",
+        "pesos"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "criterios": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/Id"
+          }
+        },
+        "escala": {
+          "type": "object",
+          "required": [
+            "min",
+            "max"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "min": {
+              "type": "number"
+            },
+            "max": {
+              "type": "number"
+            }
+          }
+        },
+        "opcoes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/Id"
+          }
+        },
+        "ordem_desempate": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/Id"
+          }
+        },
+        "pesos": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "$ref": "#/$defs/Id"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/Pesos"
+          }
+        }
+      }
+    },
+    "Papel": {
+      "description": "Papel que executa ou apoia subtarefas (PM, QA, Dev, Arquiteto de Software, DevSecOps, Stakeholder). Quem exerce o papel, uma pessoa ou um agente do papel, é decidido na decomposição e na seleção de agentes.",
+      "type": "object",
+      "required": [
+        "id",
+        "nome"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "nome": {
+          "$ref": "#/$defs/Texto"
+        },
+        "descricao": {
+          "type": "string"
+        },
+        "responsabilidades": {
+          "$ref": "#/$defs/TextoLista"
+        },
+        "atuacao_de_agente": {
+          "enum": [
+            "nao",
+            "apoio",
+            "execucao"
+          ],
+          "default": "apoio",
+          "description": "nao: só pessoas exercem o papel; apoio: um agente apoia a pessoa; execucao: um agente do papel pode executar"
+        },
+        "exemplo": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/Status"
+        },
+        "publico": {
+          "$ref": "#/$defs/Publico"
+        }
+      }
+    }
+  }
+}

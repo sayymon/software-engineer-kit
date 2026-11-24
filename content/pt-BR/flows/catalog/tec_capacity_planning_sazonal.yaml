@@ -1,0 +1,12 @@
+id: tec_capacity_planning_sazonal
+tipo: tecnica
+nome: Capacity planning sazonal
+descricao: Planejamento de capacidade para picos previstos, com teste de carga e margem para a janela.
+quando_usar:
+  - Antes de picos sazonais e campanhas de alto volume
+  - Revisão após cada janela
+quando_evitar:
+  - Basear a capacidade só na média do ano
+status: rascunho
+publico: false
+exemplo: Capacidade do checkout dimensionada para 3 vezes o pico normal na campanha.

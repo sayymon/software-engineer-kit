@@ -1,0 +1,245 @@
+{
+  "title": "licenca",
+  "x-translatable": [
+    "nome",
+    "descricao",
+    "body",
+    "permissoes",
+    "condicoes",
+    "limitacoes",
+    "clausulaPatentes",
+    "compatibilidade",
+    "quandoUsar",
+    "quandoEvitar"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+    },
+    "nome": {
+      "type": "string",
+      "minLength": 1
+    },
+    "descricao": {
+      "type": "string"
+    },
+    "publico": {
+      "default": false,
+      "type": "boolean"
+    },
+    "fontes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "livro",
+              "artigo",
+              "curso"
+            ]
+          },
+          "titulo": {
+            "type": "string",
+            "minLength": 1
+          },
+          "link": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status_revisao": {
+            "type": "string",
+            "enum": [
+              "pendente",
+              "em_revisao",
+              "revisada"
+            ]
+          },
+          "proxima_revisao": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          }
+        },
+        "required": [
+          "id",
+          "tipo",
+          "titulo",
+          "link",
+          "status_revisao",
+          "proxima_revisao"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "fonte_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dataVerificacao": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "guia_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+      }
+    },
+    "tipo": {
+      "type": "string",
+      "const": "licenca"
+    },
+    "status": {
+      "default": "rascunho",
+      "type": "string",
+      "enum": [
+        "rascunho",
+        "revisado",
+        "publicado"
+      ]
+    },
+    "spdx": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tipoLicenca": {
+      "type": "string",
+      "enum": [
+        "permissiva",
+        "copyleft forte",
+        "copyleft de rede",
+        "copyleft fraco",
+        "dominio publico",
+        "source-available",
+        "Creative Commons"
+      ]
+    },
+    "permissoes": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "condicoes": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "limitacoes": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "clausulaPatentes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "compatibilidade": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "quandoUsar": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "quandoEvitar": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "aprovacaoOSI": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "string",
+          "const": "não verificado"
+        }
+      ]
+    },
+    "aprovacaoFSF": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "string",
+          "const": "não verificado"
+        }
+      ]
+    },
+    "urlOficial": {
+      "type": "string",
+      "pattern": "^https:\\/\\/\\S+$"
+    },
+    "ferramentasRelacionadas": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "nome",
+    "tipo",
+    "spdx",
+    "tipoLicenca",
+    "permissoes",
+    "condicoes",
+    "limitacoes",
+    "clausulaPatentes",
+    "compatibilidade",
+    "quandoUsar",
+    "quandoEvitar",
+    "aprovacaoOSI",
+    "aprovacaoFSF",
+    "urlOficial"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,3888 @@
+[
+  {
+    "id": "joplin",
+    "nome": "Joplin",
+    "categorias": [
+      "Android para dev e produtividade",
+      "iOS para dev e produtividade"
+    ],
+    "empresa": "Joplin (comunidade)",
+    "url": "https://joplinapp.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/laurent22/joplin",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "android",
+      "ios",
+      "windows",
+      "macos",
+      "linux",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Anotações em Markdown com sincronização e criptografia ponta a ponta, em todas as plataformas."
+  },
+  {
+    "id": "github-mobile",
+    "nome": "GitHub Mobile",
+    "categorias": [
+      "Android para dev e produtividade"
+    ],
+    "empresa": "GitHub Inc",
+    "url": "https://github.com/mobile",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Aplicativo oficial do GitHub para revisar PRs, issues e notificações no celular."
+  },
+  {
+    "id": "todoist",
+    "nome": "Todoist",
+    "categorias": [
+      "Android para dev e produtividade",
+      "iOS para dev e produtividade"
+    ],
+    "empresa": "Doist",
+    "url": "https://todoist.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 5,
+      "unidade": "usuário/mês (cobrança anual; plano gratuito disponível)",
+      "status": "verificado",
+      "fonte": "https://www.todoist.com/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "android",
+      "ios",
+      "windows",
+      "macos",
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gerenciador de tarefas com linguagem natural, projetos e sincronização entre dispositivos."
+  },
+  {
+    "id": "tasker",
+    "nome": "Tasker",
+    "categorias": [
+      "Android para dev e produtividade"
+    ],
+    "empresa": "João Dias",
+    "url": "https://tasker.joaoapps.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "android"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Automação avançada de eventos e ações no Android, com plugins e scripts."
+  },
+  {
+    "id": "aegis-authenticator",
+    "nome": "Aegis Authenticator",
+    "categorias": [
+      "Android utilitários"
+    ],
+    "empresa": "Aegis Authenticator (comunidade)",
+    "url": "https://getaegis.app",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/beemdevelopment/Aegis",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "android"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Autenticador 2FA de código aberto para Android, com backup criptografado."
+  },
+  {
+    "id": "syncthing",
+    "nome": "Syncthing",
+    "categorias": [
+      "Android utilitários",
+      "Linux utilitários"
+    ],
+    "empresa": "Syncthing (comunidade)",
+    "url": "https://syncthing.net",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/syncthing/syncthing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "android",
+      "windows",
+      "macos",
+      "linux"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Sincronização contínua de arquivos entre dispositivos, sem nuvem de terceiros."
+  },
+  {
+    "id": "tailscale",
+    "nome": "Tailscale",
+    "categorias": [
+      "Android utilitários",
+      "iOS utilitários",
+      "Windows utilitários",
+      "Linux utilitários"
+    ],
+    "empresa": "Tailscale Inc",
+    "url": "https://tailscale.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 8,
+      "unidade": "usuário/mês (plano gratuito para uso pessoal)",
+      "status": "verificado",
+      "fonte": "https://tailscale.com/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "android",
+      "ios",
+      "windows",
+      "macos",
+      "linux"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Rede privada (VPN mesh) simples sobre WireGuard, gratuita para uso pessoal."
+  },
+  {
+    "id": "adguard",
+    "nome": "AdGuard",
+    "categorias": [
+      "Android utilitários",
+      "iOS utilitários"
+    ],
+    "empresa": "AdGuard Software",
+    "url": "https://adguard.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "android",
+      "ios",
+      "windows",
+      "macos"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Bloqueio de anúncios e rastreadores no sistema, com versões para celular e desktop."
+  },
+  {
+    "id": "protonvpn",
+    "nome": "Proton VPN",
+    "categorias": [
+      "Android utilitários",
+      "iOS utilitários",
+      "Windows utilitários",
+      "Linux utilitários"
+    ],
+    "empresa": "Proton AG",
+    "url": "https://protonvpn.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "android",
+      "ios",
+      "windows",
+      "macos",
+      "linux"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "VPN com política de não registro de dados e plano gratuito sem limite de dados."
+  },
+  {
+    "id": "solid-explorer",
+    "nome": "Solid Explorer",
+    "categorias": [
+      "Android utilitários"
+    ],
+    "empresa": "NeatBytes",
+    "url": "https://neatbytes.com/solidexplorer/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "android"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gerenciador de arquivos para Android com nuvem, FTP, SFTP e criptografia."
+  },
+  {
+    "id": "a-shell",
+    "nome": "a-Shell",
+    "categorias": [
+      "iOS para dev e produtividade"
+    ],
+    "empresa": "a-Shell (comunidade)",
+    "url": "https://holzschu.github.io/a-Shell_iOS/",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/holzschu/a-shell",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Terminal local para iOS e iPadOS com Python, Lua, JavaScript e utilitários Unix."
+  },
+  {
+    "id": "working-copy",
+    "nome": "Working Copy",
+    "categorias": [
+      "iOS para dev e produtividade"
+    ],
+    "empresa": "Anders Borum",
+    "url": "https://workingcopy.app",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Cliente Git completo para iPhone e iPad, com edição e integração com Arquivos."
+  },
+  {
+    "id": "signal",
+    "nome": "Signal",
+    "categorias": [
+      "iOS utilitários"
+    ],
+    "empresa": "Signal Foundation",
+    "url": "https://signal.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/signalapp/Signal-iOS",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "ios",
+      "android",
+      "windows",
+      "macos",
+      "linux"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Mensageiro com criptografia ponta a ponta e código aberto, gratuito."
+  },
+  {
+    "id": "pdf-expert",
+    "nome": "PDF Expert",
+    "categorias": [
+      "iOS utilitários",
+      "macOS utilitários"
+    ],
+    "empresa": "Readdle",
+    "url": "https://pdfexpert.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "macos",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Leitor e editor de PDF para Mac, iPhone e iPad."
+  },
+  {
+    "id": "goodnotes",
+    "nome": "Goodnotes",
+    "categorias": [
+      "iOS utilitários"
+    ],
+    "empresa": "Goodnotes Limited",
+    "url": "https://www.goodnotes.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 11.99,
+      "unidade": "ano",
+      "status": "verificado",
+      "fonte": "https://www.goodnotes.com/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "ios",
+      "android",
+      "windows",
+      "macos",
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Anotações manuscritas e PDFs no iPad, com recursos de IA."
+  },
+  {
+    "id": "windows-terminal",
+    "nome": "Windows Terminal",
+    "categorias": [
+      "Windows para dev e produtividade"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://github.com/microsoft/terminal",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/microsoft/terminal",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Terminal moderno do Windows com abas, painéis e perfis de PowerShell, cmd e WSL."
+  },
+  {
+    "id": "wsl",
+    "nome": "WSL (Windows Subsystem for Linux)",
+    "categorias": [
+      "Windows para dev e produtividade"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://learn.microsoft.com/windows/wsl/",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/microsoft/WSL",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Ambiente Linux completo dentro do Windows, com kernel e integração com o sistema."
+  },
+  {
+    "id": "7zip",
+    "nome": "7-Zip",
+    "categorias": [
+      "Windows utilitários"
+    ],
+    "empresa": "Igor Pavlov",
+    "url": "https://www.7-zip.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://www.7-zip.org/license.txt",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Compactador de arquivos de código aberto com formato 7z e alta taxa de compressão."
+  },
+  {
+    "id": "sumatrapdf",
+    "nome": "SumatraPDF",
+    "categorias": [
+      "Windows utilitários"
+    ],
+    "empresa": "SumatraPDF (comunidade)",
+    "url": "https://www.sumatrapdfreader.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/sumatrapdfreader/sumatrapdf",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Leitor leve de PDF, ePub e quadrinhos para Windows."
+  },
+  {
+    "id": "adobe-acrobat",
+    "nome": "Adobe Acrobat",
+    "categorias": [
+      "Windows utilitários"
+    ],
+    "empresa": "Adobe",
+    "url": "https://www.adobe.com/acrobat.html",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows",
+      "macos",
+      "web",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Leitor e editor de PDF padrão do mercado, com assinatura e IA para resumo."
+  },
+  {
+    "id": "rectangle",
+    "nome": "Rectangle",
+    "categorias": [
+      "macOS para dev e produtividade"
+    ],
+    "empresa": "Rectangle (comunidade)",
+    "url": "https://rectangleapp.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/rxhanson/Rectangle",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "macos"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gerenciador de janelas por atalho de teclado para macOS."
+  },
+  {
+    "id": "appcleaner",
+    "nome": "AppCleaner",
+    "categorias": [
+      "macOS utilitários"
+    ],
+    "empresa": "FreeMacSoft",
+    "url": "https://freemacsoft.net/appcleaner/",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "macos"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Remove aplicativos do Mac junto com arquivos residuais."
+  },
+  {
+    "id": "iina",
+    "nome": "IINA",
+    "categorias": [
+      "macOS utilitários"
+    ],
+    "empresa": "IINA (comunidade)",
+    "url": "https://iina.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/iina/iina",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "macos"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Reprodutor de vídeo moderno e de código aberto para macOS."
+  },
+  {
+    "id": "cleanshot-x",
+    "nome": "CleanShot X",
+    "categorias": [
+      "macOS utilitários"
+    ],
+    "empresa": "MTW Labs",
+    "url": "https://cleanshot.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 35,
+      "unidade": "licença (pagamento único)",
+      "status": "verificado",
+      "fonte": "https://cleanshot.com/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "macos"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Capturas e gravações de tela para Mac, com anotações e nuvem."
+  },
+  {
+    "id": "setapp",
+    "nome": "Setapp",
+    "categorias": [
+      "macOS utilitários"
+    ],
+    "empresa": "MacPaw",
+    "url": "https://setapp.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 14.99,
+      "unidade": "mês (Mac, cobrança mensal, mais imposto)",
+      "status": "verificado",
+      "fonte": "https://setapp.com/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "macos",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Assinatura com catálogo de dezenas de aplicativos para Mac e iOS."
+  },
+  {
+    "id": "lazygit",
+    "nome": "lazygit",
+    "categorias": [
+      "Linux para dev e produtividade"
+    ],
+    "empresa": "lazygit (comunidade)",
+    "url": "https://github.com/jesseduffield/lazygit",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/jesseduffield/lazygit",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Interface de terminal para Git, rápida e orientada a teclado."
+  },
+  {
+    "id": "distrobox",
+    "nome": "Distrobox",
+    "categorias": [
+      "Linux para dev e produtividade"
+    ],
+    "empresa": "Distrobox (comunidade)",
+    "url": "https://distrobox.it",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/89luca89/distrobox",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "linux"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Containers com outras distribuições Linux integrados ao desktop."
+  },
+  {
+    "id": "timeshift",
+    "nome": "Timeshift",
+    "categorias": [
+      "Linux utilitários"
+    ],
+    "empresa": "Timeshift (comunidade)",
+    "url": "https://github.com/linuxmint/timeshift",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "linux"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Snapshots do sistema para restaurar o Linux ao estado anterior."
+  },
+  {
+    "id": "kdeconnect",
+    "nome": "KDE Connect",
+    "categorias": [
+      "Linux utilitários"
+    ],
+    "empresa": "KDE",
+    "url": "https://kdeconnect.kde.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://invent.kde.org/network/kdeconnect-kde/-/raw/master/LICENSES/GPL-2.0-only.txt",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "linux",
+      "android",
+      "windows",
+      "macos"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Integra celular Android e desktop: notificações, arquivos e área de transferência."
+  },
+  {
+    "id": "mullvad-vpn",
+    "nome": "Mullvad VPN",
+    "categorias": [
+      "Linux utilitários"
+    ],
+    "empresa": "Mullvad VPN AB",
+    "url": "https://mullvad.net",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "linux",
+      "windows",
+      "macos",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "VPN com anonimato de conta e preço fixo em euros."
+  },
+  {
+    "id": "vimium",
+    "nome": "Vimium",
+    "categorias": [
+      "Extensões de navegador"
+    ],
+    "empresa": "Vimium (comunidade)",
+    "url": "https://vimium.github.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/philc/vimium",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "extensao-navegador"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Navegação no navegador pelo teclado, no estilo Vim."
+  },
+  {
+    "id": "react-developer-tools",
+    "nome": "React Developer Tools",
+    "categorias": [
+      "Extensões de navegador"
+    ],
+    "empresa": "Meta",
+    "url": "https://react.dev/learn/react-developer-tools",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/facebook/react",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "extensao-navegador"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Extensão para inspecionar componentes e desempenho de aplicações React."
+  },
+  {
+    "id": "tampermonkey",
+    "nome": "Tampermonkey",
+    "categorias": [
+      "Extensões de navegador"
+    ],
+    "empresa": "Jan Biniok",
+    "url": "https://www.tampermonkey.net",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "extensao-navegador"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gerenciador de userscripts para personalizar páginas web."
+  },
+  {
+    "id": "wappalyzer",
+    "nome": "Wappalyzer",
+    "categorias": [
+      "Extensões de navegador"
+    ],
+    "empresa": "Wappalyzer",
+    "url": "https://www.wappalyzer.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 250,
+      "unidade": "mês",
+      "status": "verificado",
+      "fonte": "https://www.wappalyzer.com/pricing/",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "extensao-navegador"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Identifica tecnologias usadas por um site (frameworks, CMS, analytics)."
+  },
+  {
+    "id": "loom",
+    "nome": "Loom",
+    "categorias": [
+      "Extensões de navegador"
+    ],
+    "empresa": "Atlassian",
+    "url": "https://www.loom.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "extensao-navegador",
+      "windows",
+      "macos",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gravação de tela com vídeo curto e compartilhamento por link."
+  },
+  {
+    "id": "pocketpal-ai",
+    "nome": "PocketPal AI",
+    "categorias": [
+      "Apps de IA no celular"
+    ],
+    "empresa": "PocketPal AI (comunidade)",
+    "url": "https://github.com/a-ghorbani/pocketpal-ai",
+    "preco": {
+      "modelo": [
+        "free",
+        "subscription"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/a-ghorbani/pocketpal-ai",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Roda modelos de linguagem pequenos localmente no celular, sem nuvem."
+  },
+  {
+    "id": "microsoft-copilot",
+    "nome": "Microsoft Copilot",
+    "categorias": [
+      "Apps de IA no celular"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://copilot.microsoft.com",
+    "preco": {
+      "modelo": [
+        "free",
+        "subscription"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://copilot.microsoft.com",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "android",
+      "ios",
+      "web",
+      "windows"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Assistente de IA da Microsoft com app gratuito para celular e web."
+  },
+  {
+    "id": "krita",
+    "nome": "Krita",
+    "categorias": [
+      "Edição de imagem"
+    ],
+    "empresa": "KDE",
+    "url": "https://krita.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/KDE/krita",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows",
+      "macos",
+      "linux"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Pintura digital e ilustração de código aberto, com ferramentas para artistas."
+  },
+  {
+    "id": "photopea",
+    "nome": "Photopea",
+    "categorias": [
+      "Edição de imagem"
+    ],
+    "empresa": "Photopea",
+    "url": "https://www.photopea.com",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://www.photopea.com/",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Editor de imagens no navegador compatível com arquivos PSD, gratuito com anúncios."
+  },
+  {
+    "id": "adobe-firefly",
+    "nome": "Adobe Firefly",
+    "categorias": [
+      "Edição de imagem"
+    ],
+    "empresa": "Adobe",
+    "url": "https://firefly.adobe.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Geração e edição de imagem, vídeo e áudio por IA, com foco em uso comercial."
+  },
+  {
+    "id": "remove-bg",
+    "nome": "remove.bg",
+    "categorias": [
+      "Edição de imagem"
+    ],
+    "empresa": "Canva Pty",
+    "url": "https://www.remove.bg",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Remoção automática de fundo de imagens por IA, com API."
+  },
+  {
+    "id": "topaz-photo-ai",
+    "nome": "Topaz Photo",
+    "categorias": [
+      "Edição de imagem"
+    ],
+    "empresa": "Topaz Labs",
+    "url": "https://www.topazlabs.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows",
+      "macos"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Ampliação, redução de ruído e nitidez de fotos com IA."
+  },
+  {
+    "id": "magnific-ai",
+    "nome": "Magnific",
+    "categorias": [
+      "Edição de imagem"
+    ],
+    "empresa": "Freepik",
+    "url": "https://magnific.ai",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Ampliação de imagens com IA que reinventa detalhes."
+  },
+  {
+    "id": "kdenlive",
+    "nome": "Kdenlive",
+    "categorias": [
+      "Edição de vídeo"
+    ],
+    "empresa": "KDE",
+    "url": "https://kdenlive.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/KDE/kdenlive",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows",
+      "macos",
+      "linux"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Editor de vídeo não linear de código aberto."
+  },
+  {
+    "id": "shotcut",
+    "nome": "Shotcut",
+    "categorias": [
+      "Edição de vídeo"
+    ],
+    "empresa": "Shotcut (comunidade)",
+    "url": "https://shotcut.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/mltframework/shotcut",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows",
+      "macos",
+      "linux"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Editor de vídeo de código aberto, multiplataforma."
+  },
+  {
+    "id": "descript",
+    "nome": "Descript",
+    "categorias": [
+      "Edição de vídeo"
+    ],
+    "empresa": "Descript Inc",
+    "url": "https://www.descript.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 16,
+      "unidade": "pessoa/mês (cobrança anual; US$ 24 no mensal)",
+      "status": "verificado",
+      "fonte": "https://www.descript.com/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "windows",
+      "macos"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Edição de vídeo e áudio por transcrição de texto, com IA."
+  },
+  {
+    "id": "veed",
+    "nome": "VEED",
+    "categorias": [
+      "Edição de vídeo"
+    ],
+    "empresa": "VEED Ltd",
+    "url": "https://www.veed.io",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Editor de vídeo no navegador com legendas, avatares e dublagem por IA."
+  },
+  {
+    "id": "final-cut-pro",
+    "nome": "Final Cut Pro",
+    "categorias": [
+      "Edição de vídeo"
+    ],
+    "empresa": "Apple",
+    "url": "https://www.apple.com/final-cut-pro/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 12.99,
+      "unidade": "mês (assinatura para iPad, após teste)",
+      "status": "verificado",
+      "fonte": "https://www.apple.com/final-cut-pro/",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "macos",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Editor de vídeo profissional da Apple, para Mac e iPad."
+  },
+  {
+    "id": "lmms",
+    "nome": "LMMS",
+    "categorias": [
+      "Música e áudio"
+    ],
+    "empresa": "LMMS (comunidade)",
+    "url": "https://lmms.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/LMMS/lmms",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows",
+      "macos",
+      "linux"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Estação de produção musical de código aberto."
+  },
+  {
+    "id": "ocenaudio",
+    "nome": "ocenaudio",
+    "categorias": [
+      "Música e áudio"
+    ],
+    "empresa": "Ocenaudio",
+    "url": "https://www.ocenaudio.com",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows",
+      "macos",
+      "linux"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Editor de áudio rápido e gratuito, com análise espectral."
+  },
+  {
+    "id": "udio",
+    "nome": "Udio",
+    "categorias": [
+      "Música e áudio"
+    ],
+    "empresa": "Udio Inc",
+    "url": "https://www.udio.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Geração de músicas por IA a partir de texto e estilos."
+  },
+  {
+    "id": "adobe-podcast",
+    "nome": "Adobe Podcast",
+    "categorias": [
+      "Música e áudio"
+    ],
+    "empresa": "Adobe",
+    "url": "https://podcast.adobe.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gravação e melhoria de áudio de voz por IA (Enhance Speech)."
+  },
+  {
+    "id": "logic-pro",
+    "nome": "Logic Pro",
+    "categorias": [
+      "Música e áudio"
+    ],
+    "empresa": "Apple",
+    "url": "https://www.apple.com/logic-pro/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 12.99,
+      "unidade": "mês (assinatura para iPad, após teste)",
+      "status": "verificado",
+      "fonte": "https://www.apple.com/logic-pro/",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "macos",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Estação de áudio digital da Apple para produção musical, no Mac e no iPad."
+  },
+  {
+    "id": "ableton-live",
+    "nome": "Ableton Live",
+    "categorias": [
+      "Música e áudio"
+    ],
+    "empresa": "Ableton AG",
+    "url": "https://www.ableton.com/live/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows",
+      "macos"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Estação de áudio digital para produção e performance musical."
+  },
+  {
+    "id": "google-sheets",
+    "nome": "Google Sheets",
+    "categorias": [
+      "Planilhas e análise de dados"
+    ],
+    "empresa": "Google",
+    "url": "https://workspace.google.com/products/sheets/",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "sql",
+      "python"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Planilhas colaborativas no navegador, com Gemini integrado em planos pagos."
+  },
+  {
+    "id": "julius-ai",
+    "nome": "Julius AI",
+    "categorias": [
+      "Planilhas e análise de dados"
+    ],
+    "empresa": "Julius Inc",
+    "url": "https://julius.ai",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "sql",
+      "python"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Analista de dados com IA: faz perguntas sobre planilhas e gera gráficos."
+  },
+  {
+    "id": "hex",
+    "nome": "Hex",
+    "categorias": [
+      "Planilhas e análise de dados"
+    ],
+    "empresa": "Hex Technologies",
+    "url": "https://hex.tech",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "sql",
+      "python"
+    ],
+    "porte": [
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Notebooks colaborativos de dados com SQL, Python e IA."
+  },
+  {
+    "id": "google-docs",
+    "nome": "Google Docs",
+    "categorias": [
+      "Escrita e documentos"
+    ],
+    "empresa": "Google",
+    "url": "https://workspace.google.com/products/docs/",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Editor de texto colaborativo no navegador, com Gemini em planos pagos."
+  },
+  {
+    "id": "languagetool",
+    "nome": "LanguageTool",
+    "categorias": [
+      "Escrita e documentos"
+    ],
+    "empresa": "LanguageTooler GmbH",
+    "url": "https://languagetool.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/languagetool-org/languagetool",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "extensao-navegador",
+      "windows",
+      "macos"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Corretor gramatical multilíngue com núcleo de código aberto e plano gratuito."
+  },
+  {
+    "id": "microsoft-word",
+    "nome": "Microsoft Word",
+    "categorias": [
+      "Escrita e documentos"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://www.microsoft.com/microsoft-365/word",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows",
+      "macos",
+      "web",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Processador de texto de referência, com Copilot em planos pagos."
+  },
+  {
+    "id": "microsoft-365-copilot",
+    "nome": "Microsoft 365 Copilot",
+    "categorias": [
+      "Escrita e documentos"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://www.microsoft.com/microsoft-365/copilot",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows",
+      "macos",
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Copilot integrado a Word, Excel, PowerPoint, Outlook e Teams."
+  },
+  {
+    "id": "marp",
+    "nome": "Marp",
+    "categorias": [
+      "Apresentações e slides"
+    ],
+    "empresa": "Marp (comunidade)",
+    "url": "https://marp.app",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/marp-team/marp",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "vscode",
+      "cli",
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Apresentações a partir de Markdown, com exportação para PDF e PPTX."
+  },
+  {
+    "id": "slidev",
+    "nome": "Slidev",
+    "categorias": [
+      "Apresentações e slides"
+    ],
+    "empresa": "Slidev (comunidade)",
+    "url": "https://sli.dev",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/slidevjs/slidev",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli",
+      "web"
+    ],
+    "linguagens": [
+      "typescript",
+      "javascript"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Slides para desenvolvedores com Markdown, Vue e código ao vivo."
+  },
+  {
+    "id": "gamma",
+    "nome": "Gamma",
+    "categorias": [
+      "Apresentações e slides"
+    ],
+    "empresa": "Gamma Tech",
+    "url": "https://gamma.app",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Apresentações, documentos e sites gerados por IA."
+  },
+  {
+    "id": "beautiful-ai",
+    "nome": "Beautiful.ai",
+    "categorias": [
+      "Apresentações e slides"
+    ],
+    "empresa": "Beautiful.ai",
+    "url": "https://www.beautiful.ai",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Slides com design automático por IA."
+  },
+  {
+    "id": "pitch",
+    "nome": "Pitch",
+    "categorias": [
+      "Apresentações e slides"
+    ],
+    "empresa": "Pitch Software",
+    "url": "https://pitch.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "windows",
+      "macos"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Apresentações colaborativas para equipes, com modelos e analytics."
+  },
+  {
+    "id": "adobe-express",
+    "nome": "Adobe Express",
+    "categorias": [
+      "Apresentações e slides"
+    ],
+    "empresa": "Adobe",
+    "url": "https://www.adobe.com/express/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Design rápido de posts, slides e vídeos, com IA Firefly."
+  },
+  {
+    "id": "fathom-video",
+    "nome": "Fathom (reuniões)",
+    "categorias": [
+      "Reuniões e transcrição"
+    ],
+    "empresa": "Fathom Video",
+    "url": "https://fathom.video",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 15,
+      "unidade": "usuário/mês (a partir de; plano gratuito disponível)",
+      "status": "verificado",
+      "fonte": "https://fathom.video/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "windows",
+      "macos"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gravador e resumidor de reuniões com plano gratuito."
+  },
+  {
+    "id": "tldv",
+    "nome": "tl;dv",
+    "categorias": [
+      "Reuniões e transcrição"
+    ],
+    "empresa": "tl;dv",
+    "url": "https://tldv.io",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "extensao-navegador"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gravação e resumo de reuniões do Meet, Zoom e Teams com plano gratuito."
+  },
+  {
+    "id": "fireflies-ai",
+    "nome": "Fireflies.ai",
+    "categorias": [
+      "Reuniões e transcrição"
+    ],
+    "empresa": "Fireflies.ai Corp",
+    "url": "https://fireflies.ai",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 10,
+      "unidade": "assento/mês (cobrança anual; US$ 18 no mensal)",
+      "status": "verificado",
+      "fonte": "https://fireflies.ai/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Assistente que grava, transcreve e resume reuniões com busca por conversas."
+  },
+  {
+    "id": "read-ai",
+    "nome": "Read AI",
+    "categorias": [
+      "Reuniões e transcrição"
+    ],
+    "empresa": "Read AI Inc",
+    "url": "https://www.read.ai",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Resumos de reuniões, e-mails e mensagens com métricas de engajamento."
+  },
+  {
+    "id": "avoma",
+    "nome": "Avoma",
+    "categorias": [
+      "Reuniões e transcrição"
+    ],
+    "empresa": "Avoma Inc",
+    "url": "https://www.avoma.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Assistente de reuniões com resumos, playbooks e insights de vendas."
+  },
+  {
+    "id": "rev",
+    "nome": "Rev",
+    "categorias": [
+      "Reuniões e transcrição"
+    ],
+    "empresa": "Rev.com",
+    "url": "https://www.rev.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Transcrição automática e humana de áudio e vídeo."
+  },
+  {
+    "id": "google-translate",
+    "nome": "Google Tradutor",
+    "categorias": [
+      "Tradução e idiomas"
+    ],
+    "empresa": "Google",
+    "url": "https://translate.google.com",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Tradução de texto, voz, imagem e documentos em mais de 100 idiomas."
+  },
+  {
+    "id": "argos-translate",
+    "nome": "Argos Translate",
+    "categorias": [
+      "Tradução e idiomas"
+    ],
+    "empresa": "Argos Translate (comunidade)",
+    "url": "https://www.argosopentech.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/argosopentech/argos-translate",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "python"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Biblioteca de tradução offline de código aberto em Python."
+  },
+  {
+    "id": "duolingo",
+    "nome": "Duolingo",
+    "categorias": [
+      "Tradução e idiomas"
+    ],
+    "empresa": "Duolingo Inc",
+    "url": "https://www.duolingo.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Aprendizado gamificado de idiomas, com plano gratuito e plano Super."
+  },
+  {
+    "id": "speak",
+    "nome": "Speak",
+    "categorias": [
+      "Tradução e idiomas"
+    ],
+    "empresa": "Speak Labs",
+    "url": "https://www.speak.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "ios",
+      "android"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Prática de conversação em idiomas com tutor de IA."
+  },
+  {
+    "id": "lokalise",
+    "nome": "Lokalise",
+    "categorias": [
+      "Tradução e idiomas"
+    ],
+    "empresa": "Lokalise Inc",
+    "url": "https://lokalise.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 149,
+      "unidade": "mês (a partir de)",
+      "status": "verificado",
+      "fonte": "https://lokalise.com/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "software-saas"
+    ],
+    "nota": "Plataforma de localização de produtos digitais, com tradução por IA."
+  },
+  {
+    "id": "logseq",
+    "nome": "Logseq",
+    "categorias": [
+      "Estudo e base de conhecimento"
+    ],
+    "empresa": "Logseq (comunidade)",
+    "url": "https://logseq.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/logseq/logseq",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows",
+      "macos",
+      "linux",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Base de conhecimento em blocos e grafos, de código aberto e local-first."
+  },
+  {
+    "id": "anki",
+    "nome": "Anki",
+    "categorias": [
+      "Estudo e base de conhecimento"
+    ],
+    "empresa": "Anki (comunidade)",
+    "url": "https://apps.ankiweb.net",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/ankitects/anki",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows",
+      "macos",
+      "linux",
+      "android",
+      "ios",
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "educacao"
+    ],
+    "nota": "Cartões de memorização com repetição espaçada."
+  },
+  {
+    "id": "remnote",
+    "nome": "RemNote",
+    "categorias": [
+      "Estudo e base de conhecimento"
+    ],
+    "empresa": "RemNote Inc",
+    "url": "https://www.remnote.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 8,
+      "unidade": "mês (cobrança anual; US$ 96 por ano)",
+      "status": "verificado",
+      "fonte": "https://www.remnote.com/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "windows",
+      "macos",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "educacao"
+    ],
+    "nota": "Notas com cartões de memorização e repetição espaçada, com IA."
+  },
+  {
+    "id": "readwise",
+    "nome": "Readwise",
+    "categorias": [
+      "Estudo e base de conhecimento"
+    ],
+    "empresa": "Readwise Inc",
+    "url": "https://readwise.io",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": 9.99,
+      "unidade": "mês (cobrança anual)",
+      "status": "verificado",
+      "fonte": "https://readwise.io/pricing",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Revisão de destaques de leitura e leitor de artigos com IA (Reader)."
+  },
+  {
+    "id": "mem-ai",
+    "nome": "Mem",
+    "categorias": [
+      "Estudo e base de conhecimento"
+    ],
+    "empresa": "Mem Labs",
+    "url": "https://get.mem.ai",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "ios",
+      "macos"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Notas com memória e busca por IA sobre o seu próprio conteúdo."
+  },
+  {
+    "id": "skyvern",
+    "nome": "Skyvern",
+    "categorias": [
+      "Agentes que usam computador e navegador"
+    ],
+    "empresa": "Skyvern AI",
+    "url": "https://www.skyvern.com",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/Skyvern-AI/skyvern",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli",
+      "api",
+      "cloud",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "python"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Automação de navegador com visão computacional e LLMs, em código aberto."
+  },
+  {
+    "id": "stagehand",
+    "nome": "Stagehand",
+    "categorias": [
+      "Agentes que usam computador e navegador"
+    ],
+    "empresa": "Browserbase",
+    "url": "https://www.stagehand.dev",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/browserbase/stagehand",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli",
+      "api",
+      "cloud"
+    ],
+    "linguagens": [
+      "typescript"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Framework de código aberto para controlar navegador por IA com código e linguagem natural."
+  },
+  {
+    "id": "perplexity-comet",
+    "nome": "Comet",
+    "categorias": [
+      "Agentes que usam computador e navegador"
+    ],
+    "empresa": "Perplexity AI",
+    "url": "https://www.perplexity.ai/comet",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://www.perplexity.ai/comet",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows",
+      "macos",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "python",
+      "typescript"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Navegador com agente de IA da Perplexity que age em páginas por você."
+  },
+  {
+    "id": "genspark",
+    "nome": "Genspark",
+    "categorias": [
+      "Agentes que usam computador e navegador"
+    ],
+    "empresa": "Genspark AI",
+    "url": "https://www.genspark.ai",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "python",
+      "typescript"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Agente de IA que pesquisa, cria slides, planilhas e executa tarefas na web."
+  },
+  {
+    "id": "openhab",
+    "nome": "openHAB",
+    "categorias": [
+      "Casa inteligente"
+    ],
+    "empresa": "openHAB Foundation",
+    "url": "https://www.openhab.org",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/openhab/openhab-core",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "casa",
+      "self-hosted",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Plataforma de automação residencial de código aberto, agnóstica de fabricante."
+  },
+  {
+    "id": "homebridge",
+    "nome": "Homebridge",
+    "categorias": [
+      "Casa inteligente"
+    ],
+    "empresa": "Homebridge (comunidade)",
+    "url": "https://homebridge.io",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/homebridge/homebridge",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "casa",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Expõe dispositivos sem HomeKit nativo ao app Casa da Apple."
+  },
+  {
+    "id": "amazon-alexa",
+    "nome": "Amazon Alexa",
+    "categorias": [
+      "Casa inteligente"
+    ],
+    "empresa": "Amazon",
+    "url": "https://alexa.amazon.com",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "casa",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Assistente de voz e app da Amazon para casa inteligente."
+  },
+  {
+    "id": "tuya-smart",
+    "nome": "Tuya Smart",
+    "categorias": [
+      "Casa inteligente"
+    ],
+    "empresa": "Tuya Inc",
+    "url": "https://www.tuya.com",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "casa",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Plataforma e app (Smart Life) com milhares de dispositivos de marcas diversas."
+  },
+  {
+    "id": "smartthings",
+    "nome": "SmartThings",
+    "categorias": [
+      "Casa inteligente"
+    ],
+    "empresa": "Samsung",
+    "url": "https://www.smartthings.com",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "casa",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Plataforma de casa inteligente da Samsung, compatível com Matter e Zigbee."
+  },
+  {
+    "id": "control4",
+    "nome": "Control4",
+    "categorias": [
+      "Casa inteligente"
+    ],
+    "empresa": "Snap One",
+    "url": "https://www.control4.com",
+    "preco": {
+      "modelo": [
+        "enterprise"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "casa"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Automação residencial profissional instalada por integradores."
+  },
+  {
+    "id": "apple-carplay",
+    "nome": "Apple CarPlay",
+    "categorias": [
+      "Carro conectado"
+    ],
+    "empresa": "Apple",
+    "url": "https://www.apple.com/ios/carplay/",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "carro",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Projeta aplicativos do iPhone na tela do carro."
+  },
+  {
+    "id": "waze",
+    "nome": "Waze",
+    "categorias": [
+      "Carro conectado"
+    ],
+    "empresa": "Google",
+    "url": "https://www.waze.com",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "carro",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Navegação colaborativa com alertas de trânsito, gratuito."
+  },
+  {
+    "id": "abetterrouteplanner",
+    "nome": "A Better Routeplanner",
+    "categorias": [
+      "Carro conectado"
+    ],
+    "empresa": "ABRP",
+    "url": "https://abetterrouteplanner.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "carro",
+      "web",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Planejador de rotas para carros elétricos com paradas de recarga."
+  },
+  {
+    "id": "plugshare",
+    "nome": "PlugShare",
+    "categorias": [
+      "Carro conectado"
+    ],
+    "empresa": "EVgo",
+    "url": "https://www.plugshare.com",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "carro",
+      "web",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Mapa colaborativo de carregadores de carros elétricos."
+  },
+  {
+    "id": "tesla-app",
+    "nome": "Tesla App",
+    "categorias": [
+      "Carro conectado"
+    ],
+    "empresa": "Tesla Inc",
+    "url": "https://www.tesla.com/support/tesla-app",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "carro",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Aplicativo oficial para controlar o carro Tesla, com chave digital."
+  },
+  {
+    "id": "carly",
+    "nome": "Carly",
+    "categorias": [
+      "Carro conectado"
+    ],
+    "empresa": "Carly Solutions",
+    "url": "https://www.mycarly.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "carro",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Diagnóstico e codificação de carros VAG, BMW e outras marcas pelo celular."
+  },
+  {
+    "id": "health-connect",
+    "nome": "Health Connect",
+    "categorias": [
+      "Wearables e óculos"
+    ],
+    "empresa": "Google",
+    "url": "https://developer.android.com/health-and-fitness/guides/health-connect",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "wearable",
+      "android"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Camada do Android que reúne dados de saúde de apps e wearables."
+  },
+  {
+    "id": "garmin-connect",
+    "nome": "Garmin Connect",
+    "categorias": [
+      "Wearables e óculos"
+    ],
+    "empresa": "Garmin",
+    "url": "https://connect.garmin.com",
+    "preco": {
+      "modelo": [
+        "free"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "wearable",
+      "android",
+      "ios",
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Aplicativo gratuito para dados de relógios e dispositivos Garmin."
+  },
+  {
+    "id": "fitbit",
+    "nome": "Fitbit",
+    "categorias": [
+      "Wearables e óculos"
+    ],
+    "empresa": "Google",
+    "url": "https://www.fitbit.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "wearable",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Pulseiras e relógios de saúde do Google, com assinatura Premium."
+  },
+  {
+    "id": "ray-ban-meta",
+    "nome": "Ray-Ban Meta",
+    "categorias": [
+      "Wearables e óculos"
+    ],
+    "empresa": "Meta",
+    "url": "https://www.meta.com/ai-glasses/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "wearable",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Óculos inteligentes com câmera, áudio e assistente Meta AI."
+  },
+  {
+    "id": "apple-vision-pro",
+    "nome": "Apple Vision Pro",
+    "categorias": [
+      "Wearables e óculos"
+    ],
+    "empresa": "Apple",
+    "url": "https://www.apple.com/apple-vision-pro/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "wearable"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Headset de computação espacial da Apple."
+  },
+  {
+    "id": "whoop",
+    "nome": "WHOOP",
+    "categorias": [
+      "Wearables e óculos"
+    ],
+    "empresa": "Whoop Inc",
+    "url": "https://www.whoop.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "wearable",
+      "android",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Pulseira de saúde e recuperação vendida por assinatura."
+  }
+]

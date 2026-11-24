@@ -1,0 +1,15 @@
+id: tec_modelo_em_v
+tipo: tecnica
+nome: Modelo em V
+descricao: "Modelo em V: cada fase de especificação tem uma fase de teste correspondente."
+quando_usar:
+  - Sistemas críticos ou regulados com rastreabilidade obrigatória
+quando_evitar:
+  - Produto em descoberta
+exemplo: Requisitos de sistema validados por testes de sistema; design de módulo por testes de integração.
+como_aplicar:
+  - Para cada nível de especificação, defina o teste correspondente
+  - Rastreie requisito até teste
+resultado_esperado: Matriz de rastreabilidade requisito para teste.
+status: rascunho
+publico: false

@@ -1,0 +1,16 @@
+id: tec_sprint_review
+tipo: tecnica
+nome: Sprint Review
+descricao: "Revisão da sprint: inspeção do incremento com os interessados para adaptar o que vem depois."
+quando_usar:
+  - Fim de cada sprint
+quando_evitar:
+  - Substituir o aceite do negócio de uma entrega
+exemplo: Demonstração do cupom em homologação; interessados pediram o motivo da recusa na tela.
+como_aplicar:
+  - Demonstre o incremento
+  - Colha feedback
+  - Ajuste o backlog
+resultado_esperado: Feedback registrado e backlog ajustado.
+status: rascunho
+publico: false

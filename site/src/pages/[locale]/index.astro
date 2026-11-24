@@ -1,0 +1,14 @@
+---
+// SPDX-License-Identifier: MIT
+import Base from '../../layouts/Base.astro';
+import { buildLocales, ctxFor } from '../../kit';
+import { renderHome } from '../../render/layers';
+export function getStaticPaths() {
+  return buildLocales().map((locale) => ({ params: { locale } }));
+}
+const locale = Astro.params.locale as 'pt-BR' | 'en';
+const ctx = ctxFor(locale);
+---
+<Base locale={locale} title={ctx.t('site.title')} slug="" base={ctx.base} description={ctx.t('home.lede')} layer="home" tipo="home">
+  <Fragment set:html={renderHome(ctx)} />
+</Base>

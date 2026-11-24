@@ -1,0 +1,11 @@
+id: tec_code_review
+tipo: tecnica
+nome: Revisão de código
+descricao: Revisão por outra pessoa antes de integrar a mudança.
+quando_usar:
+  - Toda correção
+quando_evitar:
+  - Revisão apenas formal, sem leitura real
+status: rascunho
+publico: false
+exemplo: Revisão por uma pessoa do papel antes do merge, com comentários classificados.

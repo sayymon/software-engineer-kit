@@ -1,0 +1,117 @@
+flowchart LR
+  subgraph z_SG_api_orq["<b>Orquestração da API</b>"]
+    direction LR
+    api_orq_s0(["<small><b>api_orq_s0</b></small><br/>Necessidade de expor capacidades por uma API"])
+    api_orq_c1[["<small><b>api_orq_c1</b></small><br/>Definir consumidores e contrato"]]
+    api_orq_c2[["<small><b>api_orq_c2</b></small><br/>Escolher a abordagem de entrega"]]
+    api_orq_c3[["<small><b>api_orq_c3</b></small><br/>Escolher a stack por contexto"]]
+    api_orq_c7[["<small><b>api_orq_c7</b></small><br/>Implementar e entregar a API"]]
+    api_orq_c8[["<small><b>api_orq_c8</b></small><br/>Implementar e entregar a API"]]
+    api_orq_c4[["<small><b>api_orq_c4</b></small><br/>Implementar e entregar a API"]]
+    api_orq_c5[["<small><b>api_orq_c5</b></small><br/>Implementar e entregar a API"]]
+    api_orq_c6[["<small><b>api_orq_c6</b></small><br/>Implementar e entregar a API"]]
+    api_orq_e4(["<small><b>api_orq_e4</b></small><br/>API em produção sobre um backend gerenciado assinado<br/><i>retorno: assinar_baas</i>"])
+    api_orq_e5(["<small><b>api_orq_e5</b></small><br/>API em produção atrás de um gateway comercial<br/><i>retorno: comprar_gateway</i>"])
+    api_orq_e1(["<small><b>api_orq_e1</b></small><br/>API em produção sobre a stack de API serverless e edge<br/><i>retorno: api_serverless_edge</i>"])
+    api_orq_e2(["<small><b>api_orq_e2</b></small><br/>API em produção sobre a stack de API transacional com eventos<br/><i>retorno: api_transacional_eventos</i>"])
+    api_orq_e3(["<small><b>api_orq_e3</b></small><br/>API em produção sobre a stack de monolito web com banco relacional<br/><i>retorno: api_monolito_relacional</i>"])
+  end
+  subgraph z_SG_api_ctx["<b>Contexto e contrato</b>"]
+    direction LR
+    api_ctx_s0(["<small><b>api_ctx_s0</b></small><br/>Início do levantamento"])
+    api_ctx_t1["<small><b>api_ctx_t1</b></small><br/>Mapear consumidores e casos de uso"]
+    api_ctx_t2["<small><b>api_ctx_t2</b></small><br/>Desenhar recursos, erros e limites"]
+    api_ctx_e1(["<small><b>api_ctx_e1</b></small><br/>Contrato acordado com os consumidores<br/><i>retorno: contrato_definido</i>"])
+  end
+  subgraph z_SG_api_abd["<b>Abordagem de entrega</b>"]
+    direction LR
+    api_abd_s0(["<small><b>api_abd_s0</b></small><br/>Início da escolha"])
+    api_abd_t1["<small><b>api_abd_t1</b></small><br/>Registrar premissas e pontuar as opções"]
+    api_abd_g1{"<small><b>api_abd_g1</b></small><br/>Domínio simples e<br/>prazo curto?"}
+    api_abd_e1(["<small><b>api_abd_e1</b></small><br/>Backend gerenciado cobre o domínio<br/><i>retorno: assinar_baas</i>"])
+    api_abd_g2{"<small><b>api_abd_g2</b></small><br/>Governança central<br/>de várias APIs?"}
+    api_abd_e2(["<small><b>api_abd_e2</b></small><br/>Gateway comercial centraliza a governança<br/><i>retorno: comprar_gateway</i>"])
+    api_abd_e3(["<small><b>api_abd_e3</b></small><br/>Construir com stack própria<br/><i>retorno: construir</i>"])
+  end
+  subgraph z_SG_api_stk["<b>Stack por contexto</b>"]
+    direction LR
+    api_stk_s0(["<small><b>api_stk_s0</b></small><br/>Início da escolha da stack"])
+    api_stk_g1{"<small><b>api_stk_g1</b></small><br/>Tráfego irregular ou<br/>resposta na borda?"}
+    api_stk_e1(["<small><b>api_stk_e1</b></small><br/>Stack serverless e edge<br/><i>retorno: serverless_edge</i>"])
+    api_stk_g2{"<small><b>api_stk_g2</b></small><br/>Time opera eventos e<br/>consistência<br/>eventual?"}
+    api_stk_e2(["<small><b>api_stk_e2</b></small><br/>Stack transacional com eventos<br/><i>retorno: transacional_eventos</i>"])
+    api_stk_e3(["<small><b>api_stk_e3</b></small><br/>Stack de monolito relacional<br/><i>retorno: monolito_relacional</i>"])
+  end
+  subgraph z_SG_api_ent["<b>Implementação e entrega</b>"]
+    direction LR
+    api_ent_s0(["<small><b>api_ent_s0</b></small><br/>Início da entrega"])
+    api_ent_t1["<small><b>api_ent_t1</b></small><br/>Implementar e proteger a API"]
+    api_ent_t2["<small><b>api_ent_t2</b></small><br/>Validar contrato, carga e segurança"]
+    api_ent_t3["<small><b>api_ent_t3</b></small><br/>Publicar e operar"]
+    api_ent_e1(["<small><b>api_ent_e1</b></small><br/>API entregue e operada<br/><i>retorno: pronta</i>"])
+  end
+  api_orq_s0 --> api_orq_c1
+  api_ctx_s0 --> api_ctx_t1
+  api_ctx_t1 --> api_ctx_t2
+  api_ctx_t2 --> api_ctx_e1
+  api_abd_s0 --> api_abd_t1
+  api_abd_t1 --> api_abd_g1
+  api_abd_g1 -->|"sim"| api_abd_e1
+  api_abd_g1 -->|"não"| api_abd_g2
+  api_abd_g2 -->|"sim"| api_abd_e2
+  api_abd_g2 -->|"não"| api_abd_e3
+  api_stk_s0 --> api_stk_g1
+  api_stk_g1 -->|"sim"| api_stk_e1
+  api_stk_g1 -->|"não"| api_stk_g2
+  api_stk_g2 -->|"sim"| api_stk_e2
+  api_stk_g2 -->|"não"| api_stk_e3
+  api_ent_s0 --> api_ent_t1
+  api_ent_t1 --> api_ent_t2
+  api_ent_t2 --> api_ent_t3
+  api_ent_t3 --> api_ent_e1
+  api_orq_c1 -.->|"chama"| api_ctx_s0
+  api_ctx_e1 -.->|"retorno: contrato_definido"| api_orq_c2
+  api_orq_c2 -.->|"chama"| api_abd_s0
+  api_abd_e1 -.->|"retorno: assinar_baas"| api_orq_c7
+  api_abd_e2 -.->|"retorno: comprar_gateway"| api_orq_c8
+  api_abd_e3 -.->|"retorno: construir"| api_orq_c3
+  api_orq_c3 -.->|"chama"| api_stk_s0
+  api_stk_e1 -.->|"retorno: serverless_edge"| api_orq_c4
+  api_stk_e2 -.->|"retorno: transacional_eventos"| api_orq_c5
+  api_stk_e3 -.->|"retorno: monolito_relacional"| api_orq_c6
+  api_orq_c7 -.->|"chama"| api_ent_s0
+  api_ent_e1 -.->|"retorno: pronta (api_orq_c7)"| api_orq_e4
+  api_orq_c8 -.->|"chama"| api_ent_s0
+  api_ent_e1 -.->|"retorno: pronta (api_orq_c8)"| api_orq_e5
+  api_orq_c4 -.->|"chama"| api_ent_s0
+  api_ent_e1 -.->|"retorno: pronta (api_orq_c4)"| api_orq_e1
+  api_orq_c5 -.->|"chama"| api_ent_s0
+  api_ent_e1 -.->|"retorno: pronta (api_orq_c5)"| api_orq_e2
+  api_orq_c6 -.->|"chama"| api_ent_s0
+  api_ent_e1 -.->|"retorno: pronta (api_orq_c6)"| api_orq_e3
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#0072B2,stroke:#00446B,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#E69F00,stroke:#8A5F00,stroke-width:1px,color:#000000
+  classDef z_R_3 fill:#009E73,stroke:#005F45,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_C_0_1 fill:#0072B2,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_2 fill:#E69F00,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_3 fill:#009E73,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_4 fill:#56B4E9,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  class api_orq_c1 z_C_0_1
+  class api_orq_c2 z_C_0_2
+  class api_orq_c3 z_C_0_3
+  class api_orq_c7,api_orq_c8,api_orq_c4,api_orq_c5,api_orq_c6 z_C_0_4
+  class api_orq_s0,api_orq_e4,api_orq_e5,api_orq_e1,api_orq_e2,api_orq_e3 z_R_0
+  class api_ctx_s0,api_ctx_t1,api_ctx_t2,api_ctx_e1 z_R_1
+  class api_abd_s0,api_abd_t1,api_abd_g1,api_abd_e1,api_abd_g2,api_abd_e2,api_abd_e3 z_R_2
+  class api_stk_s0,api_stk_g1,api_stk_e1,api_stk_g2,api_stk_e2,api_stk_e3 z_R_3
+  class api_ent_s0,api_ent_t1,api_ent_t2,api_ent_t3,api_ent_e1 z_R_4
+  class api_abd_g1,api_abd_g2,api_stk_g1,api_stk_g2 gw
+  style z_SG_api_orq fill:#E7ECEE,stroke:#607D8B,stroke-width:3px,color:#000000
+  style z_SG_api_ctx fill:#D9EAF3,stroke:#0072B2,stroke-width:3px,color:#000000
+  style z_SG_api_abd fill:#FBF1D9,stroke:#E69F00,stroke-width:3px,color:#000000
+  style z_SG_api_stk fill:#D9F0EA,stroke:#009E73,stroke-width:3px,color:#000000
+  style z_SG_api_ent fill:#E6F4FC,stroke:#56B4E9,stroke-width:3px,color:#000000

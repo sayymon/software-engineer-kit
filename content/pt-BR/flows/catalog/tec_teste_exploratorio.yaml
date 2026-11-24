@@ -1,0 +1,16 @@
+id: tec_teste_exploratorio
+tipo: tecnica
+nome: Teste exploratório
+descricao: Sessão curta e com objetivo em que a pessoa testa, aprende e decide o próximo teste ao mesmo tempo, procurando variações que a suíte não cobre.
+quando_usar:
+  - Validar uma correção e procurar a mesma causa em cenários vizinhos
+quando_evitar:
+  - Substituir o teste automatizado do defeito
+como_aplicar:
+  - Definir a missão da sessão (ex. cupons com datas limite)
+  - Variar dados, perfis e ordem dos passos
+  - Registrar o que foi testado e o que foi encontrado
+resultado_esperado: Lista dos cenários explorados, com os achados virando teste automatizado quando valem.
+status: rascunho
+publico: false
+exemplo: Sessão de 30 minutos com cupons vencendo hoje, ontem e amanhã, em dois fusos; nenhum achado novo.

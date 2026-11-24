@@ -1,0 +1,23 @@
+name: Bug report / Relato de bug
+description: Something in the site, the content or the tooling is wrong.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened / O que aconteceu
+      description: Describe the problem and the page or file involved.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce / Passos para reproduzir
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result / Resultado esperado
+    validations:
+      required: false

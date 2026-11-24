@@ -1,0 +1,42 @@
+flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"])
+  end
+  subgraph z_SG_inc_com["<b>Comunicação por severidade</b>"]
+    direction LR
+    inc_com_s0(["<small><b>inc_com_s0</b></small><br/>Severidade definida, comunicar"])
+    inc_com_g1{"<small><b>inc_com_g1</b></small><br/>Qual a severidade<br/>(define a<br/>comunicação)?"}
+    inc_com_t1["<small><b>inc_com_t1</b></small><br/>SEV1: war room, IC e comunicado a cada 30 minutos<br/><i>▸ 4 subtarefas</i>"]
+    inc_com_t2["<small><b>inc_com_t2</b></small><br/>SEV2: atualizar stakeholders afetados a cada 60 minutos<br/><i>▸ 2 subtarefas</i>"]
+    inc_com_t3["<small><b>inc_com_t3</b></small><br/>SEV3: avisar o dono do serviço<br/><i>▸ 1 subtarefa</i>"]
+    inc_com_e1(["<small><b>inc_com_e1</b></small><br/>Comunicação feita<br/><i>retorno: comunicado</i>"])
+  end
+  inc_com_s0 --> inc_com_g1
+  inc_com_g1 -->|"SEV1"| inc_com_t1
+  inc_com_g1 -->|"SEV2"| inc_com_t2
+  inc_com_g1 -->|"SEV3"| inc_com_t3
+  inc_com_t1 --> inc_com_e1
+  inc_com_t2 --> inc_com_e1
+  inc_com_t3 --> inc_com_e1
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#0072B2,stroke:#00446B,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#E69F00,stroke:#8A5F00,stroke-width:1px,color:#000000
+  classDef z_R_3 fill:#009E73,stroke:#005F45,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_R_5 fill:#D55E00,stroke:#803800,stroke-width:1px,color:#000000
+  classDef z_R_6 fill:#882255,stroke:#521433,stroke-width:1px,color:#FFFFFF
+  classDef z_R_7 fill:#CC79A7,stroke:#7A4964,stroke-width:1px,color:#000000
+  classDef z_R_8 fill:#999933,stroke:#5C5C1F,stroke-width:1px,color:#000000
+  classDef z_R_9 fill:#44AA99,stroke:#29665C,stroke-width:1px,color:#000000
+  classDef z_R_10 fill:#332288,stroke:#1F1452,stroke-width:1px,color:#FFFFFF
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
+  class inc_com_s0,inc_com_g1,inc_com_t1,inc_com_t2,inc_com_t3,inc_com_e1 z_R_4
+  class inc_com_g1 gw
+  style z_SG_inc_com fill:#E6F4FC,stroke:#56B4E9,stroke-width:3px,color:#000000

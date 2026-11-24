@@ -1,0 +1,67 @@
+flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"])
+  end
+  subgraph z_SG_bug_tri["<b>Triagem e classificação</b>"]
+    direction LR
+    bug_tri_s0(["<small><b>bug_tri_s0</b></small><br/>Bug reproduzido, triar"])
+    bug_tri_g1{"<small><b>bug_tri_g1</b></small><br/>Defeito,<br/>comportamento<br/>esperado ou feature?"}
+    bug_tri_g2{"<small><b>bug_tri_g2</b></small><br/>É um potencial<br/>incidente?"}
+    bug_tri_t1["<small><b>bug_tri_t1</b></small><br/>Responder e documentar o comportamento esperado<br/><i>▸ 2 subtarefas</i>"]
+    bug_tri_t2["<small><b>bug_tri_t2</b></small><br/>Encaminhar como demanda de feature<br/><i>▸ 2 subtarefas</i>"]
+    bug_tri_t3["<small><b>bug_tri_t3</b></small><br/>Acionar o incidente e seguir com a correção em paralelo<br/><i>▸ 3 subtarefas</i>"]
+    bug_tri_t4["<small><b>bug_tri_t4</b></small><br/>Avaliar severidade e prioridade<br/><i>▸ 3 subtarefas</i>"]
+    bug_tri_e3(["<small><b>bug_tri_e3</b></small><br/>Comportamento esperado<br/><i>retorno: comportamento_esperado</i>"])
+    bug_tri_e4(["<small><b>bug_tri_e4</b></small><br/>Pedido de feature<br/><i>retorno: pedido_feature</i>"])
+    bug_tri_g3{"<small><b>bug_tri_g3</b></small><br/>Afetado por janela<br/>crítica ou<br/>sazonalidade?"}
+    bug_tri_g4{"<small><b>bug_tri_g4</b></small><br/>A janela pede<br/>correção imediata ou<br/>adiamento?"}
+    bug_tri_g5{"<small><b>bug_tri_g5</b></small><br/>Bloqueante ou de<br/>alto impacto?"}
+    bug_tri_t5["<small><b>bug_tri_t5</b></small><br/>Aplicar paliativo e adiar a correção para depois da janela<br/><i>▸ 2 subtarefas</i>"]
+    bug_tri_t6["<small><b>bug_tri_t6</b></small><br/>Abrir hotfix com escopo mínimo<br/><i>▸ 3 subtarefas</i>"]
+    bug_tri_t7["<small><b>bug_tri_t7</b></small><br/>Priorizar no backlog com prazo<br/><i>▸ 2 subtarefas</i>"]
+    bug_tri_e1(["<small><b>bug_tri_e1</b></small><br/>Hotfix<br/><i>retorno: hotfix</i>"])
+    bug_tri_e2(["<small><b>bug_tri_e2</b></small><br/>Backlog<br/><i>retorno: backlog</i>"])
+  end
+  bug_tri_s0 --> bug_tri_g1
+  bug_tri_g1 -->|"defeito: o sistema contraria o requisito"| bug_tri_g2
+  bug_tri_g1 -->|"comportamento esperado conforme o requisito"| bug_tri_t1
+  bug_tri_g1 -->|"pedido de feature: o requisito não existia"| bug_tri_t2
+  bug_tri_g2 -->|"sim, pelo menos um critério atendido"| bug_tri_t3
+  bug_tri_g2 -->|"não, nenhum critério atendido"| bug_tri_t4
+  bug_tri_t1 --> bug_tri_e3
+  bug_tri_t2 --> bug_tri_e4
+  bug_tri_t3 --> bug_tri_t4
+  bug_tri_t4 --> bug_tri_g3
+  bug_tri_g3 -->|"sim, há janela crítica ativa"| bug_tri_g4
+  bug_tri_g3 -->|"não, sem janela crítica"| bug_tri_g5
+  bug_tri_g4 -->|"correção imediata (hotfix)"| bug_tri_t6
+  bug_tri_g4 -->|"adiar com mitigação paliativa"| bug_tri_t5
+  bug_tri_g4 -->|"a janela não altera a decisão"| bug_tri_g5
+  bug_tri_g5 -->|"sim: tratar como hotfix"| bug_tri_t6
+  bug_tri_g5 -->|"não: priorizar no backlog"| bug_tri_t7
+  bug_tri_t5 --> bug_tri_t7
+  bug_tri_t6 --> bug_tri_e1
+  bug_tri_t7 --> bug_tri_e2
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#0072B2,stroke:#00446B,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#E69F00,stroke:#8A5F00,stroke-width:1px,color:#000000
+  classDef z_R_3 fill:#009E73,stroke:#005F45,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#BBCC33,stroke:#707A1F,stroke-width:1px,color:#000000
+  classDef z_R_5 fill:#117733,stroke:#0A471F,stroke-width:1px,color:#FFFFFF
+  classDef z_R_6 fill:#D55E00,stroke:#803800,stroke-width:1px,color:#000000
+  classDef z_R_7 fill:#CC79A7,stroke:#7A4964,stroke-width:1px,color:#000000
+  classDef z_R_8 fill:#F0E442,stroke:#908928,stroke-width:1px,color:#000000
+  classDef z_R_9 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_R_10 fill:#999933,stroke:#5C5C1F,stroke-width:1px,color:#000000
+  classDef z_R_11 fill:#77AADD,stroke:#476685,stroke-width:1px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
+  class bug_tri_s0,bug_tri_g1,bug_tri_g2,bug_tri_t1,bug_tri_t2,bug_tri_t3,bug_tri_t4,bug_tri_e3,bug_tri_e4,bug_tri_g3,bug_tri_g4,bug_tri_g5,bug_tri_t5,bug_tri_t6,bug_tri_t7,bug_tri_e1,bug_tri_e2 z_R_2
+  class bug_tri_g1,bug_tri_g2,bug_tri_g3,bug_tri_g4,bug_tri_g5 gw
+  style z_SG_bug_tri fill:#FBF1D9,stroke:#E69F00,stroke-width:3px,color:#000000

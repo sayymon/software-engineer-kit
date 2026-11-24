@@ -1,0 +1,16 @@
+id: tec_demo_driven_development
+tipo: tecnica
+nome: Demo-driven development
+descricao: Desenvolver a partir da demonstração que se quer fazer ao final, para manter o foco no valor visível.
+quando_usar:
+  - Entregas incrementais com validação frequente do negócio
+quando_evitar:
+  - Trabalho interno sem demonstração possível
+exemplo: A meta da iteração é demonstrar o cupom aplicado no checkout de homologação.
+como_aplicar:
+  - Descreva a demonstração esperada
+  - Planeje o mínimo para ela funcionar
+  - Demonstre e colha feedback
+resultado_esperado: Demonstração feita e feedback registrado.
+status: rascunho
+publico: false

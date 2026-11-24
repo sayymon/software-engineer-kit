@@ -1,0 +1,16 @@
+id: tec_requisitos_n_o_funcionais
+tipo: tecnica
+nome: Requisitos Não Funcionais
+descricao: "Como o sistema se comporta: desempenho, disponibilidade, segurança, custo, acessibilidade, com metas numéricas."
+quando_usar:
+  - Toda feature que vai para produção
+quando_evitar:
+  - Nunca evitar; só calibrar a profundidade
+exemplo: p95 abaixo de 300 ms com 500 requisições por segundo; disponibilidade de 99,9%.
+como_aplicar:
+  - Liste as qualidades relevantes
+  - Defina meta numérica para cada uma
+  - Ligue às raias de teste
+resultado_esperado: Requisitos não funcionais com metas que viram testes de performance e segurança.
+status: rascunho
+publico: false

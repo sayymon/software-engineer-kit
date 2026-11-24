@@ -1,0 +1,308 @@
+{
+  "jornadas": [
+    {
+      "n": 1,
+      "nome": "Do problema ao requisito pronto",
+      "nota": "Enriquecimento de Requisitos",
+      "foco": "Elucidar, enriquecer e especificar requisitos"
+    },
+    {
+      "n": 2,
+      "nome": "Escolhendo a metodologia",
+      "nota": "Escolhendo a Metodologia",
+      "foco": "Scrum, Kanban, Scrumban, Shape Up e Waterfall por contexto"
+    },
+    {
+      "n": 3,
+      "nome": "O ciclo ágil: comportamentos por cerimônia",
+      "nota": "Playbook de Cerimônias Ágeis",
+      "foco": "Dailies, planning, review, retro e refinement"
+    },
+    {
+      "n": 4,
+      "nome": "System Design end-to-end",
+      "nota": "System Design na Prática",
+      "nota2": "System Design para Sistemas de IA",
+      "foco": "Do requisito à produção, com ramo probabilístico para IA"
+    },
+    {
+      "n": 5,
+      "nome": "De executor a referência",
+      "nota": "Posicionamento e Arquétipos de Staff",
+      "foco": "Externalizar, multiplicar, arquétipos e presença pública"
+    },
+    {
+      "n": 6,
+      "nome": "Ciclo de desenvolvimento com IA",
+      "nota": "Ciclo de Desenvolvimento com IA",
+      "foco": "Spec, delegação, review humano e ship com observabilidade"
+    }
+  ],
+  "camadas": [
+    {
+      "id": "fund",
+      "titulo": "Fundamentos: meia-vida 10+ anos",
+      "meiaVida": "10+ anos",
+      "estudo": "Estude devagar e fundo. Compostos por décadas: não há atalho.",
+      "itens": [
+        {
+          "nome": "Lógica e resolução de problemas",
+          "detalhe": "Decomposição, abstração"
+        },
+        {
+          "nome": "Estruturas de dados e algoritmos",
+          "detalhe": "Trade-offs de complexidade"
+        },
+        {
+          "nome": "SOLID e clean code",
+          "detalhe": "Manutenibilidade"
+        },
+        {
+          "nome": "Testes",
+          "detalhe": "Unidade, integração, contrato"
+        },
+        {
+          "nome": "Git",
+          "detalhe": "Rebase, bisect, cherry-pick, workflows"
+        },
+        {
+          "nome": "SQL e modelagem de dados",
+          "detalhe": "Relacional, índices, transações"
+        },
+        {
+          "nome": "HTTP e APIs",
+          "detalhe": "Protocolos, status codes, caching"
+        },
+        {
+          "nome": "Segurança básica",
+          "detalhe": "OWASP Top 10, IAM, segredos"
+        },
+        {
+          "nome": "Depuração sistemática",
+          "detalhe": "Hipótese → teste → conclusão"
+        }
+      ]
+    },
+    {
+      "id": "dist",
+      "titulo": "Engenharia Distribuída: meia-vida ~5 anos",
+      "meiaVida": "~5 anos",
+      "estudo": "Pratique em produção. É onde se ganha confiança de Staff.",
+      "itens": [
+        {
+          "nome": "Cloud (compute, storage, networking)",
+          "detalhe": "AWS/GCP/Azure, trade-offs de serviço"
+        },
+        {
+          "nome": "Containers e orquestração",
+          "detalhe": "Docker, Kubernetes, Helm"
+        },
+        {
+          "nome": "CI/CD",
+          "detalhe": "Pipelines, deploy incremental, feature flags"
+        },
+        {
+          "nome": "Observabilidade",
+          "detalhe": "Métricas, logs, traces, SLOs"
+        },
+        {
+          "nome": "Arquitetura",
+          "detalhe": "DDD, event-driven, microserviços com moderação"
+        },
+        {
+          "nome": "Resiliência",
+          "detalhe": "Circuit breaker, retry, rate limiting, idempotência"
+        },
+        {
+          "nome": "API design",
+          "detalhe": "REST/GraphQL, versionamento, contratos"
+        }
+      ]
+    },
+    {
+      "id": "ia",
+      "titulo": "Era IA: meia-vida ~6 meses",
+      "meiaVida": "~6 meses",
+      "estudo": "Cultive aprender rápido, não memorizar. O que você sabe importa menos que quão rápido você reaprende.",
+      "itens": [
+        {
+          "nome": "LLMs e limites",
+          "detalhe": "O que eles fazem bem, onde alucinam, custo por token"
+        },
+        {
+          "nome": "Prompt & spec engineering",
+          "detalhe": "Contexto, exemplos, restrições, critérios de sucesso"
+        },
+        {
+          "nome": "RAG",
+          "detalhe": "Chunking, embeddings, reranking, avaliação de retrieval"
+        },
+        {
+          "nome": "Agentes",
+          "detalhe": "Tools, memória, orquestração, multi-agent"
+        },
+        {
+          "nome": "Evals",
+          "detalhe": "Golden sets, regressão, LLM-as-judge com cuidado"
+        },
+        {
+          "nome": "Guardrails",
+          "detalhe": "PII, jailbreak, formato, validação de saída"
+        },
+        {
+          "nome": "LLMOps",
+          "detalhe": "Custo, caching semântico, observabilidade, drift"
+        },
+        {
+          "nome": "MCP / tool-calling",
+          "detalhe": "Integração de agentes com sistemas externos"
+        }
+      ]
+    },
+    {
+      "id": "soft",
+      "titulo": "Soft Skills: transversais (nunca expiram)",
+      "meiaVida": "nunca expira",
+      "estudo": "O multiplicador. 1 ponto de comunicação rende mais que 3 pontos de técnica nova.",
+      "itens": [
+        {
+          "nome": "Comunicação técnica",
+          "detalhe": "Escrita, fala, visualização"
+        },
+        {
+          "nome": "Elicitação de requisitos",
+          "detalhe": "Perguntar certo, ouvir, observar"
+        },
+        {
+          "nome": "Escrita de docs",
+          "detalhe": "ADRs, RFCs, runbooks"
+        },
+        {
+          "nome": "Influência sem autoridade",
+          "detalhe": "Convencer, não comandar"
+        },
+        {
+          "nome": "Mentoria",
+          "detalhe": "Ensinar, dar feedback"
+        },
+        {
+          "nome": "Gestão de energia",
+          "detalhe": "Limites, foco, sustentabilidade"
+        },
+        {
+          "nome": "Negociação",
+          "detalhe": "Trade-offs, expectativas"
+        },
+        {
+          "nome": "Pensamento crítico",
+          "detalhe": "Questionar, validar, decidir"
+        }
+      ]
+    }
+  ],
+  "regraInvestimento": [
+    {
+      "camada": "Fundamentos",
+      "regra": "Estude devagar e fundo. Compõem por décadas e não têm atalho."
+    },
+    {
+      "camada": "Engenharia distribuída",
+      "regra": "Pratique em produção. É onde se ganha confiança de Staff."
+    },
+    {
+      "camada": "Era IA",
+      "regra": "Cultive aprender rápido, não memorizar. Importa mais a velocidade de reaprender."
+    },
+    {
+      "camada": "Soft skills",
+      "regra": "É o multiplicador: 1 ponto de comunicação rende mais que 3 pontos de técnica nova."
+    }
+  ],
+  "mapa": "Mapa de Competências do Engenheiro de Software",
+  "autoavaliacao": [
+    {
+      "nome": "Fundamentos",
+      "itens": [
+        "Explico trade-offs de estruturas de dados no dia a dia",
+        "Escrevo testes junto com o código sem esforço",
+        "Uso Git com confiança (rebase, bisect, cherry-pick)",
+        "Modelo dados relacionais e sei quando NoSQL",
+        "Depuro sistematicamente (hipótese → teste → conclusão)",
+        "Conheço OWASP Top 10 e aplico no código",
+        "Explico SOLID com exemplos reais",
+        "Leio código de outros com fluência"
+      ]
+    },
+    {
+      "nome": "Engenharia Distribuída",
+      "itens": [
+        "Projeto APIs REST/GraphQL com contrato claro",
+        "Aplico resiliência: retry, circuit breaker, rate limiting",
+        "Uso filas/eventos para desacoplar sistemas",
+        "Instrumento métricas, logs e traces",
+        "Faço estimativas back-of-envelope",
+        "Escrevo ADRs para decisões importantes",
+        "Domino CI/CD e deploy incremental (flags)",
+        "Conheço trade-offs CAP e os boto na mesa"
+      ]
+    },
+    {
+      "nome": "Era IA",
+      "itens": [
+        "Sei quando (não) usar um LLM numa solução",
+        "Escrevo specs que agentes executam bem (SDD)",
+        "Construí/evoluí um pipeline RAG",
+        "Tenho evals automatizados para saída de IA",
+        "Aplico guardrails de entrada e saída",
+        "Meço custo por requisição e otimizo (caching, modelos menores)",
+        "Projeto fallbacks para falha de modelo",
+        "Uso agentes de código no meu fluxo diário"
+      ]
+    },
+    {
+      "nome": "Requisitos e Colaboração",
+      "itens": [
+        "Pergunto \"que problema resolve?\" antes de \"como construir?\"",
+        "Rodo 3 Amigos nos itens críticos",
+        "Escrevo critérios de aceitação como exemplos (Gherkin)",
+        "Fatio histórias verticalmente",
+        "Levo opções com trade-offs, não problemas soltos",
+        "Comunico risco com dados e mitigação",
+        "Faço code review que ensina",
+        "Dou e recebo feedback direto e gentil"
+      ]
+    },
+    {
+      "nome": "Metodologias e Cerimônias",
+      "itens": [
+        "Sei escolher Scrum/Kanban/Scrumban pelo contexto do time",
+        "Contribuo para dailies de 15 min úteis",
+        "Planejo com capacity honesta e forecast",
+        "Demonstro software funcionando em reviews",
+        "Levo 1-2 ações concretas de cada retro",
+        "Defendo DoR/DoD do time"
+      ]
+    },
+    {
+      "nome": "System Design",
+      "itens": [
+        "Percorro o processo completo: requisitos → estimativas → API → dados → design → trade-offs",
+        "Modelo com C4 (contexto, containers)",
+        "Identifico gargalos e aprofundo neles",
+        "Documento decisões em ADR e socializo em RFC",
+        "Projeto para falha: idempotência, retry, DLQ, rollback"
+      ]
+    },
+    {
+      "nome": "Posicionamento",
+      "itens": [
+        "Externalizo conhecimento regularmente (docs, ADRs, talks)",
+        "Sou procurado(a) para validação técnica além do meu time",
+        "Mentoro pelo menos uma pessoa",
+        "Escolhi meu arquétipo de atuação (TL/Architect/Solver/Right Hand)",
+        "Comunico para cima com conclusão primeiro (BLUF)",
+        "Tenho presença pública (escrita, comunidade, network)"
+      ]
+    }
+  ]
+}

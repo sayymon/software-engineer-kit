@@ -1,0 +1,12 @@
+id: tec_status_de_janela
+tipo: tecnica
+nome: Status de janela
+descricao: Indicador simples (janela ativa ou não, tipo e início e fim) consultável por quem decide severidade, contenção e deploy.
+quando_usar:
+  - Consulta rápida durante incidente ou triagem de bug
+  - Alinhar times sobre freeze e manutenção
+quando_evitar:
+  - Indicador sem atualização automática ou manual disciplinada
+status: rascunho
+publico: false
+exemplo: Painel indica janela crítica ativa até domingo; mudanças arriscadas esperam.

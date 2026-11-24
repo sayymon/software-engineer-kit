@@ -1,0 +1,648 @@
+{
+  "title": "stack",
+  "x-translatable": [
+    "nome",
+    "descricao",
+    "body",
+    "exemplo",
+    "quando_usar",
+    "quando_evitar",
+    "subdominio"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+    },
+    "nome": {
+      "type": "string",
+      "minLength": 1
+    },
+    "descricao": {
+      "type": "string"
+    },
+    "publico": {
+      "default": false,
+      "type": "boolean"
+    },
+    "fontes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "livro",
+              "artigo",
+              "curso"
+            ]
+          },
+          "titulo": {
+            "type": "string",
+            "minLength": 1
+          },
+          "link": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status_revisao": {
+            "type": "string",
+            "enum": [
+              "pendente",
+              "em_revisao",
+              "revisada"
+            ]
+          },
+          "proxima_revisao": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          }
+        },
+        "required": [
+          "id",
+          "tipo",
+          "titulo",
+          "link",
+          "status_revisao",
+          "proxima_revisao"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "fonte_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dataVerificacao": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "guia_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+      }
+    },
+    "exemplo": {
+      "type": "string"
+    },
+    "quando_usar": {
+      "minItems": 2,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "quando_evitar": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "status": {
+      "default": "rascunho",
+      "type": "string",
+      "enum": [
+        "rascunho",
+        "revisado",
+        "publicado"
+      ]
+    },
+    "tipo": {
+      "type": "string",
+      "const": "stack"
+    },
+    "categorias": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+      }
+    },
+    "dominio": {
+      "type": "string",
+      "enum": [
+        "software",
+        "ia"
+      ]
+    },
+    "subdominio": {
+      "type": "string"
+    },
+    "linguagens": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "slots": {
+      "minItems": 3,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+          },
+          "papel": {
+            "type": "string",
+            "minLength": 1
+          },
+          "categoria": {
+            "type": "string",
+            "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+          },
+          "obrigatorio": {
+            "type": "boolean"
+          },
+          "maisBarata": {
+            "maxItems": 3,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^(\\[\\[[^\\[\\]\\n]+\\]\\]|tabela:[a-z0-9_-]+)$"
+            }
+          },
+          "custoBeneficio": {
+            "maxItems": 3,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^(\\[\\[[^\\[\\]\\n]+\\]\\]|tabela:[a-z0-9_-]+)$"
+            }
+          },
+          "qualidadeMaxima": {
+            "maxItems": 3,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^(\\[\\[[^\\[\\]\\n]+\\]\\]|tabela:[a-z0-9_-]+)$"
+            }
+          },
+          "lacuna": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "papel",
+          "categoria",
+          "obrigatorio",
+          "maisBarata",
+          "custoBeneficio",
+          "qualidadeMaxima"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "instancias": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "minLength": 1
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "linguagens": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ferramentas": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^(\\[\\[[^\\[\\]\\n]+\\]\\]|tabela:[a-z0-9_-]+)$"
+            }
+          },
+          "fonte_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+            }
+          }
+        },
+        "required": [
+          "nome"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "condicoes": {
+      "type": "object",
+      "properties": {
+        "time_maturidade": {
+          "type": "object",
+          "properties": {
+            "favorece": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "contra": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "preferir": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+              }
+            },
+            "semAlternativa": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "favorece",
+            "contra"
+          ],
+          "additionalProperties": false
+        },
+        "escala_volume": {
+          "type": "object",
+          "properties": {
+            "favorece": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "contra": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "preferir": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+              }
+            },
+            "semAlternativa": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "favorece",
+            "contra"
+          ],
+          "additionalProperties": false
+        },
+        "orcamento": {
+          "type": "object",
+          "properties": {
+            "favorece": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "contra": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "preferir": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+              }
+            },
+            "semAlternativa": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "favorece",
+            "contra"
+          ],
+          "additionalProperties": false
+        },
+        "latencia": {
+          "type": "object",
+          "properties": {
+            "favorece": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "contra": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "preferir": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+              }
+            },
+            "semAlternativa": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "favorece",
+            "contra"
+          ],
+          "additionalProperties": false
+        },
+        "compliance_dados": {
+          "type": "object",
+          "properties": {
+            "favorece": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "contra": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "preferir": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+              }
+            },
+            "semAlternativa": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "favorece",
+            "contra"
+          ],
+          "additionalProperties": false
+        },
+        "prazo_entrega": {
+          "type": "object",
+          "properties": {
+            "favorece": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "contra": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "preferir": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+              }
+            },
+            "semAlternativa": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "favorece",
+            "contra"
+          ],
+          "additionalProperties": false
+        },
+        "lock_in": {
+          "type": "object",
+          "properties": {
+            "favorece": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "contra": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "preferir": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+              }
+            },
+            "semAlternativa": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "favorece",
+            "contra"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "time_maturidade",
+        "escala_volume",
+        "orcamento",
+        "latencia",
+        "compliance_dados",
+        "prazo_entrega",
+        "lock_in"
+      ],
+      "additionalProperties": false
+    },
+    "outrosArquetipos": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "stack": {
+            "type": "string",
+            "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+          },
+          "quando": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "stack",
+          "quando"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "checklist": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^(amb|repo|cicd|iac|obs|seg|custo|dados|teste|rel|doc|ops|ia)\\.[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+          },
+          "dominio": {
+            "type": "string",
+            "minLength": 1
+          },
+          "titulo": {
+            "type": "string",
+            "minLength": 1
+          },
+          "verificacao": {
+            "type": "string",
+            "minLength": 1
+          },
+          "nivel": {
+            "type": "string",
+            "enum": [
+              "essencial",
+              "recomendado"
+            ]
+          },
+          "slots": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+            }
+          },
+          "depende": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^(amb|repo|cicd|iac|obs|seg|custo|dados|teste|rel|doc|ops|ia)\\.[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "dominio",
+          "titulo",
+          "verificacao",
+          "nivel"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "padroes": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+      }
+    },
+    "casosDeUso": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+      }
+    },
+    "variacoes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ferramentas": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^(\\[\\[[^\\[\\]\\n]+\\]\\]|tabela:[a-z0-9_-]+)$"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "nome",
+    "tipo",
+    "dominio",
+    "slots",
+    "condicoes",
+    "outrosArquetipos",
+    "padroes",
+    "casosDeUso"
+  ],
+  "additionalProperties": false
+}

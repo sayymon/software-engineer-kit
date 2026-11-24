@@ -1,0 +1,11 @@
+id: tec_modelo_c4
+tipo: tecnica
+nome: Modelo C4
+descricao: "Diagramas de arquitetura em níveis: contexto, contêineres, componentes e código."
+quando_usar:
+  - Explicar a arquitetura para públicos diferentes
+quando_evitar:
+  - Mudança sem impacto estrutural
+status: rascunho
+publico: false
+exemplo: "Nível de contêineres: API de promoções, consumidor de eventos e cache de histórico."

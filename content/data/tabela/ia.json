@@ -1,0 +1,3297 @@
+[
+  {
+    "id": "opencode",
+    "nome": "OpenCode",
+    "categorias": [
+      "Agente de código"
+    ],
+    "empresa": "SST (comunidade)",
+    "url": "https://github.com/sst/opencode",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/sst/opencode",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli",
+      "desktop"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Agente de código open source de terminal que aceita vários provedores de modelo."
+  },
+  {
+    "id": "aider",
+    "nome": "Aider",
+    "categorias": [
+      "Agente de código"
+    ],
+    "empresa": "Aider (comunidade)",
+    "url": "https://github.com/Aider-AI/aider",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/Aider-AI/aider",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Pair programming no terminal com commits automáticos no Git."
+  },
+  {
+    "id": "cline",
+    "nome": "Cline",
+    "categorias": [
+      "Agente de código"
+    ],
+    "empresa": "Cline (comunidade)",
+    "url": "https://github.com/cline/cline",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/cline/cline",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "vscode"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Agente de código open source dentro do VS Code com aprovação passo a passo."
+  },
+  {
+    "id": "openai-codex",
+    "nome": "Codex CLI",
+    "categorias": [
+      "Agente de código"
+    ],
+    "empresa": "OpenAI",
+    "url": "https://github.com/openai/codex",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/openai/codex",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Agente de código da OpenAI para terminal, com código aberto."
+  },
+  {
+    "id": "gemini-cli",
+    "nome": "Gemini CLI",
+    "categorias": [
+      "Agente de código"
+    ],
+    "empresa": "Google",
+    "url": "https://github.com/google-gemini/gemini-cli",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/google-gemini/gemini-cli",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Agente de código do Google para terminal, com código aberto."
+  },
+  {
+    "id": "zed",
+    "nome": "Zed",
+    "categorias": [
+      "IDE com IA"
+    ],
+    "empresa": "Zed Industries",
+    "url": "https://github.com/zed-industries/zed",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/zed-industries/zed",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "macos",
+      "linux",
+      "windows"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Editor rápido em Rust com agente de IA integrado."
+  },
+  {
+    "id": "continue-dev",
+    "nome": "Continue",
+    "categorias": [
+      "IDE com IA"
+    ],
+    "empresa": "Continue (comunidade)",
+    "url": "https://github.com/continuedev/continue",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/continuedev/continue",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "vscode",
+      "jetbrains"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Assistente open source para VS Code e JetBrains com modelos à escolha."
+  },
+  {
+    "id": "windsurf",
+    "nome": "Windsurf",
+    "categorias": [
+      "IDE com IA"
+    ],
+    "empresa": "Cognition",
+    "url": "https://windsurf.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows",
+      "macos",
+      "linux"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "IDE com agente de código integrado e plano gratuito."
+  },
+  {
+    "id": "jetbrains-junie",
+    "nome": "JetBrains Junie",
+    "categorias": [
+      "IDE com IA"
+    ],
+    "empresa": "JetBrains",
+    "url": "https://www.jetbrains.com/junie/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "jetbrains"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Agente de código integrado às IDEs JetBrains."
+  },
+  {
+    "id": "google-antigravity",
+    "nome": "Google Antigravity",
+    "categorias": [
+      "IDE com IA"
+    ],
+    "empresa": "Google",
+    "url": "https://antigravity.google",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows",
+      "macos",
+      "linux"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "IDE do Google orientada a agentes."
+  },
+  {
+    "id": "activepieces",
+    "nome": "Activepieces",
+    "categorias": [
+      "Automação e no-code"
+    ],
+    "empresa": "Activepieces (comunidade)",
+    "url": "https://github.com/activepieces/activepieces",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/activepieces/activepieces",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Automação visual open source com MCP."
+  },
+  {
+    "id": "node-red",
+    "nome": "Node-RED",
+    "categorias": [
+      "Automação e no-code"
+    ],
+    "empresa": "OpenJS Foundation",
+    "url": "https://github.com/node-red/node-red",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/node-red/node-red",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Automação por fluxos, forte em IoT e integração."
+  },
+  {
+    "id": "windmill",
+    "nome": "Windmill",
+    "categorias": [
+      "Automação e no-code"
+    ],
+    "empresa": "Windmill Labs",
+    "url": "https://github.com/windmill-labs/windmill",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/windmill-labs/windmill",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Automação e scripts como código com interface."
+  },
+  {
+    "id": "make",
+    "nome": "Make",
+    "categorias": [
+      "Automação e no-code"
+    ],
+    "empresa": "Celonis",
+    "url": "https://www.make.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Automação visual com cenários e muitos conectores."
+  },
+  {
+    "id": "pipedream",
+    "nome": "Pipedream",
+    "categorias": [
+      "Automação e no-code"
+    ],
+    "empresa": "Workday",
+    "url": "https://pipedream.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Automação com código e gatilhos de API."
+  },
+  {
+    "id": "zapier",
+    "nome": "Zapier",
+    "categorias": [
+      "Automação e no-code"
+    ],
+    "empresa": "Zapier",
+    "url": "https://zapier.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Referência em automação no-code com milhares de apps."
+  },
+  {
+    "id": "power-automate",
+    "nome": "Power Automate",
+    "categorias": [
+      "Automação e no-code"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://www.microsoft.com/power-platform/products/power-automate",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "windows"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Automação integrada ao Microsoft 365 e a RPA."
+  },
+  {
+    "id": "workato",
+    "nome": "Workato",
+    "categorias": [
+      "Automação e no-code"
+    ],
+    "empresa": "Workato",
+    "url": "https://www.workato.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Automação e integração para grandes empresas."
+  },
+  {
+    "id": "ragas",
+    "nome": "Ragas",
+    "categorias": [
+      "Evals e observabilidade"
+    ],
+    "empresa": "Ragas (comunidade)",
+    "url": "https://github.com/explodinggradients/ragas",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/explodinggradients/ragas",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Métricas open source para avaliar RAG."
+  },
+  {
+    "id": "deepeval",
+    "nome": "DeepEval",
+    "categorias": [
+      "Evals e observabilidade"
+    ],
+    "empresa": "Confident AI",
+    "url": "https://github.com/confident-ai/deepeval",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/confident-ai/deepeval",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Testes unitários para LLM com métricas prontas."
+  },
+  {
+    "id": "arize-phoenix",
+    "nome": "Arize Phoenix",
+    "categorias": [
+      "Evals e observabilidade"
+    ],
+    "empresa": "Arize AI",
+    "url": "https://github.com/Arize-ai/phoenix",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/Arize-ai/phoenix",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Observabilidade e evals de LLM com OpenTelemetry."
+  },
+  {
+    "id": "braintrust",
+    "nome": "Braintrust",
+    "categorias": [
+      "Evals e observabilidade"
+    ],
+    "empresa": "Braintrust",
+    "url": "https://www.braintrust.dev",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Plataforma de evals, logs e experimentos de IA."
+  },
+  {
+    "id": "langsmith",
+    "nome": "LangSmith",
+    "categorias": [
+      "Evals e observabilidade"
+    ],
+    "empresa": "LangChain Inc",
+    "url": "https://www.langchain.com/langsmith",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Tracing, evals e monitoramento de apps LLM."
+  },
+  {
+    "id": "datadog-llm-observability",
+    "nome": "Datadog LLM Observability",
+    "categorias": [
+      "Evals e observabilidade"
+    ],
+    "empresa": "Datadog",
+    "url": "https://www.datadoghq.com/product/llm-observability/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Observabilidade de LLM dentro do Datadog."
+  },
+  {
+    "id": "qdrant",
+    "nome": "Qdrant",
+    "categorias": [
+      "Ferramentas de RAG",
+      "Vector store"
+    ],
+    "empresa": "Qdrant",
+    "url": "https://github.com/qdrant/qdrant",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/qdrant/qdrant",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "self-hosted",
+      "cloud",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Banco vetorial em Rust, open source e gerenciado."
+  },
+  {
+    "id": "cohere-rerank",
+    "nome": "Cohere Rerank",
+    "categorias": [
+      "Ferramentas de RAG"
+    ],
+    "empresa": "Cohere",
+    "url": "https://cohere.com/rerank",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Reranking que melhora a precisão da busca em RAG."
+  },
+  {
+    "id": "weaviate",
+    "nome": "Weaviate",
+    "categorias": [
+      "Ferramentas de RAG",
+      "Vector store"
+    ],
+    "empresa": "Weaviate",
+    "url": "https://github.com/weaviate/weaviate",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "self-hosted",
+      "cloud",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Banco vetorial com busca híbrida."
+  },
+  {
+    "id": "milvus",
+    "nome": "Milvus",
+    "categorias": [
+      "Vector store"
+    ],
+    "empresa": "Zilliz",
+    "url": "https://github.com/milvus-io/milvus",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/milvus-io/milvus",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "self-hosted",
+      "cloud",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Banco vetorial para escala de bilhões de vetores."
+  },
+  {
+    "id": "lancedb",
+    "nome": "LanceDB",
+    "categorias": [
+      "Vector store"
+    ],
+    "empresa": "LanceDB",
+    "url": "https://github.com/lancedb/lancedb",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/lancedb/lancedb",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Banco vetorial embutido, sem servidor."
+  },
+  {
+    "id": "vertex-ai-vector-search",
+    "nome": "Vertex AI Vector Search",
+    "categorias": [
+      "Vector store"
+    ],
+    "empresa": "Google",
+    "url": "https://cloud.google.com/vertex-ai/docs/vector-search/overview",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Busca vetorial gerenciada do Google Cloud."
+  },
+  {
+    "id": "flux",
+    "nome": "FLUX.1 (pesos abertos)",
+    "categorias": [
+      "Ferramentas de geração de imagem"
+    ],
+    "empresa": "Black Forest Labs",
+    "url": "https://github.com/black-forest-labs/flux",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/black-forest-labs/flux",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "self-hosted",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Modelos de imagem de alta qualidade com pesos abertos."
+  },
+  {
+    "id": "comfyui",
+    "nome": "ComfyUI",
+    "categorias": [
+      "Ferramentas de geração de imagem"
+    ],
+    "empresa": "Comfy Org",
+    "url": "https://github.com/comfyanonymous/ComfyUI",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/comfyanonymous/ComfyUI",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows",
+      "macos",
+      "linux"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Interface em nós para fluxos de imagem e vídeo locais."
+  },
+  {
+    "id": "ideogram",
+    "nome": "Ideogram",
+    "categorias": [
+      "Ferramentas de geração de imagem"
+    ],
+    "empresa": "Ideogram",
+    "url": "https://ideogram.ai",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Geração de imagem forte em texto dentro da imagem."
+  },
+  {
+    "id": "recraft",
+    "nome": "Recraft",
+    "categorias": [
+      "Ferramentas de geração de imagem"
+    ],
+    "empresa": "Recraft",
+    "url": "https://www.recraft.ai",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Geração de imagem e vetores para design."
+  },
+  {
+    "id": "wan-video",
+    "nome": "Wan (vídeo)",
+    "categorias": [
+      "Ferramentas de geração de vídeo"
+    ],
+    "empresa": "Alibaba",
+    "url": "https://github.com/Wan-Video/Wan2.1",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/Wan-Video/Wan2.1",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Modelo de vídeo com pesos abertos."
+  },
+  {
+    "id": "hunyuan-video",
+    "nome": "HunyuanVideo",
+    "categorias": [
+      "Ferramentas de geração de vídeo"
+    ],
+    "empresa": "Tencent",
+    "url": "https://github.com/Tencent-Hunyuan/HunyuanVideo",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Modelo de vídeo com pesos abertos."
+  },
+  {
+    "id": "ltx-video",
+    "nome": "LTX-Video",
+    "categorias": [
+      "Ferramentas de geração de vídeo"
+    ],
+    "empresa": "Lightricks",
+    "url": "https://github.com/Lightricks/LTX-Video",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/Lightricks/LTX-Video",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Modelo de vídeo rápido com pesos abertos."
+  },
+  {
+    "id": "pika",
+    "nome": "Pika",
+    "categorias": [
+      "Ferramentas de geração de vídeo"
+    ],
+    "empresa": "Pika Labs",
+    "url": "https://pika.art",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Vídeo generativo com efeitos criativos."
+  },
+  {
+    "id": "luma-dream-machine",
+    "nome": "Luma Dream Machine",
+    "categorias": [
+      "Ferramentas de geração de vídeo"
+    ],
+    "empresa": "Luma AI",
+    "url": "https://lumalabs.ai/dream-machine",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "ios"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Vídeo generativo a partir de texto e imagem."
+  },
+  {
+    "id": "openai-sora",
+    "nome": "Sora",
+    "categorias": [
+      "Ferramentas de geração de vídeo"
+    ],
+    "empresa": "OpenAI",
+    "url": "https://openai.com/sora/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Vídeo generativo da OpenAI."
+  },
+  {
+    "id": "kling",
+    "nome": "Kling",
+    "categorias": [
+      "Ferramentas de geração de vídeo"
+    ],
+    "empresa": "Kuaishou",
+    "url": "https://klingai.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Vídeo generativo com boa fidelidade de movimento."
+  },
+  {
+    "id": "crawl4ai",
+    "nome": "Crawl4AI",
+    "categorias": [
+      "Ferramentas de web scraping"
+    ],
+    "empresa": "Crawl4AI (comunidade)",
+    "url": "https://github.com/unclecode/crawl4ai",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/unclecode/crawl4ai",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Crawler open source que entrega Markdown para LLM."
+  },
+  {
+    "id": "scrapy",
+    "nome": "Scrapy",
+    "categorias": [
+      "Ferramentas de web scraping"
+    ],
+    "empresa": "Zyte",
+    "url": "https://github.com/scrapy/scrapy",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/scrapy/scrapy",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Framework Python clássico de scraping em escala."
+  },
+  {
+    "id": "apify",
+    "nome": "Apify",
+    "categorias": [
+      "Ferramentas de web scraping"
+    ],
+    "empresa": "Apify",
+    "url": "https://apify.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Plataforma de scrapers prontos e execução em nuvem."
+  },
+  {
+    "id": "jina-reader",
+    "nome": "Jina Reader",
+    "categorias": [
+      "Ferramentas de web scraping"
+    ],
+    "empresa": "Jina AI",
+    "url": "https://jina.ai/reader/",
+    "preco": {
+      "modelo": [
+        "free",
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Converte uma URL em Markdown para LLM."
+  },
+  {
+    "id": "bright-data",
+    "nome": "Bright Data",
+    "categorias": [
+      "Ferramentas de web scraping"
+    ],
+    "empresa": "Bright Data",
+    "url": "https://brightdata.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Dados da web com proxies e scrapers gerenciados."
+  },
+  {
+    "id": "zyte",
+    "nome": "Zyte API",
+    "categorias": [
+      "Ferramentas de web scraping"
+    ],
+    "empresa": "Zyte",
+    "url": "https://www.zyte.com/zyte-api/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "API de extração com antibloqueio."
+  },
+  {
+    "id": "browserbase",
+    "nome": "Browserbase",
+    "categorias": [
+      "Ferramentas de web scraping"
+    ],
+    "empresa": "Browserbase",
+    "url": "https://www.browserbase.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Navegadores na nuvem para agentes."
+  },
+  {
+    "id": "piper-tts",
+    "nome": "Piper",
+    "categorias": [
+      "Ferramentas de áudio e voz"
+    ],
+    "empresa": "Rhasspy",
+    "url": "https://github.com/rhasspy/piper",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/rhasspy/piper",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Voz sintética local e rápida."
+  },
+  {
+    "id": "kokoro",
+    "nome": "Kokoro TTS",
+    "categorias": [
+      "Ferramentas de áudio e voz"
+    ],
+    "empresa": "Hexgrad",
+    "url": "https://github.com/hexgrad/kokoro",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/hexgrad/kokoro",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Síntese de voz leve com pesos abertos."
+  },
+  {
+    "id": "deepgram",
+    "nome": "Deepgram",
+    "categorias": [
+      "Ferramentas de áudio e voz"
+    ],
+    "empresa": "Deepgram",
+    "url": "https://deepgram.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Transcrição e voz em tempo real por API."
+  },
+  {
+    "id": "assemblyai",
+    "nome": "AssemblyAI",
+    "categorias": [
+      "Ferramentas de áudio e voz"
+    ],
+    "empresa": "AssemblyAI",
+    "url": "https://www.assemblyai.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Transcrição por API com recursos de áudio inteligente."
+  },
+  {
+    "id": "azure-ai-speech",
+    "nome": "Azure AI Speech",
+    "categorias": [
+      "Ferramentas de áudio e voz"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://azure.microsoft.com/products/ai-services/ai-speech",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Fala para texto e texto para fala no Azure."
+  },
+  {
+    "id": "cartesia",
+    "nome": "Cartesia",
+    "categorias": [
+      "Ferramentas de áudio e voz"
+    ],
+    "empresa": "Cartesia",
+    "url": "https://cartesia.ai",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Voz sintética de baixa latência."
+  },
+  {
+    "id": "aws-sagemaker",
+    "nome": "Amazon SageMaker",
+    "categorias": [
+      "Framework de ML"
+    ],
+    "empresa": "Amazon Web Services",
+    "url": "https://aws.amazon.com/sagemaker/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Plataforma gerenciada de treino e implantação de ML."
+  },
+  {
+    "id": "google-vertex-ai",
+    "nome": "Vertex AI",
+    "categorias": [
+      "Framework de ML"
+    ],
+    "empresa": "Google",
+    "url": "https://cloud.google.com/vertex-ai",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Plataforma de ML e IA generativa do Google Cloud."
+  },
+  {
+    "id": "openai-agents-sdk",
+    "nome": "OpenAI Agents SDK",
+    "categorias": [
+      "Framework de agentes"
+    ],
+    "empresa": "OpenAI",
+    "url": "https://github.com/openai/openai-agents-python",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/openai/openai-agents-python",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "SDK leve para agentes com handoffs e guardrails."
+  },
+  {
+    "id": "claude-agent-sdk",
+    "nome": "Claude Agent SDK",
+    "categorias": [
+      "Framework de agentes"
+    ],
+    "empresa": "Anthropic",
+    "url": "https://github.com/anthropics/claude-agent-sdk-python",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/anthropics/claude-agent-sdk-python",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "SDK com o mesmo laço de agente do Claude Code."
+  },
+  {
+    "id": "microsoft-agent-framework",
+    "nome": "Microsoft Agent Framework",
+    "categorias": [
+      "Framework de agentes"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://github.com/microsoft/agent-framework",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Framework de agentes em Python e .NET."
+  },
+  {
+    "id": "amazon-bedrock-agentcore",
+    "nome": "Amazon Bedrock AgentCore",
+    "categorias": [
+      "Framework de agentes"
+    ],
+    "empresa": "Amazon Web Services",
+    "url": "https://aws.amazon.com/bedrock/agentcore/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Infraestrutura gerenciada para agentes em produção."
+  },
+  {
+    "id": "llama-cpp",
+    "nome": "llama.cpp",
+    "categorias": [
+      "Inferência local"
+    ],
+    "empresa": "ggml (comunidade)",
+    "url": "https://github.com/ggml-org/llama.cpp",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/ggml-org/llama.cpp",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli",
+      "windows",
+      "macos",
+      "linux"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Inferência local eficiente em CPU e GPU."
+  },
+  {
+    "id": "jan",
+    "nome": "Jan",
+    "categorias": [
+      "Inferência local"
+    ],
+    "empresa": "Jan (comunidade)",
+    "url": "https://github.com/janhq/jan",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/janhq/jan",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows",
+      "macos",
+      "linux"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Aplicativo desktop para rodar modelos locais."
+  },
+  {
+    "id": "gpt4all",
+    "nome": "GPT4All",
+    "categorias": [
+      "Inferência local"
+    ],
+    "empresa": "Nomic",
+    "url": "https://github.com/nomic-ai/gpt4all",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/nomic-ai/gpt4all",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "windows",
+      "macos",
+      "linux"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Aplicativo local simples com documentos privados."
+  },
+  {
+    "id": "open-webui",
+    "nome": "Open WebUI",
+    "categorias": [
+      "Inferência local"
+    ],
+    "empresa": "Open WebUI (comunidade)",
+    "url": "https://github.com/open-webui/open-webui",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/open-webui/open-webui",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Interface web self-hosted para modelos locais e APIs."
+  },
+  {
+    "id": "vllm",
+    "nome": "vLLM",
+    "categorias": [
+      "Inferência local"
+    ],
+    "empresa": "vLLM (comunidade)",
+    "url": "https://github.com/vllm-project/vllm",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/vllm-project/vllm",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "linux",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Servidor de inferência de alta vazão."
+  },
+  {
+    "id": "sglang",
+    "nome": "SGLang",
+    "categorias": [
+      "Inferência local"
+    ],
+    "empresa": "SGLang (comunidade)",
+    "url": "https://github.com/sgl-project/sglang",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/sgl-project/sglang",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "linux",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Servidor de inferência rápido para LLM e multimodal."
+  },
+  {
+    "id": "nvidia-tensorrt-llm",
+    "nome": "TensorRT-LLM",
+    "categorias": [
+      "Inferência local"
+    ],
+    "empresa": "NVIDIA",
+    "url": "https://github.com/NVIDIA/TensorRT-LLM",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/NVIDIA/TensorRT-LLM",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "linux",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Inferência otimizada para GPUs NVIDIA."
+  },
+  {
+    "id": "mcp-reference-servers",
+    "nome": "Servidores MCP de referência",
+    "categorias": [
+      "MCP e integrações"
+    ],
+    "empresa": "Model Context Protocol",
+    "url": "https://github.com/modelcontextprotocol/servers",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/modelcontextprotocol/servers",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "desenvolvimento-software"
+    ],
+    "nota": "Implementações oficiais de exemplo do protocolo MCP."
+  },
+  {
+    "id": "mcpo",
+    "nome": "mcpo",
+    "categorias": [
+      "MCP e integrações"
+    ],
+    "empresa": "Open WebUI (comunidade)",
+    "url": "https://github.com/open-webui/mcpo",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/open-webui/mcpo",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "desenvolvimento-software"
+    ],
+    "nota": "Expõe servidores MCP como API OpenAPI."
+  },
+  {
+    "id": "fastmcp",
+    "nome": "FastMCP",
+    "categorias": [
+      "MCP e integrações"
+    ],
+    "empresa": "Prefect",
+    "url": "https://github.com/jlowin/fastmcp",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/jlowin/fastmcp",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "desenvolvimento-software"
+    ],
+    "nota": "Biblioteca Python para criar servidores MCP."
+  },
+  {
+    "id": "docker-mcp-toolkit",
+    "nome": "Docker MCP Toolkit",
+    "categorias": [
+      "MCP e integrações"
+    ],
+    "empresa": "Docker",
+    "url": "https://docs.docker.com/ai/mcp-catalog-and-toolkit/",
+    "preco": {
+      "modelo": [
+        "free",
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "desktop",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "devops-infra"
+    ],
+    "nota": "Catálogo e execução de servidores MCP em contêineres."
+  },
+  {
+    "id": "litellm",
+    "nome": "LiteLLM",
+    "categorias": [
+      "Orquestração de LLM"
+    ],
+    "empresa": "BerriAI",
+    "url": "https://github.com/BerriAI/litellm",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/BerriAI/litellm",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli",
+      "self-hosted"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Gateway que unifica dezenas de provedores de LLM."
+  },
+  {
+    "id": "haystack",
+    "nome": "Haystack",
+    "categorias": [
+      "Orquestração de LLM"
+    ],
+    "empresa": "deepset",
+    "url": "https://github.com/deepset-ai/haystack",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/deepset-ai/haystack",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Pipelines de RAG e agentes em Python."
+  },
+  {
+    "id": "dspy",
+    "nome": "DSPy",
+    "categorias": [
+      "Orquestração de LLM"
+    ],
+    "empresa": "Stanford NLP",
+    "url": "https://github.com/stanfordnlp/dspy",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/stanfordnlp/dspy",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Programa prompts e otimiza pipelines em vez de escrevê-los à mão."
+  },
+  {
+    "id": "semantic-kernel",
+    "nome": "Semantic Kernel",
+    "categorias": [
+      "Orquestração de LLM"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://github.com/microsoft/semantic-kernel",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/microsoft/semantic-kernel",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "SDK de orquestração para .NET, Python e Java."
+  },
+  {
+    "id": "vercel-ai-sdk",
+    "nome": "Vercel AI SDK",
+    "categorias": [
+      "Orquestração de LLM"
+    ],
+    "empresa": "Vercel",
+    "url": "https://github.com/vercel/ai",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/vercel/ai",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "SDK TypeScript para apps de IA com streaming."
+  },
+  {
+    "id": "searxng",
+    "nome": "SearXNG",
+    "categorias": [
+      "Pesquisa e busca"
+    ],
+    "empresa": "SearXNG (comunidade)",
+    "url": "https://github.com/searxng/searxng",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/searxng/searxng",
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "self-hosted",
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Metabuscador privado e self-hosted."
+  },
+  {
+    "id": "duckduckgo",
+    "nome": "DuckDuckGo",
+    "categorias": [
+      "Pesquisa e busca"
+    ],
+    "empresa": "DuckDuckGo",
+    "url": "https://duckduckgo.com",
+    "preco": {
+      "modelo": [
+        "free",
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "ios",
+      "android"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Busca privada com respostas assistidas por IA."
+  },
+  {
+    "id": "tavily",
+    "nome": "Tavily",
+    "categorias": [
+      "Pesquisa e busca"
+    ],
+    "empresa": "Tavily",
+    "url": "https://tavily.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "API de busca pensada para agentes."
+  },
+  {
+    "id": "exa",
+    "nome": "Exa",
+    "categorias": [
+      "Pesquisa e busca"
+    ],
+    "empresa": "Exa",
+    "url": "https://exa.ai",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Busca semântica por API para agentes."
+  },
+  {
+    "id": "serpapi",
+    "nome": "SerpApi",
+    "categorias": [
+      "Pesquisa e busca"
+    ],
+    "empresa": "SerpApi",
+    "url": "https://serpapi.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Resultados estruturados de buscadores por API."
+  },
+  {
+    "id": "brave-search-api",
+    "nome": "Brave Search API",
+    "categorias": [
+      "Pesquisa e busca"
+    ],
+    "empresa": "Brave",
+    "url": "https://brave.com/search/api/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "API de busca com índice próprio."
+  },
+  {
+    "id": "ollama-library",
+    "nome": "Biblioteca do Ollama",
+    "categorias": [
+      "Repositório de modelos"
+    ],
+    "empresa": "Ollama",
+    "url": "https://ollama.com/library",
+    "preco": {
+      "modelo": [
+        "free",
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "cli"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Catálogo de modelos prontos para rodar localmente."
+  },
+  {
+    "id": "modelscope",
+    "nome": "ModelScope",
+    "categorias": [
+      "Repositório de modelos"
+    ],
+    "empresa": "Alibaba",
+    "url": "https://modelscope.cn",
+    "preco": {
+      "modelo": [
+        "free",
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Hub de modelos da comunidade chinesa."
+  },
+  {
+    "id": "kaggle-models",
+    "nome": "Kaggle Models",
+    "categorias": [
+      "Repositório de modelos"
+    ],
+    "empresa": "Google",
+    "url": "https://www.kaggle.com/models",
+    "preco": {
+      "modelo": [
+        "free",
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Catálogo de modelos com notebooks para testar."
+  },
+  {
+    "id": "replicate",
+    "nome": "Replicate",
+    "categorias": [
+      "Repositório de modelos"
+    ],
+    "empresa": "Replicate",
+    "url": "https://replicate.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "api",
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Executa modelos abertos por API, cobrando por uso."
+  },
+  {
+    "id": "openrouter",
+    "nome": "OpenRouter",
+    "categorias": [
+      "Repositório de modelos"
+    ],
+    "empresa": "OpenRouter",
+    "url": "https://openrouter.ai",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "api",
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Uma API para centenas de modelos de vários provedores."
+  },
+  {
+    "id": "aws-bedrock",
+    "nome": "Amazon Bedrock",
+    "categorias": [
+      "Repositório de modelos"
+    ],
+    "empresa": "Amazon Web Services",
+    "url": "https://aws.amazon.com/bedrock/",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "api"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Catálogo gerenciado de modelos na AWS."
+  },
+  {
+    "id": "azure-ai-foundry-catalog",
+    "nome": "Catálogo do Azure AI Foundry",
+    "categorias": [
+      "Repositório de modelos"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://ai.azure.com",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Catálogo de modelos com implantação gerenciada no Azure."
+  },
+  {
+    "id": "google-vertex-model-garden",
+    "nome": "Vertex AI Model Garden",
+    "categorias": [
+      "Repositório de modelos"
+    ],
+    "empresa": "Google",
+    "url": "https://cloud.google.com/model-garden",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "cloud",
+      "web"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Catálogo de modelos do Google e de terceiros."
+  },
+  {
+    "id": "microsoft-visio",
+    "nome": "Microsoft Visio",
+    "categorias": [
+      "Visualização com IA"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://www.microsoft.com/microsoft-365/visio/flowchart-software",
+    "preco": {
+      "modelo": [
+        "subscription"
+      ],
+      "usd": null,
+      "unidade": null,
+      "status": "nao-verificado",
+      "fonte": null,
+      "data": "2026-11-21"
+    },
+    "plataformas": [
+      "web",
+      "windows"
+    ],
+    "linguagens": [
+      "agnostica"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Diagramas corporativos integrados ao Microsoft 365."
+  }
+]

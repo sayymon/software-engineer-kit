@@ -1,0 +1,16 @@
+id: tec_definition_of_ready
+tipo: tecnica
+nome: Definition of Ready
+descricao: "Critérios mínimos para um item entrar em execução: claro, com critério de aceite, estimado, fatiado e sem bloqueio."
+quando_usar:
+  - Antes de o time puxar uma história
+quando_evitar:
+  - Investigação exploratória sem resultado definido
+exemplo: "História pronta: critério de aceite em exemplos, estimativa fechada, dependência do evento confirmada."
+como_aplicar:
+  - Combine os critérios com o time
+  - Confira cada história antes de puxar
+  - Devolva ao refinamento o que não atende
+resultado_esperado: Checklist de prontidão por história.
+status: rascunho
+publico: false

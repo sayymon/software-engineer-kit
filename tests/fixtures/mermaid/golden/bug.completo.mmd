@@ -1,0 +1,348 @@
+flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"])
+  end
+  subgraph z_SG_bug_orq["<b>Orquestração do bug</b>"]
+    direction LR
+    bug_orq_s0(["<small><b>bug_orq_s0</b></small><br/>Bug reportado"])
+    bug_orq_c1[["<small><b>bug_orq_c1</b></small><br/>Reproduzir o problema"]]
+    bug_orq_c2[["<small><b>bug_orq_c2</b></small><br/>Triar e classificar o bug"]]
+    bug_orq_e1(["<small><b>bug_orq_e1</b></small><br/>Fechado sem reprodução (reabrir se reaparecer)<br/><i>retorno: fechado_sem_reproducao</i>"])
+    bug_orq_c3[["<small><b>bug_orq_c3</b></small><br/>Corrigir a causa raiz"]]
+    bug_orq_e2(["<small><b>bug_orq_e2</b></small><br/>Esclarecido como comportamento esperado<br/><i>retorno: esclarecido</i>"])
+    bug_orq_e3(["<small><b>bug_orq_e3</b></small><br/>Encaminhado ao fluxo de feature<br/><i>retorno: encaminhado</i>"])
+    bug_orq_g1{"<small><b>bug_orq_g1</b></small><br/>É hotfix?"}
+    bug_orq_c4[["<small><b>bug_orq_c4</b></small><br/>Publicar a correção em ambiente de testes"]]
+    bug_orq_c7[["<small><b>bug_orq_c7</b></small><br/>Validar, entregar e verificar em produção"]]
+    bug_orq_c5[["<small><b>bug_orq_c5</b></small><br/>Testes regressivos do bug e das funcionalidades core"]]
+    bug_orq_c8[["<small><b>bug_orq_c8</b></small><br/>Analisar o escape e registrar a prevenção"]]
+    bug_orq_c6[["<small><b>bug_orq_c6</b></small><br/>Regressão das jornadas afetadas e das jornadas core"]]
+    bug_orq_e4(["<small><b>bug_orq_e4</b></small><br/>Bug corrigido, verificado e fechado<br/><i>retorno: corrigido_e_fechado</i>"])
+  end
+  subgraph z_SG_bug_rep["<b>Reprodução</b>"]
+    direction LR
+    bug_rep_s0(["<small><b>bug_rep_s0</b></small><br/>Bug a reproduzir"])
+    bug_rep_t1["<small><b>bug_rep_t1</b></small><br/>Reproduzir o problema<br/><i>▸ 5 subtarefas</i>"]
+    bug_rep_g1{"<small><b>bug_rep_g1</b></small><br/>Reproduziu?"}
+    bug_rep_e1(["<small><b>bug_rep_e1</b></small><br/>Reproduzido<br/><i>retorno: reproduzido</i>"])
+    bug_rep_t2["<small><b>bug_rep_t2</b></small><br/>Coletar evidências e tentar de novo<br/><i>▸ 3 subtarefas</i>"]
+    bug_rep_g2{"<small><b>bug_rep_g2</b></small><br/>Reproduz com as<br/>novas evidências?"}
+    bug_rep_e2(["<small><b>bug_rep_e2</b></small><br/>Não reproduzido<br/><i>retorno: nao_reproduzido</i>"])
+  end
+  subgraph z_SG_bug_tri["<b>Triagem e classificação</b>"]
+    direction LR
+    bug_tri_s0(["<small><b>bug_tri_s0</b></small><br/>Bug reproduzido, triar"])
+    bug_tri_g1{"<small><b>bug_tri_g1</b></small><br/>Defeito,<br/>comportamento<br/>esperado ou feature?"}
+    bug_tri_g2{"<small><b>bug_tri_g2</b></small><br/>É um potencial<br/>incidente?"}
+    bug_tri_t1["<small><b>bug_tri_t1</b></small><br/>Responder e documentar o comportamento esperado<br/><i>▸ 2 subtarefas</i>"]
+    bug_tri_t2["<small><b>bug_tri_t2</b></small><br/>Encaminhar como demanda de feature<br/><i>▸ 2 subtarefas</i>"]
+    bug_tri_t3["<small><b>bug_tri_t3</b></small><br/>Acionar o incidente e seguir com a correção em paralelo<br/><i>▸ 3 subtarefas</i>"]
+    bug_tri_t4["<small><b>bug_tri_t4</b></small><br/>Avaliar severidade e prioridade<br/><i>▸ 3 subtarefas</i>"]
+    bug_tri_e3(["<small><b>bug_tri_e3</b></small><br/>Comportamento esperado<br/><i>retorno: comportamento_esperado</i>"])
+    bug_tri_e4(["<small><b>bug_tri_e4</b></small><br/>Pedido de feature<br/><i>retorno: pedido_feature</i>"])
+    bug_tri_g3{"<small><b>bug_tri_g3</b></small><br/>Afetado por janela<br/>crítica ou<br/>sazonalidade?"}
+    bug_tri_g4{"<small><b>bug_tri_g4</b></small><br/>A janela pede<br/>correção imediata ou<br/>adiamento?"}
+    bug_tri_g5{"<small><b>bug_tri_g5</b></small><br/>Bloqueante ou de<br/>alto impacto?"}
+    bug_tri_t5["<small><b>bug_tri_t5</b></small><br/>Aplicar paliativo e adiar a correção para depois da janela<br/><i>▸ 2 subtarefas</i>"]
+    bug_tri_t6["<small><b>bug_tri_t6</b></small><br/>Abrir hotfix com escopo mínimo<br/><i>▸ 3 subtarefas</i>"]
+    bug_tri_t7["<small><b>bug_tri_t7</b></small><br/>Priorizar no backlog com prazo<br/><i>▸ 2 subtarefas</i>"]
+    bug_tri_e1(["<small><b>bug_tri_e1</b></small><br/>Hotfix<br/><i>retorno: hotfix</i>"])
+    bug_tri_e2(["<small><b>bug_tri_e2</b></small><br/>Backlog<br/><i>retorno: backlog</i>"])
+  end
+  subgraph z_SG_bug_cor["<b>Correção</b>"]
+    direction LR
+    bug_cor_s0(["<small><b>bug_cor_s0</b></small><br/>Bug priorizado, corrigir"])
+    bug_cor_t1["<small><b>bug_cor_t1</b></small><br/>Isolar a causa raiz<br/><i>▸ 4 subtarefas</i>"]
+    bug_cor_t2["<small><b>bug_cor_t2</b></small><br/>Corrigir com teste de regressão<br/><i>▸ 5 subtarefas</i>"]
+    bug_cor_e1(["<small><b>bug_cor_e1</b></small><br/>Correção pronta com teste de regressão<br/><i>retorno: correcao_pronta</i>"])
+  end
+  subgraph z_SG_com_pub["<b>Publicação em ambiente de testes</b>"]
+    direction LR
+    com_pub_s0(["<small><b>com_pub_s0</b></small><br/>Entregas integradas, publicar para testar"])
+    com_pub_t1["<small><b>com_pub_t1</b></small><br/>Versionar conforme a estratégia do time<br/><i>▸ 2 subtarefas</i>"]
+    com_pub_t2["<small><b>com_pub_t2</b></small><br/>Implantar no ambiente de testes<br/><i>▸ 2 subtarefas</i>"]
+    com_pub_g1{"<small><b>com_pub_g1</b></small><br/>O ambiente subiu<br/>saudável?"}
+    com_pub_e1(["<small><b>com_pub_e1</b></small><br/>Publicada no ambiente de testes<br/><i>retorno: publicado</i>"])
+    com_pub_e2(["<small><b>com_pub_e2</b></small><br/>Falha na publicação<br/><i>retorno: falha_na_publicacao</i>"])
+  end
+  subgraph z_SG_bug_ent["<b>Validação e entrega</b>"]
+    direction LR
+    bug_ent_s0(["<small><b>bug_ent_s0</b></small><br/>Correção pronta, validar"])
+    bug_ent_c1[["<small><b>bug_ent_c1</b></small><br/>Review humano da correção"]]
+    bug_ent_e2(["<small><b>bug_ent_e2</b></small><br/>Volta para a correção<br/><i>retorno: nao_corrigido</i>"])
+    bug_ent_g1{"<small><b>bug_ent_g1</b></small><br/>Existe QA dedicado<br/>no time?"}
+    bug_ent_t2["<small><b>bug_ent_t2</b></small><br/>QA valida a correção e explora cenários vizinhos<br/><i>▸ 2 subtarefas</i>"]
+    bug_ent_t3["<small><b>bug_ent_t3</b></small><br/>Validação por par: autor demonstra a correção<br/><i>▸ 2 subtarefas</i>"]
+    bug_ent_c2[["<small><b>bug_ent_c2</b></small><br/>Implantar a correção"]]
+    bug_ent_t5["<small><b>bug_ent_t5</b></small><br/>Verificar em produção que o defeito não acontece mais<br/><i>▸ 2 subtarefas</i>"]
+    bug_ent_g2{"<small><b>bug_ent_g2</b></small><br/>Corrigido em<br/>produção?"}
+    bug_ent_c3[["<small><b>bug_ent_c3</b></small><br/>Monitorar que nada degradou"]]
+    bug_ent_t6["<small><b>bug_ent_t6</b></small><br/>Fechar o bug e avisar quem reportou<br/><i>▸ 2 subtarefas</i>"]
+    bug_ent_e1(["<small><b>bug_ent_e1</b></small><br/>Corrigido e fechado<br/><i>retorno: verificado</i>"])
+  end
+  subgraph z_SG_com_val["<b>Testes automatizados e regressão</b>"]
+    direction LR
+    com_val_s0(["<small><b>com_val_s0</b></small><br/>Execução integrada, testar a feature"])
+    com_val_t1["<small><b>com_val_t1</b></small><br/>Revisar e aprimorar os testes (TDD e pirâmide)<br/><i>▸ 5 subtarefas</i>"]
+    com_val_t2["<small><b>com_val_t2</b></small><br/>Executar os testes da feature<br/><i>▸ 2 subtarefas</i>"]
+    com_val_g1{"<small><b>com_val_g1</b></small><br/>Os testes passaram?"}
+    com_val_e1(["<small><b>com_val_e1</b></small><br/>Testes da feature aprovados<br/><i>retorno: testes_aprovados</i>"])
+    com_val_e2(["<small><b>com_val_e2</b></small><br/>Testes reprovados depois de 3 tentativas<br/><i>retorno: testes_reprovados</i>"])
+    com_val_t3["<small><b>com_val_t3</b></small><br/>Corrigir e reforçar o teste que falhou<br/><i>▸ 2 subtarefas</i>"]
+  end
+  subgraph z_SG_bug_pre["<b>Prevenção</b>"]
+    direction LR
+    bug_pre_s0(["<small><b>bug_pre_s0</b></small><br/>Bug fechado, analisar o escape"])
+    bug_pre_t1["<small><b>bug_pre_t1</b></small><br/>Analisar por onde o defeito escapou<br/><i>▸ 2 subtarefas</i>"]
+    bug_pre_g1{"<small><b>bug_pre_g1</b></small><br/>Análise de escape:<br/>por que este bug<br/>chegou à produção?"}
+    bug_pre_t2["<small><b>bug_pre_t2</b></small><br/>Criar teste de regressão ou de contrato para a lacuna<br/><i>▸ 1 subtarefa</i>"]
+    bug_pre_t3["<small><b>bug_pre_t3</b></small><br/>Refinar o requisito e os critérios de aceitação<br/><i>▸ 1 subtarefa</i>"]
+    bug_pre_t4["<small><b>bug_pre_t4</b></small><br/>Atualizar checklist de revisão ou regra de análise estática<br/><i>▸ 1 subtarefa</i>"]
+    bug_pre_t5["<small><b>bug_pre_t5</b></small><br/>Criar alerta e SLO para detectar o problema mais cedo<br/><i>▸ 1 subtarefa</i>"]
+    bug_pre_t6["<small><b>bug_pre_t6</b></small><br/>Proteger a mudança com flag, canary ou rollout gradual<br/><i>▸ 1 subtarefa</i>"]
+    bug_pre_t7["<small><b>bug_pre_t7</b></small><br/>Registrar ação preventiva e acompanhar<br/><i>▸ 2 subtarefas</i>"]
+    bug_pre_e1(["<small><b>bug_pre_e1</b></small><br/>Ação preventiva registrada<br/><i>retorno: acao_registrada</i>"])
+  end
+  subgraph z_SG_com_e2e["<b>Testes de ponta a ponta (E2E)</b>"]
+    direction LR
+    com_e2e_s0(["<small><b>com_e2e_s0</b></small><br/>Entrega pronta, automatizar as jornadas críticas afetadas"])
+    com_e2e_g1{"<small><b>com_e2e_g1</b></small><br/>A entrega afeta uma<br/>jornada de usuário?"}
+    com_e2e_e3(["<small><b>com_e2e_e3</b></small><br/>Sem jornada de usuário afetada<br/><i>retorno: nao_aplicavel</i>"])
+    com_e2e_t1["<small><b>com_e2e_t1</b></small><br/>Automatizar as jornadas críticas afetadas<br/><i>▸ 4 subtarefas</i>"]
+    com_e2e_t2["<small><b>com_e2e_t2</b></small><br/>Executar os testes E2E em ambiente integrado<br/><i>▸ 2 subtarefas</i>"]
+    com_e2e_g2{"<small><b>com_e2e_g2</b></small><br/>As jornadas<br/>passaram?"}
+    com_e2e_e1(["<small><b>com_e2e_e1</b></small><br/>Jornadas críticas aprovadas<br/><i>retorno: aprovado</i>"])
+    com_e2e_e2(["<small><b>com_e2e_e2</b></small><br/>Jornada crítica reprovada<br/><i>retorno: reprovado</i>"])
+  end
+  subgraph z_SG_com_rev["<b>Review humano</b>"]
+    direction LR
+    com_rev_s0(["<small><b>com_rev_s0</b></small><br/>Testes aprovados, revisar a entrega"])
+    com_rev_t1["<small><b>com_rev_t1</b></small><br/>Review humano: arquitetura, edge cases, segurança<br/><i>▸ 3 subtarefas</i>"]
+    com_rev_g1{"<small><b>com_rev_g1</b></small><br/>Aprovada no review?"}
+    com_rev_e1(["<small><b>com_rev_e1</b></small><br/>Entrega aprovada pelo humano<br/><i>retorno: aprovado_pelo_humano</i>"])
+    com_rev_e2(["<small><b>com_rev_e2</b></small><br/>Ajustes solicitados no review<br/><i>retorno: ajustes_solicitados</i>"])
+  end
+  subgraph z_SG_com_etg["<b>Implantação</b>"]
+    direction LR
+    com_etg_s0(["<small><b>com_etg_s0</b></small><br/>Testes integrados aprovados, implantar"])
+    com_etg_g1{"<small><b>com_etg_g1</b></small><br/>Afetado por janela<br/>crítica ou<br/>sazonalidade?"}
+    com_etg_t1["<small><b>com_etg_t1</b></small><br/>Janela crítica: ajustar a entrega"]
+    com_etg_t2["<small><b>com_etg_t2</b></small><br/>Implantar em produção<br/><i>▸ 2 subtarefas</i>"]
+    com_etg_t3["<small><b>com_etg_t3</b></small><br/>Conferir a implantação pelo checklist<br/><i>▸ 4 subtarefas</i>"]
+    com_etg_g2{"<small><b>com_etg_g2</b></small><br/>A implantação está<br/>saudável?"}
+    com_etg_e1(["<small><b>com_etg_e1</b></small><br/>Implantada e saudável em produção<br/><i>retorno: implantado</i>"])
+    com_etg_t4["<small><b>com_etg_t4</b></small><br/>Reverter ou desligar a feature<br/><i>▸ 2 subtarefas</i>"]
+    com_etg_e2(["<small><b>com_etg_e2</b></small><br/>Implantação revertida<br/><i>retorno: implantacao_revertida</i>"])
+  end
+  subgraph z_SG_com_mon["<b>Validação em produção e monitoramento</b>"]
+    direction LR
+    com_mon_s0(["<small><b>com_mon_s0</b></small><br/>Liberada, validar em produção"])
+    com_mon_t1["<small><b>com_mon_t1</b></small><br/>Monitorar indicadores técnicos e de negócio<br/><i>▸ 3 subtarefas</i>"]
+    com_mon_g1{"<small><b>com_mon_g1</b></small><br/>A entrega causou<br/>incidente ou<br/>degradação?"}
+    com_mon_g2{"<small><b>com_mon_g2</b></small><br/>A janela de<br/>validação terminou?"}
+    com_mon_t2["<small><b>com_mon_t2</b></small><br/>Acionar o fluxo de incidente<br/><i>▸ 2 subtarefas</i>"]
+    com_mon_t3["<small><b>com_mon_t3</b></small><br/>Registrar o resultado e encerrar a validação<br/><i>▸ 2 subtarefas</i>"]
+    com_mon_e2(["<small><b>com_mon_e2</b></small><br/>Incidente acionado pela feature<br/><i>retorno: incidente_acionado</i>"])
+    com_mon_e1(["<small><b>com_mon_e1</b></small><br/>Feature validada em produção<br/><i>retorno: feature_validada</i>"])
+  end
+  bug_orq_s0 --> bug_orq_c1
+  bug_orq_g1 -->|"sim: hotfix segue direto para a validação e entrega"| bug_orq_c7
+  bug_orq_g1 -->|"não: publicar e rodar a regressão"| bug_orq_c4
+  bug_rep_s0 --> bug_rep_t1
+  bug_rep_t1 --> bug_rep_g1
+  bug_rep_g1 -->|"sim"| bug_rep_e1
+  bug_rep_g1 -->|"não"| bug_rep_t2
+  bug_rep_t2 --> bug_rep_g2
+  bug_rep_g2 -->|"sim"| bug_rep_e1
+  bug_rep_g2 -->|"não"| bug_rep_e2
+  bug_tri_s0 --> bug_tri_g1
+  bug_tri_g1 -->|"defeito: o sistema contraria o requisito"| bug_tri_g2
+  bug_tri_g1 -->|"comportamento esperado conforme o requisito"| bug_tri_t1
+  bug_tri_g1 -->|"pedido de feature: o requisito não existia"| bug_tri_t2
+  bug_tri_g2 -->|"sim, pelo menos um critério atendido"| bug_tri_t3
+  bug_tri_g2 -->|"não, nenhum critério atendido"| bug_tri_t4
+  bug_tri_t1 --> bug_tri_e3
+  bug_tri_t2 --> bug_tri_e4
+  bug_tri_t3 --> bug_tri_t4
+  bug_tri_t4 --> bug_tri_g3
+  bug_tri_g3 -->|"sim, há janela crítica ativa"| bug_tri_g4
+  bug_tri_g3 -->|"não, sem janela crítica"| bug_tri_g5
+  bug_tri_g4 -->|"correção imediata (hotfix)"| bug_tri_t6
+  bug_tri_g4 -->|"adiar com mitigação paliativa"| bug_tri_t5
+  bug_tri_g4 -->|"a janela não altera a decisão"| bug_tri_g5
+  bug_tri_g5 -->|"sim: tratar como hotfix"| bug_tri_t6
+  bug_tri_g5 -->|"não: priorizar no backlog"| bug_tri_t7
+  bug_tri_t5 --> bug_tri_t7
+  bug_tri_t6 --> bug_tri_e1
+  bug_tri_t7 --> bug_tri_e2
+  bug_cor_s0 --> bug_cor_t1
+  bug_cor_t1 --> bug_cor_t2
+  bug_cor_t2 --> bug_cor_e1
+  com_pub_s0 --> com_pub_t1
+  com_pub_t1 --> com_pub_t2
+  com_pub_t2 --> com_pub_g1
+  com_pub_g1 -->|"sim"| com_pub_e1
+  com_pub_g1 -->|"não"| com_pub_e2
+  bug_ent_s0 --> bug_ent_c1
+  bug_ent_g1 -->|"sim, com QA dedicado"| bug_ent_t2
+  bug_ent_g1 -->|"não, sem QA dedicado"| bug_ent_t3
+  bug_ent_t2 --> bug_ent_c2
+  bug_ent_t3 --> bug_ent_c2
+  bug_ent_t5 --> bug_ent_g2
+  bug_ent_g2 -->|"sim"| bug_ent_c3
+  bug_ent_g2 -->|"não, reabrir o isolamento da causa"| bug_ent_e2
+  bug_ent_t6 --> bug_ent_e1
+  com_val_s0 --> com_val_t1
+  com_val_t1 --> com_val_t2
+  com_val_t2 --> com_val_g1
+  com_val_g1 -->|"sim"| com_val_e1
+  com_val_g1 -->|"não e tentativas #lt; 3: corrigir e reforçar"| com_val_t3
+  com_val_g1 -->|"não e tentativas #gt;= 3: reprovado"| com_val_e2
+  com_val_t3 --> com_val_t2
+  bug_pre_s0 --> bug_pre_t1
+  bug_pre_t1 --> bug_pre_g1
+  bug_pre_g1 -->|"faltou teste"| bug_pre_t2
+  bug_pre_g1 -->|"requisito ambíguo"| bug_pre_t3
+  bug_pre_g1 -->|"a revisão não pegou"| bug_pre_t4
+  bug_pre_g1 -->|"sem observabilidade ou alerta"| bug_pre_t5
+  bug_pre_g1 -->|"mudança sem proteção"| bug_pre_t6
+  bug_pre_t2 --> bug_pre_t7
+  bug_pre_t3 --> bug_pre_t7
+  bug_pre_t4 --> bug_pre_t7
+  bug_pre_t5 --> bug_pre_t7
+  bug_pre_t6 --> bug_pre_t7
+  bug_pre_t7 --> bug_pre_e1
+  com_e2e_s0 --> com_e2e_g1
+  com_e2e_g1 -->|"sim"| com_e2e_t1
+  com_e2e_g1 -->|"não"| com_e2e_e3
+  com_e2e_t1 --> com_e2e_t2
+  com_e2e_t2 --> com_e2e_g2
+  com_e2e_g2 -->|"sim"| com_e2e_e1
+  com_e2e_g2 -->|"não"| com_e2e_e2
+  com_rev_s0 --> com_rev_t1
+  com_rev_t1 --> com_rev_g1
+  com_rev_g1 -->|"sim"| com_rev_e1
+  com_rev_g1 -->|"não, com ajustes"| com_rev_e2
+  com_etg_s0 --> com_etg_g1
+  com_etg_g1 -->|"sim, há janela crítica ativa"| com_etg_t1
+  com_etg_g1 -->|"não, sem janela crítica"| com_etg_t2
+  com_etg_t1 --> com_etg_t2
+  com_etg_t2 --> com_etg_t3
+  com_etg_t3 --> com_etg_g2
+  com_etg_g2 -->|"sim"| com_etg_e1
+  com_etg_g2 -->|"não"| com_etg_t4
+  com_etg_t4 --> com_etg_e2
+  com_mon_s0 --> com_mon_t1
+  com_mon_t1 --> com_mon_g1
+  com_mon_g1 -->|"sim"| com_mon_t2
+  com_mon_g1 -->|"não"| com_mon_g2
+  com_mon_g2 -->|"sim, com as metas avaliadas"| com_mon_t3
+  com_mon_g2 -->|"não, continuar observando"| com_mon_t1
+  com_mon_t2 --> com_mon_e2
+  com_mon_t3 --> com_mon_e1
+  bug_orq_c1 -.->|"chama"| bug_rep_s0
+  bug_rep_e1 -.->|"retorno: reproduzido"| bug_orq_c2
+  bug_rep_e2 -.->|"retorno: nao_reproduzido"| bug_orq_e1
+  bug_orq_c2 -.->|"chama"| bug_tri_s0
+  bug_tri_e3 -.->|"retorno: comportamento_esperado"| bug_orq_e2
+  bug_tri_e4 -.->|"retorno: pedido_feature"| bug_orq_e3
+  bug_tri_e1 -.->|"retorno: hotfix"| bug_orq_c3
+  bug_tri_e2 -.->|"retorno: backlog"| bug_orq_c3
+  bug_orq_c3 -.->|"chama"| bug_cor_s0
+  bug_cor_e1 -.->|"retorno: correcao_pronta"| bug_orq_g1
+  bug_orq_c4 -.->|"chama"| com_pub_s0
+  com_pub_e1 -.->|"retorno: publicado"| bug_orq_c5
+  com_pub_e2 -.->|"retorno: falha_na_publicacao"| bug_orq_c3
+  bug_orq_c7 -.->|"chama"| bug_ent_s0
+  bug_ent_e2 -.->|"retorno: nao_corrigido"| bug_orq_c3
+  bug_ent_e1 -.->|"retorno: verificado"| bug_orq_c8
+  bug_orq_c5 -.->|"chama"| com_val_s0
+  com_val_e1 -.->|"retorno: testes_aprovados"| bug_orq_c6
+  com_val_e2 -.->|"retorno: testes_reprovados"| bug_orq_c3
+  bug_orq_c8 -.->|"chama"| bug_pre_s0
+  bug_pre_e1 -.->|"retorno: acao_registrada"| bug_orq_e4
+  bug_orq_c6 -.->|"chama"| com_e2e_s0
+  com_e2e_e3 -.->|"retorno: nao_aplicavel"| bug_orq_c7
+  com_e2e_e1 -.->|"retorno: aprovado"| bug_orq_c7
+  com_e2e_e2 -.->|"retorno: reprovado"| bug_orq_c3
+  bug_ent_c1 -.->|"chama"| com_rev_s0
+  com_rev_e1 -.->|"retorno: aprovado_pelo_humano"| bug_ent_g1
+  com_rev_e2 -.->|"retorno: ajustes_solicitados"| bug_ent_e2
+  bug_ent_c2 -.->|"chama"| com_etg_s0
+  com_etg_e1 -.->|"retorno: implantado"| bug_ent_t5
+  com_etg_e2 -.->|"retorno: implantacao_revertida"| bug_ent_e2
+  bug_ent_c3 -.->|"chama"| com_mon_s0
+  com_mon_e2 -.->|"retorno: incidente_acionado"| bug_ent_e2
+  com_mon_e1 -.->|"retorno: feature_validada"| bug_ent_t6
+  z_LIG_bug_tri_t3_0{{"<b>Bug vira potencial incidente</b><br/>demanda: Incidente<br/>nó: inc_orq_s0"}}
+  z_LIG_com_mon_t2_0{{"<b>Feature em produção causa incidente</b><br/>demanda: Incidente<br/>nó: inc_orq_s0"}}
+  bug_tri_t3 -.->|"aciona"| z_LIG_bug_tri_t3_0
+  com_mon_t2 -.->|"aciona"| z_LIG_com_mon_t2_0
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#0072B2,stroke:#00446B,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#E69F00,stroke:#8A5F00,stroke-width:1px,color:#000000
+  classDef z_R_3 fill:#009E73,stroke:#005F45,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#BBCC33,stroke:#707A1F,stroke-width:1px,color:#000000
+  classDef z_R_5 fill:#117733,stroke:#0A471F,stroke-width:1px,color:#FFFFFF
+  classDef z_R_6 fill:#D55E00,stroke:#803800,stroke-width:1px,color:#000000
+  classDef z_R_7 fill:#CC79A7,stroke:#7A4964,stroke-width:1px,color:#000000
+  classDef z_R_8 fill:#F0E442,stroke:#908928,stroke-width:1px,color:#000000
+  classDef z_R_9 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_R_10 fill:#999933,stroke:#5C5C1F,stroke-width:1px,color:#000000
+  classDef z_R_11 fill:#77AADD,stroke:#476685,stroke-width:1px,color:#000000
+  classDef z_C_0_1 fill:#0072B2,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_2 fill:#E69F00,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_3 fill:#009E73,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_4 fill:#BBCC33,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_5 fill:#117733,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_6 fill:#D55E00,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_7 fill:#CC79A7,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_8 fill:#F0E442,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_5_9 fill:#56B4E9,stroke:#117733,stroke-width:4px,color:#000000
+  classDef z_C_5_10 fill:#999933,stroke:#117733,stroke-width:4px,color:#000000
+  classDef z_C_5_11 fill:#77AADD,stroke:#117733,stroke-width:4px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
+  class bug_orq_c1 z_C_0_1
+  class bug_orq_c2 z_C_0_2
+  class bug_orq_c3 z_C_0_3
+  class bug_orq_c4 z_C_0_4
+  class bug_orq_c7 z_C_0_5
+  class bug_orq_c5 z_C_0_6
+  class bug_orq_c8 z_C_0_7
+  class bug_orq_c6 z_C_0_8
+  class bug_ent_c1 z_C_5_9
+  class bug_ent_c2 z_C_5_10
+  class bug_ent_c3 z_C_5_11
+  class bug_orq_s0,bug_orq_e1,bug_orq_e2,bug_orq_e3,bug_orq_g1,bug_orq_e4 z_R_0
+  class bug_rep_s0,bug_rep_t1,bug_rep_g1,bug_rep_e1,bug_rep_t2,bug_rep_g2,bug_rep_e2 z_R_1
+  class bug_tri_s0,bug_tri_g1,bug_tri_g2,bug_tri_t1,bug_tri_t2,bug_tri_t3,bug_tri_t4,bug_tri_e3,bug_tri_e4,bug_tri_g3,bug_tri_g4,bug_tri_g5,bug_tri_t5,bug_tri_t6,bug_tri_t7,bug_tri_e1,bug_tri_e2 z_R_2
+  class bug_cor_s0,bug_cor_t1,bug_cor_t2,bug_cor_e1 z_R_3
+  class com_pub_s0,com_pub_t1,com_pub_t2,com_pub_g1,com_pub_e1,com_pub_e2 z_R_4
+  class bug_ent_s0,bug_ent_e2,bug_ent_g1,bug_ent_t2,bug_ent_t3,bug_ent_t5,bug_ent_g2,bug_ent_t6,bug_ent_e1 z_R_5
+  class com_val_s0,com_val_t1,com_val_t2,com_val_g1,com_val_e1,com_val_e2,com_val_t3 z_R_6
+  class bug_pre_s0,bug_pre_t1,bug_pre_g1,bug_pre_t2,bug_pre_t3,bug_pre_t4,bug_pre_t5,bug_pre_t6,bug_pre_t7,bug_pre_e1 z_R_7
+  class com_e2e_s0,com_e2e_g1,com_e2e_e3,com_e2e_t1,com_e2e_t2,com_e2e_g2,com_e2e_e1,com_e2e_e2 z_R_8
+  class com_rev_s0,com_rev_t1,com_rev_g1,com_rev_e1,com_rev_e2 z_R_9
+  class com_etg_s0,com_etg_g1,com_etg_t1,com_etg_t2,com_etg_t3,com_etg_g2,com_etg_e1,com_etg_t4,com_etg_e2 z_R_10
+  class com_mon_s0,com_mon_t1,com_mon_g1,com_mon_g2,com_mon_t2,com_mon_t3,com_mon_e2,com_mon_e1 z_R_11
+  class bug_orq_g1,bug_rep_g1,bug_rep_g2,bug_tri_g1,bug_tri_g2,bug_tri_g3,bug_tri_g4,bug_tri_g5,com_pub_g1,bug_ent_g1,bug_ent_g2,com_val_g1,bug_pre_g1,com_e2e_g1,com_e2e_g2,com_rev_g1,com_etg_g1,com_etg_g2,com_mon_g1,com_mon_g2 gw
+  class z_LIG_bug_tri_t3_0,z_LIG_com_mon_t2_0 ponte
+  style z_SG_bug_orq fill:#E7ECEE,stroke:#607D8B,stroke-width:3px,color:#000000
+  style z_SG_bug_rep fill:#D9EAF3,stroke:#0072B2,stroke-width:3px,color:#000000
+  style z_SG_bug_tri fill:#FBF1D9,stroke:#E69F00,stroke-width:3px,color:#000000
+  style z_SG_bug_cor fill:#D9F0EA,stroke:#009E73,stroke-width:3px,color:#000000
+  style z_SG_com_pub fill:#F5F7E0,stroke:#BBCC33,stroke-width:3px,color:#000000
+  style z_SG_bug_ent fill:#DBEBE0,stroke:#117733,stroke-width:3px,color:#000000
+  style z_SG_com_val fill:#F9E7D9,stroke:#D55E00,stroke-width:3px,color:#000000
+  style z_SG_bug_pre fill:#F7EBF2,stroke:#CC79A7,stroke-width:3px,color:#000000
+  style z_SG_com_e2e fill:#FDFBE3,stroke:#F0E442,stroke-width:3px,color:#000000
+  style z_SG_com_rev fill:#E6F4FC,stroke:#56B4E9,stroke-width:3px,color:#000000
+  style z_SG_com_etg fill:#F0F0E0,stroke:#999933,stroke-width:3px,color:#000000
+  style z_SG_com_mon fill:#EBF2FA,stroke:#77AADD,stroke-width:3px,color:#000000

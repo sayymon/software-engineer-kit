@@ -1,0 +1,36 @@
+---
+// SPDX-License-Identifier: MIT
+// Root page: picks a locale from the browser language and redirects.
+import { makeT } from '../i18n';
+import { buildLocales, siteBase } from '../kit';
+import '../styles/tokens.css';
+import '../styles/global.css';
+const base = siteBase();
+const locales = buildLocales();
+const fallbackLocale = locales.includes('pt-BR') ? 'pt-BR' : locales[0];
+const t = makeT(fallbackLocale);
+---
+<!doctype html>
+<html lang={fallbackLocale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{t('site.title')}</title>
+    <script is:inline define:vars={{ base, locales, fallbackLocale }}>
+      (function () {
+        var lang = (navigator.language || '').toLowerCase();
+        var pick = lang.indexOf('pt') === 0 ? 'pt-BR' : 'en';
+        if (locales.indexOf(pick) < 0) pick = fallbackLocale;
+        location.replace(base + '/' + pick + '/');
+      })();
+    </script>
+  </head>
+  <body data-pagefind-ignore>
+    <main>
+      <h1>{t('site.title')}</h1>
+      <ul>
+        {locales.map((l) => <li><a href={`${base}/${l}/`} lang={l}>{l === 'pt-BR' ? 'Português (Brasil)' : 'English'}</a></li>)}
+      </ul>
+    </main>
+  </body>
+</html>

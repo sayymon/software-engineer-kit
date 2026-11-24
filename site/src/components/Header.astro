@@ -1,0 +1,35 @@
+---
+// SPDX-License-Identifier: MIT
+import { LAYER_PAGES } from '../render/routes';
+import type { T } from '../i18n';
+interface Props { locale: 'pt-BR' | 'en'; base: string; slug: string; t: T }
+const { locale, base, slug, t } = Astro.props;
+const other = locale === 'pt-BR' ? 'en' : 'pt-BR';
+const home = `${base}/${locale}/`;
+const current = slug.split('/')[0];
+const here = (l: string) => `${base}/${l}/${slug ? `${slug}/` : ''}`;
+---
+<a class="skip-link" href="#main">{t('a11y.skip')}</a>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href={home}>{t('site.title')}</a>
+    <nav class="site-nav" aria-label={t('nav.label')}>
+      <ul>
+        {LAYER_PAGES.map((l) => (
+          <li><a href={`${home}${l}/`} aria-current={current === l ? 'page' : undefined}>{t(`layer.${l}`)}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <div class="header-tools">
+      <form class="search-box" role="search" action={`${home}search/`} method="get">
+        <label class="sr-only" for="header-q">{t('search.label')}</label>
+        <input id="header-q" type="search" name="q" placeholder={t('search.placeholder')} autocomplete="off" />
+        <button type="submit">{t('search.button')}</button>
+      </form>
+      <nav class="lang-switch" aria-label={t('lang.label')}>
+        <a href={here(locale)} lang={locale} hreflang={locale} aria-current="true">{locale === 'pt-BR' ? 'PT' : 'EN'}</a>
+        <a href={here(other)} lang={other} hreflang={other} aria-label={t(`lang.switchTo.${other}`)}>{other === 'pt-BR' ? 'PT' : 'EN'}</a>
+      </nav>
+    </div>
+  </div>
+</header>

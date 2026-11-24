@@ -1,0 +1,464 @@
+{
+ "id": "criar_api",
+ "nome": "Como criar uma API",
+ "sigla": "api",
+ "raias": [
+  {
+   "id": "api_orq",
+   "nome": "Orquestração da API",
+   "responsabilidade": "Encadear contexto, abordagem, stack e entrega até o desfecho.",
+   "cor": "#607D8B",
+   "orquestradora": true
+  },
+  {
+   "id": "api_ctx",
+   "nome": "Contexto e contrato",
+   "responsabilidade": "Entender os consumidores e fixar o contrato antes de escolher tecnologia.",
+   "cor": "#0072B2",
+   "orquestradora": false
+  },
+  {
+   "id": "api_abd",
+   "nome": "Abordagem de entrega",
+   "responsabilidade": "Decidir entre assinar, comprar ou construir a partir das premissas.",
+   "cor": "#E69F00",
+   "orquestradora": false
+  },
+  {
+   "id": "api_stk",
+   "nome": "Stack por contexto",
+   "responsabilidade": "Escolher o arquétipo de stack quando a abordagem é construir.",
+   "cor": "#009E73",
+   "orquestradora": false
+  },
+  {
+   "id": "api_ent",
+   "nome": "Implementação e entrega",
+   "responsabilidade": "Implementar, validar, publicar e operar a API na abordagem escolhida.",
+   "cor": "#56B4E9",
+   "orquestradora": false
+  }
+ ],
+ "nos": [
+  {
+   "id": "api_orq_s0",
+   "raia": "api_orq",
+   "tipo": "inicio",
+   "rotulo": "Necessidade de expor capacidades por uma API",
+   "proximo": [
+    {
+     "para": "api_orq_c1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "api_orq_c1",
+   "raia": "api_orq",
+   "tipo": "chamada",
+   "rotulo": "Definir consumidores e contrato",
+   "proximo": [
+    {
+     "para": "api_orq_c2",
+     "condicao": "contrato_definido"
+    }
+   ],
+   "raia_chamada": "api_ctx"
+  },
+  {
+   "id": "api_orq_c2",
+   "raia": "api_orq",
+   "tipo": "chamada",
+   "rotulo": "Escolher a abordagem de entrega",
+   "proximo": [
+    {
+     "para": "api_orq_c7",
+     "condicao": "assinar_baas"
+    },
+    {
+     "para": "api_orq_c8",
+     "condicao": "comprar_gateway"
+    },
+    {
+     "para": "api_orq_c3",
+     "condicao": "construir"
+    }
+   ],
+   "raia_chamada": "api_abd"
+  },
+  {
+   "id": "api_orq_c3",
+   "raia": "api_orq",
+   "tipo": "chamada",
+   "rotulo": "Escolher a stack por contexto",
+   "proximo": [
+    {
+     "para": "api_orq_c4",
+     "condicao": "serverless_edge"
+    },
+    {
+     "para": "api_orq_c5",
+     "condicao": "transacional_eventos"
+    },
+    {
+     "para": "api_orq_c6",
+     "condicao": "monolito_relacional"
+    }
+   ],
+   "raia_chamada": "api_stk"
+  },
+  {
+   "id": "api_orq_c4",
+   "raia": "api_orq",
+   "tipo": "chamada",
+   "rotulo": "Implementar e entregar a API",
+   "proximo": [
+    {
+     "para": "api_orq_e1",
+     "condicao": "pronta"
+    }
+   ],
+   "raia_chamada": "api_ent"
+  },
+  {
+   "id": "api_orq_c5",
+   "raia": "api_orq",
+   "tipo": "chamada",
+   "rotulo": "Implementar e entregar a API",
+   "proximo": [
+    {
+     "para": "api_orq_e2",
+     "condicao": "pronta"
+    }
+   ],
+   "raia_chamada": "api_ent"
+  },
+  {
+   "id": "api_orq_c6",
+   "raia": "api_orq",
+   "tipo": "chamada",
+   "rotulo": "Implementar e entregar a API",
+   "proximo": [
+    {
+     "para": "api_orq_e3",
+     "condicao": "pronta"
+    }
+   ],
+   "raia_chamada": "api_ent"
+  },
+  {
+   "id": "api_orq_c7",
+   "raia": "api_orq",
+   "tipo": "chamada",
+   "rotulo": "Implementar e entregar a API",
+   "proximo": [
+    {
+     "para": "api_orq_e4",
+     "condicao": "pronta"
+    }
+   ],
+   "raia_chamada": "api_ent"
+  },
+  {
+   "id": "api_orq_c8",
+   "raia": "api_orq",
+   "tipo": "chamada",
+   "rotulo": "Implementar e entregar a API",
+   "proximo": [
+    {
+     "para": "api_orq_e5",
+     "condicao": "pronta"
+    }
+   ],
+   "raia_chamada": "api_ent"
+  },
+  {
+   "id": "api_orq_e1",
+   "raia": "api_orq",
+   "tipo": "fim",
+   "rotulo": "API em produção sobre a stack de API serverless e edge",
+   "proximo": [],
+   "retorno": "api_serverless_edge"
+  },
+  {
+   "id": "api_orq_e2",
+   "raia": "api_orq",
+   "tipo": "fim",
+   "rotulo": "API em produção sobre a stack de API transacional com eventos",
+   "proximo": [],
+   "retorno": "api_transacional_eventos"
+  },
+  {
+   "id": "api_orq_e3",
+   "raia": "api_orq",
+   "tipo": "fim",
+   "rotulo": "API em produção sobre a stack de monolito web com banco relacional",
+   "proximo": [],
+   "retorno": "api_monolito_relacional"
+  },
+  {
+   "id": "api_orq_e4",
+   "raia": "api_orq",
+   "tipo": "fim",
+   "rotulo": "API em produção sobre um backend gerenciado assinado",
+   "proximo": [],
+   "retorno": "assinar_baas"
+  },
+  {
+   "id": "api_orq_e5",
+   "raia": "api_orq",
+   "tipo": "fim",
+   "rotulo": "API em produção atrás de um gateway comercial",
+   "proximo": [],
+   "retorno": "comprar_gateway"
+  },
+  {
+   "id": "api_ctx_s0",
+   "raia": "api_ctx",
+   "tipo": "inicio",
+   "rotulo": "Início do levantamento",
+   "proximo": [
+    {
+     "para": "api_ctx_t1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "api_ctx_t1",
+   "raia": "api_ctx",
+   "tipo": "tarefa",
+   "rotulo": "Mapear consumidores e casos de uso",
+   "proximo": [
+    {
+     "para": "api_ctx_t2",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "api_ctx_t2",
+   "raia": "api_ctx",
+   "tipo": "tarefa",
+   "rotulo": "Desenhar recursos, erros e limites",
+   "proximo": [
+    {
+     "para": "api_ctx_e1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "api_ctx_e1",
+   "raia": "api_ctx",
+   "tipo": "fim",
+   "rotulo": "Contrato acordado com os consumidores",
+   "proximo": [],
+   "retorno": "contrato_definido"
+  },
+  {
+   "id": "api_abd_s0",
+   "raia": "api_abd",
+   "tipo": "inicio",
+   "rotulo": "Início da escolha",
+   "proximo": [
+    {
+     "para": "api_abd_t1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "api_abd_t1",
+   "raia": "api_abd",
+   "tipo": "tarefa",
+   "rotulo": "Registrar premissas e pontuar as opções",
+   "proximo": [
+    {
+     "para": "api_abd_g1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "api_abd_g1",
+   "raia": "api_abd",
+   "tipo": "bifurcacao",
+   "rotulo": "Domínio simples e prazo curto?",
+   "proximo": [
+    {
+     "para": "api_abd_e1",
+     "condicao": "sim"
+    },
+    {
+     "para": "api_abd_g2",
+     "condicao": "não"
+    }
+   ]
+  },
+  {
+   "id": "api_abd_g2",
+   "raia": "api_abd",
+   "tipo": "bifurcacao",
+   "rotulo": "Governança central de várias APIs?",
+   "proximo": [
+    {
+     "para": "api_abd_e2",
+     "condicao": "sim"
+    },
+    {
+     "para": "api_abd_e3",
+     "condicao": "não"
+    }
+   ]
+  },
+  {
+   "id": "api_abd_e1",
+   "raia": "api_abd",
+   "tipo": "fim",
+   "rotulo": "Backend gerenciado cobre o domínio",
+   "proximo": [],
+   "retorno": "assinar_baas"
+  },
+  {
+   "id": "api_abd_e2",
+   "raia": "api_abd",
+   "tipo": "fim",
+   "rotulo": "Gateway comercial centraliza a governança",
+   "proximo": [],
+   "retorno": "comprar_gateway"
+  },
+  {
+   "id": "api_abd_e3",
+   "raia": "api_abd",
+   "tipo": "fim",
+   "rotulo": "Construir com stack própria",
+   "proximo": [],
+   "retorno": "construir"
+  },
+  {
+   "id": "api_stk_s0",
+   "raia": "api_stk",
+   "tipo": "inicio",
+   "rotulo": "Início da escolha da stack",
+   "proximo": [
+    {
+     "para": "api_stk_g1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "api_stk_g1",
+   "raia": "api_stk",
+   "tipo": "bifurcacao",
+   "rotulo": "Tráfego irregular ou resposta na borda?",
+   "proximo": [
+    {
+     "para": "api_stk_e1",
+     "condicao": "sim"
+    },
+    {
+     "para": "api_stk_g2",
+     "condicao": "não"
+    }
+   ]
+  },
+  {
+   "id": "api_stk_g2",
+   "raia": "api_stk",
+   "tipo": "bifurcacao",
+   "rotulo": "Time opera eventos e consistência eventual?",
+   "proximo": [
+    {
+     "para": "api_stk_e2",
+     "condicao": "sim"
+    },
+    {
+     "para": "api_stk_e3",
+     "condicao": "não"
+    }
+   ]
+  },
+  {
+   "id": "api_stk_e1",
+   "raia": "api_stk",
+   "tipo": "fim",
+   "rotulo": "Stack serverless e edge",
+   "proximo": [],
+   "retorno": "serverless_edge"
+  },
+  {
+   "id": "api_stk_e2",
+   "raia": "api_stk",
+   "tipo": "fim",
+   "rotulo": "Stack transacional com eventos",
+   "proximo": [],
+   "retorno": "transacional_eventos"
+  },
+  {
+   "id": "api_stk_e3",
+   "raia": "api_stk",
+   "tipo": "fim",
+   "rotulo": "Stack de monolito relacional",
+   "proximo": [],
+   "retorno": "monolito_relacional"
+  },
+  {
+   "id": "api_ent_s0",
+   "raia": "api_ent",
+   "tipo": "inicio",
+   "rotulo": "Início da entrega",
+   "proximo": [
+    {
+     "para": "api_ent_t1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "api_ent_t1",
+   "raia": "api_ent",
+   "tipo": "tarefa",
+   "rotulo": "Implementar e proteger a API",
+   "proximo": [
+    {
+     "para": "api_ent_t2",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "api_ent_t2",
+   "raia": "api_ent",
+   "tipo": "tarefa",
+   "rotulo": "Validar contrato, carga e segurança",
+   "proximo": [
+    {
+     "para": "api_ent_t3",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "api_ent_t3",
+   "raia": "api_ent",
+   "tipo": "tarefa",
+   "rotulo": "Publicar e operar",
+   "proximo": [
+    {
+     "para": "api_ent_e1",
+     "condicao": ""
+    }
+   ]
+  },
+  {
+   "id": "api_ent_e1",
+   "raia": "api_ent",
+   "tipo": "fim",
+   "rotulo": "API entregue e operada",
+   "proximo": [],
+   "retorno": "pronta"
+  }
+ ]
+}

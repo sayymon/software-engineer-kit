@@ -1,0 +1,55 @@
+version = 1
+SPDX-PackageName = "software-engineer-kit"
+SPDX-PackageSupplier = "Saymon Silva"
+SPDX-PackageDownloadLocation = "https://github.com/sayymon/software-engineer-kit"
+
+# Content: Markdown, YAML and JSON data under content/, and the documentation.
+[[annotations]]
+path = [
+  "content/**",
+  "docs/**",
+  "README.md",
+  "README.pt-BR.md",
+  "README.en.md",
+  "CONTRIBUTING.md",
+  "CODE_OF_CONDUCT.md",
+  "CODE_OF_CONDUCT.pt-BR.md",
+  "SECURITY.md",
+  "LICENSE-CONTENT",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Saymon Silva"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+# Vendored Mermaid bundle: its own MIT license and copyright.
+[[annotations]]
+path = ["site/public/vendor/mermaid/**"]
+precedence = "override"
+SPDX-FileCopyrightText = "2014 - 2022 Knut Sveidqvist"
+SPDX-License-Identifier = "MIT"
+
+# Everything else (code, configuration, workflows, schemas, tests): MIT.
+[[annotations]]
+path = [
+  "lib/**",
+  "tools/**",
+  "tests/**",
+  "config/**",
+  "schema/**",
+  "site/src/**",
+  "site/astro.config.mjs",
+  "site/tsconfig.json",
+  ".github/**",
+  "LICENSE",
+  "LICENSES/**",
+  "package.json",
+  "package-lock.json",
+  "tsconfig.json",
+  "vitest.config.ts",
+  "THIRD-PARTY-NOTICES.md",
+  "REUSE.toml",
+  ".gitignore",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Saymon Silva"
+SPDX-License-Identifier = "MIT"

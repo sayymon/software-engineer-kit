@@ -1,0 +1,11 @@
+id: tec_oncall_rotation
+tipo: tecnica
+nome: Escala de on-call
+descricao: Rodízio de plantão com primário, secundário e regras de passagem de turno.
+quando_usar:
+  - Times com serviços críticos fora do horário comercial
+quando_evitar:
+  - Times muito pequenos que não sustentam plantão (use acordo de cobertura)
+status: rascunho
+publico: false
+exemplo: Escala semanal com titular e reserva, passagem de turno às segundas.

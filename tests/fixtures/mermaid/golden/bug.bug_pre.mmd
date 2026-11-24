@@ -1,0 +1,53 @@
+flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"])
+  end
+  subgraph z_SG_bug_pre["<b>Prevenção</b>"]
+    direction LR
+    bug_pre_s0(["<small><b>bug_pre_s0</b></small><br/>Bug fechado, analisar o escape"])
+    bug_pre_t1["<small><b>bug_pre_t1</b></small><br/>Analisar por onde o defeito escapou<br/><i>▸ 2 subtarefas</i>"]
+    bug_pre_g1{"<small><b>bug_pre_g1</b></small><br/>Análise de escape:<br/>por que este bug<br/>chegou à produção?"}
+    bug_pre_t2["<small><b>bug_pre_t2</b></small><br/>Criar teste de regressão ou de contrato para a lacuna<br/><i>▸ 1 subtarefa</i>"]
+    bug_pre_t3["<small><b>bug_pre_t3</b></small><br/>Refinar o requisito e os critérios de aceitação<br/><i>▸ 1 subtarefa</i>"]
+    bug_pre_t4["<small><b>bug_pre_t4</b></small><br/>Atualizar checklist de revisão ou regra de análise estática<br/><i>▸ 1 subtarefa</i>"]
+    bug_pre_t5["<small><b>bug_pre_t5</b></small><br/>Criar alerta e SLO para detectar o problema mais cedo<br/><i>▸ 1 subtarefa</i>"]
+    bug_pre_t6["<small><b>bug_pre_t6</b></small><br/>Proteger a mudança com flag, canary ou rollout gradual<br/><i>▸ 1 subtarefa</i>"]
+    bug_pre_t7["<small><b>bug_pre_t7</b></small><br/>Registrar ação preventiva e acompanhar<br/><i>▸ 2 subtarefas</i>"]
+    bug_pre_e1(["<small><b>bug_pre_e1</b></small><br/>Ação preventiva registrada<br/><i>retorno: acao_registrada</i>"])
+  end
+  bug_pre_s0 --> bug_pre_t1
+  bug_pre_t1 --> bug_pre_g1
+  bug_pre_g1 -->|"faltou teste"| bug_pre_t2
+  bug_pre_g1 -->|"requisito ambíguo"| bug_pre_t3
+  bug_pre_g1 -->|"a revisão não pegou"| bug_pre_t4
+  bug_pre_g1 -->|"sem observabilidade ou alerta"| bug_pre_t5
+  bug_pre_g1 -->|"mudança sem proteção"| bug_pre_t6
+  bug_pre_t2 --> bug_pre_t7
+  bug_pre_t3 --> bug_pre_t7
+  bug_pre_t4 --> bug_pre_t7
+  bug_pre_t5 --> bug_pre_t7
+  bug_pre_t6 --> bug_pre_t7
+  bug_pre_t7 --> bug_pre_e1
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#0072B2,stroke:#00446B,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#E69F00,stroke:#8A5F00,stroke-width:1px,color:#000000
+  classDef z_R_3 fill:#009E73,stroke:#005F45,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#BBCC33,stroke:#707A1F,stroke-width:1px,color:#000000
+  classDef z_R_5 fill:#117733,stroke:#0A471F,stroke-width:1px,color:#FFFFFF
+  classDef z_R_6 fill:#D55E00,stroke:#803800,stroke-width:1px,color:#000000
+  classDef z_R_7 fill:#CC79A7,stroke:#7A4964,stroke-width:1px,color:#000000
+  classDef z_R_8 fill:#F0E442,stroke:#908928,stroke-width:1px,color:#000000
+  classDef z_R_9 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_R_10 fill:#999933,stroke:#5C5C1F,stroke-width:1px,color:#000000
+  classDef z_R_11 fill:#77AADD,stroke:#476685,stroke-width:1px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
+  class bug_pre_s0,bug_pre_t1,bug_pre_g1,bug_pre_t2,bug_pre_t3,bug_pre_t4,bug_pre_t5,bug_pre_t6,bug_pre_t7,bug_pre_e1 z_R_7
+  class bug_pre_g1 gw
+  style z_SG_bug_pre fill:#F7EBF2,stroke:#CC79A7,stroke-width:3px,color:#000000
