@@ -42,7 +42,8 @@ export function checkDoc(doc: Doc): FlowIssue[] {
   }
   const shared = new Map<string, string>();
   for (const c of ['artefatos', 'variaveis'] as const) {
-    (doc[c] as Doc[]).forEach((item, i) => {
+    // Optional collections, as in Python (`doc.get(colecao, [])`).
+    ((doc[c] as Doc[] | undefined) ?? []).forEach((item, i) => {
       if (shared.has(item.id)) add('ID_DUPLICADO', `${c}[${i}].id`, `id '${item.id}' duplicado: já existe em ${shared.get(item.id)}; artefatos e variáveis dividem o mesmo espaço de ids`, item.id);
       else shared.set(item.id, `${c}[${i}]`);
     });

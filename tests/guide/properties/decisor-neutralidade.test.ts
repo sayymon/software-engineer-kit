@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Design properties 8 and 9 (requirements 4.5, 4.6, 4.7): the financial context never changes the Decisor scores, and the
+// Design property 8 (design.md > Correctness Properties #8) and property 9 (requirements 4.5, 4.6, 4.7): the financial context never changes the Decisor scores, and the
 // budget is not a Decisor criterion (it is the gate before the Decisor, in the com_dcs flow).
 import fc from 'fast-check';
 import { describe, expect, it } from 'vitest';
@@ -25,6 +25,7 @@ const contexto = fc.record(
   { requiredKeys: [] },
 ) as fc.Arbitrary<ContextoFinanceiro>;
 
+// Design property 8 (design.md > Correctness Properties).
 describe('propriedade 8: o contexto financeiro não muda o resultado do Decisor', () => {
   it('totais, linhas, recomendada e empate são iguais com e sem contexto; só a justificativa pode mudar', () => {
     fc.assert(
