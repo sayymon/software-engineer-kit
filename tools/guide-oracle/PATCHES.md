@@ -24,3 +24,4 @@ Source: guide repository at commit `7abed1c`, folder `scripts/guia-decisao`. Eve
 9. `tests/properties/test_geradores_props.py`: the text strategy excludes the sequence of three dots. A lane named `...` made `test_estrutura_do_diagrama` fail by chance (the test asserts no three dots in the diagram), so the baseline passed only when hypothesis did not draw it.
 10. `tests/conftest.py`: hypothesis profile `oracle` with `derandomize=True` and no example database, so CI runs are reproducible.
 11. `tests/unit/cdp_*.mjs` moved to `tests/browser-disabled/`.
+12. `dump_doc.py`: added `--issues`, which reads a JSON document from stdin, validates it against the kit schema with the oracle validator (default options, or `--avisos` and `--completude` to switch those groups on), and emits the resulting `Issue` dataclasses as canonical JSON.
