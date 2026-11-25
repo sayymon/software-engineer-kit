@@ -9,6 +9,7 @@ import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import { unified } from 'unified';
 import type { LoadedEntity, Locale } from './index';
+import { ANCHOR_TIPOS } from '../guide/entities';
 import { routePath } from '../routes';
 import { linkTarget, parseWikilinks, replaceWikilinks } from '../wikilinks';
 import type { TabelaRow } from '../schema/tabela';
@@ -111,6 +112,9 @@ export class SiteIndex {
   readonly byId = new Map<string, Page>();
   readonly byRoute = new Map<string, Page>();
   private readonly guideAlias = new Map<string, Page>();
+  /** Anchor-only entities (no, subtarefa, playbook, pergunta, celula): they resolve to the page that hosts them. */
+  private readonly anchorHost = new Map<string, Page>();
+  private readonly anchorsByPage = new Map<string, LoadedEntity[]>();
   private inboundMap?: Map<string, Inbound[]>;
   private edgeList?: Edge[];
 
@@ -118,7 +122,9 @@ export class SiteIndex {
     readonly locale: Locale,
     entities: LoadedEntity[],
   ) {
-    this.pages = entities.map((entity) => ({
+    const isAnchor = (e: LoadedEntity) => e.derived === true && (ANCHOR_TIPOS as readonly string[]).includes(e.tipo);
+    const anchors = entities.filter(isAnchor);
+    this.pages = entities.filter((e) => !isAnchor(e)).map((entity) => ({
       id: entity.id,
       tipo: entity.tipo,
       layer: entity.relPath.split('/')[0] as SiteLayer,
@@ -132,13 +138,41 @@ export class SiteIndex {
       this.byId.set(p.id, p);
       this.byRoute.set(p.route, p);
     }
+    for (const a of anchors) {
+      if (this.byId.has(a.id) || this.anchorHost.has(a.id)) throw new Error(`duplicate id in site index: ${a.id}`);
+      const host = linkTarget(String(a.data.pagina ?? ''));
+      const page = host ? this.byId.get(host) : undefined;
+      if (!page) throw new Error(`anchor ${a.id} has no page host (${String(a.data.pagina)})`);
+      this.anchorHost.set(a.id, page);
+      (this.anchorsByPage.get(page.id) ?? this.anchorsByPage.set(page.id, []).get(page.id)!).push(a);
+    }
     for (const p of this.pages) {
       for (const gid of (p.entity.data.guia_ids as string[] | undefined) ?? []) if (!this.byId.has(gid)) this.guideAlias.set(gid, p);
     }
   }
 
   resolve(id: string): Page | undefined {
-    return this.byId.get(id) ?? this.guideAlias.get(id);
+    return this.byId.get(id) ?? this.anchorHost.get(id) ?? this.guideAlias.get(id);
+  }
+  /** True when `id` has no page of its own and resolves to an anchor on its host page. */
+  isAnchor(id: string): boolean {
+    return this.anchorHost.has(id);
+  }
+  /** Display name of an anchor-only entity, so links to it read as the item and not as its host page. */
+  anchorLabel(id: string): string | undefined {
+    const a = this.anchorsByPage.get(this.anchorHost.get(id)?.id ?? '')?.find((e) => e.id === id);
+    return a ? String(a.data.nome ?? a.id) : undefined;
+  }
+  /** Anchor-only entities hosted on a page, in source order. */
+  anchorsOf(pageId: string): LoadedEntity[] {
+    return this.anchorsByPage.get(pageId) ?? [];
+  }
+  /** Every page plus its hosted anchor entities as relation sources: (owner page, entity data). */
+  private *sources(): Generator<{ page: Page; entity: LoadedEntity }> {
+    for (const page of this.pages) {
+      yield { page, entity: page.entity };
+      for (const a of this.anchorsOf(page.id)) yield { page, entity: a };
+    }
   }
 
   ofTipo(tipo: string): Page[] {
@@ -162,10 +196,10 @@ export class SiteIndex {
         if (!entry) bySource.set(page.id, (entry = { page, fields: new Set() }));
         entry.fields.add(field);
       };
-      for (const page of this.pages) {
+      for (const { page, entity } of this.sources()) {
         if (page.tipo === 'hub') continue;
-        for (const r of relationTargets(page.entity.data)) add(r.id, page, r.field);
-        for (const l of parseWikilinks(page.entity.body)) add(l.id, page, 'body');
+        for (const r of relationTargets(entity.data)) add(r.id, page, r.field);
+        for (const l of parseWikilinks(entity.body)) add(l.id, page, 'body');
       }
       this.inboundMap = new Map();
       for (const [target, bySource] of acc) {
@@ -190,9 +224,9 @@ export class SiteIndex {
         seen.add(key);
         out.push({ source, target: target.id, kind });
       };
-      for (const page of this.pages) {
-        for (const r of relationTargets(page.entity.data)) push(page.id, r.id, r.field);
-        for (const l of parseWikilinks(page.entity.body)) push(page.id, l.id, 'body');
+      for (const { page, entity } of this.sources()) {
+        for (const r of relationTargets(entity.data)) push(page.id, r.id, r.field);
+        for (const l of parseWikilinks(entity.body)) push(page.id, l.id, 'body');
       }
       this.edgeList = out;
     }
@@ -203,7 +237,7 @@ export class SiteIndex {
   target(id: string, section?: string): { page: Page; route: string; anchor: string } | undefined {
     const page = this.resolve(id);
     if (!page) return undefined;
-    return { page, route: page.route, anchor: section ? `#${slugify(section)}` : '' };
+    return { page, route: page.route, anchor: section ? `#${slugify(section)}` : this.anchorHost.has(id) ? `#${id}` : '' };
   }
 
   /** Renders Markdown with wikilinks turned into links to real routes. */

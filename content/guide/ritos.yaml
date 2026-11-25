@@ -1,0 +1,700 @@
+# Ritos do ciclo de desenvolvimento: nível de time (Scrum), nível de programa (SAFe) e operação.
+# Cada rito diz onde acontece no fluxo (`acontece_em`), quando se aplica (tailoring), o RACI, as premissas, os
+# comportamentos esperados e as perguntas-chave (coleção `perguntas`, com o que responde cada uma).
+ritos:
+  - id: rito_refinamento
+    nome: "Refinement (refinamento do backlog)"
+    nivel: time
+    ordem: 1
+    seguinte: rito_planning
+    objetivo: "Deixar os próximos itens claros, pequenos e estimáveis antes da planning, até atenderem à Definition of Ready."
+    cadencia: "Semanal ou uma a duas vezes por iteração"
+    duracao: "Até 1 hora"
+    acontece_em: [feat_lev_g1, com_pro_t1]
+    papel: pm
+    apoio: [tech_lead]
+    consultado: [qa, designer, arquiteto]
+    informado: [stakeholder]
+    premissas:
+    - "O PM traz os itens priorizados com o problema e a métrica"
+    - "O time leu os itens antes do encontro"
+    comportamentos_esperados:
+    - "Cada item sai com critérios de aceite testáveis"
+    - "Itens grandes são fatiados na hora"
+    - "Dúvidas abertas ganham dono e prazo"
+    evitar:
+    - "Refinar só com o PM e o tech lead, sem quem vai executar"
+    - "Transformar o refinamento em desenho detalhado da solução"
+    entradas: [historias_refinadas, requisitos_levantados, roadmap]
+    saidas: [historias_refinadas, criterios_de_aceite]
+    tecnicas: [tec_criterios_aceitacao, tec_definition_of_ready]
+    perguntas: [pq_rito_refinamento_1, pq_rito_refinamento_2, pq_rito_refinamento_3]
+    exemplo: "Três histórias do cupom de recompra refinadas em 45 minutos; a de relatório foi fatiada em duas."
+    status: rascunho
+    publico: false
+  - id: rito_planning
+    nome: "Sprint/Iteration Planning"
+    nivel: time
+    ordem: 2
+    seguinte: rito_daily
+    objetivo: "Combinar o objetivo da iteração e o que o time se compromete a entregar, com as tarefas mapeadas e a capacidade conferida."
+    cadencia: "No início de cada iteração"
+    duracao: "Até 2 horas para iteração de 2 semanas"
+    acontece_em: [feat_orq_c6, com_set_t3]
+    quando: {todos: [{var: cadencia_do_time, igual: iteracoes}]}
+    papel: pm
+    apoio: [tech_lead]
+    consultado: [dev, qa]
+    informado: [stakeholder]
+    premissas:
+    - "Os itens do topo atendem à Definition of Ready"
+    - "A capacidade do time é conhecida (férias, plantão, suporte)"
+    comportamentos_esperados:
+    - "O time define um objetivo da iteração em uma frase"
+    - "Quem executa estima e escolhe o que cabe"
+    - "As ações da última retrospectiva entram no plano"
+    evitar:
+    - "Encher a iteração até 100% da capacidade"
+    - "O PM ou o tech lead decidirem sozinhos o que cabe"
+    entradas: [historias_refinadas, criterios_de_aceite, acoes_de_melhoria, cronograma_gantt]
+    saidas: [objetivo_da_iteracao, lista_de_tarefas]
+    tecnicas: [tec_planning_poker, tec_scrum_guide]
+    perguntas: [pq_rito_planning_1, pq_rito_planning_2, pq_rito_planning_3]
+    exemplo: "Objetivo: comprador recorrente paga em um clique; 34 pontos para 40 de capacidade, com folga para o plantão."
+    status: rascunho
+    publico: false
+  - id: rito_daily
+    nome: "Daily Scrum"
+    nivel: time
+    ordem: 3
+    seguinte: rito_desenvolvimento
+    objetivo: "Inspecionar o progresso rumo ao objetivo da iteração e ajustar o plano do dia, tornando os impedimentos visíveis."
+    cadencia: "Diária"
+    duracao: "15 minutos"
+    acontece_em: [com_exe_g1, com_exe_g3]
+    papel: tech_lead
+    apoio: [dev, qa]
+    informado: [pm]
+    premissas:
+    - "O quadro do time está atualizado antes do encontro"
+    - "Todos que executam participam, inclusive quem acompanha os agentes"
+    comportamentos_esperados:
+    - "A conversa gira em torno do objetivo da iteração, não do status individual"
+    - "Impedimento ganha dono na hora"
+    - "Discussões longas saem para depois, só com quem precisa"
+    evitar:
+    - "Virar relatório de status para o gestor"
+    - "Resolver problemas técnicos durante o encontro"
+    entradas: [lista_de_tarefas, objetivo_da_iteracao]
+    saidas: [impedimentos]
+    tecnicas: [tec_scrum_guide]
+    perguntas: [pq_rito_daily_1, pq_rito_daily_2, pq_rito_daily_3]
+    exemplo: "Daily de 12 minutos: o teste de contrato travou na integração com cupons; a tech lead assume o contato com o outro time."
+    status: rascunho
+    publico: false
+  - id: rito_desenvolvimento
+    nome: "Desenvolvimento e integração"
+    nivel: time
+    ordem: 4
+    seguinte: rito_review_demo
+    objetivo: "Construir, revisar e integrar as entregas em passos pequenos, com o pipeline verde e o PR revisado."
+    cadencia: "Contínua, durante a iteração"
+    duracao: "Contínua"
+    acontece_em: [com_exe_t1, com_pub_t1]
+    papel: dev
+    apoio: [qa, tech_lead]
+    consultado: [arquiteto]
+    premissas:
+    - "A spec e os critérios de aceite estão acessíveis a pessoas e agentes"
+    - "O pipeline roda a cada integração"
+    comportamentos_esperados:
+    - "Integrar pelo menos uma vez por dia"
+    - "Todo PR tem teste e contexto"
+    - "Quebra no pipeline é prioridade do time"
+    evitar:
+    - "Branches longas que integram só no fim"
+    - "Aprovar PR sem ler"
+    entradas: [lista_de_tarefas, objetivo_da_iteracao]
+    saidas: [entrega_integrada]
+    tecnicas: [tec_tdd, tec_code_review, tec_ci_cd]
+    perguntas: [pq_rito_desenvolvimento_1, pq_rito_desenvolvimento_2]
+    exemplo: "8 PRs pequenos integrados na semana, todos revisados; uma quebra no pipeline resolvida em 20 minutos."
+    status: rascunho
+    publico: false
+  - id: rito_review_demo
+    nome: "Sprint Review / System Demo"
+    nivel: time
+    ordem: 5
+    seguinte: rito_retrospectiva
+    objetivo: "Mostrar o que foi entregue funcionando, colher a opinião de quem usa e decide, e ajustar o backlog."
+    cadencia: "No fim de cada iteração"
+    duracao: "Até 1 hora"
+    acontece_em: [com_hml_t5, com_hml_g2]
+    quando: {todos: [{var: cadencia_do_time, igual: iteracoes}]}
+    papel: pm
+    apoio: [dev, qa]
+    aprova: stakeholder
+    consultado: [suporte, designer]
+    informado: [times_dependentes]
+    premissas:
+    - "Só entra na demo o que atende à Definition of Done"
+    - "Os stakeholders certos foram convidados"
+    comportamentos_esperados:
+    - "Demonstrar software funcionando, não slides"
+    - "Registrar o aceite e os pedidos de ajuste"
+    - "Atualizar o backlog com o que se aprendeu"
+    evitar:
+    - "Mostrar trabalho pela metade"
+    - "Usar a demo para cobrar o time"
+    entradas: [entrega_integrada, objetivo_da_iteracao]
+    saidas: [aceite_do_negocio, historias_refinadas]
+    tecnicas: [tec_sprint_review, tec_demo_driven_development]
+    perguntas: [pq_rito_review_demo_1, pq_rito_review_demo_2, pq_rito_review_demo_3]
+    exemplo: "Demo do pagamento em um clique para a área comercial; aceite registrado e um ajuste no texto do botão."
+    status: rascunho
+    publico: false
+  - id: rito_retrospectiva
+    nome: "Sprint/Iteration Retrospective"
+    nivel: time
+    ordem: 6
+    seguinte: rito_refinamento
+    objetivo: "Inspecionar como o time trabalhou e escolher poucas ações de melhoria para a próxima iteração."
+    cadencia: "No fim de cada iteração, depois da review"
+    duracao: "Até 1 hora e 30 minutos"
+    acontece_em: [com_mon_g2]
+    quando: {todos: [{var: cadencia_do_time, igual: iteracoes}]}
+    papel: gerente_de_engenharia
+    apoio: [tech_lead]
+    consultado: [dev, qa, pm]
+    premissas:
+    - "Ambiente seguro: o que é dito fica no time"
+    - "As ações da retrospectiva anterior são revistas primeiro"
+    comportamentos_esperados:
+    - "Falar de processos e acordos, não de culpados"
+    - "Sair com no máximo três ações, cada uma com dono"
+    - "Medir se a ação anterior funcionou"
+    evitar:
+    - "Lista longa de ações que ninguém faz"
+    - "Pular a retrospectiva quando a iteração foi difícil"
+    entradas: [objetivo_da_iteracao, impedimentos]
+    saidas: [acoes_de_melhoria]
+    tecnicas: [tec_retrospectiva]
+    perguntas: [pq_rito_retrospectiva_1, pq_rito_retrospectiva_2, pq_rito_retrospectiva_3]
+    exemplo: "Ação: testes de contrato rodam no pipeline do outro time também; dona é a QA; revisar na próxima retro."
+    status: rascunho
+    publico: false
+  - id: rito_pre_pi
+    nome: "Pre-PI Planning"
+    nivel: programa
+    ordem: 1
+    seguinte: rito_pi_planning
+    objetivo: "Preparar o PI Planning: alinhar visão, prioridades e capacidade entre os times do programa e as áreas de negócio."
+    cadencia: "Algumas semanas antes de cada PI (incremento de programa, em geral 8 a 12 semanas)"
+    duracao: "1 a 2 dias de preparação"
+    acontece_em: [feat_ent_g2, feat_cls_t1]
+    quando: {todos: [{var: atua_em_programa, igual: sim}]}
+    papel: rte
+    apoio: [pm]
+    aprova: stakeholder
+    consultado: [arquiteto, tech_lead]
+    informado: [gerente_de_engenharia]
+    premissas:
+    - "As features candidatas têm problema, métrica e estimativa grosseira"
+    - "A capacidade de cada time é conhecida"
+    comportamentos_esperados:
+    - "Priorizar as features pelo custo do atraso"
+    - "Antecipar dependências entre times e com fornecedores"
+    - "Deixar claro o que fica fora do PI"
+    evitar:
+    - "Chegar ao PI Planning com o backlog desordenado"
+    - "Prometer mais do que a capacidade somada"
+    entradas: [registro_da_necessidade, metricas_de_sucesso, card_do_epico]
+    saidas: [backlog_do_programa, roadmap]
+    tecnicas: [tec_wsjf, tec_roadmap]
+    perguntas: [pq_rito_pre_pi_1, pq_rito_pre_pi_2, pq_rito_pre_pi_3]
+    exemplo: "Backlog do programa com 14 features ordenadas por custo do atraso; 3 dependências com o time de pagamentos já mapeadas."
+    status: rascunho
+    publico: false
+  - id: rito_pi_planning
+    nome: "PI Planning"
+    nivel: programa
+    ordem: 2
+    seguinte: rito_iteracoes_time
+    objetivo: "Planejar o incremento de programa com todos os times juntos: objetivos de cada time, dependências e riscos, com o compromisso das áreas de negócio."
+    cadencia: "No início de cada PI"
+    duracao: "2 dias"
+    acontece_em: [feat_orq_c6, com_set_t3]
+    quando: {todos: [{var: atua_em_programa, igual: sim}]}
+    papel: rte
+    apoio: [pm, tech_lead]
+    aprova: stakeholder
+    consultado: [arquiteto, times_dependentes]
+    informado: [gerente_de_engenharia]
+    premissas:
+    - "O backlog do programa está priorizado"
+    - "Visão de negócio e de arquitetura apresentadas no início"
+    comportamentos_esperados:
+    - "Cada time sai com objetivos do PI e o valor de negócio de cada um"
+    - "Dependências entre times ficam visíveis no quadro do programa"
+    - "Riscos são tratados pelo ROAM (resolvido, assumido, mitigado ou aceito)"
+    - "O programa vota a confiança no plano"
+    evitar:
+    - "Plano feito pelos gestores e entregue aos times"
+    - "Esconder dependências para o plano parecer viável"
+    entradas: [backlog_do_programa, roadmap]
+    saidas: [objetivos_do_pi, quadro_do_programa, riscos_do_pi, cronograma_gantt]
+    tecnicas: [tec_wsjf, tec_roam, tec_planning_poker, tec_gantt]
+    perguntas: [pq_rito_pi_planning_1, pq_rito_pi_planning_2, pq_rito_pi_planning_3, pq_rito_pi_planning_4]
+    exemplo: "PI de 10 semanas: 5 times, 23 objetivos, 11 dependências no quadro e confiança média de 4."
+    status: rascunho
+    publico: false
+  - id: rito_iteracoes_time
+    nome: "Iterações do time"
+    nivel: programa
+    ordem: 3
+    seguinte: rito_art_sync
+    objetivo: "Executar o PI em iterações: cada time roda os próprios ritos de time rumo aos objetivos do PI."
+    cadencia: "A cada iteração do PI"
+    duracao: "Duração da iteração"
+    acontece_em: [com_exe_t1]
+    quando: {todos: [{var: atua_em_programa, igual: sim}]}
+    papel: tech_lead
+    consultado: [pm]
+    informado: [rte]
+    premissas:
+    - "Os objetivos do PI de cada time estão visíveis"
+    - "Os ritos de time seguem a mesma cadência no programa"
+    comportamentos_esperados:
+    - "Cada iteração aproxima um objetivo do PI"
+    - "Desvio do plano vira assunto do ART Sync"
+    evitar:
+    - "Times em cadências diferentes dentro do mesmo programa"
+    entradas: [objetivos_do_pi]
+    saidas: [entrega_integrada]
+    tecnicas: [tec_scrum_guide]
+    perguntas: [pq_rito_iteracoes_time_1, pq_rito_iteracoes_time_2]
+    exemplo: "Iteração 3 do PI: o time de checkout fecha o objetivo do pagamento em um clique."
+    status: rascunho
+    publico: false
+  - id: rito_art_sync
+    nome: "ART Sync / Scrum of Scrums / PO Sync"
+    nivel: programa
+    ordem: 4
+    seguinte: rito_solution_demo
+    objetivo: "Sincronizar os times do programa: progresso dos objetivos, dependências, riscos e impedimentos que um time sozinho não resolve."
+    cadencia: "Semanal"
+    duracao: "30 a 60 minutos"
+    acontece_em: [com_exe_g1]
+    quando: {todos: [{var: atua_em_programa, igual: sim}]}
+    papel: rte
+    apoio: [pm]
+    consultado: [tech_lead, times_dependentes]
+    informado: [gerente_de_engenharia]
+    premissas:
+    - "Cada time traz o estado dos seus objetivos e dependências"
+    - "O quadro do programa está atualizado"
+    comportamentos_esperados:
+    - "Tratar só o que cruza times"
+    - "Decidir dono e prazo para cada impedimento do programa"
+    - "Atualizar os riscos do PI"
+    evitar:
+    - "Repetir a daily de cada time"
+    - "Discutir detalhe técnico de um time só"
+    entradas: [quadro_do_programa, impedimentos]
+    saidas: [quadro_do_programa, riscos_do_pi]
+    tecnicas: [tec_roam]
+    perguntas: [pq_rito_art_sync_1, pq_rito_art_sync_2, pq_rito_art_sync_3]
+    exemplo: "ART Sync: a API de cupons atrasou uma semana; o time de checkout reordena e o risco passa de aceito para mitigado."
+    status: rascunho
+    publico: false
+  - id: rito_solution_demo
+    nome: "Solution Demo"
+    nivel: programa
+    ordem: 5
+    seguinte: rito_inspect_adapt
+    objetivo: "Demonstrar a solução integrada de todos os times do programa às áreas de negócio, no ambiente mais próximo do real."
+    cadencia: "No fim de cada PI (e, se possível, a cada iteração)"
+    duracao: "1 a 2 horas"
+    acontece_em: [com_hml_t5, com_lib_t1]
+    quando: {todos: [{var: atua_em_programa, igual: sim}]}
+    papel: pm
+    apoio: [rte, arquiteto]
+    aprova: stakeholder
+    consultado: [suporte]
+    informado: [times_dependentes]
+    premissas:
+    - "A solução está integrada entre os times"
+    - "Só entra o que atende à Definition of Done do programa"
+    comportamentos_esperados:
+    - "Mostrar fluxos de ponta a ponta, atravessando os times"
+    - "Medir os objetivos do PI contra o valor planejado"
+    evitar:
+    - "Uma demo por time, sem mostrar a integração"
+    - "Demo em ambiente montado só para a apresentação"
+    entradas: [entrega_integrada, objetivos_do_pi]
+    saidas: [aceite_do_negocio]
+    tecnicas: [tec_demo_driven_development]
+    perguntas: [pq_rito_solution_demo_1, pq_rito_solution_demo_2]
+    exemplo: "Solution demo do PI 3: compra recorrente com cupom, pagamento e nota fiscal integrados; 82% do valor planejado."
+    status: rascunho
+    publico: false
+  - id: rito_inspect_adapt
+    nome: "Inspect & Adapt"
+    nivel: programa
+    ordem: 6
+    seguinte: rito_pi_retro
+    objetivo: "Avaliar o PI com dados (valor entregue e métricas de fluxo) e resolver os maiores problemas do programa num workshop de solução de problemas."
+    cadencia: "No fim de cada PI"
+    duracao: "Meio dia"
+    acontece_em: [com_mon_g2, bug_pre_t1]
+    quando: {todos: [{var: atua_em_programa, igual: sim}]}
+    papel: rte
+    aprova: gerente_de_engenharia
+    consultado: [pm, tech_lead, arquiteto]
+    informado: [stakeholder]
+    premissas:
+    - "As métricas do PI estão levantadas antes do encontro"
+    - "Os problemas candidatos foram votados pelos times"
+    comportamentos_esperados:
+    - "Olhar o valor entregue contra o planejado"
+    - "Ir à causa raiz dos problemas escolhidos"
+    - "Sair com itens de melhoria no backlog do próximo PI"
+    evitar:
+    - "Virar apresentação de resultados sem análise"
+    - "Escolher problemas que ninguém pode resolver"
+    entradas: [objetivos_do_pi, riscos_do_pi, relatorio_de_monitoramento]
+    saidas: [acoes_de_melhoria, grafico_de_pareto]
+    tecnicas: [tec_x5_whys, tec_pareto, tec_ishikawa]
+    perguntas: [pq_rito_inspect_adapt_1, pq_rito_inspect_adapt_2, pq_rito_inspect_adapt_3]
+    exemplo: "I&A: 82% do valor; maior problema é a espera por ambientes; ação de ambientes efêmeros entra no próximo PI."
+    status: rascunho
+    publico: false
+  - id: rito_pi_retro
+    nome: "PI Retrospective"
+    nivel: programa
+    ordem: 7
+    seguinte: rito_pre_pi
+    objetivo: "Melhorar a forma como o programa trabalha junto: acordos entre times, cadência e os próprios ritos."
+    cadencia: "No fim de cada PI, depois do Inspect & Adapt"
+    duracao: "Até 1 hora e 30 minutos"
+    acontece_em: [com_mon_g2]
+    quando: {todos: [{var: atua_em_programa, igual: sim}]}
+    papel: rte
+    consultado: [tech_lead, pm]
+    informado: [gerente_de_engenharia]
+    premissas:
+    - "Participam representantes de todos os times"
+    - "As ações do PI anterior são revistas primeiro"
+    comportamentos_esperados:
+    - "Falar dos acordos entre times, não de um time"
+    - "Sair com poucas ações de programa, cada uma com dono"
+    evitar:
+    - "Repetir as retrospectivas dos times"
+    - "Ações sem dono"
+    entradas: [acoes_de_melhoria, grafico_de_pareto]
+    saidas: [acoes_de_melhoria]
+    tecnicas: [tec_retrospectiva]
+    perguntas: [pq_rito_pi_retro_1, pq_rito_pi_retro_2]
+    exemplo: "Ação: o quadro do programa passa a ser atualizado na véspera do ART Sync; dono é o RTE."
+    status: rascunho
+    publico: false
+  - id: rito_revisao_arquitetura
+    nome: "Revisão de arquitetura e ADRs"
+    nivel: time
+    ordem: 7
+    objetivo: "Revisar o desenho da solução e aprovar as decisões estruturais registradas em ADR antes de decompor."
+    cadencia: "Por feature com decisão estrutural"
+    duracao: "Até 1 hora"
+    acontece_em: [feat_spc_g2]
+    papel: arquiteto
+    apoio: [tech_lead]
+    consultado: [seguranca, sre, engenheiro_de_dados]
+    informado: [times_dependentes]
+    premissas:
+    - "O design e os ADRs foram enviados antes"
+    - "Os trade-offs estão escritos, não só a solução escolhida"
+    comportamentos_esperados:
+    - "Discutir alternativas e consequências"
+    - "Registrar a decisão e quem a aprovou no ADR"
+    evitar:
+    - "Aprovar sem ler"
+    - "Decidir na reunião sem registrar"
+    entradas: [design_md, adrs_da_feature]
+    saidas: [adrs_da_feature]
+    tecnicas: [tec_adrs]
+    perguntas: [pq_rito_revisao_arquitetura_1, pq_rito_revisao_arquitetura_2]
+    exemplo: "Revisão do cache de cupons: ADR aprovado com a ressalva de expiração por evento; SRE pediu métrica de acerto do cache."
+    status: rascunho
+    publico: false
+  - id: rito_war_room
+    nome: "War room do incidente"
+    nivel: operacao
+    ordem: 1
+    seguinte: rito_post_mortem
+    objetivo: "Concentrar quem decide e quem investiga num lugar só para restaurar o serviço rápido em um SEV1."
+    cadencia: "Durante o incidente SEV1"
+    duracao: "Até a estabilização"
+    acontece_em: [inc_com_t1, inc_mit_t1]
+    quando: {todos: [{var: severidade, igual: sev1}]}
+    papel: sre
+    apoio: [dev]
+    consultado: [tech_lead, times_dependentes]
+    informado: [stakeholder, suporte]
+    premissas:
+    - "Um incident commander definido"
+    - "Linha do tempo aberta desde o primeiro minuto"
+    comportamentos_esperados:
+    - "Uma voz de comando"
+    - "Mitigar primeiro, diagnosticar depois"
+    - "Comunicado na cadência combinada"
+    evitar:
+    - "Muita gente falando ao mesmo tempo"
+    - "Buscar culpados durante o incidente"
+    entradas: [linha_do_tempo_do_incidente, sinais_do_alerta]
+    saidas: [comunicado_do_incidente, linha_do_tempo_do_incidente]
+    tecnicas: [tec_war_room, tec_incident_command]
+    perguntas: [pq_rito_war_room_1, pq_rito_war_room_2]
+    exemplo: "War room do checkout: IC no plantonista, rollback em 10 minutos, comunicados a cada 30 minutos."
+    status: rascunho
+    publico: false
+  - id: rito_post_mortem
+    nome: "Post-mortem"
+    nivel: operacao
+    ordem: 2
+    objetivo: "Transformar um incidente ou um escape de bug em aprendizado e ações, sem culpados."
+    cadencia: "Até 5 dias úteis depois do encerramento"
+    duracao: "Até 1 hora e 30 minutos"
+    acontece_em: [inc_pos_t1, bug_pre_t1]
+    papel: tech_lead
+    apoio: [sre]
+    aprova: gerente_de_engenharia
+    consultado: [dev, qa, pm]
+    informado: [stakeholder, times_dependentes]
+    premissas:
+    - "A linha do tempo está pronta antes do encontro"
+    - "Combinado explícito de que não há culpados"
+    comportamentos_esperados:
+    - "Partir dos fatos e chegar às causas de sistema"
+    - "Ações com dono, prazo e critério de pronto"
+    - "Compartilhar o aprendizado"
+    evitar:
+    - "Procurar culpados"
+    - "Ações genéricas como tomar mais cuidado"
+    entradas: [linha_do_tempo_do_incidente]
+    saidas: [post_mortem, acoes_corretivas, diagrama_de_ishikawa]
+    tecnicas: [tec_blameless_postmortem, tec_x5_whys, tec_ishikawa]
+    perguntas: [pq_rito_post_mortem_1, pq_rito_post_mortem_2]
+    exemplo: "Post-mortem do checkout: causa no cálculo de frete sem flag; 3 ações com dono e prazo."
+    status: rascunho
+    publico: false
+perguntas:
+  - id: pq_rito_refinamento_1
+    texto: "Cada item tem critério de aceite que o QA consegue testar?"
+    depende_de: [rito_refinamento, tec_criterios_aceitacao]
+    status: rascunho
+    publico: false
+  - id: pq_rito_refinamento_2
+    texto: "O item cabe numa iteração ou precisa ser fatiado?"
+    depende_de: [rito_refinamento, com_pro_t1]
+    status: rascunho
+    publico: false
+  - id: pq_rito_refinamento_3
+    texto: "Que dúvida ainda impede o time de estimar?"
+    depende_de: [rito_refinamento, feat_lev_g1]
+    status: rascunho
+    publico: false
+  - id: pq_rito_planning_1
+    texto: "Qual é o objetivo da iteração em uma frase?"
+    depende_de: [rito_planning]
+    status: rascunho
+    publico: false
+  - id: pq_rito_planning_2
+    texto: "A soma das estimativas cabe na capacidade real do time?"
+    depende_de: [rito_planning, tec_planning_poker]
+    status: rascunho
+    publico: false
+  - id: pq_rito_planning_3
+    texto: "Que ação da última retrospectiva entra nesta iteração?"
+    depende_de: [rito_planning, rito_retrospectiva]
+    status: rascunho
+    publico: false
+  - id: pq_rito_daily_1
+    texto: "Estamos mais perto do objetivo da iteração do que ontem?"
+    depende_de: [rito_daily]
+    status: rascunho
+    publico: false
+  - id: pq_rito_daily_2
+    texto: "Que impedimento precisa de ajuda hoje e quem cuida dele?"
+    depende_de: [rito_daily]
+    status: rascunho
+    publico: false
+  - id: pq_rito_daily_3
+    texto: "Alguma tarefa de agente está parada esperando decisão humana?"
+    depende_de: [rito_daily, com_exe_g1]
+    status: rascunho
+    publico: false
+  - id: pq_rito_desenvolvimento_1
+    texto: "O pipeline está verde depois de cada integração?"
+    depende_de: [rito_desenvolvimento, tec_ci_cd]
+    status: rascunho
+    publico: false
+  - id: pq_rito_desenvolvimento_2
+    texto: "Todo PR tem teste e passou por revisão?"
+    depende_de: [rito_desenvolvimento, tec_code_review]
+    status: rascunho
+    publico: false
+  - id: pq_rito_review_demo_1
+    texto: "O objetivo da iteração foi atingido?"
+    depende_de: [rito_review_demo, rito_planning]
+    status: rascunho
+    publico: false
+  - id: pq_rito_review_demo_2
+    texto: "O stakeholder aceitou ou pediu ajuste?"
+    depende_de: [rito_review_demo, com_hml_g2]
+    status: rascunho
+    publico: false
+  - id: pq_rito_review_demo_3
+    texto: "O que aprendemos muda a prioridade do backlog?"
+    depende_de: [rito_review_demo]
+    status: rascunho
+    publico: false
+  - id: pq_rito_retrospectiva_1
+    texto: "A ação da retrospectiva anterior funcionou?"
+    depende_de: [rito_retrospectiva]
+    status: rascunho
+    publico: false
+  - id: pq_rito_retrospectiva_2
+    texto: "Qual impedimento se repetiu e o que muda para não voltar?"
+    depende_de: [rito_retrospectiva, rito_daily]
+    status: rascunho
+    publico: false
+  - id: pq_rito_retrospectiva_3
+    texto: "Quais são as até três ações e quem cuida de cada uma?"
+    depende_de: [rito_retrospectiva, tec_retrospectiva]
+    status: rascunho
+    publico: false
+  - id: pq_rito_pre_pi_1
+    texto: "As features do topo foram priorizadas pelo custo do atraso?"
+    depende_de: [rito_pre_pi, tec_wsjf]
+    status: rascunho
+    publico: false
+  - id: pq_rito_pre_pi_2
+    texto: "Que dependência entre times já sabemos que vai existir?"
+    depende_de: [rito_pre_pi]
+    status: rascunho
+    publico: false
+  - id: pq_rito_pre_pi_3
+    texto: "A capacidade somada comporta o que está no topo?"
+    depende_de: [rito_pre_pi]
+    status: rascunho
+    publico: false
+  - id: pq_rito_pi_planning_1
+    texto: "Cada time tem objetivos do PI com valor de negócio atribuído?"
+    depende_de: [rito_pi_planning]
+    status: rascunho
+    publico: false
+  - id: pq_rito_pi_planning_2
+    texto: "Todas as dependências entre times estão no quadro do programa?"
+    depende_de: [rito_pi_planning]
+    status: rascunho
+    publico: false
+  - id: pq_rito_pi_planning_3
+    texto: "Cada risco foi classificado no ROAM?"
+    depende_de: [rito_pi_planning, tec_roam]
+    status: rascunho
+    publico: false
+  - id: pq_rito_pi_planning_4
+    texto: "Qual a confiança do programa no plano (de 1 a 5)?"
+    depende_de: [rito_pi_planning]
+    status: rascunho
+    publico: false
+  - id: pq_rito_iteracoes_time_1
+    texto: "Esta iteração aproxima qual objetivo do PI?"
+    depende_de: [rito_iteracoes_time, rito_planning]
+    status: rascunho
+    publico: false
+  - id: pq_rito_iteracoes_time_2
+    texto: "O desvio do plano já foi levado ao ART Sync?"
+    depende_de: [rito_iteracoes_time, rito_art_sync]
+    status: rascunho
+    publico: false
+  - id: pq_rito_art_sync_1
+    texto: "Alguma dependência entre times está atrasada?"
+    depende_de: [rito_art_sync]
+    status: rascunho
+    publico: false
+  - id: pq_rito_art_sync_2
+    texto: "Que impedimento precisa de decisão fora dos times?"
+    depende_de: [rito_art_sync, rito_daily]
+    status: rascunho
+    publico: false
+  - id: pq_rito_art_sync_3
+    texto: "Algum risco do PI mudou de classificação no ROAM?"
+    depende_de: [rito_art_sync, tec_roam]
+    status: rascunho
+    publico: false
+  - id: pq_rito_solution_demo_1
+    texto: "A solução funciona de ponta a ponta entre os times?"
+    depende_de: [rito_solution_demo, com_hml_t5]
+    status: rascunho
+    publico: false
+  - id: pq_rito_solution_demo_2
+    texto: "Quanto do valor planejado dos objetivos do PI foi entregue?"
+    depende_de: [rito_solution_demo, rito_pi_planning]
+    status: rascunho
+    publico: false
+  - id: pq_rito_inspect_adapt_1
+    texto: "Quanto do valor planejado foi entregue e por quê?"
+    depende_de: [rito_inspect_adapt, rito_solution_demo]
+    status: rascunho
+    publico: false
+  - id: pq_rito_inspect_adapt_2
+    texto: "Qual é a causa raiz do maior problema do programa?"
+    depende_de: [rito_inspect_adapt, tec_x5_whys]
+    status: rascunho
+    publico: false
+  - id: pq_rito_inspect_adapt_3
+    texto: "Que melhoria entra no backlog do próximo PI?"
+    depende_de: [rito_inspect_adapt]
+    status: rascunho
+    publico: false
+  - id: pq_rito_pi_retro_1
+    texto: "Que acordo entre times precisa mudar no próximo PI?"
+    depende_de: [rito_pi_retro]
+    status: rascunho
+    publico: false
+  - id: pq_rito_pi_retro_2
+    texto: "A ação do PI anterior funcionou?"
+    depende_de: [rito_pi_retro]
+    status: rascunho
+    publico: false
+  - id: pq_rito_revisao_arquitetura_1
+    texto: "Os trade-offs de cada decisão estão no ADR?"
+    depende_de: [rito_revisao_arquitetura, tec_adrs]
+    status: rascunho
+    publico: false
+  - id: pq_rito_revisao_arquitetura_2
+    texto: "Segurança, confiabilidade e dados foram ouvidos?"
+    depende_de: [rito_revisao_arquitetura]
+    status: rascunho
+    publico: false
+  - id: pq_rito_war_room_1
+    texto: "Quem é o incident commander agora?"
+    depende_de: [rito_war_room, inc_cmd_g2]
+    status: rascunho
+    publico: false
+  - id: pq_rito_war_room_2
+    texto: "A mitigação mais reversível já foi tentada?"
+    depende_de: [rito_war_room, inc_mit_t1]
+    status: rascunho
+    publico: false
+  - id: pq_rito_post_mortem_1
+    texto: "Em qual barreira o problema deveria ter parado?"
+    depende_de: [rito_post_mortem, bug_pre_t1]
+    status: rascunho
+    publico: false
+  - id: pq_rito_post_mortem_2
+    texto: "Cada ação tem dono, prazo e critério de pronto?"
+    depende_de: [rito_post_mortem, inc_pos_t2]
+    status: rascunho
+    publico: false

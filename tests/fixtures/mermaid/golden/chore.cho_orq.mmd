@@ -1,0 +1,69 @@
+flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"]) ~~~ z_LEG_r0["<b>Enquadramento da tarefa</b><br/>raia chamada"] ~~~ z_LEG_r1["<b>Execução por papéis</b><br/>raia chamada"] ~~~ z_LEG_r2["<b>Testes automatizados e regressão</b><br/>raia chamada"] ~~~ z_LEG_r3["<b>Review humano</b><br/>raia chamada"] ~~~ z_LEG_r4["<b>Implantação</b><br/>raia chamada"]
+  end
+  subgraph z_SG_cho_orq["<b>Orquestração: tarefa operacional (chore)</b>"]
+    direction LR
+    cho_orq_s0(["<small><b>cho_orq_s0</b></small><br/>Tarefa operacional necessária"])
+    cho_orq_c1[["<small><b>cho_orq_c1</b></small><br/>Enquadramento da tarefa"]]
+    cho_orq_c2[["<small><b>cho_orq_c2</b></small><br/>Execução das tarefas"]]
+    cho_orq_e2(["<small><b>cho_orq_e2</b></small><br/>Reclassificada como feature<br/><i>retorno: reclassificar_como_feature</i>"])
+    cho_orq_e3(["<small><b>cho_orq_e3</b></small><br/>Reclassificada como dívida técnica<br/><i>retorno: reclassificar_como_divida_tecnica</i>"])
+    cho_orq_e4(["<small><b>cho_orq_e4</b></small><br/>Reclassificada como migração<br/><i>retorno: reclassificar_como_migracao</i>"])
+    cho_orq_e5(["<small><b>cho_orq_e5</b></small><br/>Reclassificada como infraestrutura<br/><i>retorno: reclassificar_como_infraestrutura</i>"])
+    cho_orq_e6(["<small><b>cho_orq_e6</b></small><br/>Reclassificada como descontinuação<br/><i>retorno: reclassificar_como_descontinuacao</i>"])
+    cho_orq_e7(["<small><b>cho_orq_e7</b></small><br/>Reclassificada como segurança<br/><i>retorno: reclassificar_como_seguranca</i>"])
+    cho_orq_c3[["<small><b>cho_orq_c3</b></small><br/>Testes automatizados"]]
+    cho_orq_c4[["<small><b>cho_orq_c4</b></small><br/>Review humano"]]
+    cho_orq_c5[["<small><b>cho_orq_c5</b></small><br/>Implantação"]]
+    cho_orq_e1(["<small><b>cho_orq_e1</b></small><br/>Tarefa concluída e implantada<br/><i>retorno: chore_concluida</i>"])
+  end
+  cho_orq_s0 --> cho_orq_c1
+  cho_orq_c1 -->|"confirmada_como_chore"| cho_orq_c2
+  cho_orq_c1 -->|"reclassificar_como_feature"| cho_orq_e2
+  cho_orq_c1 -->|"reclassificar_como_divida_tecnica"| cho_orq_e3
+  cho_orq_c1 -->|"reclassificar_como_migracao"| cho_orq_e4
+  cho_orq_c1 -->|"reclassificar_como_infraestrutura"| cho_orq_e5
+  cho_orq_c1 -->|"reclassificar_como_descontinuacao"| cho_orq_e6
+  cho_orq_c1 -->|"reclassificar_como_seguranca"| cho_orq_e7
+  cho_orq_c2 -->|"execucao_integrada"| cho_orq_c3
+  cho_orq_c3 -->|"testes_aprovados"| cho_orq_c4
+  cho_orq_c3 -->|"testes_reprovados"| cho_orq_c2
+  cho_orq_c4 -->|"aprovado_pelo_humano"| cho_orq_c5
+  cho_orq_c4 -->|"ajustes_solicitados"| cho_orq_c2
+  cho_orq_c5 -->|"implantado"| cho_orq_e1
+  cho_orq_c5 -->|"implantacao_revertida"| cho_orq_c2
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#332288,stroke:#1F1452,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#009E73,stroke:#005F45,stroke-width:1px,color:#000000
+  classDef z_R_3 fill:#D55E00,stroke:#803800,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_R_5 fill:#999933,stroke:#5C5C1F,stroke-width:1px,color:#000000
+  classDef z_R_6 fill:#882255,stroke:#521433,stroke-width:1px,color:#FFFFFF
+  classDef z_R_7 fill:#E69F00,stroke:#8A5F00,stroke-width:1px,color:#000000
+  classDef z_R_8 fill:#6699CC,stroke:#3D5C7A,stroke-width:1px,color:#000000
+  classDef z_C_0_1 fill:#332288,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_2 fill:#009E73,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_3 fill:#D55E00,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_4 fill:#56B4E9,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_5 fill:#999933,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  class z_LEG_r0 z_R_1
+  class z_LEG_r1 z_R_2
+  class z_LEG_r2 z_R_3
+  class z_LEG_r3 z_R_4
+  class z_LEG_r4 z_R_5
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
+  class cho_orq_c1 z_C_0_1
+  class cho_orq_c2 z_C_0_2
+  class cho_orq_c3 z_C_0_3
+  class cho_orq_c4 z_C_0_4
+  class cho_orq_c5 z_C_0_5
+  class cho_orq_s0,cho_orq_e2,cho_orq_e3,cho_orq_e4,cho_orq_e5,cho_orq_e6,cho_orq_e7,cho_orq_e1 z_R_0
+  style z_SG_cho_orq fill:#E7ECEE,stroke:#607D8B,stroke-width:3px,color:#000000

@@ -1,0 +1,322 @@
+# Fixture de subtarefas condicionais, artefatos com tipo, subtipo e variantes, e itens exclusivos e compartilhados.
+# Duas demandas (alfa e beta), cada uma com a raia orquestradora e uma chamada para uma segunda raia em alfa.
+# Itens compartilhados: art_necessidade (artefato com variantes), art_pedido (entrada das duas orquestradoras) e modelo_trabalho.
+# Itens exclusivos: tem_dado_pessoal e art_parecer (só alfa), art_teste_contrato (só beta).
+# Itens sem uso, de propósito (somem do Catálogo e geram ITEM_SEM_USO): art_sem_uso e var_sem_uso.
+versao: 1
+demandas:
+- id: alfa
+  nome: Alfa
+  sigla: alf
+  publico: false
+- id: beta
+  nome: Beta
+  sigla: bet
+  publico: false
+raias:
+- id: alf_orq
+  nome: Orquestração alfa
+  demanda: alfa
+  responsabilidade: Conduzir a demanda alfa
+  cor: '#4F81BD'
+  orquestradora: true
+  status: rascunho
+  publico: false
+  entradas:
+  - art_pedido
+- id: alf_impl
+  nome: Implementação alfa
+  demanda: alfa
+  responsabilidade: Implementar e abrir o pull request
+  cor: '#F2C14E'
+  orquestradora: false
+  status: rascunho
+  publico: false
+  entradas:
+  - art_necessidade
+- id: bet_orq
+  nome: Orquestração beta
+  demanda: beta
+  responsabilidade: Conduzir a demanda beta
+  cor: '#C0504D'
+  orquestradora: true
+  status: rascunho
+  publico: false
+  entradas:
+  - art_pedido
+requisitos:
+- id: funcional
+  nome: Funcional
+  publico: false
+decisoes:
+- id: alf_orq_s1
+  raia: alf_orq
+  tipo: inicio
+  rotulo: Início alfa
+  condicao: ''
+  proximo:
+  - para: alf_orq_t1
+    condicao: ''
+  estado: {}
+  publico: false
+- id: alf_orq_t1
+  raia: alf_orq
+  tipo: tarefa
+  rotulo: Registrar a necessidade
+  condicao: ''
+  proximo:
+  - para: alf_orq_c1
+    condicao: ''
+  estado:
+    modelo_trabalho: produto
+  entradas:
+  - art_pedido
+  saidas:
+  - art_necessidade
+  - art_card_atualizado
+  - art_parecer
+  subtarefas:
+  - id: alf_orq_t1_st1
+    rotulo: Escrever o registro da necessidade
+    descricao: Escreva o registro no formato que o modelo de trabalho pede.
+    exemplo: PRD com problema, público e métrica de sucesso.
+    responsavel: pessoa
+    entradas:
+    - art_pedido
+    saidas:
+    - art_necessidade
+    tecnicas:
+    - tecnica: tec_entrevista
+      uso: obrigatoria
+  - id: alf_orq_t1_st2
+    rotulo: Avaliar o impacto na privacidade
+    descricao: Só vale quando a demanda trata dado pessoal.
+    exemplo: Parecer curto do jurídico sobre a base legal.
+    responsavel: ambos
+    quando:
+      todos:
+      - var: tem_dado_pessoal
+        igual: sim
+    porque: Dado pessoal exige base legal registrada antes de implementar.
+    entradas:
+    - art_necessidade
+    saidas:
+    - art_parecer
+    tecnicas:
+    - tecnica: tec_entrevista
+      uso: opcional
+  - id: alf_orq_t1_st3
+    rotulo: Atualizar o card da demanda
+    responsavel: agente
+    entradas:
+    - art_necessidade
+    saidas:
+    - art_card_atualizado
+  playbook: pb_alf_orq_t1
+  publico: false
+- id: alf_orq_c1
+  raia: alf_orq
+  tipo: chamada
+  rotulo: Implementar a necessidade
+  raia_chamada: alf_impl
+  condicao: ''
+  proximo:
+  - para: alf_orq_e1
+    condicao: pronto
+  estado: {}
+  entradas:
+  - art_necessidade
+  saidas:
+  - art_pull_request
+  publico: false
+- id: alf_orq_e1
+  raia: alf_orq
+  tipo: fim
+  rotulo: Alfa concluída
+  retorno: concluida
+  condicao: ''
+  proximo: []
+  estado: {}
+  publico: false
+- id: alf_impl_s1
+  raia: alf_impl
+  tipo: inicio
+  rotulo: Início da implementação
+  condicao: ''
+  proximo:
+  - para: alf_impl_t1
+    condicao: ''
+  estado: {}
+  publico: false
+- id: alf_impl_t1
+  raia: alf_impl
+  tipo: tarefa
+  rotulo: Escrever o código e o PR
+  condicao: ''
+  proximo:
+  - para: alf_impl_e1
+    condicao: ''
+  estado: {}
+  entradas:
+  - art_necessidade
+  saidas:
+  - art_pull_request
+  - art_codigo
+  publico: false
+- id: alf_impl_e1
+  raia: alf_impl
+  tipo: fim
+  rotulo: Implementação pronta
+  retorno: pronto
+  condicao: ''
+  proximo: []
+  estado: {}
+  saidas:
+  - art_pull_request
+  publico: false
+- id: bet_orq_s1
+  raia: bet_orq
+  tipo: inicio
+  rotulo: Início beta
+  condicao: ''
+  proximo:
+  - para: bet_orq_t1
+    condicao: ''
+  estado: {}
+  publico: false
+- id: bet_orq_t1
+  raia: bet_orq
+  tipo: tarefa
+  rotulo: Registrar a necessidade de beta
+  condicao: ''
+  proximo:
+  - para: bet_orq_e1
+    condicao: ''
+  estado: {}
+  entradas:
+  - art_pedido
+  saidas:
+  - art_necessidade
+  - art_teste_contrato
+  subtarefas:
+  - id: bet_orq_t1_st1
+    rotulo: Registrar a necessidade
+    entradas:
+    - art_pedido
+    saidas:
+    - art_necessidade
+  - id: bet_orq_t1_st2
+    rotulo: Escrever o teste de contrato
+    saidas:
+    - art_teste_contrato
+  publico: false
+- id: bet_orq_e1
+  raia: bet_orq
+  tipo: fim
+  rotulo: Beta concluída
+  retorno: concluida
+  condicao: ''
+  proximo: []
+  estado: {}
+  publico: false
+celulas:
+- demanda: alfa
+  requisito: funcional
+  publico: false
+playbooks:
+- id: pb_alf_orq_t1
+  resumo: Registre a necessidade no formato que o contexto pede.
+  exemplo: No time de produto, um PRD. Em fluxo contínuo, um card.
+  publico: false
+abordagens:
+- id: abo_x
+  nome: Abordagem X
+  publico: false
+tecnicas:
+- id: tec_entrevista
+  nome: Entrevista
+  publico: false
+padroes:
+- id: pad_x
+  nome: Padrão X
+  publico: false
+estrategias:
+- id: est_x
+  nome: Estratégia X
+  publico: false
+categorias_ferramenta: []
+fontes: []
+artefatos:
+- id: art_pedido
+  nome: Pedido original
+  tipo: comunicacao
+  subtipo: mensagem no canal do time
+  exemplo: 'Mensagem no canal: precisamos de cupom no checkout.'
+- id: art_necessidade
+  nome: Registro da necessidade
+  tipo: documento
+  subtipo: PRD
+  descricao: O mesmo registro em formatos diferentes conforme o modelo de trabalho.
+  variantes:
+  - nome: PRD
+    descricao: Documento de requisitos do produto.
+    quando:
+      todos:
+      - var: modelo_trabalho
+        igual: produto
+    exemplo: PRD com problema, público e métrica.
+  - nome: Documento de visão
+    quando:
+      todos:
+      - var: modelo_trabalho
+        igual: projeto
+  - nome: Card
+    descricao: Um card enxuto na ferramenta de gestão.
+    quando:
+      algum:
+      - var: modelo_trabalho
+        igual: fluxo_continuo
+- id: art_parecer
+  nome: Parecer de privacidade
+  tipo: documento
+  subtipo: parecer jurídico
+- id: art_card_atualizado
+  nome: Card atualizado
+  tipo: acao
+  subtipo: card atualizado
+- id: art_pull_request
+  nome: Pull request
+  tipo: pull_request
+- id: art_codigo
+  nome: Código da mudança
+  tipo: codigo
+  subtipo: código-fonte
+- id: art_teste_contrato
+  nome: Teste de contrato
+  tipo: teste
+  subtipo: teste de contrato
+- id: art_sem_uso
+  nome: Artefato sem uso
+  tipo: documento
+variaveis:
+- id: tem_dado_pessoal
+  nome: Tem dado pessoal
+  tipo: booleano
+  inicial: nao
+- id: modelo_trabalho
+  nome: Modelo de trabalho
+  tipo: enum
+  valores:
+  - produto
+  - projeto
+  - fluxo_continuo
+- id: var_sem_uso
+  nome: Variável sem uso
+  tipo: texto
+decisor_construir_comprar_assinar:
+  criterios: [diferenciacao, tempo_ate_valor, custo_total, dependencia_fornecedor, risco]
+  escala: {min: 1, max: 5}
+  opcoes: [construir, comprar, assinar]
+  ordem_desempate: [assinar, comprar, construir]
+  pesos:
+    cumprir_prazo: {diferenciacao: 0.10, tempo_ate_valor: 0.40, custo_total: 0.20, dependencia_fornecedor: 0.10, risco: 0.20}

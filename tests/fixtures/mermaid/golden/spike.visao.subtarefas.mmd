@@ -1,0 +1,46 @@
+flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"]) ~~~ z_LEG_r0["<b>Pergunta e timebox</b><br/>raia chamada"] ~~~ z_LEG_r1["<b>Experimento e prova de conceito</b><br/>raia chamada"] ~~~ z_LEG_r2["<b>Recomendação</b><br/>raia chamada"]
+  end
+  subgraph z_SG_spk_orq["<b>Orquestração: spike e prova de conceito</b>"]
+    direction LR
+    spk_orq_s0(["<small><b>spk_orq_s0</b></small><br/>Incerteza que impede decidir ou estimar"])
+    spk_orq_c1[["<small><b>spk_orq_c1</b></small><br/>Pergunta e timebox"]]
+    spk_orq_c2[["<small><b>spk_orq_c2</b></small><br/>Experimento e prova de conceito"]]
+    spk_orq_c3[["<small><b>spk_orq_c3</b></small><br/>Recomendação"]]
+    spk_orq_e3(["<small><b>spk_orq_e3</b></small><br/>Timebox esgotado: decidir se estende ou encerra<br/><i>retorno: timebox_esgotado</i>"])
+    spk_orq_e1(["<small><b>spk_orq_e1</b></small><br/>Abordagem viável, segue para a feature<br/><i>retorno: viavel</i>"])
+    spk_orq_e2(["<small><b>spk_orq_e2</b></small><br/>Abordagem descartada, alternativa registrada<br/><i>retorno: inviavel</i>"])
+  end
+  spk_orq_s0 --> spk_orq_c1
+  spk_orq_c1 -->|"definido"| spk_orq_c2
+  spk_orq_c2 -->|"respondido"| spk_orq_c3
+  spk_orq_c2 -->|"timebox_esgotado"| spk_orq_e3
+  spk_orq_c3 -->|"viavel"| spk_orq_e1
+  spk_orq_c3 -->|"inviavel"| spk_orq_e2
+  z_LIG_spk_orq_e1_0{{"<b>Spike vira feature</b><br/>demanda: Feature<br/>nó: feat_orq_s0"}}
+  spk_orq_e1 -.->|"aciona"| z_LIG_spk_orq_e1_0
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#332288,stroke:#1F1452,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#117733,stroke:#0A471F,stroke-width:1px,color:#FFFFFF
+  classDef z_R_3 fill:#CC6677,stroke:#7A3D47,stroke-width:1px,color:#000000
+  classDef z_C_0_1 fill:#332288,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_2 fill:#117733,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_3 fill:#CC6677,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  class z_LEG_r0 z_R_1
+  class z_LEG_r1 z_R_2
+  class z_LEG_r2 z_R_3
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
+  class spk_orq_c1 z_C_0_1
+  class spk_orq_c2 z_C_0_2
+  class spk_orq_c3 z_C_0_3
+  class spk_orq_s0,spk_orq_e3,spk_orq_e1,spk_orq_e2 z_R_0
+  class z_LIG_spk_orq_e1_0 ponte
+  style z_SG_spk_orq fill:#E7ECEE,stroke:#607D8B,stroke-width:3px,color:#000000

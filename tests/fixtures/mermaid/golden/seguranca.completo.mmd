@@ -1,0 +1,271 @@
+flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"])
+  end
+  subgraph z_SG_sec_orq["<b>Orquestração: segurança</b>"]
+    direction LR
+    sec_orq_s0(["<small><b>sec_orq_s0</b></small><br/>Vulnerabilidade encontrada ou ataque identificado"])
+    sec_orq_c1[["<small><b>sec_orq_c1</b></small><br/>Triagem de segurança"]]
+    sec_orq_c2[["<small><b>sec_orq_c2</b></small><br/>Contenção da exposição"]]
+    sec_orq_e2(["<small><b>sec_orq_e2</b></small><br/>Exploração ativa tratada como incidente de segurança<br/><i>retorno: ataque_em_andamento</i>"])
+    sec_orq_e3(["<small><b>sec_orq_e3</b></small><br/>Falso positivo registrado<br/><i>retorno: falso_positivo</i>"])
+    sec_orq_c3[["<small><b>sec_orq_c3</b></small><br/>Correção da vulnerabilidade"]]
+    sec_orq_c4[["<small><b>sec_orq_c4</b></small><br/>Publicar a correção em ambiente de testes"]]
+    sec_orq_c5[["<small><b>sec_orq_c5</b></small><br/>Testes automatizados e regressão"]]
+    sec_orq_c6[["<small><b>sec_orq_c6</b></small><br/>Testes de segurança da correção"]]
+    sec_orq_c7[["<small><b>sec_orq_c7</b></small><br/>Review humano"]]
+    sec_orq_c8[["<small><b>sec_orq_c8</b></small><br/>Implantação"]]
+    sec_orq_c9[["<small><b>sec_orq_c9</b></small><br/>Validação em produção e monitoramento"]]
+    sec_orq_c10[["<small><b>sec_orq_c10</b></small><br/>Conformidade e divulgação"]]
+    sec_orq_e4(["<small><b>sec_orq_e4</b></small><br/>Incidente acionado em produção<br/><i>retorno: incidente_acionado</i>"])
+    sec_orq_e1(["<small><b>sec_orq_e1</b></small><br/>Vulnerabilidade corrigida, validada e divulgada<br/><i>retorno: divulgado</i>"])
+  end
+  subgraph z_SG_sec_tri["<b>Triagem de segurança</b>"]
+    direction LR
+    sec_tri_s0(["<small><b>sec_tri_s0</b></small><br/>Achado recebido, triar"])
+    sec_tri_t1["<small><b>sec_tri_t1</b></small><br/>Registrar o achado com a origem e a evidência"]
+    sec_tri_g1{"<small><b>sec_tri_g1</b></small><br/>Há ataque ou<br/>exploração em<br/>andamento?"}
+    sec_tri_e1(["<small><b>sec_tri_e1</b></small><br/>Exploração ativa<br/><i>retorno: ataque_em_andamento</i>"])
+    sec_tri_t2["<small><b>sec_tri_t2</b></small><br/>Reproduzir e classificar o risco pelo CVSS e pela exposição"]
+    sec_tri_g2{"<small><b>sec_tri_g2</b></small><br/>É uma<br/>vulnerabilidade<br/>real?"}
+    sec_tri_e2(["<small><b>sec_tri_e2</b></small><br/>Vulnerabilidade confirmada<br/><i>retorno: vulnerabilidade_confirmada</i>"])
+    sec_tri_e3(["<small><b>sec_tri_e3</b></small><br/>Falso positivo<br/><i>retorno: falso_positivo</i>"])
+  end
+  subgraph z_SG_sec_con["<b>Contenção da exposição</b>"]
+    direction LR
+    sec_con_s0(["<small><b>sec_con_s0</b></small><br/>Vulnerabilidade confirmada, conter"])
+    sec_con_g1{"<small><b>sec_con_g1</b></small><br/>Severidade crítica<br/>ou alta, ou exposta<br/>na internet?"}
+    sec_con_e2(["<small><b>sec_con_e2</b></small><br/>Sem contenção imediata<br/><i>retorno: sem_contencao</i>"])
+    sec_con_t1["<small><b>sec_con_t1</b></small><br/>Conter a exposição: WAF, bloqueio ou rotação de segredos"]
+    sec_con_e1(["<small><b>sec_con_e1</b></small><br/>Exposição contida<br/><i>retorno: contido</i>"])
+  end
+  subgraph z_SG_sec_cor["<b>Correção da vulnerabilidade</b>"]
+    direction LR
+    sec_cor_s0(["<small><b>sec_cor_s0</b></small><br/>Corrigir a vulnerabilidade"])
+    sec_cor_t1["<small><b>sec_cor_t1</b></small><br/>Escrever o teste que reproduz a exploração"]
+    sec_cor_t2["<small><b>sec_cor_t2</b></small><br/>Corrigir na causa: patch, dependência ou código"]
+    sec_cor_e1(["<small><b>sec_cor_e1</b></small><br/>Correção pronta<br/><i>retorno: correcao_pronta</i>"])
+  end
+  subgraph z_SG_com_pub["<b>Publicação em ambiente de testes</b>"]
+    direction LR
+    com_pub_s0(["<small><b>com_pub_s0</b></small><br/>Entregas integradas, publicar para testar"])
+    com_pub_t1["<small><b>com_pub_t1</b></small><br/>Versionar conforme a estratégia do time<br/><i>▸ 2 subtarefas</i>"]
+    com_pub_t2["<small><b>com_pub_t2</b></small><br/>Implantar no ambiente de testes<br/><i>▸ 3 subtarefas</i>"]
+    com_pub_g1{"<small><b>com_pub_g1</b></small><br/>O ambiente subiu<br/>saudável?"}
+    com_pub_e1(["<small><b>com_pub_e1</b></small><br/>Publicada no ambiente de testes<br/><i>retorno: publicado</i>"])
+    com_pub_e2(["<small><b>com_pub_e2</b></small><br/>Falha na publicação<br/><i>retorno: falha_na_publicacao</i>"])
+  end
+  subgraph z_SG_com_val["<b>Testes automatizados e regressão</b>"]
+    direction LR
+    com_val_s0(["<small><b>com_val_s0</b></small><br/>Execução integrada, testar a feature"])
+    com_val_t1["<small><b>com_val_t1</b></small><br/>Revisar e aprimorar os testes (TDD e pirâmide)<br/><i>▸ 5 subtarefas</i>"]
+    com_val_t2["<small><b>com_val_t2</b></small><br/>Executar os testes da feature<br/><i>▸ 2 subtarefas</i>"]
+    com_val_g1{"<small><b>com_val_g1</b></small><br/>Os testes passaram?"}
+    com_val_e1(["<small><b>com_val_e1</b></small><br/>Testes da feature aprovados<br/><i>retorno: testes_aprovados</i>"])
+    com_val_e2(["<small><b>com_val_e2</b></small><br/>Testes reprovados depois de 3 tentativas<br/><i>retorno: testes_reprovados</i>"])
+    com_val_t3["<small><b>com_val_t3</b></small><br/>Corrigir e reforçar o teste que falhou<br/><i>▸ 2 subtarefas</i>"]
+  end
+  subgraph z_SG_com_seg["<b>Testes de segurança</b>"]
+    direction LR
+    com_seg_s0(["<small><b>com_seg_s0</b></small><br/>Entrega pronta, testar a segurança"])
+    com_seg_t1["<small><b>com_seg_t1</b></small><br/>Analisar o código, as dependências e os segredos<br/><i>▸ 3 subtarefas</i>"]
+    com_seg_t2["<small><b>com_seg_t2</b></small><br/>Testar a aplicação em execução<br/><i>▸ 4 subtarefas</i>"]
+    com_seg_g1{"<small><b>com_seg_g1</b></small><br/>Sem vulnerabilidade<br/>alta ou crítica?"}
+    com_seg_e1(["<small><b>com_seg_e1</b></small><br/>Segurança aprovada<br/><i>retorno: aprovado</i>"])
+    com_seg_e2(["<small><b>com_seg_e2</b></small><br/>Vulnerabilidade alta ou crítica aberta<br/><i>retorno: reprovado</i>"])
+  end
+  subgraph z_SG_com_rev["<b>Review humano</b>"]
+    direction LR
+    com_rev_s0(["<small><b>com_rev_s0</b></small><br/>Testes aprovados, revisar a entrega"])
+    com_rev_t1["<small><b>com_rev_t1</b></small><br/>Review humano: arquitetura, edge cases, segurança<br/><i>▸ 3 subtarefas</i>"]
+    com_rev_g1{"<small><b>com_rev_g1</b></small><br/>Aprovada no review?"}
+    com_rev_e1(["<small><b>com_rev_e1</b></small><br/>Entrega aprovada pelo humano<br/><i>retorno: aprovado_pelo_humano</i>"])
+    com_rev_e2(["<small><b>com_rev_e2</b></small><br/>Ajustes solicitados no review<br/><i>retorno: ajustes_solicitados</i>"])
+  end
+  subgraph z_SG_com_etg["<b>Implantação</b>"]
+    direction LR
+    com_etg_s0(["<small><b>com_etg_s0</b></small><br/>Testes integrados aprovados, implantar"])
+    com_etg_g1{"<small><b>com_etg_g1</b></small><br/>Afetado por janela<br/>crítica ou<br/>sazonalidade?"}
+    com_etg_t1["<small><b>com_etg_t1</b></small><br/>Janela crítica: ajustar a entrega"]
+    com_etg_t2["<small><b>com_etg_t2</b></small><br/>Implantar em produção<br/><i>▸ 2 subtarefas</i>"]
+    com_etg_t3["<small><b>com_etg_t3</b></small><br/>Conferir a implantação pelo checklist<br/><i>▸ 4 subtarefas</i>"]
+    com_etg_g2{"<small><b>com_etg_g2</b></small><br/>A implantação está<br/>saudável?"}
+    com_etg_e1(["<small><b>com_etg_e1</b></small><br/>Implantada e saudável em produção<br/><i>retorno: implantado</i>"])
+    com_etg_t4["<small><b>com_etg_t4</b></small><br/>Reverter ou desligar a feature<br/><i>▸ 2 subtarefas</i>"]
+    com_etg_e2(["<small><b>com_etg_e2</b></small><br/>Implantação revertida<br/><i>retorno: implantacao_revertida</i>"])
+  end
+  subgraph z_SG_com_mon["<b>Validação em produção e monitoramento</b>"]
+    direction LR
+    com_mon_s0(["<small><b>com_mon_s0</b></small><br/>Liberada, validar em produção"])
+    com_mon_t1["<small><b>com_mon_t1</b></small><br/>Monitorar indicadores técnicos e de negócio<br/><i>▸ 3 subtarefas</i>"]
+    com_mon_g1{"<small><b>com_mon_g1</b></small><br/>A entrega causou<br/>incidente ou<br/>degradação?"}
+    com_mon_g2{"<small><b>com_mon_g2</b></small><br/>A janela de<br/>validação terminou?"}
+    com_mon_t2["<small><b>com_mon_t2</b></small><br/>Acionar o fluxo de incidente<br/><i>▸ 2 subtarefas</i>"]
+    com_mon_t3["<small><b>com_mon_t3</b></small><br/>Registrar o resultado e encerrar a validação<br/><i>▸ 2 subtarefas</i>"]
+    com_mon_e2(["<small><b>com_mon_e2</b></small><br/>Incidente acionado pela feature<br/><i>retorno: incidente_acionado</i>"])
+    com_mon_e1(["<small><b>com_mon_e1</b></small><br/>Feature validada em produção<br/><i>retorno: feature_validada</i>"])
+  end
+  subgraph z_SG_sec_div["<b>Conformidade e divulgação</b>"]
+    direction LR
+    sec_div_s0(["<small><b>sec_div_s0</b></small><br/>Correção em produção, divulgar"])
+    sec_div_t1["<small><b>sec_div_t1</b></small><br/>Avaliar se houve exposição de dados pessoais"]
+    sec_div_g1{"<small><b>sec_div_g1</b></small><br/>Houve exposição de<br/>dados pessoais?"}
+    sec_div_t2["<small><b>sec_div_t2</b></small><br/>Notificar a autoridade e os titulares no prazo legal"]
+    sec_div_t3["<small><b>sec_div_t3</b></small><br/>Publicar o aviso de segurança para quem precisa agir"]
+    sec_div_e1(["<small><b>sec_div_e1</b></small><br/>Divulgado<br/><i>retorno: divulgado</i>"])
+  end
+  sec_orq_s0 --> sec_orq_c1
+  sec_tri_s0 --> sec_tri_t1
+  sec_tri_t1 --> sec_tri_g1
+  sec_tri_g1 -->|"sim, exploração ativa"| sec_tri_e1
+  sec_tri_g1 -->|"não"| sec_tri_t2
+  sec_tri_t2 --> sec_tri_g2
+  sec_tri_g2 -->|"sim, confirmada"| sec_tri_e2
+  sec_tri_g2 -->|"não, falso positivo"| sec_tri_e3
+  sec_con_s0 --> sec_con_g1
+  sec_con_g1 -->|"sim, conter já"| sec_con_t1
+  sec_con_g1 -->|"não, seguir para a correção"| sec_con_e2
+  sec_con_t1 --> sec_con_e1
+  sec_cor_s0 --> sec_cor_t1
+  sec_cor_t1 --> sec_cor_t2
+  sec_cor_t2 --> sec_cor_e1
+  com_pub_s0 --> com_pub_t1
+  com_pub_t1 --> com_pub_t2
+  com_pub_t2 --> com_pub_g1
+  com_pub_g1 -->|"sim"| com_pub_e1
+  com_pub_g1 -->|"não"| com_pub_e2
+  com_val_s0 --> com_val_t1
+  com_val_t1 --> com_val_t2
+  com_val_t2 --> com_val_g1
+  com_val_g1 -->|"sim"| com_val_e1
+  com_val_g1 -->|"não e tentativas #lt; 3: corrigir e reforçar"| com_val_t3
+  com_val_g1 -->|"não e tentativas #gt;= 3: reprovado"| com_val_e2
+  com_val_t3 --> com_val_t2
+  com_seg_s0 --> com_seg_t1
+  com_seg_t1 --> com_seg_t2
+  com_seg_t2 --> com_seg_g1
+  com_seg_g1 -->|"sim"| com_seg_e1
+  com_seg_g1 -->|"não"| com_seg_e2
+  com_rev_s0 --> com_rev_t1
+  com_rev_t1 --> com_rev_g1
+  com_rev_g1 -->|"sim"| com_rev_e1
+  com_rev_g1 -->|"não, com ajustes"| com_rev_e2
+  com_etg_s0 --> com_etg_g1
+  com_etg_g1 -->|"sim, há janela crítica ativa"| com_etg_t1
+  com_etg_g1 -->|"não, sem janela crítica"| com_etg_t2
+  com_etg_t1 --> com_etg_t2
+  com_etg_t2 --> com_etg_t3
+  com_etg_t3 --> com_etg_g2
+  com_etg_g2 -->|"sim"| com_etg_e1
+  com_etg_g2 -->|"não"| com_etg_t4
+  com_etg_t4 --> com_etg_e2
+  com_mon_s0 --> com_mon_t1
+  com_mon_t1 --> com_mon_g1
+  com_mon_g1 -->|"sim"| com_mon_t2
+  com_mon_g1 -->|"não"| com_mon_g2
+  com_mon_g2 -->|"sim, com as metas avaliadas"| com_mon_t3
+  com_mon_g2 -->|"não, continuar observando"| com_mon_t1
+  com_mon_t2 --> com_mon_e2
+  com_mon_t3 --> com_mon_e1
+  sec_div_s0 --> sec_div_t1
+  sec_div_t1 --> sec_div_g1
+  sec_div_g1 -->|"sim, notificar"| sec_div_t2
+  sec_div_g1 -->|"não"| sec_div_t3
+  sec_div_t2 --> sec_div_t3
+  sec_div_t3 --> sec_div_e1
+  sec_orq_c1 -.->|"chama"| sec_tri_s0
+  sec_tri_e1 -.->|"retorno: ataque_em_andamento"| sec_orq_e2
+  sec_tri_e2 -.->|"retorno: vulnerabilidade_confirmada"| sec_orq_c2
+  sec_tri_e3 -.->|"retorno: falso_positivo"| sec_orq_e3
+  sec_orq_c2 -.->|"chama"| sec_con_s0
+  sec_con_e2 -.->|"retorno: sem_contencao"| sec_orq_c3
+  sec_con_e1 -.->|"retorno: contido"| sec_orq_c3
+  sec_orq_c3 -.->|"chama"| sec_cor_s0
+  sec_cor_e1 -.->|"retorno: correcao_pronta"| sec_orq_c4
+  sec_orq_c4 -.->|"chama"| com_pub_s0
+  com_pub_e1 -.->|"retorno: publicado"| sec_orq_c5
+  com_pub_e2 -.->|"retorno: falha_na_publicacao"| sec_orq_c3
+  sec_orq_c5 -.->|"chama"| com_val_s0
+  com_val_e1 -.->|"retorno: testes_aprovados"| sec_orq_c6
+  com_val_e2 -.->|"retorno: testes_reprovados"| sec_orq_c3
+  sec_orq_c6 -.->|"chama"| com_seg_s0
+  com_seg_e1 -.->|"retorno: aprovado"| sec_orq_c7
+  com_seg_e2 -.->|"retorno: reprovado"| sec_orq_c3
+  sec_orq_c7 -.->|"chama"| com_rev_s0
+  com_rev_e1 -.->|"retorno: aprovado_pelo_humano"| sec_orq_c8
+  com_rev_e2 -.->|"retorno: ajustes_solicitados"| sec_orq_c3
+  sec_orq_c8 -.->|"chama"| com_etg_s0
+  com_etg_e1 -.->|"retorno: implantado"| sec_orq_c9
+  com_etg_e2 -.->|"retorno: implantacao_revertida"| sec_orq_c3
+  sec_orq_c9 -.->|"chama"| com_mon_s0
+  com_mon_e2 -.->|"retorno: incidente_acionado"| sec_orq_e4
+  com_mon_e1 -.->|"retorno: feature_validada"| sec_orq_c10
+  sec_orq_c10 -.->|"chama"| sec_div_s0
+  sec_div_e1 -.->|"retorno: divulgado"| sec_orq_e1
+  z_LIG_sec_orq_e2_0{{"<b>Ataque vira incidente</b><br/>demanda: Incidente<br/>nó: inc_orq_s0"}}
+  z_LIG_com_mon_t2_0{{"<b>Feature em produção causa incidente</b><br/>demanda: Incidente<br/>nó: inc_orq_s0"}}
+  sec_orq_e2 -.->|"aciona"| z_LIG_sec_orq_e2_0
+  com_mon_t2 -.->|"aciona"| z_LIG_com_mon_t2_0
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#332288,stroke:#1F1452,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#117733,stroke:#0A471F,stroke-width:1px,color:#FFFFFF
+  classDef z_R_3 fill:#CC6677,stroke:#7A3D47,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#BBCC33,stroke:#707A1F,stroke-width:1px,color:#000000
+  classDef z_R_5 fill:#D55E00,stroke:#803800,stroke-width:1px,color:#000000
+  classDef z_R_6 fill:#EE7733,stroke:#8F471F,stroke-width:1px,color:#000000
+  classDef z_R_7 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_R_8 fill:#999933,stroke:#5C5C1F,stroke-width:1px,color:#000000
+  classDef z_R_9 fill:#77AADD,stroke:#476685,stroke-width:1px,color:#000000
+  classDef z_R_10 fill:#44AA99,stroke:#29665C,stroke-width:1px,color:#000000
+  classDef z_C_0_1 fill:#332288,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_2 fill:#117733,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_3 fill:#CC6677,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_4 fill:#BBCC33,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_5 fill:#D55E00,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_6 fill:#EE7733,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_7 fill:#56B4E9,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_8 fill:#999933,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_9 fill:#77AADD,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_10 fill:#44AA99,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
+  class sec_orq_c1 z_C_0_1
+  class sec_orq_c2 z_C_0_2
+  class sec_orq_c3 z_C_0_3
+  class sec_orq_c4 z_C_0_4
+  class sec_orq_c5 z_C_0_5
+  class sec_orq_c6 z_C_0_6
+  class sec_orq_c7 z_C_0_7
+  class sec_orq_c8 z_C_0_8
+  class sec_orq_c9 z_C_0_9
+  class sec_orq_c10 z_C_0_10
+  class sec_orq_s0,sec_orq_e2,sec_orq_e3,sec_orq_e4,sec_orq_e1 z_R_0
+  class sec_tri_s0,sec_tri_t1,sec_tri_g1,sec_tri_e1,sec_tri_t2,sec_tri_g2,sec_tri_e2,sec_tri_e3 z_R_1
+  class sec_con_s0,sec_con_g1,sec_con_e2,sec_con_t1,sec_con_e1 z_R_2
+  class sec_cor_s0,sec_cor_t1,sec_cor_t2,sec_cor_e1 z_R_3
+  class com_pub_s0,com_pub_t1,com_pub_t2,com_pub_g1,com_pub_e1,com_pub_e2 z_R_4
+  class com_val_s0,com_val_t1,com_val_t2,com_val_g1,com_val_e1,com_val_e2,com_val_t3 z_R_5
+  class com_seg_s0,com_seg_t1,com_seg_t2,com_seg_g1,com_seg_e1,com_seg_e2 z_R_6
+  class com_rev_s0,com_rev_t1,com_rev_g1,com_rev_e1,com_rev_e2 z_R_7
+  class com_etg_s0,com_etg_g1,com_etg_t1,com_etg_t2,com_etg_t3,com_etg_g2,com_etg_e1,com_etg_t4,com_etg_e2 z_R_8
+  class com_mon_s0,com_mon_t1,com_mon_g1,com_mon_g2,com_mon_t2,com_mon_t3,com_mon_e2,com_mon_e1 z_R_9
+  class sec_div_s0,sec_div_t1,sec_div_g1,sec_div_t2,sec_div_t3,sec_div_e1 z_R_10
+  class sec_tri_g1,sec_tri_g2,sec_con_g1,com_pub_g1,com_val_g1,com_seg_g1,com_rev_g1,com_etg_g1,com_etg_g2,com_mon_g1,com_mon_g2,sec_div_g1 gw
+  class z_LIG_sec_orq_e2_0,z_LIG_com_mon_t2_0 ponte
+  style z_SG_sec_orq fill:#E7ECEE,stroke:#607D8B,stroke-width:3px,color:#000000
+  style z_SG_sec_tri fill:#E0DEED,stroke:#332288,stroke-width:3px,color:#000000
+  style z_SG_sec_con fill:#DBEBE0,stroke:#117733,stroke-width:3px,color:#000000
+  style z_SG_sec_cor fill:#F7E8EB,stroke:#CC6677,stroke-width:3px,color:#000000
+  style z_SG_com_pub fill:#F5F7E0,stroke:#BBCC33,stroke-width:3px,color:#000000
+  style z_SG_com_val fill:#F9E7D9,stroke:#D55E00,stroke-width:3px,color:#000000
+  style z_SG_com_seg fill:#FCEBE0,stroke:#EE7733,stroke-width:3px,color:#000000
+  style z_SG_com_rev fill:#E6F4FC,stroke:#56B4E9,stroke-width:3px,color:#000000
+  style z_SG_com_etg fill:#F0F0E0,stroke:#999933,stroke-width:3px,color:#000000
+  style z_SG_com_mon fill:#EBF2FA,stroke:#77AADD,stroke-width:3px,color:#000000
+  style z_SG_sec_div fill:#E3F2F0,stroke:#44AA99,stroke-width:3px,color:#000000

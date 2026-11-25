@@ -27,6 +27,25 @@ import {
   Padrao,
 } from './fundamentals';
 import { GUIA_PRATICO_TRANSLATABLE, GuiaPratico } from './guides';
+import {
+  Artefato,
+  CategoriaFerramentaGuia,
+  Celula,
+  Decisao,
+  FonteGuia,
+  GUIDE_TRANSLATABLE,
+  No,
+  PadraoGuia,
+  Papel,
+  Pergunta,
+  Playbook,
+  Raia,
+  Rito,
+  Subtarefa,
+  Tarefa,
+  TipoDeArtefato,
+  Variavel,
+} from './guide';
 import { LICENCA_TRANSLATABLE, Licenca } from './licenca';
 import { STACK_TRANSLATABLE, Stack } from './stacks';
 import {
@@ -72,6 +91,23 @@ export const TYPES = {
   abordagem: { schema: Abordagem, translatable: CONCEITUAL_ONLY_TRANSLATABLE },
   estrategia: { schema: Estrategia, translatable: CONCEITUAL_ONLY_TRANSLATABLE },
   requisito: { schema: Requisito, translatable: CONCEITUAL_ONLY_TRANSLATABLE },
+  // Derived from the guide YAML (lib/guide), never authored as files.
+  raia: { schema: Raia, translatable: GUIDE_TRANSLATABLE },
+  tarefa: { schema: Tarefa, translatable: GUIDE_TRANSLATABLE },
+  decisao: { schema: Decisao, translatable: GUIDE_TRANSLATABLE },
+  no: { schema: No, translatable: GUIDE_TRANSLATABLE },
+  subtarefa: { schema: Subtarefa, translatable: GUIDE_TRANSLATABLE },
+  playbook: { schema: Playbook, translatable: GUIDE_TRANSLATABLE },
+  pergunta: { schema: Pergunta, translatable: GUIDE_TRANSLATABLE },
+  celula: { schema: Celula, translatable: GUIDE_TRANSLATABLE },
+  artefato: { schema: Artefato, translatable: GUIDE_TRANSLATABLE },
+  variavel: { schema: Variavel, translatable: GUIDE_TRANSLATABLE },
+  papel: { schema: Papel, translatable: GUIDE_TRANSLATABLE },
+  rito: { schema: Rito, translatable: GUIDE_TRANSLATABLE },
+  'categoria-ferramenta': { schema: CategoriaFerramentaGuia, translatable: GUIDE_TRANSLATABLE },
+  'fonte-guia': { schema: FonteGuia, translatable: GUIDE_TRANSLATABLE },
+  'padrao-guia': { schema: PadraoGuia, translatable: GUIDE_TRANSLATABLE },
+  'tipo-de-artefato': { schema: TipoDeArtefato, translatable: GUIDE_TRANSLATABLE },
 } as const;
 
 export type Tipo = keyof typeof TYPES;
@@ -118,6 +154,22 @@ export const Entity = z.discriminatedUnion('tipo', [
   Abordagem,
   Estrategia,
   Requisito,
+  Raia,
+  Tarefa,
+  Decisao,
+  No,
+  Subtarefa,
+  Playbook,
+  Pergunta,
+  Celula,
+  Artefato,
+  Variavel,
+  Papel,
+  Rito,
+  CategoriaFerramentaGuia,
+  FonteGuia,
+  PadraoGuia,
+  TipoDeArtefato,
 ]);
 export type Entity = z.infer<typeof Entity>;
 

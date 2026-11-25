@@ -32,6 +32,32 @@ jobs:
       - run: npm run smoke
         env:
           SITE_BASE: /software-engineer-kit
+  guide-oracle:
+    name: guide-oracle
+    # Fixed runner: the pinned oracle Python is published for 24.04, not yet for ubuntu-latest (26.04).
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: 3.12.11
+      - run: pip install -r requirements.txt
+        working-directory: tools/guide-oracle
+      - name: Validate the guide with the Python oracle
+        run: python -m guia_decisao.cli validar --estrito --yaml ../../content/guide --schema ../../schema/flows.schema.json
+        working-directory: tools/guide-oracle
+        env:
+          PYTHONPATH: src
+      - name: Run the oracle tests
+        run: python -m pytest -q -p no:cacheprovider
+        working-directory: tools/guide-oracle
+        env:
+          PYTHONPATH: src
   dependency-review:
     name: dependency-review
     runs-on: ubuntu-latest

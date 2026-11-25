@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
 import { z } from 'zod';
-import { BASE_TRANSLATABLE, baseShape, id, statusEditorial } from './common';
+import { BASE_TRANSLATABLE, baseShape, id, statusEditorial, wikilinks } from './common';
 
 /** Demand sigla: 3 or 4 letters (feat, bug, inc ...). Practical guides keep the 3 letter list. */
 const DEMAND_SIGLA_RE = /^[a-z]{3,4}$/;
 const rawList = z.array(z.record(z.string(), z.unknown()));
 
 /**
- * Guide demand flow envelope (content/pt-BR/flows/<id>.yaml). The lists keep the guide shapes
+ * Guide demand flow envelope (derived from content/guide/<id>.yaml). The lists keep the guide shapes
  * and are validated in depth by Ajv against schema/flows.schema.json.
  */
 export const Demanda = z.strictObject({
@@ -26,6 +26,9 @@ export const Demanda = z.strictObject({
   decisoes: rawList,
   playbooks: rawList.optional(),
   celulas: rawList.optional(),
+  perguntas: rawList.optional(),
+  /** [[id]] links derived from the guide reference fields. */
+  relacoes: wikilinks.optional(),
   requisitos: z.array(id).optional(),
   abordagens: z.array(id).optional(),
   tecnicas: z.array(id).optional(),

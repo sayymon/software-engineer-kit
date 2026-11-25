@@ -61,9 +61,9 @@ describe('workflows', () => {
     }
   });
 
-  it('configures dependabot for npm and github-actions', () => {
+  it('configures dependabot for npm, github-actions and the pip oracle', () => {
     const d = YAML.parse(readFileSync(join(root, '.github/dependabot.yml'), 'utf8')) as { updates: { 'package-ecosystem': string }[] };
-    expect(d.updates.map((u) => u['package-ecosystem']).sort()).toEqual(['github-actions', 'npm']);
+    expect(d.updates.map((u) => u['package-ecosystem']).sort()).toEqual(['github-actions', 'npm', 'pip']);
   });
 
   it('parses the issue templates', () => {

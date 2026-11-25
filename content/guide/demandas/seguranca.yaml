@@ -1,0 +1,953 @@
+# Demanda: Segurança. Onda 3, status rascunho.
+
+demandas:
+  - id: seguranca
+    nome: "Segurança"
+    sigla: sec
+    publico: false
+
+artefatos:
+  - id: achado_de_seguranca
+    nome: "Achado de segurança"
+    descricao: "Registro do achado: origem (varredura, teste de intrusão, recompensa por bugs, alerta, CVE de dependência), componente, evidência e quem reportou"
+    exemplo: "CVE de alta severidade na biblioteca de parsing de JSON usada pelo checkout, reportada pela varredura de dependências"
+    tipo: documento
+    subtipo: registro
+    status: rascunho
+    publico: false
+  - id: classificacao_de_risco
+    nome: "Classificação de risco de segurança"
+    descricao: "Severidade pelo CVSS, exposição (pública ou interna), exploração conhecida e dados afetados"
+    exemplo: "CVSS 8,1; endpoint público; exploração pública conhecida; dados de pagamento no caminho"
+    tipo: documento
+    subtipo: analise
+    status: rascunho
+    publico: false
+  - id: contencao_de_seguranca
+    nome: "Contenção de segurança"
+    descricao: "Medida imediata que reduz a exposição antes da correção: bloqueio, regra de WAF (patch virtual), rotação de segredos ou desligar o recurso"
+    exemplo: "Regra de WAF bloqueando o payload malicioso e rotação das chaves da API de cupons"
+    tipo: acao
+    subtipo: contencao
+    status: rascunho
+    publico: false
+  - id: teste_de_exploracao
+    nome: "Teste de exploração"
+    descricao: "Teste que reproduz a exploração da vulnerabilidade e passa a falhar depois da correção"
+    exemplo: "Teste que envia o JSON malicioso ao checkout e espera a recusa, não a execução"
+    tipo: teste
+    subtipo: seguranca
+    status: rascunho
+    publico: false
+  - id: avaliacao_de_dados_pessoais
+    nome: "Avaliação de dados pessoais"
+    descricao: "Se houve exposição de dados pessoais, quais, de quantas pessoas e por quanto tempo, para decidir as notificações legais"
+    exemplo: "Sem exposição: logs mostram tentativas bloqueadas pela regra de WAF desde a primeira hora"
+    tipo: documento
+    subtipo: analise
+    status: rascunho
+    publico: false
+  - id: notificacao_regulatoria
+    nome: "Notificação regulatória"
+    descricao: "Comunicação à autoridade de proteção de dados e aos titulares quando a lei exige"
+    exemplo: "Notificação à autoridade em até 3 dias úteis com a natureza dos dados e as medidas tomadas"
+    tipo: acao
+    subtipo: comunicacao
+    destinatarios: [stakeholder]
+    status: rascunho
+    publico: false
+  - id: aviso_de_seguranca
+    nome: "Aviso de segurança"
+    descricao: "Comunicado responsável do que foi corrigido, para quem precisa agir (times, suporte e, se for o caso, clientes)"
+    exemplo: "Aviso aos times: dependência atualizada no checkout; nenhum dado exposto; atualizar também nos serviços X e Y"
+    tipo: acao
+    subtipo: comunicacao
+    destinatarios: [times_dependentes, suporte, stakeholder]
+    status: rascunho
+    publico: false
+
+raias:
+  - id: sec_orq
+    nome: "Orquestração: segurança"
+    demanda: seguranca
+    responsabilidade: "Tratar uma vulnerabilidade encontrada ou um ataque identificado: triar, conter, corrigir, validar e divulgar com responsabilidade"
+    cor: '#607D8B'
+    orquestradora: true
+    status: rascunho
+    publico: false
+  - id: sec_tri
+    nome: "Triagem de segurança"
+    demanda: seguranca
+    responsabilidade: "Confirmar o achado, descartar falso positivo e classificar o risco"
+    cor: '#332288'
+    status: rascunho
+    publico: false
+  - id: sec_con
+    nome: "Contenção da exposição"
+    demanda: seguranca
+    responsabilidade: "Reduzir a exposição enquanto a correção não chega"
+    cor: '#117733'
+    status: rascunho
+    publico: false
+    entradas: [classificacao_de_risco, achado_de_seguranca]
+  - id: sec_cor
+    nome: "Correção da vulnerabilidade"
+    demanda: seguranca
+    responsabilidade: "Corrigir na causa com o teste de exploração e abrir o PR"
+    cor: '#CC6677'
+    status: rascunho
+    publico: false
+    entradas: [classificacao_de_risco, achado_de_seguranca]
+  - id: sec_div
+    nome: "Conformidade e divulgação"
+    demanda: seguranca
+    responsabilidade: "Avaliar dados pessoais, cumprir as notificações legais e divulgar com responsabilidade"
+    cor: '#44AA99'
+    status: rascunho
+    publico: false
+    entradas: [achado_de_seguranca, classificacao_de_risco]
+
+decisoes:
+  - id: sec_tri_s0
+    raia: sec_tri
+    tipo: inicio
+    rotulo: "Achado recebido, triar"
+    condicao: ''
+    proximo:
+    - para: sec_tri_t1
+      condicao: ""
+    estado: {}
+    playbook: pb_sec_tri_s0
+    status: rascunho
+    publico: false
+  - id: sec_tri_t1
+    raia: sec_tri
+    tipo: tarefa
+    rotulo: "Registrar o achado com a origem e a evidência"
+    condicao: ''
+    proximo:
+    - para: sec_tri_g1
+      condicao: ""
+    estado: {}
+    saidas: [achado_de_seguranca]
+    papel: seguranca
+    apoio: [dev]
+    playbook: pb_sec_tri_t1
+    status: rascunho
+    publico: false
+  - id: sec_tri_g1
+    raia: sec_tri
+    tipo: bifurcacao
+    rotulo: "Há ataque ou exploração em andamento?"
+    condicao: ''
+    proximo:
+    - para: sec_tri_e1
+      condicao: "sim, exploração ativa"
+    - para: sec_tri_t2
+      condicao: "não"
+    estado: {}
+    entradas: [achado_de_seguranca]
+    papel: seguranca
+    consultado: [sre]
+    playbook: pb_sec_tri_g1
+    status: rascunho
+    publico: false
+  - id: sec_tri_t2
+    raia: sec_tri
+    tipo: tarefa
+    rotulo: "Reproduzir e classificar o risco pelo CVSS e pela exposição"
+    condicao: ''
+    proximo:
+    - para: sec_tri_g2
+      condicao: ""
+    estado: {}
+    entradas: [achado_de_seguranca]
+    saidas: [classificacao_de_risco]
+    papel: seguranca
+    apoio: [dev]
+    tecnicas:
+    - tecnica: tec_cvss
+      uso: obrigatoria
+      porque: "a mesma régua de severidade para todos os achados"
+    playbook: pb_sec_tri_t2
+    status: rascunho
+    publico: false
+  - id: sec_tri_g2
+    raia: sec_tri
+    tipo: bifurcacao
+    rotulo: "É uma vulnerabilidade real?"
+    condicao: ''
+    proximo:
+    - para: sec_tri_e2
+      condicao: "sim, confirmada"
+    - para: sec_tri_e3
+      condicao: "não, falso positivo"
+    estado: {}
+    entradas: [classificacao_de_risco]
+    papel: seguranca
+    consultado: [arquiteto]
+    playbook: pb_sec_tri_g2
+    status: rascunho
+    publico: false
+  - id: sec_tri_e1
+    raia: sec_tri
+    tipo: fim
+    rotulo: "Exploração ativa"
+    condicao: ''
+    proximo: []
+    estado: {}
+    retorno: ataque_em_andamento
+    saidas: [achado_de_seguranca]
+    playbook: pb_sec_tri_e1
+    status: rascunho
+    publico: false
+  - id: sec_tri_e2
+    raia: sec_tri
+    tipo: fim
+    rotulo: "Vulnerabilidade confirmada"
+    condicao: ''
+    proximo: []
+    estado: {}
+    retorno: vulnerabilidade_confirmada
+    saidas: [achado_de_seguranca, classificacao_de_risco]
+    playbook: pb_sec_tri_e2
+    status: rascunho
+    publico: false
+  - id: sec_tri_e3
+    raia: sec_tri
+    tipo: fim
+    rotulo: "Falso positivo"
+    condicao: ''
+    proximo: []
+    estado: {}
+    retorno: falso_positivo
+    saidas: [classificacao_de_risco]
+    playbook: pb_sec_tri_e3
+    status: rascunho
+    publico: false
+  - id: sec_con_s0
+    raia: sec_con
+    tipo: inicio
+    rotulo: "Vulnerabilidade confirmada, conter"
+    condicao: ''
+    proximo:
+    - para: sec_con_g1
+      condicao: ""
+    estado: {}
+    playbook: pb_sec_con_s0
+    status: rascunho
+    publico: false
+  - id: sec_con_g1
+    raia: sec_con
+    tipo: bifurcacao
+    rotulo: "Severidade crítica ou alta, ou exposta na internet?"
+    condicao: ''
+    proximo:
+    - para: sec_con_t1
+      condicao: "sim, conter já"
+    - para: sec_con_e2
+      condicao: "não, seguir para a correção"
+    estado: {}
+    entradas: [classificacao_de_risco]
+    papel: seguranca
+    consultado: [sre]
+    playbook: pb_sec_con_g1
+    status: rascunho
+    publico: false
+  - id: sec_con_t1
+    raia: sec_con
+    tipo: tarefa
+    rotulo: "Conter a exposição: WAF, bloqueio ou rotação de segredos"
+    condicao: ''
+    proximo:
+    - para: sec_con_e1
+      condicao: ""
+    estado: {}
+    entradas: [classificacao_de_risco, achado_de_seguranca]
+    saidas: [contencao_de_seguranca]
+    papel: seguranca
+    apoio: [sre, devops]
+    informado: [tech_lead]
+    tecnicas:
+    - tecnica: tec_patch_virtual
+      uso: recomendada
+      porque: "a regra no WAF fecha a porta sem esperar o deploy"
+    - tecnica: tec_feature_flags
+      uso: recomendada
+      porque: "desliga o recurso vulnerável sem novo deploy"
+    playbook: pb_sec_con_t1
+    status: rascunho
+    publico: false
+  - id: sec_con_e1
+    raia: sec_con
+    tipo: fim
+    rotulo: "Exposição contida"
+    condicao: ''
+    proximo: []
+    estado: {}
+    retorno: contido
+    saidas: [contencao_de_seguranca]
+    playbook: pb_sec_con_e1
+    status: rascunho
+    publico: false
+  - id: sec_con_e2
+    raia: sec_con
+    tipo: fim
+    rotulo: "Sem contenção imediata"
+    condicao: ''
+    proximo: []
+    estado: {}
+    retorno: sem_contencao
+    playbook: pb_sec_con_e2
+    status: rascunho
+    publico: false
+  - id: sec_cor_s0
+    raia: sec_cor
+    tipo: inicio
+    rotulo: "Corrigir a vulnerabilidade"
+    condicao: ''
+    proximo:
+    - para: sec_cor_t1
+      condicao: ""
+    estado: {}
+    playbook: pb_sec_cor_s0
+    status: rascunho
+    publico: false
+  - id: sec_cor_t1
+    raia: sec_cor
+    tipo: tarefa
+    rotulo: "Escrever o teste que reproduz a exploração"
+    condicao: ''
+    proximo:
+    - para: sec_cor_t2
+      condicao: ""
+    estado: {}
+    entradas: [achado_de_seguranca, classificacao_de_risco]
+    saidas: [teste_de_exploracao]
+    papel: dev
+    apoio: [seguranca]
+    tecnicas:
+    - tecnica: tec_teste_regressao
+      uso: obrigatoria
+      porque: "o teste de exploração protege contra a volta da vulnerabilidade"
+    playbook: pb_sec_cor_t1
+    status: rascunho
+    publico: false
+  - id: sec_cor_t2
+    raia: sec_cor
+    tipo: tarefa
+    rotulo: "Corrigir na causa: patch, dependência ou código"
+    condicao: ''
+    proximo:
+    - para: sec_cor_e1
+      condicao: ""
+    estado: {}
+    entradas: [teste_de_exploracao]
+    saidas: [codigo_da_correcao, entrega_integrada]
+    papel: dev
+    apoio: [seguranca]
+    consultado: [arquiteto]
+    tecnicas:
+    - tecnica: tec_devsecops
+      uso: obrigatoria
+      porque: "o pipeline confirma que a dependência e o código estão limpos"
+    playbook: pb_sec_cor_t2
+    status: rascunho
+    publico: false
+  - id: sec_cor_e1
+    raia: sec_cor
+    tipo: fim
+    rotulo: "Correção pronta"
+    condicao: ''
+    proximo: []
+    estado: {}
+    retorno: correcao_pronta
+    saidas: [entrega_integrada, teste_de_exploracao]
+    playbook: pb_sec_cor_e1
+    status: rascunho
+    publico: false
+  - id: sec_div_s0
+    raia: sec_div
+    tipo: inicio
+    rotulo: "Correção em produção, divulgar"
+    condicao: ''
+    proximo:
+    - para: sec_div_t1
+      condicao: ""
+    estado: {}
+    playbook: pb_sec_div_s0
+    status: rascunho
+    publico: false
+  - id: sec_div_t1
+    raia: sec_div
+    tipo: tarefa
+    rotulo: "Avaliar se houve exposição de dados pessoais"
+    condicao: ''
+    proximo:
+    - para: sec_div_g1
+      condicao: ""
+    estado: {}
+    entradas: [achado_de_seguranca, classificacao_de_risco]
+    saidas: [avaliacao_de_dados_pessoais, houve_exposicao_de_dados]
+    papel: seguranca
+    apoio: [engenheiro_de_dados]
+    consultado: [stakeholder]
+    playbook: pb_sec_div_t1
+    status: rascunho
+    publico: false
+  - id: sec_div_g1
+    raia: sec_div
+    tipo: bifurcacao
+    rotulo: "Houve exposição de dados pessoais?"
+    condicao: ''
+    proximo:
+    - para: sec_div_t2
+      condicao: "sim, notificar"
+    - para: sec_div_t3
+      condicao: "não"
+    estado: {}
+    entradas: [avaliacao_de_dados_pessoais, houve_exposicao_de_dados]
+    papel: seguranca
+    aprova: gerente_de_engenharia
+    playbook: pb_sec_div_g1
+    status: rascunho
+    publico: false
+  - id: sec_div_t2
+    raia: sec_div
+    tipo: tarefa
+    rotulo: "Notificar a autoridade e os titulares no prazo legal"
+    condicao: ''
+    proximo:
+    - para: sec_div_t3
+      condicao: ""
+    estado: {}
+    entradas: [avaliacao_de_dados_pessoais]
+    saidas: [notificacao_regulatoria]
+    papel: seguranca
+    apoio: [pm]
+    consultado: [stakeholder]
+    playbook: pb_sec_div_t2
+    status: rascunho
+    publico: false
+  - id: sec_div_t3
+    raia: sec_div
+    tipo: tarefa
+    rotulo: "Publicar o aviso de segurança para quem precisa agir"
+    condicao: ''
+    proximo:
+    - para: sec_div_e1
+      condicao: ""
+    estado: {}
+    entradas: [achado_de_seguranca]
+    saidas: [aviso_de_seguranca]
+    papel: seguranca
+    apoio: [tech_lead]
+    playbook: pb_sec_div_t3
+    status: rascunho
+    publico: false
+  - id: sec_div_e1
+    raia: sec_div
+    tipo: fim
+    rotulo: "Divulgado"
+    condicao: ''
+    proximo: []
+    estado: {}
+    retorno: divulgado
+    saidas: [aviso_de_seguranca]
+    playbook: pb_sec_div_e1
+    status: rascunho
+    publico: false
+  - id: sec_orq_s0
+    raia: sec_orq
+    tipo: inicio
+    rotulo: "Vulnerabilidade encontrada ou ataque identificado"
+    condicao: ''
+    proximo:
+    - para: sec_orq_c1
+      condicao: ""
+    estado: {}
+    playbook: pb_sec_orq_s0
+    status: rascunho
+    publico: false
+  - id: sec_orq_c1
+    raia: sec_orq
+    tipo: chamada
+    raia_chamada: sec_tri
+    rotulo: "Triagem de segurança"
+    condicao: ''
+    proximo:
+    - para: sec_orq_e2
+      condicao: ataque_em_andamento
+    - para: sec_orq_c2
+      condicao: vulnerabilidade_confirmada
+    - para: sec_orq_e3
+      condicao: falso_positivo
+    estado: {}
+    playbook: pb_sec_orq_c1
+    status: rascunho
+    publico: false
+  - id: sec_orq_c2
+    raia: sec_orq
+    tipo: chamada
+    raia_chamada: sec_con
+    rotulo: "Contenção da exposição"
+    condicao: ''
+    proximo:
+    - para: sec_orq_c3
+      condicao: contido
+    - para: sec_orq_c3
+      condicao: sem_contencao
+    estado: {}
+    entradas: [classificacao_de_risco]
+    playbook: pb_sec_orq_c2
+    status: rascunho
+    publico: false
+  - id: sec_orq_c3
+    raia: sec_orq
+    tipo: chamada
+    raia_chamada: sec_cor
+    rotulo: "Correção da vulnerabilidade"
+    condicao: ''
+    proximo:
+    - para: sec_orq_c4
+      condicao: correcao_pronta
+    estado: {}
+    entradas: [classificacao_de_risco, achado_de_seguranca, contencao_de_seguranca]
+    playbook: pb_sec_orq_c3
+    status: rascunho
+    publico: false
+  - id: sec_orq_c4
+    raia: sec_orq
+    tipo: chamada
+    raia_chamada: com_pub
+    rotulo: "Publicar a correção em ambiente de testes"
+    condicao: ''
+    proximo:
+    - para: sec_orq_c5
+      condicao: publicado
+    - para: sec_orq_c3
+      condicao: falha_na_publicacao
+    estado: {}
+    entradas: [entrega_integrada]
+    playbook: pb_sec_orq_c4
+    status: rascunho
+    publico: false
+  - id: sec_orq_c5
+    raia: sec_orq
+    tipo: chamada
+    raia_chamada: com_val
+    rotulo: "Testes automatizados e regressão"
+    condicao: ''
+    proximo:
+    - para: sec_orq_c6
+      condicao: testes_aprovados
+    - para: sec_orq_c3
+      condicao: testes_reprovados
+    estado: {}
+    playbook: pb_sec_orq_c5
+    status: rascunho
+    publico: false
+  - id: sec_orq_c6
+    raia: sec_orq
+    tipo: chamada
+    raia_chamada: com_seg
+    rotulo: "Testes de segurança da correção"
+    condicao: ''
+    proximo:
+    - para: sec_orq_c7
+      condicao: aprovado
+    - para: sec_orq_c3
+      condicao: reprovado
+    estado: {}
+    entradas: [teste_de_exploracao]
+    playbook: pb_sec_orq_c6
+    status: rascunho
+    publico: false
+  - id: sec_orq_c7
+    raia: sec_orq
+    tipo: chamada
+    raia_chamada: com_rev
+    rotulo: "Review humano"
+    condicao: ''
+    proximo:
+    - para: sec_orq_c8
+      condicao: aprovado_pelo_humano
+    - para: sec_orq_c3
+      condicao: ajustes_solicitados
+    estado: {}
+    playbook: pb_sec_orq_c7
+    status: rascunho
+    publico: false
+  - id: sec_orq_c8
+    raia: sec_orq
+    tipo: chamada
+    raia_chamada: com_etg
+    rotulo: "Implantação"
+    condicao: ''
+    proximo:
+    - para: sec_orq_c9
+      condicao: implantado
+    - para: sec_orq_c3
+      condicao: implantacao_revertida
+    estado: {}
+    playbook: pb_sec_orq_c8
+    status: rascunho
+    publico: false
+  - id: sec_orq_c9
+    raia: sec_orq
+    tipo: chamada
+    raia_chamada: com_mon
+    rotulo: "Validação em produção e monitoramento"
+    condicao: ''
+    proximo:
+    - para: sec_orq_c10
+      condicao: feature_validada
+    - para: sec_orq_e4
+      condicao: incidente_acionado
+    estado: {}
+    playbook: pb_sec_orq_c9
+    status: rascunho
+    publico: false
+  - id: sec_orq_c10
+    raia: sec_orq
+    tipo: chamada
+    raia_chamada: sec_div
+    rotulo: "Conformidade e divulgação"
+    condicao: ''
+    proximo:
+    - para: sec_orq_e1
+      condicao: divulgado
+    estado: {}
+    playbook: pb_sec_orq_c10
+    status: rascunho
+    publico: false
+  - id: sec_orq_e1
+    raia: sec_orq
+    tipo: fim
+    rotulo: "Vulnerabilidade corrigida, validada e divulgada"
+    condicao: ''
+    proximo: []
+    estado: {}
+    retorno: divulgado
+    entradas: [aviso_de_seguranca]
+    playbook: pb_sec_orq_e1
+    status: rascunho
+    publico: false
+  - id: sec_orq_e2
+    raia: sec_orq
+    tipo: fim
+    rotulo: "Exploração ativa tratada como incidente de segurança"
+    condicao: ''
+    proximo: []
+    estado: {}
+    retorno: ataque_em_andamento
+    entradas: [achado_de_seguranca]
+    ligacoes:
+    - demanda_destino: incidente
+      para: inc_orq_s0
+      condicao: "há ataque ou exploração em andamento"
+      tipo: aciona
+      rotulo: "Ataque vira incidente"
+    playbook: pb_sec_orq_e2
+    status: rascunho
+    publico: false
+  - id: sec_orq_e3
+    raia: sec_orq
+    tipo: fim
+    rotulo: "Falso positivo registrado"
+    condicao: ''
+    proximo: []
+    estado: {}
+    retorno: falso_positivo
+    entradas: [classificacao_de_risco]
+    playbook: pb_sec_orq_e3
+    status: rascunho
+    publico: false
+  - id: sec_orq_e4
+    raia: sec_orq
+    tipo: fim
+    rotulo: "Incidente acionado em produção"
+    condicao: ''
+    proximo: []
+    estado: {}
+    retorno: incidente_acionado
+    playbook: pb_sec_orq_e4
+    status: rascunho
+    publico: false
+
+playbooks:
+  - id: pb_sec_tri_s0
+    exemplo: "A raia Triagem de segurança começa; o primeiro passo é «Registrar o achado com a origem e a evidência»."
+    resumo: "Início da raia Triagem de segurança. Confirmar o achado, descartar falso positivo e classificar o risco."
+    status: rascunho
+    publico: false
+  - id: pb_sec_tri_t1
+    exemplo: "Segurança entrega Achado de segurança. Achado de segurança: CVE de alta severidade na biblioteca de parsing de JSON usada pelo checkout, reportada pela varredura de dependências."
+    resumo: "Registre o achado antes de agir, num canal restrito: segurança não se discute em canal aberto."
+    perguntas_chave: [pq_sec_tri_t1_1]
+    evitar:
+    - "Discutir a vulnerabilidade em canal público"
+    status: rascunho
+    publico: false
+  - id: pb_sec_tri_g1
+    exemplo: "Segurança decide com Achado de segurança: «sim, exploração ativa» leva a «Exploração ativa»; «não» leva a «Reproduzir e classificar o risco pelo CVSS e pela exposição». Por exemplo, Achado de segurança: CVE de alta severidade na biblioteca de parsing de JSON usada pelo checkout, reportada pela varredura de dependências."
+    resumo: "Exploração ativa é incidente: o fluxo de incidente comanda a resposta."
+    status: rascunho
+    publico: false
+  - id: pb_sec_tri_t2
+    exemplo: "Segurança entrega Classificação de risco de segurança. Classificação de risco de segurança: CVSS 8,1; endpoint público; exploração pública conhecida; dados de pagamento no caminho."
+    resumo: "Reproduza em ambiente controlado e classifique pelo CVSS, pela exposição e pela exploração conhecida."
+    perguntas_chave: [pq_sec_tri_t2_1, pq_sec_tri_t2_2]
+    status: rascunho
+    publico: false
+  - id: pb_sec_tri_g2
+    exemplo: "Segurança decide com Classificação de risco de segurança: «sim, confirmada» leva a «Vulnerabilidade confirmada»; «não, falso positivo» leva a «Falso positivo». Por exemplo, Classificação de risco de segurança: CVSS 8,1; endpoint público; exploração pública conhecida; dados de pagamento no caminho."
+    resumo: "Falso positivo também se registra, com o motivo, para a varredura aprender."
+    status: rascunho
+    publico: false
+  - id: pb_sec_tri_e1
+    exemplo: "A raia Triagem de segurança devolve «ataque_em_andamento» entregando Achado de segurança; em Triagem de segurança (sec_orq_c1), o fluxo segue para «Exploração ativa tratada como incidente de segurança». Por exemplo, Achado de segurança: CVE de alta severidade na biblioteca de parsing de JSON usada pelo checkout, reportada pela varredura de dependências."
+    resumo: "Retorno «ataque_em_andamento»."
+    status: rascunho
+    publico: false
+  - id: pb_sec_tri_e2
+    exemplo: "A raia Triagem de segurança devolve «vulnerabilidade_confirmada» entregando Achado de segurança e Classificação de risco de segurança; em Triagem de segurança (sec_orq_c1), o fluxo segue para «Contenção da exposição». Por exemplo, Achado de segurança: CVE de alta severidade na biblioteca de parsing de JSON usada pelo checkout, reportada pela varredura de dependências."
+    resumo: "Retorno «vulnerabilidade_confirmada»."
+    status: rascunho
+    publico: false
+  - id: pb_sec_tri_e3
+    exemplo: "A raia Triagem de segurança devolve «falso_positivo» entregando Classificação de risco de segurança; em Triagem de segurança (sec_orq_c1), o fluxo segue para «Falso positivo registrado». Por exemplo, Classificação de risco de segurança: CVSS 8,1; endpoint público; exploração pública conhecida; dados de pagamento no caminho."
+    resumo: "Retorno «falso_positivo»."
+    status: rascunho
+    publico: false
+  - id: pb_sec_con_s0
+    exemplo: "A raia Contenção da exposição começa recebendo Classificação de risco de segurança e Achado de segurança; o primeiro passo é «Severidade crítica ou alta, ou exposta na internet?». Por exemplo, Classificação de risco de segurança: CVSS 8,1; endpoint público; exploração pública conhecida; dados de pagamento no caminho."
+    resumo: "Início da raia Contenção da exposição. Reduzir a exposição enquanto a correção não chega."
+    status: rascunho
+    publico: false
+  - id: pb_sec_con_g1
+    exemplo: "Segurança decide com Classificação de risco de segurança: «sim, conter já» leva a «Conter a exposição: WAF, bloqueio ou rotação de segredos»; «não, seguir para a correção» leva a «Sem contenção imediata». Por exemplo, Classificação de risco de segurança: CVSS 8,1; endpoint público; exploração pública conhecida; dados de pagamento no caminho."
+    resumo: "Conter antes de corrigir quando o risco é alto: cada hora exposta conta."
+    status: rascunho
+    publico: false
+  - id: pb_sec_con_t1
+    exemplo: "Segurança entrega Contenção de segurança. Contenção de segurança: Regra de WAF bloqueando o payload malicioso e rotação das chaves da API de cupons."
+    resumo: "A contenção é temporária: compra tempo para a correção na causa."
+    perguntas_chave: [pq_sec_con_t1_1]
+    status: rascunho
+    publico: false
+  - id: pb_sec_con_e1
+    exemplo: "A raia Contenção da exposição devolve «contido» entregando Contenção de segurança; em Contenção da exposição (sec_orq_c2), o fluxo segue para «Correção da vulnerabilidade». Por exemplo, Contenção de segurança: Regra de WAF bloqueando o payload malicioso e rotação das chaves da API de cupons."
+    resumo: "Retorno «contido»."
+    status: rascunho
+    publico: false
+  - id: pb_sec_con_e2
+    exemplo: "A raia Contenção da exposição devolve «sem_contencao»; em Contenção da exposição (sec_orq_c2), o fluxo segue para «Correção da vulnerabilidade»."
+    resumo: "Retorno «sem_contencao»."
+    status: rascunho
+    publico: false
+  - id: pb_sec_cor_s0
+    exemplo: "A raia Correção da vulnerabilidade começa recebendo Classificação de risco de segurança e Achado de segurança; o primeiro passo é «Escrever o teste que reproduz a exploração». Por exemplo, Classificação de risco de segurança: CVSS 8,1; endpoint público; exploração pública conhecida; dados de pagamento no caminho."
+    resumo: "Início da raia Correção da vulnerabilidade. Corrigir na causa com o teste de exploração e abrir o PR."
+    status: rascunho
+    publico: false
+  - id: pb_sec_cor_t1
+    exemplo: "Dev entrega Teste de exploração. Teste de exploração: Teste que envia o JSON malicioso ao checkout e espera a recusa, não a execução."
+    resumo: "O teste falha com a vulnerabilidade e passa com a correção."
+    status: rascunho
+    publico: false
+  - id: pb_sec_cor_t2
+    exemplo: "Dev entrega Código da correção e Entrega integrada. Código da correção: Tratamento de cupom expirado na consulta de saldo, 14 linhas, com o teste do cupom expirado verde."
+    resumo: "Corrija na causa e procure o mesmo padrão em outros serviços."
+    perguntas_chave: [pq_sec_cor_t2_1]
+    status: rascunho
+    publico: false
+  - id: pb_sec_cor_e1
+    exemplo: "A raia Correção da vulnerabilidade devolve «correcao_pronta» entregando Entrega integrada e Teste de exploração; em Correção da vulnerabilidade (sec_orq_c3), o fluxo segue para «Publicar a correção em ambiente de testes». Por exemplo, Entrega integrada: PR de integração com os 3 PRs da onda 2 e os ajustes das pessoas."
+    resumo: "Retorno «correcao_pronta»."
+    status: rascunho
+    publico: false
+  - id: pb_sec_div_s0
+    exemplo: "A raia Conformidade e divulgação começa recebendo Achado de segurança e Classificação de risco de segurança; o primeiro passo é «Avaliar se houve exposição de dados pessoais». Por exemplo, Achado de segurança: CVE de alta severidade na biblioteca de parsing de JSON usada pelo checkout, reportada pela varredura de dependências."
+    resumo: "Início da raia Conformidade e divulgação. Avaliar dados pessoais, cumprir as notificações legais e divulgar com responsabilidade."
+    status: rascunho
+    publico: false
+  - id: pb_sec_div_t1
+    exemplo: "Segurança entrega Avaliação de dados pessoais e Houve exposição de dados pessoais. Avaliação de dados pessoais: Sem exposição: logs mostram tentativas bloqueadas pela regra de WAF desde a primeira hora."
+    resumo: "A lei de proteção de dados define prazos de notificação: avalie cedo quem e o que foi exposto."
+    perguntas_chave: [pq_sec_div_t1_1]
+    status: rascunho
+    publico: false
+  - id: pb_sec_div_g1
+    exemplo: "Segurança decide com Avaliação de dados pessoais e Houve exposição de dados pessoais: «sim, notificar» leva a «Notificar a autoridade e os titulares no prazo legal»; «não» leva a «Publicar o aviso de segurança para quem precisa agir». Por exemplo, Avaliação de dados pessoais: Sem exposição: logs mostram tentativas bloqueadas pela regra de WAF desde a primeira hora."
+    resumo: "Com exposição de dados pessoais, a notificação é obrigação legal, não escolha."
+    status: rascunho
+    publico: false
+  - id: pb_sec_div_t2
+    exemplo: "Segurança entrega Notificação regulatória. Notificação regulatória: Notificação à autoridade em até 3 dias úteis com a natureza dos dados e as medidas tomadas."
+    resumo: "A notificação diz o que aconteceu, quais dados, quem foi afetado e o que foi feito."
+    status: rascunho
+    publico: false
+  - id: pb_sec_div_t3
+    exemplo: "Segurança entrega Aviso de segurança. Aviso de segurança: Aviso aos times: dependência atualizada no checkout; nenhum dado exposto; atualizar também nos serviços X e Y."
+    resumo: "Divulgação responsável: o suficiente para quem precisa agir, sem ensinar a explorar."
+    evitar:
+    - "Publicar detalhes de exploração antes de todos corrigirem"
+    status: rascunho
+    publico: false
+  - id: pb_sec_div_e1
+    exemplo: "A raia Conformidade e divulgação devolve «divulgado» entregando Aviso de segurança; em Conformidade e divulgação (sec_orq_c10), o fluxo segue para «Vulnerabilidade corrigida, validada e divulgada». Por exemplo, Aviso de segurança: Aviso aos times: dependência atualizada no checkout; nenhum dado exposto; atualizar também nos serviços X e Y."
+    resumo: "Retorno «divulgado»."
+    status: rascunho
+    publico: false
+  - id: pb_sec_orq_s0
+    exemplo: "A raia Orquestração: segurança começa; o primeiro passo é «Triagem de segurança»."
+    resumo: "Demanda de segurança tem relógio: o tempo de exposição conta. Confirme, contenha o que está exposto, corrija a causa e comunique com responsabilidade."
+    perguntas_chave: [pq_sec_orq_s0_1]
+    status: rascunho
+    publico: false
+  - id: pb_sec_orq_c1
+    exemplo: "Chama a raia Triagem de segurança; «ataque_em_andamento» leva a «Exploração ativa tratada como incidente de segurança»; «vulnerabilidade_confirmada» leva a «Contenção da exposição»; «falso_positivo» leva a «Falso positivo registrado»."
+    resumo: "Chama a raia Triagem de segurança. Retornos possíveis: ataque_em_andamento, vulnerabilidade_confirmada, falso_positivo."
+    status: rascunho
+    publico: false
+  - id: pb_sec_orq_c2
+    exemplo: "Chama a raia Contenção da exposição; «contido» leva a «Correção da vulnerabilidade»; «sem_contencao» leva a «Correção da vulnerabilidade». Por exemplo, Classificação de risco de segurança: CVSS 8,1; endpoint público; exploração pública conhecida; dados de pagamento no caminho."
+    resumo: "Chama a raia Contenção da exposição. Retornos possíveis: contido, sem_contencao."
+    status: rascunho
+    publico: false
+  - id: pb_sec_orq_c3
+    exemplo: "Chama a raia Correção da vulnerabilidade; «correcao_pronta» leva a «Publicar a correção em ambiente de testes». Por exemplo, Classificação de risco de segurança: CVSS 8,1; endpoint público; exploração pública conhecida; dados de pagamento no caminho."
+    resumo: "Chama a raia Correção da vulnerabilidade. Retornos possíveis: correcao_pronta."
+    status: rascunho
+    publico: false
+  - id: pb_sec_orq_c4
+    exemplo: "Chama a raia Publicação em ambiente de testes; «publicado» leva a «Testes automatizados e regressão»; «falha_na_publicacao» leva a «Correção da vulnerabilidade». Por exemplo, Entrega integrada: PR de integração com os 3 PRs da onda 2 e os ajustes das pessoas."
+    resumo: "Chama a raia Publicar a correção em ambiente de testes. Retornos possíveis: publicado, falha_na_publicacao."
+    status: rascunho
+    publico: false
+  - id: pb_sec_orq_c5
+    exemplo: "Chama a raia Testes automatizados e regressão; «testes_aprovados» leva a «Testes de segurança da correção»; «testes_reprovados» leva a «Correção da vulnerabilidade»."
+    resumo: "Chama a raia Testes automatizados e regressão. Retornos possíveis: testes_aprovados, testes_reprovados."
+    status: rascunho
+    publico: false
+  - id: pb_sec_orq_c6
+    exemplo: "Chama a raia Testes de segurança; «aprovado» leva a «Review humano»; «reprovado» leva a «Correção da vulnerabilidade». Por exemplo, Teste de exploração: Teste que envia o JSON malicioso ao checkout e espera a recusa, não a execução."
+    resumo: "Chama a raia Testes de segurança da correção. Retornos possíveis: aprovado, reprovado."
+    status: rascunho
+    publico: false
+  - id: pb_sec_orq_c7
+    exemplo: "Chama a raia Review humano; «aprovado_pelo_humano» leva a «Implantação»; «ajustes_solicitados» leva a «Correção da vulnerabilidade»."
+    resumo: "Chama a raia Review humano. Retornos possíveis: aprovado_pelo_humano, ajustes_solicitados."
+    status: rascunho
+    publico: false
+  - id: pb_sec_orq_c8
+    exemplo: "Chama a raia Implantação; «implantado» leva a «Validação em produção e monitoramento»; «implantacao_revertida» leva a «Correção da vulnerabilidade»."
+    resumo: "Chama a raia Implantação. Retornos possíveis: implantado, implantacao_revertida."
+    status: rascunho
+    publico: false
+  - id: pb_sec_orq_c9
+    exemplo: "Chama a raia Validação em produção e monitoramento; «feature_validada» leva a «Conformidade e divulgação»; «incidente_acionado» leva a «Incidente acionado em produção»."
+    resumo: "Chama a raia Validação em produção e monitoramento. Retornos possíveis: feature_validada, incidente_acionado."
+    status: rascunho
+    publico: false
+  - id: pb_sec_orq_c10
+    exemplo: "Chama a raia Conformidade e divulgação; «divulgado» leva a «Vulnerabilidade corrigida, validada e divulgada»."
+    resumo: "Chama a raia Conformidade e divulgação. Retornos possíveis: divulgado."
+    status: rascunho
+    publico: false
+  - id: pb_sec_orq_e1
+    exemplo: "A demanda termina em «divulgado»: vulnerabilidade corrigida, validada e divulgada, com Aviso de segurança. Por exemplo, Aviso de segurança: Aviso aos times: dependência atualizada no checkout; nenhum dado exposto; atualizar também nos serviços X e Y."
+    resumo: "Vulnerabilidade corrigida, validada e divulgada. Fim da demanda."
+    status: rascunho
+    publico: false
+  - id: pb_sec_orq_e2
+    exemplo: "A demanda termina em «ataque_em_andamento»: exploração ativa tratada como incidente de segurança, com Achado de segurança. Por exemplo, Achado de segurança: CVE de alta severidade na biblioteca de parsing de JSON usada pelo checkout, reportada pela varredura de dependências."
+    resumo: "Exploração ativa tratada como incidente de segurança. Fim da demanda."
+    status: rascunho
+    publico: false
+  - id: pb_sec_orq_e3
+    exemplo: "A demanda termina em «falso_positivo»: falso positivo registrado, com Classificação de risco de segurança. Por exemplo, Classificação de risco de segurança: CVSS 8,1; endpoint público; exploração pública conhecida; dados de pagamento no caminho."
+    resumo: "Falso positivo registrado. Fim da demanda."
+    status: rascunho
+    publico: false
+  - id: pb_sec_orq_e4
+    exemplo: "A demanda termina em «incidente_acionado»: incidente acionado em produção."
+    resumo: "Incidente acionado em produção. Fim da demanda."
+    status: rascunho
+    publico: false
+
+celulas:
+  - demanda: seguranca
+    requisito: funcional
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: seguranca
+    requisito: nao_funcional
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: seguranca
+    requisito: restricao
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: seguranca
+    requisito: probabilistico_ia
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+
+perguntas:
+  - id: pq_sec_tri_t1_1
+    texto: "Qual componente e qual versão estão afetados?"
+    depende_de: [sec_tri_t1]
+    status: rascunho
+    publico: false
+  - id: pq_sec_tri_t2_1
+    texto: "O componente está exposto na internet?"
+    depende_de: [sec_tri_t2]
+    status: rascunho
+    publico: false
+  - id: pq_sec_tri_t2_2
+    texto: "Existe exploração pública conhecida?"
+    depende_de: [sec_tri_t2]
+    status: rascunho
+    publico: false
+  - id: pq_sec_con_t1_1
+    texto: "Que medida reduz a exposição agora sem derrubar o serviço?"
+    depende_de: [sec_con_t1]
+    status: rascunho
+    publico: false
+  - id: pq_sec_cor_t2_1
+    texto: "Outros serviços usam o mesmo componente vulnerável?"
+    depende_de: [sec_cor_t2]
+    status: rascunho
+    publico: false
+  - id: pq_sec_div_t1_1
+    texto: "Que dados pessoais, de quantas pessoas e por quanto tempo?"
+    depende_de: [sec_div_t1]
+    status: rascunho
+    publico: false
+  - id: pq_sec_orq_s0_1
+    texto: "De onde veio o achado e quem mais sabe dele?"
+    depende_de: [sec_orq_s0]
+    status: rascunho
+    publico: false

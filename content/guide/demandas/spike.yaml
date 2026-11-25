@@ -1,0 +1,629 @@
+# Demanda: Spike e prova de conceito. Onda 3, status rascunho.
+
+demandas:
+  - id: spike
+    nome: "Spike e prova de conceito"
+    sigla: spk
+    publico: false
+
+artefatos:
+  - id: pergunta_do_spike
+    nome: "Pergunta do spike"
+    descricao: "A pergunta que o spike responde, a hipótese e o critério que diz se a resposta é sim ou não"
+    exemplo: "Dá para validar o cupom em menos de 50 ms com o cache distribuído? Sim se o p95 ficar abaixo de 50 ms com 2 mil chamadas por minuto"
+    tipo: documento
+    subtipo: especificacao
+    status: rascunho
+    publico: false
+  - id: timebox_do_spike
+    nome: "Timebox do spike"
+    descricao: "Prazo máximo, o que entra e o que fica fora da investigação"
+    exemplo: "3 dias; fora: tela, autenticação e dados reais"
+    tipo: documento
+    subtipo: plano
+    status: rascunho
+    publico: false
+  - id: poc
+    nome: "Prova de conceito (POC)"
+    descricao: "Código descartável que demonstra só o necessário para responder à pergunta do spike"
+    exemplo: "Serviço mínimo com o cache distribuído e um script de carga, numa branch que não vai para produção"
+    tipo: codigo
+    subtipo: aplicacao
+    status: rascunho
+    publico: false
+  - id: resultado_do_spike
+    nome: "Resultado do spike"
+    descricao: "O que foi medido ou observado na POC contra o critério de sucesso"
+    exemplo: "p95 de 38 ms com 2 mil chamadas por minuto; consumo de memória dentro do limite"
+    tipo: documento
+    subtipo: relatorio
+    status: rascunho
+    publico: false
+  - id: recomendacao_do_spike
+    nome: "Recomendação do spike"
+    descricao: "Conclusão, alternativas avaliadas, riscos e a estimativa que agora é possível fazer"
+    exemplo: "Viável com cache distribuído; risco na invalidação; feature estimada em 3 semanas"
+    tipo: documento
+    subtipo: analise
+    status: rascunho
+    publico: false
+  - id: comunicado_do_spike
+    nome: "Comunicado do spike"
+    descricao: "Mensagem com a pergunta, a resposta e a recomendação para quem decide"
+    exemplo: "Spike do cache de cupons: viável, p95 de 38 ms; recomendação e riscos no link"
+    tipo: acao
+    subtipo: comunicacao
+    destinatarios: [stakeholder, times_dependentes]
+    status: rascunho
+    publico: false
+
+raias:
+  - id: spk_orq
+    nome: "Orquestração: spike e prova de conceito"
+    demanda: spike
+    responsabilidade: "Responder uma pergunta técnica ou de produto dentro de um timebox, com uma POC descartável, antes de decidir ou estimar"
+    cor: '#607D8B'
+    orquestradora: true
+    status: rascunho
+    publico: false
+  - id: spk_def
+    nome: "Pergunta e timebox"
+    demanda: spike
+    responsabilidade: "Definir a pergunta, o critério de sucesso e o prazo máximo do spike"
+    cor: '#332288'
+    status: rascunho
+    publico: false
+  - id: spk_poc
+    nome: "Experimento e prova de conceito"
+    demanda: spike
+    responsabilidade: "Construir a POC descartável e medir contra o critério dentro do timebox"
+    cor: '#117733'
+    status: rascunho
+    publico: false
+    entradas: [pergunta_do_spike, timebox_do_spike]
+  - id: spk_rec
+    nome: "Recomendação"
+    demanda: spike
+    responsabilidade: "Registrar a conclusão e a recomendação e levar a decisão a quem decide"
+    cor: '#CC6677'
+    status: rascunho
+    publico: false
+    entradas: [resultado_do_spike, pergunta_do_spike]
+
+decisoes:
+  - id: spk_def_s0
+    raia: spk_def
+    tipo: inicio
+    rotulo: "Incerteza registrada, definir o spike"
+    condicao: ''
+    proximo:
+    - para: spk_def_t1
+      condicao: ""
+    estado: {}
+    playbook: pb_spk_def_s0
+    status: rascunho
+    publico: false
+  - id: spk_def_t1
+    raia: spk_def
+    tipo: tarefa
+    rotulo: "Escrever a pergunta e o critério de sucesso"
+    condicao: ''
+    proximo:
+    - para: spk_def_t2
+      condicao: ""
+    estado: {}
+    saidas: [pergunta_do_spike]
+    papel: tech_lead
+    apoio: [pm]
+    consultado: [arquiteto]
+    playbook: pb_spk_def_t1
+    status: rascunho
+    publico: false
+  - id: spk_def_t2
+    raia: spk_def
+    tipo: tarefa
+    rotulo: "Definir o timebox e o que fica fora"
+    condicao: ''
+    proximo:
+    - para: spk_def_e1
+      condicao: ""
+    estado: {}
+    entradas: [pergunta_do_spike]
+    saidas: [timebox_do_spike]
+    papel: tech_lead
+    tecnicas:
+    - tecnica: tec_timebox
+      uso: obrigatoria
+      porque: "o prazo fixo obriga a investigar só o que responde à pergunta"
+    playbook: pb_spk_def_t2
+    status: rascunho
+    publico: false
+  - id: spk_def_e1
+    raia: spk_def
+    tipo: fim
+    rotulo: "Spike definido"
+    condicao: ''
+    proximo: []
+    estado: {}
+    retorno: definido
+    saidas: [pergunta_do_spike, timebox_do_spike]
+    playbook: pb_spk_def_e1
+    status: rascunho
+    publico: false
+  - id: spk_poc_s0
+    raia: spk_poc
+    tipo: inicio
+    rotulo: "Spike definido, experimentar"
+    condicao: ''
+    proximo:
+    - para: spk_poc_t1
+      condicao: ""
+    estado: {}
+    playbook: pb_spk_poc_s0
+    status: rascunho
+    publico: false
+  - id: spk_poc_t1
+    raia: spk_poc
+    tipo: tarefa
+    rotulo: "Construir a POC descartável"
+    condicao: ''
+    proximo:
+    - para: spk_poc_t2
+      condicao: ""
+    estado: {}
+    entradas: [pergunta_do_spike, timebox_do_spike]
+    saidas: [poc]
+    papel: dev
+    apoio: [arquiteto]
+    tecnicas:
+    - tecnica: tec_poc
+      uso: obrigatoria
+      porque: "demonstra só o necessário para responder"
+    - tecnica: tec_prototipacao
+      uso: recomendada
+      porque: "protótipo rápido de interface quando a dúvida é de experiência"
+    playbook: pb_spk_poc_t1
+    status: rascunho
+    publico: false
+  - id: spk_poc_t2
+    raia: spk_poc
+    tipo: tarefa
+    rotulo: "Medir contra o critério de sucesso"
+    condicao: ''
+    proximo:
+    - para: spk_poc_g1
+      condicao: ""
+    estado: {}
+    entradas: [poc, pergunta_do_spike]
+    saidas: [resultado_do_spike]
+    papel: dev
+    apoio: [qa]
+    playbook: pb_spk_poc_t2
+    status: rascunho
+    publico: false
+  - id: spk_poc_g1
+    raia: spk_poc
+    tipo: bifurcacao
+    rotulo: "Respondeu dentro do timebox?"
+    condicao: ''
+    proximo:
+    - para: spk_poc_e1
+      condicao: "sim, a pergunta foi respondida"
+    - para: spk_poc_e2
+      condicao: "não, o timebox acabou"
+    estado: {}
+    entradas: [resultado_do_spike, timebox_do_spike]
+    papel: tech_lead
+    playbook: pb_spk_poc_g1
+    status: rascunho
+    publico: false
+  - id: spk_poc_e1
+    raia: spk_poc
+    tipo: fim
+    rotulo: "Pergunta respondida"
+    condicao: ''
+    proximo: []
+    estado: {}
+    retorno: respondido
+    saidas: [resultado_do_spike, poc]
+    playbook: pb_spk_poc_e1
+    status: rascunho
+    publico: false
+  - id: spk_poc_e2
+    raia: spk_poc
+    tipo: fim
+    rotulo: "Timebox esgotado"
+    condicao: ''
+    proximo: []
+    estado: {}
+    retorno: timebox_esgotado
+    saidas: [resultado_do_spike]
+    playbook: pb_spk_poc_e2
+    status: rascunho
+    publico: false
+  - id: spk_rec_s0
+    raia: spk_rec
+    tipo: inicio
+    rotulo: "Resultado do spike em mãos"
+    condicao: ''
+    proximo:
+    - para: spk_rec_t1
+      condicao: ""
+    estado: {}
+    playbook: pb_spk_rec_s0
+    status: rascunho
+    publico: false
+  - id: spk_rec_t1
+    raia: spk_rec
+    tipo: tarefa
+    rotulo: "Registrar a recomendação com as evidências"
+    condicao: ''
+    proximo:
+    - para: spk_rec_t2
+      condicao: ""
+    estado: {}
+    entradas: [resultado_do_spike, pergunta_do_spike]
+    saidas: [recomendacao_do_spike]
+    papel: tech_lead
+    apoio: [arquiteto]
+    playbook: pb_spk_rec_t1
+    status: rascunho
+    publico: false
+  - id: spk_rec_t2
+    raia: spk_rec
+    tipo: tarefa
+    rotulo: "Apresentar a recomendação a quem decide"
+    condicao: ''
+    proximo:
+    - para: spk_rec_g1
+      condicao: ""
+    estado: {}
+    entradas: [recomendacao_do_spike]
+    saidas: [comunicado_do_spike]
+    papel: tech_lead
+    apoio: [pm]
+    consultado: [stakeholder]
+    playbook: pb_spk_rec_t2
+    status: rascunho
+    publico: false
+  - id: spk_rec_g1
+    raia: spk_rec
+    tipo: bifurcacao
+    rotulo: "A abordagem é viável?"
+    condicao: ''
+    proximo:
+    - para: spk_rec_e1
+      condicao: "sim, seguir para a feature"
+    - para: spk_rec_e2
+      condicao: "não, descartar e registrar a alternativa"
+    estado: {}
+    entradas: [recomendacao_do_spike]
+    papel: pm
+    consultado: [tech_lead]
+    aprova: stakeholder
+    playbook: pb_spk_rec_g1
+    status: rascunho
+    publico: false
+  - id: spk_rec_e1
+    raia: spk_rec
+    tipo: fim
+    rotulo: "Viável"
+    condicao: ''
+    proximo: []
+    estado: {}
+    retorno: viavel
+    saidas: [recomendacao_do_spike]
+    playbook: pb_spk_rec_e1
+    status: rascunho
+    publico: false
+  - id: spk_rec_e2
+    raia: spk_rec
+    tipo: fim
+    rotulo: "Inviável"
+    condicao: ''
+    proximo: []
+    estado: {}
+    retorno: inviavel
+    saidas: [recomendacao_do_spike]
+    playbook: pb_spk_rec_e2
+    status: rascunho
+    publico: false
+  - id: spk_orq_s0
+    raia: spk_orq
+    tipo: inicio
+    rotulo: "Incerteza que impede decidir ou estimar"
+    condicao: ''
+    proximo:
+    - para: spk_orq_c1
+      condicao: ""
+    estado: {}
+    playbook: pb_spk_orq_s0
+    status: rascunho
+    publico: false
+  - id: spk_orq_c1
+    raia: spk_orq
+    tipo: chamada
+    raia_chamada: spk_def
+    rotulo: "Pergunta e timebox"
+    condicao: ''
+    proximo:
+    - para: spk_orq_c2
+      condicao: definido
+    estado: {}
+    playbook: pb_spk_orq_c1
+    status: rascunho
+    publico: false
+  - id: spk_orq_c2
+    raia: spk_orq
+    tipo: chamada
+    raia_chamada: spk_poc
+    rotulo: "Experimento e prova de conceito"
+    condicao: ''
+    proximo:
+    - para: spk_orq_c3
+      condicao: respondido
+    - para: spk_orq_e3
+      condicao: timebox_esgotado
+    estado: {}
+    entradas: [pergunta_do_spike, timebox_do_spike]
+    playbook: pb_spk_orq_c2
+    status: rascunho
+    publico: false
+  - id: spk_orq_c3
+    raia: spk_orq
+    tipo: chamada
+    raia_chamada: spk_rec
+    rotulo: "Recomendação"
+    condicao: ''
+    proximo:
+    - para: spk_orq_e1
+      condicao: viavel
+    - para: spk_orq_e2
+      condicao: inviavel
+    estado: {}
+    entradas: [resultado_do_spike]
+    playbook: pb_spk_orq_c3
+    status: rascunho
+    publico: false
+  - id: spk_orq_e1
+    raia: spk_orq
+    tipo: fim
+    rotulo: "Abordagem viável, segue para a feature"
+    condicao: ''
+    proximo: []
+    estado: {}
+    retorno: viavel
+    entradas: [recomendacao_do_spike]
+    ligacoes:
+    - demanda_destino: feature
+      para: feat_orq_s0
+      condicao: "o spike mostrou que a abordagem é viável"
+      tipo: aciona
+      rotulo: "Spike vira feature"
+    playbook: pb_spk_orq_e1
+    status: rascunho
+    publico: false
+  - id: spk_orq_e2
+    raia: spk_orq
+    tipo: fim
+    rotulo: "Abordagem descartada, alternativa registrada"
+    condicao: ''
+    proximo: []
+    estado: {}
+    retorno: inviavel
+    entradas: [recomendacao_do_spike]
+    playbook: pb_spk_orq_e2
+    status: rascunho
+    publico: false
+  - id: spk_orq_e3
+    raia: spk_orq
+    tipo: fim
+    rotulo: "Timebox esgotado: decidir se estende ou encerra"
+    condicao: ''
+    proximo: []
+    estado: {}
+    retorno: timebox_esgotado
+    entradas: [resultado_do_spike]
+    playbook: pb_spk_orq_e3
+    status: rascunho
+    publico: false
+
+playbooks:
+  - id: pb_spk_def_s0
+    exemplo: "A raia Pergunta e timebox começa; o primeiro passo é «Escrever a pergunta e o critério de sucesso»."
+    resumo: "Início da raia Pergunta e timebox. Definir a pergunta, o critério de sucesso e o prazo máximo do spike."
+    status: rascunho
+    publico: false
+  - id: pb_spk_def_t1
+    exemplo: "Tech Lead entrega Pergunta do spike. Pergunta do spike: Dá para validar o cupom em menos de 50 ms com o cache distribuído? Sim se o p95 ficar abaixo de 50 ms com 2 mil chamadas por minuto."
+    resumo: "Spike sem pergunta vira pesquisa sem fim. Escreva a pergunta, a hipótese e o que conta como resposta."
+    perguntas_chave: [pq_spk_def_t1_1, pq_spk_def_t1_2]
+    status: rascunho
+    publico: false
+  - id: pb_spk_def_t2
+    exemplo: "Tech Lead entrega Timebox do spike. Timebox do spike: 3 dias; fora: tela, autenticação e dados reais."
+    resumo: "O timebox é o contrato do spike: quando acaba, o time decide com o que tem."
+    perguntas_chave: [pq_spk_def_t2_1]
+    status: rascunho
+    publico: false
+  - id: pb_spk_def_e1
+    exemplo: "A raia Pergunta e timebox devolve «definido» entregando Pergunta do spike e Timebox do spike; em Pergunta e timebox (spk_orq_c1), o fluxo segue para «Experimento e prova de conceito». Por exemplo, Pergunta do spike: Dá para validar o cupom em menos de 50 ms com o cache distribuído? Sim se o p95 ficar abaixo de 50 ms com 2 mil chamadas por minuto."
+    resumo: "Retorno «definido»: pergunta, critério e timebox prontos."
+    status: rascunho
+    publico: false
+  - id: pb_spk_poc_s0
+    exemplo: "A raia Experimento e prova de conceito começa recebendo Pergunta do spike e Timebox do spike; o primeiro passo é «Construir a POC descartável». Por exemplo, Pergunta do spike: Dá para validar o cupom em menos de 50 ms com o cache distribuído? Sim se o p95 ficar abaixo de 50 ms com 2 mil chamadas por minuto."
+    resumo: "Início da raia Experimento e prova de conceito. Construir a POC descartável e medir contra o critério dentro do timebox."
+    status: rascunho
+    publico: false
+  - id: pb_spk_poc_t1
+    exemplo: "Dev entrega Prova de conceito (POC). Prova de conceito (POC): Serviço mínimo com o cache distribuído e um script de carga, numa branch que não vai para produção."
+    resumo: "A POC é descartável: sem testes completos, sem tela polida, sem dados reais. Ela existe para responder à pergunta."
+    perguntas_chave: [pq_spk_poc_t1_1]
+    evitar:
+    - "Transformar a POC em produção"
+    status: rascunho
+    publico: false
+  - id: pb_spk_poc_t2
+    exemplo: "Dev entrega Resultado do spike. Resultado do spike: p95 de 38 ms com 2 mil chamadas por minuto; consumo de memória dentro do limite."
+    resumo: "Meça o que o critério pede, do jeito mais simples que dá confiança."
+    perguntas_chave: [pq_spk_poc_t2_1]
+    status: rascunho
+    publico: false
+  - id: pb_spk_poc_g1
+    exemplo: "Tech Lead decide com Resultado do spike e Timebox do spike: «sim, a pergunta foi respondida» leva a «Pergunta respondida»; «não, o timebox acabou» leva a «Timebox esgotado». Por exemplo, Resultado do spike: p95 de 38 ms com 2 mil chamadas por minuto; consumo de memória dentro do limite."
+    resumo: "Com o timebox esgotado, não estique em silêncio: leve o que aprendeu para quem decide."
+    status: rascunho
+    publico: false
+  - id: pb_spk_poc_e1
+    exemplo: "A raia Experimento e prova de conceito devolve «respondido» entregando Resultado do spike e Prova de conceito (POC); em Experimento e prova de conceito (spk_orq_c2), o fluxo segue para «Recomendação». Por exemplo, Resultado do spike: p95 de 38 ms com 2 mil chamadas por minuto; consumo de memória dentro do limite."
+    resumo: "Retorno «respondido»."
+    status: rascunho
+    publico: false
+  - id: pb_spk_poc_e2
+    exemplo: "A raia Experimento e prova de conceito devolve «timebox_esgotado» entregando Resultado do spike; em Experimento e prova de conceito (spk_orq_c2), o fluxo segue para «Timebox esgotado: decidir se estende ou encerra». Por exemplo, Resultado do spike: p95 de 38 ms com 2 mil chamadas por minuto; consumo de memória dentro do limite."
+    resumo: "Retorno «timebox_esgotado»: o resultado parcial vai para a decisão."
+    status: rascunho
+    publico: false
+  - id: pb_spk_rec_s0
+    exemplo: "A raia Recomendação começa recebendo Resultado do spike e Pergunta do spike; o primeiro passo é «Registrar a recomendação com as evidências». Por exemplo, Resultado do spike: p95 de 38 ms com 2 mil chamadas por minuto; consumo de memória dentro do limite."
+    resumo: "Início da raia Recomendação. Registrar a conclusão e a recomendação e levar a decisão a quem decide."
+    status: rascunho
+    publico: false
+  - id: pb_spk_rec_t1
+    exemplo: "Tech Lead entrega Recomendação do spike. Recomendação do spike: Viável com cache distribuído; risco na invalidação; feature estimada em 3 semanas."
+    resumo: "A recomendação diz o que fazer, por que, os riscos e a estimativa que agora é possível."
+    perguntas_chave: [pq_spk_rec_t1_1]
+    status: rascunho
+    publico: false
+  - id: pb_spk_rec_t2
+    exemplo: "Tech Lead entrega Comunicado do spike. Comunicado do spike: Spike do cache de cupons: viável, p95 de 38 ms; recomendação e riscos no link."
+    resumo: "Quem decide ouve a resposta, a recomendação e os riscos antes de seguir."
+    status: rascunho
+    publico: false
+  - id: pb_spk_rec_g1
+    exemplo: "PM decide com Recomendação do spike: «sim, seguir para a feature» leva a «Viável»; «não, descartar e registrar a alternativa» leva a «Inviável». Por exemplo, Recomendação do spike: Viável com cache distribuído; risco na invalidação; feature estimada em 3 semanas."
+    resumo: "Viável vai para a feature com a estimativa; inviável fica registrado para ninguém repetir a investigação."
+    status: rascunho
+    publico: false
+  - id: pb_spk_rec_e1
+    exemplo: "A raia Recomendação devolve «viavel» entregando Recomendação do spike; em Recomendação (spk_orq_c3), o fluxo segue para «Abordagem viável, segue para a feature». Por exemplo, Recomendação do spike: Viável com cache distribuído; risco na invalidação; feature estimada em 3 semanas."
+    resumo: "Retorno «viavel»."
+    status: rascunho
+    publico: false
+  - id: pb_spk_rec_e2
+    exemplo: "A raia Recomendação devolve «inviavel» entregando Recomendação do spike; em Recomendação (spk_orq_c3), o fluxo segue para «Abordagem descartada, alternativa registrada». Por exemplo, Recomendação do spike: Viável com cache distribuído; risco na invalidação; feature estimada em 3 semanas."
+    resumo: "Retorno «inviavel»."
+    status: rascunho
+    publico: false
+  - id: pb_spk_orq_s0
+    exemplo: "A raia Orquestração: spike e prova de conceito começa; o primeiro passo é «Pergunta e timebox»."
+    resumo: "Spike é investigação com prazo: troca incerteza por conhecimento. A POC é descartável e responde uma pergunta; não vira produto sem passar pelo fluxo de feature."
+    perguntas_chave: [pq_spk_orq_s0_1]
+    status: rascunho
+    publico: false
+  - id: pb_spk_orq_c1
+    exemplo: "Chama a raia Pergunta e timebox; «definido» leva a «Experimento e prova de conceito»."
+    resumo: "Chama a raia Pergunta e timebox. Retornos possíveis: definido."
+    status: rascunho
+    publico: false
+  - id: pb_spk_orq_c2
+    exemplo: "Chama a raia Experimento e prova de conceito; «respondido» leva a «Recomendação»; «timebox_esgotado» leva a «Timebox esgotado: decidir se estende ou encerra». Por exemplo, Pergunta do spike: Dá para validar o cupom em menos de 50 ms com o cache distribuído? Sim se o p95 ficar abaixo de 50 ms com 2 mil chamadas por minuto."
+    resumo: "Chama a raia Experimento e prova de conceito. Retornos possíveis: respondido, timebox_esgotado."
+    status: rascunho
+    publico: false
+  - id: pb_spk_orq_c3
+    exemplo: "Chama a raia Recomendação; «viavel» leva a «Abordagem viável, segue para a feature»; «inviavel» leva a «Abordagem descartada, alternativa registrada». Por exemplo, Resultado do spike: p95 de 38 ms com 2 mil chamadas por minuto; consumo de memória dentro do limite."
+    resumo: "Chama a raia Recomendação. Retornos possíveis: viavel, inviavel."
+    status: rascunho
+    publico: false
+  - id: pb_spk_orq_e1
+    exemplo: "A demanda termina em «viavel»: abordagem viável, segue para a feature, com Recomendação do spike. Por exemplo, Recomendação do spike: Viável com cache distribuído; risco na invalidação; feature estimada em 3 semanas."
+    resumo: "Abordagem viável, segue para a feature. Fim da demanda."
+    status: rascunho
+    publico: false
+  - id: pb_spk_orq_e2
+    exemplo: "A demanda termina em «inviavel»: abordagem descartada, alternativa registrada, com Recomendação do spike. Por exemplo, Recomendação do spike: Viável com cache distribuído; risco na invalidação; feature estimada em 3 semanas."
+    resumo: "Abordagem descartada, alternativa registrada. Fim da demanda."
+    status: rascunho
+    publico: false
+  - id: pb_spk_orq_e3
+    exemplo: "A demanda termina em «timebox_esgotado»: timebox esgotado: decidir se estende ou encerra, com Resultado do spike. Por exemplo, Resultado do spike: p95 de 38 ms com 2 mil chamadas por minuto; consumo de memória dentro do limite."
+    resumo: "Timebox esgotado: decidir se estende ou encerra. Fim da demanda."
+    status: rascunho
+    publico: false
+
+celulas:
+  - demanda: spike
+    requisito: funcional
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: spike
+    requisito: nao_funcional
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: spike
+    requisito: restricao
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: spike
+    requisito: probabilistico_ia
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+
+perguntas:
+  - id: pq_spk_def_t1_1
+    texto: "Qual é a pergunta, em uma frase?"
+    depende_de: [spk_def_t1]
+    status: rascunho
+    publico: false
+  - id: pq_spk_def_t1_2
+    texto: "Que resultado diz sim e que resultado diz não?"
+    depende_de: [spk_def_t1]
+    status: rascunho
+    publico: false
+  - id: pq_spk_def_t2_1
+    texto: "Quanto tempo esta resposta vale?"
+    depende_de: [spk_def_t2]
+    status: rascunho
+    publico: false
+  - id: pq_spk_poc_t1_1
+    texto: "O que é o mínimo que responde à pergunta?"
+    depende_de: [spk_poc_t1]
+    status: rascunho
+    publico: false
+  - id: pq_spk_poc_t2_1
+    texto: "O resultado responde à pergunta ou só à parte fácil dela?"
+    depende_de: [spk_poc_t2]
+    status: rascunho
+    publico: false
+  - id: pq_spk_rec_t1_1
+    texto: "Qual estimativa este spike tornou possível?"
+    depende_de: [spk_rec_t1]
+    status: rascunho
+    publico: false
+  - id: pq_spk_orq_s0_1
+    texto: "Qual decisão está travada por esta incerteza?"
+    depende_de: [spk_orq_s0]
+    status: rascunho
+    publico: false

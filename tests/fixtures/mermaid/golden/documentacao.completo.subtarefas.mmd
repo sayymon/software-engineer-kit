@@ -1,0 +1,106 @@
+flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"]) ~~~ z_LEG_st("<b>st</b>: subtarefa")
+  end
+  subgraph z_SG_doc_orq["<b>Orquestração: documentação</b>"]
+    direction LR
+    doc_orq_s0(["<small><b>doc_orq_s0</b></small><br/>Necessidade de documentação"])
+    doc_orq_c1[["<small><b>doc_orq_c1</b></small><br/>Planejamento da documentação"]]
+    doc_orq_c2[["<small><b>doc_orq_c2</b></small><br/>Escrita da documentação"]]
+    doc_orq_c3[["<small><b>doc_orq_c3</b></small><br/>Review humano"]]
+    doc_orq_c4[["<small><b>doc_orq_c4</b></small><br/>Publicação e divulgação"]]
+    doc_orq_e1(["<small><b>doc_orq_e1</b></small><br/>Documentação publicada e divulgada<br/><i>retorno: documentacao_disponivel</i>"])
+  end
+  subgraph z_SG_doc_pla["<b>Planejamento da documentação</b>"]
+    direction LR
+    doc_pla_s0(["<small><b>doc_pla_s0</b></small><br/>Iniciar: planejamento da documentação"])
+    doc_pla_t1["<small><b>doc_pla_t1</b></small><br/>Definir público, tipo e fonte de verdade"]
+    doc_pla_e1(["<small><b>doc_pla_e1</b></small><br/>Plano definido<br/><i>retorno: plano_definido</i>"])
+  end
+  subgraph z_SG_doc_esc["<b>Escrita da documentação</b>"]
+    direction LR
+    doc_esc_s0(["<small><b>doc_esc_s0</b></small><br/>Iniciar: escrita da documentação"])
+    doc_esc_t1["<small><b>doc_esc_t1</b></small><br/>Escrever a documentação"]
+    doc_esc_t2["<small><b>doc_esc_t2</b></small><br/>Validar com uma pessoa do público"]
+    doc_esc_e1(["<small><b>doc_esc_e1</b></small><br/>Documentação pronta<br/><i>retorno: documentacao_pronta</i>"])
+  end
+  subgraph z_SG_com_rev["<b>Review humano</b>"]
+    direction LR
+    com_rev_s0(["<small><b>com_rev_s0</b></small><br/>Testes aprovados, revisar a entrega"])
+    subgraph z_TS_com_rev_t1["<b>Review humano: arquitetura, edge cases, segurança</b>"]
+      direction LR
+      com_rev_t1["<small><b>com_rev_t1</b></small><br/>Review humano: arquitetura, edge cases, segurança"]
+      com_rev_t1_st1("<small><b>com_rev_t1_st1</b></small><br/>Revisar a arquitetura e a aderência aos ADRs<br/><i>Arquiteto de Software</i>")
+      com_rev_t1_st2("<small><b>com_rev_t1_st2</b></small><br/>Revisar os casos de borda e o que os agentes geraram<br/><i>Tech Lead</i>")
+      com_rev_t1_st3("<small><b>com_rev_t1_st3</b></small><br/>Revisar segurança e dados sensíveis<br/><i>Segurança</i>")
+    end
+    com_rev_g1{"<small><b>com_rev_g1</b></small><br/>Aprovada no review?"}
+    com_rev_e1(["<small><b>com_rev_e1</b></small><br/>Entrega aprovada pelo humano<br/><i>retorno: aprovado_pelo_humano</i>"])
+    com_rev_e2(["<small><b>com_rev_e2</b></small><br/>Ajustes solicitados no review<br/><i>retorno: ajustes_solicitados</i>"])
+  end
+  subgraph z_SG_doc_pub["<b>Publicação e divulgação</b>"]
+    direction LR
+    doc_pub_s0(["<small><b>doc_pub_s0</b></small><br/>Iniciar: publicação e divulgação"])
+    doc_pub_t1["<small><b>doc_pub_t1</b></small><br/>Publicar e avisar os interessados"]
+    doc_pub_e1(["<small><b>doc_pub_e1</b></small><br/>Documentação publicada<br/><i>retorno: documentacao_publicada</i>"])
+  end
+  com_rev_t1 --> com_rev_t1_st1
+  com_rev_t1_st1 --> com_rev_t1_st2
+  com_rev_t1_st2 --> com_rev_t1_st3
+  doc_orq_s0 --> doc_orq_c1
+  doc_pla_s0 --> doc_pla_t1
+  doc_pla_t1 --> doc_pla_e1
+  doc_esc_s0 --> doc_esc_t1
+  doc_esc_t1 --> doc_esc_t2
+  doc_esc_t2 --> doc_esc_e1
+  com_rev_s0 --> com_rev_t1
+  com_rev_t1_st3 --> com_rev_g1
+  com_rev_g1 -->|"sim"| com_rev_e1
+  com_rev_g1 -->|"não, com ajustes"| com_rev_e2
+  doc_pub_s0 --> doc_pub_t1
+  doc_pub_t1 --> doc_pub_e1
+  doc_orq_c1 -.->|"chama"| doc_pla_s0
+  doc_pla_e1 -.->|"retorno: plano_definido"| doc_orq_c2
+  doc_orq_c2 -.->|"chama"| doc_esc_s0
+  doc_esc_e1 -.->|"retorno: documentacao_pronta"| doc_orq_c3
+  doc_orq_c3 -.->|"chama"| com_rev_s0
+  com_rev_e1 -.->|"retorno: aprovado_pelo_humano"| doc_orq_c4
+  com_rev_e2 -.->|"retorno: ajustes_solicitados"| doc_orq_c2
+  doc_orq_c4 -.->|"chama"| doc_pub_s0
+  doc_pub_e1 -.->|"retorno: documentacao_publicada"| doc_orq_e1
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#332288,stroke:#1F1452,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#117733,stroke:#0A471F,stroke-width:1px,color:#FFFFFF
+  classDef z_R_3 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#CC6677,stroke:#7A3D47,stroke-width:1px,color:#000000
+  classDef z_S_3 fill:#B3DDF5,stroke:#346C8C,stroke-width:1px,color:#000000,font-size:12px
+  classDef z_C_0_1 fill:#332288,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_2 fill:#117733,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_3 fill:#56B4E9,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_4 fill:#CC6677,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  class z_LEG_st leg
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
+  class doc_orq_c1 z_C_0_1
+  class doc_orq_c2 z_C_0_2
+  class doc_orq_c3 z_C_0_3
+  class doc_orq_c4 z_C_0_4
+  class doc_orq_s0,doc_orq_e1 z_R_0
+  class doc_pla_s0,doc_pla_t1,doc_pla_e1 z_R_1
+  class doc_esc_s0,doc_esc_t1,doc_esc_t2,doc_esc_e1 z_R_2
+  class com_rev_s0,com_rev_t1,com_rev_g1,com_rev_e1,com_rev_e2 z_R_3
+  class doc_pub_s0,doc_pub_t1,doc_pub_e1 z_R_4
+  class com_rev_t1_st1,com_rev_t1_st2,com_rev_t1_st3 z_S_3
+  class com_rev_g1 gw
+  style z_SG_doc_orq fill:#E7ECEE,stroke:#607D8B,stroke-width:3px,color:#000000
+  style z_SG_doc_pla fill:#E0DEED,stroke:#332288,stroke-width:3px,color:#000000
+  style z_SG_doc_esc fill:#DBEBE0,stroke:#117733,stroke-width:3px,color:#000000
+  style z_SG_com_rev fill:#E6F4FC,stroke:#56B4E9,stroke-width:3px,color:#000000
+  style z_SG_doc_pub fill:#F7E8EB,stroke:#CC6677,stroke-width:3px,color:#000000
+  style z_TS_com_rev_t1 fill:#F5FAFE,stroke:#3C7EA3,stroke-width:1.5px,stroke-dasharray:5 3,color:#000000

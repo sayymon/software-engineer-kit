@@ -1,0 +1,230 @@
+{
+  "title": "decisao",
+  "x-translatable": [
+    "nome",
+    "descricao",
+    "body"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+    },
+    "nome": {
+      "type": "string",
+      "minLength": 1
+    },
+    "descricao": {
+      "type": "string"
+    },
+    "publico": {
+      "default": false,
+      "type": "boolean"
+    },
+    "fontes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "livro",
+              "artigo",
+              "curso"
+            ]
+          },
+          "titulo": {
+            "type": "string",
+            "minLength": 1
+          },
+          "link": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status_revisao": {
+            "type": "string",
+            "enum": [
+              "pendente",
+              "em_revisao",
+              "revisada"
+            ]
+          },
+          "proxima_revisao": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          }
+        },
+        "required": [
+          "id",
+          "tipo",
+          "titulo",
+          "link",
+          "status_revisao",
+          "proxima_revisao"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "fonte_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dataVerificacao": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "guia_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+      }
+    },
+    "status": {
+      "default": "rascunho",
+      "type": "string",
+      "enum": [
+        "rascunho",
+        "revisado",
+        "publicado"
+      ]
+    },
+    "relacoes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+      }
+    },
+    "tipo": {
+      "type": "string",
+      "const": "decisao"
+    },
+    "raia": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+    },
+    "demanda": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+    },
+    "rotulo": {
+      "type": "string"
+    },
+    "condicao": {
+      "type": "string"
+    },
+    "proximo": {
+      "type": "array",
+      "items": {}
+    },
+    "estado": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {}
+    },
+    "ligacoes": {
+      "type": "array",
+      "items": {}
+    },
+    "playbook": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+    },
+    "entradas": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+      }
+    },
+    "saidas": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+      }
+    },
+    "tecnicas": {
+      "type": "array",
+      "items": {}
+    },
+    "layout": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {}
+    },
+    "raia_chamada": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+    },
+    "retorno": {
+      "type": "string"
+    },
+    "papel": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+    },
+    "apoio": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+      }
+    },
+    "consultado": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+      }
+    },
+    "informado": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+      }
+    },
+    "aprova": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+    }
+  },
+  "required": [
+    "id",
+    "nome",
+    "tipo",
+    "raia",
+    "condicao",
+    "proximo",
+    "estado"
+  ],
+  "additionalProperties": false
+}

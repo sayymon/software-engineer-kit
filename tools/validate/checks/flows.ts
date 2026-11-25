@@ -1,20 +1,21 @@
 // SPDX-License-Identifier: MIT
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { assembleDoc, checkDoc, validateAgainstSchema } from '../../../lib/flows';
+import { checkDoc, validateAgainstSchema } from '../../../lib/flows';
+import { guideDir, hasGuide, loadGuideDoc } from '../../../lib/guide';
 import { fail, na, ok, type Check } from '../types';
 
 const LETTER: Record<string, string> = { inicio: 's', tarefa: 't', bifurcacao: 'g', chamada: 'c', fim: 'e' };
 
 export const flows: Check = {
   name: 'flows',
-  description: 'guide flows validate against the vendored JSON Schema and the guide cross-reference rules; practical guides keep their lane and node structure',
+  description: 'the guide YAML (content/guide) validates against the vendored JSON Schema and the guide cross-reference rules; practical guides keep their lane and node structure',
   run(ctx) {
     const { entities } = ctx.source();
     const demands = entities.filter((e) => e.tipo === 'demanda');
-    if (demands.length === 0) return na('no flows yet');
+    if (!hasGuide(guideDir(ctx.contentRoot))) return na('no guide yet');
     const problems: string[] = [];
-    const doc = assembleDoc(entities);
+    const doc = loadGuideDoc(guideDir(ctx.contentRoot));
     const schemaFile = join(ctx.root, 'schema/flows.schema.json');
     const schema = JSON.parse(readFileSync(schemaFile, 'utf8')) as object;
     for (const i of validateAgainstSchema(doc, schema)) problems.push(`schema ${i.path}: ${i.message}`);

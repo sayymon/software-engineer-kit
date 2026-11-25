@@ -1,0 +1,68 @@
+flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"]) ~~~ z_LEG_r0["<b>Decisão construir, comprar ou assinar</b><br/>raia chamada"] ~~~ z_LEG_r1["<b>Prontidão (Definition of Ready)</b><br/>raia chamada"] ~~~ z_LEG_r2["<b>Fornecedor e contratação</b><br/>raia chamada"]
+  end
+  subgraph z_SG_feat_cls["<b>Classificação, escopo, fornecimento e prontidão</b>"]
+    direction LR
+    feat_cls_s0(["<small><b>feat_cls_s0</b></small><br/>Requisitos claros, classificar"])
+    feat_cls_t1["<small><b>feat_cls_t1</b></small><br/>Classificar os requisitos e delimitar o escopo<br/><i>▸ 6 subtarefas</i>"]
+    feat_cls_c2[["<small><b>feat_cls_c2</b></small><br/>Decidir construir, comprar ou assinar"]]
+    feat_cls_c1[["<small><b>feat_cls_c1</b></small><br/>Verificar a prontidão (Definition of Ready)"]]
+    feat_cls_c3[["<small><b>feat_cls_c3</b></small><br/>Escolher e contratar o fornecedor"]]
+    feat_cls_e2(["<small><b>feat_cls_e2</b></small><br/>Todas as opções fora do orçamento<br/><i>retorno: fora_do_orcamento</i>"])
+    feat_cls_e1(["<small><b>feat_cls_e1</b></small><br/>Escopo delimitado e pronto para especificar<br/><i>retorno: pronto_para_especificar</i>"])
+  end
+  feat_cls_s0 --> feat_cls_t1
+  feat_cls_t1 --> feat_cls_c2
+  feat_cls_c2 -->|"construir"| feat_cls_c1
+  feat_cls_c2 -->|"comprar"| feat_cls_c3
+  feat_cls_c2 -->|"assinar"| feat_cls_c3
+  feat_cls_c2 -->|"fora_do_orcamento"| feat_cls_e2
+  feat_cls_c1 -->|"pronto_para_iniciar"| feat_cls_e1
+  feat_cls_c3 -->|"contratado"| feat_cls_c1
+  feat_cls_c3 -->|"nenhum_atende"| feat_cls_c2
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#332288,stroke:#1F1452,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#117733,stroke:#0A471F,stroke-width:1px,color:#FFFFFF
+  classDef z_R_3 fill:#CC6677,stroke:#7A3D47,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#44AA99,stroke:#29665C,stroke-width:1px,color:#000000
+  classDef z_R_5 fill:#0072B2,stroke:#00446B,stroke-width:1px,color:#FFFFFF
+  classDef z_R_6 fill:#AA4499,stroke:#66295C,stroke-width:1px,color:#FFFFFF
+  classDef z_R_7 fill:#009E73,stroke:#005F45,stroke-width:1px,color:#000000
+  classDef z_R_8 fill:#BBCC33,stroke:#707A1F,stroke-width:1px,color:#000000
+  classDef z_R_9 fill:#D55E00,stroke:#803800,stroke-width:1px,color:#000000
+  classDef z_R_10 fill:#CC79A7,stroke:#7A4964,stroke-width:1px,color:#000000
+  classDef z_R_11 fill:#F0E442,stroke:#908928,stroke-width:1px,color:#000000
+  classDef z_R_12 fill:#88CCEE,stroke:#527A8F,stroke-width:1px,color:#000000
+  classDef z_R_13 fill:#661100,stroke:#3D0A00,stroke-width:1px,color:#FFFFFF
+  classDef z_R_14 fill:#EE7733,stroke:#8F471F,stroke-width:1px,color:#000000
+  classDef z_R_15 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_R_16 fill:#997700,stroke:#5C4700,stroke-width:1px,color:#000000
+  classDef z_R_17 fill:#999933,stroke:#5C5C1F,stroke-width:1px,color:#000000
+  classDef z_R_18 fill:#EE8866,stroke:#8F523D,stroke-width:1px,color:#000000
+  classDef z_R_19 fill:#77AADD,stroke:#476685,stroke-width:1px,color:#000000
+  classDef z_R_20 fill:#4477AA,stroke:#294766,stroke-width:1px,color:#FFFFFF
+  classDef z_R_21 fill:#DDCC77,stroke:#857A47,stroke-width:1px,color:#000000
+  classDef z_R_22 fill:#AA3377,stroke:#661F47,stroke-width:1px,color:#FFFFFF
+  classDef z_R_23 fill:#882255,stroke:#521433,stroke-width:1px,color:#FFFFFF
+  classDef z_R_24 fill:#E69F00,stroke:#8A5F00,stroke-width:1px,color:#000000
+  classDef z_R_25 fill:#6699CC,stroke:#3D5C7A,stroke-width:1px,color:#000000
+  classDef z_C_3_20 fill:#4477AA,stroke:#CC6677,stroke-width:4px,color:#FFFFFF
+  classDef z_C_3_21 fill:#DDCC77,stroke:#CC6677,stroke-width:4px,color:#000000
+  classDef z_C_3_22 fill:#AA3377,stroke:#CC6677,stroke-width:4px,color:#FFFFFF
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  class z_LEG_r0 z_R_20
+  class z_LEG_r1 z_R_21
+  class z_LEG_r2 z_R_22
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
+  class feat_cls_c2 z_C_3_20
+  class feat_cls_c1 z_C_3_21
+  class feat_cls_c3 z_C_3_22
+  class feat_cls_s0,feat_cls_t1,feat_cls_e2,feat_cls_e1 z_R_3
+  style z_SG_feat_cls fill:#F7E8EB,stroke:#CC6677,stroke-width:3px,color:#000000

@@ -1,0 +1,593 @@
+# Demanda: Dívida técnica e refatoração. Esqueleto (onda 2): orquestradora, raias próprias e raias comuns. Status rascunho.
+demandas:
+  - id: divida_tecnica
+    nome: Dívida técnica e refatoração
+    sigla: dvt
+    publico: false
+artefatos:
+  - id: mapa_da_divida
+    nome: Mapa da dívida
+    descricao: Onde está a dívida, que mudanças ela atrasa e com que frequência
+    tipo: documento
+    subtipo: analise
+    exemplo: Módulo de cupons com regras duplicadas em três serviços; toda mudança de desconto leva o dobro do tempo
+    status: rascunho
+    publico: false
+  - id: custo_da_divida
+    nome: Custo da dívida
+    descricao: Tempo perdido por mudança, incidentes ligados e esforço estimado da refatoração
+    tipo: documento
+    subtipo: relatorio
+    exemplo: 2 dias extras por mudança, 3 incidentes no trimestre; refatoração estimada em 8 dias
+    status: rascunho
+    publico: false
+  - id: testes_de_caracterizacao
+    nome: Testes de caracterização
+    descricao: Testes que fixam o comportamento atual antes de mexer na estrutura
+    tipo: teste
+    subtipo: caracterizacao
+    exemplo: 40 testes fixam o cálculo atual de desconto antes da extração do módulo
+    status: rascunho
+    publico: false
+  - id: plano_de_refatoracao
+    nome: Plano de refatoração
+    descricao: Sequência de passos, cada um integrável e reversível sozinho
+    tipo: documento
+    subtipo: plano
+    exemplo: '5 passos: extrair interface, mover regra, trocar chamadas, remover duplicata, apagar código morto'
+    status: rascunho
+    publico: false
+raias:
+  - id: dvt_orq
+    nome: 'Orquestração: dívida técnica e refatoração'
+    demanda: divida_tecnica
+    responsabilidade: Conduzir a demanda de dívida técnica e refatoração do início ao fim, delegando cada etapa a uma raia
+    cor: '#607D8B'
+    orquestradora: true
+    status: rascunho
+    publico: false
+  - id: dvt_ava
+    nome: Avaliação da dívida
+    demanda: divida_tecnica
+    responsabilidade: Mapear a dívida, medir o custo de carregá-la e decidir se paga agora
+    cor: '#332288'
+    status: rascunho
+    publico: false
+  - id: dvt_pla
+    nome: Plano de refatoração segura
+    demanda: divida_tecnica
+    responsabilidade: Planejar a refatoração em passos pequenos, reversíveis e protegidos por testes
+    cor: '#117733'
+    status: rascunho
+    publico: false
+decisoes:
+  - id: dvt_ava_s0
+    raia: dvt_ava
+    tipo: inicio
+    rotulo: 'Iniciar: avaliação da dívida'
+    condicao: ''
+    proximo:
+      - para: dvt_ava_t1
+        condicao: ''
+    estado: {}
+    playbook: pb_dvt_ava_s0
+    status: rascunho
+    publico: false
+  - id: dvt_ava_t1
+    raia: dvt_ava
+    tipo: tarefa
+    rotulo: Mapear a dívida e onde ela dói
+    condicao: ''
+    proximo:
+      - para: dvt_ava_t2
+        condicao: ''
+    estado: {}
+    saidas:
+      - mapa_da_divida
+    papel: tech_lead
+    apoio: [dev, arquiteto]
+    playbook: pb_dvt_ava_t1
+    status: rascunho
+    publico: false
+  - id: dvt_ava_t2
+    raia: dvt_ava
+    tipo: tarefa
+    rotulo: Estimar o custo de carregar e o risco de pagar
+    condicao: ''
+    proximo:
+      - para: dvt_ava_g1
+        condicao: ''
+    estado: {}
+    entradas:
+      - mapa_da_divida
+    saidas:
+      - custo_da_divida
+    papel: tech_lead
+    apoio: [pm]
+    playbook: pb_dvt_ava_t2
+    status: rascunho
+    publico: false
+  - id: dvt_ava_g1
+    raia: dvt_ava
+    tipo: bifurcacao
+    rotulo: Pagar a dívida agora?
+    condicao: Pagar a dívida agora?
+    proximo:
+      - para: dvt_ava_e1
+        condicao: sim
+      - para: dvt_ava_e2
+        condicao: não
+    estado: {}
+    entradas:
+      - custo_da_divida
+    papel: tech_lead
+    apoio: [pm]
+    aprova: gerente_de_engenharia
+    consultado: [arquiteto]
+    informado: [stakeholder]
+    playbook: pb_dvt_ava_g1
+    status: rascunho
+    publico: false
+  - id: dvt_ava_e1
+    raia: dvt_ava
+    tipo: fim
+    retorno: pagar_agora
+    rotulo: Pagar agora
+    condicao: ''
+    proximo: []
+    estado: {}
+    saidas:
+      - custo_da_divida
+    playbook: pb_dvt_ava_e1
+    status: rascunho
+    publico: false
+  - id: dvt_ava_e2
+    raia: dvt_ava
+    tipo: fim
+    retorno: aceitar_a_divida
+    rotulo: Aceitar a dívida
+    condicao: ''
+    proximo: []
+    estado: {}
+    saidas:
+      - custo_da_divida
+    playbook: pb_dvt_ava_e2
+    status: rascunho
+    publico: false
+  - id: dvt_pla_s0
+    raia: dvt_pla
+    tipo: inicio
+    rotulo: 'Iniciar: plano de refatoração segura'
+    condicao: ''
+    proximo:
+      - para: dvt_pla_t1
+        condicao: ''
+    estado: {}
+    playbook: pb_dvt_pla_s0
+    status: rascunho
+    publico: false
+  - id: dvt_pla_t1
+    raia: dvt_pla
+    tipo: tarefa
+    rotulo: Escrever testes de caracterização do comportamento atual
+    condicao: ''
+    proximo:
+      - para: dvt_pla_t2
+        condicao: ''
+    estado: {}
+    saidas:
+      - testes_de_caracterizacao
+    papel: dev
+    apoio: [qa]
+    playbook: pb_dvt_pla_t1
+    status: rascunho
+    publico: false
+  - id: dvt_pla_t2
+    raia: dvt_pla
+    tipo: tarefa
+    rotulo: Fatiar a refatoração em passos pequenos e reversíveis
+    condicao: ''
+    proximo:
+      - para: dvt_pla_e1
+        condicao: ''
+    estado: {}
+    entradas:
+      - testes_de_caracterizacao
+    saidas:
+      - plano_de_refatoracao
+    papel: tech_lead
+    apoio: [dev]
+    playbook: pb_dvt_pla_t2
+    status: rascunho
+    publico: false
+  - id: dvt_pla_e1
+    raia: dvt_pla
+    tipo: fim
+    retorno: plano_pronto
+    rotulo: Plano pronto
+    condicao: ''
+    proximo: []
+    estado: {}
+    saidas:
+      - plano_de_refatoracao
+    playbook: pb_dvt_pla_e1
+    status: rascunho
+    publico: false
+  - id: dvt_orq_s0
+    raia: dvt_orq
+    tipo: inicio
+    rotulo: Dívida percebida no código ou na arquitetura
+    condicao: ''
+    proximo:
+      - para: dvt_orq_c1
+        condicao: ''
+    estado: {}
+    playbook: pb_dvt_orq_s0
+    status: rascunho
+    publico: false
+  - id: dvt_orq_c1
+    raia: dvt_orq
+    tipo: chamada
+    raia_chamada: dvt_ava
+    rotulo: Avaliação da dívida
+    condicao: ''
+    proximo:
+      - para: dvt_orq_c2
+        condicao: pagar_agora
+      - para: dvt_orq_e2
+        condicao: aceitar_a_divida
+    estado: {}
+    saidas:
+      - custo_da_divida
+    playbook: pb_dvt_orq_c1
+    status: rascunho
+    publico: false
+  - id: dvt_orq_c2
+    raia: dvt_orq
+    tipo: chamada
+    raia_chamada: dvt_pla
+    rotulo: Plano de refatoração segura
+    condicao: ''
+    proximo:
+      - para: dvt_orq_c3
+        condicao: plano_pronto
+    estado: {}
+    entradas:
+      - custo_da_divida
+    saidas:
+      - plano_de_refatoracao
+    playbook: pb_dvt_orq_c2
+    status: rascunho
+    publico: false
+  - id: dvt_orq_c3
+    raia: dvt_orq
+    tipo: chamada
+    raia_chamada: com_pro
+    rotulo: Verificar a prontidão (Definition of Ready)
+    condicao: ''
+    proximo:
+      - para: dvt_orq_c4
+        condicao: pronto_para_iniciar
+    estado: {}
+    entradas:
+      - plano_de_refatoracao
+    playbook: pb_dvt_orq_c3
+    status: rascunho
+    publico: false
+  - id: dvt_orq_c4
+    raia: dvt_orq
+    tipo: chamada
+    raia_chamada: com_exe
+    rotulo: Execução das tarefas
+    condicao: ''
+    proximo:
+      - para: dvt_orq_c5
+        condicao: execucao_integrada
+    estado: {}
+    playbook: pb_dvt_orq_c4
+    status: rascunho
+    publico: false
+  - id: dvt_orq_c5
+    raia: dvt_orq
+    tipo: chamada
+    raia_chamada: com_pub
+    rotulo: Publicar em ambiente de testes
+    condicao: ''
+    proximo:
+      - para: dvt_orq_c6
+        condicao: publicado
+      - para: dvt_orq_c4
+        condicao: falha_na_publicacao
+    estado: {}
+    playbook: pb_dvt_orq_c5
+    status: rascunho
+    publico: false
+  - id: dvt_orq_c6
+    raia: dvt_orq
+    tipo: chamada
+    raia_chamada: com_val
+    rotulo: Testes automatizados
+    condicao: ''
+    proximo:
+      - para: dvt_orq_c7
+        condicao: testes_aprovados
+      - para: dvt_orq_c4
+        condicao: testes_reprovados
+    estado: {}
+    playbook: pb_dvt_orq_c6
+    status: rascunho
+    publico: false
+  - id: dvt_orq_c7
+    raia: dvt_orq
+    tipo: chamada
+    raia_chamada: com_rev
+    rotulo: Review humano
+    condicao: ''
+    proximo:
+      - para: dvt_orq_c8
+        condicao: aprovado_pelo_humano
+      - para: dvt_orq_c4
+        condicao: ajustes_solicitados
+    estado: {}
+    playbook: pb_dvt_orq_c7
+    status: rascunho
+    publico: false
+  - id: dvt_orq_c8
+    raia: dvt_orq
+    tipo: chamada
+    raia_chamada: com_etg
+    rotulo: Implantação
+    condicao: ''
+    proximo:
+      - para: dvt_orq_c9
+        condicao: implantado
+      - para: dvt_orq_c4
+        condicao: implantacao_revertida
+    estado: {}
+    playbook: pb_dvt_orq_c8
+    status: rascunho
+    publico: false
+  - id: dvt_orq_c9
+    raia: dvt_orq
+    tipo: chamada
+    raia_chamada: com_mon
+    rotulo: Validação em produção e monitoramento
+    condicao: ''
+    proximo:
+      - para: dvt_orq_e1
+        condicao: feature_validada
+      - para: dvt_orq_e3
+        condicao: incidente_acionado
+    estado: {}
+    playbook: pb_dvt_orq_c9
+    status: rascunho
+    publico: false
+  - id: dvt_orq_e1
+    raia: dvt_orq
+    tipo: fim
+    retorno: divida_paga
+    rotulo: Dívida paga e ganho medido
+    condicao: ''
+    proximo: []
+    estado: {}
+    playbook: pb_dvt_orq_e1
+    status: rascunho
+    publico: false
+  - id: dvt_orq_e2
+    raia: dvt_orq
+    tipo: fim
+    retorno: aceitar_a_divida
+    rotulo: Dívida aceita e registrada no backlog
+    condicao: ''
+    proximo: []
+    estado: {}
+    playbook: pb_dvt_orq_e2
+    status: rascunho
+    publico: false
+  - id: dvt_orq_e3
+    raia: dvt_orq
+    tipo: fim
+    retorno: incidente_acionado
+    rotulo: Incidente acionado em produção
+    condicao: ''
+    proximo: []
+    estado: {}
+    playbook: pb_dvt_orq_e3
+    status: rascunho
+    publico: false
+playbooks:
+  - id: pb_dvt_ava_s0
+    exemplo: "A raia Avaliação da dívida começa; o primeiro passo é «Mapear a dívida e onde ela dói»."
+    resumo: 'Início da raia Avaliação da dívida. Responsabilidade: mapear a dívida, medir o custo de carregá-la e decidir se paga agora.'
+    status: rascunho
+    publico: false
+  - id: pb_dvt_ava_t1
+    exemplo: "Tech Lead entrega Mapa da dívida. Mapa da dívida: Módulo de cupons com regras duplicadas em três serviços; toda mudança de desconto leva o dobro do tempo."
+    resumo: 'Mapear a dívida e onde ela dói. Entrega: onde está a dívida, que mudanças ela atrasa e com que frequência.'
+    perguntas_chave: [pq_dvt_ava_t1_1]
+    status: rascunho
+    publico: false
+  - id: pb_dvt_ava_t2
+    exemplo: "Tech Lead entrega Custo da dívida. Custo da dívida: 2 dias extras por mudança, 3 incidentes no trimestre; refatoração estimada em 8 dias."
+    resumo: 'Estimar o custo de carregar e o risco de pagar. Entrega: tempo perdido por mudança, incidentes ligados e esforço estimado da refatoração.'
+    perguntas_chave: [pq_dvt_ava_t2_1]
+    status: rascunho
+    publico: false
+  - id: pb_dvt_ava_g1
+    exemplo: "Tech Lead decide com Custo da dívida: «sim» leva a «Pagar agora»; «não» leva a «Aceitar a dívida». Por exemplo, Custo da dívida: 2 dias extras por mudança, 3 incidentes no trimestre; refatoração estimada em 8 dias."
+    resumo: Pagar a dívida agora? A resposta decide o retorno da raia.
+    status: rascunho
+    publico: false
+  - id: pb_dvt_ava_e1
+    exemplo: "A raia Avaliação da dívida devolve «pagar_agora» entregando Custo da dívida; em Avaliação da dívida (dvt_orq_c1), o fluxo segue para «Plano de refatoração segura». Por exemplo, Custo da dívida: 2 dias extras por mudança, 3 incidentes no trimestre; refatoração estimada em 8 dias."
+    resumo: Retorno «pagar_agora» da raia Avaliação da dívida. Quem chamou a raia segue por este retorno.
+    status: rascunho
+    publico: false
+  - id: pb_dvt_ava_e2
+    exemplo: "A raia Avaliação da dívida devolve «aceitar_a_divida» entregando Custo da dívida; em Avaliação da dívida (dvt_orq_c1), o fluxo segue para «Dívida aceita e registrada no backlog». Por exemplo, Custo da dívida: 2 dias extras por mudança, 3 incidentes no trimestre; refatoração estimada em 8 dias."
+    resumo: Retorno «aceitar_a_divida» da raia Avaliação da dívida. Quem chamou a raia segue por este retorno.
+    status: rascunho
+    publico: false
+  - id: pb_dvt_pla_s0
+    exemplo: "A raia Plano de refatoração segura começa; o primeiro passo é «Escrever testes de caracterização do comportamento atual»."
+    resumo: 'Início da raia Plano de refatoração segura. Responsabilidade: planejar a refatoração em passos pequenos, reversíveis e protegidos por testes.'
+    status: rascunho
+    publico: false
+  - id: pb_dvt_pla_t1
+    exemplo: "Dev entrega Testes de caracterização. Testes de caracterização: 40 testes fixam o cálculo atual de desconto antes da extração do módulo."
+    resumo: 'Escrever testes de caracterização do comportamento atual. Entrega: testes que fixam o comportamento atual antes de mexer na estrutura.'
+    perguntas_chave: [pq_dvt_pla_t1_1]
+    status: rascunho
+    publico: false
+  - id: pb_dvt_pla_t2
+    exemplo: "Tech Lead entrega Plano de refatoração. Plano de refatoração: 5 passos: extrair interface, mover regra, trocar chamadas, remover duplicata, apagar código morto."
+    resumo: 'Fatiar a refatoração em passos pequenos e reversíveis. Entrega: sequência de passos, cada um integrável e reversível sozinho.'
+    perguntas_chave: [pq_dvt_pla_t2_1]
+    status: rascunho
+    publico: false
+  - id: pb_dvt_pla_e1
+    exemplo: "A raia Plano de refatoração segura devolve «plano_pronto» entregando Plano de refatoração; em Plano de refatoração segura (dvt_orq_c2), o fluxo segue para «Verificar a prontidão (Definition of Ready)». Por exemplo, Plano de refatoração: 5 passos: extrair interface, mover regra, trocar chamadas, remover duplicata, apagar código morto."
+    resumo: Retorno «plano_pronto» da raia Plano de refatoração segura. Quem chamou a raia segue por este retorno.
+    status: rascunho
+    publico: false
+  - id: pb_dvt_orq_s0
+    exemplo: "A raia Orquestração: dívida técnica e refatoração começa; o primeiro passo é «Avaliação da dívida»."
+    resumo: 'Toda dívida tem juros: o custo de carregá-la cresce a cada mudança. Antes de refatorar, meça o custo e o risco e decida pagar agora, planejar ou aceitar de forma consciente.'
+    status: rascunho
+    publico: false
+  - id: pb_dvt_orq_c1
+    exemplo: "Chama a raia Avaliação da dívida; «pagar_agora» leva a «Plano de refatoração segura»; «aceitar_a_divida» leva a «Dívida aceita e registrada no backlog». Por exemplo, Custo da dívida: 2 dias extras por mudança, 3 incidentes no trimestre; refatoração estimada em 8 dias."
+    resumo: Chama a raia Avaliação da dívida. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - 'Retornos possíveis: pagar_agora, aceitar_a_divida'
+    status: rascunho
+    publico: false
+  - id: pb_dvt_orq_c2
+    exemplo: "Chama a raia Plano de refatoração segura; «plano_pronto» leva a «Verificar a prontidão (Definition of Ready)». Por exemplo, Plano de refatoração: 5 passos: extrair interface, mover regra, trocar chamadas, remover duplicata, apagar código morto."
+    resumo: Chama a raia Plano de refatoração segura. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - 'Retornos possíveis: plano_pronto'
+    status: rascunho
+    publico: false
+  - id: pb_dvt_orq_c3
+    exemplo: "Chama a raia Prontidão (Definition of Ready); «pronto_para_iniciar» leva a «Execução das tarefas». Por exemplo, Plano de refatoração: 5 passos: extrair interface, mover regra, trocar chamadas, remover duplicata, apagar código morto."
+    resumo: Chama a raia Verificar a prontidão (Definition of Ready). O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - 'Retornos possíveis: pronto_para_iniciar'
+    status: rascunho
+    publico: false
+  - id: pb_dvt_orq_c4
+    exemplo: "Chama a raia Execução por papéis; «execucao_integrada» leva a «Publicar em ambiente de testes»."
+    resumo: Chama a raia Execução das tarefas. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - 'Retornos possíveis: execucao_integrada'
+    status: rascunho
+    publico: false
+  - id: pb_dvt_orq_c5
+    exemplo: "Chama a raia Publicação em ambiente de testes; «publicado» leva a «Testes automatizados»; «falha_na_publicacao» leva a «Execução das tarefas»."
+    resumo: Chama a raia Publicar em ambiente de testes. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - 'Retornos possíveis: publicado, falha_na_publicacao'
+    status: rascunho
+    publico: false
+  - id: pb_dvt_orq_c6
+    exemplo: "Chama a raia Testes automatizados e regressão; «testes_aprovados» leva a «Review humano»; «testes_reprovados» leva a «Execução das tarefas»."
+    resumo: Chama a raia Testes automatizados. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - 'Retornos possíveis: testes_aprovados, testes_reprovados'
+    status: rascunho
+    publico: false
+  - id: pb_dvt_orq_c7
+    exemplo: "Chama a raia Review humano; «aprovado_pelo_humano» leva a «Implantação»; «ajustes_solicitados» leva a «Execução das tarefas»."
+    resumo: Chama a raia Review humano. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - 'Retornos possíveis: aprovado_pelo_humano, ajustes_solicitados'
+    status: rascunho
+    publico: false
+  - id: pb_dvt_orq_c8
+    exemplo: "Chama a raia Implantação; «implantado» leva a «Validação em produção e monitoramento»; «implantacao_revertida» leva a «Execução das tarefas»."
+    resumo: Chama a raia Implantação. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - 'Retornos possíveis: implantado, implantacao_revertida'
+    status: rascunho
+    publico: false
+  - id: pb_dvt_orq_c9
+    exemplo: "Chama a raia Validação em produção e monitoramento; «feature_validada» leva a «Dívida paga e ganho medido»; «incidente_acionado» leva a «Incidente acionado em produção»."
+    resumo: Chama a raia Validação em produção e monitoramento. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - 'Retornos possíveis: feature_validada, incidente_acionado'
+    status: rascunho
+    publico: false
+  - id: pb_dvt_orq_e1
+    exemplo: "A demanda termina em «divida_paga»: dívida paga e ganho medido."
+    resumo: Dívida paga e ganho medido. Fim da demanda.
+    status: rascunho
+    publico: false
+  - id: pb_dvt_orq_e2
+    exemplo: "A demanda termina em «aceitar_a_divida»: dívida aceita e registrada no backlog."
+    resumo: Dívida aceita e registrada no backlog. Fim da demanda.
+    status: rascunho
+    publico: false
+  - id: pb_dvt_orq_e3
+    exemplo: "A demanda termina em «incidente_acionado»: incidente acionado em produção."
+    resumo: Incidente acionado em produção. Fim da demanda.
+    status: rascunho
+    publico: false
+celulas:
+  - demanda: divida_tecnica
+    requisito: funcional
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: divida_tecnica
+    requisito: nao_funcional
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: divida_tecnica
+    requisito: restricao
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: divida_tecnica
+    requisito: probabilistico_ia
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+perguntas:
+  - id: pq_dvt_ava_t1_1
+    texto: "O que precisa estar claro para mapear a dívida e onde ela dói?"
+    depende_de: [dvt_ava_t1]
+    status: rascunho
+    publico: false
+  - id: pq_dvt_ava_t2_1
+    texto: "O que precisa estar claro para estimar o custo de carregar e o risco de pagar?"
+    depende_de: [dvt_ava_t2]
+    status: rascunho
+    publico: false
+  - id: pq_dvt_pla_t1_1
+    texto: "O que precisa estar claro para escrever testes de caracterização do comportamento atual?"
+    depende_de: [dvt_pla_t1]
+    status: rascunho
+    publico: false
+  - id: pq_dvt_pla_t2_1
+    texto: "O que precisa estar claro para fatiar a refatoração em passos pequenos e reversíveis?"
+    depende_de: [dvt_pla_t2]
+    status: rascunho
+    publico: false

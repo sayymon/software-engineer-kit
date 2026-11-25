@@ -1,4 +1,8 @@
 flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"]) ~~~ z_LEG_r0["<b>Detecção e triagem</b><br/>raia chamada"] ~~~ z_LEG_r1["<b>Classificação de severidade</b><br/>raia chamada"] ~~~ z_LEG_r2["<b>Comando do incidente</b><br/>raia chamada"] ~~~ z_LEG_r3["<b>Comunicação por severidade</b><br/>raia chamada"] ~~~ z_LEG_r4["<b>Escalada</b><br/>raia chamada"] ~~~ z_LEG_r5["<b>Contenção de danos</b><br/>raia chamada"] ~~~ z_LEG_r6["<b>Reavaliação de severidade</b><br/>raia chamada"] ~~~ z_LEG_r7["<b>Mitigação e verificação</b><br/>raia chamada"] ~~~ z_LEG_r8["<b>Encerramento</b><br/>raia chamada"] ~~~ z_LEG_r9["<b>Aprendizado pós-incidente</b><br/>raia chamada"]
+  end
   subgraph z_SG_inc_orq["<b>Orquestração do incidente</b>"]
     direction LR
     inc_orq_s0(["<small><b>inc_orq_s0</b></small><br/>Alerta ou relato de falha em produção"])
@@ -56,6 +60,21 @@ flowchart LR
   classDef z_C_0_10 fill:#332288,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
   classDef gw font-size:11px
   classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  class z_LEG_r0 z_R_1
+  class z_LEG_r1 z_R_2
+  class z_LEG_r2 z_R_3
+  class z_LEG_r3 z_R_4
+  class z_LEG_r4 z_R_5
+  class z_LEG_r5 z_R_6
+  class z_LEG_r6 z_R_7
+  class z_LEG_r7 z_R_8
+  class z_LEG_r8 z_R_9
+  class z_LEG_r9 z_R_10
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
   class inc_orq_c1 z_C_0_1
   class inc_orq_c2 z_C_0_2
   class inc_orq_c3 z_C_0_3

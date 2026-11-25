@@ -8,7 +8,7 @@ describe('entity schemas', () => {
   it('has a fixture for every type and no stray fixtures', () => {
     expect(Object.keys(valid).sort()).toEqual([...TIPOS].sort());
     expect(Object.keys(invalidMutations).sort()).toEqual([...TIPOS].sort());
-    expect(TIPOS).toHaveLength(22);
+    expect(TIPOS).toHaveLength(38);
   });
 
   for (const tipo of TIPOS) {

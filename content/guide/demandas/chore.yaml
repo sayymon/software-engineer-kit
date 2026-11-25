@@ -1,0 +1,564 @@
+# Demanda: Tarefa operacional (chore). Esqueleto (onda 2): orquestradora, raias próprias e raias comuns. Status rascunho.
+demandas:
+  - id: chore
+    nome: Tarefa operacional (chore)
+    sigla: cho
+    publico: false
+artefatos:
+  - id: descricao_da_tarefa
+    nome: Descrição da tarefa
+    descricao: Card com o que fazer, por que agora e como saber que terminou
+    tipo: acao
+    subtipo: card
+    exemplo: Atualizar a biblioteca de datas para a versão com correção de fuso; pronto quando a suíte passa e nada muda para o usuário
+    status: rascunho
+    publico: false
+raias:
+  - id: cho_orq
+    nome: 'Orquestração: tarefa operacional (chore)'
+    demanda: chore
+    responsabilidade: Conduzir a demanda de tarefa operacional (chore) do início ao fim, delegando cada etapa a uma raia
+    cor: '#607D8B'
+    orquestradora: true
+    status: rascunho
+    publico: false
+  - id: cho_ent
+    nome: Enquadramento da tarefa
+    demanda: chore
+    responsabilidade: Confirmar que é mesmo uma chore ou reclassificar para a demanda certa
+    cor: '#332288'
+    status: rascunho
+    publico: false
+decisoes:
+  - id: cho_ent_s0
+    raia: cho_ent
+    tipo: inicio
+    rotulo: 'Iniciar: enquadramento da tarefa'
+    condicao: ''
+    proximo:
+      - para: cho_ent_t1
+        condicao: ''
+    estado: {}
+    playbook: pb_cho_ent_s0
+    status: rascunho
+    publico: false
+  - id: cho_ent_t1
+    raia: cho_ent
+    tipo: tarefa
+    rotulo: Descrever a tarefa e o critério de pronto
+    condicao: ''
+    proximo:
+      - para: cho_ent_g1
+        condicao: ''
+    estado: {}
+    saidas:
+      - descricao_da_tarefa
+    papel: dev
+    apoio: [tech_lead]
+    playbook: pb_cho_ent_t1
+    status: rascunho
+    publico: false
+  - id: cho_ent_g1
+    raia: cho_ent
+    tipo: bifurcacao
+    rotulo: Ainda é uma chore?
+    condicao: Ainda é uma chore?
+    proximo:
+      - para: cho_ent_e1
+        condicao: 'sim: rotina, sem mudança de comportamento'
+      - para: cho_ent_e2
+        condicao: muda comportamento para o usuário
+      - para: cho_ent_e3
+        condicao: adiada até atrasar cada mudança
+      - para: cho_ent_e4
+        condicao: exige migração ou upgrade com quebra de compatibilidade
+      - para: cho_ent_e5
+        condicao: exige mudança de infraestrutura
+      - para: cho_ent_e6
+        condicao: remove algo que ainda tem consumidores
+      - para: cho_ent_e7
+        condicao: 'sinal de invasão ou falha de segurança'
+    estado: {}
+    entradas:
+      - descricao_da_tarefa
+    papel: tech_lead
+    apoio: [pm]
+    consultado: [arquiteto]
+    playbook: pb_cho_ent_g1
+    status: rascunho
+    publico: false
+  - id: cho_ent_e1
+    raia: cho_ent
+    tipo: fim
+    retorno: confirmada_como_chore
+    rotulo: Confirmada como chore
+    condicao: ''
+    proximo: []
+    estado: {}
+    saidas:
+      - descricao_da_tarefa
+    playbook: pb_cho_ent_e1
+    status: rascunho
+    publico: false
+  - id: cho_ent_e2
+    raia: cho_ent
+    tipo: fim
+    retorno: reclassificar_como_feature
+    rotulo: Reclassificar como feature
+    condicao: ''
+    proximo: []
+    estado: {}
+    saidas:
+      - descricao_da_tarefa
+    playbook: pb_cho_ent_e2
+    status: rascunho
+    publico: false
+  - id: cho_ent_e3
+    raia: cho_ent
+    tipo: fim
+    retorno: reclassificar_como_divida_tecnica
+    rotulo: Reclassificar como dívida técnica
+    condicao: ''
+    proximo: []
+    estado: {}
+    saidas:
+      - descricao_da_tarefa
+    playbook: pb_cho_ent_e3
+    status: rascunho
+    publico: false
+  - id: cho_ent_e4
+    raia: cho_ent
+    tipo: fim
+    retorno: reclassificar_como_migracao
+    rotulo: Reclassificar como migração
+    condicao: ''
+    proximo: []
+    estado: {}
+    saidas:
+      - descricao_da_tarefa
+    playbook: pb_cho_ent_e4
+    status: rascunho
+    publico: false
+  - id: cho_ent_e5
+    raia: cho_ent
+    tipo: fim
+    retorno: reclassificar_como_infraestrutura
+    rotulo: Reclassificar como infraestrutura
+    condicao: ''
+    proximo: []
+    estado: {}
+    saidas:
+      - descricao_da_tarefa
+    playbook: pb_cho_ent_e5
+    status: rascunho
+    publico: false
+  - id: cho_ent_e6
+    raia: cho_ent
+    tipo: fim
+    retorno: reclassificar_como_descontinuacao
+    rotulo: Reclassificar como descontinuação
+    condicao: ''
+    proximo: []
+    estado: {}
+    saidas:
+      - descricao_da_tarefa
+    playbook: pb_cho_ent_e6
+    status: rascunho
+    publico: false
+  - id: cho_ent_e7
+    raia: cho_ent
+    tipo: fim
+    retorno: reclassificar_como_seguranca
+    rotulo: Reclassificar como segurança
+    condicao: ''
+    proximo: []
+    estado: {}
+    saidas:
+      - descricao_da_tarefa
+    playbook: pb_cho_ent_e7
+    status: rascunho
+    publico: false
+  - id: cho_orq_s0
+    raia: cho_orq
+    tipo: inicio
+    rotulo: Tarefa operacional necessária
+    condicao: ''
+    proximo:
+      - para: cho_orq_c1
+        condicao: ''
+    estado: {}
+    playbook: pb_cho_orq_s0
+    status: rascunho
+    publico: false
+  - id: cho_orq_c1
+    raia: cho_orq
+    tipo: chamada
+    raia_chamada: cho_ent
+    rotulo: Enquadramento da tarefa
+    condicao: ''
+    proximo:
+      - para: cho_orq_c2
+        condicao: confirmada_como_chore
+      - para: cho_orq_e2
+        condicao: reclassificar_como_feature
+      - para: cho_orq_e3
+        condicao: reclassificar_como_divida_tecnica
+      - para: cho_orq_e4
+        condicao: reclassificar_como_migracao
+      - para: cho_orq_e5
+        condicao: reclassificar_como_infraestrutura
+      - para: cho_orq_e6
+        condicao: reclassificar_como_descontinuacao
+      - para: cho_orq_e7
+        condicao: reclassificar_como_seguranca
+    estado: {}
+    saidas:
+      - descricao_da_tarefa
+    playbook: pb_cho_orq_c1
+    status: rascunho
+    publico: false
+  - id: cho_orq_c2
+    raia: cho_orq
+    tipo: chamada
+    raia_chamada: com_exe
+    rotulo: Execução das tarefas
+    condicao: ''
+    proximo:
+      - para: cho_orq_c3
+        condicao: execucao_integrada
+    estado: {}
+    entradas:
+      - descricao_da_tarefa
+    playbook: pb_cho_orq_c2
+    status: rascunho
+    publico: false
+  - id: cho_orq_c3
+    raia: cho_orq
+    tipo: chamada
+    raia_chamada: com_val
+    rotulo: Testes automatizados
+    condicao: ''
+    proximo:
+      - para: cho_orq_c4
+        condicao: testes_aprovados
+      - para: cho_orq_c2
+        condicao: testes_reprovados
+    estado: {}
+    playbook: pb_cho_orq_c3
+    status: rascunho
+    publico: false
+  - id: cho_orq_c4
+    raia: cho_orq
+    tipo: chamada
+    raia_chamada: com_rev
+    rotulo: Review humano
+    condicao: ''
+    proximo:
+      - para: cho_orq_c5
+        condicao: aprovado_pelo_humano
+      - para: cho_orq_c2
+        condicao: ajustes_solicitados
+    estado: {}
+    playbook: pb_cho_orq_c4
+    status: rascunho
+    publico: false
+  - id: cho_orq_c5
+    raia: cho_orq
+    tipo: chamada
+    raia_chamada: com_etg
+    rotulo: Implantação
+    condicao: ''
+    proximo:
+      - para: cho_orq_e1
+        condicao: implantado
+      - para: cho_orq_c2
+        condicao: implantacao_revertida
+    estado: {}
+    playbook: pb_cho_orq_c5
+    status: rascunho
+    publico: false
+  - id: cho_orq_e1
+    raia: cho_orq
+    tipo: fim
+    retorno: chore_concluida
+    rotulo: Tarefa concluída e implantada
+    condicao: ''
+    proximo: []
+    estado: {}
+    playbook: pb_cho_orq_e1
+    status: rascunho
+    publico: false
+  - id: cho_orq_e2
+    raia: cho_orq
+    tipo: fim
+    retorno: reclassificar_como_feature
+    rotulo: Reclassificada como feature
+    condicao: ''
+    proximo: []
+    estado: {}
+    ligacoes:
+      - demanda_destino: feature
+        para: feat_orq_s0
+        condicao: a tarefa muda comportamento para o usuário
+        tipo: aciona
+        rotulo: Chore vira feature
+    playbook: pb_cho_orq_e2
+    status: rascunho
+    publico: false
+  - id: cho_orq_e3
+    raia: cho_orq
+    tipo: fim
+    retorno: reclassificar_como_divida_tecnica
+    rotulo: Reclassificada como dívida técnica
+    condicao: ''
+    proximo: []
+    estado: {}
+    ligacoes:
+      - demanda_destino: divida_tecnica
+        para: dvt_orq_s0
+        condicao: a chore adiada acumulou custo em cada mudança
+        tipo: aciona
+        rotulo: Chore vira dívida técnica
+    playbook: pb_cho_orq_e3
+    status: rascunho
+    publico: false
+  - id: cho_orq_e4
+    raia: cho_orq
+    tipo: fim
+    retorno: reclassificar_como_migracao
+    rotulo: Reclassificada como migração
+    condicao: ''
+    proximo: []
+    estado: {}
+    ligacoes:
+      - demanda_destino: migracao
+        para: mig_orq_s0
+        condicao: a atualização quebra compatibilidade e pede migração
+        tipo: aciona
+        rotulo: Chore vira migração
+    playbook: pb_cho_orq_e4
+    status: rascunho
+    publico: false
+  - id: cho_orq_e5
+    raia: cho_orq
+    tipo: fim
+    retorno: reclassificar_como_infraestrutura
+    rotulo: Reclassificada como infraestrutura
+    condicao: ''
+    proximo: []
+    estado: {}
+    ligacoes:
+      - demanda_destino: infraestrutura
+        para: inf_orq_s0
+        condicao: a tarefa exige mudança de infraestrutura
+        tipo: aciona
+        rotulo: Chore vira mudança de infraestrutura
+    playbook: pb_cho_orq_e5
+    status: rascunho
+    publico: false
+  - id: cho_orq_e6
+    raia: cho_orq
+    tipo: fim
+    retorno: reclassificar_como_descontinuacao
+    rotulo: Reclassificada como descontinuação
+    condicao: ''
+    proximo: []
+    estado: {}
+    ligacoes:
+      - demanda_destino: descontinuacao
+        para: dsc_orq_s0
+        condicao: a tarefa remove algo que ainda tem consumidores
+        tipo: aciona
+        rotulo: Chore vira descontinuação
+    playbook: pb_cho_orq_e6
+    status: rascunho
+    publico: false
+  - id: cho_orq_e7
+    raia: cho_orq
+    tipo: fim
+    retorno: reclassificar_como_seguranca
+    rotulo: Reclassificada como segurança
+    condicao: ''
+    proximo: []
+    estado: {}
+    ligacoes:
+      - demanda_destino: seguranca
+        para: sec_orq_s0
+        condicao: durante a tarefa apareceu sinal de invasão ou falha de segurança
+        tipo: aciona
+        rotulo: Chore vira demanda de segurança
+    playbook: pb_cho_orq_e7
+    status: rascunho
+    publico: false
+playbooks:
+  - id: pb_cho_ent_s0
+    exemplo: "A raia Enquadramento da tarefa começa; o primeiro passo é «Descrever a tarefa e o critério de pronto»."
+    resumo: 'Início da raia Enquadramento da tarefa. Responsabilidade: confirmar que é mesmo uma chore ou reclassificar para a demanda certa.'
+    status: rascunho
+    publico: false
+  - id: pb_cho_ent_t1
+    exemplo: "Dev entrega Descrição da tarefa. Descrição da tarefa: Atualizar a biblioteca de datas para a versão com correção de fuso; pronto quando a suíte passa e nada muda para o usuário."
+    resumo: 'Descrever a tarefa e o critério de pronto. Entrega: card com o que fazer, por que agora e como saber que terminou.'
+    perguntas_chave: [pq_cho_ent_t1_1]
+    status: rascunho
+    publico: false
+  - id: pb_cho_ent_g1
+    exemplo: "Tech Lead decide com Descrição da tarefa: «sim: rotina, sem mudança de comportamento» leva a «Confirmada como chore»; «muda comportamento para o usuário» leva a «Reclassificar como feature»; «adiada até atrasar cada mudança» leva a «Reclassificar como dívida técnica»; «exige migração ou upgrade com quebra de compatibilidade» leva a «Reclassificar como migração»; «exige mudança de infraestrutura» leva a «Reclassificar como infraestrutura»; «remove algo que ainda tem consumidores» leva a «Reclassificar como descontinuação»; «sinal de invasão ou falha de segurança» leva a «Reclassificar como segurança». Por exemplo, Descrição da tarefa: Atualizar a biblioteca de datas para a versão com correção de fuso; pronto quando a suíte passa e nada muda para o usuário."
+    resumo: Ainda é uma chore? A resposta decide o retorno da raia.
+    status: rascunho
+    publico: false
+  - id: pb_cho_ent_e1
+    exemplo: "A raia Enquadramento da tarefa devolve «confirmada_como_chore» entregando Descrição da tarefa; em Enquadramento da tarefa (cho_orq_c1), o fluxo segue para «Execução das tarefas». Por exemplo, Descrição da tarefa: Atualizar a biblioteca de datas para a versão com correção de fuso; pronto quando a suíte passa e nada muda para o usuário."
+    resumo: Retorno «confirmada_como_chore» da raia Enquadramento da tarefa. Quem chamou a raia segue por este retorno.
+    status: rascunho
+    publico: false
+  - id: pb_cho_ent_e2
+    exemplo: "A raia Enquadramento da tarefa devolve «reclassificar_como_feature» entregando Descrição da tarefa; em Enquadramento da tarefa (cho_orq_c1), o fluxo segue para «Reclassificada como feature». Por exemplo, Descrição da tarefa: Atualizar a biblioteca de datas para a versão com correção de fuso; pronto quando a suíte passa e nada muda para o usuário."
+    resumo: Retorno «reclassificar_como_feature» da raia Enquadramento da tarefa. Quem chamou a raia segue por este retorno.
+    status: rascunho
+    publico: false
+  - id: pb_cho_ent_e3
+    exemplo: "A raia Enquadramento da tarefa devolve «reclassificar_como_divida_tecnica» entregando Descrição da tarefa; em Enquadramento da tarefa (cho_orq_c1), o fluxo segue para «Reclassificada como dívida técnica». Por exemplo, Descrição da tarefa: Atualizar a biblioteca de datas para a versão com correção de fuso; pronto quando a suíte passa e nada muda para o usuário."
+    resumo: Retorno «reclassificar_como_divida_tecnica» da raia Enquadramento da tarefa. Quem chamou a raia segue por este retorno.
+    status: rascunho
+    publico: false
+  - id: pb_cho_ent_e4
+    exemplo: "A raia Enquadramento da tarefa devolve «reclassificar_como_migracao» entregando Descrição da tarefa; em Enquadramento da tarefa (cho_orq_c1), o fluxo segue para «Reclassificada como migração». Por exemplo, Descrição da tarefa: Atualizar a biblioteca de datas para a versão com correção de fuso; pronto quando a suíte passa e nada muda para o usuário."
+    resumo: Retorno «reclassificar_como_migracao» da raia Enquadramento da tarefa. Quem chamou a raia segue por este retorno.
+    status: rascunho
+    publico: false
+  - id: pb_cho_ent_e5
+    exemplo: "A raia Enquadramento da tarefa devolve «reclassificar_como_infraestrutura» entregando Descrição da tarefa; em Enquadramento da tarefa (cho_orq_c1), o fluxo segue para «Reclassificada como infraestrutura». Por exemplo, Descrição da tarefa: Atualizar a biblioteca de datas para a versão com correção de fuso; pronto quando a suíte passa e nada muda para o usuário."
+    resumo: Retorno «reclassificar_como_infraestrutura» da raia Enquadramento da tarefa. Quem chamou a raia segue por este retorno.
+    status: rascunho
+    publico: false
+  - id: pb_cho_ent_e6
+    exemplo: "A raia Enquadramento da tarefa devolve «reclassificar_como_descontinuacao» entregando Descrição da tarefa; em Enquadramento da tarefa (cho_orq_c1), o fluxo segue para «Reclassificada como descontinuação». Por exemplo, Descrição da tarefa: Atualizar a biblioteca de datas para a versão com correção de fuso; pronto quando a suíte passa e nada muda para o usuário."
+    resumo: Retorno «reclassificar_como_descontinuacao» da raia Enquadramento da tarefa. Quem chamou a raia segue por este retorno.
+    status: rascunho
+    publico: false
+  - id: pb_cho_orq_s0
+    exemplo: "A raia Orquestração: tarefa operacional (chore) começa; o primeiro passo é «Enquadramento da tarefa»."
+    resumo: 'Chore é manutenção de rotina sem mudança de comportamento para o usuário: atualizar dependência, renovar certificado, ajustar configuração. Se muda comportamento, é feature; se foi adiada até
+      acumular custo, virou dívida técnica, migração, mudança de infraestrutura ou descontinuação.'
+    status: rascunho
+    publico: false
+  - id: pb_cho_orq_c1
+    exemplo: "Chama a raia Enquadramento da tarefa; «confirmada_como_chore» leva a «Execução das tarefas»; «reclassificar_como_feature» leva a «Reclassificada como feature»; «reclassificar_como_divida_tecnica» leva a «Reclassificada como dívida técnica»; «reclassificar_como_migracao» leva a «Reclassificada como migração»; «reclassificar_como_infraestrutura» leva a «Reclassificada como infraestrutura»; «reclassificar_como_descontinuacao» leva a «Reclassificada como descontinuação»; «reclassificar_como_seguranca» leva a «Reclassificada como segurança». Por exemplo, Descrição da tarefa: Atualizar a biblioteca de datas para a versão com correção de fuso; pronto quando a suíte passa e nada muda para o usuário."
+    resumo: Chama a raia Enquadramento da tarefa. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - 'Retornos possíveis: confirmada_como_chore, reclassificar_como_feature, reclassificar_como_divida_tecnica, reclassificar_como_migracao, reclassificar_como_infraestrutura, reclassificar_como_descontinuacao'
+    status: rascunho
+    publico: false
+  - id: pb_cho_orq_c2
+    exemplo: "Chama a raia Execução por papéis; «execucao_integrada» leva a «Testes automatizados». Por exemplo, Descrição da tarefa: Atualizar a biblioteca de datas para a versão com correção de fuso; pronto quando a suíte passa e nada muda para o usuário."
+    resumo: Chama a raia Execução das tarefas. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - 'Retornos possíveis: execucao_integrada'
+    status: rascunho
+    publico: false
+  - id: pb_cho_orq_c3
+    exemplo: "Chama a raia Testes automatizados e regressão; «testes_aprovados» leva a «Review humano»; «testes_reprovados» leva a «Execução das tarefas»."
+    resumo: Chama a raia Testes automatizados. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - 'Retornos possíveis: testes_aprovados, testes_reprovados'
+    status: rascunho
+    publico: false
+  - id: pb_cho_orq_c4
+    exemplo: "Chama a raia Review humano; «aprovado_pelo_humano» leva a «Implantação»; «ajustes_solicitados» leva a «Execução das tarefas»."
+    resumo: Chama a raia Review humano. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - 'Retornos possíveis: aprovado_pelo_humano, ajustes_solicitados'
+    status: rascunho
+    publico: false
+  - id: pb_cho_orq_c5
+    exemplo: "Chama a raia Implantação; «implantado» leva a «Tarefa concluída e implantada»; «implantacao_revertida» leva a «Execução das tarefas»."
+    resumo: Chama a raia Implantação. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - 'Retornos possíveis: implantado, implantacao_revertida'
+    status: rascunho
+    publico: false
+  - id: pb_cho_orq_e1
+    exemplo: "A demanda termina em «chore_concluida»: tarefa concluída e implantada."
+    resumo: Tarefa concluída e implantada. Fim da demanda.
+    status: rascunho
+    publico: false
+  - id: pb_cho_orq_e2
+    exemplo: "A demanda termina em «reclassificar_como_feature»: reclassificada como feature."
+    resumo: Reclassificada como feature. Fim da demanda.
+    status: rascunho
+    publico: false
+  - id: pb_cho_orq_e3
+    exemplo: "A demanda termina em «reclassificar_como_divida_tecnica»: reclassificada como dívida técnica."
+    resumo: Reclassificada como dívida técnica. Fim da demanda.
+    status: rascunho
+    publico: false
+  - id: pb_cho_orq_e4
+    exemplo: "A demanda termina em «reclassificar_como_migracao»: reclassificada como migração."
+    resumo: Reclassificada como migração. Fim da demanda.
+    status: rascunho
+    publico: false
+  - id: pb_cho_orq_e5
+    exemplo: "A demanda termina em «reclassificar_como_infraestrutura»: reclassificada como infraestrutura."
+    resumo: Reclassificada como infraestrutura. Fim da demanda.
+    status: rascunho
+    publico: false
+  - id: pb_cho_orq_e6
+    exemplo: "A demanda termina em «reclassificar_como_descontinuacao»: reclassificada como descontinuação."
+    resumo: Reclassificada como descontinuação. Fim da demanda.
+    status: rascunho
+    publico: false
+  - id: pb_cho_ent_e7
+    exemplo: "A raia Enquadramento da tarefa devolve «reclassificar_como_seguranca» entregando Descrição da tarefa; em Enquadramento da tarefa (cho_orq_c1), o fluxo segue para «Reclassificada como segurança». Por exemplo, Descrição da tarefa: Atualizar a biblioteca de datas para a versão com correção de fuso; pronto quando a suíte passa e nada muda para o usuário."
+    resumo: 'Retorno «reclassificar_como_seguranca»: durante a tarefa operacional apareceu sinal de invasão ou de falha de segurança. Pare a chore e abra a demanda de segurança num canal restrito.'
+    status: rascunho
+    publico: false
+  - id: pb_cho_orq_e7
+    exemplo: "A demanda termina em «reclassificar_como_seguranca»: reclassificada como segurança."
+    resumo: Reclassificada como segurança. A demanda de segurança tria, contém, corrige e divulga.
+    status: rascunho
+    publico: false
+
+celulas:
+  - demanda: chore
+    requisito: funcional
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: chore
+    requisito: nao_funcional
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: chore
+    requisito: restricao
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: chore
+    requisito: probabilistico_ia
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+perguntas:
+  - id: pq_cho_ent_t1_1
+    texto: "O que precisa estar claro para descrever a tarefa e o critério de pronto?"
+    depende_de: [cho_ent_t1]
+    status: rascunho
+    publico: false

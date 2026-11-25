@@ -1,0 +1,37 @@
+flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"])
+  end
+  subgraph z_SG_com_pro["<b>Prontidão (Definition of Ready)</b>"]
+    direction LR
+    com_pro_s0(["<small><b>com_pro_s0</b></small><br/>Escopo definido, checar a prontidão"])
+    com_pro_g1{"<small><b>com_pro_g1</b></small><br/>Definition of Ready?"}
+    com_pro_e1(["<small><b>com_pro_e1</b></small><br/>Pronto para iniciar<br/><i>retorno: pronto_para_iniciar</i>"])
+    com_pro_t1["<small><b>com_pro_t1</b></small><br/>Refinar com o time até a Definition of Ready<br/><i>▸ 3 subtarefas</i>"]
+  end
+  com_pro_s0 --> com_pro_g1
+  com_pro_g1 -->|"não"| com_pro_t1
+  com_pro_g1 -->|"sim"| com_pro_e1
+  com_pro_t1 --> com_pro_g1
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#332288,stroke:#1F1452,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#DDCC77,stroke:#857A47,stroke-width:1px,color:#000000
+  classDef z_R_3 fill:#009E73,stroke:#005F45,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#EE7733,stroke:#8F471F,stroke-width:1px,color:#000000
+  classDef z_R_5 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_R_6 fill:#999933,stroke:#5C5C1F,stroke-width:1px,color:#000000
+  classDef z_R_7 fill:#77AADD,stroke:#476685,stroke-width:1px,color:#000000
+  classDef z_R_8 fill:#882255,stroke:#521433,stroke-width:1px,color:#FFFFFF
+  classDef z_R_9 fill:#E69F00,stroke:#8A5F00,stroke-width:1px,color:#000000
+  classDef z_R_10 fill:#6699CC,stroke:#3D5C7A,stroke-width:1px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
+  class com_pro_s0,com_pro_g1,com_pro_e1,com_pro_t1 z_R_2
+  class com_pro_g1 gw
+  style z_SG_com_pro fill:#FAF7EB,stroke:#DDCC77,stroke-width:3px,color:#000000

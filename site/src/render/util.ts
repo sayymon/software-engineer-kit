@@ -34,8 +34,8 @@ export function ext(url: string, label?: string): string {
   return isUrl(url) ? `<a href="${esc(url)}" rel="noopener noreferrer">${esc(label ?? url)}</a>` : esc(label ?? url);
 }
 
-export function anchor(ctx: Ctx, page: Page, label?: string): string {
-  return `<a href="${esc(ctx.href(page.route))}">${esc(label ?? page.nome)}</a>`;
+export function anchor(ctx: Ctx, page: Page, label?: string, fragment = ''): string {
+  return `<a href="${esc(ctx.href(page.route))}${fragment ? `#${esc(fragment)}` : ''}">${esc(label ?? page.nome)}</a>`;
 }
 
 /** Text with wikilinks resolved to anchors and `tabela:<id>` rows shown by name. Everything else is escaped. */
@@ -54,7 +54,7 @@ export function inline(ctx: Ctx, s: string): string {
   for (const l of links) {
     out += esc(s.slice(cursor, l.start));
     const page = ctx.index.resolve(l.id);
-    out += page ? anchor(ctx, page, l.label ?? page.nome) : esc(l.label ?? l.id);
+    out += page ? anchor(ctx, page, l.label ?? ctx.index.anchorLabel(l.id) ?? page.nome, ctx.index.isAnchor(l.id) ? l.id : '') : esc(l.label ?? l.id);
     cursor = l.end;
   }
   return out + esc(s.slice(cursor));

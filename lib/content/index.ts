@@ -6,6 +6,7 @@ import { basename, extname, join, relative } from 'node:path';
 import matter from 'gray-matter';
 import YAML from 'yaml';
 import { TYPES, sourceHash, translatableFields, type Tipo } from '../schema';
+import { deriveGuideEntities, guideDir, hasGuide, loadGuideFiles } from '../guide';
 
 export const SOURCE_LOCALE = 'pt-BR';
 export const LOCALES = ['pt-BR', 'en'] as const;
@@ -29,6 +30,8 @@ export type LoadedEntity = {
   fallback: boolean;
   /** True when the overlay was written for an older pt-BR text (source_hash differs). */
   stale: boolean;
+  /** True for entities derived from the guide YAML (content/guide). They have no file of their own. */
+  derived?: boolean;
 };
 
 export type LoadProblem = { file: string; message: string };
@@ -139,7 +142,22 @@ export function loadContent(contentRoot: string, locale: Locale = SOURCE_LOCALE)
     }
     entities.push({ id, tipo, locale, relPath, file, data, body, fallback, stale });
   }
+  if (hasGuide(guideDir(contentRoot))) deriveGuide(contentRoot, locale, entities, problems);
   return { entities, problems };
+}
+
+/** Appends the entities derived from content/guide. A broken guide folder is reported as a problem. */
+function deriveGuide(contentRoot: string, locale: Locale, entities: LoadedEntity[], problems: LoadProblem[]): void {
+  const dir = guideDir(contentRoot);
+  try {
+    const derived = deriveGuideEntities(loadGuideFiles(dir), entities.map((e) => ({ id: e.id, tipo: e.tipo, data: e.data })), contentRoot);
+    for (const message of derived.problems) problems.push({ file: dir, message });
+    for (const d of derived.entities) {
+      entities.push({ id: d.id, tipo: d.tipo, locale, relPath: d.relPath, file: d.file, data: d.data, body: '', fallback: locale !== SOURCE_LOCALE, stale: false, derived: true });
+    }
+  } catch (error) {
+    problems.push({ file: dir, message: `cannot load the guide: ${(error as Error).message}` });
+  }
 }
 
 /** Content access used by the site and the tools. A backend can replace the filesystem later. */

@@ -1,0 +1,27 @@
+flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"])
+  end
+  subgraph z_SG_doc_pla["<b>Planejamento da documentação</b>"]
+    direction LR
+    doc_pla_s0(["<small><b>doc_pla_s0</b></small><br/>Iniciar: planejamento da documentação"])
+    doc_pla_t1["<small><b>doc_pla_t1</b></small><br/>Definir público, tipo e fonte de verdade"]
+    doc_pla_e1(["<small><b>doc_pla_e1</b></small><br/>Plano definido<br/><i>retorno: plano_definido</i>"])
+  end
+  doc_pla_s0 --> doc_pla_t1
+  doc_pla_t1 --> doc_pla_e1
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#332288,stroke:#1F1452,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#117733,stroke:#0A471F,stroke-width:1px,color:#FFFFFF
+  classDef z_R_3 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#CC6677,stroke:#7A3D47,stroke-width:1px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
+  class doc_pla_s0,doc_pla_t1,doc_pla_e1 z_R_1
+  style z_SG_doc_pla fill:#E0DEED,stroke:#332288,stroke-width:3px,color:#000000

@@ -1,56 +1,13 @@
 // SPDX-License-Identifier: MIT
-// Guide flows: rebuilds the guide document from the flow entities, validates it with the vendored JSON Schema
-// (Ajv) and ports the cross-reference rules of the guide validator (ids, transitions, lanes, calls, returns).
+// Guide flows: validates the guide document (lib/guide loadGuideDoc) with the vendored JSON Schema (Ajv)
+// and ports the cross-reference rules of the guide validator (ids, transitions, lanes, calls, returns).
 import Ajv2020 from 'ajv/dist/2020.js';
-import type { LoadedEntity } from '../content';
 
-export type Doc = Record<string, any>;
+import type { GuideDoc } from '../guide';
+export type Doc = GuideDoc;
 export type FlowIssue = { code: string; path: string; message: string };
 
-const LISTS = ['demandas', 'raias', 'artefatos', 'variaveis', 'papeis', 'requisitos', 'decisoes', 'celulas', 'playbooks', 'abordagens', 'tecnicas', 'padroes', 'estrategias', 'categorias_ferramenta', 'fontes'] as const;
-const STRIP = new Set(['tipo', 'guia_ids', 'dataVerificacao', 'aliases', 'tags', 'fontes', 'fonte_ids']);
-const COLLECTION_OF: Record<string, string> = { tecnica: 'tecnicas', abordagem: 'abordagens', estrategia: 'estrategias', requisito: 'requisitos' };
 const ID_COLLECTIONS = ['demandas', 'raias', 'requisitos', 'decisoes', 'playbooks', 'abordagens', 'tecnicas', 'padroes', 'estrategias', 'categorias_ferramenta', 'fontes'] as const;
-
-function without(obj: Record<string, unknown>, keys: Set<string>): Record<string, unknown> {
-  return Object.fromEntries(Object.entries(obj).filter(([k]) => !keys.has(k)));
-}
-
-/**
- * Rebuilds the document the guide loader produces: lists concatenated in order (comum, then the demands in
- * `ordem_das_demandas`), maps and scalars once. Entities of tipo demanda carry the demand header plus its lists.
- */
-export function assembleDoc(entities: Array<Pick<LoadedEntity, 'id' | 'tipo' | 'data'>>): Doc {
-  const doc: Doc = {};
-  for (const k of LISTS) doc[k] = [];
-  const demands = entities.filter((e) => e.tipo === 'demanda');
-  const comum = demands.find((e) => e.id === 'comum');
-  const order: string[] = ((comum?.data.ordem_das_demandas as string[] | undefined) ?? []).slice();
-  const rest = demands.filter((e) => e.id !== 'comum' && !order.includes(e.id)).map((e) => e.id).sort();
-  const sequence = [...(comum ? ['comum'] : []), ...order, ...rest]
-    .map((id) => demands.find((e) => e.id === id))
-    .filter((e): e is NonNullable<typeof e> => Boolean(e));
-  for (const e of sequence) {
-    const d = e.data;
-    const header: Doc = { id: e.id, nome: d.nome, ...(d.sigla !== undefined ? { sigla: d.sigla } : {}), ...(d.biblioteca !== undefined ? { biblioteca: d.biblioteca } : {}), publico: d.publico ?? false };
-    doc.demandas.push(header);
-    for (const k of ['raias', 'artefatos', 'variaveis', 'papeis', 'decisoes', 'celulas', 'playbooks'] as const) {
-      if (Array.isArray(d[k])) doc[k].push(...(d[k] as unknown[]));
-    }
-    if (e.id === 'comum') {
-      if (d.versao !== undefined) doc.versao = d.versao;
-      if (d.decisor_construir_comprar_assinar !== undefined) doc.decisor_construir_comprar_assinar = d.decisor_construir_comprar_assinar;
-    }
-  }
-  for (const e of entities) {
-    const collection = COLLECTION_OF[e.tipo];
-    if (collection) doc[collection].push(without(e.data, STRIP));
-    // Guide techniques merged into a kit note stay resolvable by their guide id.
-    for (const gid of (e.data.guia_ids as string[] | undefined) ?? []) doc.tecnicas.push({ id: gid, nome: String(e.data.nome) });
-  }
-  return doc;
-}
-
 let compiled: ReturnType<Ajv2020['compile']> | undefined;
 export function validateAgainstSchema(doc: Doc, schema: object): FlowIssue[] {
   if (!compiled) {
