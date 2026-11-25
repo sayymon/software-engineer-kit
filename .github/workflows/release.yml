@@ -47,7 +47,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: 22
+          node-version: 22.23.4
           cache: npm
       - run: npm ci
       - run: npm audit --audit-level=high
@@ -58,6 +58,8 @@ jobs:
           SITE_BASE: /software-engineer-kit
           SITE_URL: https://sayymon.github.io/software-engineer-kit
       - run: npm run smoke
+        env:
+          SITE_BASE: /software-engineer-kit
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: site/dist

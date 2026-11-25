@@ -6,7 +6,7 @@ Português: [README.pt-BR.md](README.pt-BR.md). Overview: [README.md](README.md)
 A place to look things up and use as a guide for software and AI engineering decisions. It gathers tools, fundamentals (patterns, data structures, algorithms and licenses), stacks, practical guides, journeys, skills and certifications, with navigation between related terms. Content is written in Portuguese (pt-BR) and gains an English layer (`content/en`) over time. The site is static (Astro, with Pagefind search).
 
 ## Run it locally
-Requirement: Node 22 or newer.
+Requirement: Node 22.23.4 or newer (Astro 7 requirement).
 ```bash
 npm ci
 npm run validate     # schema, ids, terms, licenses
