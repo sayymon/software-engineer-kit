@@ -2,7 +2,7 @@
 
 Comparação dos 44 códigos de regra do validador Python (`tools/guide-oracle/src/guia_decisao/validator.py`, cópia do commit `7abed1c`) com o validador TypeScript do kit (`lib/flows/index.ts`, função `checkDoc`, mais `validateAgainstSchema`). Os números de linha referem-se aos arquivos como estão na etapa 1.
 
-Resultado: 20 portados, 0 parciais, 24 ausentes. Os 24 ausentes formam a lista de portabilidade da etapa 2.
+Resultado: 26 portados, 0 parciais, 18 ausentes. Os 18 ausentes formam a lista de portabilidade da etapa 2.
 
 Leitura das colunas:
 
@@ -33,12 +33,12 @@ Leitura das colunas:
 | `PESOS` | erro | 464 | portado | 190 | tests/flows/flows.test.ts:14 (documento real sem erros), sem teste dedicado | Pesos do Decisor de um objetivo que não somam 1 |
 | `REF_QUEBRADA` | erro | 480, 556, 566, 673 | portado | lib/guide/validate/dados.ts, rules.ts | tests/guide/oracle-defects-refs.test.ts | Referência a id inexistente em raias, nós, células, playbooks, `fontes[].itens`, `fonte_ids`, ligações, dados, papéis e RACI. Os casos de `quando` cobrem só a variável ausente; o resto fica com `CONDICAO_INVALIDA` (passo 3) |
 | `LIGACAO_INCONSISTENTE` | erro | 575, 589 | portado | lib/guide/validate | tests/guide/oracle-defects-structure.test.ts | Ligação para a própria demanda, ou para nó de demanda diferente da demanda de destino |
-| `CONDICAO_INVALIDA` | erro | 619 | ausente | - | - | Condição `quando` malformada (operador ou variável) |
-| `VARIAVEL_ENUM_SEM_VALORES` | erro | 669 | ausente | - | - | Variável `enum` sem `valores` |
-| `SUBTAREFA_EM_NAO_TAREFA` | erro | 702 | ausente | - | - | Subtarefas em nó que não é `tarefa` |
-| `SUBTAREFA_ID_PADRAO` | erro | 713 | ausente | - | - | Id de subtarefa fora da forma `<nó>_st<n>` |
-| `CONDICAO_AUSENTE` | erro | 738 | ausente | - | - | Uso condicional de técnica sem `quando` |
-| `VARIANTE_DUPLICADA` | erro | 800 | ausente | - | - | Nome de variante repetido no artefato |
+| `CONDICAO_INVALIDA` | erro | 619 | portado | lib/guide/validate | tests/guide/oracle-defects-dados.test.ts | Condição `quando` malformada (operador ou variável) |
+| `VARIAVEL_ENUM_SEM_VALORES` | erro | 669 | portado | lib/guide/validate | tests/guide/oracle-defects-dados.test.ts | Variável `enum` sem `valores` |
+| `SUBTAREFA_EM_NAO_TAREFA` | erro | 702 | portado | lib/guide/validate | tests/guide/oracle-defects-dados.test.ts | Subtarefas em nó que não é `tarefa` |
+| `SUBTAREFA_ID_PADRAO` | erro | 713 | portado | lib/guide/validate | tests/guide/oracle-defects-dados.test.ts | Id de subtarefa fora da forma `<nó>_st<n>` |
+| `CONDICAO_AUSENTE` | erro | 738 | portado | lib/guide/validate | tests/guide/oracle-defects-dados.test.ts | Uso condicional de técnica sem `quando` |
+| `VARIANTE_DUPLICADA` | erro | 800 | portado | lib/guide/validate | tests/guide/oracle-defects-dados.test.ts | Nome de variante repetido no artefato |
 | `VAR_NAO_DECLARADA` | aviso | 823 | ausente | - | - | Chave de `estado` que não existe em `variaveis` |
 | `ENTRADA_SEM_PRODUTOR` | aviso | 874, 883 | ausente | - | - | Entrada que nem a raia nem um nó ou subtarefa anterior produz |
 | `SAIDA_NAO_ENTREGUE` | aviso | 890 | ausente | - | - | Saída de tarefa que nenhuma subtarefa produz |
