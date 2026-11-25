@@ -3,12 +3,13 @@
 // Ported from the Python oracle (validator.py: _checar_avisos, _checar_completude), restricted to the data-flow
 // rules: VAR_NAO_DECLARADA, ENTRADA_SEM_PRODUTOR, SAIDA_NAO_ENTREGUE, ITEM_SEM_USO, TAREFA_SEM_ENTREGAVEL,
 // SUBTAREFA_SEM_ENTREGAVEL and LACUNA_DE_DADOS. The role/RACI rules live in raci.ts (called at the end, as in Python);
-// the question, playbook and taxonomy rules of the same Python
+// the question and playbook rules (and the taxonomy rules, in taxonomia.ts) of the same Python
 // functions are ported in their own modules (phases 5 to 7).
 import type { GuideDoc } from '../index';
 import { lacunasDeDados } from '../rastreio';
 import { checarPlaybooksSemNo, regrasDePergunta } from './perguntas';
 import { checarPapeis } from './raci';
+import { checarTaxonomia } from './taxonomia';
 import type { Problema } from './types';
 type Doc = GuideDoc;
 const list = (v: unknown): Doc[] => (Array.isArray(v) ? (v as Doc[]) : []);
@@ -173,6 +174,7 @@ export function checarAvisos(doc: Doc): Problema[] {
 export function checarCompletude(doc: Doc): Problema[] {
   const issues: Problema[] = [];
   const aviso = novoAviso(issues);
+  checarTaxonomia(doc, aviso);
   checarPlaybooksSemNo(doc, aviso);
   const lacunas = lacunasDeDados(doc);
   for (const colecao of ['artefatos', 'variaveis'] as const) {

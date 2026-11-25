@@ -2,7 +2,7 @@
 
 Comparação dos 44 códigos de regra do validador Python (`tools/guide-oracle/src/guia_decisao/validator.py`, cópia do commit `7abed1c`) com o validador TypeScript do kit (`lib/flows/index.ts`, função `checkDoc`, mais `validateAgainstSchema`). Os números de linha referem-se aos arquivos como estão na etapa 1.
 
-Resultado: 40 portados, 0 parciais, 4 ausentes. Os 4 ausentes formam a lista de portabilidade da etapa 2.
+Resultado: 44 portados, 0 parciais, 0 ausentes. A portabilidade da etapa 2 está completa.
 
 Leitura das colunas:
 
@@ -51,10 +51,10 @@ Leitura das colunas:
 | `PERGUNTA_SEM_USO` | aviso | 981 | portado | lib/guide/validate | tests/guide/oracle-defects-perguntas.test.ts | Pergunta que nenhum playbook ou rito cita |
 | `APROVA_FORA_DE_GATEWAY` | aviso | 991 | portado | lib/guide/validate | tests/guide/oracle-defects-raci.test.ts | `aprova` em nó que não é gateway de qualidade |
 | `APROVA_REDUNDANTE` | aviso | 994 | portado | lib/guide/validate | tests/guide/oracle-defects-raci.test.ts | `aprova` igual ao papel que já decide o gateway |
-| `COMUNICACAO_SEM_DESTINATARIO` | aviso | 1019 | ausente | - | - | Comunicação sem `destinatarios` |
-| `TIPO_LEGADO` | aviso | 1023 | ausente | - | - | Artefato com tipo fora da taxonomia atual |
-| `SUBTIPO_AUSENTE` | aviso | 1026 | ausente | - | - | Tipo que tem subtipos, sem `subtipo` |
-| `SUBTIPO_INVALIDO` | aviso | 1029, 1032 | ausente | - | - | Subtipo inexistente no tipo, ou subtipo em tipo que não os tem |
+| `COMUNICACAO_SEM_DESTINATARIO` | aviso | 1019 | portado | lib/guide/validate | tests/guide/oracle-defects-taxonomia.test.ts | Comunicação sem `destinatarios` |
+| `TIPO_LEGADO` | aviso | 1023 | portado | lib/guide/validate | tests/guide/oracle-defects-taxonomia.test.ts | Artefato com tipo fora da taxonomia atual |
+| `SUBTIPO_AUSENTE` | aviso | 1026 | portado | lib/guide/validate | tests/guide/oracle-defects-taxonomia.test.ts | Tipo que tem subtipos, sem `subtipo` |
+| `SUBTIPO_INVALIDO` | aviso | 1029, 1032 | portado | lib/guide/validate | tests/guide/oracle-defects-taxonomia.test.ts | Subtipo inexistente no tipo, ou subtipo em tipo que não os tem |
 | `PLAYBOOK_SEM_NO` | aviso | 1037 | portado | lib/guide/validate | tests/guide/oracle-defects-perguntas.test.ts | Playbook que nenhum nó usa |
 | `LACUNA_DE_DADOS` | aviso | 1045 | portado | lib/guide/validate | tests/guide/oracle-defects-avisos.test.ts | Artefato ou variável sem produtor ou sem consumidor |
 

@@ -1,9 +1,14 @@
 // SPDX-License-Identifier: MIT
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { checkDoc, validateAgainstSchema } from '../../../lib/flows';
-import { guideDir, hasGuide, loadGuideDoc } from '../../../lib/guide';
+import { guideDir, hasGuide, loadGuideDoc, type GuideDoc } from '../../../lib/guide';
+import { validateGuide } from '../../../lib/guide/validate';
 import { fail, na, ok, type Check } from '../types';
+
+/** Strict: schema, rules, warnings (`avisos`) and completeness (`completude`) all count as problems. */
+export function guideProblems(doc: GuideDoc, schema: object): string[] {
+  return validateGuide(doc, schema, { avisos: true, completude: true }).map((p) => `${p.code} (${p.nivel}) ${p.path}: ${p.message}`);
+}
 
 const LETTER: Record<string, string> = { inicio: 's', tarefa: 't', bifurcacao: 'g', chamada: 'c', fim: 'e' };
 
@@ -18,8 +23,7 @@ export const flows: Check = {
     const doc = loadGuideDoc(guideDir(ctx.contentRoot));
     const schemaFile = join(ctx.root, 'schema/flows.schema.json');
     const schema = JSON.parse(readFileSync(schemaFile, 'utf8')) as object;
-    for (const i of validateAgainstSchema(doc, schema)) problems.push(`schema ${i.path}: ${i.message}`);
-    for (const i of checkDoc(doc)) problems.push(`${i.code} ${i.path}: ${i.message}`);
+    problems.push(...guideProblems(doc, schema));
     const order = (demands.find((d) => d.id === 'comum')?.data.ordem_das_demandas as string[] | undefined) ?? [];
     for (const id of order) if (!demands.some((d) => d.id === id)) problems.push(`demand "${id}" listed in ordem_das_demandas has no flow`);
     // Practical guides (kit shape): lanes, nodes, orchestrator, calls.
