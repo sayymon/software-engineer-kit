@@ -16,7 +16,6 @@ Job names, with no workflow prefix, no matrix and no path filters, so they alway
 | Check | Workflow | What it does |
 |---|---|---|
 | `build-test` | `pr.yml` | `npm ci`, validate, tests, build both locales, smoke |
-| `guide-oracle` | `pr.yml` | Python oracle (`tools/guide-oracle`, temporary): validates `content/guide` and runs its pytest suite |
 | `dependency-review` | `pr.yml` | Blocks PRs that add dependencies with high severity advisories |
 | `npm-audit` | `pr.yml` | `npm audit --audit-level=high` |
 | `codeql` | `codeql.yml` | CodeQL for JavaScript and TypeScript |
@@ -68,7 +67,7 @@ The personal `gh` token lacks the `workflow` scope, so workflow files are pushed
 Fluxo: PR para `main`, checks obrigatórios verdes, revisão do code owner, merge por squash, o responsável cria a tag `vX.Y.Z`, o workflow `release` publica.
 
 ### Checks obrigatórios
-Os nomes são os nomes dos jobs, sem prefixo de workflow, sem matriz e sem filtros de caminho, para sempre reportarem. A tabela acima descreve cada um. O check `guide-oracle` roda o oráculo Python temporário (`tools/guide-oracle`), que valida `content/guide` e executa a suíte de testes dele; sai junto com o oráculo no estágio 2. Todos os workflows usam `pull_request` (nunca `pull_request_target`), `permissions: {}` no topo com privilégio mínimo por job, e actions fixadas em SHA de commit. O Dependabot mantém os SHAs atualizados.
+Os nomes são os nomes dos jobs, sem prefixo de workflow, sem matriz e sem filtros de caminho, para sempre reportarem. A tabela acima descreve cada um. Todos os workflows usam `pull_request` (nunca `pull_request_target`), `permissions: {}` no topo com privilégio mínimo por job, e actions fixadas em SHA de commit. O Dependabot mantém os SHAs atualizados.
 
 ### Ruleset de `main` (`main-protection`)
 Exigir pull request com 1 aprovação e revisão do code owner, descartar aprovações antigas no push, exigir resolução de conversas, somente squash, exigir os checks acima com branch atualizada, histórico linear, bloquear force push e exclusão.

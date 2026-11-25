@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Port of tools/guide-oracle/tests/properties/test_geradores_props.py (task 10.2, part 1). One `it` per Python property.
+// Port of the former Python oracle (task 10.2, part 1). One `it` per Python property.
 // Not ported: the three HTML properties, because the TypeScript tree has no HTML generator (gerar_html has no
 // counterpart in lib/ or tools/). Their reasons are recorded in the skipped `it.skip` entries below.
 // Determinism: fixed seed, bounded numRuns, and shrinking capped (endOnFailure) so memory stays bounded.

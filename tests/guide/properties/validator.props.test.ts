@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Port of tools/guide-oracle/tests/properties/test_validator_props.py (Properties 6, 7, 8, 21 and 32), task 10.2 part 2.
+// Port of the former Python oracle (Properties 6, 7, 8, 21 and 32), task 10.2 part 2.
 // One `it` per Python property. `validate(doc, SCHEMA)` becomes `validateGuide(doc, schema)`; Issue.item_id is `itemId`.
 // Python's `assume` becomes `fc.pre`. Determinism: fixed seed, numRuns = Python max_examples, shrinking capped
 // (endOnFailure) because documents are large.

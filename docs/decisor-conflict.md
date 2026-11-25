@@ -21,7 +21,7 @@ A etapa 1 da migração do guia não altera o Decisor do kit. `lib/decisor.ts`, 
 | Leitura da nota | Campo `leitura_da_nota` no arquivo | Comentário no YAML: nota maior é melhor em todos os critérios |
 | Saída | `{ opcao, totais, contribuicoes, pesos }` | `Resultado` com avaliações, empate e justificativa em texto auditável |
 | Erros | Classes `ObjetivoDesconhecido`, `CriterioAusente`, `NotaForaDaEscala` | `DecisorError` com mensagem em português |
-| Prova | `tests/decisor.test.ts` (totais calculados com o `decisor.py` anterior) | Suíte do oráculo (`tools/guide-oracle/tests/unit/test_decisor.py`) |
+| Prova | `tests/decisor.test.ts` (totais calculados com o `decisor.py` anterior) | `tests/guide/oracle-decisor.test.ts` (saídas gravadas do oráculo em `tests/guide/expected/decisor.json`) |
 
 Os dois compartilham critérios, escala, pesos e desempate. A diferença está em três pontos: o papel do orçamento (eixo ou portão), a presença do contexto financeiro e a saída com justificativa.
 
@@ -40,7 +40,7 @@ Busca por `decisor`, `matriz`, `eixo`, `pontuar_opcoes_matriz` em `lib`, `site/s
 | `lib/schema/flows.ts` (linha 24) e `lib/guide/entities.ts` (linhas 60 e 305) | Aceitam e repassam o bloco do guia no envelope `comum` |
 | 27 guias práticos em `content/pt-BR/guides/` | Passo `prep.pontuar_opcoes_matriz` ("Pontuar construir, comprar e assinar", notas de 1 a 5 na "matriz"). O id do passo está em `schema/ids-frozen.json` e em `content/ids.lock.json` (27 ocorrências em cada), então não pode mudar nem sumir |
 | 15 stacks em `content/pt-BR/stacks/` | Cada stack tem `condicoes.<eixo>` com os mesmos 7 eixos (`CONDICAO_EIXOS` em `lib/schema/stacks.ts`, linha 6, inclui `orcamento`). Não importam o Decisor, mas o modelo de eixos do kit reaparece aí |
-| `tools/guide-oracle` | `decisor.py`, o comando `decidir` da CLI e `test_decisor.py` exercitam o modelo do guia |
+| `tools/guide-oracle` (removido na fase 12) | `decisor.py`, o comando `decidir` da CLI e `test_decisor.py` exercitavam o modelo do guia. Hoje `tools/guide/cli.ts` e `tests/guide/oracle-decisor.test.ts` fazem isso |
 
 Nenhum arquivo em `content/pt-BR/stacks/` ou `site/src` (fora do `flow.ts` e do i18n) referencia a função `decidir`.
 

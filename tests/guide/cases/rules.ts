@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Cases for the whole-document validator test: the four flag combinations on the real guide and planted structural
-// defects of the older rules (rules.ts). Single source for the regression test and tools/guide/record-expected.ts.
+// defects of the older rules (rules.ts). Used by the regression test.
 // SCHEMA messages differ between the oracle (jsonschema) and Ajv, so the planted cases stay schema-valid on purpose.
 import type { Flags } from '../support/expected';
 // compared by the key only (see oracle-defects tests) and the cases below stay schema-valid on purpose.

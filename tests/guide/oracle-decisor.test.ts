@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
-// Regression test of lib/decisor.ts against the stored oracle output (tests/guide/expected/decisor.json, recorded from
-// decisor.py by tools/guide/record-expected.ts): the real guide config plus varied cases (ties, errors, scale
+// Regression test of lib/decisor.ts against the stored oracle output (tests/guide/expected/decisor.json, recorded once from
+// the former decisor.py): the real guide config plus varied cases (ties, errors, scale
 // violations, with and without financial context).
 import { describe, expect, it } from 'vitest';
 import { DecisorError, decidir } from '../../lib/decisor';

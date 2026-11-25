@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Regression test of the TypeScript guide loader and Mermaid generator against the stored oracle output
-// (tests/guide/expected/parity.json, recorded by tools/guide-oracle through tools/guide/record-expected.ts).
+// (tests/guide/expected/parity.json, recorded once from the former Python oracle).
 // The loaded document is compared by the SHA-256 of each canonical collection, so a difference names the collection.
 import { describe, expect, it } from 'vitest';
 import { gerarTodos } from '../../lib/flow-mermaid';

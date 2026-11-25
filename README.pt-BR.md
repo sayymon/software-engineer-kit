@@ -52,7 +52,7 @@ O mapeamento por pasta fica em `REUSE.toml`. Arquivos de código novos levam o c
 1. Faça um fork ou crie uma branch a partir de `main`.
 2. Faça a mudança e rode `npm run validate`, `npm test`, `npm run build` e `npm run smoke`.
 3. Abra um Pull Request para `main`, com título no padrão Conventional Commits.
-4. Os checks obrigatórios rodam sozinhos: `build-test`, `guide-oracle`, `dependency-review`, `npm-audit`, `codeql`, `secret-scan`, `public-terms`, `reuse` e `actionlint`.
+4. Os checks obrigatórios rodam sozinhos: `build-test`, `dependency-review`, `npm-audit`, `codeql`, `secret-scan`, `public-terms`, `reuse` e `actionlint`.
 5. O PR precisa da revisão do responsável pelo código (CODEOWNERS: @sayymon). O merge é por squash.
 
 `main` não aceita push direto. Traduções entram como arquivos em `content/en`, como descrito em [CONTRIBUTING.md](CONTRIBUTING.md) e `docs/i18n.md`. Regras de conduta: [CODE_OF_CONDUCT.pt-BR.md](CODE_OF_CONDUCT.pt-BR.md). Vulnerabilidades: [SECURITY.md](SECURITY.md).

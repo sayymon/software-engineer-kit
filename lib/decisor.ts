@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Decisor "construir, comprar ou assinar". Port of tools/guide-oracle/src/guia_decisao/decisor.py: pure function over the
+// Decisor "construir, comprar ou assinar". Port of decisor.py from the guide repository (commit 7abed1c, former Python reference): pure function over the
 // guide block `comum.decisor_construir_comprar_assinar`. Scores in 6 decimals, fixed tie tolerance of 1e-9 and tie-break
 // by the guide order. The financial context only feeds the justification, never the scores.
 import type { GuideDoc } from './guide/load';

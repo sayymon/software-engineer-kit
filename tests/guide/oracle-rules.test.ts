@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Regression test of the TypeScript guide validator against the stored oracle output (tests/guide/expected/rules-*.json,
-// recorded by tools/guide/record-expected.ts). Issues are compared whole and in order: code, nivel, path, itemId and message.
+// recorded once from the former Python oracle). Issues are compared whole and in order: code, nivel, path, itemId and message.
 import { describe, expect, it } from 'vitest';
 import { plantedCases, realCombos } from './cases/rules';
 import { readExpected, realDoc, tsRows, type IssueRow } from './support/expected';

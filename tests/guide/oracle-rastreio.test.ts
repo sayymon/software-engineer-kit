@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Regression test of lib/guide/rastreio.ts against the stored oracle output (tests/guide/expected/rastreio.json,
-// recorded from rastreio.py by tools/guide/record-expected.ts). Compares rastrearDados, usosEmCondicoes,
+// recorded once from the former rastreio.py). Compares rastrearDados, usosEmCondicoes,
 // lacunasDeDados (values and key order) and descreverCondicao on every `quando`, for the real guide and mutated copies.
 import { describe, expect, it } from 'vitest';
 import { descreverCondicao, lacunasDeDados, rastrearDados, usosEmCondicoes } from '../../lib/guide';

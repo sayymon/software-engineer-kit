@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
-// Helpers for the stored oracle outputs in tests/guide/expected/. The recorder (tools/guide/record-expected.ts)
-// writes them from the Python oracle; the regression tests read them. No test depends on Python.
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+// Helpers for the stored outputs in tests/guide/expected/. They were recorded once from the Python oracle (since removed);
+// the files are now the source of truth. Regenerate one only deliberately, by hand, after reviewing the behavior change.
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { guideDir, loadGuideDoc } from '../../../lib/guide';
 import { validateGuide } from '../../../lib/guide/validate';
@@ -13,7 +13,7 @@ export const schema = JSON.parse(readFileSync(join(root, 'schema/flows.schema.js
 export type D = any;
 export type Flags = { avisos?: boolean; completude?: boolean };
 
-/** One issue as the oracle prints it (dump_doc.py --issues). */
+/** One issue as the oracle prints it (recorded from the oracle). */
 export interface IssueRow {
   code: string;
   nivel: string;
@@ -29,26 +29,10 @@ export const realDoc = (): D => {
   return JSON.parse(JSON.stringify(cached));
 };
 
-export const flagsToArgs = (f: Flags): string[] => [...(f.avisos ? ['--avisos'] : []), ...(f.completude ? ['--completude'] : [])];
 
 /** TypeScript validator output in the oracle row shape, in emission order. */
 export const tsRows = (doc: D, flags: Flags = {}): IssueRow[] =>
   validateGuide(doc, schema, { ...flags }).map((i) => ({ code: i.code, nivel: i.nivel, path: i.path, item_id: i.itemId ?? null, message: i.message }));
-
-/** JSON with sorted object keys, 1-space indent and a trailing newline (stable diffs). */
-export function canonical(value: unknown): string {
-  const sort = (v: unknown): unknown => {
-    if (Array.isArray(v)) return v.map(sort);
-    if (v && typeof v === 'object') return Object.fromEntries(Object.keys(v).sort().map((k) => [k, sort((v as Record<string, unknown>)[k])]));
-    return v;
-  };
-  return `${JSON.stringify(sort(value), null, 1)}\n`;
-}
-
-export function writeExpected(name: string, value: unknown): void {
-  mkdirSync(expectedDir, { recursive: true });
-  writeFileSync(join(expectedDir, name), canonical(value));
-}
 
 export function readExpected<T>(name: string): T {
   return JSON.parse(readFileSync(join(expectedDir, name), 'utf8')) as T;

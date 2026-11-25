@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Documents fed to the data tracing (rastreio): the real guide, seeded mutations and hand-built shapes.
-// Single source for the regression test and tools/guide/record-expected.ts.
+// Used by the regression test.
 import { realDoc } from '../support/expected';
 type D = any; // eslint-disable-line @typescript-eslint/no-explicit-any
 const clone = (): D => realDoc();

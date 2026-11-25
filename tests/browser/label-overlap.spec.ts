@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Port of tools/guide-oracle/tests/browser-disabled/cdp_sobreposicao.mjs (see docs/guide-browser-tests.md):
+// Port of the former Python oracle (see docs/guide-browser-tests.md):
 // no g.node may cover the label of a g.cluster (subgraph) in the 2 Mermaid views of each demand page.
 // Requires a built site: KIT_LOCALES=pt-BR npm run build
 import { expect, test } from '@playwright/test';

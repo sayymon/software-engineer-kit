@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Port of tools/guide-oracle/tests/properties/test_subtarefas_dados_props.py (Properties 39 to 45), task 10.2 part 2.
+// Port of the former Python oracle (Properties 39 to 45), task 10.2 part 2.
 // One `it` per Python property. validate/rastrear_dados/descrever_condicao map to validateGuide, rastrearDados and
 // descreverCondicao; Issue.item_id is `itemId`. Python's `assume` becomes `fc.pre`. Determinism: fixed seed,
 // numRuns = Python max_examples, shrinking capped (endOnFailure).

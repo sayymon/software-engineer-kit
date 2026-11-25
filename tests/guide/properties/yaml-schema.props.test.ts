@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Port of tools/guide-oracle/tests/properties/test_yaml_schema_props.py (Properties 1 to 5), task 10.2 part 1.
+// Port of the former Python oracle (Properties 1 to 5), task 10.2 part 1.
 // One `it` per Python property. dump_yaml/load_yaml map to YAML.stringify/YAML.parse with the loader options of
 // lib/guide/load.ts (core schema, uniqueKeys false); the CLI runs in-process through tools/guide/cli.ts `main`.
 // Determinism: fixed seed, bounded numRuns, shrinking capped (endOnFailure) because documents are large.

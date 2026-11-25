@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Planted-defect cases for the 'perguntas' rules, shared by the regression test and tools/guide/record-expected.ts.
+// Planted-defect cases for the 'perguntas' rules, used by the regression test.
 // Each case mutates a copy of the real guide document. Single source: do not duplicate these in the tests.
 type D = any; // eslint-disable-line @typescript-eslint/no-explicit-any
 export const CODES = ['PERGUNTA_SEM_DEPENDENCIA', 'PERGUNTA_SEM_USO', 'PLAYBOOK_SEM_NO'];

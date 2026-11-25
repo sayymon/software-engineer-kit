@@ -1,6 +1,6 @@
 # Paridade das regras do validador do guia
 
-Comparação dos 44 códigos de regra do validador Python (`tools/guide-oracle/src/guia_decisao/validator.py`, cópia do commit `7abed1c`) com o validador TypeScript do kit (`lib/flows/index.ts`, função `checkDoc`, mais `validateAgainstSchema`). Os números de linha referem-se aos arquivos como estão na etapa 1.
+Comparação dos 44 códigos de regra do validador Python original (`validator.py`, commit `7abed1c` do repositório do guia, removido do kit) com o validador TypeScript do kit (`lib/guide/validate/`, mais `validateAgainstSchema`). As colunas de linha referem-se aos arquivos como estavam na etapa 1. A coluna "Linha kit" aponta para `lib/flows/index.ts` quando o código nasceu lá, e para `lib/guide/validate` quando foi portado depois.
 
 Resultado: 44 portados, 0 parciais, 0 ausentes. A portabilidade da etapa 2 está completa.
 
@@ -9,7 +9,7 @@ Leitura das colunas:
 - Tipo: `erro` falha o `validar`, `aviso` só falha com `--estrito`. A classificação segue a função do Python que emite o código (`_checar_avisos` e `_checar_completude` emitem avisos).
 - Linha Python: onde o código é emitido em `validator.py`.
 - Linha kit: onde o código é emitido em `lib/flows/index.ts`.
-- Teste: o teste do kit que prova o código. `sem teste dedicado` significa que o código só é exercitado pelo documento real sem erros. A prova de paridade entre Python e kit para código ausente existe hoje apenas no oráculo (ver abaixo).
+- Teste: o teste do kit que prova o código. `sem teste dedicado` significa que o código só é exercitado pelo documento real sem erros. A paridade com o Python é provada pelas saídas gravadas (ver abaixo).
 
 | Código | Tipo | Linha Python | Status | Linha kit | Teste | Regra |
 |---|---|---|---|---|---|---|
@@ -58,24 +58,19 @@ Leitura das colunas:
 | `PLAYBOOK_SEM_NO` | aviso | 1037 | portado | lib/guide/validate | tests/guide/oracle-defects-perguntas.test.ts | Playbook que nenhum nó usa |
 | `LACUNA_DE_DADOS` | aviso | 1045 | portado | lib/guide/validate | tests/guide/oracle-defects-avisos.test.ts | Artefato ou variável sem produtor ou sem consumidor |
 
-## Como o kit é verificado hoje
+## Como o kit é verificado
 
-- `tests/flows/flows.test.ts` valida o documento real contra o schema e as regras de `checkDoc` (zero problemas) e planta defeitos para `TRANSICAO_INVALIDA`, `RETORNOS_INCOMPATIVEIS`, `ORQUESTRADORA`, `REF_QUEBRADA`, `CHAMADA_CICLO` e para uma chave extra no schema.
-- `tests/guide/oracle-parity.test.ts` (com `GUIDE_ORACLE_PYTHON` definido) compara o documento carregado e todos os diagramas Mermaid do TypeScript com os do Python. Ele não compara os avisos.
-- O job `guide-oracle` roda `validar --estrito` e a suíte do oráculo no CI. Os 27 códigos ausentes seguem protegidos por ele até a etapa 2.
-- Códigos sem nenhum teste no oráculo: `APROVA_FORA_DE_GATEWAY`, `APROVA_REDUNDANTE`, `COMUNICACAO_SEM_DESTINATARIO`, `LACUNA_DE_DADOS`, `PERGUNTA_SEM_DEPENDENCIA`, `PERGUNTA_SEM_USO`, `PLAYBOOK_SEM_NO`, `RACI_CONFLITO`, `SEM_PAPEL`, `SUBTIPO_AUSENTE`, `SUBTIPO_INVALIDO` e `TIPO_LEGADO`. A etapa 2 escreve o teste no kit junto com a portabilidade.
+A toolchain é única (Node e TypeScript). A prova de paridade com o validador Python original é feita por testes de regressão contra saídas gravadas em `tests/guide/expected/`, registradas uma vez a partir do oráculo no commit `7abed1c` do repositório do guia. O oráculo (`tools/guide-oracle/`) e o job `guide-oracle` foram removidos.
 
-## Ordem de portabilidade na etapa 2
+- `tests/guide/oracle-rules.test.ts` compara, por inteiro e em ordem, os problemas do documento real (`rules-real.json`, com `avisos` e `completude` ligados e desligados) e dos defeitos estruturais plantados (`rules-planted.json`).
+- `tests/guide/oracle-defects-*.test.ts` plantam um defeito por caminho de origem de cada código e comparam com `defects-*.json`.
+- `tests/guide/oracle-rastreio.test.ts`, `tests/guide/oracle-decisor.test.ts` e `tests/guide/cli.test.ts` fazem o mesmo para o rastreio, o Decisor e a saída da CLI (`rastreio.json`, `decisor.json`, `cli-validar.json`).
+- `tests/guide/oracle-parity.test.ts` compara o documento carregado (por hash de cada coleção) e todos os diagramas Mermaid com `parity.json`. `tests/mermaid-parity` compara os diagramas byte a byte com os goldens em `tests/fixtures/mermaid`.
+- `tests/flows/flows.test.ts` valida o documento real contra o schema e as regras de `checkDoc`.
+- `npm run validate` roda o validador no modo estrito (`avisos` e `completude` ligados).
 
-Cada passo traz o teste diferencial contra o oráculo (mesmo documento, mesmos códigos e caminhos) e um teste com defeito plantado por código.
+Os arquivos de `tests/guide/expected/` são a fonte de verdade. Regenere um deles só de propósito, à mão, depois de revisar a mudança de comportamento.
 
-1. Concluído: `REF_QUEBRADA` e `ID_DUPLICADO` completos (fontes, ligações, dados, RACI, papéis, perguntas, ritos).
-2. Erros estruturais de raias e ligações: `DEMANDA_INCONSISTENTE`, `COR_DUPLICADA`, `LIGACAO_INCONSISTENTE`.
-3. Erros de dados e subtarefas: `CONDICAO_INVALIDA`, `CONDICAO_AUSENTE`, `VARIAVEL_ENUM_SEM_VALORES`, `VARIANTE_DUPLICADA`, `SUBTAREFA_EM_NAO_TAREFA`, `SUBTAREFA_ID_PADRAO`.
-4. Fluxo de dados (avisos): `VAR_NAO_DECLARADA`, `ENTRADA_SEM_PRODUTOR`, `SAIDA_NAO_ENTREGUE`, `ITEM_SEM_USO`, `TAREFA_SEM_ENTREGAVEL`, `SUBTAREFA_SEM_ENTREGAVEL`, `LACUNA_DE_DADOS`. Depende do rastreio de dados (`rastreio.py`).
-5. RACI e papéis (avisos): `SEM_PAPEL`, `RACI_CONFLITO`, `APROVA_FORA_DE_GATEWAY`, `APROVA_REDUNDANTE`.
-6. Perguntas e playbooks (avisos): `PERGUNTA_SEM_DEPENDENCIA`, `PERGUNTA_SEM_USO`, `PLAYBOOK_SEM_NO`.
-7. Taxonomia (avisos): `COMUNICACAO_SEM_DESTINATARIO`, `TIPO_LEGADO`, `SUBTIPO_AUSENTE`, `SUBTIPO_INVALIDO`. Usa `lib/guide/taxonomia.ts`.
-8. Modo estrito e saída da CLI em TypeScript, depois a remoção de `tools/guide-oracle` e a renomeação do check `guide-oracle`.
+## Histórico da ordem de portabilidade
 
-A ordem põe os erros antes dos avisos porque erros bloqueiam a publicação, e agrupa por dependência de dados para que cada passo reuse o anterior.
+A etapa 2 portou os códigos em oito passos, cada um com um defeito plantado por código e a comparação com o oráculo: (1) `REF_QUEBRADA` e `ID_DUPLICADO` completos; (2) erros estruturais de raias e ligações; (3) erros de dados e subtarefas; (4) fluxo de dados, sobre o rastreio de `lib/guide/rastreio.ts`; (5) RACI e papéis; (6) perguntas e playbooks; (7) taxonomia, sobre `lib/guide/taxonomia.ts`; (8) modo estrito, CLI em TypeScript e remoção do oráculo. A ordem pôs os erros antes dos avisos porque erros bloqueiam a publicação.

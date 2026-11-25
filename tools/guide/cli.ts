@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // npm run guide -- <validar|rastrear|decidir> [opções]
 // Exit codes: 0 ok, 1 validation failed / problems found, 2 usage or input error.
-// Text output of `validar` mirrors the Python CLI (tools/guide-oracle/src/guia_decisao/cli.py).
+// Text output of `validar` mirrors the Python CLI (the former Python CLI, since removed).
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';

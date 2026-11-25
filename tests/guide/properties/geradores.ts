@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// fast-check generators shared by the property tests. Port of tools/guide-oracle/tests/properties/strategies.py.
+// fast-check generators shared by the property tests. Port of the former Python oracle
 //
 // Public API (same names as the Python module, in camelCase):
 // - validDocs(): source documents that pass `validateGuide` with no issues (and no warnings with `avisos`).

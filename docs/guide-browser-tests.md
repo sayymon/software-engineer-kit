@@ -1,5 +1,5 @@
 # Mapa dos testes de navegador do guia
-Inventário dos seis scripts `tools/guide-oracle/tests/browser-disabled/cdp_*.mjs` (item 11 de `tools/guide-oracle/PATCHES.md`). Eles dirigiam o Chrome headless por CDP contra a página HTML autônoma do oráculo Python. Este mapa registra o que cada um verifica, se o comportamento existe no site de hoje e para onde ele vai.
+Inventário dos seis scripts `cdp_*.mjs` do oráculo Python (removido do kit na fase 12; os scripts estão no histórico do git e no repositório do guia, commit `7abed1c`). Eles dirigiam o Chrome headless por CDP contra a página HTML autônoma do oráculo Python. Este mapa registra o que cada um verifica, se o comportamento existe no site de hoje e para onde ele vai.
 Resultado: 1 comportamento existe parcialmente e vira teste Playwright (tarefa 11.2). Os outros 5 não existem no site e viram critério de aceite da etapa 3.
 Estado do site na data da análise: `site/src` e `site/dist` (build estático em Astro). Cada página de demanda (`site/dist/pt-BR/flows/<demanda>/index.html`) traz 2 figuras Mermaid, `Visão geral` e `Fluxo completo` (`site/src/render/flow.ts`, linhas 46 a 51), renderizadas no cliente por `site/src/components/Diagram.astro`. Os playbooks dos nós aparecem como `<details>` na mesma página (`flow.ts`, linha 72). Não há modal, zoom, arraste, abas, seletor de demanda nem filtro de catálogo.
 Leitura das colunas:
@@ -27,7 +27,7 @@ Os comportamentos marcados `etapa 3` seguem como critérios de aceite, sem teste
 ## Notas para a 11.2
 - O repositório ainda não tem Playwright (`package.json` e `node_modules/.bin` não o trazem). A 11.2 adiciona a dependência, ou registra a ausência se a instalação não couber no escopo.
 - O teste de sobreposição roda contra `site/dist` servido por HTTP local. Os scripts antigos abriam `file:`, e `file:` não carrega o Mermaid vendorizado em `vendor/mermaid` nas mesmas condições.
-- Os `.mjs` ficam em `tools/guide-oracle` até a fase 12 (remoção do oráculo). Os critérios acima preservam o conhecimento antes da remoção.
+- Os `.mjs` saíram do kit com o oráculo (fase 12). Os critérios acima preservam o conhecimento deles.
 
 ## Como rodar (11.2)
 - Teste: `tests/browser/label-overlap.spec.ts` (Playwright, Chromium), com config própria em `playwright.config.ts`. Ele fica fora do `npm test` (o vitest exclui `tests/browser/**`).

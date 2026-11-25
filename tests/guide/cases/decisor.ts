@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Decisor cases (real guide config plus ties, errors, scale violations, with and without financial context).
-// Single source for the regression test and tools/guide/record-expected.ts.
+// Used by the regression test.
 import { configDoGuia } from '../../../lib/decisor';
 import { guideDir, loadGuideDoc } from '../../../lib/guide';
 import { root } from '../support/expected';

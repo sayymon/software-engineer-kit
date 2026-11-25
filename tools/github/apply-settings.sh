@@ -9,7 +9,7 @@ REPO="sayymon/software-engineer-kit"
 APPLY=0
 
 # Required status checks: the job names of pr.yml and codeql.yml. Keep in sync (a test checks it).
-REQUIRED_CHECKS=(build-test guide-oracle dependency-review npm-audit codeql secret-scan public-terms reuse actionlint)
+REQUIRED_CHECKS=(build-test dependency-review npm-audit codeql secret-scan public-terms reuse actionlint)
 
 while [ $# -gt 0 ]; do
   case "$1" in
