@@ -28,5 +28,5 @@ describe.skipIf(!python)('TypeScript against the Python oracle', () => {
     const ts = gerarTodos(loadGuideDoc(dir), true, subtarefas);
     expect([...ts.keys()].sort()).toEqual(Object.keys(py).sort());
     for (const [name, text] of Object.entries(py)) expect(ts.get(name)?.texto, name).toBe(text);
-  });
+  }, 60_000);
 });

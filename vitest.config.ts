@@ -10,6 +10,7 @@ export default defineConfig({
   },
   test: {
     include: ['tests/**/*.test.ts', 'private/tests/**/*.test.ts'],
+    exclude: ['node_modules/**', 'tests/browser/**'],
     environment: 'node',
   },
 });

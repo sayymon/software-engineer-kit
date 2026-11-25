@@ -46,6 +46,7 @@ path = [
   "package-lock.json",
   "tsconfig.json",
   "vitest.config.ts",
+  "playwright.config.ts",
   "THIRD-PARTY-NOTICES.md",
   "REUSE.toml",
   ".gitignore",

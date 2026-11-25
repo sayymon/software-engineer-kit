@@ -19,7 +19,8 @@
     "build:en": "tsx tools/site/build.ts en",
     "preview": "astro preview --root site",
     "guide": "tsx tools/guide/cli.ts",
-    "smoke": "tsx tools/preview/smoke.ts"
+    "smoke": "tsx tools/preview/smoke.ts",
+    "test:browser": "playwright test"
   },
   "dependencies": {
     "ajv": "^8.20.0",
@@ -35,6 +36,7 @@
     "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@playwright/test": "^1.65.1",
     "@types/node": "^26.6.6",
     "fast-check": "^4.11.0",
     "tsx": "^4.23.15",
