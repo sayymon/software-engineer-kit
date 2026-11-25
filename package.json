@@ -18,6 +18,7 @@
     "build:pt-BR": "tsx tools/site/build.ts pt-BR",
     "build:en": "tsx tools/site/build.ts en",
     "preview": "astro preview --root site",
+    "guide": "tsx tools/guide/cli.ts",
     "smoke": "tsx tools/preview/smoke.ts"
   },
   "dependencies": {

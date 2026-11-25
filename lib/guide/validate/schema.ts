@@ -31,6 +31,13 @@ function validatorFor(schema: object): ReturnType<Ajv2020['compile']> {
   return compiled;
 }
 
+/**
+ * SCHEMA issues. Known difference from the Python oracle: its messages come from `jsonschema`
+ * (e.g. "'x' is a required property") and ours from Ajv ("must have required property 'x' {...}"). Ajv also emits
+ * extra errors for `if/then`, `anyOf` and `oneOf`, and one `additionalProperties` error per key, so the text and
+ * even the count cannot be matched exactly. Tests therefore compare SCHEMA issues by (code, nivel, path, itemId)
+ * only; every other rule message is byte for byte the oracle's.
+ */
 export function validateSchema(doc: GuideDoc, schema: object): Problema[] {
   const validator = validatorFor(schema);
   if (validator(doc)) return [];

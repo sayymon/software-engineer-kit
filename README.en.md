@@ -15,6 +15,15 @@ npm run build        # static site in both locales
 npm run smoke        # checks the built site
 ```
 `npm run preview` serves the built site.
+## Guide command
+`npm run guide -- <command>` validates, traces and decides from the guide in `content/guide/`.
+```bash
+npm run guide -- validar                      # errors and warnings (--estrito also fails on warnings)
+npm run guide -- rastrear                     # producers, consumers and gaps of each data item
+npm run guide -- rastrear <id>                # only the requested item
+npm run guide -- decidir --objetivo <id> --notas notas.yaml
+```
+`--yaml` points to another guide, `--json` swaps the text for JSON. Exit codes: 0 success, 1 problems found, 2 input error.
 
 ## Structure
 | Folder | Content |

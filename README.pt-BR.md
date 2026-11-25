@@ -15,6 +15,15 @@ npm run build        # site estático nos dois idiomas
 npm run smoke        # verificação do site construído
 ```
 `npm run preview` serve o site construído.
+## Comando do guia
+`npm run guide -- <comando>` valida, rastreia e decide a partir do guia em `content/guide/`.
+```bash
+npm run guide -- validar                      # erros e avisos (--estrito falha também nos avisos)
+npm run guide -- rastrear                     # produtores, consumidores e lacunas de cada dado
+npm run guide -- rastrear <id>                # só o item pedido
+npm run guide -- decidir --objetivo <id> --notas notas.yaml
+```
+`--yaml` aponta outro guia, `--json` troca o texto por JSON. Códigos de saída: 0 sucesso, 1 problemas encontrados, 2 erro de entrada.
 
 ## Estrutura
 | Pasta | Conteúdo |

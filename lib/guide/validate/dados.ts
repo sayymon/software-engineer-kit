@@ -31,6 +31,11 @@ export function pyRepr(v: unknown): string {
   return `{${Object.entries(v as Record<string, unknown>).map(([k, x]) => `${pyRepr(k)}: ${pyRepr(x)}`).join(', ')}}`;
 }
 
+/** Python `repr()` of a float (a whole number prints with `.0`, e.g. 1.0). */
+export function pyFloat(n: number): string {
+  return Number.isInteger(n) && Math.abs(n) < 1e16 ? `${n}.0` : String(n);
+}
+
 /** CONDICAO_INVALIDA of one term whose variable exists (validator.py: _checar_termo). */
 function checarTermo(termo: Doc, variavel: Doc, path: string, itemId: string, add: AddIssue): void {
   const varId = variavel.id;
@@ -121,7 +126,7 @@ export function checarLigacoes(doc: Doc, ids: Record<string, Set<string>>, broke
 /** Data, roles, RACI, questions and rites: REF_QUEBRADA and ID_DUPLICADO only. */
 export function checarDados(doc: Doc, add: AddIssue): void {
   const broken: Broken = (path, alvo, onde, origem) =>
-    add('REF_QUEBRADA', path, `'${origem}' references missing id '${alvo}' (expected in ${onde})`, origem);
+    add('REF_QUEBRADA', path, `'${origem}' referencia id inexistente '${alvo}' (esperado em ${onde})`, origem);
   // First declaration wins for duplicated variable ids (Python builds the map over the reversed list).
   const variaveis = new Map<string, Doc>();
   for (const v of list(doc.variaveis)) if (!variaveis.has(v.id)) variaveis.set(v.id, v);
@@ -136,7 +141,7 @@ export function checarDados(doc: Doc, add: AddIssue): void {
 
   const papeis = new Set<string>();
   list(doc.papeis).forEach((pa, i) => {
-    if (papeis.has(pa.id)) add('ID_DUPLICADO', `papeis[${i}].id`, `role id '${pa.id}' repeated`, pa.id);
+    if (papeis.has(pa.id)) add('ID_DUPLICADO', `papeis[${i}].id`, `id de papel '${pa.id}' duplicado`, pa.id);
     papeis.add(pa.id);
   });
 
@@ -211,7 +216,7 @@ export function checarDados(doc: Doc, add: AddIssue): void {
   const ritosIds = new Set<string>();
   for (const [colecao, vistos] of [['perguntas', perguntas], ['ritos', ritosIds]] as const) {
     list(doc[colecao]).forEach((item, i) => {
-      if (vistos.has(item.id)) add('ID_DUPLICADO', `${colecao}[${i}].id`, `id '${item.id}' repeated in ${colecao}`, item.id);
+      if (vistos.has(item.id)) add('ID_DUPLICADO', `${colecao}[${i}].id`, `id '${item.id}' duplicado em ${colecao}`, item.id);
       vistos.add(item.id);
     });
   }

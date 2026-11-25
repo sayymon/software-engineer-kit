@@ -85,10 +85,11 @@ const cases: Case[] = [
 const keyOf = (k: Key) => JSON.stringify(k);
 const clone = (): D => JSON.parse(JSON.stringify(base));
 const tsKeys = (doc: D): Key[] => validateGuide(doc, schema).map((p) => [p.code, p.nivel, p.path, p.itemId ?? null]);
-const pyKeys = (doc: D): Key[] =>
+const pyIssues = (doc: D) =>
   (JSON.parse(
     execFileSync(python as string, [oracle, '--issues'], { input: JSON.stringify(doc), encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 }),
-  ) as Array<{ code: string; nivel: string; path: string; item_id: string | null }>).map((i) => [i.code, i.nivel, i.path, i.item_id ?? null]);
+  ) as Array<{ code: string; nivel: string; path: string; item_id: string | null; message: string }>);
+const pyKeys = (doc: D): Key[] => pyIssues(doc).map((i) => [i.code, i.nivel, i.path, i.item_id ?? null]);
 
 describe('planted REF_QUEBRADA and ID_DUPLICADO defects (TypeScript)', () => {
   it.each(cases)('%s', (_name, plant) => {
@@ -107,5 +108,8 @@ describe.skipIf(!python)('planted defects agree with the Python oracle', () => {
     const py = pyKeys(doc).map(keyOf).sort();
     expect(py).toContain(keyOf([e.code, 'erro', e.path, e.itemId]));
     expect({ onlyTs: ts.filter((k) => !py.includes(k)), onlyPython: py.filter((k) => !ts.includes(k)) }).toEqual({ onlyTs: [], onlyPython: [] });
+    // Messages are ported literally from the oracle, so the whole set matches including the text.
+    const msgs = (l: Array<{ code: string; path: string; message: string }>) => l.map((i) => `${i.code}|${i.path}|${i.message}`).sort();
+    expect(msgs(validateGuide(doc, schema))).toEqual(msgs(pyIssues(doc)));
   });
 });

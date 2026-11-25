@@ -4,7 +4,7 @@
 import Ajv2020 from 'ajv/dist/2020.js';
 
 import type { GuideDoc } from '../index';
-import { checarDados, checarFontes, checarLigacoes, type AddIssue } from './dados';
+import { checarDados, pyFloat, pyRepr, checarFontes, checarLigacoes, type AddIssue } from './dados';
 import { checarCoresDasRaias, checarDemandaDasRaias } from './raias';
 export type Doc = GuideDoc;
 export type FlowIssue = { code: string; path: string; message: string; itemId?: string | null };
@@ -35,7 +35,7 @@ export function checkDoc(doc: Doc): FlowIssue[] {
     const seen = new Map<string, number>();
     ids[c] = new Set();
     (doc[c] as Doc[]).forEach((item, i) => {
-      if (seen.has(item.id)) add('ID_DUPLICADO', `${c}[${i}].id`, `id '${item.id}' repeated in ${c} (items ${seen.get(item.id)} and ${i})`, item.id);
+      if (seen.has(item.id)) add('ID_DUPLICADO', `${c}[${i}].id`, `id '${item.id}' duplicado em ${c}: itens ${c}[${seen.get(item.id)}] e ${c}[${i}]`, item.id);
       else seen.set(item.id, i);
       ids[c].add(item.id);
     });
@@ -43,7 +43,7 @@ export function checkDoc(doc: Doc): FlowIssue[] {
   const shared = new Map<string, string>();
   for (const c of ['artefatos', 'variaveis'] as const) {
     (doc[c] as Doc[]).forEach((item, i) => {
-      if (shared.has(item.id)) add('ID_DUPLICADO', `${c}[${i}].id`, `id '${item.id}' already used in ${shared.get(item.id)}`, item.id);
+      if (shared.has(item.id)) add('ID_DUPLICADO', `${c}[${i}].id`, `id '${item.id}' duplicado: já existe em ${shared.get(item.id)}; artefatos e variáveis dividem o mesmo espaço de ids`, item.id);
       else shared.set(item.id, `${c}[${i}]`);
     });
   }
@@ -54,20 +54,21 @@ export function checkDoc(doc: Doc): FlowIssue[] {
   const raiaById = new Map<string, Doc>();
   for (const r of raias) if (!raiaById.has(r.id)) raiaById.set(r.id, r);
   const libs = new Set<string>((doc.demandas as Doc[]).filter((d) => d.biblioteca === true).map((d) => d.id));
-  // Subtask ids are unique among themselves and against node ids.
-  const sub = new Map<string, string>();
+  // Subtask ids are unique among themselves and against node ids (first occurrence wins, as in the oracle).
+  const where = new Map<string, string>();
+  decisoes.forEach((d, i) => { if (!where.has(d.id)) where.set(d.id, `decisoes[${i}]`); });
   decisoes.forEach((d, i) => {
     ((d.subtarefas as Doc[] | undefined) ?? []).forEach((s, k) => {
-      if (nodeById.has(s.id) || sub.has(s.id)) add('ID_DUPLICADO', `decisoes[${i}].subtarefas[${k}].id`, `subtask id '${s.id}' repeated`, s.id);
-      else sub.set(s.id, `${i}.${k}`);
+      if (where.has(s.id)) add('ID_DUPLICADO', `decisoes[${i}].subtarefas[${k}].id`, `id de subtarefa '${s.id}' duplicado: já existe em ${where.get(s.id)}; os ids de subtarefas e de nós são globalmente únicos`, s.id);
+      else where.set(s.id, `decisoes[${i}].subtarefas[${k}]`);
     });
   });
   // Transitions and gateways.
   decisoes.forEach((d, i) => {
     (d.proximo as Doc[]).forEach((t, j) => {
-      if (!nodeById.has(t.para)) add('TRANSICAO_INVALIDA', `decisoes[${i}].proximo[${j}].para`, `'${d.id}' points to missing id '${t.para}'`);
+      if (!nodeById.has(t.para)) add('TRANSICAO_INVALIDA', `decisoes[${i}].proximo[${j}].para`, `transição de '${d.id}' aponta para id inexistente '${t.para}'`);
     });
-    if (d.tipo === 'bifurcacao' && (d.proximo as Doc[]).length < 2) add('BIFURCACAO_SAIDAS', `decisoes[${i}].proximo`, `gateway '${d.id}' has fewer than 2 exits`);
+    if (d.tipo === 'bifurcacao' && (d.proximo as Doc[]).length < 2) add('BIFURCACAO_SAIDAS', `decisoes[${i}].proximo`, `bifurcação '${d.id}' tem ${(d.proximo as Doc[]).length} saída(s); o mínimo é 2`);
   });
   // Reachability inside each lane.
   const starts = new Map<string, string[]>();
@@ -88,7 +89,7 @@ export function checkDoc(doc: Doc): FlowIssue[] {
     }
   }
   decisoes.forEach((d, i) => {
-    if (raiaById.has(d.raia) && !seen.has(d.id)) add('ORFA', `decisoes[${i}]`, `node '${d.id}' is not reachable from the start of lane '${d.raia}'`);
+    if (raiaById.has(d.raia) && !seen.has(d.id)) add('ORFA', `decisoes[${i}]`, `decisão '${d.id}' não é alcançável a partir do nó 'inicio' da raia '${d.raia}'`);
   });
   checarDemandaDasRaias(doc, add);
   // Lane structure.
@@ -99,14 +100,14 @@ export function checkDoc(doc: Doc): FlowIssue[] {
     if (raiaById.get(r.id) !== r) return;
     const nodes = nodesOf.get(r.id) ?? [];
     const inicios = nodes.filter(([, d]) => d.tipo === 'inicio');
-    if (inicios.length === 0) add('RAIA_SEM_INICIO', `raias[${ri}]`, `lane '${r.id}' has no start node`);
-    if (inicios.length > 1) add('RAIA_INICIO_MULTIPLO', `raias[${ri}]`, `lane '${r.id}' has ${inicios.length} start nodes`);
+    if (inicios.length === 0) add('RAIA_SEM_INICIO', `raias[${ri}]`, `a raia '${r.id}' não tem nó 'inicio'; o esperado é exatamente 1`);
+    if (inicios.length > 1) add('RAIA_INICIO_MULTIPLO', `raias[${ri}]`, `a raia '${r.id}' tem ${inicios.length} nós 'inicio' (${inicios.map(([, d]) => d.id).join(', ')}); o esperado é exatamente 1`);
     const fins = nodes.filter(([, d]) => d.tipo === 'fim');
-    if (fins.length === 0) add('RAIA_SEM_FIM', `raias[${ri}]`, `lane '${r.id}' has no end node`);
+    if (fins.length === 0) add('RAIA_SEM_FIM', `raias[${ri}]`, `a raia '${r.id}' não tem nó 'fim'; cada fim é um retorno nomeado da raia`);
     const returns = new Map<string, string>();
     for (const [i, d] of fins) {
-      if (!d.retorno) add('RAIA_SEM_FIM', `decisoes[${i}].retorno`, `end '${d.id}' has no return name`);
-      else if (returns.has(d.retorno)) add('RAIA_SEM_FIM', `decisoes[${i}].retorno`, `return '${d.retorno}' of '${d.id}' repeats '${returns.get(d.retorno)}'`);
+      if (!d.retorno) add('RAIA_SEM_FIM', `decisoes[${i}].retorno`, `o fim '${d.id}' da raia '${r.id}' não declara \`retorno\``);
+      else if (returns.has(d.retorno)) add('RAIA_SEM_FIM', `decisoes[${i}].retorno`, `o retorno '${d.retorno}' do fim '${d.id}' repete o de '${returns.get(d.retorno)}' na raia '${r.id}'; os retornos de uma raia são únicos`);
       else returns.set(d.retorno, d.id);
     }
   });
@@ -114,7 +115,7 @@ export function checkDoc(doc: Doc): FlowIssue[] {
     if (!raiaById.has(d.raia)) return;
     (d.proximo as Doc[]).forEach((t, j) => {
       const dest = nodeById.get(t.para);
-      if (dest && raiaById.has(dest.raia) && dest.raia !== d.raia) add('TRANSICAO_ENTRE_RAIAS', `decisoes[${i}].proximo[${j}].para`, `'${d.id}' leaves its lane without a call node`);
+      if (dest && raiaById.has(dest.raia) && dest.raia !== d.raia) add('TRANSICAO_ENTRE_RAIAS', `decisoes[${i}].proximo[${j}].para`, `'${d.id}' (raia '${d.raia}') aponta para '${dest.id}' (raia '${dest.raia}'); uma raia só aciona outra por um nó 'chamada'`);
     });
   });
   // Calls: target lane, return names, acyclic call graph.
@@ -125,25 +126,30 @@ export function checkDoc(doc: Doc): FlowIssue[] {
     const origin = raiaById.get(d.raia);
     const targetId = d.raia_chamada as string | undefined;
     if (d.tipo !== 'chamada') {
-      if (targetId !== undefined) add('CHAMADA_INVALIDA', `decisoes[${i}].raia_chamada`, `'${d.id}' is not a call node but declares raia_chamada`);
+      if (targetId !== undefined) add('CHAMADA_INVALIDA', `decisoes[${i}].raia_chamada`, `'${d.id}' não é do tipo 'chamada' mas declara \`raia_chamada\``);
       return;
     }
-    if (targetId === undefined) return void add('CHAMADA_INVALIDA', `decisoes[${i}]`, `call node '${d.id}' has no raia_chamada`);
+    if (targetId === undefined) return void add('CHAMADA_INVALIDA', `decisoes[${i}]`, `o nó 'chamada' '${d.id}' não declara \`raia_chamada\``);
     const target = raiaById.get(targetId);
     if (!target || !origin) return;
     calledLanes.add(targetId);
-    if (targetId === d.raia) return void add('CHAMADA_INVALIDA', `decisoes[${i}].raia_chamada`, `'${d.id}' calls its own lane`);
+    if (targetId === d.raia) return void add('CHAMADA_INVALIDA', `decisoes[${i}].raia_chamada`, `'${d.id}' chama a própria raia '${targetId}'`);
     if (target.demanda !== origin.demanda && !libs.has(target.demanda)) {
-      return void add('CHAMADA_INVALIDA', `decisoes[${i}].raia_chamada`, `'${d.id}' calls lane '${targetId}' of another demand`);
+      return void add('CHAMADA_INVALIDA', `decisoes[${i}].raia_chamada`, `'${d.id}' chama a raia '${targetId}' da demanda '${target.demanda}'; \`chamada\` só liga raias da mesma demanda ('${origin.demanda}') ou de uma biblioteca; entre demandas use \`ligacoes\``);
     }
     calls.get(d.raia)?.add(targetId);
     const returns = new Set((nodesOf.get(targetId) ?? []).filter(([, x]) => x.tipo === 'fim' && x.retorno).map(([, x]) => x.retorno as string));
     const conds = (d.proximo as Doc[]).map((t) => t.condicao as string);
-    const missing = [...returns].filter((x) => !conds.includes(x));
-    const extra = [...new Set(conds)].filter((x) => !returns.has(x));
-    const repeated = [...new Set(conds.filter((c, k) => conds.indexOf(c) !== k))];
+    const byCodepoint = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
+    const missing = [...returns].filter((x) => !conds.includes(x)).sort(byCodepoint);
+    const extra = [...new Set(conds)].filter((x) => !returns.has(x)).sort(byCodepoint);
+    const repeated = [...new Set(conds.filter((c, k) => conds.indexOf(c) !== k))].sort(byCodepoint);
     if (missing.length || extra.length || repeated.length) {
-      add('RETORNOS_INCOMPATIVEIS', `decisoes[${i}].proximo`, `exits of '${d.id}' do not match returns of '${targetId}' (missing ${JSON.stringify(missing)}, extra ${JSON.stringify(extra)}, repeated ${JSON.stringify(repeated)})`);
+      const parts: string[] = [];
+      if (missing.length) parts.push(`faltam ${pyRepr(missing)}`);
+      if (extra.length) parts.push(`sobram ${pyRepr(extra)}`);
+      if (repeated.length) parts.push(`repetidas ${pyRepr(repeated)}`);
+      add('RETORNOS_INCOMPATIVEIS', `decisoes[${i}].proximo`, `as saídas de '${d.id}' não casam com os retornos da raia '${targetId}': ${parts.join('; ')}`);
     }
   });
   const reach = (from: string): Set<string> => {
@@ -158,7 +164,7 @@ export function checkDoc(doc: Doc): FlowIssue[] {
     return out;
   };
   raias.forEach((r, ri) => {
-    if (raiaById.get(r.id) === r && reach(r.id).has(r.id)) add('CHAMADA_CICLO', `raias[${ri}]`, `lane '${r.id}' is part of a call cycle`);
+    if (raiaById.get(r.id) === r && reach(r.id).has(r.id)) add('CHAMADA_CICLO', `raias[${ri}]`, `a raia '${r.id}' participa de um ciclo de chamadas; o grafo raia -> raia_chamada deve ser acíclico`);
   });
   // Orchestrator per demand and orphan lanes.
   const byDemand = new Map<string, number[]>();
@@ -166,12 +172,12 @@ export function checkDoc(doc: Doc): FlowIssue[] {
   for (const [dem, indices] of byDemand) {
     const orqs = indices.filter((ri) => raias[ri].orquestradora === true);
     if (libs.has(dem)) {
-      for (const ri of orqs) add('ORQUESTRADORA', `raias[${ri}].orquestradora`, `lane '${raias[ri].id}' belongs to a library and cannot orchestrate`);
-    } else if (orqs.length === 0) add('ORQUESTRADORA', `raias[${indices[0]}]`, `demand '${dem}' has no orchestrator lane`);
-    else if (orqs.length > 1) add('ORQUESTRADORA', `raias[${orqs[1]}].orquestradora`, `demand '${dem}' has ${orqs.length} orchestrator lanes`);
+      for (const ri of orqs) add('ORQUESTRADORA', `raias[${ri}].orquestradora`, `a raia '${raias[ri].id}' é de uma biblioteca ('${dem}') e não pode ser orquestradora`);
+    } else if (orqs.length === 0) add('ORQUESTRADORA', `raias[${indices[0]}]`, `a demanda '${dem}' tem raias, mas nenhuma é \`orquestradora\`; o esperado é exatamente 1`, dem);
+    else if (orqs.length > 1) for (const ri of orqs.slice(1)) add('ORQUESTRADORA', `raias[${ri}].orquestradora`, `a demanda '${dem}' tem ${orqs.length} raias orquestradoras; o esperado é exatamente 1`);
     for (const ri of indices) {
       const r = raias[ri];
-      if ((libs.has(dem) || r.orquestradora !== true) && !calledLanes.has(r.id)) add('RAIA_ORFA', `raias[${ri}]`, `lane '${r.id}' is not called by any lane`);
+      if ((libs.has(dem) || r.orquestradora !== true) && !calledLanes.has(r.id)) add('RAIA_ORFA', `raias[${ri}]`, `a raia '${r.id}' não é orquestradora e nenhuma raia a chama`);
     }
   }
   checarCoresDasRaias(doc, add);
@@ -179,22 +185,22 @@ export function checkDoc(doc: Doc): FlowIssue[] {
   const sigla = new Map<string, string>((doc.demandas as Doc[]).filter((d) => typeof d.sigla === 'string').map((d) => [d.id, d.sigla]));
   raias.forEach((r, ri) => {
     const s = sigla.get(r.demanda);
-    if (s && !String(r.id).startsWith(`${s}_`)) add('ID_PADRAO', `raias[${ri}].id`, `lane id '${r.id}' must start with '${s}_'`);
+    if (s && !String(r.id).startsWith(`${s}_`)) add('ID_PADRAO', `raias[${ri}].id`, `o id da raia '${r.id}' deve começar com '${s}_' (sigla da demanda '${r.demanda}')`);
   });
   decisoes.forEach((d, i) => {
     if (!raiaById.has(d.raia)) return;
     if (!new RegExp(`^${String(d.raia).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}_${LETTER[d.tipo]}\\d+$`).test(d.id)) {
-      add('ID_PADRAO', `decisoes[${i}].id`, `node id '${d.id}' must look like '${d.raia}_${LETTER[d.tipo]}<n>'`);
+      add('ID_PADRAO', `decisoes[${i}].id`, `o id '${d.id}' deve ter a forma '${d.raia}_${LETTER[d.tipo]}<n>' (tipo '${d.tipo}', raia '${d.raia}')`);
     }
   });
   // Decision weights sum to 1.
   const pesos = (doc.decisor_construir_comprar_assinar?.pesos ?? {}) as Record<string, Record<string, number>>;
   for (const [goal, weights] of Object.entries(pesos)) {
     const sum = Object.values(weights).reduce((a, b) => a + b, 0);
-    if (Math.abs(sum - 1) > 1e-9) add('PESOS', `decisor_construir_comprar_assinar.pesos.${goal}`, `weights of '${goal}' sum to ${sum}`);
+    if (Math.abs(sum - 1) > 1e-9) add('PESOS', `decisor_construir_comprar_assinar.pesos.${goal}`, `pesos do objetivo '${goal}' somam ${pyFloat(sum)}; o esperado é 1 (tolerância 1e-09)`, goal);
   }
   // References.
-  const broken = (path: string, target: string, collection: string, origin: string) => add('REF_QUEBRADA', path, `'${origin}' references missing id '${target}' (expected in ${collection})`, origin);
+  const broken = (path: string, target: string, collection: string, origin: string) => add('REF_QUEBRADA', path, `'${origin}' referencia id inexistente '${target}' (esperado em ${collection})`, origin);
   raias.forEach((r, i) => {
     if (!ids.demandas.has(r.demanda)) broken(`raias[${i}].demanda`, r.demanda, 'demandas', r.id);
   });
