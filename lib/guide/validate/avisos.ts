@@ -7,6 +7,7 @@
 // functions are ported in their own modules (phases 5 to 7).
 import type { GuideDoc } from '../index';
 import { lacunasDeDados } from '../rastreio';
+import { checarPlaybooksSemNo, regrasDePergunta } from './perguntas';
 import { checarPapeis } from './raci';
 import type { Problema } from './types';
 type Doc = GuideDoc;
@@ -165,13 +166,14 @@ export function checarAvisos(doc: Doc): Problema[] {
       }
     });
   });
-  checarPapeis(doc, aviso);
+  checarPapeis(doc, aviso, regrasDePergunta(doc, aviso));
   return avisos;
 }
 /** Completeness warnings of the whole guide; only runs with `completude` (and `avisos`), as in Python. */
 export function checarCompletude(doc: Doc): Problema[] {
   const issues: Problema[] = [];
   const aviso = novoAviso(issues);
+  checarPlaybooksSemNo(doc, aviso);
   const lacunas = lacunasDeDados(doc);
   for (const colecao of ['artefatos', 'variaveis'] as const) {
     list(doc[colecao]).forEach((item, i) => {

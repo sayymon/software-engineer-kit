@@ -2,7 +2,7 @@
 
 Comparação dos 44 códigos de regra do validador Python (`tools/guide-oracle/src/guia_decisao/validator.py`, cópia do commit `7abed1c`) com o validador TypeScript do kit (`lib/flows/index.ts`, função `checkDoc`, mais `validateAgainstSchema`). Os números de linha referem-se aos arquivos como estão na etapa 1.
 
-Resultado: 37 portados, 0 parciais, 7 ausentes. Os 7 ausentes formam a lista de portabilidade da etapa 2.
+Resultado: 40 portados, 0 parciais, 4 ausentes. Os 4 ausentes formam a lista de portabilidade da etapa 2.
 
 Leitura das colunas:
 
@@ -47,15 +47,15 @@ Leitura das colunas:
 | `SUBTAREFA_SEM_ENTREGAVEL` | aviso | 945 | portado | lib/guide/validate | tests/guide/oracle-defects-avisos.test.ts | Subtarefa sem artefato em `saidas` |
 | `SEM_PAPEL` | aviso | 954, 956, 959, 985 | portado | lib/guide/validate | tests/guide/oracle-defects-raci.test.ts | Tarefa, gateway, subtarefa ou rito sem `papel` |
 | `RACI_CONFLITO` | aviso | 968, 970, 972 | portado | lib/guide/validate | tests/guide/oracle-defects-raci.test.ts | Papel que aprova e apoia, é responsável e consultado, ou informado com outra letra |
-| `PERGUNTA_SEM_DEPENDENCIA` | aviso | 979 | ausente | - | - | Pergunta sem `depende_de` |
-| `PERGUNTA_SEM_USO` | aviso | 981 | ausente | - | - | Pergunta que nenhum playbook ou rito cita |
+| `PERGUNTA_SEM_DEPENDENCIA` | aviso | 979 | portado | lib/guide/validate | tests/guide/oracle-defects-perguntas.test.ts | Pergunta sem `depende_de` |
+| `PERGUNTA_SEM_USO` | aviso | 981 | portado | lib/guide/validate | tests/guide/oracle-defects-perguntas.test.ts | Pergunta que nenhum playbook ou rito cita |
 | `APROVA_FORA_DE_GATEWAY` | aviso | 991 | portado | lib/guide/validate | tests/guide/oracle-defects-raci.test.ts | `aprova` em nó que não é gateway de qualidade |
 | `APROVA_REDUNDANTE` | aviso | 994 | portado | lib/guide/validate | tests/guide/oracle-defects-raci.test.ts | `aprova` igual ao papel que já decide o gateway |
 | `COMUNICACAO_SEM_DESTINATARIO` | aviso | 1019 | ausente | - | - | Comunicação sem `destinatarios` |
 | `TIPO_LEGADO` | aviso | 1023 | ausente | - | - | Artefato com tipo fora da taxonomia atual |
 | `SUBTIPO_AUSENTE` | aviso | 1026 | ausente | - | - | Tipo que tem subtipos, sem `subtipo` |
 | `SUBTIPO_INVALIDO` | aviso | 1029, 1032 | ausente | - | - | Subtipo inexistente no tipo, ou subtipo em tipo que não os tem |
-| `PLAYBOOK_SEM_NO` | aviso | 1037 | ausente | - | - | Playbook que nenhum nó usa |
+| `PLAYBOOK_SEM_NO` | aviso | 1037 | portado | lib/guide/validate | tests/guide/oracle-defects-perguntas.test.ts | Playbook que nenhum nó usa |
 | `LACUNA_DE_DADOS` | aviso | 1045 | portado | lib/guide/validate | tests/guide/oracle-defects-avisos.test.ts | Artefato ou variável sem produtor ou sem consumidor |
 
 ## Como o kit é verificado hoje
