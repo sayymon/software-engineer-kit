@@ -2,10 +2,12 @@
 // Data-flow warnings of the guide validator (nivel "aviso").
 // Ported from the Python oracle (validator.py: _checar_avisos, _checar_completude), restricted to the data-flow
 // rules: VAR_NAO_DECLARADA, ENTRADA_SEM_PRODUTOR, SAIDA_NAO_ENTREGUE, ITEM_SEM_USO, TAREFA_SEM_ENTREGAVEL,
-// SUBTAREFA_SEM_ENTREGAVEL and LACUNA_DE_DADOS. The role, question, playbook and taxonomy rules of the same Python
+// SUBTAREFA_SEM_ENTREGAVEL and LACUNA_DE_DADOS. The role/RACI rules live in raci.ts (called at the end, as in Python);
+// the question, playbook and taxonomy rules of the same Python
 // functions are ported in their own modules (phases 5 to 7).
 import type { GuideDoc } from '../index';
 import { lacunasDeDados } from '../rastreio';
+import { checarPapeis } from './raci';
 import type { Problema } from './types';
 type Doc = GuideDoc;
 const list = (v: unknown): Doc[] => (Array.isArray(v) ? (v as Doc[]) : []);
@@ -163,6 +165,7 @@ export function checarAvisos(doc: Doc): Problema[] {
       }
     });
   });
+  checarPapeis(doc, aviso);
   return avisos;
 }
 /** Completeness warnings of the whole guide; only runs with `completude` (and `avisos`), as in Python. */
