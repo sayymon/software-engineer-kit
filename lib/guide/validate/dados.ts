@@ -18,7 +18,7 @@ const DOMINIO_BOOLEANO = ['sim', 'nao'];
 const escapeRegex = (s: string): string => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 /** Python `repr()` of a JSON value, so messages match the oracle (e.g. 'a', True, None, ['x', 'y']). */
-function pyRepr(v: unknown): string {
+export function pyRepr(v: unknown): string {
   if (v === null || v === undefined) return 'None';
   if (typeof v === 'boolean') return v ? 'True' : 'False';
   if (typeof v === 'number') return String(v);

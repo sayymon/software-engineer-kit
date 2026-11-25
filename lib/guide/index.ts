@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 export { ANCHOR_TIPOS, deriveGuideEntities, type DerivedEntity, type DeriveResult, type KitRef } from './entities';
 export { GuideLoadError, hasGuide, loadGuideDoc, loadGuideFiles, mergeGuideFiles, type GuideDoc, type GuideFile } from './load';
+export { descreverCondicao, lacunasDeDados, rastrearDados, usosEmCondicoes, type RastroDado, type UsoEmCondicao } from './rastreio';
 export { SUBTIPOS, TIPOS, TIPOS_LEGADOS, eComunicacao, rotuloSubtipo } from './taxonomia';
 import { join } from 'node:path';
 

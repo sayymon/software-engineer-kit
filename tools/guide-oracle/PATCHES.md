@@ -25,3 +25,4 @@ Source: guide repository at commit `7abed1c`, folder `scripts/guia-decisao`. Eve
 10. `tests/conftest.py`: hypothesis profile `oracle` with `derandomize=True` and no example database, so CI runs are reproducible.
 11. `tests/unit/cdp_*.mjs` moved to `tests/browser-disabled/`.
 12. `dump_doc.py`: added `--issues`, which reads a JSON document from stdin, validates it against the kit schema with the oracle validator (default options, or `--avisos` and `--completude` to switch those groups on), and emits the resulting `Issue` dataclasses as canonical JSON.
+13. `dump_doc.py`: added `--rastreio`, which reads a JSON document from stdin and emits as canonical JSON the results of `rastrear_dados`, `usos_em_condicoes` and `lacunas_de_dados` (each with its key order, since canonical JSON sorts keys), plus `descrever_condicao` applied to every `quando` value found in the document.

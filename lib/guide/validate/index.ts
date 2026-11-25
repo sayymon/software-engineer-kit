@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 import type { GuideDoc } from '../index';
 import { itemIdDoCaminho, normalizarDatas } from './caminho';
+import { checarAvisos, checarCompletude } from './avisos';
 import { validateSchema } from './schema';
 import { checkDoc as checkLegacyRules, type Doc, type FlowIssue } from './rules';
 import type { OpcoesValidacao, Problema, Nivel } from './types';
@@ -29,10 +30,11 @@ export function validateGuide(doc: GuideDoc, schema: object, opcoes: OpcoesValid
   const schemaIssues = validateSchema(normalizado, schema);
   if (schemaIssues.length) return schemaIssues;
 
-  // These options are part of the stable contract. Warning and completeness
-  // rule groups are added in later portability tasks; current rules are errors.
-  void opcoes;
-  return checkLegacyRules(normalizado).map((issue) => toProblem(normalizado, issue));
+  const problemas = checkLegacyRules(normalizado).map((issue) => toProblem(normalizado, issue));
+  // As in Python, warnings need `avisos`, and completeness needs both flags.
+  if (opcoes.avisos) problemas.push(...checarAvisos(normalizado));
+  if (opcoes.avisos && opcoes.completude) problemas.push(...checarCompletude(normalizado));
+  return problemas;
 }
 
 /** Legacy cross-reference API retained for callers that do not need schema checks. */

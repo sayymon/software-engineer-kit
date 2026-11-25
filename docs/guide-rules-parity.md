@@ -2,7 +2,7 @@
 
 Comparação dos 44 códigos de regra do validador Python (`tools/guide-oracle/src/guia_decisao/validator.py`, cópia do commit `7abed1c`) com o validador TypeScript do kit (`lib/flows/index.ts`, função `checkDoc`, mais `validateAgainstSchema`). Os números de linha referem-se aos arquivos como estão na etapa 1.
 
-Resultado: 26 portados, 0 parciais, 18 ausentes. Os 18 ausentes formam a lista de portabilidade da etapa 2.
+Resultado: 33 portados, 0 parciais, 11 ausentes. Os 11 ausentes formam a lista de portabilidade da etapa 2.
 
 Leitura das colunas:
 
@@ -39,12 +39,12 @@ Leitura das colunas:
 | `SUBTAREFA_ID_PADRAO` | erro | 713 | portado | lib/guide/validate | tests/guide/oracle-defects-dados.test.ts | Id de subtarefa fora da forma `<nó>_st<n>` |
 | `CONDICAO_AUSENTE` | erro | 738 | portado | lib/guide/validate | tests/guide/oracle-defects-dados.test.ts | Uso condicional de técnica sem `quando` |
 | `VARIANTE_DUPLICADA` | erro | 800 | portado | lib/guide/validate | tests/guide/oracle-defects-dados.test.ts | Nome de variante repetido no artefato |
-| `VAR_NAO_DECLARADA` | aviso | 823 | ausente | - | - | Chave de `estado` que não existe em `variaveis` |
-| `ENTRADA_SEM_PRODUTOR` | aviso | 874, 883 | ausente | - | - | Entrada que nem a raia nem um nó ou subtarefa anterior produz |
-| `SAIDA_NAO_ENTREGUE` | aviso | 890 | ausente | - | - | Saída de tarefa que nenhuma subtarefa produz |
-| `ITEM_SEM_USO` | aviso | 921 | ausente | - | - | Artefato ou variável que nada referencia |
-| `TAREFA_SEM_ENTREGAVEL` | aviso | 939 | ausente | - | - | Tarefa sem artefato em `saidas` |
-| `SUBTAREFA_SEM_ENTREGAVEL` | aviso | 945 | ausente | - | - | Subtarefa sem artefato em `saidas` |
+| `VAR_NAO_DECLARADA` | aviso | 823 | portado | lib/guide/validate | tests/guide/oracle-defects-avisos.test.ts | Chave de `estado` que não existe em `variaveis` |
+| `ENTRADA_SEM_PRODUTOR` | aviso | 874, 883 | portado | lib/guide/validate | tests/guide/oracle-defects-avisos.test.ts | Entrada que nem a raia nem um nó ou subtarefa anterior produz |
+| `SAIDA_NAO_ENTREGUE` | aviso | 890 | portado | lib/guide/validate | tests/guide/oracle-defects-avisos.test.ts | Saída de tarefa que nenhuma subtarefa produz |
+| `ITEM_SEM_USO` | aviso | 921 | portado | lib/guide/validate | tests/guide/oracle-defects-avisos.test.ts | Artefato ou variável que nada referencia |
+| `TAREFA_SEM_ENTREGAVEL` | aviso | 939 | portado | lib/guide/validate | tests/guide/oracle-defects-avisos.test.ts | Tarefa sem artefato em `saidas` |
+| `SUBTAREFA_SEM_ENTREGAVEL` | aviso | 945 | portado | lib/guide/validate | tests/guide/oracle-defects-avisos.test.ts | Subtarefa sem artefato em `saidas` |
 | `SEM_PAPEL` | aviso | 954, 956, 959, 985 | ausente | - | - | Tarefa, gateway, subtarefa ou rito sem `papel` |
 | `RACI_CONFLITO` | aviso | 968, 970, 972 | ausente | - | - | Papel que aprova e apoia, é responsável e consultado, ou informado com outra letra |
 | `PERGUNTA_SEM_DEPENDENCIA` | aviso | 979 | ausente | - | - | Pergunta sem `depende_de` |
@@ -56,7 +56,7 @@ Leitura das colunas:
 | `SUBTIPO_AUSENTE` | aviso | 1026 | ausente | - | - | Tipo que tem subtipos, sem `subtipo` |
 | `SUBTIPO_INVALIDO` | aviso | 1029, 1032 | ausente | - | - | Subtipo inexistente no tipo, ou subtipo em tipo que não os tem |
 | `PLAYBOOK_SEM_NO` | aviso | 1037 | ausente | - | - | Playbook que nenhum nó usa |
-| `LACUNA_DE_DADOS` | aviso | 1045 | ausente | - | - | Artefato ou variável sem produtor ou sem consumidor |
+| `LACUNA_DE_DADOS` | aviso | 1045 | portado | lib/guide/validate | tests/guide/oracle-defects-avisos.test.ts | Artefato ou variável sem produtor ou sem consumidor |
 
 ## Como o kit é verificado hoje
 
