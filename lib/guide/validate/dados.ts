@@ -30,14 +30,32 @@ export function checarFontes(doc: Doc, ids: Record<string, Set<string>>, broken:
   }
 }
 
-/** Links between demands: only the broken-reference part (LIGACAO_INCONSISTENTE is ported later). */
-export function checarLigacoes(doc: Doc, ids: Record<string, Set<string>>, broken: Broken): void {
-  const porId = new Set<string>(list(doc.decisoes).map((d) => d.id));
+/** Links between demands: broken references and LIGACAO_INCONSISTENTE. */
+export function checarLigacoes(doc: Doc, ids: Record<string, Set<string>>, broken: Broken, add: AddIssue): void {
+  const porId = new Map<string, Doc>();
+  for (const d of list(doc.decisoes)) if (!porId.has(d.id)) porId.set(d.id, d);
+  const demandaDaRaia = new Map<string, string>();
+  for (const r of list(doc.raias)) demandaDaRaia.set(r.id, r.demanda);
+  // Effective demand: the lane's (source of truth) or, failing that, the node's own `demanda`.
+  const demandaDe = (dec: Doc): string | undefined => (demandaDaRaia.has(dec.raia) ? demandaDaRaia.get(dec.raia) : dec.demanda);
   list(doc.decisoes).forEach((d, i) => {
     list(d.ligacoes).forEach((lig, j) => {
       const base = `decisoes[${i}].ligacoes[${j}]`;
-      if (!ids.demandas.has(lig.demanda_destino)) broken(`${base}.demanda_destino`, lig.demanda_destino, 'demandas', d.id);
-      if (!porId.has(lig.para)) broken(`${base}.para`, lig.para, 'decisoes', d.id);
+      const destino = lig.demanda_destino;
+      const alvo = lig.para;
+      const demandaOk = ids.demandas.has(destino);
+      if (!demandaOk) broken(`${base}.demanda_destino`, destino, 'demandas', d.id);
+      const alvoDecisao = porId.get(alvo);
+      if (alvoDecisao === undefined) broken(`${base}.para`, alvo, 'decisoes', d.id);
+      if (demandaOk && demandaDe(d) === destino) {
+        add('LIGACAO_INCONSISTENTE', `${base}.demanda_destino`, `ligação de '${d.id}' aponta para a própria demanda '${destino}'; use \`proximo\` para o fluxo interno`, d.id);
+      }
+      if (demandaOk && alvoDecisao !== undefined) {
+        const demandaAlvo = demandaDe(alvoDecisao);
+        if (demandaAlvo != null && demandaAlvo !== destino) {
+          add('LIGACAO_INCONSISTENTE', `${base}.para`, `ligação de '${d.id}': '${alvo}' pertence à demanda '${demandaAlvo}', não a '${destino}'`, d.id);
+        }
+      }
     });
   });
 }

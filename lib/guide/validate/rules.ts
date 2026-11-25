@@ -5,6 +5,7 @@ import Ajv2020 from 'ajv/dist/2020.js';
 
 import type { GuideDoc } from '../index';
 import { checarDados, checarFontes, checarLigacoes, type AddIssue } from './dados';
+import { checarCoresDasRaias, checarDemandaDasRaias } from './raias';
 export type Doc = GuideDoc;
 export type FlowIssue = { code: string; path: string; message: string; itemId?: string | null };
 
@@ -89,6 +90,7 @@ export function checkDoc(doc: Doc): FlowIssue[] {
   decisoes.forEach((d, i) => {
     if (raiaById.has(d.raia) && !seen.has(d.id)) add('ORFA', `decisoes[${i}]`, `node '${d.id}' is not reachable from the start of lane '${d.raia}'`);
   });
+  checarDemandaDasRaias(doc, add);
   // Lane structure.
   const nodesOf = new Map<string, Array<[number, Doc]>>();
   for (const r of raiaById.keys()) nodesOf.set(r, []);
@@ -172,6 +174,7 @@ export function checkDoc(doc: Doc): FlowIssue[] {
       if ((libs.has(dem) || r.orquestradora !== true) && !calledLanes.has(r.id)) add('RAIA_ORFA', `raias[${ri}]`, `lane '${r.id}' is not called by any lane`);
     }
   }
+  checarCoresDasRaias(doc, add);
   // Id patterns.
   const sigla = new Map<string, string>((doc.demandas as Doc[]).filter((d) => typeof d.sigla === 'string').map((d) => [d.id, d.sigla]));
   raias.forEach((r, ri) => {
@@ -220,7 +223,7 @@ export function checkDoc(doc: Doc): FlowIssue[] {
     }
   });
   checarFontes(doc, ids, broken);
-  checarLigacoes(doc, ids, broken);
+  checarLigacoes(doc, ids, broken, add);
   checarDados(doc, add);
   return issues;
 }

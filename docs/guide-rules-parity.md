@@ -2,7 +2,7 @@
 
 Comparação dos 44 códigos de regra do validador Python (`tools/guide-oracle/src/guia_decisao/validator.py`, cópia do commit `7abed1c`) com o validador TypeScript do kit (`lib/flows/index.ts`, função `checkDoc`, mais `validateAgainstSchema`). Os números de linha referem-se aos arquivos como estão na etapa 1.
 
-Resultado: 17 portados, 0 parciais, 27 ausentes. Os 27 ausentes formam a lista de portabilidade da etapa 2.
+Resultado: 20 portados, 0 parciais, 24 ausentes. Os 24 ausentes formam a lista de portabilidade da etapa 2.
 
 Leitura das colunas:
 
@@ -28,11 +28,11 @@ Leitura das colunas:
 | `CHAMADA_CICLO` | erro | 387 | portado | 158 | tests/flows/flows.test.ts:40 | Raia que alcança a si mesma por chamadas |
 | `ORQUESTRADORA` | erro | 400, 405, 409 | portado | 166, 167, 168 | tests/flows/flows.test.ts:40 | Raia de biblioteca orquestradora, ou demanda sem ou com mais de uma raia orquestradora |
 | `RAIA_ORFA` | erro | 415 | portado | 171 | tests/flows/flows.test.ts:14 (documento real sem erros), sem teste dedicado | Raia não orquestradora que nenhuma raia chama |
-| `DEMANDA_INCONSISTENTE` | erro | 280 | ausente | - | - | Nó declara uma demanda diferente da demanda da sua raia |
-| `COR_DUPLICADA` | erro | 432 | ausente | - | - | Cor repetida entre raias do mesmo diagrama (inclui bibliotecas chamadas) |
+| `DEMANDA_INCONSISTENTE` | erro | 280 | portado | lib/guide/validate | tests/guide/oracle-defects-structure.test.ts | Nó declara uma demanda diferente da demanda da sua raia |
+| `COR_DUPLICADA` | erro | 432 | portado | lib/guide/validate | tests/guide/oracle-defects-structure.test.ts | Cor repetida entre raias do mesmo diagrama (inclui bibliotecas chamadas) |
 | `PESOS` | erro | 464 | portado | 190 | tests/flows/flows.test.ts:14 (documento real sem erros), sem teste dedicado | Pesos do Decisor de um objetivo que não somam 1 |
 | `REF_QUEBRADA` | erro | 480, 556, 566, 673 | portado | lib/guide/validate/dados.ts, rules.ts | tests/guide/oracle-defects-refs.test.ts | Referência a id inexistente em raias, nós, células, playbooks, `fontes[].itens`, `fonte_ids`, ligações, dados, papéis e RACI. Os casos de `quando` cobrem só a variável ausente; o resto fica com `CONDICAO_INVALIDA` (passo 3) |
-| `LIGACAO_INCONSISTENTE` | erro | 575, 589 | ausente | - | - | Ligação para a própria demanda, ou para nó de demanda diferente da demanda de destino |
+| `LIGACAO_INCONSISTENTE` | erro | 575, 589 | portado | lib/guide/validate | tests/guide/oracle-defects-structure.test.ts | Ligação para a própria demanda, ou para nó de demanda diferente da demanda de destino |
 | `CONDICAO_INVALIDA` | erro | 619 | ausente | - | - | Condição `quando` malformada (operador ou variável) |
 | `VARIAVEL_ENUM_SEM_VALORES` | erro | 669 | ausente | - | - | Variável `enum` sem `valores` |
 | `SUBTAREFA_EM_NAO_TAREFA` | erro | 702 | ausente | - | - | Subtarefas em nó que não é `tarefa` |
