@@ -12,9 +12,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "types": ["node"],
-    "baseUrl": ".",
     "paths": {
-      "@lib/*": ["lib/*"]
+      "@lib/*": ["./lib/*"]
     }
   },
   "include": ["lib", "tools", "tests", "config", "private", "vitest.config.ts", "site/src/i18n", "site/src/render"],

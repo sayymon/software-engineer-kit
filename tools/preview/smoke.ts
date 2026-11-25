@@ -136,7 +136,7 @@ async function main() {
   const repo = new FsContentRepository(join(root, 'content'));
   const port = await freePort();
   const origin = `http://127.0.0.1:${port}`;
-  const server = spawn(process.execPath, [join(root, 'node_modules/astro/astro.js'), 'preview', '--root', join(root, 'site'), '--host', '127.0.0.1', '--port', String(port)], {
+  const server = spawn(process.execPath, [join(root, 'node_modules/astro/bin/astro.mjs'), 'preview', '--root', join(root, 'site'), '--host', '127.0.0.1', '--port', String(port)], {
     cwd: root,
     env: { ...process.env, KIT_ROOT: root, KIT_OUT_DIR: `./${outName}`, ASTRO_TELEMETRY_DISABLED: '1' },
     stdio: ['ignore', 'pipe', 'pipe'],

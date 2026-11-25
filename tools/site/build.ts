@@ -26,7 +26,7 @@ function run(label: string, bin: string, args: string[]): void {
   }
 }
 
-run('astro build', process.execPath, [join(root, 'node_modules/astro/astro.js'), 'build', '--root', join(root, 'site')]);
+run('astro build', process.execPath, [join(root, 'node_modules/astro/bin/astro.mjs'), 'build', '--root', join(root, 'site')]);
 if (!existsSync(join(outDir, 'index.html'))) {
   console.error(`build produced no ${outName}/index.html`);
   process.exit(1);

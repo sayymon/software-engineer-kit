@@ -6,7 +6,7 @@ English: [README.en.md](README.en.md). Visão geral: [README.md](README.md).
 Um lugar para consultar e usar como guia nas decisões de engenharia de software e de IA. Reúne ferramentas, fundamentos (padrões, estruturas de dados, algoritmos e licenças), stacks, guias práticos, jornadas, competências e certificações, com navegação entre os termos relacionados. O conteúdo é escrito em português (pt-BR) e recebe uma camada em inglês (`content/en`) ao longo do tempo. O site é estático (Astro, com busca Pagefind).
 
 ## Como rodar localmente
-Requisito: Node 22 ou superior.
+Requisito: Node 22.23.4 ou superior (exigência do Astro 7).
 ```bash
 npm ci
 npm run validate     # schema, ids, termos, licenças

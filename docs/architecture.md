@@ -19,9 +19,9 @@ The kit is a static site built from Markdown and YAML content, with shared TypeS
 
 ## Decisions
 
-- **Astro 5, static output.** Islands (`client:only`, `client:visible`) keep JavaScript off content pages and give Wave B a place for three.js and 3d-force-graph. Pagefind builds an offline search index after `astro build`.
+- **Astro 7, static output.** Islands (`client:only`, `client:visible`) keep JavaScript off content pages and give Wave B a place for three.js and 3d-force-graph. Pagefind builds an offline search index after `astro build`.
 - **Own Markdown pipeline.** `unified` with `remark-parse`, `remark-gfm` and a wikilink plugin. Astro content collections cannot express the pt-BR source plus overlay merge or build-time resolution against a global id index.
-- **Node and TypeScript only.** One toolchain for CI, the schema, the validators and the site. Python is not part of the build.
+- **Node and TypeScript only.** (Node 22.23.4 or newer, TypeScript 7.) One toolchain for CI, the schema, the validators and the site. Python is not part of the build.
 - **Single root package.** One `package.json`, one lockfile, no workspaces. `lib/` is imported through the `@lib/*` path alias.
 - **Backend readiness.** The site reads content through `lib/content` (`ContentRepository`, filesystem today). The build also emits static JSON (`/{locale}/api/index.json`, `graph.json`, `flows/<id>.json`). A later backend can replace those endpoints, and ids stay the keys for progress, accounts and retrieval.
 
