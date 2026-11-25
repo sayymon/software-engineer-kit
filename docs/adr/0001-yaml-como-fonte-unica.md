@@ -15,7 +15,7 @@ A migração anterior convertia o guia em arquivos de catálogo do kit (`content
 2. O kit deriva uma entidade tipada para cada item do guia na carga (`lib/guide/`). Cada id do guia tem exatamente uma entidade, com página, relações bidirecionais e entrada no grafo. O conteúdo escrito não é copiado para outro arquivo.
 3. A toolchain é Node e TypeScript. O Python existe só como oráculo temporário em `tools/guide-oracle/`, usado para provar que o loader, o validador e o gerador de Mermaid em TypeScript produzem os mesmos resultados.
 4. Um único schema, `schema/flows.schema.json` (o schema atual do guia, com outro `$id`), serve ao Ajv em TypeScript e ao validador Python.
-5. O Decisor do kit (`lib/decisor.ts` com `content/data/matriz.json`) não muda nesta etapa. A comparação com o modelo do guia está em [decisor-conflict.md](../decisor-conflict.md).
+5. O Decisor do kit não mudava na etapa 1. Depois, `lib/decisor.ts` passou a ler o modelo do guia e `content/data/matriz.json` foi removido. A comparação original está em [decisor-conflict.md](../decisor-conflict.md).
 
 ## Opções consideradas
 

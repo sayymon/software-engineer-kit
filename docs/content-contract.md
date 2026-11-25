@@ -68,7 +68,7 @@ Guide field names that clash with the entity `tipo` are renamed in the derived e
 - Derived ids are appended to `content/ids.lock.json` like any other entity id.
 
 ### Catalog replaces matrix
-The guide decision (Requirement 6 of its spec) replaces the decision matrix with a catalog that has filters by tipo, category, language, use case and company. Until the unified catalog exists (stage 3 of the migration), the demand page keeps the existing matrix table fed by `content/data/matriz.json`. Which Decisor model wins is open: see `docs/decisor-conflict.md`.
+The guide decision (Requirement 6 of its spec) replaces the decision matrix with a catalog that has filters by tipo, category, language, use case and company. Until the unified catalog exists (stage 3 of the migration), the demand page shows the weights table read from the guide block `comum.decisor_construir_comprar_assinar` (`configDoGuia`), with the budget gate `com_dcs_g1` and the financial context. `content/data/matriz.json` no longer exists. See `docs/decisor-conflict.md`.
 
 ### RACI rules
 A node, subtask, question or rite may declare `papel` (responsible), `apoio`, `consultado`, `informado` and, on gateways, `aprova`.

@@ -6,6 +6,7 @@ Uso:
     python dump_doc.py <pasta-do-guia> --fixture    só as colecoes que o gerador Mermaid lê
     cat documento.json | python dump_doc.py --issues [--avisos] [--completude]  lista de Issue da validação em JSON
     cat documento.json | python dump_doc.py --rastreio   rastreio de dados (rastrear, usos, lacunas, descrições) em JSON
+    cat casos.json | python dump_doc.py --decisor   lista de {config, objetivo, notas, contexto} -> lista de {ok: Resultado} ou {erro}
 
 Serve de referência para o teste diferencial tests/guide/oracle-parity.test.ts.
 """
@@ -18,6 +19,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent / "src"))
 
+from guia_decisao.decisor import DecisorError, decidir  # noqa: E402
 from guia_decisao.loader import load_yaml  # noqa: E402
 from guia_decisao.mermaid_gen import gerar_todos  # noqa: E402
 from guia_decisao.paths import GUIA_SCHEMA  # noqa: E402
@@ -84,6 +86,21 @@ def main(argv: list[str]) -> int:
         )
         return 0
 
+    if argv[0] == "--decisor":
+        try:
+            casos = json.load(sys.stdin)
+        except json.JSONDecodeError as exc:
+            print(f"JSON inválido na entrada: linha {exc.lineno}, coluna {exc.colno}: {exc.msg}", file=sys.stderr)
+            return 2
+        saidas = []
+        for caso in casos:
+            try:
+                r = decidir(caso["config"], caso["objetivo"], caso["notas"], caso.get("contexto"))
+                saidas.append({"ok": asdict(r)})
+            except DecisorError as exc:
+                saidas.append({"erro": str(exc)})
+        sys.stdout.write(canonico(saidas))
+        return 0
     doc = load_yaml(Path(argv[0]))
     modo = argv[1] if len(argv) > 1 else ""
     if modo == "--mermaid":

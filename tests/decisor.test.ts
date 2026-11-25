@@ -1,59 +1,48 @@
 // SPDX-License-Identifier: MIT
-import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { CriterioAusente, NotaForaDaEscala, ObjetivoDesconhecido, decidir, type Matriz, type Notas } from '../lib/decisor';
+import { DecisorError, configDoGuia, decidir, type Notas } from '../lib/decisor';
+import { guideDir, loadGuideDoc } from '../lib/guide';
 
-const matriz = JSON.parse(readFileSync(new URL('../content/data/matriz.json', import.meta.url), 'utf8')) as Matriz;
-const flat = (v: number): Notas => Object.fromEntries(matriz.ordem_desempate.map((o) => [o, Object.fromEntries(matriz.criterios.map((c) => [c, v]))]));
+const config = configDoGuia(loadGuideDoc(guideDir(new URL('../content', import.meta.url).pathname)));
+const flat = (v: number): Notas => Object.fromEntries(config.opcoes.map((o) => [o, Object.fromEntries(config.criterios.map((c) => [c, v]))]));
 
-describe('decisor (matriz.json)', () => {
-  it('weights of every goal sum to 1', () => {
-    for (const [goal, w] of Object.entries(matriz.pesos)) {
+describe('decisor (bloco do guia)', () => {
+  it('weights of every goal sum to 1 and cover every criterion', () => {
+    for (const [goal, w] of Object.entries(config.pesos)) {
       expect(Math.abs(Object.values(w).reduce((a, b) => a + b, 0) - 1), goal).toBeLessThan(1e-9);
-      expect(Object.keys(w).sort()).toEqual([...matriz.criterios].sort());
+      expect(Object.keys(w).sort()).toEqual([...config.criterios].sort());
     }
   });
-  it('breaks ties with the fixed order (assinar, comprar, construir)', () => {
-    expect(decidir('cumprir_prazo', flat(3), matriz).opcao).toBe('assinar');
+  it('breaks ties with the guide order (assinar, comprar, construir)', () => {
+    const r = decidir(config, 'cumprir_prazo', flat(3));
+    expect(r.recomendada).toBe('assinar');
+    expect(r.empate).toEqual(['construir', 'comprar', 'assinar']);
+    expect(r.justificativa).toContain('Empate entre construir, comprar, assinar: venceu assinar');
   });
-  it('picks the option with the highest weighted total', () => {
+  it('picks the highest weighted total, rounded to 6 decimals', () => {
     const notas = flat(3);
     notas.construir = { diferenciacao: 5, tempo_ate_valor: 1, custo_total: 3, dependencia_fornecedor: 5, risco: 3 };
-    const r = decidir('diferenciar_produto', notas, matriz);
-    expect(r.opcao).toBe('construir');
-    expect(r.totais.construir).toBeCloseTo(0.4 * 5 + 0.15 * 1 + 0.15 * 3 + 0.15 * 5 + 0.15 * 3, 9);
-    expect(r.contribuicoes.construir.diferenciacao).toBeCloseTo(2, 9);
+    const r = decidir(config, 'diferenciar_produto', notas);
+    expect(r.recomendada).toBe('construir');
+    expect(r.empate).toEqual([]);
+    expect(r.avaliacoes[0].total).toBe(3.8);
+    expect(r.avaliacoes[0].linhas[0]).toEqual({ criterio: 'diferenciacao', nota: 5, peso: 0.4, contribuicao: 2 });
   });
-  it('rejects unknown goals, missing criteria and out of scale notes', () => {
-    expect(() => decidir('inexistente', flat(3), matriz)).toThrow(ObjetivoDesconhecido);
+  it('rejects unknown goals and options, missing or out of scale notes with DecisorError', () => {
+    expect(() => decidir(config, 'inexistente', flat(3))).toThrow(DecisorError);
     const missing = flat(3);
     delete missing.comprar.risco;
-    expect(() => decidir('reduzir_custo', missing, matriz)).toThrow(CriterioAusente);
+    expect(() => decidir(config, 'reduzir_custo', missing)).toThrow("falta a nota do critério 'risco' na opção 'comprar'");
     const high = flat(3);
     high.comprar.risco = 6;
-    expect(() => decidir('reduzir_custo', high, matriz)).toThrow(NotaForaDaEscala);
-    const frac = flat(3);
-    frac.comprar.risco = 2.5;
-    expect(() => decidir('reduzir_custo', frac, matriz)).toThrow(NotaForaDaEscala);
+    expect(() => decidir(config, 'reduzir_custo', high)).toThrow('está fora da escala 1 a 5');
+    expect(() => decidir(config, 'reduzir_custo', { ...flat(3), extra: {} })).toThrow('opções desconhecidas: extra');
   });
-  it('matches the reference results of the decisor for the four goals', () => {
-    const notas: Notas = {
-      assinar: { diferenciacao: 2, tempo_ate_valor: 5, custo_total: 3, dependencia_fornecedor: 2, risco: 4 },
-      comprar: { diferenciacao: 3, tempo_ate_valor: 3, custo_total: 2, dependencia_fornecedor: 3, risco: 3 },
-      construir: { diferenciacao: 5, tempo_ate_valor: 1, custo_total: 4, dependencia_fornecedor: 5, risco: 2 },
-    };
-    // Totals computed once with the reference decisor.py (reference implementation) for the same notes.
-    const expected = {
-      cumprir_prazo: { assinar: 3.8, comprar: 2.8, construir: 2.6 },
-      diferenciar_produto: { assinar: 2.9, comprar: 2.85, construir: 3.8 },
-      reduzir_custo: { assinar: 3.25, comprar: 2.6, construir: 3.4 },
-      validar_hipotese: { assinar: 3.75, comprar: 2.8, construir: 2.65 },
-    };
-    for (const [goal, totals] of Object.entries(expected)) {
-      const r = decidir(goal, notas, matriz);
-      for (const [op, t] of Object.entries(totals)) expect(r.totais[op], `${goal}/${op}`).toBeCloseTo(t, 9);
-    }
-    const winners = { cumprir_prazo: 'assinar', diferenciar_produto: 'construir', reduzir_custo: 'construir', validar_hipotese: 'assinar' };
-    for (const [goal, winner] of Object.entries(winners)) expect(decidir(goal, notas, matriz).opcao, goal).toBe(winner);
+  it('financial context changes only the justification', () => {
+    const ctx = { custos: { construir: { curto: 10, longo: 'alto' } }, roi: 1.5, custo_de_nao_fazer: 'perda de prazo' };
+    const a = decidir(config, 'reduzir_custo', flat(3));
+    const b = decidir(config, 'reduzir_custo', flat(3), ctx);
+    expect({ ...b, justificativa: '' }).toEqual({ ...a, justificativa: '' });
+    expect(b.justificativa).toContain('Contexto: custo de construir: curto prazo 10, longo prazo alto; custo de não fazer: perda de prazo; ROI esperado: 1.5.');
   });
 });

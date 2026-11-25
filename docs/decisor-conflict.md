@@ -1,5 +1,7 @@
 # Decisor: dois modelos no mesmo kit
 
+> Registro histórico: `content/data/matriz.json` foi removido e `lib/decisor.ts` e `matrizTable` leem o guia (fase 8 da spec `porte-guia-typescript`).
+
 A etapa 1 da migração do guia não altera o Decisor do kit. `lib/decisor.ts`, `content/data/matriz.json`, `tests/decisor.test.ts` e a tabela `matrizTable` de `site/src/render/flow.ts` seguem como estavam. O modelo do guia chega ao kit apenas como dado, dentro do envelope `comum` (`decisor_construir_comprar_assinar`). Este documento compara os dois modelos para que a escolha seja feita com evidência.
 
 ## Os dois modelos
