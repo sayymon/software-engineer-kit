@@ -1,0 +1,86 @@
+flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"]) ~~~ z_LEG_r0["<b>Avaliação da dívida</b><br/>raia chamada"] ~~~ z_LEG_r1["<b>Plano de refatoração segura</b><br/>raia chamada"] ~~~ z_LEG_r2["<b>Prontidão (Definition of Ready)</b><br/>raia chamada"] ~~~ z_LEG_r3["<b>Execução por papéis</b><br/>raia chamada"] ~~~ z_LEG_r4["<b>Publicação em ambiente de testes</b><br/>raia chamada"] ~~~ z_LEG_r5["<b>Testes automatizados e regressão</b><br/>raia chamada"] ~~~ z_LEG_r6["<b>Review humano</b><br/>raia chamada"] ~~~ z_LEG_r7["<b>Implantação</b><br/>raia chamada"] ~~~ z_LEG_r8["<b>Validação em produção e monitoramento</b><br/>raia chamada"]
+  end
+  subgraph z_SG_dvt_orq["<b>Orquestração: dívida técnica e refatoração</b>"]
+    direction LR
+    dvt_orq_s0(["<small><b>dvt_orq_s0</b></small><br/>Dívida percebida no código ou na arquitetura"])
+    dvt_orq_c1[["<small><b>dvt_orq_c1</b></small><br/>Avaliação da dívida"]]
+    dvt_orq_c2[["<small><b>dvt_orq_c2</b></small><br/>Plano de refatoração segura"]]
+    dvt_orq_e2(["<small><b>dvt_orq_e2</b></small><br/>Dívida aceita e registrada no backlog<br/><i>retorno: aceitar_a_divida</i>"])
+    dvt_orq_c3[["<small><b>dvt_orq_c3</b></small><br/>Verificar a prontidão (Definition of Ready)"]]
+    dvt_orq_c4[["<small><b>dvt_orq_c4</b></small><br/>Execução das tarefas"]]
+    dvt_orq_c5[["<small><b>dvt_orq_c5</b></small><br/>Publicar em ambiente de testes"]]
+    dvt_orq_c6[["<small><b>dvt_orq_c6</b></small><br/>Testes automatizados"]]
+    dvt_orq_c7[["<small><b>dvt_orq_c7</b></small><br/>Review humano"]]
+    dvt_orq_c8[["<small><b>dvt_orq_c8</b></small><br/>Implantação"]]
+    dvt_orq_c9[["<small><b>dvt_orq_c9</b></small><br/>Validação em produção e monitoramento"]]
+    dvt_orq_e1(["<small><b>dvt_orq_e1</b></small><br/>Dívida paga e ganho medido<br/><i>retorno: divida_paga</i>"])
+    dvt_orq_e3(["<small><b>dvt_orq_e3</b></small><br/>Incidente acionado em produção<br/><i>retorno: incidente_acionado</i>"])
+  end
+  dvt_orq_s0 --> dvt_orq_c1
+  dvt_orq_c1 -->|"pagar_agora"| dvt_orq_c2
+  dvt_orq_c1 -->|"aceitar_a_divida"| dvt_orq_e2
+  dvt_orq_c2 -->|"plano_pronto"| dvt_orq_c3
+  dvt_orq_c3 -->|"pronto_para_iniciar"| dvt_orq_c4
+  dvt_orq_c4 -->|"execucao_integrada"| dvt_orq_c5
+  dvt_orq_c5 -->|"publicado"| dvt_orq_c6
+  dvt_orq_c5 -->|"falha_na_publicacao"| dvt_orq_c4
+  dvt_orq_c6 -->|"testes_aprovados"| dvt_orq_c7
+  dvt_orq_c6 -->|"testes_reprovados"| dvt_orq_c4
+  dvt_orq_c7 -->|"aprovado_pelo_humano"| dvt_orq_c8
+  dvt_orq_c7 -->|"ajustes_solicitados"| dvt_orq_c4
+  dvt_orq_c8 -->|"implantado"| dvt_orq_c9
+  dvt_orq_c8 -->|"implantacao_revertida"| dvt_orq_c4
+  dvt_orq_c9 -->|"feature_validada"| dvt_orq_e1
+  dvt_orq_c9 -->|"incidente_acionado"| dvt_orq_e3
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#332288,stroke:#1F1452,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#117733,stroke:#0A471F,stroke-width:1px,color:#FFFFFF
+  classDef z_R_3 fill:#DDCC77,stroke:#857A47,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#009E73,stroke:#005F45,stroke-width:1px,color:#000000
+  classDef z_R_5 fill:#BBCC33,stroke:#707A1F,stroke-width:1px,color:#000000
+  classDef z_R_6 fill:#D55E00,stroke:#803800,stroke-width:1px,color:#000000
+  classDef z_R_7 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_R_8 fill:#999933,stroke:#5C5C1F,stroke-width:1px,color:#000000
+  classDef z_R_9 fill:#77AADD,stroke:#476685,stroke-width:1px,color:#000000
+  classDef z_R_10 fill:#882255,stroke:#521433,stroke-width:1px,color:#FFFFFF
+  classDef z_R_11 fill:#E69F00,stroke:#8A5F00,stroke-width:1px,color:#000000
+  classDef z_R_12 fill:#6699CC,stroke:#3D5C7A,stroke-width:1px,color:#000000
+  classDef z_C_0_1 fill:#332288,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_2 fill:#117733,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_3 fill:#DDCC77,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_4 fill:#009E73,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_5 fill:#BBCC33,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_6 fill:#D55E00,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_7 fill:#56B4E9,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_8 fill:#999933,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_9 fill:#77AADD,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  class z_LEG_r0 z_R_1
+  class z_LEG_r1 z_R_2
+  class z_LEG_r2 z_R_3
+  class z_LEG_r3 z_R_4
+  class z_LEG_r4 z_R_5
+  class z_LEG_r5 z_R_6
+  class z_LEG_r6 z_R_7
+  class z_LEG_r7 z_R_8
+  class z_LEG_r8 z_R_9
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
+  class dvt_orq_c1 z_C_0_1
+  class dvt_orq_c2 z_C_0_2
+  class dvt_orq_c3 z_C_0_3
+  class dvt_orq_c4 z_C_0_4
+  class dvt_orq_c5 z_C_0_5
+  class dvt_orq_c6 z_C_0_6
+  class dvt_orq_c7 z_C_0_7
+  class dvt_orq_c8 z_C_0_8
+  class dvt_orq_c9 z_C_0_9
+  class dvt_orq_s0,dvt_orq_e2,dvt_orq_e1,dvt_orq_e3 z_R_0
+  style z_SG_dvt_orq fill:#E7ECEE,stroke:#607D8B,stroke-width:3px,color:#000000

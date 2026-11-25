@@ -1,4 +1,8 @@
 flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"]) ~~~ z_LEG_st("<b>st</b>: subtarefa") ~~~ z_LEG_sc("<b>◆ st</b>: subtarefa condicional<br/>borda tracejada")
+  end
   subgraph z_SG_bug_orq["<b>Orquestração do bug</b>"]
     direction LR
     bug_orq_s0(["<small><b>bug_orq_s0</b></small><br/>Bug reportado"])
@@ -127,13 +131,14 @@ flowchart LR
       direction LR
       com_pub_t1["<small><b>com_pub_t1</b></small><br/>Versionar conforme a estratégia do time"]
       com_pub_t1_st1("<small><b>com_pub_t1_st1</b></small><br/>Fazer o merge ou gerar a versão pela estratégia de branches<br/><i>Dev</i>")
-      com_pub_t1_st2("<small><b>com_pub_t1_st2</b></small><br/>Gerar o artefato de build pelo pipeline<br/><i>Engenharia de plataforma</i>")
+      com_pub_t1_st2("<small><b>com_pub_t1_st2</b></small><br/>Gerar o artefato de build pelo pipeline<br/><i>DevOps</i>")
     end
     subgraph z_TS_com_pub_t2["<b>Implantar no ambiente de testes</b>"]
       direction LR
       com_pub_t2["<small><b>com_pub_t2</b></small><br/>Implantar no ambiente de testes"]
       com_pub_t2_st1("<small><b>com_pub_t2_st1</b></small><br/>Publicar no staging de desenvolvimento<br/><i>SRE</i>")
       com_pub_t2_st2("<small><b>com_pub_t2_st2</b></small><br/>Conferir saúde e configuração do ambiente<br/><i>SRE</i>")
+      com_pub_t2_st3("<small><b>com_pub_t2_st3</b></small><br/>◆ Publicar também no ambiente de QA<br/><i>DevOps</i>")
     end
     com_pub_g1{"<small><b>com_pub_g1</b></small><br/>O ambiente subiu<br/>saudável?"}
     com_pub_e1(["<small><b>com_pub_e1</b></small><br/>Publicada no ambiente de testes<br/><i>retorno: publicado</i>"])
@@ -276,7 +281,7 @@ flowchart LR
       com_rev_t1["<small><b>com_rev_t1</b></small><br/>Review humano: arquitetura, edge cases, segurança"]
       com_rev_t1_st1("<small><b>com_rev_t1_st1</b></small><br/>Revisar a arquitetura e a aderência aos ADRs<br/><i>Arquiteto de Software</i>")
       com_rev_t1_st2("<small><b>com_rev_t1_st2</b></small><br/>Revisar os casos de borda e o que os agentes geraram<br/><i>Tech Lead</i>")
-      com_rev_t1_st3("<small><b>com_rev_t1_st3</b></small><br/>Revisar segurança e dados sensíveis<br/><i>DevSecOps</i>")
+      com_rev_t1_st3("<small><b>com_rev_t1_st3</b></small><br/>Revisar segurança e dados sensíveis<br/><i>Segurança</i>")
     end
     com_rev_g1{"<small><b>com_rev_g1</b></small><br/>Aprovada no review?"}
     com_rev_e1(["<small><b>com_rev_e1</b></small><br/>Entrega aprovada pelo humano<br/><i>retorno: aprovado_pelo_humano</i>"])
@@ -376,6 +381,7 @@ flowchart LR
   com_pub_t1_st1 --> com_pub_t1_st2
   com_pub_t2 --> com_pub_t2_st1
   com_pub_t2_st1 --> com_pub_t2_st2
+  com_pub_t2_st2 --> com_pub_t2_st3
   bug_ent_t2 --> bug_ent_t2_st1
   bug_ent_t2_st1 --> bug_ent_t2_st2
   bug_ent_t3 --> bug_ent_t3_st1
@@ -461,7 +467,7 @@ flowchart LR
   bug_cor_t2_st5 --> bug_cor_e1
   com_pub_s0 --> com_pub_t1
   com_pub_t1_st2 --> com_pub_t2
-  com_pub_t2_st2 --> com_pub_g1
+  com_pub_t2_st3 --> com_pub_g1
   com_pub_g1 -->|"sim"| com_pub_e1
   com_pub_g1 -->|"não"| com_pub_e2
   bug_ent_s0 --> bug_ent_c1
@@ -584,6 +590,7 @@ flowchart LR
   classDef z_S_11 fill:#C2D9F0,stroke:#476685,stroke-width:1px,color:#000000,font-size:12px
   classDef z_SC_1 fill:#8CC0DC,stroke:#00446B,stroke-width:2px,color:#000000,font-size:12px,stroke-dasharray:4 3
   classDef z_SC_3 fill:#8CD3C0,stroke:#005F45,stroke-width:2px,color:#000000,font-size:12px,stroke-dasharray:4 3
+  classDef z_SC_4 fill:#E0E8A3,stroke:#707A1F,stroke-width:2px,color:#000000,font-size:12px,stroke-dasharray:4 3
   classDef z_SC_6 fill:#ECB78C,stroke:#803800,stroke-width:2px,color:#000000,font-size:12px,stroke-dasharray:4 3
   classDef z_SC_8 fill:#F8F3AA,stroke:#908928,stroke-width:2px,color:#000000,font-size:12px,stroke-dasharray:4 3
   classDef z_SC_10 fill:#D1D1A3,stroke:#5C5C1F,stroke-width:2px,color:#000000,font-size:12px,stroke-dasharray:4 3
@@ -601,6 +608,14 @@ flowchart LR
   classDef z_C_5_11 fill:#77AADD,stroke:#117733,stroke-width:4px,color:#000000
   classDef gw font-size:11px
   classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  class z_LEG_st leg
+  classDef legcond fill:#FFFFFF,stroke:#333333,stroke-width:2px,stroke-dasharray:4 3,color:#000000
+  class z_LEG_sc legcond
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
   class bug_orq_c1 z_C_0_1
   class bug_orq_c2 z_C_0_2
   class bug_orq_c3 z_C_0_3
@@ -626,6 +641,7 @@ flowchart LR
   class com_mon_s0,com_mon_t1,com_mon_g1,com_mon_g2,com_mon_t2,com_mon_t3,com_mon_e2,com_mon_e1 z_R_11
   class bug_rep_t1_st5 z_SC_1
   class bug_cor_t1_st2,bug_cor_t2_st2,bug_cor_t2_st3,bug_cor_t2_st4 z_SC_3
+  class com_pub_t2_st3 z_SC_4
   class com_val_t1_st3,com_val_t1_st4 z_SC_6
   class com_e2e_t1_st3 z_SC_8
   class com_etg_t3_st4 z_SC_10

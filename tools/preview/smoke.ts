@@ -7,7 +7,7 @@ import { spawn } from 'node:child_process';
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { createServer } from 'node:net';
 import { dirname, join, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { FsContentRepository, LOCALES, type Locale } from '../../lib/content';
 import { SiteIndex } from '../../lib/content/site';
 
@@ -97,6 +97,14 @@ function probes(index: SiteIndex): Probe[] {
   const cert = first('certificacao');
   const flow = first('demanda', (id) => id === 'feature');
   const category = first('categoria');
+  const rito = first('rito');
+  const papel = first('papel');
+  const artefato = first('artefato');
+  const tipoArtefato = first('tipo-de-artefato');
+  const tecnica = first('tecnica', (id) => id === 'tec_tco');
+  const tarefaComSub = index.ofTipo('tarefa').sort((a, b) => a.id.localeCompare(b.id)).find((p) => index.anchorsOf(p.id).some((a) => a.tipo === 'subtarefa'));
+  if (!tarefaComSub) throw new Error('no tarefa with an anchored subtarefa to probe');
+  const subtarefa = index.anchorsOf(tarefaComSub.id).find((a) => a.tipo === 'subtarefa')!;
   const list: Probe[] = [
     { kind: 'home', route: '', expect: ['<h1'] },
     { kind: 'tool', route: tool.route, expect: [`<h1>`, 'data-tipo="ferramenta"'] },
@@ -107,6 +115,15 @@ function probes(index: SiteIndex): Probe[] {
     { kind: 'guide', route: guide.route, expect: ['data-island="mermaid"', 'vendor/mermaid/mermaid.min.js', 'mermaid-source'] },
     { kind: 'certification', route: cert.route, expect: ['data-tipo="certificacao"'] },
     { kind: 'flow', route: flow.route, expect: ['data-island="mermaid"', 'class="matrix"'] },
+    { kind: 'flow seguranca', route: 'flows/seguranca', expect: ['data-island="mermaid"', 'data-tipo="demanda"'] },
+    { kind: 'flow spike', route: 'flows/spike', expect: ['data-island="mermaid"', 'data-tipo="demanda"'] },
+    { kind: 'rito', route: rito.route, expect: ['data-tipo="rito"'] },
+    { kind: 'papel', route: papel.route, expect: ['data-tipo="papel"'] },
+    { kind: 'artefato', route: artefato.route, expect: ['data-tipo="artefato"'] },
+    { kind: 'tarefa with anchored subtarefa', route: tarefaComSub.route, expect: ['data-tipo="tarefa"', `id="${subtarefa.id}"`] },
+    { kind: 'tipo de artefato', route: tipoArtefato.route, expect: ['data-tipo="tipo-de-artefato"'] },
+    { kind: 'technique under fundamentals', route: tecnica.route, expect: ['data-tipo="tecnica"', 'data-layer="fundamentals"'] },
+    { kind: 'techniques section', route: 'fundamentals/techniques', expect: [`${tecnica.route}/`] },
     { kind: 'journeys', route: 'journeys', expect: ['<h1'] },
     { kind: 'search', route: 'search', expect: ['id="search-form"'] },
     { kind: 'licenses hub', route: 'fundamentals/licenses', expect: ['class="notice"', ...index.ofTipo('licenca').map((p) => `${p.route}/`)] },
@@ -123,6 +140,16 @@ function probes(index: SiteIndex): Probe[] {
   return list;
 }
 
+/** Runs a Pagefind query in Node against the served index and returns the result URLs. */
+async function searchPagefind(origin: string, locale: Locale, query: string): Promise<string[]> {
+  const pf = await import(pathToFileURL(join(outDir, 'pagefind', 'pagefind.js')).href);
+  await pf.options({ basePath: `${origin}${base}/pagefind/`, language: locale === 'en' ? 'en' : 'pt-br' });
+  const res = await pf.search(query);
+  const urls: string[] = [];
+  for (const r of res.results.slice(0, 20)) urls.push((await r.data()).url as string);
+  await pf.destroy?.();
+  return urls;
+}
 async function main() {
   if (!existsSync(join(outDir, 'index.html'))) {
     console.error(`no build at ${outDir}. Run npm run build first.`);
@@ -186,7 +213,7 @@ async function main() {
           if (asset.status !== 200 || asset.text.length < 100000) fail(`${locale} ${p.kind}: mermaid asset not served (status ${asset.status})`);
         }
       }
-      for (const api of ['api/index.json', 'api/graph.json', 'api/flows/feature.json']) {
+      for (const api of ['api/index.json', 'api/graph.json', ...index.ofTipo('demanda').filter((p) => p.entity.data.biblioteca !== true).map((p) => `api/flows/${p.id}.json`)]) {
         const { status, text } = await get(origin, `${base}/${locale}/${api}`);
         try {
           const json = JSON.parse(text);
@@ -197,6 +224,10 @@ async function main() {
           fail(`${locale} ${api}: not JSON (status ${status})`);
         }
       }
+      const rito = index.ofTipo('rito').sort((a, b) => a.id.localeCompare(b.id))[0];
+      const found = await searchPagefind(origin, locale as Locale, rito.nome);
+      if (found.some((u) => u.includes(`/${rito.route}/`))) pass(`${locale} pagefind finds rito "${rito.nome}"`);
+      else fail(`${locale} pagefind query "${rito.nome}" did not return ${rito.route} (got ${found.slice(0, 5).join(', ')})`);
       const entry = await get(origin, `${base}/pagefind/pagefind-entry.json`);
       if (entry.status !== 200) fail(`pagefind entry missing (status ${entry.status})`);
       else {

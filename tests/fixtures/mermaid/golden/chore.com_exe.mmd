@@ -1,0 +1,60 @@
+flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"]) ~~~ z_LEG_r0["<b>Execução pelas pessoas por papel</b><br/>raia chamada"] ~~~ z_LEG_r1["<b>Execução pelos agentes por papel</b><br/>raia chamada"] ~~~ z_LEG_r2["<b>Melhoria contínua dos agentes</b><br/>raia chamada"]
+  end
+  subgraph z_SG_com_exe["<b>Execução por papéis</b>"]
+    direction LR
+    com_exe_s0(["<small><b>com_exe_s0</b></small><br/>Planos prontos, executar por papel"])
+    com_exe_g1{"<small><b>com_exe_g1</b></small><br/>Há decisão humana<br/>que bloqueia os<br/>agentes?"}
+    com_exe_c1[["<small><b>com_exe_c1</b></small><br/>Pessoas decidem o que desbloqueia os agentes"]]
+    com_exe_g2{"<small><b>com_exe_g2</b></small><br/>Há tarefas para<br/>agentes?"}
+    com_exe_c2[["<small><b>com_exe_c2</b></small><br/>Agentes executam por papel, em paralelo"]]
+    com_exe_c4[["<small><b>com_exe_c4</b></small><br/>Pessoas executam as tarefas do papel"]]
+    com_exe_c3[["<small><b>com_exe_c3</b></small><br/>Revisar e melhorar o agente que desviou"]]
+    com_exe_g3{"<small><b>com_exe_g3</b></small><br/>Restam tarefas de<br/>pessoas?"}
+    com_exe_t1["<small><b>com_exe_t1</b></small><br/>Revisar os PRs e integrar as entregas<br/><i>▸ 5 subtarefas</i>"]
+    com_exe_e1(["<small><b>com_exe_e1</b></small><br/>Execução integrada e pronta para validar<br/><i>retorno: execucao_integrada</i>"])
+  end
+  com_exe_s0 --> com_exe_g1
+  com_exe_g1 -->|"sim"| com_exe_c1
+  com_exe_g1 -->|"não"| com_exe_g2
+  com_exe_c1 -->|"execucao_humana_concluida"| com_exe_g2
+  com_exe_g2 -->|"sim"| com_exe_c2
+  com_exe_g2 -->|"não, só pessoas"| com_exe_c4
+  com_exe_c2 -->|"entrega_gerada"| com_exe_g3
+  com_exe_c2 -->|"desvio_do_agente"| com_exe_c3
+  com_exe_c4 -->|"execucao_humana_concluida"| com_exe_t1
+  com_exe_c3 -->|"agente_ajustado"| com_exe_c2
+  com_exe_c3 -->|"assumir_por_pessoa"| com_exe_c4
+  com_exe_g3 -->|"sim"| com_exe_c4
+  com_exe_g3 -->|"não"| com_exe_t1
+  com_exe_t1 --> com_exe_e1
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#332288,stroke:#1F1452,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#009E73,stroke:#005F45,stroke-width:1px,color:#000000
+  classDef z_R_3 fill:#D55E00,stroke:#803800,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_R_5 fill:#999933,stroke:#5C5C1F,stroke-width:1px,color:#000000
+  classDef z_R_6 fill:#882255,stroke:#521433,stroke-width:1px,color:#FFFFFF
+  classDef z_R_7 fill:#E69F00,stroke:#8A5F00,stroke-width:1px,color:#000000
+  classDef z_R_8 fill:#6699CC,stroke:#3D5C7A,stroke-width:1px,color:#000000
+  classDef z_C_2_6 fill:#882255,stroke:#009E73,stroke-width:4px,color:#FFFFFF
+  classDef z_C_2_7 fill:#E69F00,stroke:#009E73,stroke-width:4px,color:#000000
+  classDef z_C_2_8 fill:#6699CC,stroke:#009E73,stroke-width:4px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  class z_LEG_r0 z_R_6
+  class z_LEG_r1 z_R_7
+  class z_LEG_r2 z_R_8
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
+  class com_exe_c1,com_exe_c4 z_C_2_6
+  class com_exe_c2 z_C_2_7
+  class com_exe_c3 z_C_2_8
+  class com_exe_s0,com_exe_g1,com_exe_g2,com_exe_g3,com_exe_t1,com_exe_e1 z_R_2
+  class com_exe_g1,com_exe_g2,com_exe_g3 gw
+  style z_SG_com_exe fill:#D9F0EA,stroke:#009E73,stroke-width:3px,color:#000000

@@ -1,0 +1,339 @@
+# Demanda: Teste e qualidade. Esqueleto (onda 2): orquestradora, raias próprias e raias comuns. Status rascunho.
+demandas:
+  - id: teste_qa
+    nome: Teste e qualidade
+    sigla: tqa
+    publico: false
+artefatos:
+  - id: mapa_de_cobertura
+    nome: Mapa de cobertura
+    descricao: O que não tem teste, por nível da pirâmide, e o histórico de falhas
+    tipo: documento
+    subtipo: analise
+    exemplo: Pagamentos sem teste de contrato; 60% das falhas do semestre vieram do cálculo de frete sem teste de integração
+    status: rascunho
+    publico: false
+  - id: estrategia_de_testes
+    nome: Estratégia de testes
+    descricao: Lista priorizada de testes a criar, com o nível de cada um
+    tipo: documento
+    subtipo: plano
+    exemplo: 'Prioridade 1: contrato com o gateway de pagamento; prioridade 2: integração do frete; prioridade 3: E2E do checkout'
+    status: rascunho
+    publico: false
+raias:
+  - id: tqa_orq
+    nome: 'Orquestração: teste e qualidade'
+    demanda: teste_qa
+    responsabilidade: Conduzir a demanda de teste e qualidade do início ao fim, delegando cada etapa a uma raia
+    cor: '#607D8B'
+    orquestradora: true
+    status: rascunho
+    publico: false
+  - id: tqa_est
+    nome: Estratégia de testes
+    demanda: teste_qa
+    responsabilidade: Mapear as lacunas de cobertura e priorizar pelo risco
+    cor: '#332288'
+    status: rascunho
+    publico: false
+decisoes:
+  - id: tqa_est_s0
+    raia: tqa_est
+    tipo: inicio
+    rotulo: 'Iniciar: estratégia de testes'
+    condicao: ''
+    proximo:
+      - para: tqa_est_t1
+        condicao: ''
+    estado: {}
+    playbook: pb_tqa_est_s0
+    status: rascunho
+    publico: false
+  - id: tqa_est_t1
+    raia: tqa_est
+    tipo: tarefa
+    rotulo: Mapear as lacunas de cobertura
+    condicao: ''
+    proximo:
+      - para: tqa_est_t2
+        condicao: ''
+    estado: {}
+    saidas:
+      - mapa_de_cobertura
+    papel: qa
+    apoio: [dev]
+    playbook: pb_tqa_est_t1
+    status: rascunho
+    publico: false
+  - id: tqa_est_t2
+    raia: tqa_est
+    tipo: tarefa
+    rotulo: Priorizar pelo risco e escolher os níveis de teste
+    condicao: ''
+    proximo:
+      - para: tqa_est_e1
+        condicao: ''
+    estado: {}
+    entradas:
+      - mapa_de_cobertura
+    saidas:
+      - estrategia_de_testes
+    papel: qa
+    apoio: [tech_lead, pm]
+    playbook: pb_tqa_est_t2
+    status: rascunho
+    publico: false
+  - id: tqa_est_e1
+    raia: tqa_est
+    tipo: fim
+    retorno: estrategia_definida
+    rotulo: Estratégia definida
+    condicao: ''
+    proximo: []
+    estado: {}
+    saidas:
+      - estrategia_de_testes
+    playbook: pb_tqa_est_e1
+    status: rascunho
+    publico: false
+  - id: tqa_orq_s0
+    raia: tqa_orq
+    tipo: inicio
+    rotulo: Lacuna de qualidade percebida
+    condicao: ''
+    proximo:
+      - para: tqa_orq_c1
+        condicao: ''
+    estado: {}
+    playbook: pb_tqa_orq_s0
+    status: rascunho
+    publico: false
+  - id: tqa_orq_c1
+    raia: tqa_orq
+    tipo: chamada
+    raia_chamada: tqa_est
+    rotulo: Estratégia de testes
+    condicao: ''
+    proximo:
+      - para: tqa_orq_c2
+        condicao: estrategia_definida
+    estado: {}
+    saidas:
+      - estrategia_de_testes
+    playbook: pb_tqa_orq_c1
+    status: rascunho
+    publico: false
+  - id: tqa_orq_c2
+    raia: tqa_orq
+    tipo: chamada
+    raia_chamada: com_exe
+    rotulo: Execução das tarefas
+    condicao: ''
+    proximo:
+      - para: tqa_orq_c3
+        condicao: execucao_integrada
+    estado: {}
+    entradas:
+      - estrategia_de_testes
+    playbook: pb_tqa_orq_c2
+    status: rascunho
+    publico: false
+  - id: tqa_orq_c3
+    raia: tqa_orq
+    tipo: chamada
+    raia_chamada: com_val
+    rotulo: Testes automatizados
+    condicao: ''
+    proximo:
+      - para: tqa_orq_c4
+        condicao: testes_aprovados
+      - para: tqa_orq_c2
+        condicao: testes_reprovados
+    estado: {}
+    playbook: pb_tqa_orq_c3
+    status: rascunho
+    publico: false
+  - id: tqa_orq_c4
+    raia: tqa_orq
+    tipo: chamada
+    raia_chamada: com_e2e
+    rotulo: Testes de ponta a ponta
+    condicao: ''
+    proximo:
+      - para: tqa_orq_c5
+        condicao: aprovado
+      - para: tqa_orq_c2
+        condicao: reprovado
+      - para: tqa_orq_c5
+        condicao: nao_aplicavel
+    estado: {}
+    playbook: pb_tqa_orq_c4
+    status: rascunho
+    publico: false
+  - id: tqa_orq_c5
+    raia: tqa_orq
+    tipo: chamada
+    raia_chamada: com_prf
+    rotulo: Testes de performance
+    condicao: ''
+    proximo:
+      - para: tqa_orq_c6
+        condicao: aprovado
+      - para: tqa_orq_c2
+        condicao: reprovado
+      - para: tqa_orq_c6
+        condicao: nao_aplicavel
+    estado: {}
+    playbook: pb_tqa_orq_c5
+    status: rascunho
+    publico: false
+  - id: tqa_orq_c6
+    raia: tqa_orq
+    tipo: chamada
+    raia_chamada: com_rev
+    rotulo: Review humano
+    condicao: ''
+    proximo:
+      - para: tqa_orq_e1
+        condicao: aprovado_pelo_humano
+      - para: tqa_orq_c2
+        condicao: ajustes_solicitados
+    estado: {}
+    playbook: pb_tqa_orq_c6
+    status: rascunho
+    publico: false
+  - id: tqa_orq_e1
+    raia: tqa_orq
+    tipo: fim
+    retorno: cobertura_ampliada
+    rotulo: Cobertura ampliada nas áreas de risco
+    condicao: ''
+    proximo: []
+    estado: {}
+    playbook: pb_tqa_orq_e1
+    status: rascunho
+    publico: false
+playbooks:
+  - id: pb_tqa_est_s0
+    exemplo: "A raia Estratégia de testes começa; o primeiro passo é «Mapear as lacunas de cobertura»."
+    resumo: 'Início da raia Estratégia de testes. Responsabilidade: mapear as lacunas de cobertura e priorizar pelo risco.'
+    status: rascunho
+    publico: false
+  - id: pb_tqa_est_t1
+    exemplo: "QA entrega Mapa de cobertura. Mapa de cobertura: Pagamentos sem teste de contrato; 60% das falhas do semestre vieram do cálculo de frete sem teste de integração."
+    resumo: 'Mapear as lacunas de cobertura. Entrega: o que não tem teste, por nível da pirâmide, e o histórico de falhas.'
+    perguntas_chave: [pq_tqa_est_t1_1]
+    status: rascunho
+    publico: false
+  - id: pb_tqa_est_t2
+    exemplo: "QA entrega Estratégia de testes. Estratégia de testes: Prioridade 1: contrato com o gateway de pagamento; prioridade 2: integração do frete; prioridade 3: E2E do checkout."
+    resumo: 'Priorizar pelo risco e escolher os níveis de teste. Entrega: lista priorizada de testes a criar, com o nível de cada um.'
+    perguntas_chave: [pq_tqa_est_t2_1]
+    status: rascunho
+    publico: false
+  - id: pb_tqa_est_e1
+    exemplo: "A raia Estratégia de testes devolve «estrategia_definida» entregando Estratégia de testes; em Estratégia de testes (tqa_orq_c1), o fluxo segue para «Execução das tarefas». Por exemplo, Estratégia de testes: Prioridade 1: contrato com o gateway de pagamento; prioridade 2: integração do frete; prioridade 3: E2E do checkout."
+    resumo: Retorno «estrategia_definida» da raia Estratégia de testes. Quem chamou a raia segue por este retorno.
+    status: rascunho
+    publico: false
+  - id: pb_tqa_orq_s0
+    exemplo: "A raia Orquestração: teste e qualidade começa; o primeiro passo é «Estratégia de testes»."
+    resumo: 'Demanda de qualidade amplia a rede de proteção: cobre o que hoje quebra sem ninguém perceber, priorizando pelo risco.'
+    status: rascunho
+    publico: false
+  - id: pb_tqa_orq_c1
+    exemplo: "Chama a raia Estratégia de testes; «estrategia_definida» leva a «Execução das tarefas». Por exemplo, Estratégia de testes: Prioridade 1: contrato com o gateway de pagamento; prioridade 2: integração do frete; prioridade 3: E2E do checkout."
+    resumo: Chama a raia Estratégia de testes. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - 'Retornos possíveis: estrategia_definida'
+    status: rascunho
+    publico: false
+  - id: pb_tqa_orq_c2
+    exemplo: "Chama a raia Execução por papéis; «execucao_integrada» leva a «Testes automatizados». Por exemplo, Estratégia de testes: Prioridade 1: contrato com o gateway de pagamento; prioridade 2: integração do frete; prioridade 3: E2E do checkout."
+    resumo: Chama a raia Execução das tarefas. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - 'Retornos possíveis: execucao_integrada'
+    status: rascunho
+    publico: false
+  - id: pb_tqa_orq_c3
+    exemplo: "Chama a raia Testes automatizados e regressão; «testes_aprovados» leva a «Testes de ponta a ponta»; «testes_reprovados» leva a «Execução das tarefas»."
+    resumo: Chama a raia Testes automatizados. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - 'Retornos possíveis: testes_aprovados, testes_reprovados'
+    status: rascunho
+    publico: false
+  - id: pb_tqa_orq_c4
+    exemplo: "Chama a raia Testes de ponta a ponta (E2E); «aprovado» leva a «Testes de performance»; «reprovado» leva a «Execução das tarefas»; «nao_aplicavel» leva a «Testes de performance»."
+    resumo: Chama a raia Testes de ponta a ponta. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - 'Retornos possíveis: aprovado, reprovado, nao_aplicavel'
+    status: rascunho
+    publico: false
+  - id: pb_tqa_orq_c5
+    exemplo: "Chama a raia Testes de performance; «aprovado» leva a «Review humano»; «reprovado» leva a «Execução das tarefas»; «nao_aplicavel» leva a «Review humano»."
+    resumo: Chama a raia Testes de performance. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - 'Retornos possíveis: aprovado, reprovado, nao_aplicavel'
+    status: rascunho
+    publico: false
+  - id: pb_tqa_orq_c6
+    exemplo: "Chama a raia Review humano; «aprovado_pelo_humano» leva a «Cobertura ampliada nas áreas de risco»; «ajustes_solicitados» leva a «Execução das tarefas»."
+    resumo: Chama a raia Review humano. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - 'Retornos possíveis: aprovado_pelo_humano, ajustes_solicitados'
+    status: rascunho
+    publico: false
+  - id: pb_tqa_orq_e1
+    exemplo: "A demanda termina em «cobertura_ampliada»: cobertura ampliada nas áreas de risco."
+    resumo: Cobertura ampliada nas áreas de risco. Fim da demanda.
+    status: rascunho
+    publico: false
+celulas:
+  - demanda: teste_qa
+    requisito: funcional
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: teste_qa
+    requisito: nao_funcional
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: teste_qa
+    requisito: restricao
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: teste_qa
+    requisito: probabilistico_ia
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+perguntas:
+  - id: pq_tqa_est_t1_1
+    texto: "O que precisa estar claro para mapear as lacunas de cobertura?"
+    depende_de: [tqa_est_t1]
+    status: rascunho
+    publico: false
+  - id: pq_tqa_est_t2_1
+    texto: "O que precisa estar claro para priorizar pelo risco e escolher os níveis de teste?"
+    depende_de: [tqa_est_t2]
+    status: rascunho
+    publico: false

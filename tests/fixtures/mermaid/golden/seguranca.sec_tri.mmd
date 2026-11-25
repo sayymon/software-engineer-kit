@@ -1,0 +1,44 @@
+flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"])
+  end
+  subgraph z_SG_sec_tri["<b>Triagem de segurança</b>"]
+    direction LR
+    sec_tri_s0(["<small><b>sec_tri_s0</b></small><br/>Achado recebido, triar"])
+    sec_tri_t1["<small><b>sec_tri_t1</b></small><br/>Registrar o achado com a origem e a evidência"]
+    sec_tri_g1{"<small><b>sec_tri_g1</b></small><br/>Há ataque ou<br/>exploração em<br/>andamento?"}
+    sec_tri_e1(["<small><b>sec_tri_e1</b></small><br/>Exploração ativa<br/><i>retorno: ataque_em_andamento</i>"])
+    sec_tri_t2["<small><b>sec_tri_t2</b></small><br/>Reproduzir e classificar o risco pelo CVSS e pela exposição"]
+    sec_tri_g2{"<small><b>sec_tri_g2</b></small><br/>É uma<br/>vulnerabilidade<br/>real?"}
+    sec_tri_e2(["<small><b>sec_tri_e2</b></small><br/>Vulnerabilidade confirmada<br/><i>retorno: vulnerabilidade_confirmada</i>"])
+    sec_tri_e3(["<small><b>sec_tri_e3</b></small><br/>Falso positivo<br/><i>retorno: falso_positivo</i>"])
+  end
+  sec_tri_s0 --> sec_tri_t1
+  sec_tri_t1 --> sec_tri_g1
+  sec_tri_g1 -->|"sim, exploração ativa"| sec_tri_e1
+  sec_tri_g1 -->|"não"| sec_tri_t2
+  sec_tri_t2 --> sec_tri_g2
+  sec_tri_g2 -->|"sim, confirmada"| sec_tri_e2
+  sec_tri_g2 -->|"não, falso positivo"| sec_tri_e3
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#332288,stroke:#1F1452,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#117733,stroke:#0A471F,stroke-width:1px,color:#FFFFFF
+  classDef z_R_3 fill:#CC6677,stroke:#7A3D47,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#BBCC33,stroke:#707A1F,stroke-width:1px,color:#000000
+  classDef z_R_5 fill:#D55E00,stroke:#803800,stroke-width:1px,color:#000000
+  classDef z_R_6 fill:#EE7733,stroke:#8F471F,stroke-width:1px,color:#000000
+  classDef z_R_7 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_R_8 fill:#999933,stroke:#5C5C1F,stroke-width:1px,color:#000000
+  classDef z_R_9 fill:#77AADD,stroke:#476685,stroke-width:1px,color:#000000
+  classDef z_R_10 fill:#44AA99,stroke:#29665C,stroke-width:1px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
+  class sec_tri_s0,sec_tri_t1,sec_tri_g1,sec_tri_e1,sec_tri_t2,sec_tri_g2,sec_tri_e2,sec_tri_e3 z_R_1
+  class sec_tri_g1,sec_tri_g2 gw
+  style z_SG_sec_tri fill:#E0DEED,stroke:#332288,stroke-width:3px,color:#000000

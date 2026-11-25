@@ -133,6 +133,13 @@
         "publicado"
       ]
     },
+    "relacoes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+      }
+    },
     "tipo": {
       "type": "string",
       "const": "requisito"

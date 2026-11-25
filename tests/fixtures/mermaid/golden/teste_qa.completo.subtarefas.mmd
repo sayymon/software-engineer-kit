@@ -1,0 +1,379 @@
+flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"]) ~~~ z_LEG_st("<b>st</b>: subtarefa") ~~~ z_LEG_sc("<b>◆ st</b>: subtarefa condicional<br/>borda tracejada")
+  end
+  subgraph z_SG_tqa_orq["<b>Orquestração: teste e qualidade</b>"]
+    direction LR
+    tqa_orq_s0(["<small><b>tqa_orq_s0</b></small><br/>Lacuna de qualidade percebida"])
+    tqa_orq_c1[["<small><b>tqa_orq_c1</b></small><br/>Estratégia de testes"]]
+    tqa_orq_c2[["<small><b>tqa_orq_c2</b></small><br/>Execução das tarefas"]]
+    tqa_orq_c3[["<small><b>tqa_orq_c3</b></small><br/>Testes automatizados"]]
+    tqa_orq_c4[["<small><b>tqa_orq_c4</b></small><br/>Testes de ponta a ponta"]]
+    tqa_orq_c5[["<small><b>tqa_orq_c5</b></small><br/>Testes de performance"]]
+    tqa_orq_c6[["<small><b>tqa_orq_c6</b></small><br/>Review humano"]]
+    tqa_orq_e1(["<small><b>tqa_orq_e1</b></small><br/>Cobertura ampliada nas áreas de risco<br/><i>retorno: cobertura_ampliada</i>"])
+  end
+  subgraph z_SG_tqa_est["<b>Estratégia de testes</b>"]
+    direction LR
+    tqa_est_s0(["<small><b>tqa_est_s0</b></small><br/>Iniciar: estratégia de testes"])
+    tqa_est_t1["<small><b>tqa_est_t1</b></small><br/>Mapear as lacunas de cobertura"]
+    tqa_est_t2["<small><b>tqa_est_t2</b></small><br/>Priorizar pelo risco e escolher os níveis de teste"]
+    tqa_est_e1(["<small><b>tqa_est_e1</b></small><br/>Estratégia definida<br/><i>retorno: estrategia_definida</i>"])
+  end
+  subgraph z_SG_com_exe["<b>Execução por papéis</b>"]
+    direction LR
+    com_exe_s0(["<small><b>com_exe_s0</b></small><br/>Planos prontos, executar por papel"])
+    com_exe_g1{"<small><b>com_exe_g1</b></small><br/>Há decisão humana<br/>que bloqueia os<br/>agentes?"}
+    com_exe_c1[["<small><b>com_exe_c1</b></small><br/>Pessoas decidem o que desbloqueia os agentes"]]
+    com_exe_g2{"<small><b>com_exe_g2</b></small><br/>Há tarefas para<br/>agentes?"}
+    com_exe_c2[["<small><b>com_exe_c2</b></small><br/>Agentes executam por papel, em paralelo"]]
+    com_exe_c4[["<small><b>com_exe_c4</b></small><br/>Pessoas executam as tarefas do papel"]]
+    com_exe_c3[["<small><b>com_exe_c3</b></small><br/>Revisar e melhorar o agente que desviou"]]
+    com_exe_g3{"<small><b>com_exe_g3</b></small><br/>Restam tarefas de<br/>pessoas?"}
+    subgraph z_TS_com_exe_t1["<b>Revisar os PRs e integrar as entregas</b>"]
+      direction LR
+      com_exe_t1["<small><b>com_exe_t1</b></small><br/>Revisar os PRs e integrar as entregas"]
+      com_exe_t1_st1("<small><b>com_exe_t1_st1</b></small><br/>Revisar cada PR pela pirâmide de revisão<br/><i>Tech Lead</i>")
+      com_exe_t1_st2("<small><b>com_exe_t1_st2</b></small><br/>Validar os pontos bloqueantes depois das correções<br/><i>Tech Lead</i>")
+      com_exe_t1_st3("<small><b>com_exe_t1_st3</b></small><br/>Juntar as entregas em uma integração única<br/><i>Dev</i>")
+      com_exe_t1_st4("<small><b>com_exe_t1_st4</b></small><br/>Conferir que toda tarefa do plano tem entrega e dono<br/><i>Tech Lead</i>")
+      com_exe_t1_st5("<small><b>com_exe_t1_st5</b></small><br/>◆ Validar cada PR no ambiente efêmero<br/><i>QA</i>")
+    end
+    com_exe_e1(["<small><b>com_exe_e1</b></small><br/>Execução integrada e pronta para validar<br/><i>retorno: execucao_integrada</i>"])
+  end
+  subgraph z_SG_com_val["<b>Testes automatizados e regressão</b>"]
+    direction LR
+    com_val_s0(["<small><b>com_val_s0</b></small><br/>Execução integrada, testar a feature"])
+    subgraph z_TS_com_val_t1["<b>Revisar e aprimorar os testes (TDD e pirâmide)</b>"]
+      direction LR
+      com_val_t1["<small><b>com_val_t1</b></small><br/>Revisar e aprimorar os testes (TDD e pirâmide)"]
+      com_val_t1_st1("<small><b>com_val_t1_st1</b></small><br/>Conferir que cada critério de aceite tem teste<br/><i>QA</i>")
+      com_val_t1_st2("<small><b>com_val_t1_st2</b></small><br/>Equilibrar a pirâmide: unitários, integração e contrato<br/><i>QA</i>")
+      com_val_t1_st3("<small><b>com_val_t1_st3</b></small><br/>◆ Fixar a linha de base do comportamento atual<br/><i>QA</i>")
+      com_val_t1_st4("<small><b>com_val_t1_st4</b></small><br/>◆ Confirmar que o teste que reproduzia o defeito agora passa<br/><i>Dev</i>")
+      com_val_t1_st5("<small><b>com_val_t1_st5</b></small><br/>Rodar a regressão das funcionalidades core<br/><i>QA</i>")
+    end
+    subgraph z_TS_com_val_t2["<b>Executar os testes da feature</b>"]
+      direction LR
+      com_val_t2["<small><b>com_val_t2</b></small><br/>Executar os testes da feature"]
+      com_val_t2_st1("<small><b>com_val_t2_st1</b></small><br/>Rodar a suíte no pipeline<br/><i>Dev</i>")
+      com_val_t2_st2("<small><b>com_val_t2_st2</b></small><br/>Registrar as falhas com evidência<br/><i>QA</i>")
+    end
+    com_val_g1{"<small><b>com_val_g1</b></small><br/>Os testes passaram?"}
+    com_val_e1(["<small><b>com_val_e1</b></small><br/>Testes da feature aprovados<br/><i>retorno: testes_aprovados</i>"])
+    com_val_e2(["<small><b>com_val_e2</b></small><br/>Testes reprovados depois de 3 tentativas<br/><i>retorno: testes_reprovados</i>"])
+    subgraph z_TS_com_val_t3["<b>Corrigir e reforçar o teste que falhou</b>"]
+      direction LR
+      com_val_t3["<small><b>com_val_t3</b></small><br/>Corrigir e reforçar o teste que falhou"]
+      com_val_t3_st1("<small><b>com_val_t3_st1</b></small><br/>Escrever primeiro o teste que reproduz a falha<br/><i>Dev</i>")
+      com_val_t3_st2("<small><b>com_val_t3_st2</b></small><br/>Corrigir o código até o teste passar<br/><i>Dev</i>")
+    end
+  end
+  subgraph z_SG_com_e2e["<b>Testes de ponta a ponta (E2E)</b>"]
+    direction LR
+    com_e2e_s0(["<small><b>com_e2e_s0</b></small><br/>Entrega pronta, automatizar as jornadas críticas afetadas"])
+    com_e2e_g1{"<small><b>com_e2e_g1</b></small><br/>A entrega afeta uma<br/>jornada de usuário?"}
+    com_e2e_e3(["<small><b>com_e2e_e3</b></small><br/>Sem jornada de usuário afetada<br/><i>retorno: nao_aplicavel</i>"])
+    subgraph z_TS_com_e2e_t1["<b>Automatizar as jornadas críticas afetadas</b>"]
+      direction LR
+      com_e2e_t1["<small><b>com_e2e_t1</b></small><br/>Automatizar as jornadas críticas afetadas"]
+      com_e2e_t1_st1("<small><b>com_e2e_t1_st1</b></small><br/>Selecionar as jornadas críticas afetadas<br/><i>QA</i>")
+      com_e2e_t1_st2("<small><b>com_e2e_t1_st2</b></small><br/>Escrever os cenários de ponta a ponta<br/><i>QA</i>")
+      com_e2e_t1_st3("<small><b>com_e2e_t1_st3</b></small><br/>◆ Incluir a verificação de acessibilidade nas jornadas<br/><i>QA</i>")
+      com_e2e_t1_st4("<small><b>com_e2e_t1_st4</b></small><br/>Incluir as jornadas core que não podem quebrar<br/><i>QA</i>")
+    end
+    subgraph z_TS_com_e2e_t2["<b>Executar os testes E2E em ambiente integrado</b>"]
+      direction LR
+      com_e2e_t2["<small><b>com_e2e_t2</b></small><br/>Executar os testes E2E em ambiente integrado"]
+      com_e2e_t2_st1("<small><b>com_e2e_t2_st1</b></small><br/>Rodar os cenários no ambiente integrado<br/><i>QA</i>")
+      com_e2e_t2_st2("<small><b>com_e2e_t2_st2</b></small><br/>Investigar falhas instáveis antes de reprovar<br/><i>QA</i>")
+    end
+    com_e2e_g2{"<small><b>com_e2e_g2</b></small><br/>As jornadas<br/>passaram?"}
+    com_e2e_e1(["<small><b>com_e2e_e1</b></small><br/>Jornadas críticas aprovadas<br/><i>retorno: aprovado</i>"])
+    com_e2e_e2(["<small><b>com_e2e_e2</b></small><br/>Jornada crítica reprovada<br/><i>retorno: reprovado</i>"])
+  end
+  subgraph z_SG_com_prf["<b>Testes de performance</b>"]
+    direction LR
+    com_prf_s0(["<small><b>com_prf_s0</b></small><br/>Entrega pronta, planejar o teste a partir dos requisitos"])
+    com_prf_g1{"<small><b>com_prf_g1</b></small><br/>Há requisito de<br/>performance?"}
+    com_prf_e3(["<small><b>com_prf_e3</b></small><br/>Sem requisito de performance<br/><i>retorno: nao_aplicavel</i>"])
+    subgraph z_TS_com_prf_t1["<b>Planejar o teste a partir dos requisitos</b>"]
+      direction LR
+      com_prf_t1["<small><b>com_prf_t1</b></small><br/>Planejar o teste a partir dos requisitos"]
+      com_prf_t1_st1("<small><b>com_prf_t1_st1</b></small><br/>Traduzir os requisitos não funcionais em cenários de carga<br/><i>SRE</i>")
+      com_prf_t1_st2("<small><b>com_prf_t1_st2</b></small><br/>Preparar dados e ambiente representativos<br/><i>SRE</i>")
+    end
+    subgraph z_TS_com_prf_t2["<b>Executar carga, estresse e medir latência</b>"]
+      direction LR
+      com_prf_t2["<small><b>com_prf_t2</b></small><br/>Executar carga, estresse e medir latência"]
+      com_prf_t2_st1("<small><b>com_prf_t2_st1</b></small><br/>Rodar os testes de carga e de estresse<br/><i>SRE</i>")
+      com_prf_t2_st2("<small><b>com_prf_t2_st2</b></small><br/>Comparar com a meta e registrar gargalos<br/><i>Arquiteto de Software</i>")
+    end
+    com_prf_g2{"<small><b>com_prf_g2</b></small><br/>As metas de<br/>performance foram<br/>atendidas?"}
+    com_prf_e1(["<small><b>com_prf_e1</b></small><br/>Metas de performance atendidas<br/><i>retorno: aprovado</i>"])
+    com_prf_e2(["<small><b>com_prf_e2</b></small><br/>Metas de performance não atendidas<br/><i>retorno: reprovado</i>"])
+  end
+  subgraph z_SG_com_rev["<b>Review humano</b>"]
+    direction LR
+    com_rev_s0(["<small><b>com_rev_s0</b></small><br/>Testes aprovados, revisar a entrega"])
+    subgraph z_TS_com_rev_t1["<b>Review humano: arquitetura, edge cases, segurança</b>"]
+      direction LR
+      com_rev_t1["<small><b>com_rev_t1</b></small><br/>Review humano: arquitetura, edge cases, segurança"]
+      com_rev_t1_st1("<small><b>com_rev_t1_st1</b></small><br/>Revisar a arquitetura e a aderência aos ADRs<br/><i>Arquiteto de Software</i>")
+      com_rev_t1_st2("<small><b>com_rev_t1_st2</b></small><br/>Revisar os casos de borda e o que os agentes geraram<br/><i>Tech Lead</i>")
+      com_rev_t1_st3("<small><b>com_rev_t1_st3</b></small><br/>Revisar segurança e dados sensíveis<br/><i>Segurança</i>")
+    end
+    com_rev_g1{"<small><b>com_rev_g1</b></small><br/>Aprovada no review?"}
+    com_rev_e1(["<small><b>com_rev_e1</b></small><br/>Entrega aprovada pelo humano<br/><i>retorno: aprovado_pelo_humano</i>"])
+    com_rev_e2(["<small><b>com_rev_e2</b></small><br/>Ajustes solicitados no review<br/><i>retorno: ajustes_solicitados</i>"])
+  end
+  subgraph z_SG_com_exp["<b>Execução pelas pessoas por papel</b>"]
+    direction LR
+    com_exp_s0(["<small><b>com_exp_s0</b></small><br/>Tarefas humanas alocadas, executar"])
+    com_exp_t1["<small><b>com_exp_t1</b></small><br/>Pessoas executam as tarefas e as decisões"]
+    com_exp_g1{"<small><b>com_exp_g1</b></small><br/>Há tarefa híbrida<br/>com o agente?"}
+    com_exp_e1(["<small><b>com_exp_e1</b></small><br/>Execução humana concluída<br/><i>retorno: execucao_humana_concluida</i>"])
+    com_exp_t2["<small><b>com_exp_t2</b></small><br/>Pareia com o agente nas tarefas híbridas"]
+  end
+  subgraph z_SG_com_dea["<b>Execução pelos agentes por papel</b>"]
+    direction LR
+    com_dea_s0(["<small><b>com_dea_s0</b></small><br/>Tarefas delegadas aos agentes por papel"])
+    com_dea_t1["<small><b>com_dea_t1</b></small><br/>Delega com autonomia delimitada"]
+    com_dea_t2["<small><b>com_dea_t2</b></small><br/>Agentes executam: código, testes, docs e PR"]
+    com_dea_g1{"<small><b>com_dea_g1</b></small><br/>A saída do agente<br/>está dentro do<br/>esperado?"}
+    com_dea_e1(["<small><b>com_dea_e1</b></small><br/>Entrega gerada pelos agentes<br/><i>retorno: entrega_gerada</i>"])
+    com_dea_e2(["<small><b>com_dea_e2</b></small><br/>Desvio do agente sinalizado<br/><i>retorno: desvio_do_agente</i>"])
+  end
+  subgraph z_SG_com_mel["<b>Melhoria contínua dos agentes</b>"]
+    direction LR
+    com_mel_s0(["<small><b>com_mel_s0</b></small><br/>Desvio do agente detectado"])
+    subgraph z_TS_com_mel_t1["<b>Registrar e classificar o desvio</b>"]
+      direction LR
+      com_mel_t1["<small><b>com_mel_t1</b></small><br/>Registrar e classificar o desvio"]
+      com_mel_t1_st1("<small><b>com_mel_t1_st1</b></small><br/>Descrever o esperado, o obtido e a evidência<br/><i>QA</i>")
+      com_mel_t1_st2("<small><b>com_mel_t1_st2</b></small><br/>Classificar a causa do desvio<br/><i>Engenharia de IA</i>")
+    end
+    subgraph z_TS_com_mel_t2["<b>Ajustar o agente e transformar o desvio em teste</b>"]
+      direction LR
+      com_mel_t2["<small><b>com_mel_t2</b></small><br/>Ajustar o agente e transformar o desvio em teste"]
+      com_mel_t2_st1("<small><b>com_mel_t2_st1</b></small><br/>◆ Ajustar a instrução, o contexto ou a skill do agente<br/><i>Engenharia de IA</i>")
+      com_mel_t2_st2("<small><b>com_mel_t2_st2</b></small><br/>◆ Ajustar ferramentas ou permissões<br/><i>Segurança</i>")
+      com_mel_t2_st3("<small><b>com_mel_t2_st3</b></small><br/>◆ Pedir o ajuste da spec<br/><i>Tech Lead</i>")
+      com_mel_t2_st4("<small><b>com_mel_t2_st4</b></small><br/>Incluir o caso do desvio nos testes do agente<br/><i>QA</i>")
+    end
+    subgraph z_TS_com_mel_t3["<b>Registrar o aprendizado no catálogo de agentes</b>"]
+      direction LR
+      com_mel_t3["<small><b>com_mel_t3</b></small><br/>Registrar o aprendizado no catálogo de agentes"]
+      com_mel_t3_st1("<small><b>com_mel_t3_st1</b></small><br/>Registrar o desvio, a causa e o ajuste no catálogo<br/><i>Tech Lead</i>")
+    end
+    com_mel_g1{"<small><b>com_mel_g1</b></small><br/>O mesmo desvio se<br/>repetiu 3 vezes?"}
+    com_mel_e1(["<small><b>com_mel_e1</b></small><br/>Agente ajustado, volta a executar<br/><i>retorno: agente_ajustado</i>"])
+    com_mel_e2(["<small><b>com_mel_e2</b></small><br/>Tarefa assumida por pessoa do papel<br/><i>retorno: assumir_por_pessoa</i>"])
+  end
+  com_exe_t1 --> com_exe_t1_st1
+  com_exe_t1_st1 --> com_exe_t1_st2
+  com_exe_t1_st2 --> com_exe_t1_st3
+  com_exe_t1_st3 --> com_exe_t1_st4
+  com_exe_t1_st4 --> com_exe_t1_st5
+  com_val_t1 --> com_val_t1_st1
+  com_val_t1_st1 --> com_val_t1_st2
+  com_val_t1_st2 --> com_val_t1_st3
+  com_val_t1_st3 --> com_val_t1_st4
+  com_val_t1_st4 --> com_val_t1_st5
+  com_val_t2 --> com_val_t2_st1
+  com_val_t2_st1 --> com_val_t2_st2
+  com_val_t3 --> com_val_t3_st1
+  com_val_t3_st1 --> com_val_t3_st2
+  com_e2e_t1 --> com_e2e_t1_st1
+  com_e2e_t1_st1 --> com_e2e_t1_st2
+  com_e2e_t1_st2 --> com_e2e_t1_st3
+  com_e2e_t1_st3 --> com_e2e_t1_st4
+  com_e2e_t2 --> com_e2e_t2_st1
+  com_e2e_t2_st1 --> com_e2e_t2_st2
+  com_prf_t1 --> com_prf_t1_st1
+  com_prf_t1_st1 --> com_prf_t1_st2
+  com_prf_t2 --> com_prf_t2_st1
+  com_prf_t2_st1 --> com_prf_t2_st2
+  com_rev_t1 --> com_rev_t1_st1
+  com_rev_t1_st1 --> com_rev_t1_st2
+  com_rev_t1_st2 --> com_rev_t1_st3
+  com_mel_t1 --> com_mel_t1_st1
+  com_mel_t1_st1 --> com_mel_t1_st2
+  com_mel_t2 --> com_mel_t2_st1
+  com_mel_t2_st1 --> com_mel_t2_st2
+  com_mel_t2_st2 --> com_mel_t2_st3
+  com_mel_t2_st3 --> com_mel_t2_st4
+  com_mel_t3 --> com_mel_t3_st1
+  tqa_orq_s0 --> tqa_orq_c1
+  tqa_est_s0 --> tqa_est_t1
+  tqa_est_t1 --> tqa_est_t2
+  tqa_est_t2 --> tqa_est_e1
+  com_exe_s0 --> com_exe_g1
+  com_exe_g1 -->|"sim"| com_exe_c1
+  com_exe_g1 -->|"não"| com_exe_g2
+  com_exe_g2 -->|"sim"| com_exe_c2
+  com_exe_g2 -->|"não, só pessoas"| com_exe_c4
+  com_exe_g3 -->|"sim"| com_exe_c4
+  com_exe_g3 -->|"não"| com_exe_t1
+  com_exe_t1_st5 --> com_exe_e1
+  com_val_s0 --> com_val_t1
+  com_val_t1_st5 --> com_val_t2
+  com_val_t2_st2 --> com_val_g1
+  com_val_g1 -->|"sim"| com_val_e1
+  com_val_g1 -->|"não e tentativas #lt; 3: corrigir e reforçar"| com_val_t3
+  com_val_g1 -->|"não e tentativas #gt;= 3: reprovado"| com_val_e2
+  com_val_t3_st2 --> com_val_t2
+  com_e2e_s0 --> com_e2e_g1
+  com_e2e_g1 -->|"sim"| com_e2e_t1
+  com_e2e_g1 -->|"não"| com_e2e_e3
+  com_e2e_t1_st4 --> com_e2e_t2
+  com_e2e_t2_st2 --> com_e2e_g2
+  com_e2e_g2 -->|"sim"| com_e2e_e1
+  com_e2e_g2 -->|"não"| com_e2e_e2
+  com_prf_s0 --> com_prf_g1
+  com_prf_g1 -->|"sim"| com_prf_t1
+  com_prf_g1 -->|"não"| com_prf_e3
+  com_prf_t1_st2 --> com_prf_t2
+  com_prf_t2_st2 --> com_prf_g2
+  com_prf_g2 -->|"sim"| com_prf_e1
+  com_prf_g2 -->|"não"| com_prf_e2
+  com_rev_s0 --> com_rev_t1
+  com_rev_t1_st3 --> com_rev_g1
+  com_rev_g1 -->|"sim"| com_rev_e1
+  com_rev_g1 -->|"não, com ajustes"| com_rev_e2
+  com_exp_s0 --> com_exp_t1
+  com_exp_t1 --> com_exp_g1
+  com_exp_g1 -->|"sim, há tarefa híbrida"| com_exp_t2
+  com_exp_g1 -->|"não, só tarefas humanas"| com_exp_e1
+  com_exp_t2 --> com_exp_e1
+  com_dea_s0 --> com_dea_t1
+  com_dea_t1 --> com_dea_t2
+  com_dea_t2 --> com_dea_g1
+  com_dea_g1 -->|"sim"| com_dea_e1
+  com_dea_g1 -->|"não, desvio do esperado"| com_dea_e2
+  com_mel_s0 --> com_mel_t1
+  com_mel_t1_st2 --> com_mel_t2
+  com_mel_t2_st4 --> com_mel_t3
+  com_mel_t3_st1 --> com_mel_g1
+  com_mel_g1 -->|"não, menos de 3"| com_mel_e1
+  com_mel_g1 -->|"sim, 3 vezes"| com_mel_e2
+  tqa_orq_c1 -.->|"chama"| tqa_est_s0
+  tqa_est_e1 -.->|"retorno: estrategia_definida"| tqa_orq_c2
+  tqa_orq_c2 -.->|"chama"| com_exe_s0
+  com_exe_e1 -.->|"retorno: execucao_integrada"| tqa_orq_c3
+  tqa_orq_c3 -.->|"chama"| com_val_s0
+  com_val_e1 -.->|"retorno: testes_aprovados"| tqa_orq_c4
+  com_val_e2 -.->|"retorno: testes_reprovados"| tqa_orq_c2
+  tqa_orq_c4 -.->|"chama"| com_e2e_s0
+  com_e2e_e3 -.->|"retorno: nao_aplicavel"| tqa_orq_c5
+  com_e2e_e1 -.->|"retorno: aprovado"| tqa_orq_c5
+  com_e2e_e2 -.->|"retorno: reprovado"| tqa_orq_c2
+  tqa_orq_c5 -.->|"chama"| com_prf_s0
+  com_prf_e3 -.->|"retorno: nao_aplicavel"| tqa_orq_c6
+  com_prf_e1 -.->|"retorno: aprovado"| tqa_orq_c6
+  com_prf_e2 -.->|"retorno: reprovado"| tqa_orq_c2
+  tqa_orq_c6 -.->|"chama"| com_rev_s0
+  com_rev_e1 -.->|"retorno: aprovado_pelo_humano"| tqa_orq_e1
+  com_rev_e2 -.->|"retorno: ajustes_solicitados"| tqa_orq_c2
+  com_exe_c1 -.->|"chama"| com_exp_s0
+  com_exp_e1 -.->|"retorno: execucao_humana_concluida (com_exe_c1)"| com_exe_g2
+  com_exe_c2 -.->|"chama"| com_dea_s0
+  com_dea_e1 -.->|"retorno: entrega_gerada"| com_exe_g3
+  com_dea_e2 -.->|"retorno: desvio_do_agente"| com_exe_c3
+  com_exe_c4 -.->|"chama"| com_exp_s0
+  com_exp_e1 -.->|"retorno: execucao_humana_concluida (com_exe_c4)"| com_exe_t1
+  com_exe_c3 -.->|"chama"| com_mel_s0
+  com_mel_e1 -.->|"retorno: agente_ajustado"| com_exe_c2
+  com_mel_e2 -.->|"retorno: assumir_por_pessoa"| com_exe_c4
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#332288,stroke:#1F1452,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#009E73,stroke:#005F45,stroke-width:1px,color:#000000
+  classDef z_R_3 fill:#D55E00,stroke:#803800,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#F0E442,stroke:#908928,stroke-width:1px,color:#000000
+  classDef z_R_5 fill:#661100,stroke:#3D0A00,stroke-width:1px,color:#FFFFFF
+  classDef z_R_6 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_R_7 fill:#882255,stroke:#521433,stroke-width:1px,color:#FFFFFF
+  classDef z_R_8 fill:#E69F00,stroke:#8A5F00,stroke-width:1px,color:#000000
+  classDef z_R_9 fill:#6699CC,stroke:#3D5C7A,stroke-width:1px,color:#000000
+  classDef z_S_2 fill:#8CD3C0,stroke:#005F45,stroke-width:1px,color:#000000,font-size:12px
+  classDef z_S_3 fill:#ECB78C,stroke:#803800,stroke-width:1px,color:#000000,font-size:12px
+  classDef z_S_4 fill:#F8F3AA,stroke:#908928,stroke-width:1px,color:#000000,font-size:12px
+  classDef z_S_5 fill:#BA948C,stroke:#3D0A00,stroke-width:1px,color:#000000,font-size:12px
+  classDef z_S_6 fill:#B3DDF5,stroke:#346C8C,stroke-width:1px,color:#000000,font-size:12px
+  classDef z_S_9 fill:#BAD1E8,stroke:#3D5C7A,stroke-width:1px,color:#000000,font-size:12px
+  classDef z_SC_2 fill:#8CD3C0,stroke:#005F45,stroke-width:2px,color:#000000,font-size:12px,stroke-dasharray:4 3
+  classDef z_SC_3 fill:#ECB78C,stroke:#803800,stroke-width:2px,color:#000000,font-size:12px,stroke-dasharray:4 3
+  classDef z_SC_4 fill:#F8F3AA,stroke:#908928,stroke-width:2px,color:#000000,font-size:12px,stroke-dasharray:4 3
+  classDef z_SC_9 fill:#BAD1E8,stroke:#3D5C7A,stroke-width:2px,color:#000000,font-size:12px,stroke-dasharray:4 3
+  classDef z_C_0_1 fill:#332288,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_2 fill:#009E73,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_3 fill:#D55E00,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_4 fill:#F0E442,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_5 fill:#661100,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_6 fill:#56B4E9,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_2_7 fill:#882255,stroke:#009E73,stroke-width:4px,color:#FFFFFF
+  classDef z_C_2_8 fill:#E69F00,stroke:#009E73,stroke-width:4px,color:#000000
+  classDef z_C_2_9 fill:#6699CC,stroke:#009E73,stroke-width:4px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  class z_LEG_st leg
+  classDef legcond fill:#FFFFFF,stroke:#333333,stroke-width:2px,stroke-dasharray:4 3,color:#000000
+  class z_LEG_sc legcond
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
+  class tqa_orq_c1 z_C_0_1
+  class tqa_orq_c2 z_C_0_2
+  class tqa_orq_c3 z_C_0_3
+  class tqa_orq_c4 z_C_0_4
+  class tqa_orq_c5 z_C_0_5
+  class tqa_orq_c6 z_C_0_6
+  class com_exe_c1,com_exe_c4 z_C_2_7
+  class com_exe_c2 z_C_2_8
+  class com_exe_c3 z_C_2_9
+  class tqa_orq_s0,tqa_orq_e1 z_R_0
+  class tqa_est_s0,tqa_est_t1,tqa_est_t2,tqa_est_e1 z_R_1
+  class com_exe_s0,com_exe_g1,com_exe_g2,com_exe_g3,com_exe_t1,com_exe_e1 z_R_2
+  class com_val_s0,com_val_t1,com_val_t2,com_val_g1,com_val_e1,com_val_e2,com_val_t3 z_R_3
+  class com_e2e_s0,com_e2e_g1,com_e2e_e3,com_e2e_t1,com_e2e_t2,com_e2e_g2,com_e2e_e1,com_e2e_e2 z_R_4
+  class com_prf_s0,com_prf_g1,com_prf_e3,com_prf_t1,com_prf_t2,com_prf_g2,com_prf_e1,com_prf_e2 z_R_5
+  class com_rev_s0,com_rev_t1,com_rev_g1,com_rev_e1,com_rev_e2 z_R_6
+  class com_exp_s0,com_exp_t1,com_exp_g1,com_exp_e1,com_exp_t2 z_R_7
+  class com_dea_s0,com_dea_t1,com_dea_t2,com_dea_g1,com_dea_e1,com_dea_e2 z_R_8
+  class com_mel_s0,com_mel_t1,com_mel_t2,com_mel_t3,com_mel_g1,com_mel_e1,com_mel_e2 z_R_9
+  class com_exe_t1_st5 z_SC_2
+  class com_val_t1_st3,com_val_t1_st4 z_SC_3
+  class com_e2e_t1_st3 z_SC_4
+  class com_mel_t2_st1,com_mel_t2_st2,com_mel_t2_st3 z_SC_9
+  class com_exe_t1_st1,com_exe_t1_st2,com_exe_t1_st3,com_exe_t1_st4 z_S_2
+  class com_val_t1_st1,com_val_t1_st2,com_val_t1_st5,com_val_t2_st1,com_val_t2_st2,com_val_t3_st1,com_val_t3_st2 z_S_3
+  class com_e2e_t1_st1,com_e2e_t1_st2,com_e2e_t1_st4,com_e2e_t2_st1,com_e2e_t2_st2 z_S_4
+  class com_prf_t1_st1,com_prf_t1_st2,com_prf_t2_st1,com_prf_t2_st2 z_S_5
+  class com_rev_t1_st1,com_rev_t1_st2,com_rev_t1_st3 z_S_6
+  class com_mel_t1_st1,com_mel_t1_st2,com_mel_t2_st4,com_mel_t3_st1 z_S_9
+  class com_exe_g1,com_exe_g2,com_exe_g3,com_val_g1,com_e2e_g1,com_e2e_g2,com_prf_g1,com_prf_g2,com_rev_g1,com_exp_g1,com_dea_g1,com_mel_g1 gw
+  style z_SG_tqa_orq fill:#E7ECEE,stroke:#607D8B,stroke-width:3px,color:#000000
+  style z_SG_tqa_est fill:#E0DEED,stroke:#332288,stroke-width:3px,color:#000000
+  style z_SG_com_exe fill:#D9F0EA,stroke:#009E73,stroke-width:3px,color:#000000
+  style z_SG_com_val fill:#F9E7D9,stroke:#D55E00,stroke-width:3px,color:#000000
+  style z_SG_com_e2e fill:#FDFBE3,stroke:#F0E442,stroke-width:3px,color:#000000
+  style z_SG_com_prf fill:#E8DBD9,stroke:#661100,stroke-width:3px,color:#000000
+  style z_SG_com_rev fill:#E6F4FC,stroke:#56B4E9,stroke-width:3px,color:#000000
+  style z_SG_com_exp fill:#EDDEE6,stroke:#882255,stroke-width:3px,color:#000000
+  style z_SG_com_dea fill:#FBF1D9,stroke:#E69F00,stroke-width:3px,color:#000000
+  style z_SG_com_mel fill:#E8F0F7,stroke:#6699CC,stroke-width:3px,color:#000000
+  style z_TS_com_exe_t1 fill:#F0F9F7,stroke:#006F50,stroke-width:1.5px,stroke-dasharray:5 3,color:#000000
+  style z_TS_com_val_t1 fill:#FCF5F0,stroke:#954200,stroke-width:1.5px,stroke-dasharray:5 3,color:#000000
+  style z_TS_com_val_t2 fill:#FCF5F0,stroke:#954200,stroke-width:1.5px,stroke-dasharray:5 3,color:#000000
+  style z_TS_com_val_t3 fill:#FCF5F0,stroke:#954200,stroke-width:1.5px,stroke-dasharray:5 3,color:#000000
+  style z_TS_com_e2e_t1 fill:#FEFDF4,stroke:#A8A02E,stroke-width:1.5px,stroke-dasharray:5 3,color:#000000
+  style z_TS_com_e2e_t2 fill:#FEFDF4,stroke:#A8A02E,stroke-width:1.5px,stroke-dasharray:5 3,color:#000000
+  style z_TS_com_prf_t1 fill:#F6F1F0,stroke:#470C00,stroke-width:1.5px,stroke-dasharray:5 3,color:#000000
+  style z_TS_com_prf_t2 fill:#F6F1F0,stroke:#470C00,stroke-width:1.5px,stroke-dasharray:5 3,color:#000000
+  style z_TS_com_rev_t1 fill:#F5FAFE,stroke:#3C7EA3,stroke-width:1.5px,stroke-dasharray:5 3,color:#000000
+  style z_TS_com_mel_t1 fill:#F6F9FC,stroke:#476B8F,stroke-width:1.5px,stroke-dasharray:5 3,color:#000000
+  style z_TS_com_mel_t2 fill:#F6F9FC,stroke:#476B8F,stroke-width:1.5px,stroke-dasharray:5 3,color:#000000
+  style z_TS_com_mel_t3 fill:#F6F9FC,stroke:#476B8F,stroke-width:1.5px,stroke-dasharray:5 3,color:#000000

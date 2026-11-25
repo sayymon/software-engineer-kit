@@ -67,10 +67,26 @@ export const SPEC: Record<string, Spec> = {
   hub: { facts: [], rels: [] },
   jornada: { facts: ['perfil'], rels: ['certificacoes', 'competencias'] },
   competencia: { facts: ['area', 'meiaVida', 'estudo'], rels: ['habilidades', 'certificacoes'] },
-  tecnica: { facts: [], rels: [] },
+  tecnica: { facts: [], rels: ['relacoes'] },
   abordagem: { facts: [], rels: [] },
   estrategia: { facts: [], rels: [] },
-  requisito: { facts: ['categoria'], rels: [] },
+  requisito: { facts: ['categoria'], rels: ['relacoes'] },
+  raia: { facts: ['responsabilidade', 'orquestradora'], rels: ['relacoes'] },
+  tarefa: { facts: ['rotulo', 'condicao'], rels: ['relacoes'] },
+  decisao: { facts: ['rotulo', 'condicao'], rels: ['relacoes'] },
+  no: { facts: ['no_tipo', 'rotulo', 'condicao', 'retorno'], rels: [] },
+  subtarefa: { facts: ['rotulo', 'descricao', 'exemplo', 'responsavel', 'porque'], rels: [] },
+  playbook: { facts: ['resumo', 'exemplo', 'fazer', 'evitar'], rels: [] },
+  pergunta: { facts: ['texto'], rels: [] },
+  celula: { facts: ['perguntas_chave'], rels: [] },
+  artefato: { facts: ['artefato_tipo', 'subtipo', 'exemplo'], rels: ['relacoes'] },
+  variavel: { facts: ['variavel_tipo', 'exemplo', 'inicial'], rels: ['relacoes'] },
+  papel: { facts: ['atuacao_de_agente', 'exemplo', 'responsabilidades'], rels: ['relacoes'] },
+  rito: { facts: ['nivel', 'ordem', 'cadencia', 'duracao', 'objetivo', 'premissas', 'comportamentos_esperados', 'evitar', 'exemplo'], rels: ['relacoes'] },
+  'tipo-de-artefato': { facts: ['artefato_tipo', 'legado', 'subtipos'], rels: ['relacoes'] },
+  'categoria-ferramenta': { facts: ['custo', 'beneficio', 'dependencia_fornecedor'], rels: ['relacoes'] },
+  'fonte-guia': { facts: ['fonte_tipo', 'titulo', 'link', 'status_revisao', 'proxima_revisao'], rels: ['relacoes'] },
+  'padrao-guia': { facts: [], rels: ['relacoes'] },
 };
 
 /** Extra keys rendered by dedicated blocks. Listed so the UI string test covers them. */
@@ -124,6 +140,29 @@ function body(ctx: Ctx, page: Page): string {
   return `<div class="prose">${ctx.index.render(text, { href: ctx.href, where: page.entity.relPath })}</div>`;
 }
 
+/** Anchor-only guide items (no, subtarefa, playbook, pergunta, celula) rendered on the page that hosts them. */
+function anchored(ctx: Ctx, page: Page): string {
+  const items = ctx.index.anchorsOf(page.id);
+  if (items.length === 0) return '';
+  const groups = groupBy(items, (e) => e.tipo, ctx.locale);
+  const inner = groups
+    .map(([tipo, list]) => {
+      const lis = list
+        .map((e) => {
+          const spec = SPEC[e.tipo] ?? { facts: [], rels: [] };
+          return (
+            `<li id="${esc(e.id)}"><strong>${esc(String(e.data.nome ?? e.id))}</strong>` +
+            facts(ctx, e.data, spec.facts) +
+            (Array.isArray(e.data.relacoes) && e.data.relacoes.length ? linkList(ctx, e.data.relacoes) : '') +
+            `</li>`
+          );
+        })
+        .join('');
+      return `<h3>${esc(ctx.t(`tipo.${tipo}`))} <span class="count">${list.length}</span></h3><ul class="anchored">${lis}</ul>`;
+    })
+    .join('');
+  return section(ctx.t('s.anchored'), inner, 'anchored');
+}
 function inbound(ctx: Ctx, page: Page): string {
   const items = ctx.index.inbound(page.id);
   if (items.length === 0) return '';
@@ -535,6 +574,7 @@ export function renderEntity(ctx: Ctx, page: Page): Rendered {
     head(ctx, page) +
     `<div class="entity-body">` +
     middle +
+    anchored(ctx, page) +
     body(ctx, page) +
     fontes(ctx, page.entity.data) +
     inbound(ctx, page) +

@@ -6,7 +6,7 @@ flowchart LR
   subgraph z_SG_inc_mit["<b>Mitigação e verificação</b>"]
     direction LR
     inc_mit_s0(["<small><b>inc_mit_s0</b></small><br/>Comunicação e contenção feitas, mitigar"])
-    inc_mit_t1["<small><b>inc_mit_t1</b></small><br/>Mitigar primeiro: restaurar o serviço antes de diagnosticar<br/><i>▸ 3 subtarefas</i>"]
+    inc_mit_t1["<small><b>inc_mit_t1</b></small><br/>Mitigar primeiro: restaurar o serviço antes de diagnosticar<br/><i>▸ 4 subtarefas</i>"]
     inc_mit_g1{"<small><b>inc_mit_g1</b></small><br/>A mitigação<br/>funcionou?"}
     inc_mit_e2(["<small><b>inc_mit_e2</b></small><br/>3 tentativas esgotadas, escalar<br/><i>retorno: tentativas_esgotadas</i>"])
     inc_mit_t2["<small><b>inc_mit_t2</b></small><br/>Verificar que o serviço voltou<br/><i>▸ 2 subtarefas</i>"]

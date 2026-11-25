@@ -1,0 +1,167 @@
+flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"]) ~~~ z_LEG_r0["<b>Entendimento da necessidade e contexto</b><br/>raia chamada"] ~~~ z_LEG_r1["<b>Levantamento e enriquecimento de requisitos</b><br/>raia chamada"] ~~~ z_LEG_r2["<b>Classificação, escopo, fornecimento e prontidão</b><br/>raia chamada"] ~~~ z_LEG_r3["<b>Especificação (SDD): requirements e design</b><br/>raia chamada"] ~~~ z_LEG_r4["<b>Decomposição e mapeamento de tarefas</b><br/>raia chamada"] ~~~ z_LEG_r5["<b>Preparação para execução (setup)</b><br/>raia chamada"] ~~~ z_LEG_r6["<b>Execução por papéis</b><br/>raia chamada"] ~~~ z_LEG_r7["<b>Publicação em ambiente de testes</b><br/>raia chamada"] ~~~ z_LEG_r8["<b>Testes automatizados e regressão</b><br/>raia chamada"] ~~~ z_LEG_r9["<b>Análise da reprovação e iteração</b><br/>raia chamada"] ~~~ z_LEG_r10["<b>Testes de ponta a ponta (E2E)</b><br/>raia chamada"] ~~~ z_LEG_r11["<b>Avaliação de IA (evals)</b><br/>raia chamada"] ~~~ z_LEG_r12["<b>Testes de performance</b><br/>raia chamada"] ~~~ z_LEG_r13["<b>Testes de segurança</b><br/>raia chamada"] ~~~ z_LEG_r14["<b>Review humano</b><br/>raia chamada"] ~~~ z_LEG_r15["<b>Testes integrados</b><br/>raia chamada"] ~~~ z_LEG_r16["<b>Implantação</b><br/>raia chamada"] ~~~ z_LEG_r17["<b>Liberação e comunicação</b><br/>raia chamada"] ~~~ z_LEG_r18["<b>Validação em produção e monitoramento</b><br/>raia chamada"]
+  end
+  subgraph z_SG_feat_orq["<b>Orquestração da feature</b>"]
+    direction LR
+    feat_orq_s0(["<small><b>feat_orq_s0</b></small><br/>Necessidade percebida"])
+    feat_orq_c1[["<small><b>feat_orq_c1</b></small><br/>Entender a necessidade e o contexto"]]
+    feat_orq_c2[["<small><b>feat_orq_c2</b></small><br/>Levantar e enriquecer os requisitos"]]
+    feat_orq_e2(["<small><b>feat_orq_e2</b></small><br/>Reutilizar a solução que já existe<br/><i>retorno: reutilizar_existente</i>"])
+    feat_orq_e3(["<small><b>feat_orq_e3</b></small><br/>Devolvida ao demandante, fora dos objetivos atuais<br/><i>retorno: fora_dos_objetivos</i>"])
+    feat_orq_e4(["<small><b>feat_orq_e4</b></small><br/>Encaminhada para spike antes de seguir<br/><i>retorno: precisa_de_spike</i>"])
+    feat_orq_c3[["<small><b>feat_orq_c3</b></small><br/>Classificar, decidir o fornecimento e verificar a prontidão"]]
+    feat_orq_c4[["<small><b>feat_orq_c4</b></small><br/>Especificar: requirements, design e ADRs"]]
+    feat_orq_e5(["<small><b>feat_orq_e5</b></small><br/>Fora do orçamento: devolver com o relatório de custo<br/><i>retorno: fora_do_orcamento</i>"])
+    feat_orq_c5[["<small><b>feat_orq_c5</b></small><br/>Decompor em tarefas, papéis e dependências"]]
+    feat_orq_c6[["<small><b>feat_orq_c6</b></small><br/>Preparar a execução (setup)"]]
+    feat_orq_c7[["<small><b>feat_orq_c7</b></small><br/>Execução das tarefas"]]
+    feat_orq_c8[["<small><b>feat_orq_c8</b></small><br/>Publicar em ambiente de testes"]]
+    feat_orq_c9[["<small><b>feat_orq_c9</b></small><br/>Testes da feature"]]
+    feat_orq_c19[["<small><b>feat_orq_c19</b></small><br/>Analisar a reprovação e iterar"]]
+    feat_orq_c10[["<small><b>feat_orq_c10</b></small><br/>Testes de ponta a ponta (E2E)"]]
+    feat_orq_c11[["<small><b>feat_orq_c11</b></small><br/>Avaliação de IA (evals)"]]
+    feat_orq_c12[["<small><b>feat_orq_c12</b></small><br/>Testes de performance"]]
+    feat_orq_c13[["<small><b>feat_orq_c13</b></small><br/>Testes de segurança"]]
+    feat_orq_c14[["<small><b>feat_orq_c14</b></small><br/>Review humano da entrega"]]
+    feat_orq_c15[["<small><b>feat_orq_c15</b></small><br/>Testes integrados"]]
+    feat_orq_c16[["<small><b>feat_orq_c16</b></small><br/>Implantação"]]
+    feat_orq_c17[["<small><b>feat_orq_c17</b></small><br/>Liberação e comunicação aos stakeholders"]]
+    feat_orq_c18[["<small><b>feat_orq_c18</b></small><br/>Validação em produção e monitoramento"]]
+    feat_orq_e1(["<small><b>feat_orq_e1</b></small><br/>Feature validada em produção<br/><i>retorno: feature_validada</i>"])
+  end
+  feat_orq_s0 --> feat_orq_c1
+  feat_orq_c1 -->|"necessidade_entendida"| feat_orq_c2
+  feat_orq_c1 -->|"reutilizar_existente"| feat_orq_e2
+  feat_orq_c1 -->|"fora_dos_objetivos"| feat_orq_e3
+  feat_orq_c1 -->|"precisa_de_spike"| feat_orq_e4
+  feat_orq_c2 -->|"requisitos_claros"| feat_orq_c3
+  feat_orq_c3 -->|"pronto_para_especificar"| feat_orq_c4
+  feat_orq_c3 -->|"fora_do_orcamento"| feat_orq_e5
+  feat_orq_c4 -->|"spec_pronta"| feat_orq_c5
+  feat_orq_c5 -->|"tarefas_mapeadas"| feat_orq_c6
+  feat_orq_c6 -->|"pronto_para_executar"| feat_orq_c7
+  feat_orq_c7 -->|"execucao_integrada"| feat_orq_c8
+  feat_orq_c8 -->|"publicado"| feat_orq_c9
+  feat_orq_c8 -->|"falha_na_publicacao"| feat_orq_c19
+  feat_orq_c9 -->|"testes_aprovados"| feat_orq_c10
+  feat_orq_c9 -->|"testes_reprovados"| feat_orq_c19
+  feat_orq_c19 -->|"spec_ajustada"| feat_orq_c5
+  feat_orq_c19 -->|"correcao_na_implementacao"| feat_orq_c7
+  feat_orq_c19 -->|"incidente_acionado"| feat_orq_c7
+  feat_orq_c10 -->|"aprovado"| feat_orq_c11
+  feat_orq_c10 -->|"nao_aplicavel"| feat_orq_c11
+  feat_orq_c10 -->|"reprovado"| feat_orq_c19
+  feat_orq_c11 -->|"aprovado"| feat_orq_c12
+  feat_orq_c11 -->|"nao_aplicavel"| feat_orq_c12
+  feat_orq_c11 -->|"reprovado"| feat_orq_c19
+  feat_orq_c12 -->|"aprovado"| feat_orq_c13
+  feat_orq_c12 -->|"nao_aplicavel"| feat_orq_c13
+  feat_orq_c12 -->|"reprovado"| feat_orq_c19
+  feat_orq_c13 -->|"aprovado"| feat_orq_c14
+  feat_orq_c13 -->|"reprovado"| feat_orq_c19
+  feat_orq_c14 -->|"aprovado_pelo_humano"| feat_orq_c15
+  feat_orq_c14 -->|"ajustes_solicitados"| feat_orq_c19
+  feat_orq_c15 -->|"testes_integrados_aprovados"| feat_orq_c16
+  feat_orq_c15 -->|"reprovado"| feat_orq_c19
+  feat_orq_c16 -->|"implantado"| feat_orq_c17
+  feat_orq_c16 -->|"implantacao_revertida"| feat_orq_c19
+  feat_orq_c17 -->|"liberado"| feat_orq_c18
+  feat_orq_c18 -->|"feature_validada"| feat_orq_e1
+  feat_orq_c18 -->|"incidente_acionado"| feat_orq_c19
+  z_LIG_feat_orq_e4_0{{"<b>Feature pede spike</b><br/>demanda: Spike e prova de conceito<br/>nó: spk_orq_s0"}}
+  feat_orq_e4 -.->|"aciona"| z_LIG_feat_orq_e4_0
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#332288,stroke:#1F1452,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#117733,stroke:#0A471F,stroke-width:1px,color:#FFFFFF
+  classDef z_R_3 fill:#CC6677,stroke:#7A3D47,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#44AA99,stroke:#29665C,stroke-width:1px,color:#000000
+  classDef z_R_5 fill:#0072B2,stroke:#00446B,stroke-width:1px,color:#FFFFFF
+  classDef z_R_6 fill:#AA4499,stroke:#66295C,stroke-width:1px,color:#FFFFFF
+  classDef z_R_7 fill:#009E73,stroke:#005F45,stroke-width:1px,color:#000000
+  classDef z_R_8 fill:#BBCC33,stroke:#707A1F,stroke-width:1px,color:#000000
+  classDef z_R_9 fill:#D55E00,stroke:#803800,stroke-width:1px,color:#000000
+  classDef z_R_10 fill:#CC79A7,stroke:#7A4964,stroke-width:1px,color:#000000
+  classDef z_R_11 fill:#F0E442,stroke:#908928,stroke-width:1px,color:#000000
+  classDef z_R_12 fill:#88CCEE,stroke:#527A8F,stroke-width:1px,color:#000000
+  classDef z_R_13 fill:#661100,stroke:#3D0A00,stroke-width:1px,color:#FFFFFF
+  classDef z_R_14 fill:#EE7733,stroke:#8F471F,stroke-width:1px,color:#000000
+  classDef z_R_15 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_R_16 fill:#997700,stroke:#5C4700,stroke-width:1px,color:#000000
+  classDef z_R_17 fill:#999933,stroke:#5C5C1F,stroke-width:1px,color:#000000
+  classDef z_R_18 fill:#EE8866,stroke:#8F523D,stroke-width:1px,color:#000000
+  classDef z_R_19 fill:#77AADD,stroke:#476685,stroke-width:1px,color:#000000
+  classDef z_R_20 fill:#4477AA,stroke:#294766,stroke-width:1px,color:#FFFFFF
+  classDef z_R_21 fill:#DDCC77,stroke:#857A47,stroke-width:1px,color:#000000
+  classDef z_R_22 fill:#AA3377,stroke:#661F47,stroke-width:1px,color:#FFFFFF
+  classDef z_R_23 fill:#882255,stroke:#521433,stroke-width:1px,color:#FFFFFF
+  classDef z_R_24 fill:#E69F00,stroke:#8A5F00,stroke-width:1px,color:#000000
+  classDef z_R_25 fill:#6699CC,stroke:#3D5C7A,stroke-width:1px,color:#000000
+  classDef z_C_0_1 fill:#332288,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_2 fill:#117733,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_3 fill:#CC6677,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_4 fill:#44AA99,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_5 fill:#0072B2,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_6 fill:#AA4499,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_7 fill:#009E73,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_8 fill:#BBCC33,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_9 fill:#D55E00,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_10 fill:#CC79A7,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_11 fill:#F0E442,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_12 fill:#88CCEE,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_13 fill:#661100,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_14 fill:#EE7733,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_15 fill:#56B4E9,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_16 fill:#997700,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_17 fill:#999933,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_18 fill:#EE8866,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_19 fill:#77AADD,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  class z_LEG_r0 z_R_1
+  class z_LEG_r1 z_R_2
+  class z_LEG_r2 z_R_3
+  class z_LEG_r3 z_R_4
+  class z_LEG_r4 z_R_5
+  class z_LEG_r5 z_R_6
+  class z_LEG_r6 z_R_7
+  class z_LEG_r7 z_R_8
+  class z_LEG_r8 z_R_9
+  class z_LEG_r9 z_R_10
+  class z_LEG_r10 z_R_11
+  class z_LEG_r11 z_R_12
+  class z_LEG_r12 z_R_13
+  class z_LEG_r13 z_R_14
+  class z_LEG_r14 z_R_15
+  class z_LEG_r15 z_R_16
+  class z_LEG_r16 z_R_17
+  class z_LEG_r17 z_R_18
+  class z_LEG_r18 z_R_19
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
+  class feat_orq_c1 z_C_0_1
+  class feat_orq_c2 z_C_0_2
+  class feat_orq_c3 z_C_0_3
+  class feat_orq_c4 z_C_0_4
+  class feat_orq_c5 z_C_0_5
+  class feat_orq_c6 z_C_0_6
+  class feat_orq_c7 z_C_0_7
+  class feat_orq_c8 z_C_0_8
+  class feat_orq_c9 z_C_0_9
+  class feat_orq_c19 z_C_0_10
+  class feat_orq_c10 z_C_0_11
+  class feat_orq_c11 z_C_0_12
+  class feat_orq_c12 z_C_0_13
+  class feat_orq_c13 z_C_0_14
+  class feat_orq_c14 z_C_0_15
+  class feat_orq_c15 z_C_0_16
+  class feat_orq_c16 z_C_0_17
+  class feat_orq_c17 z_C_0_18
+  class feat_orq_c18 z_C_0_19
+  class feat_orq_s0,feat_orq_e2,feat_orq_e3,feat_orq_e4,feat_orq_e5,feat_orq_e1 z_R_0
+  class z_LIG_feat_orq_e4_0 ponte
+  style z_SG_feat_orq fill:#E7ECEE,stroke:#607D8B,stroke-width:3px,color:#000000

@@ -5,7 +5,8 @@ import { FsContentRepository, LOCALES, type Locale } from '@lib/content';
 import { SiteIndex, readData, tabelaRows } from '@lib/content/site';
 import type { TabelaRow } from '@lib/schema/tabela';
 import { makeT } from './i18n';
-import { assembleDoc, type Doc } from '@lib/flows';
+import type { Doc } from '@lib/flows';
+import { guideDir, loadGuideDoc } from '@lib/guide';
 import type { Ctx } from './render/util';
 
 const root = process.env.KIT_ROOT ?? process.cwd();
@@ -57,7 +58,7 @@ export function data<T>(name: string): T {
 export function flowDoc(locale: Locale): Doc {
   let doc = shared.docs.get(locale);
   if (!doc) {
-    doc = assembleDoc(siteIndex(locale).pages.map((p) => p.entity));
+    doc = loadGuideDoc(guideDir(contentRoot));
     shared.docs.set(locale, doc);
   }
   return doc;

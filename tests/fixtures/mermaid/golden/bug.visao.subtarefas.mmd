@@ -1,4 +1,8 @@
 flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"]) ~~~ z_LEG_r0["<b>Reprodução</b><br/>raia chamada"] ~~~ z_LEG_r1["<b>Triagem e classificação</b><br/>raia chamada"] ~~~ z_LEG_r2["<b>Correção</b><br/>raia chamada"] ~~~ z_LEG_r3["<b>Publicação em ambiente de testes</b><br/>raia chamada"] ~~~ z_LEG_r4["<b>Validação e entrega</b><br/>raia chamada"] ~~~ z_LEG_r5["<b>Testes automatizados e regressão</b><br/>raia chamada"] ~~~ z_LEG_r6["<b>Prevenção</b><br/>raia chamada"] ~~~ z_LEG_r7["<b>Testes de ponta a ponta (E2E)</b><br/>raia chamada"]
+  end
   subgraph z_SG_bug_orq["<b>Orquestração do bug</b>"]
     direction LR
     bug_orq_s0(["<small><b>bug_orq_s0</b></small><br/>Bug reportado"])
@@ -58,6 +62,19 @@ flowchart LR
   classDef z_C_0_8 fill:#F0E442,stroke:#607D8B,stroke-width:4px,color:#000000
   classDef gw font-size:11px
   classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  class z_LEG_r0 z_R_1
+  class z_LEG_r1 z_R_2
+  class z_LEG_r2 z_R_3
+  class z_LEG_r3 z_R_4
+  class z_LEG_r4 z_R_5
+  class z_LEG_r5 z_R_6
+  class z_LEG_r6 z_R_7
+  class z_LEG_r7 z_R_8
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
   class bug_orq_c1 z_C_0_1
   class bug_orq_c2 z_C_0_2
   class bug_orq_c3 z_C_0_3

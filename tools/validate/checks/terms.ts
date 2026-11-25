@@ -7,10 +7,10 @@ import { fail, ok, type Check } from '../types';
 export const PUBLIC_TERMS_FILE = 'config/public-terms.txt';
 export const PRIVATE_TERMS_FILE = 'private/config/internal-terms.txt';
 /** Directories never scanned: dependencies, build output, scratch, the private folder and the vendored bundles. */
-const SKIP_DIRS = new Set(['.git', 'node_modules', '.astro', '.agents', 'private', 'vendor']);
+const SKIP_DIRS = new Set(['.git', 'node_modules', '.astro', '.agents', 'private', 'vendor', '.hypothesis', '.pytest_cache', '__pycache__']);
 /** Files never scanned: the lockfile and the public ruleset itself. */
 const SKIP_FILES = new Set(['package-lock.json', PUBLIC_TERMS_FILE]);
-const TEXT_EXT = new Set(['.md', '.yaml', '.yml', '.json', '.txt', '.ts', '.tsx', '.js', '.mjs', '.astro', '.css', '.html', '.toml', '.sh', '']);
+const TEXT_EXT = new Set(['.md', '.yaml', '.yml', '.json', '.txt', '.ts', '.tsx', '.js', '.mjs', '.astro', '.css', '.html', '.toml', '.sh', '.py', '.cfg', '']);
 function files(root: string, rel = '', out: string[] = []): string[] {
   for (const name of readdirSync(join(root, rel)).sort()) {
     const childRel = rel ? join(rel, name) : name;

@@ -1,0 +1,39 @@
+flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"])
+  end
+  subgraph z_SG_com_dea["<b>Execução pelos agentes por papel</b>"]
+    direction LR
+    com_dea_s0(["<small><b>com_dea_s0</b></small><br/>Tarefas delegadas aos agentes por papel"])
+    com_dea_t1["<small><b>com_dea_t1</b></small><br/>Delega com autonomia delimitada"]
+    com_dea_t2["<small><b>com_dea_t2</b></small><br/>Agentes executam: código, testes, docs e PR"]
+    com_dea_g1{"<small><b>com_dea_g1</b></small><br/>A saída do agente<br/>está dentro do<br/>esperado?"}
+    com_dea_e1(["<small><b>com_dea_e1</b></small><br/>Entrega gerada pelos agentes<br/><i>retorno: entrega_gerada</i>"])
+    com_dea_e2(["<small><b>com_dea_e2</b></small><br/>Desvio do agente sinalizado<br/><i>retorno: desvio_do_agente</i>"])
+  end
+  com_dea_s0 --> com_dea_t1
+  com_dea_t1 --> com_dea_t2
+  com_dea_t2 --> com_dea_g1
+  com_dea_g1 -->|"sim"| com_dea_e1
+  com_dea_g1 -->|"não, desvio do esperado"| com_dea_e2
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#332288,stroke:#1F1452,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#117733,stroke:#0A471F,stroke-width:1px,color:#FFFFFF
+  classDef z_R_3 fill:#009E73,stroke:#005F45,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#D55E00,stroke:#803800,stroke-width:1px,color:#000000
+  classDef z_R_5 fill:#999933,stroke:#5C5C1F,stroke-width:1px,color:#000000
+  classDef z_R_6 fill:#77AADD,stroke:#476685,stroke-width:1px,color:#000000
+  classDef z_R_7 fill:#882255,stroke:#521433,stroke-width:1px,color:#FFFFFF
+  classDef z_R_8 fill:#E69F00,stroke:#8A5F00,stroke-width:1px,color:#000000
+  classDef z_R_9 fill:#6699CC,stroke:#3D5C7A,stroke-width:1px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
+  class com_dea_s0,com_dea_t1,com_dea_t2,com_dea_g1,com_dea_e1,com_dea_e2 z_R_8
+  class com_dea_g1 gw
+  style z_SG_com_dea fill:#FBF1D9,stroke:#E69F00,stroke-width:3px,color:#000000

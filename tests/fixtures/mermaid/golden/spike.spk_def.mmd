@@ -1,0 +1,28 @@
+flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"])
+  end
+  subgraph z_SG_spk_def["<b>Pergunta e timebox</b>"]
+    direction LR
+    spk_def_s0(["<small><b>spk_def_s0</b></small><br/>Incerteza registrada, definir o spike"])
+    spk_def_t1["<small><b>spk_def_t1</b></small><br/>Escrever a pergunta e o critério de sucesso"]
+    spk_def_t2["<small><b>spk_def_t2</b></small><br/>Definir o timebox e o que fica fora"]
+    spk_def_e1(["<small><b>spk_def_e1</b></small><br/>Spike definido<br/><i>retorno: definido</i>"])
+  end
+  spk_def_s0 --> spk_def_t1
+  spk_def_t1 --> spk_def_t2
+  spk_def_t2 --> spk_def_e1
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#332288,stroke:#1F1452,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#117733,stroke:#0A471F,stroke-width:1px,color:#FFFFFF
+  classDef z_R_3 fill:#CC6677,stroke:#7A3D47,stroke-width:1px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
+  class spk_def_s0,spk_def_t1,spk_def_t2,spk_def_e1 z_R_1
+  style z_SG_spk_def fill:#E0DEED,stroke:#332288,stroke-width:3px,color:#000000

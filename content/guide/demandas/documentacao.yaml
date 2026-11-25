@@ -1,0 +1,453 @@
+# Demanda: Documentação. Esqueleto (onda 2): orquestradora, raias próprias e raias comuns. Status rascunho.
+demandas:
+  - id: documentacao
+    nome: Documentação
+    sigla: doc
+    publico: false
+artefatos:
+  - id: plano_da_documentacao
+    nome: Plano da documentação
+    descricao: Para quem, que tipo (tutorial, guia, referência, explicação) e onde mora
+    tipo: documento
+    subtipo: plano
+    exemplo: Guia de uso da API de cupons para times parceiros, no portal de desenvolvedores, gerado a partir do contrato
+    status: rascunho
+    publico: false
+  - id: documentacao_escrita
+    nome: Documentação escrita
+    descricao: Texto ou diagrama pronto para revisão
+    tipo: documento
+    subtipo: guia
+    exemplo: Guia com autenticação, três exemplos de chamada e a tabela de erros
+    status: rascunho
+    publico: false
+  - id: documentacao_validada
+    nome: Documentação validada
+    descricao: Documento ajustado depois de alguém do público usar
+    tipo: documento
+    subtipo: guia
+    exemplo: Uma pessoa de um time parceiro integrou seguindo só o guia; dois passos foram reescritos
+    status: rascunho
+    publico: false
+  - id: aviso_de_documentacao
+    nome: Aviso de documentação
+    descricao: Mensagem com o link e o que mudou
+    tipo: acao
+    subtipo: comunicacao
+    exemplo: 'Mensagem no canal dos times parceiros: guia novo da API de cupons publicado, com o link'
+    destinatarios:
+      - times_dependentes
+      - suporte
+    status: rascunho
+    publico: false
+raias:
+  - id: doc_orq
+    nome: 'Orquestração: documentação'
+    demanda: documentacao
+    responsabilidade: Conduzir a demanda de documentação do início ao fim, delegando cada etapa a uma raia
+    cor: '#607D8B'
+    orquestradora: true
+    status: rascunho
+    publico: false
+  - id: doc_pla
+    nome: Planejamento da documentação
+    demanda: documentacao
+    responsabilidade: Definir o público, o tipo de documento e a fonte de verdade
+    cor: '#332288'
+    status: rascunho
+    publico: false
+  - id: doc_esc
+    nome: Escrita da documentação
+    demanda: documentacao
+    responsabilidade: Escrever a documentação e validar com quem vai usar
+    cor: '#117733'
+    status: rascunho
+    publico: false
+  - id: doc_pub
+    nome: Publicação e divulgação
+    demanda: documentacao
+    responsabilidade: Publicar no lugar certo e avisar quem precisa saber
+    cor: '#CC6677'
+    status: rascunho
+    publico: false
+decisoes:
+  - id: doc_pla_s0
+    raia: doc_pla
+    tipo: inicio
+    rotulo: 'Iniciar: planejamento da documentação'
+    condicao: ''
+    proximo:
+      - para: doc_pla_t1
+        condicao: ''
+    estado: {}
+    playbook: pb_doc_pla_s0
+    status: rascunho
+    publico: false
+  - id: doc_pla_t1
+    raia: doc_pla
+    tipo: tarefa
+    rotulo: Definir público, tipo e fonte de verdade
+    condicao: ''
+    proximo:
+      - para: doc_pla_e1
+        condicao: ''
+    estado: {}
+    saidas:
+      - plano_da_documentacao
+    papel: tech_lead
+    apoio: [pm]
+    playbook: pb_doc_pla_t1
+    status: rascunho
+    publico: false
+  - id: doc_pla_e1
+    raia: doc_pla
+    tipo: fim
+    retorno: plano_definido
+    rotulo: Plano definido
+    condicao: ''
+    proximo: []
+    estado: {}
+    saidas:
+      - plano_da_documentacao
+    playbook: pb_doc_pla_e1
+    status: rascunho
+    publico: false
+  - id: doc_esc_s0
+    raia: doc_esc
+    tipo: inicio
+    rotulo: 'Iniciar: escrita da documentação'
+    condicao: ''
+    proximo:
+      - para: doc_esc_t1
+        condicao: ''
+    estado: {}
+    playbook: pb_doc_esc_s0
+    status: rascunho
+    publico: false
+  - id: doc_esc_t1
+    raia: doc_esc
+    tipo: tarefa
+    rotulo: Escrever a documentação
+    condicao: ''
+    proximo:
+      - para: doc_esc_t2
+        condicao: ''
+    estado: {}
+    saidas:
+      - documentacao_escrita
+    papel: tech_lead
+    apoio: [dev]
+    playbook: pb_doc_esc_t1
+    status: rascunho
+    publico: false
+  - id: doc_esc_t2
+    raia: doc_esc
+    tipo: tarefa
+    rotulo: Validar com uma pessoa do público
+    condicao: ''
+    proximo:
+      - para: doc_esc_e1
+        condicao: ''
+    estado: {}
+    entradas:
+      - documentacao_escrita
+    saidas:
+      - documentacao_validada
+    papel: tech_lead
+    playbook: pb_doc_esc_t2
+    status: rascunho
+    publico: false
+  - id: doc_esc_e1
+    raia: doc_esc
+    tipo: fim
+    retorno: documentacao_pronta
+    rotulo: Documentação pronta
+    condicao: ''
+    proximo: []
+    estado: {}
+    saidas:
+      - documentacao_validada
+    playbook: pb_doc_esc_e1
+    status: rascunho
+    publico: false
+  - id: doc_pub_s0
+    raia: doc_pub
+    tipo: inicio
+    rotulo: 'Iniciar: publicação e divulgação'
+    condicao: ''
+    proximo:
+      - para: doc_pub_t1
+        condicao: ''
+    estado: {}
+    playbook: pb_doc_pub_s0
+    status: rascunho
+    publico: false
+  - id: doc_pub_t1
+    raia: doc_pub
+    tipo: tarefa
+    rotulo: Publicar e avisar os interessados
+    condicao: ''
+    proximo:
+      - para: doc_pub_e1
+        condicao: ''
+    estado: {}
+    saidas:
+      - aviso_de_documentacao
+    papel: tech_lead
+    apoio: [pm]
+    playbook: pb_doc_pub_t1
+    status: rascunho
+    publico: false
+  - id: doc_pub_e1
+    raia: doc_pub
+    tipo: fim
+    retorno: documentacao_publicada
+    rotulo: Documentação publicada
+    condicao: ''
+    proximo: []
+    estado: {}
+    saidas:
+      - aviso_de_documentacao
+    playbook: pb_doc_pub_e1
+    status: rascunho
+    publico: false
+  - id: doc_orq_s0
+    raia: doc_orq
+    tipo: inicio
+    rotulo: Necessidade de documentação
+    condicao: ''
+    proximo:
+      - para: doc_orq_c1
+        condicao: ''
+    estado: {}
+    playbook: pb_doc_orq_s0
+    status: rascunho
+    publico: false
+  - id: doc_orq_c1
+    raia: doc_orq
+    tipo: chamada
+    raia_chamada: doc_pla
+    rotulo: Planejamento da documentação
+    condicao: ''
+    proximo:
+      - para: doc_orq_c2
+        condicao: plano_definido
+    estado: {}
+    saidas:
+      - plano_da_documentacao
+    playbook: pb_doc_orq_c1
+    status: rascunho
+    publico: false
+  - id: doc_orq_c2
+    raia: doc_orq
+    tipo: chamada
+    raia_chamada: doc_esc
+    rotulo: Escrita da documentação
+    condicao: ''
+    proximo:
+      - para: doc_orq_c3
+        condicao: documentacao_pronta
+    estado: {}
+    entradas:
+      - plano_da_documentacao
+    saidas:
+      - documentacao_validada
+    playbook: pb_doc_orq_c2
+    status: rascunho
+    publico: false
+  - id: doc_orq_c3
+    raia: doc_orq
+    tipo: chamada
+    raia_chamada: com_rev
+    rotulo: Review humano
+    condicao: ''
+    proximo:
+      - para: doc_orq_c4
+        condicao: aprovado_pelo_humano
+      - para: doc_orq_c2
+        condicao: ajustes_solicitados
+    estado: {}
+    entradas:
+      - documentacao_validada
+    playbook: pb_doc_orq_c3
+    status: rascunho
+    publico: false
+  - id: doc_orq_c4
+    raia: doc_orq
+    tipo: chamada
+    raia_chamada: doc_pub
+    rotulo: Publicação e divulgação
+    condicao: ''
+    proximo:
+      - para: doc_orq_e1
+        condicao: documentacao_publicada
+    estado: {}
+    saidas:
+      - aviso_de_documentacao
+    playbook: pb_doc_orq_c4
+    status: rascunho
+    publico: false
+  - id: doc_orq_e1
+    raia: doc_orq
+    tipo: fim
+    retorno: documentacao_disponivel
+    rotulo: Documentação publicada e divulgada
+    condicao: ''
+    proximo: []
+    estado: {}
+    playbook: pb_doc_orq_e1
+    status: rascunho
+    publico: false
+    entradas:
+      - aviso_de_documentacao
+playbooks:
+  - id: pb_doc_pla_s0
+    exemplo: "A raia Planejamento da documentação começa; o primeiro passo é «Definir público, tipo e fonte de verdade»."
+    resumo: 'Início da raia Planejamento da documentação. Responsabilidade: definir o público, o tipo de documento e a fonte de verdade.'
+    status: rascunho
+    publico: false
+  - id: pb_doc_pla_t1
+    exemplo: "Tech Lead entrega Plano da documentação. Plano da documentação: Guia de uso da API de cupons para times parceiros, no portal de desenvolvedores, gerado a partir do contrato."
+    resumo: 'Definir público, tipo e fonte de verdade. Entrega: para quem, que tipo (tutorial, guia, referência, explicação) e onde mora.'
+    perguntas_chave: [pq_doc_pla_t1_1]
+    status: rascunho
+    publico: false
+  - id: pb_doc_pla_e1
+    exemplo: "A raia Planejamento da documentação devolve «plano_definido» entregando Plano da documentação; em Planejamento da documentação (doc_orq_c1), o fluxo segue para «Escrita da documentação». Por exemplo, Plano da documentação: Guia de uso da API de cupons para times parceiros, no portal de desenvolvedores, gerado a partir do contrato."
+    resumo: Retorno «plano_definido» da raia Planejamento da documentação. Quem chamou a raia segue por este retorno.
+    status: rascunho
+    publico: false
+  - id: pb_doc_esc_s0
+    exemplo: "A raia Escrita da documentação começa; o primeiro passo é «Escrever a documentação»."
+    resumo: 'Início da raia Escrita da documentação. Responsabilidade: escrever a documentação e validar com quem vai usar.'
+    status: rascunho
+    publico: false
+  - id: pb_doc_esc_t1
+    exemplo: "Tech Lead entrega Documentação escrita. Documentação escrita: Guia com autenticação, três exemplos de chamada e a tabela de erros."
+    resumo: 'Escrever a documentação. Entrega: texto ou diagrama pronto para revisão.'
+    perguntas_chave: [pq_doc_esc_t1_1]
+    status: rascunho
+    publico: false
+  - id: pb_doc_esc_t2
+    exemplo: "Tech Lead entrega Documentação validada. Documentação validada: Uma pessoa de um time parceiro integrou seguindo só o guia; dois passos foram reescritos."
+    resumo: 'Validar com uma pessoa do público. Entrega: documento ajustado depois de alguém do público usar.'
+    perguntas_chave: [pq_doc_esc_t2_1]
+    status: rascunho
+    publico: false
+  - id: pb_doc_esc_e1
+    exemplo: "A raia Escrita da documentação devolve «documentacao_pronta» entregando Documentação validada; em Escrita da documentação (doc_orq_c2), o fluxo segue para «Review humano». Por exemplo, Documentação validada: Uma pessoa de um time parceiro integrou seguindo só o guia; dois passos foram reescritos."
+    resumo: Retorno «documentacao_pronta» da raia Escrita da documentação. Quem chamou a raia segue por este retorno.
+    status: rascunho
+    publico: false
+  - id: pb_doc_pub_s0
+    exemplo: "A raia Publicação e divulgação começa; o primeiro passo é «Publicar e avisar os interessados»."
+    resumo: 'Início da raia Publicação e divulgação. Responsabilidade: publicar no lugar certo e avisar quem precisa saber.'
+    status: rascunho
+    publico: false
+  - id: pb_doc_pub_t1
+    exemplo: "Tech Lead entrega Aviso de documentação. Aviso de documentação: Mensagem no canal dos times parceiros: guia novo da API de cupons publicado, com o link."
+    resumo: 'Publicar e avisar os interessados. Entrega: mensagem com o link e o que mudou.'
+    perguntas_chave: [pq_doc_pub_t1_1]
+    status: rascunho
+    publico: false
+  - id: pb_doc_pub_e1
+    exemplo: "A raia Publicação e divulgação devolve «documentacao_publicada» entregando Aviso de documentação; em Publicação e divulgação (doc_orq_c4), o fluxo segue para «Documentação publicada e divulgada». Por exemplo, Aviso de documentação: Mensagem no canal dos times parceiros: guia novo da API de cupons publicado, com o link."
+    resumo: Retorno «documentacao_publicada» da raia Publicação e divulgação. Quem chamou a raia segue por este retorno.
+    status: rascunho
+    publico: false
+  - id: pb_doc_orq_s0
+    exemplo: "A raia Orquestração: documentação começa; o primeiro passo é «Planejamento da documentação»."
+    resumo: 'Documentação é legado: escreva para quem vem depois. Defina o público e a fonte de verdade antes de escrever.'
+    status: rascunho
+    publico: false
+  - id: pb_doc_orq_c1
+    exemplo: "Chama a raia Planejamento da documentação; «plano_definido» leva a «Escrita da documentação». Por exemplo, Plano da documentação: Guia de uso da API de cupons para times parceiros, no portal de desenvolvedores, gerado a partir do contrato."
+    resumo: Chama a raia Planejamento da documentação. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - 'Retornos possíveis: plano_definido'
+    status: rascunho
+    publico: false
+  - id: pb_doc_orq_c2
+    exemplo: "Chama a raia Escrita da documentação; «documentacao_pronta» leva a «Review humano». Por exemplo, Documentação validada: Uma pessoa de um time parceiro integrou seguindo só o guia; dois passos foram reescritos."
+    resumo: Chama a raia Escrita da documentação. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - 'Retornos possíveis: documentacao_pronta'
+    status: rascunho
+    publico: false
+  - id: pb_doc_orq_c3
+    exemplo: "Chama a raia Review humano; «aprovado_pelo_humano» leva a «Publicação e divulgação»; «ajustes_solicitados» leva a «Escrita da documentação». Por exemplo, Documentação validada: Uma pessoa de um time parceiro integrou seguindo só o guia; dois passos foram reescritos."
+    resumo: Chama a raia Review humano. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - 'Retornos possíveis: aprovado_pelo_humano, ajustes_solicitados'
+    status: rascunho
+    publico: false
+  - id: pb_doc_orq_c4
+    exemplo: "Chama a raia Publicação e divulgação; «documentacao_publicada» leva a «Documentação publicada e divulgada». Por exemplo, Aviso de documentação: Mensagem no canal dos times parceiros: guia novo da API de cupons publicado, com o link."
+    resumo: Chama a raia Publicação e divulgação. O fluxo segue pelo retorno que a raia devolver.
+    fazer:
+      - 'Retornos possíveis: documentacao_publicada'
+    status: rascunho
+    publico: false
+  - id: pb_doc_orq_e1
+    exemplo: "A demanda termina em «documentacao_disponivel»: documentação publicada e divulgada, com Aviso de documentação. Por exemplo, Aviso de documentação: Mensagem no canal dos times parceiros: guia novo da API de cupons publicado, com o link."
+    resumo: Documentação publicada e divulgada. Fim da demanda.
+    status: rascunho
+    publico: false
+celulas:
+  - demanda: documentacao
+    requisito: funcional
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: documentacao
+    requisito: nao_funcional
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: documentacao
+    requisito: restricao
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+  - demanda: documentacao
+    requisito: probabilistico_ia
+    perguntas_chave: []
+    tecnicas: []
+    abordagens: []
+    padroes: []
+    estrategias: []
+    categorias_ferramenta: []
+    publico: false
+perguntas:
+  - id: pq_doc_pla_t1_1
+    texto: "O que precisa estar claro para definir público, tipo e fonte de verdade?"
+    depende_de: [doc_pla_t1]
+    status: rascunho
+    publico: false
+  - id: pq_doc_esc_t1_1
+    texto: "O que precisa estar claro para escrever a documentação?"
+    depende_de: [doc_esc_t1]
+    status: rascunho
+    publico: false
+  - id: pq_doc_esc_t2_1
+    texto: "O que precisa estar claro para validar com uma pessoa do público?"
+    depende_de: [doc_esc_t2]
+    status: rascunho
+    publico: false
+  - id: pq_doc_pub_t1_1
+    texto: "O que precisa estar claro para publicar e avisar os interessados?"
+    depende_de: [doc_pub_t1]
+    status: rascunho
+    publico: false

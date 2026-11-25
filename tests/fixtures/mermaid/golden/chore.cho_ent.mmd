@@ -1,0 +1,46 @@
+flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"])
+  end
+  subgraph z_SG_cho_ent["<b>Enquadramento da tarefa</b>"]
+    direction LR
+    cho_ent_s0(["<small><b>cho_ent_s0</b></small><br/>Iniciar: enquadramento da tarefa"])
+    cho_ent_t1["<small><b>cho_ent_t1</b></small><br/>Descrever a tarefa e o critério de pronto"]
+    cho_ent_g1{"<small><b>cho_ent_g1</b></small><br/>Ainda é uma chore?"}
+    cho_ent_e1(["<small><b>cho_ent_e1</b></small><br/>Confirmada como chore<br/><i>retorno: confirmada_como_chore</i>"])
+    cho_ent_e2(["<small><b>cho_ent_e2</b></small><br/>Reclassificar como feature<br/><i>retorno: reclassificar_como_feature</i>"])
+    cho_ent_e3(["<small><b>cho_ent_e3</b></small><br/>Reclassificar como dívida técnica<br/><i>retorno: reclassificar_como_divida_tecnica</i>"])
+    cho_ent_e4(["<small><b>cho_ent_e4</b></small><br/>Reclassificar como migração<br/><i>retorno: reclassificar_como_migracao</i>"])
+    cho_ent_e5(["<small><b>cho_ent_e5</b></small><br/>Reclassificar como infraestrutura<br/><i>retorno: reclassificar_como_infraestrutura</i>"])
+    cho_ent_e6(["<small><b>cho_ent_e6</b></small><br/>Reclassificar como descontinuação<br/><i>retorno: reclassificar_como_descontinuacao</i>"])
+    cho_ent_e7(["<small><b>cho_ent_e7</b></small><br/>Reclassificar como segurança<br/><i>retorno: reclassificar_como_seguranca</i>"])
+  end
+  cho_ent_s0 --> cho_ent_t1
+  cho_ent_t1 --> cho_ent_g1
+  cho_ent_g1 -->|"sim: rotina, sem mudança de comportamento"| cho_ent_e1
+  cho_ent_g1 -->|"muda comportamento para o usuário"| cho_ent_e2
+  cho_ent_g1 -->|"adiada até atrasar cada mudança"| cho_ent_e3
+  cho_ent_g1 -->|"exige migração ou upgrade com quebra de compatibilidade"| cho_ent_e4
+  cho_ent_g1 -->|"exige mudança de infraestrutura"| cho_ent_e5
+  cho_ent_g1 -->|"remove algo que ainda tem consumidores"| cho_ent_e6
+  cho_ent_g1 -->|"sinal de invasão ou falha de segurança"| cho_ent_e7
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#332288,stroke:#1F1452,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#009E73,stroke:#005F45,stroke-width:1px,color:#000000
+  classDef z_R_3 fill:#D55E00,stroke:#803800,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_R_5 fill:#999933,stroke:#5C5C1F,stroke-width:1px,color:#000000
+  classDef z_R_6 fill:#882255,stroke:#521433,stroke-width:1px,color:#FFFFFF
+  classDef z_R_7 fill:#E69F00,stroke:#8A5F00,stroke-width:1px,color:#000000
+  classDef z_R_8 fill:#6699CC,stroke:#3D5C7A,stroke-width:1px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
+  class cho_ent_s0,cho_ent_t1,cho_ent_g1,cho_ent_e1,cho_ent_e2,cho_ent_e3,cho_ent_e4,cho_ent_e5,cho_ent_e6,cho_ent_e7 z_R_1
+  class cho_ent_g1 gw
+  style z_SG_cho_ent fill:#E0DEED,stroke:#332288,stroke-width:3px,color:#000000

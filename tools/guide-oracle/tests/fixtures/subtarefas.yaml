@@ -1,0 +1,653 @@
+# Fixture com subtarefas, artefatos, variáveis e as quatro formas de uso de técnica.
+# Base: raias_minimo.yaml. Lacunas de propósito: art_alerta (sem consumidor), art_politica (sem produtor), art_orfao (nenhum).
+# Catálogo por demanda: art_orfao não tem uso (some da tela e gera ITEM_SEM_USO); art_postmortem e mitigado são só do
+# incidente; severidade é compartilhada por bug e incidente; os demais itens são só do bug.
+versao: 1
+demandas:
+- id: bug
+  nome: Bug
+  sigla: bug
+  publico: false
+- id: incidente
+  nome: Incidente
+  sigla: inc
+  publico: false
+raias:
+- id: bug_orq
+  nome: Orquestração do bug
+  demanda: bug
+  responsabilidade: Conduzir o bug da entrada ao fechamento
+  cor: '#4F81BD'
+  orquestradora: true
+  status: rascunho
+  publico: false
+  entradas:
+  - art_relato
+- id: bug_diag
+  nome: Diagnóstico
+  demanda: bug
+  responsabilidade: Reproduzir o defeito e achar a causa raiz
+  cor: '#F2C14E'
+  orquestradora: false
+  status: rascunho
+  publico: false
+  entradas:
+  - art_relato
+  - severidade
+- id: bug_corr
+  nome: Correção
+  demanda: bug
+  responsabilidade: Corrigir e verificar a correção
+  cor: '#2B2B2B'
+  orquestradora: false
+  status: rascunho
+  publico: false
+  entradas:
+  - art_causa
+- id: inc_orq
+  nome: Orquestração do incidente
+  demanda: incidente
+  responsabilidade: Conduzir o incidente até a normalização
+  cor: '#C0504D'
+  orquestradora: true
+  status: rascunho
+  publico: false
+  entradas:
+  - severidade
+requisitos:
+- id: funcional
+  nome: Funcional
+  publico: false
+decisoes:
+- id: bug_orq_s1
+  raia: bug_orq
+  tipo: inicio
+  rotulo: Bug reportado
+  condicao: ''
+  proximo:
+  - para: bug_orq_c1
+    condicao: ''
+  estado: {}
+  playbook: pb_bug_orq_s1
+  layout:
+    coluna: 0
+  publico: false
+- id: bug_orq_c1
+  raia: bug_orq
+  tipo: chamada
+  raia_chamada: bug_diag
+  rotulo: Diagnosticar o bug
+  condicao: ''
+  proximo:
+  - para: bug_orq_c2
+    condicao: causa encontrada
+  - para: bug_orq_e2
+    condicao: não reproduzível
+  estado: {}
+  playbook: pb_bug_orq_c1
+  layout:
+    coluna: 1
+  publico: false
+- id: bug_orq_c2
+  raia: bug_orq
+  tipo: chamada
+  raia_chamada: bug_corr
+  rotulo: Corrigir o bug
+  condicao: ''
+  proximo:
+  - para: bug_orq_g1
+    condicao: corrigido
+  estado: {}
+  layout:
+    coluna: 2
+  publico: false
+- id: bug_orq_g1
+  raia: bug_orq
+  tipo: bifurcacao
+  rotulo: Bug é potencial incidente?
+  condicao: raio de impacto, dados, dinheiro ou segurança
+  proximo:
+  - para: bug_orq_t1
+    condicao: sim
+  - para: bug_orq_e1
+    condicao: não
+  estado: {}
+  ligacoes:
+  - demanda_destino: incidente
+    para: inc_orq_s1
+    condicao: pelo menos um critério de potencial incidente
+    tipo: aciona
+    rotulo: Bug vira potencial incidente
+  playbook: pb_bug_orq_g1
+  layout:
+    coluna: 3
+  publico: false
+- id: bug_orq_t1
+  raia: bug_orq
+  tipo: tarefa
+  rotulo: Registrar o bug no ticket do incidente
+  condicao: ''
+  proximo:
+  - para: bug_orq_e1
+    condicao: ''
+  estado: {}
+  playbook: pb_bug_orq_t1
+  layout:
+    coluna: 4
+  publico: false
+  entradas:
+  - art_relato
+  saidas:
+  - art_alerta
+  subtarefas:
+  - id: bug_orq_t1_st1
+    rotulo: Abrir o ticket do incidente
+    descricao: Abra o ticket e anexe o relato.
+    responsavel: pessoa
+    entradas:
+    - art_relato
+    saidas: []
+    tecnicas: []
+  - id: bug_orq_t1_st2
+    rotulo: Vincular o bug ao ticket
+    descricao: O agente cria o vínculo e emite o alerta.
+    responsavel: agente
+    entradas:
+    - art_relato
+    saidas:
+    - art_alerta
+    tecnicas: []
+- id: bug_orq_e1
+  raia: bug_orq
+  tipo: fim
+  retorno: bug fechado
+  rotulo: Bug fechado
+  condicao: ''
+  proximo: []
+  estado: {}
+  layout:
+    coluna: 5
+  publico: false
+- id: bug_orq_e2
+  raia: bug_orq
+  tipo: fim
+  retorno: bug descartado
+  rotulo: Bug descartado por falta de reprodução
+  condicao: ''
+  proximo: []
+  estado: {}
+  layout:
+    coluna: 5
+  publico: false
+- id: bug_diag_s1
+  raia: bug_diag
+  tipo: inicio
+  rotulo: Diagnóstico solicitado
+  condicao: ''
+  proximo:
+  - para: bug_diag_t1
+    condicao: ''
+  estado: {}
+  playbook: pb_bug_diag_s1
+  layout:
+    coluna: 0
+  publico: false
+- id: bug_diag_t1
+  raia: bug_diag
+  tipo: tarefa
+  rotulo: Reproduzir o defeito
+  condicao: ''
+  proximo:
+  - para: bug_diag_g1
+    condicao: ''
+  estado: {}
+  layout:
+    coluna: 1
+  publico: false
+  playbook: pb_bug_diag_t1
+  entradas:
+  - art_relato
+  - severidade
+  saidas:
+  - art_repro
+  - reproduzido
+  tecnicas:
+  - tecnica: tec_x5_whys
+    uso: obrigatoria
+    porque: Evita parar no sintoma.
+  - tecnica: tec_bisect
+    uso: recomendada
+    porque: Reduz o espaço de busca.
+  - tecnica: tec_logs
+    uso: opcional
+  - tecnica: tec_pareamento
+    uso: condicional
+    quando:
+      todos:
+      - var: severidade
+        em:
+        - sev1
+        - sev2
+    porque: Bug grave pede segunda opinião.
+  subtarefas:
+  - id: bug_diag_t1_st1
+    rotulo: Ler o relato e coletar o ambiente
+    descricao: Reúna versão, ambiente e passos citados.
+    responsavel: agente
+    entradas:
+    - art_relato
+    saidas: []
+    tecnicas:
+    - tecnica: tec_logs
+      uso: recomendada
+  - id: bug_diag_t1_st2
+    rotulo: Tentar reproduzir
+    descricao: Execute os passos em ambiente controlado.
+    exemplo: "Rodar o passo a passo no simulador com o cupom QUINZE: a tela fica branca no terceiro toque."
+    responsavel: ambos
+    entradas:
+    - art_relato
+    - severidade
+    saidas:
+    - art_repro
+    - reproduzido
+    tecnicas:
+    - tecnica: tec_bisect
+      uso: opcional
+    - tecnica: tec_pareamento
+      uso: condicional
+      quando:
+        algum:
+        - var: severidade
+          igual: sev1
+        - var: tentativas
+          maior_que: 2
+      porque: Sem reprodução após várias tentativas.
+  - id: bug_diag_t1_st3
+    rotulo: Registrar os passos mínimos
+    descricao: Anote a sequência mínima para o time.
+    responsavel: pessoa
+    entradas:
+    - art_repro
+    saidas: []
+    tecnicas:
+    - tecnica: tec_x5_whys
+      uso: obrigatoria
+      porque: Garante a causa, não o sintoma.
+- id: bug_diag_g1
+  raia: bug_diag
+  tipo: bifurcacao
+  rotulo: Reproduziu?
+  condicao: ''
+  proximo:
+  - para: bug_diag_t2
+    condicao: sim
+  - para: bug_diag_e2
+    condicao: não
+  estado: {}
+  layout:
+    coluna: 2
+  publico: false
+- id: bug_diag_t2
+  raia: bug_diag
+  tipo: tarefa
+  rotulo: Isolar a causa raiz
+  condicao: ''
+  proximo:
+  - para: bug_diag_e1
+    condicao: ''
+  estado: {}
+  entradas:
+  - art_repro
+  - art_politica
+  saidas:
+  - art_causa
+  layout:
+    coluna: 3
+  publico: false
+- id: bug_diag_e1
+  raia: bug_diag
+  tipo: fim
+  retorno: causa encontrada
+  rotulo: Causa raiz identificada
+  condicao: ''
+  proximo: []
+  estado: {}
+  layout:
+    coluna: 4
+  publico: false
+  saidas:
+  - art_causa
+- id: bug_diag_e2
+  raia: bug_diag
+  tipo: fim
+  retorno: não reproduzível
+  rotulo: Sem reprodução
+  condicao: ''
+  proximo: []
+  estado: {}
+  layout:
+    coluna: 4
+  publico: false
+- id: bug_corr_s1
+  raia: bug_corr
+  tipo: inicio
+  rotulo: Correção solicitada
+  condicao: ''
+  proximo:
+  - para: bug_corr_t1
+    condicao: ''
+  estado: {}
+  layout:
+    coluna: 0
+  publico: false
+- id: bug_corr_t1
+  raia: bug_corr
+  tipo: tarefa
+  rotulo: Implementar a correção com teste de regressão
+  condicao: ''
+  proximo:
+  - para: bug_corr_e1
+    condicao: ''
+  estado: {}
+  playbook: pb_bug_corr_t1
+  layout:
+    coluna: 1
+  publico: false
+  entradas:
+  - art_causa
+  saidas:
+  - art_patch
+  subtarefas:
+  - id: bug_corr_t1_st1
+    rotulo: Escrever o teste que falha
+    descricao: Teste de regressão antes da correção.
+    responsavel: agente
+    entradas:
+    - art_causa
+    saidas: []
+    tecnicas: []
+  - id: bug_corr_t1_st2
+    rotulo: Corrigir e revisar
+    descricao: Corrija e passe pela revisão humana.
+    responsavel: ambos
+    entradas:
+    - art_causa
+    saidas:
+    - art_patch
+    - tentativas
+    tecnicas: []
+- id: bug_corr_e1
+  raia: bug_corr
+  tipo: fim
+  retorno: corrigido
+  rotulo: Correção verificada
+  condicao: ''
+  proximo: []
+  estado: {}
+  layout:
+    coluna: 2
+  publico: false
+- id: inc_orq_s1
+  raia: inc_orq
+  tipo: inicio
+  rotulo: Incidente declarado
+  condicao: ''
+  proximo:
+  - para: inc_orq_t1
+    condicao: ''
+  estado: {}
+  layout:
+    coluna: 0
+  publico: false
+- id: inc_orq_t1
+  raia: inc_orq
+  tipo: tarefa
+  rotulo: Mitigar e comunicar
+  condicao: ''
+  proximo:
+  - para: inc_orq_e1
+    condicao: ''
+  estado:
+    mitigado: nao
+  entradas:
+  - severidade
+  saidas:
+  - art_postmortem
+  layout:
+    coluna: 1
+  publico: false
+- id: inc_orq_e1
+  raia: inc_orq
+  tipo: fim
+  retorno: normalizado
+  rotulo: Serviço normalizado
+  condicao: ''
+  proximo: []
+  estado: {}
+  layout:
+    coluna: 2
+  publico: false
+celulas:
+- demanda: bug
+  requisito: funcional
+  perguntas_chave: []
+  tecnicas: []
+  abordagens: []
+  padroes: []
+  estrategias: []
+  categorias_ferramenta: []
+  publico: false
+- demanda: incidente
+  requisito: funcional
+  perguntas_chave: []
+  tecnicas: []
+  abordagens: []
+  padroes: []
+  estrategias: []
+  categorias_ferramenta: []
+  publico: false
+playbooks:
+- id: pb_bug_orq_s1
+  resumo: Todo bug nasce de um relato. Registre o que foi visto antes de agir.
+  perguntas_chave: [pq_bug_orq_s1_1]
+  fazer:
+  - Registrar o relato com data e ambiente
+  - Anexar evidências
+  evitar:
+  - Corrigir sem reproduzir
+  tecnicas:
+  - tec_x5_whys
+  publico: false
+- id: pb_bug_orq_c1
+  resumo: Chame a raia de diagnóstico e espere um dos retornos nomeados.
+  fazer:
+  - Entregar o relato completo à raia de diagnóstico
+  publico: false
+- id: pb_bug_orq_g1
+  resumo: Avalie os critérios de potencial incidente.
+  perguntas_chave: [pq_bug_orq_g1_1]
+  fazer:
+  - Conferir cada critério
+  evitar:
+  - Decidir sem dados
+  abordagens:
+  - abo_triagem
+  publico: false
+- id: pb_bug_orq_t1
+  resumo: Deixe o rastro entre bug e incidente no ticket.
+  publico: false
+- id: pb_bug_diag_s1
+  resumo: Comece pela reprodução em ambiente controlado.
+  publico: false
+- id: pb_bug_corr_t1
+  resumo: Corrija o defeito e escreva o teste que o teria pego.
+  fazer:
+  - Escrever o teste antes da correção
+  evitar:
+  - Correção sem teste de regressão
+  padroes:
+  - pad_teste_regressao
+  publico: false
+- id: pb_bug_diag_t1
+  resumo: Reproduza o defeito com os passos do relato.
+  exemplo: "Relato de tela branca no iPhone: a equipe repete o passo a passo e vê o erro em 2 de 3 tentativas."
+  perguntas_chave:
+  - O ambiente é o mesmo do relato?
+  fazer:
+  - Registrar os passos mínimos
+  evitar:
+  - Mudar duas coisas ao mesmo tempo
+  publico: false
+abordagens:
+- id: abo_triagem
+  nome: Triagem por critérios
+  publico: false
+tecnicas:
+- id: tec_x5_whys
+  nome: 5 porquês
+  publico: false
+- id: tec_bisect
+  nome: Bisect
+  publico: false
+- id: tec_logs
+  nome: Análise de logs
+  publico: false
+- id: tec_pareamento
+  nome: Pareamento
+  publico: false
+padroes:
+- id: pad_teste_regressao
+  nome: Teste de regressão
+  publico: false
+estrategias:
+- id: est_hotfix
+  nome: Hotfix controlado
+  publico: false
+categorias_ferramenta: []
+fontes: []
+decisor_construir_comprar_assinar:
+  criterios:
+  - diferenciacao
+  - tempo_ate_valor
+  - custo_total
+  - dependencia_fornecedor
+  - risco
+  escala:
+    min: 1
+    max: 5
+  opcoes:
+  - construir
+  - comprar
+  - assinar
+  ordem_desempate:
+  - assinar
+  - comprar
+  - construir
+  pesos:
+    cumprir_prazo:
+      diferenciacao: 0.1
+      tempo_ate_valor: 0.4
+      custo_total: 0.2
+      dependencia_fornecedor: 0.1
+      risco: 0.2
+    diferenciar_produto:
+      diferenciacao: 0.4
+      tempo_ate_valor: 0.15
+      custo_total: 0.15
+      dependencia_fornecedor: 0.15
+      risco: 0.15
+    reduzir_custo:
+      diferenciacao: 0.1
+      tempo_ate_valor: 0.15
+      custo_total: 0.4
+      dependencia_fornecedor: 0.15
+      risco: 0.2
+    validar_hipotese:
+      diferenciacao: 0.1
+      tempo_ate_valor: 0.35
+      custo_total: 0.2
+      dependencia_fornecedor: 0.1
+      risco: 0.25
+artefatos:
+- id: art_relato
+  nome: Relato do bug
+  descricao: Texto do relato com data, ambiente e evidências.
+  exemplo: "No iPhone, a tela fica branca ao tocar em pagar. Desde ontem."
+  tipo: documento
+  publico: false
+- id: art_repro
+  nome: Passos de reprodução
+  descricao: Sequência mínima que reproduz o defeito.
+  exemplo: "1. Abrir o checkout. 2. Aplicar cupom. 3. Tocar em pagar."
+  tipo: dado
+  publico: false
+- id: art_causa
+  nome: Causa raiz
+  descricao: Explicação da causa raiz confirmada.
+  tipo: decisao
+  publico: false
+- id: art_patch
+  nome: Correção com teste
+  descricao: Patch com o teste de regressão.
+  tipo: documento
+  publico: false
+- id: art_alerta
+  nome: Alerta de monitoria
+  descricao: Sinal emitido, ainda sem consumidor.
+  tipo: sinal
+  publico: false
+- id: art_politica
+  nome: Política de severidade
+  descricao: Consumida sem produtor no fluxo.
+  tipo: documento
+  publico: false
+- id: art_postmortem
+  nome: Relatório pós-incidente
+  descricao: Registro do que aconteceu e do que muda. Só o incidente o produz.
+  exemplo: "Checkout fora do ar por 18 minutos; a causa foi uma configuração; a ação é validar antes de publicar."
+  tipo: documento
+  publico: false
+- id: art_orfao
+  nome: Rascunho esquecido
+  descricao: Ninguém produz nem consome.
+  tipo: documento
+  publico: false
+variaveis:
+- id: severidade
+  nome: Severidade
+  descricao: Gravidade estimada do bug.
+  exemplo: "sev1"
+  tipo: enum
+  valores:
+  - sev1
+  - sev2
+  - sev3
+  inicial: sev3
+  publico: false
+- id: reproduzido
+  nome: Reproduzido
+  descricao: O defeito foi reproduzido.
+  tipo: booleano
+  publico: false
+- id: tentativas
+  nome: Tentativas
+  descricao: Quantas vezes a correção foi tentada.
+  exemplo: "2 (a terceira falha escala)"
+  tipo: inteiro
+  inicial: 0
+  publico: false
+- id: mitigado
+  nome: Mitigado
+  descricao: O impacto no cliente foi contido. Só o incidente usa.
+  exemplo: "nao"
+  tipo: booleano
+  publico: false
+
+perguntas:
+- id: pq_bug_orq_s1_1
+  texto: "Quem foi afetado e desde quando?"
+  depende_de: [bug_orq_s1]
+- id: pq_bug_orq_g1_1
+  texto: "O raio de impacto cresce?"
+  depende_de: [bug_orq_g1]

@@ -211,6 +211,23 @@
         "additionalProperties": {}
       }
     },
+    "perguntas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "propertyNames": {
+          "type": "string"
+        },
+        "additionalProperties": {}
+      }
+    },
+    "relacoes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\[\\[[^\\[\\]\\n]+\\]\\]$"
+      }
+    },
     "requisitos": {
       "type": "array",
       "items": {

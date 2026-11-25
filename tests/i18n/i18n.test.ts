@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
-import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { loadContent } from '../../lib/content';
 import { TIPOS } from '../../lib/schema';
 import { SITE_LAYERS } from '../../lib/content/site';
 import en from '../../site/src/i18n/en.json';
@@ -76,15 +77,22 @@ describe('UI strings', () => {
 
   it('have a title for every content section folder', () => {
     const base = join(root, 'content', 'pt-BR');
+    // Folders on disk plus the folders of the entities derived from the guide YAML.
+    const folders = new Set<string>();
     for (const layer of ['tools', 'ai', 'fundamentals', 'flows']) {
-      for (const name of readdirSync(join(base, layer))) {
-        if (!statSync(join(base, layer, name)).isDirectory()) continue;
-        if (layer === 'fundamentals' && name === 'licenses') continue;
-        expect(pt[`section.${layer}.${name}`], `section.${layer}.${name}`).toBeDefined();
-      }
+      if (!existsSync(join(base, layer))) continue;
+      for (const name of readdirSync(join(base, layer))) if (statSync(join(base, layer, name)).isDirectory()) folders.add(`${layer}/${name}`);
+    }
+    for (const e of loadContent(join(root, 'content'), 'pt-BR').entities) {
+      const [layer, name, rest] = e.relPath.split('/');
+      if (['tools', 'ai', 'fundamentals', 'flows'].includes(layer) && rest !== undefined) folders.add(`${layer}/${name}`);
+    }
+    for (const folder of folders) {
+      if (folder === 'fundamentals/licenses') continue;
+      const [layer, name] = folder.split('/');
+      expect(pt[`section.${layer}.${name}`], `section.${layer}.${name}`).toBeDefined();
     }
   });
-
   it('formats placeholders and rejects unknown keys', () => {
     expect(makeT('en')('count.items', { n: 3 })).toBe('3 items');
     expect(() => makeT('pt-BR')('no.such.key')).toThrow(/missing UI string/);

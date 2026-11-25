@@ -1,0 +1,71 @@
+flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"]) ~~~ z_LEG_r0["<b>Plano da mudança de infraestrutura</b><br/>raia chamada"] ~~~ z_LEG_r1["<b>Prontidão (Definition of Ready)</b><br/>raia chamada"] ~~~ z_LEG_r2["<b>Execução por papéis</b><br/>raia chamada"] ~~~ z_LEG_r3["<b>Testes de segurança</b><br/>raia chamada"] ~~~ z_LEG_r4["<b>Review humano</b><br/>raia chamada"] ~~~ z_LEG_r5["<b>Implantação</b><br/>raia chamada"] ~~~ z_LEG_r6["<b>Validação em produção e monitoramento</b><br/>raia chamada"]
+  end
+  subgraph z_SG_inf_orq["<b>Orquestração: infraestrutura e DevOps</b>"]
+    direction LR
+    inf_orq_s0(["<small><b>inf_orq_s0</b></small><br/>Mudança de infraestrutura necessária"])
+    inf_orq_c1[["<small><b>inf_orq_c1</b></small><br/>Plano da mudança de infraestrutura"]]
+    inf_orq_c2[["<small><b>inf_orq_c2</b></small><br/>Verificar a prontidão (Definition of Ready)"]]
+    inf_orq_c3[["<small><b>inf_orq_c3</b></small><br/>Execução das tarefas"]]
+    inf_orq_c4[["<small><b>inf_orq_c4</b></small><br/>Testes de segurança"]]
+    inf_orq_c5[["<small><b>inf_orq_c5</b></small><br/>Review humano"]]
+    inf_orq_c6[["<small><b>inf_orq_c6</b></small><br/>Implantação"]]
+    inf_orq_c7[["<small><b>inf_orq_c7</b></small><br/>Validação em produção e monitoramento"]]
+    inf_orq_e1(["<small><b>inf_orq_e1</b></small><br/>Mudança aplicada e estável<br/><i>retorno: infraestrutura_estavel</i>"])
+    inf_orq_e2(["<small><b>inf_orq_e2</b></small><br/>Incidente acionado em produção<br/><i>retorno: incidente_acionado</i>"])
+  end
+  inf_orq_s0 --> inf_orq_c1
+  inf_orq_c1 -->|"plano_aprovado"| inf_orq_c2
+  inf_orq_c2 -->|"pronto_para_iniciar"| inf_orq_c3
+  inf_orq_c3 -->|"execucao_integrada"| inf_orq_c4
+  inf_orq_c4 -->|"aprovado"| inf_orq_c5
+  inf_orq_c4 -->|"reprovado"| inf_orq_c3
+  inf_orq_c5 -->|"aprovado_pelo_humano"| inf_orq_c6
+  inf_orq_c5 -->|"ajustes_solicitados"| inf_orq_c3
+  inf_orq_c6 -->|"implantado"| inf_orq_c7
+  inf_orq_c6 -->|"implantacao_revertida"| inf_orq_c3
+  inf_orq_c7 -->|"feature_validada"| inf_orq_e1
+  inf_orq_c7 -->|"incidente_acionado"| inf_orq_e2
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#332288,stroke:#1F1452,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#DDCC77,stroke:#857A47,stroke-width:1px,color:#000000
+  classDef z_R_3 fill:#009E73,stroke:#005F45,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#EE7733,stroke:#8F471F,stroke-width:1px,color:#000000
+  classDef z_R_5 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_R_6 fill:#999933,stroke:#5C5C1F,stroke-width:1px,color:#000000
+  classDef z_R_7 fill:#77AADD,stroke:#476685,stroke-width:1px,color:#000000
+  classDef z_R_8 fill:#882255,stroke:#521433,stroke-width:1px,color:#FFFFFF
+  classDef z_R_9 fill:#E69F00,stroke:#8A5F00,stroke-width:1px,color:#000000
+  classDef z_R_10 fill:#6699CC,stroke:#3D5C7A,stroke-width:1px,color:#000000
+  classDef z_C_0_1 fill:#332288,stroke:#607D8B,stroke-width:4px,color:#FFFFFF
+  classDef z_C_0_2 fill:#DDCC77,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_3 fill:#009E73,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_4 fill:#EE7733,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_5 fill:#56B4E9,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_6 fill:#999933,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef z_C_0_7 fill:#77AADD,stroke:#607D8B,stroke-width:4px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  class z_LEG_r0 z_R_1
+  class z_LEG_r1 z_R_2
+  class z_LEG_r2 z_R_3
+  class z_LEG_r3 z_R_4
+  class z_LEG_r4 z_R_5
+  class z_LEG_r5 z_R_6
+  class z_LEG_r6 z_R_7
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
+  class inf_orq_c1 z_C_0_1
+  class inf_orq_c2 z_C_0_2
+  class inf_orq_c3 z_C_0_3
+  class inf_orq_c4 z_C_0_4
+  class inf_orq_c5 z_C_0_5
+  class inf_orq_c6 z_C_0_6
+  class inf_orq_c7 z_C_0_7
+  class inf_orq_s0,inf_orq_e1,inf_orq_e2 z_R_0
+  style z_SG_inf_orq fill:#E7ECEE,stroke:#607D8B,stroke-width:3px,color:#000000

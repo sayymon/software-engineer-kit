@@ -89,7 +89,8 @@ export const Competencia = z.strictObject({
 export const COMPETENCIA_TRANSLATABLE = [...BASE_TRANSLATABLE, 'area', 'niveis', 'meiaVida', 'estudo', 'itens'] as const;
 
 /** Guide `ItemConceitual` kinds: tecnica, abordagem, estrategia, requisito. */
-const conceitual = { ...baseShape, ...conceitualShape };
+/** `relacoes` holds the [[id]] links derived from the guide reference fields. */
+const conceitual = { ...baseShape, ...conceitualShape, relacoes: wikilinks.optional() };
 
 export const Tecnica = z.strictObject({
   ...conceitual,

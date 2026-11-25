@@ -1,0 +1,40 @@
+flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_s(["<b>s</b>: início"]) ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"])
+  end
+  subgraph z_SG_com_seg["<b>Testes de segurança</b>"]
+    direction LR
+    com_seg_s0(["<small><b>com_seg_s0</b></small><br/>Entrega pronta, testar a segurança"])
+    com_seg_t1["<small><b>com_seg_t1</b></small><br/>Analisar o código, as dependências e os segredos<br/><i>▸ 3 subtarefas</i>"]
+    com_seg_t2["<small><b>com_seg_t2</b></small><br/>Testar a aplicação em execução<br/><i>▸ 4 subtarefas</i>"]
+    com_seg_g1{"<small><b>com_seg_g1</b></small><br/>Sem vulnerabilidade<br/>alta ou crítica?"}
+    com_seg_e1(["<small><b>com_seg_e1</b></small><br/>Segurança aprovada<br/><i>retorno: aprovado</i>"])
+    com_seg_e2(["<small><b>com_seg_e2</b></small><br/>Vulnerabilidade alta ou crítica aberta<br/><i>retorno: reprovado</i>"])
+  end
+  com_seg_s0 --> com_seg_t1
+  com_seg_t1 --> com_seg_t2
+  com_seg_t2 --> com_seg_g1
+  com_seg_g1 -->|"sim"| com_seg_e1
+  com_seg_g1 -->|"não"| com_seg_e2
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#332288,stroke:#1F1452,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#117733,stroke:#0A471F,stroke-width:1px,color:#FFFFFF
+  classDef z_R_3 fill:#CC6677,stroke:#7A3D47,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#BBCC33,stroke:#707A1F,stroke-width:1px,color:#000000
+  classDef z_R_5 fill:#D55E00,stroke:#803800,stroke-width:1px,color:#000000
+  classDef z_R_6 fill:#EE7733,stroke:#8F471F,stroke-width:1px,color:#000000
+  classDef z_R_7 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_R_8 fill:#999933,stroke:#5C5C1F,stroke-width:1px,color:#000000
+  classDef z_R_9 fill:#77AADD,stroke:#476685,stroke-width:1px,color:#000000
+  classDef z_R_10 fill:#44AA99,stroke:#29665C,stroke-width:1px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  class z_LEG_s,z_LEG_t,z_LEG_g,z_LEG_e leg
+  class z_LEG_c legc
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
+  class com_seg_s0,com_seg_t1,com_seg_t2,com_seg_g1,com_seg_e1,com_seg_e2 z_R_6
+  class com_seg_g1 gw
+  style z_SG_com_seg fill:#FCEBE0,stroke:#EE7733,stroke-width:3px,color:#000000

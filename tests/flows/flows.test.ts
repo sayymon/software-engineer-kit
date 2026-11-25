@@ -1,33 +1,30 @@
 // SPDX-License-Identifier: MIT
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { loadContent } from '../../lib/content';
-import { assembleDoc, checkDoc, validateAgainstSchema, type Doc } from '../../lib/flows';
-
+import { checkDoc, validateAgainstSchema, type Doc } from '../../lib/flows';
+import { guideDir, loadGuideDoc } from '../../lib/guide';
 const root = new URL('../../', import.meta.url).pathname;
 const schema = JSON.parse(readFileSync(`${root}schema/flows.schema.json`, 'utf8')) as object;
-const { entities } = loadContent(`${root}content`, 'pt-BR');
-const DEMANDS = ['bug', 'chore', 'descontinuacao', 'divida_tecnica', 'documentacao', 'feature', 'incidente', 'infraestrutura', 'migracao', 'teste_qa'];
-const doc = () => structuredClone(assembleDoc(entities)) as Doc;
-
+const doc = () => structuredClone(loadGuideDoc(guideDir(`${root}content`))) as Doc;
 describe('guide flows', () => {
-  it('has the 10 demands plus the common library, in the declared order', () => {
+  it('has the common library plus the 12 demands, in the declared order', () => {
     const d = doc();
-    expect(d.demandas.map((x: Doc) => x.id)).toEqual(['comum', 'feature', 'bug', 'incidente', 'chore', 'divida_tecnica', 'infraestrutura', 'teste_qa', 'documentacao', 'migracao', 'descontinuacao']);
-    for (const id of DEMANDS) expect(entities.find((e) => e.tipo === 'demanda' && e.id === id), id).toBeDefined();
+    expect(d.demandas.map((x: Doc) => x.id)).toEqual(['comum', 'feature', 'bug', 'incidente', 'chore', 'seguranca', 'spike', 'divida_tecnica', 'infraestrutura', 'teste_qa', 'documentacao', 'migracao', 'descontinuacao']);
   });
   it('validates against the vendored JSON Schema and the cross-reference rules', () => {
     const d = doc();
     expect(validateAgainstSchema(d, schema)).toEqual([]);
     expect(checkDoc(d)).toEqual([]);
-    expect(d.raias.length).toBeGreaterThan(50);
-    expect(d.decisoes.length).toBeGreaterThan(400);
+    expect(d.raias.length).toBe(71);
+    expect(d.decisoes.length).toBe(544);
   });
-  it('catalog items are entities and the merged ones stay resolvable by guide id', () => {
+  it('carries the guide catalog: 127 techniques and 4 requirements, plus rituals and questions', () => {
     const d = doc();
-    expect(d.tecnicas.length).toBe(109);
+    expect(d.tecnicas.length).toBe(127);
     expect(d.tecnicas.map((t: Doc) => t.id)).toContain('tec_circuit_breaker');
     expect(d.requisitos.length).toBe(4);
+    expect(d.ritos.length).toBe(16);
+    expect(d.perguntas.length).toBe(451);
   });
   it('detects a transition to a missing node', () => {
     const d = doc();

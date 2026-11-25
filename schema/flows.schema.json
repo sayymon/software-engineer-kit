@@ -120,6 +120,20 @@
     },
     "decisor_construir_comprar_assinar": {
       "$ref": "#/$defs/Decisor"
+    },
+    "perguntas": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Pergunta"
+      }
+    },
+    "ritos": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Rito"
+      }
     }
   },
   "$defs": {
@@ -433,29 +447,32 @@
         "tipo": {
           "enum": [
             "documento",
-            "dado",
+            "diagrama",
+            "teste",
+            "ambiente",
+            "acao",
             "evidencia",
-            "decisao",
             "sinal",
+            "dashboard",
             "codigo",
             "commit",
             "pull_request",
             "adr",
-            "teste",
             "biblioteca",
             "agente",
             "skill",
             "script",
-            "diagrama",
+            "dado",
+            "decisao",
             "card",
             "comunicacao",
-            "acao",
             "configuracao"
-          ]
+          ],
+          "description": "Categoria do artefato. Os cinco últimos (dado, decisao, card, comunicacao, configuracao) são legados: no guia, card, comunicação e configuração são subtipos de ação e dado é um documento."
         },
         "subtipo": {
           "type": "string",
-          "description": "Refinamento livre do tipo (ex.: design doc, PRD, UML de sequência, teste de contrato, email)."
+          "description": "Subtipo da categoria, numa lista fechada por tipo (guia_decisao.taxonomia.SUBTIPOS). Documentos antigos podem trazer texto livre; a checagem de completude avisa."
         },
         "variantes": {
           "type": "array",
@@ -814,7 +831,8 @@
           "type": "string"
         },
         "perguntas_chave": {
-          "$ref": "#/$defs/TextoLista"
+          "$ref": "#/$defs/IdLista",
+          "description": "Ids das perguntas-chave (coleção `perguntas`)."
         },
         "fazer": {
           "$ref": "#/$defs/TextoLista"
@@ -1112,6 +1130,151 @@
           ],
           "default": "apoio",
           "description": "nao: só pessoas exercem o papel; apoio: um agente apoia a pessoa; execucao: um agente do papel pode executar"
+        },
+        "exemplo": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/Status"
+        },
+        "publico": {
+          "$ref": "#/$defs/Publico"
+        }
+      }
+    },
+    "Pergunta": {
+      "description": "Pergunta-chave com tailoring: o item que a responde (tarefa, gateway, subtarefa, técnica ou rito), quando se aplica e o RACI (herdado do item quando omitido).",
+      "type": "object",
+      "required": [
+        "id",
+        "texto"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "texto": {
+          "$ref": "#/$defs/Texto"
+        },
+        "depende_de": {
+          "$ref": "#/$defs/IdLista",
+          "description": "Itens que respondem a pergunta: nós, subtarefas, técnicas ou ritos."
+        },
+        "quando": {
+          "$ref": "#/$defs/Condicao",
+          "description": "Tailoring: a pergunta só se aplica nesta condição."
+        },
+        "papel": {
+          "$ref": "#/$defs/Id",
+          "description": "RACI R: quem responde ou facilita."
+        },
+        "apoio": {
+          "$ref": "#/$defs/IdLista"
+        },
+        "aprova": {
+          "$ref": "#/$defs/Id",
+          "description": "RACI A: quem aprova, quando é outro papel."
+        },
+        "consultado": {
+          "$ref": "#/$defs/IdLista"
+        },
+        "informado": {
+          "$ref": "#/$defs/IdLista"
+        },
+        "status": {
+          "$ref": "#/$defs/Status"
+        },
+        "publico": {
+          "$ref": "#/$defs/Publico"
+        }
+      }
+    },
+    "Rito": {
+      "description": "Rito do ciclo de desenvolvimento (time, programa ou operação): objetivo, cadência, RACI, premissas, comportamentos esperados e perguntas-chave.",
+      "type": "object",
+      "required": [
+        "id",
+        "nome",
+        "nivel",
+        "objetivo"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "nome": {
+          "$ref": "#/$defs/Texto"
+        },
+        "nivel": {
+          "enum": [
+            "time",
+            "programa",
+            "operacao"
+          ]
+        },
+        "ordem": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "seguinte": {
+          "$ref": "#/$defs/Id"
+        },
+        "objetivo": {
+          "type": "string"
+        },
+        "cadencia": {
+          "type": "string"
+        },
+        "duracao": {
+          "type": "string"
+        },
+        "acontece_em": {
+          "$ref": "#/$defs/IdLista",
+          "description": "Nós do fluxo em que o rito acontece."
+        },
+        "quando": {
+          "$ref": "#/$defs/Condicao",
+          "description": "Tailoring: o rito só se aplica nesta condição."
+        },
+        "papel": {
+          "$ref": "#/$defs/Id",
+          "description": "RACI R: quem responde ou facilita."
+        },
+        "apoio": {
+          "$ref": "#/$defs/IdLista"
+        },
+        "aprova": {
+          "$ref": "#/$defs/Id",
+          "description": "RACI A: quem aprova, quando é outro papel."
+        },
+        "consultado": {
+          "$ref": "#/$defs/IdLista"
+        },
+        "informado": {
+          "$ref": "#/$defs/IdLista"
+        },
+        "premissas": {
+          "$ref": "#/$defs/TextoLista"
+        },
+        "comportamentos_esperados": {
+          "$ref": "#/$defs/TextoLista"
+        },
+        "evitar": {
+          "$ref": "#/$defs/TextoLista"
+        },
+        "entradas": {
+          "$ref": "#/$defs/IdLista"
+        },
+        "saidas": {
+          "$ref": "#/$defs/IdLista"
+        },
+        "tecnicas": {
+          "$ref": "#/$defs/IdLista"
+        },
+        "perguntas": {
+          "$ref": "#/$defs/IdLista"
         },
         "exemplo": {
           "type": "string"
