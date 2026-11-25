@@ -34,7 +34,8 @@ jobs:
           SITE_BASE: /software-engineer-kit
   guide-oracle:
     name: guide-oracle
-    runs-on: ubuntu-latest
+    # Fixed runner: the pinned oracle Python is published for 24.04, not yet for ubuntu-latest (26.04).
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     permissions:
       contents: read
