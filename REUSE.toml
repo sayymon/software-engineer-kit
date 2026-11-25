@@ -49,6 +49,7 @@ path = [
   "THIRD-PARTY-NOTICES.md",
   "REUSE.toml",
   ".gitignore",
+  ".gitleaks.toml",
 ]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Saymon Silva"

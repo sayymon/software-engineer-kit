@@ -1,0 +1,11 @@
+# Configuracao do gitleaks usada pelo check secret-scan.
+# Mantem as regras padrao e libera apenas falsos positivos conhecidos.
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "idModeloApi nas notas de modelo e um identificador publico de modelo, nao uma credencial"
+condition = "AND"
+regexTarget = "line"
+regexes = ['''idModeloApi: [A-Za-z0-9._:/-]+''']
+paths = ['''^content/[^/]+/ai/models/[^/]+\.md$''']
