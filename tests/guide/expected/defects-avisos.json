@@ -1,0 +1,162 @@
+{
+ "ENTRADA_SEM_PRODUTOR em nó": [
+  {
+   "code": "ENTRADA_SEM_PRODUTOR",
+   "item_id": "com_exp_t2",
+   "message": "a entrada 'art_sem_produtor' de 'com_exp_t2' não está nas `entradas` da raia 'com_exp' nem nas `saidas` de um nó que a antecede na raia",
+   "nivel": "aviso",
+   "path": "decisoes[32].entradas[0]"
+  }
+ ],
+ "ENTRADA_SEM_PRODUTOR em subtarefa": [
+  {
+   "code": "ENTRADA_SEM_PRODUTOR",
+   "item_id": "com_set_t1_st1",
+   "message": "a entrada 'art_sem_produtor_sub' de 'com_set_t1_st1' não está nas `entradas` da tarefa 'com_set_t1' nem nas `saidas` de uma subtarefa anterior",
+   "nivel": "aviso",
+   "path": "decisoes[1].subtarefas[0].entradas[0]"
+  }
+ ],
+ "ITEM_SEM_USO em artefato": [
+  {
+   "code": "ITEM_SEM_USO",
+   "item_id": "art_sem_uso",
+   "message": "'art_sem_uso' não é referenciado por nenhum nó, subtarefa, raia, estado ou condição (some da aba Catálogo)",
+   "nivel": "aviso",
+   "path": "artefatos[201]"
+  }
+ ],
+ "ITEM_SEM_USO em variável": [
+  {
+   "code": "ITEM_SEM_USO",
+   "item_id": "var_sem_uso",
+   "message": "'var_sem_uso' não é referenciado por nenhum nó, subtarefa, raia, estado ou condição (some da aba Catálogo)",
+   "nivel": "aviso",
+   "path": "variaveis[83]"
+  }
+ ],
+ "LACUNA_DE_DADOS sem consumidor": [
+  {
+   "code": "SAIDA_NAO_ENTREGUE",
+   "item_id": "com_set_t1",
+   "message": "a saída 'art_lacuna_saida' da tarefa 'com_set_t1' não é produzida por nenhuma de suas subtarefas",
+   "nivel": "aviso",
+   "path": "decisoes[1].saidas[6]"
+  },
+  {
+   "code": "LACUNA_DE_DADOS",
+   "item_id": "art_lacuna_saida",
+   "message": "'art_lacuna_saida' está sem consumidor: declare quem produz e quem consome (entradas, saídas, condição ou destinatários)",
+   "nivel": "aviso",
+   "path": "artefatos[201]"
+  }
+ ],
+ "LACUNA_DE_DADOS sem produtor": [
+  {
+   "code": "ENTRADA_SEM_PRODUTOR",
+   "item_id": "com_set_t1",
+   "message": "a entrada 'art_lacuna' de 'com_set_t1' não está nas `entradas` da raia 'com_set' nem nas `saidas` de um nó que a antecede na raia",
+   "nivel": "aviso",
+   "path": "decisoes[1].entradas[2]"
+  },
+  {
+   "code": "LACUNA_DE_DADOS",
+   "item_id": "art_lacuna",
+   "message": "'art_lacuna' está sem produtor: declare quem produz e quem consome (entradas, saídas, condição ou destinatários)",
+   "nivel": "aviso",
+   "path": "artefatos[201]"
+  }
+ ],
+ "SAIDA_NAO_ENTREGUE": [
+  {
+   "code": "SAIDA_NAO_ENTREGUE",
+   "item_id": "com_set_t1",
+   "message": "a saída 'art_nao_entregue' da tarefa 'com_set_t1' não é produzida por nenhuma de suas subtarefas",
+   "nivel": "aviso",
+   "path": "decisoes[1].saidas[6]"
+  }
+ ],
+ "SUBTAREFA_SEM_ENTREGAVEL": [
+  {
+   "code": "SAIDA_NAO_ENTREGUE",
+   "item_id": "com_set_t1",
+   "message": "a saída 'branch_da_feature' da tarefa 'com_set_t1' não é produzida por nenhuma de suas subtarefas",
+   "nivel": "aviso",
+   "path": "decisoes[1].saidas[1]"
+  },
+  {
+   "code": "SUBTAREFA_SEM_ENTREGAVEL",
+   "item_id": "com_set_t1_st1",
+   "message": "a subtarefa 'com_set_t1_st1' não tem nenhum artefato em `saidas`",
+   "nivel": "aviso",
+   "path": "decisoes[1].subtarefas[0]"
+  }
+ ],
+ "TAREFA_SEM_ENTREGAVEL": [
+  {
+   "code": "ENTRADA_SEM_PRODUTOR",
+   "item_id": "com_set_t1_st6",
+   "message": "a entrada 'pipeline_ci_cd' de 'com_set_t1_st6' não está nas `entradas` da tarefa 'com_set_t1' nem nas `saidas` de uma subtarefa anterior",
+   "nivel": "aviso",
+   "path": "decisoes[1].subtarefas[5].entradas[0]"
+  },
+  {
+   "code": "TAREFA_SEM_ENTREGAVEL",
+   "item_id": "com_set_t1",
+   "message": "a tarefa 'com_set_t1' não entrega nenhum artefato em `saidas` (nem nas subtarefas); toda tarefa precisa de ao menos um artefato (use tipo `acao` para algo que se faz sem objeto durável)",
+   "nivel": "aviso",
+   "path": "decisoes[1]"
+  },
+  {
+   "code": "SUBTAREFA_SEM_ENTREGAVEL",
+   "item_id": "com_set_t1_st1",
+   "message": "a subtarefa 'com_set_t1_st1' não tem nenhum artefato em `saidas`",
+   "nivel": "aviso",
+   "path": "decisoes[1].subtarefas[0]"
+  },
+  {
+   "code": "SUBTAREFA_SEM_ENTREGAVEL",
+   "item_id": "com_set_t1_st2",
+   "message": "a subtarefa 'com_set_t1_st2' não tem nenhum artefato em `saidas`",
+   "nivel": "aviso",
+   "path": "decisoes[1].subtarefas[1]"
+  },
+  {
+   "code": "SUBTAREFA_SEM_ENTREGAVEL",
+   "item_id": "com_set_t1_st3",
+   "message": "a subtarefa 'com_set_t1_st3' não tem nenhum artefato em `saidas`",
+   "nivel": "aviso",
+   "path": "decisoes[1].subtarefas[2]"
+  },
+  {
+   "code": "SUBTAREFA_SEM_ENTREGAVEL",
+   "item_id": "com_set_t1_st4",
+   "message": "a subtarefa 'com_set_t1_st4' não tem nenhum artefato em `saidas`",
+   "nivel": "aviso",
+   "path": "decisoes[1].subtarefas[3]"
+  },
+  {
+   "code": "SUBTAREFA_SEM_ENTREGAVEL",
+   "item_id": "com_set_t1_st5",
+   "message": "a subtarefa 'com_set_t1_st5' não tem nenhum artefato em `saidas`",
+   "nivel": "aviso",
+   "path": "decisoes[1].subtarefas[4]"
+  },
+  {
+   "code": "SUBTAREFA_SEM_ENTREGAVEL",
+   "item_id": "com_set_t1_st6",
+   "message": "a subtarefa 'com_set_t1_st6' não tem nenhum artefato em `saidas`",
+   "nivel": "aviso",
+   "path": "decisoes[1].subtarefas[5]"
+  }
+ ],
+ "VAR_NAO_DECLARADA": [
+  {
+   "code": "VAR_NAO_DECLARADA",
+   "item_id": "com_set_t1",
+   "message": "a chave de estado 'var_fantasma' de 'com_set_t1' não existe em `variaveis`",
+   "nivel": "aviso",
+   "path": "decisoes[1].estado.var_fantasma"
+  }
+ ]
+}

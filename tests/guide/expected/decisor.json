@@ -1,0 +1,2140 @@
+[
+ {
+  "ok": {
+   "avaliacoes": [
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.3,
+       "criterio": "diferenciacao",
+       "nota": 3,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1.2,
+       "criterio": "tempo_ate_valor",
+       "nota": 3,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "custo_total",
+       "nota": 3,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.3,
+       "criterio": "dependencia_fornecedor",
+       "nota": 3,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "risco",
+       "nota": 3,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "construir",
+     "total": 3
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.3,
+       "criterio": "diferenciacao",
+       "nota": 3,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1.2,
+       "criterio": "tempo_ate_valor",
+       "nota": 3,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "custo_total",
+       "nota": 3,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.3,
+       "criterio": "dependencia_fornecedor",
+       "nota": 3,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "risco",
+       "nota": 3,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "comprar",
+     "total": 3
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.3,
+       "criterio": "diferenciacao",
+       "nota": 3,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1.2,
+       "criterio": "tempo_ate_valor",
+       "nota": 3,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "custo_total",
+       "nota": 3,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.3,
+       "criterio": "dependencia_fornecedor",
+       "nota": 3,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "risco",
+       "nota": 3,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "assinar",
+     "total": 3
+    }
+   ],
+   "empate": [
+    "construir",
+    "comprar",
+    "assinar"
+   ],
+   "justificativa": "Objetivo: cumprir_prazo. Recomendação: assinar (total 3).\nconstruir: diferenciação 3 x 0,1 = 0,3; tempo até o valor 3 x 0,4 = 1,2; custo total 3 x 0,2 = 0,6; dependência de fornecedor 3 x 0,1 = 0,3; risco 3 x 0,2 = 0,6; total 3.\ncomprar: diferenciação 3 x 0,1 = 0,3; tempo até o valor 3 x 0,4 = 1,2; custo total 3 x 0,2 = 0,6; dependência de fornecedor 3 x 0,1 = 0,3; risco 3 x 0,2 = 0,6; total 3.\nassinar: diferenciação 3 x 0,1 = 0,3; tempo até o valor 3 x 0,4 = 1,2; custo total 3 x 0,2 = 0,6; dependência de fornecedor 3 x 0,1 = 0,3; risco 3 x 0,2 = 0,6; total 3.\nEmpate entre construir, comprar, assinar: venceu assinar pela ordem de desempate (assinar, comprar, construir).",
+   "objetivo": "cumprir_prazo",
+   "recomendada": "assinar"
+  }
+ },
+ {
+  "ok": {
+   "avaliacoes": [
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.3,
+       "criterio": "diferenciacao",
+       "nota": 3,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1.6,
+       "criterio": "tempo_ate_valor",
+       "nota": 4,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.4,
+       "criterio": "custo_total",
+       "nota": 2,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.5,
+       "criterio": "dependencia_fornecedor",
+       "nota": 5,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.8,
+       "criterio": "risco",
+       "nota": 4,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "construir",
+     "total": 3.6
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.4,
+       "criterio": "diferenciacao",
+       "nota": 4,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 2,
+       "criterio": "tempo_ate_valor",
+       "nota": 5,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "custo_total",
+       "nota": 3,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.1,
+       "criterio": "dependencia_fornecedor",
+       "nota": 1,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1,
+       "criterio": "risco",
+       "nota": 5,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "comprar",
+     "total": 4.1
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.4,
+       "criterio": "diferenciacao",
+       "nota": 4,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 2,
+       "criterio": "tempo_ate_valor",
+       "nota": 5,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "custo_total",
+       "nota": 3,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.1,
+       "criterio": "dependencia_fornecedor",
+       "nota": 1,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1,
+       "criterio": "risco",
+       "nota": 5,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "assinar",
+     "total": 4.1
+    }
+   ],
+   "empate": [
+    "comprar",
+    "assinar"
+   ],
+   "justificativa": "Objetivo: cumprir_prazo. Recomendação: assinar (total 4,1).\nconstruir: diferenciação 3 x 0,1 = 0,3; tempo até o valor 4 x 0,4 = 1,6; custo total 2 x 0,2 = 0,4; dependência de fornecedor 5 x 0,1 = 0,5; risco 4 x 0,2 = 0,8; total 3,6.\ncomprar: diferenciação 4 x 0,1 = 0,4; tempo até o valor 5 x 0,4 = 2; custo total 3 x 0,2 = 0,6; dependência de fornecedor 1 x 0,1 = 0,1; risco 5 x 0,2 = 1; total 4,1.\nassinar: diferenciação 4 x 0,1 = 0,4; tempo até o valor 5 x 0,4 = 2; custo total 3 x 0,2 = 0,6; dependência de fornecedor 1 x 0,1 = 0,1; risco 5 x 0,2 = 1; total 4,1.\nEmpate entre comprar, assinar: venceu assinar pela ordem de desempate (assinar, comprar, construir).",
+   "objetivo": "cumprir_prazo",
+   "recomendada": "assinar"
+  }
+ },
+ {
+  "ok": {
+   "avaliacoes": [
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.3,
+       "criterio": "diferenciacao",
+       "nota": 3,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 2,
+       "criterio": "tempo_ate_valor",
+       "nota": 5,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.2,
+       "criterio": "custo_total",
+       "nota": 1,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.2,
+       "criterio": "dependencia_fornecedor",
+       "nota": 2,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1,
+       "criterio": "risco",
+       "nota": 5,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "construir",
+     "total": 3.7
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.1,
+       "criterio": "diferenciacao",
+       "nota": 1,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1.2,
+       "criterio": "tempo_ate_valor",
+       "nota": 3,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.8,
+       "criterio": "custo_total",
+       "nota": 4,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.5,
+       "criterio": "dependencia_fornecedor",
+       "nota": 5,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "risco",
+       "nota": 3,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "comprar",
+     "total": 3.2
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.1,
+       "criterio": "diferenciacao",
+       "nota": 1,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1.2,
+       "criterio": "tempo_ate_valor",
+       "nota": 3,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.8,
+       "criterio": "custo_total",
+       "nota": 4,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.5,
+       "criterio": "dependencia_fornecedor",
+       "nota": 5,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "risco",
+       "nota": 3,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "assinar",
+     "total": 3.2
+    }
+   ],
+   "empate": [],
+   "justificativa": "Objetivo: cumprir_prazo. Recomendação: construir (total 3,7).\nconstruir: diferenciação 3 x 0,1 = 0,3; tempo até o valor 5 x 0,4 = 2; custo total 1 x 0,2 = 0,2; dependência de fornecedor 2 x 0,1 = 0,2; risco 5 x 0,2 = 1; total 3,7.\ncomprar: diferenciação 1 x 0,1 = 0,1; tempo até o valor 3 x 0,4 = 1,2; custo total 4 x 0,2 = 0,8; dependência de fornecedor 5 x 0,1 = 0,5; risco 3 x 0,2 = 0,6; total 3,2.\nassinar: diferenciação 1 x 0,1 = 0,1; tempo até o valor 3 x 0,4 = 1,2; custo total 4 x 0,2 = 0,8; dependência de fornecedor 5 x 0,1 = 0,5; risco 3 x 0,2 = 0,6; total 3,2.\nContexto: custo de construir: curto prazo 100, médio prazo 250.5, longo prazo R$ 1.000; custo de comprar: longo prazo 30; custo de não fazer: 12000; ROI esperado: 0.25; orçamento previsto: 5000.",
+   "objetivo": "cumprir_prazo",
+   "recomendada": "construir"
+  }
+ },
+ {
+  "ok": {
+   "avaliacoes": [
+    {
+     "linhas": [
+      {
+       "contribuicao": 1.2,
+       "criterio": "diferenciacao",
+       "nota": 3,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "tempo_ate_valor",
+       "nota": 3,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "custo_total",
+       "nota": 3,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "dependencia_fornecedor",
+       "nota": 3,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "risco",
+       "nota": 3,
+       "peso": 0.15
+      }
+     ],
+     "opcao": "construir",
+     "total": 3
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 1.2,
+       "criterio": "diferenciacao",
+       "nota": 3,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "tempo_ate_valor",
+       "nota": 3,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "custo_total",
+       "nota": 3,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "dependencia_fornecedor",
+       "nota": 3,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "risco",
+       "nota": 3,
+       "peso": 0.15
+      }
+     ],
+     "opcao": "comprar",
+     "total": 3
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 1.2,
+       "criterio": "diferenciacao",
+       "nota": 3,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "tempo_ate_valor",
+       "nota": 3,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "custo_total",
+       "nota": 3,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "dependencia_fornecedor",
+       "nota": 3,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "risco",
+       "nota": 3,
+       "peso": 0.15
+      }
+     ],
+     "opcao": "assinar",
+     "total": 3
+    }
+   ],
+   "empate": [
+    "construir",
+    "comprar",
+    "assinar"
+   ],
+   "justificativa": "Objetivo: diferenciar_produto. Recomendação: assinar (total 3).\nconstruir: diferenciação 3 x 0,4 = 1,2; tempo até o valor 3 x 0,15 = 0,45; custo total 3 x 0,15 = 0,45; dependência de fornecedor 3 x 0,15 = 0,45; risco 3 x 0,15 = 0,45; total 3.\ncomprar: diferenciação 3 x 0,4 = 1,2; tempo até o valor 3 x 0,15 = 0,45; custo total 3 x 0,15 = 0,45; dependência de fornecedor 3 x 0,15 = 0,45; risco 3 x 0,15 = 0,45; total 3.\nassinar: diferenciação 3 x 0,4 = 1,2; tempo até o valor 3 x 0,15 = 0,45; custo total 3 x 0,15 = 0,45; dependência de fornecedor 3 x 0,15 = 0,45; risco 3 x 0,15 = 0,45; total 3.\nEmpate entre construir, comprar, assinar: venceu assinar pela ordem de desempate (assinar, comprar, construir).",
+   "objetivo": "diferenciar_produto",
+   "recomendada": "assinar"
+  }
+ },
+ {
+  "ok": {
+   "avaliacoes": [
+    {
+     "linhas": [
+      {
+       "contribuicao": 1.2,
+       "criterio": "diferenciacao",
+       "nota": 3,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "tempo_ate_valor",
+       "nota": 4,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.3,
+       "criterio": "custo_total",
+       "nota": 2,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.75,
+       "criterio": "dependencia_fornecedor",
+       "nota": 5,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "risco",
+       "nota": 4,
+       "peso": 0.15
+      }
+     ],
+     "opcao": "construir",
+     "total": 3.45
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 1.6,
+       "criterio": "diferenciacao",
+       "nota": 4,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.75,
+       "criterio": "tempo_ate_valor",
+       "nota": 5,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "custo_total",
+       "nota": 3,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.15,
+       "criterio": "dependencia_fornecedor",
+       "nota": 1,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.75,
+       "criterio": "risco",
+       "nota": 5,
+       "peso": 0.15
+      }
+     ],
+     "opcao": "comprar",
+     "total": 3.7
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 1.6,
+       "criterio": "diferenciacao",
+       "nota": 4,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.75,
+       "criterio": "tempo_ate_valor",
+       "nota": 5,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "custo_total",
+       "nota": 3,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.15,
+       "criterio": "dependencia_fornecedor",
+       "nota": 1,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.75,
+       "criterio": "risco",
+       "nota": 5,
+       "peso": 0.15
+      }
+     ],
+     "opcao": "assinar",
+     "total": 3.7
+    }
+   ],
+   "empate": [
+    "comprar",
+    "assinar"
+   ],
+   "justificativa": "Objetivo: diferenciar_produto. Recomendação: assinar (total 3,7).\nconstruir: diferenciação 3 x 0,4 = 1,2; tempo até o valor 4 x 0,15 = 0,6; custo total 2 x 0,15 = 0,3; dependência de fornecedor 5 x 0,15 = 0,75; risco 4 x 0,15 = 0,6; total 3,45.\ncomprar: diferenciação 4 x 0,4 = 1,6; tempo até o valor 5 x 0,15 = 0,75; custo total 3 x 0,15 = 0,45; dependência de fornecedor 1 x 0,15 = 0,15; risco 5 x 0,15 = 0,75; total 3,7.\nassinar: diferenciação 4 x 0,4 = 1,6; tempo até o valor 5 x 0,15 = 0,75; custo total 3 x 0,15 = 0,45; dependência de fornecedor 1 x 0,15 = 0,15; risco 5 x 0,15 = 0,75; total 3,7.\nEmpate entre comprar, assinar: venceu assinar pela ordem de desempate (assinar, comprar, construir).",
+   "objetivo": "diferenciar_produto",
+   "recomendada": "assinar"
+  }
+ },
+ {
+  "ok": {
+   "avaliacoes": [
+    {
+     "linhas": [
+      {
+       "contribuicao": 1.2,
+       "criterio": "diferenciacao",
+       "nota": 3,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.75,
+       "criterio": "tempo_ate_valor",
+       "nota": 5,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.15,
+       "criterio": "custo_total",
+       "nota": 1,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.3,
+       "criterio": "dependencia_fornecedor",
+       "nota": 2,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.75,
+       "criterio": "risco",
+       "nota": 5,
+       "peso": 0.15
+      }
+     ],
+     "opcao": "construir",
+     "total": 3.15
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.4,
+       "criterio": "diferenciacao",
+       "nota": 1,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "tempo_ate_valor",
+       "nota": 3,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "custo_total",
+       "nota": 4,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.75,
+       "criterio": "dependencia_fornecedor",
+       "nota": 5,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "risco",
+       "nota": 3,
+       "peso": 0.15
+      }
+     ],
+     "opcao": "comprar",
+     "total": 2.65
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.4,
+       "criterio": "diferenciacao",
+       "nota": 1,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "tempo_ate_valor",
+       "nota": 3,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "custo_total",
+       "nota": 4,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.75,
+       "criterio": "dependencia_fornecedor",
+       "nota": 5,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "risco",
+       "nota": 3,
+       "peso": 0.15
+      }
+     ],
+     "opcao": "assinar",
+     "total": 2.65
+    }
+   ],
+   "empate": [],
+   "justificativa": "Objetivo: diferenciar_produto. Recomendação: construir (total 3,15).\nconstruir: diferenciação 3 x 0,4 = 1,2; tempo até o valor 5 x 0,15 = 0,75; custo total 1 x 0,15 = 0,15; dependência de fornecedor 2 x 0,15 = 0,3; risco 5 x 0,15 = 0,75; total 3,15.\ncomprar: diferenciação 1 x 0,4 = 0,4; tempo até o valor 3 x 0,15 = 0,45; custo total 4 x 0,15 = 0,6; dependência de fornecedor 5 x 0,15 = 0,75; risco 3 x 0,15 = 0,45; total 2,65.\nassinar: diferenciação 1 x 0,4 = 0,4; tempo até o valor 3 x 0,15 = 0,45; custo total 4 x 0,15 = 0,6; dependência de fornecedor 5 x 0,15 = 0,75; risco 3 x 0,15 = 0,45; total 2,65.\nContexto: custo de construir: curto prazo 100, médio prazo 250.5, longo prazo R$ 1.000; custo de comprar: longo prazo 30; custo de não fazer: 12000; ROI esperado: 0.25; orçamento previsto: 5000.",
+   "objetivo": "diferenciar_produto",
+   "recomendada": "construir"
+  }
+ },
+ {
+  "ok": {
+   "avaliacoes": [
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.3,
+       "criterio": "diferenciacao",
+       "nota": 3,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "tempo_ate_valor",
+       "nota": 3,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 1.2,
+       "criterio": "custo_total",
+       "nota": 3,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "dependencia_fornecedor",
+       "nota": 3,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "risco",
+       "nota": 3,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "construir",
+     "total": 3
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.3,
+       "criterio": "diferenciacao",
+       "nota": 3,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "tempo_ate_valor",
+       "nota": 3,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 1.2,
+       "criterio": "custo_total",
+       "nota": 3,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "dependencia_fornecedor",
+       "nota": 3,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "risco",
+       "nota": 3,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "comprar",
+     "total": 3
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.3,
+       "criterio": "diferenciacao",
+       "nota": 3,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "tempo_ate_valor",
+       "nota": 3,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 1.2,
+       "criterio": "custo_total",
+       "nota": 3,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "dependencia_fornecedor",
+       "nota": 3,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "risco",
+       "nota": 3,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "assinar",
+     "total": 3
+    }
+   ],
+   "empate": [
+    "construir",
+    "comprar",
+    "assinar"
+   ],
+   "justificativa": "Objetivo: reduzir_custo. Recomendação: assinar (total 3).\nconstruir: diferenciação 3 x 0,1 = 0,3; tempo até o valor 3 x 0,15 = 0,45; custo total 3 x 0,4 = 1,2; dependência de fornecedor 3 x 0,15 = 0,45; risco 3 x 0,2 = 0,6; total 3.\ncomprar: diferenciação 3 x 0,1 = 0,3; tempo até o valor 3 x 0,15 = 0,45; custo total 3 x 0,4 = 1,2; dependência de fornecedor 3 x 0,15 = 0,45; risco 3 x 0,2 = 0,6; total 3.\nassinar: diferenciação 3 x 0,1 = 0,3; tempo até o valor 3 x 0,15 = 0,45; custo total 3 x 0,4 = 1,2; dependência de fornecedor 3 x 0,15 = 0,45; risco 3 x 0,2 = 0,6; total 3.\nEmpate entre construir, comprar, assinar: venceu assinar pela ordem de desempate (assinar, comprar, construir).",
+   "objetivo": "reduzir_custo",
+   "recomendada": "assinar"
+  }
+ },
+ {
+  "ok": {
+   "avaliacoes": [
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.3,
+       "criterio": "diferenciacao",
+       "nota": 3,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "tempo_ate_valor",
+       "nota": 4,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.8,
+       "criterio": "custo_total",
+       "nota": 2,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.75,
+       "criterio": "dependencia_fornecedor",
+       "nota": 5,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.8,
+       "criterio": "risco",
+       "nota": 4,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "construir",
+     "total": 3.25
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.4,
+       "criterio": "diferenciacao",
+       "nota": 4,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.75,
+       "criterio": "tempo_ate_valor",
+       "nota": 5,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 1.2,
+       "criterio": "custo_total",
+       "nota": 3,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.15,
+       "criterio": "dependencia_fornecedor",
+       "nota": 1,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 1,
+       "criterio": "risco",
+       "nota": 5,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "comprar",
+     "total": 3.5
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.4,
+       "criterio": "diferenciacao",
+       "nota": 4,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.75,
+       "criterio": "tempo_ate_valor",
+       "nota": 5,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 1.2,
+       "criterio": "custo_total",
+       "nota": 3,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.15,
+       "criterio": "dependencia_fornecedor",
+       "nota": 1,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 1,
+       "criterio": "risco",
+       "nota": 5,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "assinar",
+     "total": 3.5
+    }
+   ],
+   "empate": [
+    "comprar",
+    "assinar"
+   ],
+   "justificativa": "Objetivo: reduzir_custo. Recomendação: assinar (total 3,5).\nconstruir: diferenciação 3 x 0,1 = 0,3; tempo até o valor 4 x 0,15 = 0,6; custo total 2 x 0,4 = 0,8; dependência de fornecedor 5 x 0,15 = 0,75; risco 4 x 0,2 = 0,8; total 3,25.\ncomprar: diferenciação 4 x 0,1 = 0,4; tempo até o valor 5 x 0,15 = 0,75; custo total 3 x 0,4 = 1,2; dependência de fornecedor 1 x 0,15 = 0,15; risco 5 x 0,2 = 1; total 3,5.\nassinar: diferenciação 4 x 0,1 = 0,4; tempo até o valor 5 x 0,15 = 0,75; custo total 3 x 0,4 = 1,2; dependência de fornecedor 1 x 0,15 = 0,15; risco 5 x 0,2 = 1; total 3,5.\nEmpate entre comprar, assinar: venceu assinar pela ordem de desempate (assinar, comprar, construir).",
+   "objetivo": "reduzir_custo",
+   "recomendada": "assinar"
+  }
+ },
+ {
+  "ok": {
+   "avaliacoes": [
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.3,
+       "criterio": "diferenciacao",
+       "nota": 3,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.75,
+       "criterio": "tempo_ate_valor",
+       "nota": 5,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.4,
+       "criterio": "custo_total",
+       "nota": 1,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.3,
+       "criterio": "dependencia_fornecedor",
+       "nota": 2,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 1,
+       "criterio": "risco",
+       "nota": 5,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "construir",
+     "total": 2.75
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.1,
+       "criterio": "diferenciacao",
+       "nota": 1,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "tempo_ate_valor",
+       "nota": 3,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 1.6,
+       "criterio": "custo_total",
+       "nota": 4,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.75,
+       "criterio": "dependencia_fornecedor",
+       "nota": 5,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "risco",
+       "nota": 3,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "comprar",
+     "total": 3.5
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.1,
+       "criterio": "diferenciacao",
+       "nota": 1,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.45,
+       "criterio": "tempo_ate_valor",
+       "nota": 3,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 1.6,
+       "criterio": "custo_total",
+       "nota": 4,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.75,
+       "criterio": "dependencia_fornecedor",
+       "nota": 5,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "risco",
+       "nota": 3,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "assinar",
+     "total": 3.5
+    }
+   ],
+   "empate": [
+    "comprar",
+    "assinar"
+   ],
+   "justificativa": "Objetivo: reduzir_custo. Recomendação: assinar (total 3,5).\nconstruir: diferenciação 3 x 0,1 = 0,3; tempo até o valor 5 x 0,15 = 0,75; custo total 1 x 0,4 = 0,4; dependência de fornecedor 2 x 0,15 = 0,3; risco 5 x 0,2 = 1; total 2,75.\ncomprar: diferenciação 1 x 0,1 = 0,1; tempo até o valor 3 x 0,15 = 0,45; custo total 4 x 0,4 = 1,6; dependência de fornecedor 5 x 0,15 = 0,75; risco 3 x 0,2 = 0,6; total 3,5.\nassinar: diferenciação 1 x 0,1 = 0,1; tempo até o valor 3 x 0,15 = 0,45; custo total 4 x 0,4 = 1,6; dependência de fornecedor 5 x 0,15 = 0,75; risco 3 x 0,2 = 0,6; total 3,5.\nEmpate entre comprar, assinar: venceu assinar pela ordem de desempate (assinar, comprar, construir).\nContexto: custo de construir: curto prazo 100, médio prazo 250.5, longo prazo R$ 1.000; custo de comprar: longo prazo 30; custo de não fazer: 12000; ROI esperado: 0.25; orçamento previsto: 5000.",
+   "objetivo": "reduzir_custo",
+   "recomendada": "assinar"
+  }
+ },
+ {
+  "ok": {
+   "avaliacoes": [
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.3,
+       "criterio": "diferenciacao",
+       "nota": 3,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1.05,
+       "criterio": "tempo_ate_valor",
+       "nota": 3,
+       "peso": 0.35
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "custo_total",
+       "nota": 3,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.3,
+       "criterio": "dependencia_fornecedor",
+       "nota": 3,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.75,
+       "criterio": "risco",
+       "nota": 3,
+       "peso": 0.25
+      }
+     ],
+     "opcao": "construir",
+     "total": 3
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.3,
+       "criterio": "diferenciacao",
+       "nota": 3,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1.05,
+       "criterio": "tempo_ate_valor",
+       "nota": 3,
+       "peso": 0.35
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "custo_total",
+       "nota": 3,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.3,
+       "criterio": "dependencia_fornecedor",
+       "nota": 3,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.75,
+       "criterio": "risco",
+       "nota": 3,
+       "peso": 0.25
+      }
+     ],
+     "opcao": "comprar",
+     "total": 3
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.3,
+       "criterio": "diferenciacao",
+       "nota": 3,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1.05,
+       "criterio": "tempo_ate_valor",
+       "nota": 3,
+       "peso": 0.35
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "custo_total",
+       "nota": 3,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.3,
+       "criterio": "dependencia_fornecedor",
+       "nota": 3,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.75,
+       "criterio": "risco",
+       "nota": 3,
+       "peso": 0.25
+      }
+     ],
+     "opcao": "assinar",
+     "total": 3
+    }
+   ],
+   "empate": [
+    "construir",
+    "comprar",
+    "assinar"
+   ],
+   "justificativa": "Objetivo: validar_hipotese. Recomendação: assinar (total 3).\nconstruir: diferenciação 3 x 0,1 = 0,3; tempo até o valor 3 x 0,35 = 1,05; custo total 3 x 0,2 = 0,6; dependência de fornecedor 3 x 0,1 = 0,3; risco 3 x 0,25 = 0,75; total 3.\ncomprar: diferenciação 3 x 0,1 = 0,3; tempo até o valor 3 x 0,35 = 1,05; custo total 3 x 0,2 = 0,6; dependência de fornecedor 3 x 0,1 = 0,3; risco 3 x 0,25 = 0,75; total 3.\nassinar: diferenciação 3 x 0,1 = 0,3; tempo até o valor 3 x 0,35 = 1,05; custo total 3 x 0,2 = 0,6; dependência de fornecedor 3 x 0,1 = 0,3; risco 3 x 0,25 = 0,75; total 3.\nEmpate entre construir, comprar, assinar: venceu assinar pela ordem de desempate (assinar, comprar, construir).",
+   "objetivo": "validar_hipotese",
+   "recomendada": "assinar"
+  }
+ },
+ {
+  "ok": {
+   "avaliacoes": [
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.3,
+       "criterio": "diferenciacao",
+       "nota": 3,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1.4,
+       "criterio": "tempo_ate_valor",
+       "nota": 4,
+       "peso": 0.35
+      },
+      {
+       "contribuicao": 0.4,
+       "criterio": "custo_total",
+       "nota": 2,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.5,
+       "criterio": "dependencia_fornecedor",
+       "nota": 5,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1,
+       "criterio": "risco",
+       "nota": 4,
+       "peso": 0.25
+      }
+     ],
+     "opcao": "construir",
+     "total": 3.6
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.4,
+       "criterio": "diferenciacao",
+       "nota": 4,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1.75,
+       "criterio": "tempo_ate_valor",
+       "nota": 5,
+       "peso": 0.35
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "custo_total",
+       "nota": 3,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.1,
+       "criterio": "dependencia_fornecedor",
+       "nota": 1,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1.25,
+       "criterio": "risco",
+       "nota": 5,
+       "peso": 0.25
+      }
+     ],
+     "opcao": "comprar",
+     "total": 4.1
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.4,
+       "criterio": "diferenciacao",
+       "nota": 4,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1.75,
+       "criterio": "tempo_ate_valor",
+       "nota": 5,
+       "peso": 0.35
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "custo_total",
+       "nota": 3,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.1,
+       "criterio": "dependencia_fornecedor",
+       "nota": 1,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1.25,
+       "criterio": "risco",
+       "nota": 5,
+       "peso": 0.25
+      }
+     ],
+     "opcao": "assinar",
+     "total": 4.1
+    }
+   ],
+   "empate": [
+    "comprar",
+    "assinar"
+   ],
+   "justificativa": "Objetivo: validar_hipotese. Recomendação: assinar (total 4,1).\nconstruir: diferenciação 3 x 0,1 = 0,3; tempo até o valor 4 x 0,35 = 1,4; custo total 2 x 0,2 = 0,4; dependência de fornecedor 5 x 0,1 = 0,5; risco 4 x 0,25 = 1; total 3,6.\ncomprar: diferenciação 4 x 0,1 = 0,4; tempo até o valor 5 x 0,35 = 1,75; custo total 3 x 0,2 = 0,6; dependência de fornecedor 1 x 0,1 = 0,1; risco 5 x 0,25 = 1,25; total 4,1.\nassinar: diferenciação 4 x 0,1 = 0,4; tempo até o valor 5 x 0,35 = 1,75; custo total 3 x 0,2 = 0,6; dependência de fornecedor 1 x 0,1 = 0,1; risco 5 x 0,25 = 1,25; total 4,1.\nEmpate entre comprar, assinar: venceu assinar pela ordem de desempate (assinar, comprar, construir).",
+   "objetivo": "validar_hipotese",
+   "recomendada": "assinar"
+  }
+ },
+ {
+  "ok": {
+   "avaliacoes": [
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.3,
+       "criterio": "diferenciacao",
+       "nota": 3,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1.75,
+       "criterio": "tempo_ate_valor",
+       "nota": 5,
+       "peso": 0.35
+      },
+      {
+       "contribuicao": 0.2,
+       "criterio": "custo_total",
+       "nota": 1,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.2,
+       "criterio": "dependencia_fornecedor",
+       "nota": 2,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1.25,
+       "criterio": "risco",
+       "nota": 5,
+       "peso": 0.25
+      }
+     ],
+     "opcao": "construir",
+     "total": 3.7
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.1,
+       "criterio": "diferenciacao",
+       "nota": 1,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1.05,
+       "criterio": "tempo_ate_valor",
+       "nota": 3,
+       "peso": 0.35
+      },
+      {
+       "contribuicao": 0.8,
+       "criterio": "custo_total",
+       "nota": 4,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.5,
+       "criterio": "dependencia_fornecedor",
+       "nota": 5,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.75,
+       "criterio": "risco",
+       "nota": 3,
+       "peso": 0.25
+      }
+     ],
+     "opcao": "comprar",
+     "total": 3.2
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.1,
+       "criterio": "diferenciacao",
+       "nota": 1,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1.05,
+       "criterio": "tempo_ate_valor",
+       "nota": 3,
+       "peso": 0.35
+      },
+      {
+       "contribuicao": 0.8,
+       "criterio": "custo_total",
+       "nota": 4,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.5,
+       "criterio": "dependencia_fornecedor",
+       "nota": 5,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.75,
+       "criterio": "risco",
+       "nota": 3,
+       "peso": 0.25
+      }
+     ],
+     "opcao": "assinar",
+     "total": 3.2
+    }
+   ],
+   "empate": [],
+   "justificativa": "Objetivo: validar_hipotese. Recomendação: construir (total 3,7).\nconstruir: diferenciação 3 x 0,1 = 0,3; tempo até o valor 5 x 0,35 = 1,75; custo total 1 x 0,2 = 0,2; dependência de fornecedor 2 x 0,1 = 0,2; risco 5 x 0,25 = 1,25; total 3,7.\ncomprar: diferenciação 1 x 0,1 = 0,1; tempo até o valor 3 x 0,35 = 1,05; custo total 4 x 0,2 = 0,8; dependência de fornecedor 5 x 0,1 = 0,5; risco 3 x 0,25 = 0,75; total 3,2.\nassinar: diferenciação 1 x 0,1 = 0,1; tempo até o valor 3 x 0,35 = 1,05; custo total 4 x 0,2 = 0,8; dependência de fornecedor 5 x 0,1 = 0,5; risco 3 x 0,25 = 0,75; total 3,2.\nContexto: custo de construir: curto prazo 100, médio prazo 250.5, longo prazo R$ 1.000; custo de comprar: longo prazo 30; custo de não fazer: 12000; ROI esperado: 0.25; orçamento previsto: 5000.",
+   "objetivo": "validar_hipotese",
+   "recomendada": "construir"
+  }
+ },
+ {
+  "ok": {
+   "avaliacoes": [
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.5,
+       "criterio": "diferenciacao",
+       "nota": 5,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 2,
+       "criterio": "tempo_ate_valor",
+       "nota": 5,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 1,
+       "criterio": "custo_total",
+       "nota": 5,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.5,
+       "criterio": "dependencia_fornecedor",
+       "nota": 5,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1,
+       "criterio": "risco",
+       "nota": 5,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "construir",
+     "total": 5
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.5,
+       "criterio": "diferenciacao",
+       "nota": 5,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 2,
+       "criterio": "tempo_ate_valor",
+       "nota": 5,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 1,
+       "criterio": "custo_total",
+       "nota": 5,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.5,
+       "criterio": "dependencia_fornecedor",
+       "nota": 5,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1,
+       "criterio": "risco",
+       "nota": 5,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "comprar",
+     "total": 5
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.5,
+       "criterio": "diferenciacao",
+       "nota": 5,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 2,
+       "criterio": "tempo_ate_valor",
+       "nota": 5,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 1,
+       "criterio": "custo_total",
+       "nota": 5,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.5,
+       "criterio": "dependencia_fornecedor",
+       "nota": 5,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1,
+       "criterio": "risco",
+       "nota": 5,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "assinar",
+     "total": 5
+    }
+   ],
+   "empate": [
+    "construir",
+    "comprar",
+    "assinar"
+   ],
+   "justificativa": "Objetivo: cumprir_prazo. Recomendação: assinar (total 5).\nconstruir: diferenciação 5 x 0,1 = 0,5; tempo até o valor 5 x 0,4 = 2; custo total 5 x 0,2 = 1; dependência de fornecedor 5 x 0,1 = 0,5; risco 5 x 0,2 = 1; total 5.\ncomprar: diferenciação 5 x 0,1 = 0,5; tempo até o valor 5 x 0,4 = 2; custo total 5 x 0,2 = 1; dependência de fornecedor 5 x 0,1 = 0,5; risco 5 x 0,2 = 1; total 5.\nassinar: diferenciação 5 x 0,1 = 0,5; tempo até o valor 5 x 0,4 = 2; custo total 5 x 0,2 = 1; dependência de fornecedor 5 x 0,1 = 0,5; risco 5 x 0,2 = 1; total 5.\nEmpate entre construir, comprar, assinar: venceu assinar pela ordem de desempate (assinar, comprar, construir).",
+   "objetivo": "cumprir_prazo",
+   "recomendada": "assinar"
+  }
+ },
+ {
+  "ok": {
+   "avaliacoes": [
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.1,
+       "criterio": "diferenciacao",
+       "nota": 1,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.4,
+       "criterio": "tempo_ate_valor",
+       "nota": 1,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.2,
+       "criterio": "custo_total",
+       "nota": 1,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.1,
+       "criterio": "dependencia_fornecedor",
+       "nota": 1,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.2,
+       "criterio": "risco",
+       "nota": 1,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "construir",
+     "total": 1
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.1,
+       "criterio": "diferenciacao",
+       "nota": 1,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.4,
+       "criterio": "tempo_ate_valor",
+       "nota": 1,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.2,
+       "criterio": "custo_total",
+       "nota": 1,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.1,
+       "criterio": "dependencia_fornecedor",
+       "nota": 1,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.2,
+       "criterio": "risco",
+       "nota": 1,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "comprar",
+     "total": 1
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.1,
+       "criterio": "diferenciacao",
+       "nota": 1,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.4,
+       "criterio": "tempo_ate_valor",
+       "nota": 1,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.2,
+       "criterio": "custo_total",
+       "nota": 1,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.1,
+       "criterio": "dependencia_fornecedor",
+       "nota": 1,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.2,
+       "criterio": "risco",
+       "nota": 1,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "assinar",
+     "total": 1
+    }
+   ],
+   "empate": [
+    "construir",
+    "comprar",
+    "assinar"
+   ],
+   "justificativa": "Objetivo: cumprir_prazo. Recomendação: assinar (total 1).\nconstruir: diferenciação 1 x 0,1 = 0,1; tempo até o valor 1 x 0,4 = 0,4; custo total 1 x 0,2 = 0,2; dependência de fornecedor 1 x 0,1 = 0,1; risco 1 x 0,2 = 0,2; total 1.\ncomprar: diferenciação 1 x 0,1 = 0,1; tempo até o valor 1 x 0,4 = 0,4; custo total 1 x 0,2 = 0,2; dependência de fornecedor 1 x 0,1 = 0,1; risco 1 x 0,2 = 0,2; total 1.\nassinar: diferenciação 1 x 0,1 = 0,1; tempo até o valor 1 x 0,4 = 0,4; custo total 1 x 0,2 = 0,2; dependência de fornecedor 1 x 0,1 = 0,1; risco 1 x 0,2 = 0,2; total 1.\nEmpate entre construir, comprar, assinar: venceu assinar pela ordem de desempate (assinar, comprar, construir).\nContexto: ROI esperado: 0.",
+   "objetivo": "cumprir_prazo",
+   "recomendada": "assinar"
+  }
+ },
+ {
+  "ok": {
+   "avaliacoes": [
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.25,
+       "criterio": "diferenciacao",
+       "nota": 2.5,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1,
+       "criterio": "tempo_ate_valor",
+       "nota": 2.5,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.5,
+       "criterio": "custo_total",
+       "nota": 2.5,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.25,
+       "criterio": "dependencia_fornecedor",
+       "nota": 2.5,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.5,
+       "criterio": "risco",
+       "nota": 2.5,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "construir",
+     "total": 2.5
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.25,
+       "criterio": "diferenciacao",
+       "nota": 2.5,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1,
+       "criterio": "tempo_ate_valor",
+       "nota": 2.5,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.5,
+       "criterio": "custo_total",
+       "nota": 2.5,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.25,
+       "criterio": "dependencia_fornecedor",
+       "nota": 2.5,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.5,
+       "criterio": "risco",
+       "nota": 2.5,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "comprar",
+     "total": 2.5
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.25,
+       "criterio": "diferenciacao",
+       "nota": 2.5,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 1,
+       "criterio": "tempo_ate_valor",
+       "nota": 2.5,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.5,
+       "criterio": "custo_total",
+       "nota": 2.5,
+       "peso": 0.2
+      },
+      {
+       "contribuicao": 0.25,
+       "criterio": "dependencia_fornecedor",
+       "nota": 2.5,
+       "peso": 0.1
+      },
+      {
+       "contribuicao": 0.5,
+       "criterio": "risco",
+       "nota": 2.5,
+       "peso": 0.2
+      }
+     ],
+     "opcao": "assinar",
+     "total": 2.5
+    }
+   ],
+   "empate": [
+    "construir",
+    "comprar",
+    "assinar"
+   ],
+   "justificativa": "Objetivo: cumprir_prazo. Recomendação: assinar (total 2,5).\nconstruir: diferenciação 2,5 x 0,1 = 0,25; tempo até o valor 2,5 x 0,4 = 1; custo total 2,5 x 0,2 = 0,5; dependência de fornecedor 2,5 x 0,1 = 0,25; risco 2,5 x 0,2 = 0,5; total 2,5.\ncomprar: diferenciação 2,5 x 0,1 = 0,25; tempo até o valor 2,5 x 0,4 = 1; custo total 2,5 x 0,2 = 0,5; dependência de fornecedor 2,5 x 0,1 = 0,25; risco 2,5 x 0,2 = 0,5; total 2,5.\nassinar: diferenciação 2,5 x 0,1 = 0,25; tempo até o valor 2,5 x 0,4 = 1; custo total 2,5 x 0,2 = 0,5; dependência de fornecedor 2,5 x 0,1 = 0,25; risco 2,5 x 0,2 = 0,5; total 2,5.\nEmpate entre construir, comprar, assinar: venceu assinar pela ordem de desempate (assinar, comprar, construir).",
+   "objetivo": "cumprir_prazo",
+   "recomendada": "assinar"
+  }
+ },
+ {
+  "ok": {
+   "avaliacoes": [
+    {
+     "linhas": [
+      {
+       "contribuicao": 1.6,
+       "criterio": "diferenciacao",
+       "nota": 4,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "tempo_ate_valor",
+       "nota": 4,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "custo_total",
+       "nota": 4,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "dependencia_fornecedor",
+       "nota": 4,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "risco",
+       "nota": 4,
+       "peso": 0.15
+      }
+     ],
+     "opcao": "construir",
+     "total": 4
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 1.6,
+       "criterio": "diferenciacao",
+       "nota": 4,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "tempo_ate_valor",
+       "nota": 4,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "custo_total",
+       "nota": 4,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "dependencia_fornecedor",
+       "nota": 4,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.6,
+       "criterio": "risco",
+       "nota": 4,
+       "peso": 0.15
+      }
+     ],
+     "opcao": "comprar",
+     "total": 4
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 1.2,
+       "criterio": "diferenciacao",
+       "nota": 3,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.15,
+       "criterio": "tempo_ate_valor",
+       "nota": 1,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.15,
+       "criterio": "custo_total",
+       "nota": 1,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.3,
+       "criterio": "dependencia_fornecedor",
+       "nota": 2,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.15,
+       "criterio": "risco",
+       "nota": 1,
+       "peso": 0.15
+      }
+     ],
+     "opcao": "assinar",
+     "total": 1.95
+    }
+   ],
+   "empate": [
+    "construir",
+    "comprar"
+   ],
+   "justificativa": "Objetivo: diferenciar_produto. Recomendação: comprar (total 4).\nconstruir: diferenciação 4 x 0,4 = 1,6; tempo até o valor 4 x 0,15 = 0,6; custo total 4 x 0,15 = 0,6; dependência de fornecedor 4 x 0,15 = 0,6; risco 4 x 0,15 = 0,6; total 4.\ncomprar: diferenciação 4 x 0,4 = 1,6; tempo até o valor 4 x 0,15 = 0,6; custo total 4 x 0,15 = 0,6; dependência de fornecedor 4 x 0,15 = 0,6; risco 4 x 0,15 = 0,6; total 4.\nassinar: diferenciação 3 x 0,4 = 1,2; tempo até o valor 1 x 0,15 = 0,15; custo total 1 x 0,15 = 0,15; dependência de fornecedor 2 x 0,15 = 0,3; risco 1 x 0,15 = 0,15; total 1,95.\nEmpate entre construir, comprar: venceu comprar pela ordem de desempate (assinar, comprar, construir).",
+   "objetivo": "diferenciar_produto",
+   "recomendada": "comprar"
+  }
+ },
+ {
+  "ok": {
+   "avaliacoes": [
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.85,
+       "criterio": "diferenciacao",
+       "nota": 2.125,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.31875,
+       "criterio": "tempo_ate_valor",
+       "nota": 2.125,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.31875,
+       "criterio": "custo_total",
+       "nota": 2.125,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.31875,
+       "criterio": "dependencia_fornecedor",
+       "nota": 2.125,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.31875,
+       "criterio": "risco",
+       "nota": 2.125,
+       "peso": 0.15
+      }
+     ],
+     "opcao": "construir",
+     "total": 2.125
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.85,
+       "criterio": "diferenciacao",
+       "nota": 2.125,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.31875,
+       "criterio": "tempo_ate_valor",
+       "nota": 2.125,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.31875,
+       "criterio": "custo_total",
+       "nota": 2.125,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.31875,
+       "criterio": "dependencia_fornecedor",
+       "nota": 2.125,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.31875,
+       "criterio": "risco",
+       "nota": 2.125,
+       "peso": 0.15
+      }
+     ],
+     "opcao": "comprar",
+     "total": 2.125
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.85,
+       "criterio": "diferenciacao",
+       "nota": 2.125,
+       "peso": 0.4
+      },
+      {
+       "contribuicao": 0.31875,
+       "criterio": "tempo_ate_valor",
+       "nota": 2.125,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.31875,
+       "criterio": "custo_total",
+       "nota": 2.125,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.31875,
+       "criterio": "dependencia_fornecedor",
+       "nota": 2.125,
+       "peso": 0.15
+      },
+      {
+       "contribuicao": 0.31875,
+       "criterio": "risco",
+       "nota": 2.125,
+       "peso": 0.15
+      }
+     ],
+     "opcao": "assinar",
+     "total": 2.125
+    }
+   ],
+   "empate": [
+    "construir",
+    "comprar",
+    "assinar"
+   ],
+   "justificativa": "Objetivo: diferenciar_produto. Recomendação: assinar (total 2,12).\nconstruir: diferenciação 2,12 x 0,4 = 0,85; tempo até o valor 2,12 x 0,15 = 0,32; custo total 2,12 x 0,15 = 0,32; dependência de fornecedor 2,12 x 0,15 = 0,32; risco 2,12 x 0,15 = 0,32; total 2,12.\ncomprar: diferenciação 2,12 x 0,4 = 0,85; tempo até o valor 2,12 x 0,15 = 0,32; custo total 2,12 x 0,15 = 0,32; dependência de fornecedor 2,12 x 0,15 = 0,32; risco 2,12 x 0,15 = 0,32; total 2,12.\nassinar: diferenciação 2,12 x 0,4 = 0,85; tempo até o valor 2,12 x 0,15 = 0,32; custo total 2,12 x 0,15 = 0,32; dependência de fornecedor 2,12 x 0,15 = 0,32; risco 2,12 x 0,15 = 0,32; total 2,12.\nEmpate entre construir, comprar, assinar: venceu assinar pela ordem de desempate (assinar, comprar, construir).\n",
+   "objetivo": "diferenciar_produto",
+   "recomendada": "assinar"
+  }
+ },
+ {
+  "erro": "objetivo desconhecido: 'inexistente'; objetivos válidos: cumprir_prazo, diferenciar_produto, reduzir_custo, validar_hipotese"
+ },
+ {
+  "erro": "a nota 6 do critério 'diferenciacao' na opção 'construir' está fora da escala 1 a 5"
+ },
+ {
+  "erro": "a nota 0 do critério 'diferenciacao' na opção 'construir' está fora da escala 1 a 5"
+ },
+ {
+  "erro": "a nota 5.5 do critério 'risco' na opção 'assinar' está fora da escala 1 a 5"
+ },
+ {
+  "erro": "a nota do critério 'custo_total' na opção 'comprar' não é um número: 'alto'"
+ },
+ {
+  "erro": "a nota do critério 'custo_total' na opção 'comprar' não é um número: True"
+ },
+ {
+  "erro": "a nota do critério 'custo_total' na opção 'comprar' não é um número: None"
+ },
+ {
+  "erro": "faltam as notas das opções: assinar"
+ },
+ {
+  "erro": "falta a nota do critério 'risco' na opção 'comprar'"
+ },
+ {
+  "erro": "opções desconhecidas: extra, outra; opções válidas: construir, comprar, assinar"
+ },
+ {
+  "ok": {
+   "avaliacoes": [
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.666667,
+       "criterio": "k",
+       "nota": 2,
+       "peso": 0.3333333
+      }
+     ],
+     "opcao": "a",
+     "total": 0.666667
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.666667,
+       "criterio": "k",
+       "nota": 2,
+       "peso": 0.3333333
+      }
+     ],
+     "opcao": "b",
+     "total": 0.666667
+    },
+    {
+     "linhas": [
+      {
+       "contribuicao": 0.333333,
+       "criterio": "k",
+       "nota": 1,
+       "peso": 0.3333333
+      }
+     ],
+     "opcao": "c",
+     "total": 0.333333
+    }
+   ],
+   "empate": [
+    "a",
+    "b"
+   ],
+   "justificativa": "Objetivo: x. Recomendação: b (total 0,67).\na: k 2 x 0,33 = 0,67; total 0,67.\nb: k 2 x 0,33 = 0,67; total 0,67.\nc: k 1 x 0,33 = 0,33; total 0,33.\nEmpate entre a, b: venceu b pela ordem de desempate (c, b).",
+   "objetivo": "x",
+   "recomendada": "b"
+  }
+ },
+ {
+  "erro": "a nota 4 do critério 'k' na opção 'a' está fora da escala 0 a 3"
+ }
+]

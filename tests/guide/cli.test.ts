@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
-// Task 9.2: tests for tools/guide/cli.ts (exit codes, text format, rastrear) and, when GUIDE_ORACLE_PYTHON
-// is set, a byte-for-byte comparison of the `validar` and `rastrear` output with the Python CLI on planted defects.
+// Task 9.2: tests for tools/guide/cli.ts (exit codes, text format, rastrear) and a byte-for-byte comparison of the
+// `validar` output with the stored Python CLI output (tests/guide/expected/cli-validar.json) on a planted defect.
 import { spawnSync } from 'node:child_process';
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -9,11 +9,12 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import YAML from 'yaml';
 import { guideDir, loadGuideDoc } from '../../lib/guide';
 import { lacunasDeDados, rastrearDados } from '../../lib/guide/rastreio';
+import { ARQUIVO, docComDefeito } from './cases/cli';
+import { readExpected } from './support/expected';
 
 const root = new URL('../../', import.meta.url).pathname;
 const tsx = join(root, 'node_modules/.bin/tsx');
 const cli = join(root, 'tools/guide/cli.ts');
-const python = process.env.GUIDE_ORACLE_PYTHON;
 const schemaPath = join(root, 'schema/flows.schema.json');
 
 type R = { code: number | null; out: string; err: string };
@@ -32,9 +33,7 @@ beforeAll(() => {
   limpo = join(tmp, 'limpo.yaml');
   defeito = join(tmp, 'defeito.yaml');
   writeFileSync(limpo, YAML.stringify(real));
-  const ruim = structuredClone(real) as any; // eslint-disable-line @typescript-eslint/no-explicit-any
-  ruim.tecnicas[0].fonte_ids = ['id_inexistente_xyz'];
-  writeFileSync(defeito, YAML.stringify(ruim));
+  writeFileSync(defeito, YAML.stringify(docComDefeito()));
 });
 afterAll(() => rmSync(tmp, { recursive: true, force: true }));
 
@@ -74,16 +73,12 @@ describe('guide validar', () => {
     expect(j).toMatchObject({ valido: false, erros: 1, avisos: 0 });
   });
 
-  it.skipIf(!python)('matches the Python CLI text output on a planted defect', () => {
-    const py = spawnSync(python!, ['-m', 'guia_decisao.cli', 'validar', '--yaml', defeito, '--schema', schemaPath, '--sem-avisos'], {
-      cwd: root,
-      encoding: 'utf8',
-      env: { ...process.env, PYTHONPATH: join(root, 'tools/guide-oracle/src') },
-    });
+  it('matches the stored Python CLI text output on a planted defect', () => {
+    const py = readExpected<{ status: number; stdout: string; stderr: string }>('cli-validar.json');
     const ts = run('validar', '--yaml', defeito, '--schema', schemaPath, '--sem-avisos');
-    expect(py.status).toBe(ts.code);
-    expect(py.stdout).toBe(ts.out);
-    expect(py.stderr).toBe(ts.err);
+    expect(ts.code).toBe(py.status);
+    expect(ts.out.split(defeito).join(ARQUIVO)).toBe(py.stdout);
+    expect(ts.err.split(defeito).join(ARQUIVO)).toBe(py.stderr);
   });
 });
 
