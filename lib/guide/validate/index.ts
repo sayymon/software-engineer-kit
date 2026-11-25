@@ -49,7 +49,7 @@ function toProblem(doc: GuideDoc, issue: FlowIssue): Problema {
     code: issue.code,
     nivel: 'erro' as Nivel,
     path: issue.path,
-    itemId: itemIdDoCaminho(doc, partes),
+    itemId: issue.itemId !== undefined ? issue.itemId : itemIdDoCaminho(doc, partes),
     message: issue.message,
   };
 }

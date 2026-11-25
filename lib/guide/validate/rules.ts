@@ -4,8 +4,9 @@
 import Ajv2020 from 'ajv/dist/2020.js';
 
 import type { GuideDoc } from '../index';
+import { checarDados, checarFontes, checarLigacoes, type AddIssue } from './dados';
 export type Doc = GuideDoc;
-export type FlowIssue = { code: string; path: string; message: string };
+export type FlowIssue = { code: string; path: string; message: string; itemId?: string | null };
 
 const ID_COLLECTIONS = ['demandas', 'raias', 'requisitos', 'decisoes', 'playbooks', 'abordagens', 'tecnicas', 'padroes', 'estrategias', 'categorias_ferramenta', 'fontes'] as const;
 let compiled: ReturnType<Ajv2020['compile']> | undefined;
@@ -26,14 +27,14 @@ const LETTER: Record<string, string> = { inicio: 's', tarefa: 't', bifurcacao: '
 
 export function checkDoc(doc: Doc): FlowIssue[] {
   const issues: FlowIssue[] = [];
-  const add = (code: string, path: string, message: string) => issues.push({ code, path, message });
+  const add: AddIssue = (code, path, message, itemId) => issues.push(itemId === undefined ? { code, path, message } : { code, path, message, itemId });
   const ids: Record<string, Set<string>> = {};
   // Unique ids per collection.
   for (const c of ID_COLLECTIONS) {
     const seen = new Map<string, number>();
     ids[c] = new Set();
     (doc[c] as Doc[]).forEach((item, i) => {
-      if (seen.has(item.id)) add('ID_DUPLICADO', `${c}[${i}].id`, `id '${item.id}' repeated in ${c} (items ${seen.get(item.id)} and ${i})`);
+      if (seen.has(item.id)) add('ID_DUPLICADO', `${c}[${i}].id`, `id '${item.id}' repeated in ${c} (items ${seen.get(item.id)} and ${i})`, item.id);
       else seen.set(item.id, i);
       ids[c].add(item.id);
     });
@@ -41,7 +42,7 @@ export function checkDoc(doc: Doc): FlowIssue[] {
   const shared = new Map<string, string>();
   for (const c of ['artefatos', 'variaveis'] as const) {
     (doc[c] as Doc[]).forEach((item, i) => {
-      if (shared.has(item.id)) add('ID_DUPLICADO', `${c}[${i}].id`, `id '${item.id}' already used in ${shared.get(item.id)}`);
+      if (shared.has(item.id)) add('ID_DUPLICADO', `${c}[${i}].id`, `id '${item.id}' already used in ${shared.get(item.id)}`, item.id);
       else shared.set(item.id, `${c}[${i}]`);
     });
   }
@@ -56,7 +57,7 @@ export function checkDoc(doc: Doc): FlowIssue[] {
   const sub = new Map<string, string>();
   decisoes.forEach((d, i) => {
     ((d.subtarefas as Doc[] | undefined) ?? []).forEach((s, k) => {
-      if (nodeById.has(s.id) || sub.has(s.id)) add('ID_DUPLICADO', `decisoes[${i}].subtarefas[${k}].id`, `subtask id '${s.id}' repeated`);
+      if (nodeById.has(s.id) || sub.has(s.id)) add('ID_DUPLICADO', `decisoes[${i}].subtarefas[${k}].id`, `subtask id '${s.id}' repeated`, s.id);
       else sub.set(s.id, `${i}.${k}`);
     });
   });
@@ -190,7 +191,7 @@ export function checkDoc(doc: Doc): FlowIssue[] {
     if (Math.abs(sum - 1) > 1e-9) add('PESOS', `decisor_construir_comprar_assinar.pesos.${goal}`, `weights of '${goal}' sum to ${sum}`);
   }
   // References.
-  const broken = (path: string, target: string, collection: string, origin: string) => add('REF_QUEBRADA', path, `'${origin}' references missing id '${target}' (expected in ${collection})`);
+  const broken = (path: string, target: string, collection: string, origin: string) => add('REF_QUEBRADA', path, `'${origin}' references missing id '${target}' (expected in ${collection})`, origin);
   raias.forEach((r, i) => {
     if (!ids.demandas.has(r.demanda)) broken(`raias[${i}].demanda`, r.demanda, 'demandas', r.id);
   });
@@ -218,5 +219,8 @@ export function checkDoc(doc: Doc): FlowIssue[] {
       });
     }
   });
+  checarFontes(doc, ids, broken);
+  checarLigacoes(doc, ids, broken);
+  checarDados(doc, add);
   return issues;
 }

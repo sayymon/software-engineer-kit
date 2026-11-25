@@ -2,7 +2,7 @@
 
 Comparação dos 44 códigos de regra do validador Python (`tools/guide-oracle/src/guia_decisao/validator.py`, cópia do commit `7abed1c`) com o validador TypeScript do kit (`lib/flows/index.ts`, função `checkDoc`, mais `validateAgainstSchema`). Os números de linha referem-se aos arquivos como estão na etapa 1.
 
-Resultado: 15 portados, 2 parciais, 27 ausentes. Os 27 ausentes e os 2 parciais formam a lista de portabilidade da etapa 2.
+Resultado: 17 portados, 0 parciais, 27 ausentes. Os 27 ausentes formam a lista de portabilidade da etapa 2.
 
 Leitura das colunas:
 
@@ -14,7 +14,7 @@ Leitura das colunas:
 | Código | Tipo | Linha Python | Status | Linha kit | Teste | Regra |
 |---|---|---|---|---|---|---|
 | `SCHEMA` | erro | 127 | portado | 22 | tests/flows/flows.test.ts:57 | Documento fora do JSON Schema |
-| `ID_DUPLICADO` | erro | 141, 164, 175, 678, 752 | parcial | 36, 44, 59 | tests/flows/flows.test.ts:14, sem teste dedicado | Id repetido. O kit cobre as 11 coleções, artefatos e variáveis (id compartilhado) e subtarefas. Faltam papéis (678) e as coleções `perguntas` e `ritos` (752) |
+| `ID_DUPLICADO` | erro | 141, 164, 175, 678, 752 | portado | lib/guide/validate/dados.ts, rules.ts | tests/guide/oracle-defects-refs.test.ts | Id repetido nas 11 coleções, artefatos, variáveis (id compartilhado), subtarefas, papéis, perguntas e ritos |
 | `ID_PADRAO` | erro | 443, 450 | portado | 178, 183 | tests/flows/flows.test.ts:14 (documento real sem erros), sem teste dedicado | Id de raia sem a sigla da demanda, id de nó fora da forma `<raia>_<letra><n>` |
 | `TRANSICAO_INVALIDA` | erro | 191 | portado | 66 | tests/flows/flows.test.ts:29 | `proximo.para` aponta para id inexistente |
 | `BIFURCACAO_SAIDAS` | erro | 206 | portado | 68 | tests/flows/flows.test.ts:14 (documento real sem erros), sem teste dedicado | Bifurcação com menos de 2 saídas |
@@ -31,7 +31,7 @@ Leitura das colunas:
 | `DEMANDA_INCONSISTENTE` | erro | 280 | ausente | - | - | Nó declara uma demanda diferente da demanda da sua raia |
 | `COR_DUPLICADA` | erro | 432 | ausente | - | - | Cor repetida entre raias do mesmo diagrama (inclui bibliotecas chamadas) |
 | `PESOS` | erro | 464 | portado | 190 | tests/flows/flows.test.ts:14 (documento real sem erros), sem teste dedicado | Pesos do Decisor de um objetivo que não somam 1 |
-| `REF_QUEBRADA` | erro | 480, 556, 566, 673 | parcial | 193 | tests/flows/flows.test.ts:40 | Referência a id inexistente. O kit cobre raias, nós, células e playbooks. Faltam `fontes[].itens`, `fonte_ids`, as ligações (556, 566) e as referências de dados, papéis e RACI (673) |
+| `REF_QUEBRADA` | erro | 480, 556, 566, 673 | portado | lib/guide/validate/dados.ts, rules.ts | tests/guide/oracle-defects-refs.test.ts | Referência a id inexistente em raias, nós, células, playbooks, `fontes[].itens`, `fonte_ids`, ligações, dados, papéis e RACI. Os casos de `quando` cobrem só a variável ausente; o resto fica com `CONDICAO_INVALIDA` (passo 3) |
 | `LIGACAO_INCONSISTENTE` | erro | 575, 589 | ausente | - | - | Ligação para a própria demanda, ou para nó de demanda diferente da demanda de destino |
 | `CONDICAO_INVALIDA` | erro | 619 | ausente | - | - | Condição `quando` malformada (operador ou variável) |
 | `VARIAVEL_ENUM_SEM_VALORES` | erro | 669 | ausente | - | - | Variável `enum` sem `valores` |
@@ -69,7 +69,7 @@ Leitura das colunas:
 
 Cada passo traz o teste diferencial contra o oráculo (mesmo documento, mesmos códigos e caminhos) e um teste com defeito plantado por código.
 
-1. Completar os parciais: `REF_QUEBRADA` (fontes, ligações, dados e RACI) e `ID_DUPLICADO` (papéis, perguntas, ritos). São erros, e o documento real já os satisfaz.
+1. Concluído: `REF_QUEBRADA` e `ID_DUPLICADO` completos (fontes, ligações, dados, RACI, papéis, perguntas, ritos).
 2. Erros estruturais de raias e ligações: `DEMANDA_INCONSISTENTE`, `COR_DUPLICADA`, `LIGACAO_INCONSISTENTE`.
 3. Erros de dados e subtarefas: `CONDICAO_INVALIDA`, `CONDICAO_AUSENTE`, `VARIAVEL_ENUM_SEM_VALORES`, `VARIANTE_DUPLICADA`, `SUBTAREFA_EM_NAO_TAREFA`, `SUBTAREFA_ID_PADRAO`.
 4. Fluxo de dados (avisos): `VAR_NAO_DECLARADA`, `ENTRADA_SEM_PRODUTOR`, `SAIDA_NAO_ENTREGUE`, `ITEM_SEM_USO`, `TAREFA_SEM_ENTREGAVEL`, `SUBTAREFA_SEM_ENTREGAVEL`, `LACUNA_DE_DADOS`. Depende do rastreio de dados (`rastreio.py`).
