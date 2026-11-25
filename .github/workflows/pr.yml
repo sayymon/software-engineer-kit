@@ -30,6 +30,8 @@ jobs:
           SITE_BASE: /software-engineer-kit
           SITE_URL: https://sayymon.github.io/software-engineer-kit
       - run: npm run smoke
+        env:
+          SITE_BASE: /software-engineer-kit
   dependency-review:
     name: dependency-review
     runs-on: ubuntu-latest
