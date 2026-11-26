@@ -94,14 +94,21 @@ async function iniciar(host: HTMLElement): Promise<void> {
     $('eco-count').textContent = tr('eco.count', { visible: quantos, total, edges: ligacoes });
     $('eco-empty').hidden = quantos > 0;
     atualizarLegenda();
-    if (estado.foco !== null) {
+    // The focus follows the filters: neighbors are recomputed against the new visible set, in both directions
+    // (a filter that hides neighbors, and the filter being removed). The camera stays where it is.
+    if (emFoco && estado.foco !== null) {
       const i = modelo.porId.get(estado.foco);
-      if (i !== undefined && !visivel[i]) sairDoFoco(false);
+      if (i === undefined || !visivel[i]) sairDoFoco(false);
+      else {
+        const rolagem = painel.scrollTop;
+        focarNo(i, { empilhar: false, animar: false, manterCamera: true });
+        painel.scrollTop = rolagem;
+      }
     }
   }
 
   // ---- focus ----
-  function focarNo(i: number, opcoes: { empilhar: boolean; animar?: boolean; camera?: CameraSalva }): void {
+  function focarNo(i: number, opcoes: { empilhar: boolean; animar?: boolean; camera?: CameraSalva; manterCamera?: boolean }): void {
     if (opcoes.empilhar && estado.foco) historico.push(estado.foco);
     const trocouDeNo = estado.foco !== modelo.ids[i];
     if (trocouDeNo) expandidos.clear();
@@ -119,8 +126,9 @@ async function iniciar(host: HTMLElement): Promise<void> {
     const rotulados = [...ordenados].sort((a, b) => modelo.grau[b] - modelo.grau[a]).slice(0, 22);
     renderer.focar({ no: i, vizinhos: ordenados.map((k, n) => ({ i: k, pos: pontos[n] })), rotulados }, { animar: opcoes.animar ?? true });
     if (opcoes.camera) renderer.restaurarCamera(opcoes.camera);
-    else renderer.enquadrar(i, { animar: opcoes.animar ?? true });
+    else if (!opcoes.manterCamera) renderer.enquadrar(i, { animar: opcoes.animar ?? true });
     host.dataset.foco = modelo.ids[i];
+    host.dataset.vizinhos = String(ordenados.length);
     abrirPainel(i, f);
     $('eco-back').hidden = historico.length === 0;
     $('eco-exit').hidden = false;
@@ -135,6 +143,7 @@ async function iniciar(host: HTMLElement): Promise<void> {
     renderer.focar(null, { animar: true });
     renderer.enquadrar('tudo', { animar: true });
     delete host.dataset.foco;
+    delete host.dataset.vizinhos;
     $<HTMLElement>('eco-panel').hidden = true;
     $('eco-exit').hidden = true;
     $('eco-back').hidden = true;

@@ -107,6 +107,19 @@ test('filtro por tipo isola empresas e entra no hash', async ({ page }) => {
   await expect(page.locator('#eco-count')).toHaveText(total ?? '');
 });
 
+test('com um nó em foco, ligar e desligar filtros atualiza os vizinhos sem clicar no nó de novo', async ({ page }) => {
+  await abrir(page, '/pt-BR/ecossistema/#f=github_copilot');
+  const host = page.locator('[data-island="ecossistema"]');
+  await expect(host).toHaveAttribute('data-foco', 'github_copilot');
+  const todos = Number(await host.getAttribute('data-vizinhos'));
+  expect(todos).toBeGreaterThan(10);
+  await page.locator('#eco-legend-list button[data-tipo="ferramenta"]').click();
+  await expect.poll(async () => Number(await host.getAttribute('data-vizinhos'))).toBeLessThan(todos);
+  await expect(host).toHaveAttribute('data-foco', 'github_copilot');
+  await page.locator('#eco-legend-list button[data-tipo="ferramenta"]').click();
+  await expect.poll(async () => Number(await host.getAttribute('data-vizinhos'))).toBe(todos);
+});
+
 test('sem WebGL a página oferece o catálogo em lista', async ({ page }) => {
   await page.addInitScript(() => {
     const original = HTMLCanvasElement.prototype.getContext;
