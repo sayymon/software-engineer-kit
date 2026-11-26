@@ -114,7 +114,8 @@ for (const r of roles) {
         prompt: r.body,
         ...(r.modelo && { model: modelos.kiro[r.modelo] }),
         tools: ["read", ...(exec ? ["write", "shell"] : []), ...r.mcp.map((m) => `@${m}`)],
-        allowedTools: ["read"],
+        // Formato V3: leitura e skills sem confirmação; escrita e shell seguem pedindo.
+        permissions: { rules: [{ capability: "fs_read", effect: "allow" }, { capability: "skill", effect: "allow" }] },
         includeMcpJson: true,
         resources: ["file://AGENTS.md", "file://.kiro/steering/**/*.md"],
       },

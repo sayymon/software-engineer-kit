@@ -7,9 +7,18 @@
     "read",
     "@github"
   ],
-  "allowedTools": [
-    "read"
-  ],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_read",
+        "effect": "allow"
+      },
+      {
+        "capability": "skill",
+        "effect": "allow"
+      }
+    ]
+  },
   "includeMcpJson": true,
   "resources": [
     "file://AGENTS.md",

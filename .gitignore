@@ -18,3 +18,4 @@ site/dist-*/
 /private/
 playwright-report/
 test-results/
+.kiro/agents/*.bak
