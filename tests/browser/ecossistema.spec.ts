@@ -14,6 +14,18 @@ async function abrir(page: Page, caminho = '/pt-BR/ecossistema/') {
   return erros;
 }
 
+test('ocupa a tela toda e o título volta à tela inicial do kit', async ({ page }) => {
+  await abrir(page);
+  await expect(page.locator('header.site-header')).toHaveCount(0);
+  await expect(page.locator('footer')).toHaveCount(0);
+  const caixa = await page.locator('.eco').boundingBox();
+  expect(caixa?.height).toBeGreaterThanOrEqual(890);
+  const link = page.locator('.eco-eyebrow a');
+  await expect(link).toHaveText('Software Engineer Kit');
+  await link.click();
+  await expect(page).toHaveURL(/\/pt-BR\/$/);
+});
+
 test('abre, mostra a contagem e a legenda', async ({ page }) => {
   const erros = await abrir(page);
   await expect(page.locator('#eco-count')).toContainText(/\d+ de \d+ nós/);

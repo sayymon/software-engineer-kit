@@ -607,6 +607,9 @@ async function iniciar(host: HTMLElement): Promise<void> {
     }
   });
 
+  // ---- language links keep the state in the fragment ----
+  document.querySelectorAll<HTMLAnchorElement>('[data-lang-link]').forEach((a) => a.addEventListener('click', () => (a.hash = location.hash)));
+
   // ---- boot ----
   montarLegenda();
   alternarTodos.textContent = tr('eco.collapseAll');

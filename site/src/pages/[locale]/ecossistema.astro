@@ -14,13 +14,14 @@ const t = ctx.t;
 // The client reads the strings it needs from this JSON (no network call, works offline).
 const textos = Object.fromEntries(Object.entries(messages[locale]).filter(([k]) => k.startsWith('eco.') || k.startsWith('tipo.')));
 const home = `${ctx.base}/${locale}/`;
+const other = locale === 'pt-BR' ? 'en' : 'pt-BR';
 ---
 <Base locale={locale} title={t('eco.title')} slug="ecossistema" base={ctx.base} layer="ecossistema" tipo="ecossistema" description={t('eco.lede')} immersive>
   <div class="eco" data-island="ecossistema" data-base={ctx.base} data-locale={locale} data-pagefind-ignore>
     <div class="eco-stage" id="eco-stage" role="img" aria-label={t('eco.stageLabel')}></div>
 
     <header class="eco-hero">
-      <p class="eco-eyebrow">{t('eco.eyebrow')}</p>
+      <p class="eco-eyebrow"><a href={home} aria-label={t('eco.home')}>{t('eco.eyebrow')}</a></p>
       <h1>{t('eco.title')}</h1>
       <p class="eco-lede">{t('eco.lede')}</p>
       <p class="eco-hint">{t('eco.hint')}</p>
@@ -32,6 +33,10 @@ const home = `${ctx.base}/${locale}/`;
         <input id="eco-q" type="search" placeholder={t('eco.search.placeholder')} autocomplete="off" />
         <ul id="eco-results" class="eco-results" hidden></ul>
       </div>
+      <nav class="eco-lang" aria-label={t('lang.label')}>
+        <a href={`${ctx.base}/${locale}/ecossistema/`} data-lang-link lang={locale} aria-current="true">{locale === 'pt-BR' ? 'PT' : 'EN'}</a>
+        <a href={`${ctx.base}/${other}/ecossistema/`} data-lang-link lang={other} hreflang={other} aria-label={t(`lang.switchTo.${other}`)}>{other === 'pt-BR' ? 'PT' : 'EN'}</a>
+      </nav>
       <button type="button" class="eco-btn eco-more" id="eco-more" aria-expanded="false" aria-controls="eco-controls">{t('eco.controls')}</button>
       <div class="eco-controls" id="eco-controls">
       <label class="eco-toggle"><input type="checkbox" id="eco-hubs" /> {t('eco.hubs')}</label>

@@ -431,7 +431,7 @@
   "eco.detailsLoading": "Carregando detalhes",
   "eco.detailsNone": "Sem itens de detalhe ligados a este nó.",
   "eco.exit": "Sair do foco",
-  "eco.eyebrow": "Mapa vivo do kit",
+  "eco.eyebrow": "Software Engineer Kit",
   "eco.facts": "Fatos",
   "eco.fallbackLink": "Abrir o catálogo em lista",
   "eco.fallbackMark": "Texto em pt-BR, sem tradução.",
@@ -474,5 +474,6 @@
   "eco.controls": "Controles",
   "eco.toggleGroup": "Recolher ou expandir o grupo",
   "eco.collapseAll": "Recolher tudo",
-  "eco.expandAll": "Expandir tudo"
+  "eco.expandAll": "Expandir tudo",
+  "eco.home": "Voltar para a tela inicial do kit"
 }

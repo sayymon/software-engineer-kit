@@ -431,7 +431,7 @@
   "eco.detailsLoading": "Loading details",
   "eco.detailsNone": "No detail items linked to this node.",
   "eco.exit": "Leave focus",
-  "eco.eyebrow": "Living map of the kit",
+  "eco.eyebrow": "Software Engineer Kit",
   "eco.facts": "Facts",
   "eco.fallbackLink": "Open the catalog as a list",
   "eco.fallbackMark": "Text in pt-BR, no translation yet.",
@@ -474,5 +474,6 @@
   "eco.controls": "Controls",
   "eco.toggleGroup": "Collapse or expand the group",
   "eco.collapseAll": "Collapse all",
-  "eco.expandAll": "Expand all"
+  "eco.expandAll": "Expand all",
+  "eco.home": "Back to the kit home"
 }

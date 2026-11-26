@@ -34,12 +34,13 @@ const site = t('site.title');
     <link rel="alternate" hreflang="en" href={`${base}/en/${slug ? `${slug}/` : ''}`} />
   </head>
   <body>
-    <Header locale={locale} base={base} slug={slug} t={t} />
+    {!immersive && <Header locale={locale} base={base} slug={slug} t={t} />}
+    {immersive && <a class="skip-link" href="#eco-stage">{t('a11y.skip')}</a>}
     <main id="main" class={immersive ? 'immersive' : undefined} data-pagefind-body data-pagefind-filter="layer[data-layer]" data-fallback={fallback ? 'true' : 'false'} data-layer={layer} data-tipo={tipo}>
       {fallback && <p class="banner" role="note" data-pagefind-ignore>{t('fallback.banner')}</p>}
       <slot />
     </main>
-    <Footer locale={locale} base={base} t={t} />
+    {!immersive && <Footer locale={locale} base={base} t={t} />}
     {hasDiagram && <Diagram base={base} />}
   </body>
 </html>
