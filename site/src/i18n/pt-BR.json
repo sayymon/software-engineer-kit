@@ -472,5 +472,6 @@
   "eco.stageLabel": "Grafo 3D do ecossistema. Para navegar pelo teclado, use a busca e o painel lateral.",
   "eco.title": "Ecossistema",
   "eco.types": "Tipos",
-  "nav.ecosystem": "Ecossistema 3D"
+  "nav.ecosystem": "Ecossistema 3D",
+  "eco.controls": "Controles"
 }

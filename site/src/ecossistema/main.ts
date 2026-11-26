@@ -408,6 +408,13 @@ async function iniciar(host: HTMLElement): Promise<void> {
   }
 
   // ---- toolbar ----
+  const maisBtn = $<HTMLButtonElement>('eco-more');
+  maisBtn.onclick = () => {
+    const aberto = host.dataset.controles === 'aberto';
+    if (aberto) delete host.dataset.controles;
+    else host.dataset.controles = 'aberto';
+    maisBtn.setAttribute('aria-expanded', String(!aberto));
+  };
   const camadasBox = document.querySelectorAll<HTMLInputElement>('[data-camada]');
   camadasBox.forEach((c) => {
     c.checked = estado.camadas.has(c.dataset.camada as Camada);

@@ -32,6 +32,8 @@ const home = `${ctx.base}/${locale}/`;
         <input id="eco-q" type="search" placeholder={t('eco.search.placeholder')} autocomplete="off" />
         <ul id="eco-results" class="eco-results" hidden></ul>
       </div>
+      <button type="button" class="eco-btn eco-more" id="eco-more" aria-expanded="false" aria-controls="eco-controls">{t('eco.controls')}</button>
+      <div class="eco-controls" id="eco-controls">
       <fieldset class="eco-layers">
         <legend class="sr-only">{t('eco.layers')}</legend>
         <label><input type="checkbox" data-camada="nucleo" checked /> {t('eco.layer.nucleo')}</label>
@@ -45,6 +47,7 @@ const home = `${ctx.base}/${locale}/`;
       <button type="button" class="eco-btn" id="eco-recenter">{t('eco.recenter')}</button>
       <button type="button" class="eco-btn" id="eco-back" hidden>{t('eco.back')}</button>
       <button type="button" class="eco-btn" id="eco-exit" hidden>{t('eco.exit')}</button>
+      </div>
     </div>
 
     <aside class="eco-legend" aria-label={t('eco.legend')}>
