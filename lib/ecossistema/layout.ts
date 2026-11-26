@@ -3,6 +3,7 @@
 import { forceLink, forceManyBody, forceSimulation, forceX, forceY, forceZ, type SimNode } from 'd3-force-3d';
 import type { Adjacencia } from './adjacencia';
 import type { Area } from './camadas';
+import { ESCALA } from './constantes';
 
 export interface EntradaLayout {
   n: number;
@@ -16,8 +17,7 @@ export interface EntradaLayout {
   passos?: number;
 }
 
-/** World units per integer step: positions are stored as round(coordinate * ESCALA). */
-export const ESCALA = 10;
+export { ESCALA };
 
 const ANCORAS: Record<Area, readonly [number, number, number]> = {
   fluxos: [-420, 120, 0],

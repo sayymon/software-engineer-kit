@@ -18,6 +18,7 @@ const here = (l: string) => `${base}/${l}/${slug ? `${slug}/` : ''}`;
         {LAYER_PAGES.map((l) => (
           <li><a href={`${home}${l}/`} aria-current={current === l ? 'page' : undefined}>{t(`layer.${l}`)}</a></li>
         ))}
+        <li><a class="nav-eco" href={`${home}ecossistema/`} aria-current={current === 'ecossistema' ? 'page' : undefined}>{t('nav.ecosystem')}</a></li>
       </ul>
     </nav>
     <div class="header-tools">

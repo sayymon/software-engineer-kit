@@ -17,8 +17,9 @@ interface Props {
   fallback?: boolean;
   hasDiagram?: boolean;
   searchPage?: boolean;
+  immersive?: boolean;
 }
-const { locale, title, slug, base, description = '', layer = 'site', tipo = 'page', fallback = false, hasDiagram = false } = Astro.props;
+const { locale, title, slug, base, description = '', layer = 'site', tipo = 'page', fallback = false, hasDiagram = false, immersive = false } = Astro.props;
 const t = makeT(locale);
 const site = t('site.title');
 ---
@@ -34,7 +35,7 @@ const site = t('site.title');
   </head>
   <body>
     <Header locale={locale} base={base} slug={slug} t={t} />
-    <main id="main" data-pagefind-body data-pagefind-filter="layer[data-layer]" data-fallback={fallback ? 'true' : 'false'} data-layer={layer} data-tipo={tipo}>
+    <main id="main" class={immersive ? 'immersive' : undefined} data-pagefind-body data-pagefind-filter="layer[data-layer]" data-fallback={fallback ? 'true' : 'false'} data-layer={layer} data-tipo={tipo}>
       {fallback && <p class="banner" role="note" data-pagefind-ignore>{t('fallback.banner')}</p>}
       <slot />
     </main>
