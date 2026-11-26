@@ -1,0 +1,656 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "0.1 Criar `lib/guide/validate/` com o tipo `Problema`, `OpcoesValidacao`, `caminho.ts` (caminho, item id e normalização de datas) e `validateGuide` na ordem do Python": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628682783
+      },
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628689246
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795629342668
+      }
+    ],
+    "0.2 Adicionar o modo `--issues` a `tools/guide-oracle/dump_doc.py` (documento JSON pela entrada padrão, lista de `Issue` em JSON na saída) e registrar em `tools/guide-oracle/PATCHES.md`": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628682837
+      },
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628689283
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795629401281
+      }
+    ],
+    "0.3 Criar `tests/guide/oracle-rules.test.ts` com a comparação pela chave `(code, nivel, path, itemId)` e o relatório de diferenças dos dois lados": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628682867
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795629406472
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795629499533
+      }
+    ],
+    "0.4 Fazer o job `guide-oracle` instalar Node além do Python e rodar o teste diferencial com `GUIDE_ORACLE_PYTHON`": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628682893
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795629499602
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795629553682
+      }
+    ],
+    "0.5 Commit `test(guia): harness diferencial contra o oráculo`": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628682915
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795629553743
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795629562576
+      }
+    ],
+    "1.1 Completar `REF_QUEBRADA` (fontes e itens, `fonte_ids`, ligações, dados e RACI) e `ID_DUPLICADO` (papéis, perguntas, ritos)": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628682982
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795629570807
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795629897901
+      }
+    ],
+    "1.2 Atualizar `docs/guide-rules-parity.md` e fazer o commit `feat(guia): completa REF_QUEBRADA e ID_DUPLICADO`": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683010
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795629897977
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795629917099
+      }
+    ],
+    "2.1 Portar `DEMANDA_INCONSISTENTE`, `COR_DUPLICADA` (inclui bibliotecas chamadas) e `LIGACAO_INCONSISTENTE`, com defeitos plantados": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683043
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795629917132
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795630051255
+      }
+    ],
+    "2.2 Atualizar a paridade e fazer o commit `feat(guia): regras estruturais de raias e ligações`": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683067
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795630051345
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795630062753
+      }
+    ],
+    "3.1 Portar `CONDICAO_INVALIDA`, `CONDICAO_AUSENTE`, `VARIAVEL_ENUM_SEM_VALORES`, `VARIANTE_DUPLICADA`, `SUBTAREFA_EM_NAO_TAREFA` e `SUBTAREFA_ID_PADRAO` em `dados.ts`, com defeitos plantados": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683087
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795630062862
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795630221144
+      }
+    ],
+    "3.2 Atualizar a paridade e fazer o commit `feat(guia): regras de dados e subtarefas`": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683110
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795630221218
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795630225550
+      }
+    ],
+    "4.1 Portar `rastreio.py` para `lib/guide/rastreio.ts` (`rastrearDados`, `descreverCondicao`, `usosEmCondicoes`, `lacunasDeDados`)": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683136
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795630225610
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795630364791
+      }
+    ],
+    "4.2 Portar `VAR_NAO_DECLARADA`, `ENTRADA_SEM_PRODUTOR`, `SAIDA_NAO_ENTREGUE`, `ITEM_SEM_USO`, `TAREFA_SEM_ENTREGAVEL`, `SUBTAREFA_SEM_ENTREGAVEL` e `LACUNA_DE_DADOS`, usando o rastreio": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683157
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795630364898
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795630538926
+      }
+    ],
+    "4.3 Atualizar a paridade e fazer o commit `feat(guia): rastreio de dados e avisos de fluxo de dados`": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683178
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795630538968
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795630543242
+      }
+    ],
+    "5.1 Portar `SEM_PAPEL`, `RACI_CONFLITO`, `APROVA_FORA_DE_GATEWAY` e `APROVA_REDUNDANTE` em `raci.ts`, com defeitos plantados (inclui os códigos sem teste no oráculo)": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683198
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795630543275
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795630668465
+      }
+    ],
+    "5.2 Atualizar a paridade e fazer o commit `feat(guia): avisos de RACI e papéis`": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683223
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795630668525
+      }
+    ],
+    "6.1 Portar `PERGUNTA_SEM_DEPENDENCIA`, `PERGUNTA_SEM_USO` e `PLAYBOOK_SEM_NO` em `perguntas.ts`, com defeitos plantados": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683245
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795630668563
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795630857418
+      }
+    ],
+    "6.2 Atualizar a paridade e fazer o commit `feat(guia): avisos de perguntas e playbooks`": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683266
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795630857518
+      }
+    ],
+    "7.1 Portar `COMUNICACAO_SEM_DESTINATARIO`, `TIPO_LEGADO`, `SUBTIPO_AUSENTE` e `SUBTIPO_INVALIDO` em `taxonomia.ts`, usando `lib/guide/taxonomia.ts`": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683288
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795630857556
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795630971051
+      }
+    ],
+    "7.2 Ligar `avisos` e `completude` em `tools/validate/checks/flows.ts`, para que `npm run validate` seja estrito": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683313
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795630971191
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795631066901
+      }
+    ],
+    "7.3 Confirmar que os 44 códigos estão `portado` em `docs/guide-rules-parity.md` e fazer o commit `feat(guia): avisos de taxonomia e validação estrita`": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683340
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795631067000
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795631084023
+      }
+    ],
+    "8.1 Reescrever `lib/decisor.ts` com `configDoGuia`, `decidir`, `DecisorError` e `contextoEmTexto`, com arredondamento de 6 casas e desempate do guia": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683367
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795631084193
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795634784003
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795634787058
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795634895859
+      }
+    ],
+    "8.2 Provar a neutralidade do contexto financeiro e a ausência do orçamento como critério": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683398
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795634895908
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795634963089
+      }
+    ],
+    "8.3 Remover `content/data/matriz.json` e reescrever `matrizTable` em `site/src/render/flow.ts` para ler o guia e mostrar o portão de orçamento e o contexto financeiro, com as chaves de i18n em pt-BR e en": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683426
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795634963138
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795635204280
+      }
+    ],
+    "8.4 Confirmar que os 27 ids `prep.pontuar_opcoes_matriz` continuam em `content/ids.lock.json` e fazer o commit `feat(guia): decisor no modelo do guia`": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683457
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795635204389
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795635209192
+      }
+    ],
+    "9.1 Criar `tools/guide/cli.ts` com `validar`, `rastrear` e `decidir`, o script `guide` no `package.json` e os códigos de saída 0, 1 e 2": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683485
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795635209249
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795635310492
+      }
+    ],
+    "9.2 Testar a CLI (saída de texto igual ao formato do Python, códigos de saída) e documentar no `README.pt-BR.md` e no `README.en.md`. Commit `feat(guia): comando de linha do guia`": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683513
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795635310555
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795635427242
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795635430507
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795635808558
+      }
+    ],
+    "10.1 Portar `strategies.py` para `tests/guide/properties/geradores.ts`": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683539
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795635808650
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795636265350
+      }
+    ],
+    "10.2 Portar as 32 propriedades de `tests/properties/` e acrescentar as propriedades 3, 4, 5 e 8 do design": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683564
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795636265439
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795636627059
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795636630572
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795637476891
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795637480148
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795637570861
+      }
+    ],
+    "10.3 Fazer o commit `test(guia): propriedades em fast-check`": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683592
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795637576068
+      }
+    ],
+    "11.1 Escrever `docs/guide-browser-tests.md` com o comportamento de cada `cdp_*.mjs` e se ele existe no site": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683622
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795637576112
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795637657585
+      }
+    ],
+    "11.2 Criar testes Playwright contra o build para os comportamentos que já existem e registrar os demais como critério de aceite da etapa 3. Commit `test(guia): mapa dos testes de navegador`": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683649
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795637657668
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795638187424
+      }
+    ],
+    "12.1 Gravar em `tests/guide/expected/` a saída do oráculo para o documento real, para cada defeito plantado, para o rastreio e para os casos do Decisor, e trocar os testes diferenciais por testes de regressão contra esses arquivos": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683673
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795638187520
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795638754964
+      }
+    ],
+    "12.2 Remover `tools/guide-oracle/`, o job `guide-oracle` e as anotações REUSE dele, e ajustar `tools/github/apply-settings.sh` para o novo conjunto de checks obrigatórios": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683704
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795638755031
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795638894300
+      }
+    ],
+    "12.3 Atualizar `docs/guide-rules-parity.md`, `docs/architecture.md`, ADR 0001, os READMEs e o `CONTRIBUTING.md` para a toolchain única": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683731
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795638894345
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795639095949
+      }
+    ],
+    "12.4 Rodar todas as verificações num clone limpo sem `private/`, sem Python instalado, e fazer o commit `chore(guia): remove o oráculo Python`": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683759
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795639096011
+      },
+      {
+        "executionId": "00ff9509-7e83-4e69-8070-a2ccbd403ead",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795639167635
+      }
+    ],
+    "13.1 Abrir o PR único, aguardar todos os checks obrigatórios e pedir a aprovação do dono": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683794
+      }
+    ],
+    "13.2 Depois do merge, aplicar no ruleset da `main` a troca do check `guide-oracle` e registrar a mudança em `docs/governance.md`": [
+      {
+        "executionId": "dcdf5ca1-5772-4a42-8585-ad3140ca9706",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795628683825
+      }
+    ]
+  }
+}

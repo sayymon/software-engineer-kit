@@ -1,0 +1,671 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Criar o harness de medição em `tests/browser/performance.spec.ts` (sem asserção ainda) e `tests/browser/helpers/medicao.ts`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654256521
+      },
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654265198
+      },
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654623940
+      }
+    ],
+    "1.2 Medir S1 e S2 em `tests/browser/spike/s1-s2.spec.ts`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654256582
+      },
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654630171
+      }
+    ],
+    "1.3 Medir S3 e S4 em `tests/browser/spike/s3-s4.spec.ts`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654256617
+      }
+    ],
+    "1.4 Medir S5 em `tests/browser/spike/s5.spec.ts`: protótipo descartável do Renderizador próprio (`@dagrejs/dagre` em Worker, SVG gerado pelo kit) para 224 nós": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654256652
+      }
+    ],
+    "1.5 Medir S6 em `tests/browser/spike/s6.spec.ts`: build ESM dividida do Mermaid 11.17.2 (flowchart e dagre por `import()`) servida por `tests/browser/serve.ts`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654256693
+      }
+    ],
+    "1.6 Escrever `docs/spike-fluxos-desempenho.md` com as tabelas de S1 a S6 e a seção \"Resultado do spike\" no `design.md`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654256727
+      }
+    ],
+    "1.7 Checkpoint: apresentar ao dono o go/no-go do spike e aguardar a decisão": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654256759
+      }
+    ],
+    "1.8 Commit `docs(site): spike de desempenho do diagrama de fluxos`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654256786
+      }
+    ],
+    "2.1 Estender `schema/flows.schema.json` com `categorias_ferramenta`, `guias_praticos` e o marcador explícito de \"sem ferramenta aplicável\" (campo opcional booleano, nome fixado nesta tarefa) em `$defs/Decisao` e `$defs/Subtarefa`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654256812
+      }
+    ],
+    "2.2 Acrescentar `categorias_ferramenta` e `guias_praticos` a `REF_FIELDS` em `lib/guide/entities.ts` e emitir `REF_QUEBRADA` com o id da tarefa, o campo e o id não resolvido": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654256839
+      }
+    ],
+    "2.3 Portar as regras novas para `lib/guide/validate/`: aviso de duplicidade (`CATEGORIA_FERRAMENTA_DUPLICADA`, `GUIA_PRATICO_DUPLICADO`) e completude `SEM_FERRAMENTA_OU_GUIA`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654256912
+      }
+    ],
+    "2.4 Escrever o adendo \"Atualização da etapa 3\" em `docs/adr/0001-yaml-como-fonte-unica.md` e o teste de guarda de `content/ids.lock.json`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654256941
+      }
+    ],
+    "2.5 Declarar em `content/guide/comum.yaml` as Categorias_de_Ferramenta que as tarefas da `feature` usam (`categorias_ferramenta`, hoje vazio), com nome e descrição agnósticos": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654256965
+      }
+    ],
+    "2.6 Ligar a `categorias_ferramenta` e `guias_praticos` as tarefas e subtarefas da `feature` na primeira terça parte das raias, na ordem do guia (`content/guide/demandas/feature.yaml`)": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654256992
+      }
+    ],
+    "2.7 Mesma ligação para a segunda terça parte das raias da `feature`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257018
+      }
+    ],
+    "2.8 Mesma ligação para a terceira terça parte das raias da `feature`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257046
+      }
+    ],
+    "2.9 Incluir `feature` em `DEMANDAS_COM_LIGACAO_OBRIGATORIA` e confirmar `npm run validate` estrito sem avisos de completude": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257080
+      }
+    ],
+    "2.10 Commit `feat(guia): ligação de tarefas a categorias de ferramenta e guias práticos`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257103
+      }
+    ],
+    "3.1 Criar `lib/schema/grafo.ts` (Zod, `VERSAO_MODELO_DE_GRAFO = 1`, `ModeloDeGrafo` e tipos filhos do design) e gerar `schema/json/grafo-fluxo.json` por `tools/schema/generate.ts`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257130
+      }
+    ],
+    "3.2 Extrair `contexto()` de `lib/flow-mermaid/index.ts` para `lib/flow-graph/contexto.ts`, sem mudar comportamento": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257158
+      }
+    ],
+    "3.3 Implementar `gerarGrafo` e `gerarGrafos` em `lib/flow-graph/index.ts`, validando o resultado contra o schema e falhando com o id da Demanda e o caminho do campo": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257186
+      }
+    ],
+    "3.4 Escrever `tests/flow-graph/geradores.ts` e os testes de propriedade `tests/flow-graph/grafo.props.test.ts`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257211
+      }
+    ],
+    "3.5 Escrever o teste de propriedade `tests/flow-graph/ordem.props.test.ts`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257241
+      }
+    ],
+    "3.6 Criar a rota Astro `site/src/pages/[locale]/api/flows/[id].graph.json.ts` com `getStaticPaths` sobre as Demandas não biblioteca": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257265
+      }
+    ],
+    "3.7 Commit `feat(site): modelo de grafo do fluxo e API estática`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257291
+      }
+    ],
+    "4.1 Adaptar `lib/flow-mermaid/index.ts` para montar o texto a partir de `ModeloDeGrafo` em `gerarDiagramaDoGrafo` nas Views `visao`, `raia:<id>` e `completo`, sem Subtarefas": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257321
+      }
+    ],
+    "4.2 Cobrir Subtarefas, legenda e `mapaIds` em `gerarDiagramaDoGrafo` e manter `gerarDiagrama(doc, demandaId, visao, ...)` como camada de compatibilidade, inclusive `visoesDoGuia` e `guiaParaDoc` das 3 notas": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257348
+      }
+    ],
+    "4.3 Escrever os testes de propriedade `tests/flow-graph/mermaid.props.test.ts`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257374
+      }
+    ],
+    "4.4 Implementar `textoAcessivel(grafo)` em `lib/flow-graph/` e usá-lo em `site/src/render/flow.ts` para a lista ordenada de Nós por Raia com as transições, mantendo os playbooks em `<details>`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257400
+      }
+    ],
+    "4.5 Remover do build o caminho que lê o YAML direto, deixando-o só como oráculo de teste em `tests/`, e documentar no `docs/architecture.md` que o grafo é a fonte do Texto_Mermaid": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257425
+      }
+    ],
+    "4.6 Commit `refactor(fluxos): texto mermaid derivado do modelo de grafo`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257451
+      }
+    ],
+    "5.1 Implementar `lib/flow-graph/expansao.ts` (`ConjuntoExpandido`, `ClusterDeRaia`, `ArestaVisivel`, `GrafoVisivel`, `projetar`, `chaveDoConjunto`, `lerConjunto` e `normalizar`) em TypeScript puro": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257484
+      }
+    ],
+    "5.2 Escrever os testes de propriedade `tests/flow-graph/expansao.props.test.ts` com grafos aleatórios e os grafos reais das 12 Demandas": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257521
+      }
+    ],
+    "5.3 Implementar `gerarDiagramaExpandido(grafo, conj, comLegenda)` em `lib/flow-mermaid/index.ts`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257549
+      }
+    ],
+    "5.4 Gerar o golden `tests/fixtures/mermaid/golden/feature.geral.mmd` e escrever `tests/flow-graph/expansao-mermaid.props.test.ts`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257579
+      }
+    ],
+    "5.5 Escrever o teste de exemplo `tests/flow-graph/limites-mermaid.test.ts` que gera o texto de Expandir_tudo, com e sem Subtarefas, das 12 Demandas e confere `maxTextSize` e `maxEdges` configurados": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257608
+      }
+    ],
+    "5.6 Checkpoint: pedir ao dono a revisão do golden `feature.geral.mmd` e fixá-lo depois da aprovação": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257639
+      }
+    ],
+    "5.7 Commit `feat(fluxos): visao geral e expansao progressiva no modelo`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257668
+      }
+    ],
+    "6.1 Criar `site/src/flow-app/state.ts` e `site/src/flow-app/loader.ts`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257695
+      }
+    ],
+    "6.2 Empacotar o Mermaid no build conforme a decisão do spike (ESM dividida de flowchart e dagre, ou bundle único como fallback) em `tools/site/build.ts`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257725
+      }
+    ],
+    "6.3 Implementar `site/src/flow-app/renderer.ts` (interfaces `Renderizador`, `InstanciaRenderizador`, `EstadoDiagrama` e registro `PERSPECTIVAS`) e `perspectives/mermaid.ts`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257759
+      }
+    ],
+    "6.4 Implementar `site/src/flow-app/expansao.ts`: fila com número de sequência e descarte de resultado obsoleto, cache de SVG por `chaveDoConjunto` com limite de bytes e indicador de progresso (`role=\"status\"`, `aria-busy`, até 100 ms)": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257786
+      }
+    ],
+    "6.5 Reescrever a Pagina_de_Demanda (`site/src/render/flow.ts` e a página Astro) com a ilha `data-island=\"flow\"`: seletor das 12 Demandas na ordem de `ordem_das_demandas`, Abas_de_View (`geral`, raias, `completo`) com cor da Raia, legenda e troca de Demanda sem recarregar": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257813
+      }
+    ],
+    "6.6 Implementar `site/src/flow-app/interaction.ts`: clique (até 3 px), arraste com `grabbing`, setas, Ctrl ou Cmd com a roda, botões de zoom e rótulo acessível dos gestos": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257840
+      }
+    ],
+    "6.7 Implementar Cluster_de_Raia na ilha: clique expande no lugar, \"Abrir raia\" ativa `raia:<id>`, \"Recolher\" volta ao cluster, Enter expande, ação própria por teclado e Expandir_tudo": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257866
+      }
+    ],
+    "6.8 Implementar o botão \"Voltar\" (histórico de Views e rolagem, desabilitado sem histórico) e o alternador \"Raias\" da View `completo`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257891
+      }
+    ],
+    "6.9 Implementar o seletor de Perspectiva (opção `mermaid`, registro aberto), com escolha no Fragmento_de_Estado e no `localStorage`, preservando View, Conjunto_Expandido, Subtarefas e Nó": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257920
+      }
+    ],
+    "6.10 Escrever `tests/browser/diagrama-ids.spec.ts` e `tests/browser/diagrama-interacao.spec.ts`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257949
+      }
+    ],
+    "6.11 Escrever `tests/browser/demanda-troca.spec.ts` e `tests/browser/ordem-views.spec.ts`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654257975
+      }
+    ],
+    "6.12 Escrever `tests/browser/expansao-progressiva.spec.ts` e `tests/browser/perspectiva.spec.ts`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258001
+      }
+    ],
+    "6.13 Commit `feat(site): diagrama interativo de fluxos com visao geral e expansao`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258028
+      }
+    ],
+    "7.1 Ampliar `api/flows/<id>.json` (`site/src/render/api.ts`) com `papeis`, letras RACI por nó, entradas e saídas, produtores e consumidores por artefato e variável (via `rastrearDados`) e o indicador \"sem produtor\" (via `lacunasDeDados`)": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258057
+      }
+    ],
+    "7.2 Criar `site/src/flow-app/modal.ts` com `<dialog>` nativo, `inert` no resto da página, foco preso, Esc e botão fechar devolvendo o foco, e `no=` no Fragmento_de_Estado": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258086
+      }
+    ],
+    "7.3 Renderizar o conteúdo do Modal por tipo de Nó: tarefa (nome, tipo, Raia, resumo, Fazer, Evitar, perguntas-chave na ordem do guia, entradas, saídas, técnicas e papéis com letra RACI), gateway (pergunta, saídas com condição, papel que decide), Subtarefa condicional (\"Executar quando\") e chamada de Raia (Raia chamada, retornos e botão para abrir a View)": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258114
+      }
+    ],
+    "7.4 Tornar clicáveis papel, técnica, artefato, variável, rito e pergunta dentro do Modal (empilha, botão voltar, link para a Pagina_Canonica) e implementar o detalhe de artefato e variável com tipo, subtipo, exemplo, produtores, consumidores, aviso \"sem produtor\" e a ação \"destacar no Diagrama\"": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258142
+      }
+    ],
+    "7.5 Implementar na ilha o alternador \"Subtarefas\" (expande as de toda raia expandida), a expansão por tarefa, a indicação \"N subtarefas\", a borda tracejada com ◆ nas condicionais e o alternador oculto quando a View não tem Subtarefas": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258173
+      }
+    ],
+    "7.6 Escrever `tests/browser/modal-playbook.spec.ts` e `tests/browser/entradas-saidas.spec.ts`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258206
+      }
+    ],
+    "7.7 Escrever `tests/browser/subtarefas.spec.ts`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258299
+      }
+    ],
+    "7.8 Commit `feat(site): modal de playbook, subtarefas e rastreio de entradas e saidas`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258325
+      }
+    ],
+    "8.1 Criar `lib/facets/index.ts` com `derivarFacetas(schemas)` e `construirIndice(facetas, entidades)`, a partir de `schema/json/*.json`, sem nome de campo fixo": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258352
+      }
+    ],
+    "8.2 Implementar `lib/facets/filtrar.ts` (E entre Facetas, OU dentro da Faceta, contagens por valor, independência da ordem) e os testes `tests/facets/filtrar.props.test.ts`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258380
+      }
+    ],
+    "8.3 Publicar `api/catalog.json` e `api/facets.json` no build, com os valores de Faceta já extraídos": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258408
+      }
+    ],
+    "8.4 Criar o mapeamento `AREA_DE_CAMADA` em `site/src/render/routes.ts` e reescrever `site/src/components/Header.astro` com as três entradas (Fluxos de demandas, Jornadas e competências, Catálogo) e `aria-current=\"page\"` pela Area da Entidade": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258436
+      }
+    ],
+    "8.5 Criar as páginas iniciais das três Areas com os grupos e os totais, e manter todas as rotas atuais por redirecionamento ou alias para a Pagina_Canonica": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258465
+      }
+    ],
+    "8.6 Implementar a ilha do Catalogo (`site/src/flow-app/` ou `site/src/catalog-app/`): lista única, busca por substring sobre id, nome, descrição e exemplo, Facetas geradas, contagem ao lado de cada valor, \"N de M\", \"Limpar filtros\", \"nenhum item\" com sugestão de remover o último Filtro e estado no hash": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258495
+      }
+    ],
+    "8.7 Implementar a Area Jornadas_e_Competencias: totais por grupo, etapas da jornada na ordem com links, competência com meia-vida e orientação, certificações relacionadas nos dois sentidos, \"sem jornada\", Filtros (texto, emissor, área) e Fonte_e_Data ou \"não verificado\" em custo, validade e versão do exame": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258522
+      }
+    ],
+    "8.8 Escrever `tests/browser/catalogo-area.spec.ts`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258552
+      }
+    ],
+    "8.9 Escrever `tests/browser/jornadas.spec.ts` e `tests/browser/areas-menu.spec.ts`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258579
+      }
+    ],
+    "8.10 Commit `feat(site): tres areas, motor de facetas e catalogo filtravel`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258606
+      }
+    ],
+    "9.1 Publicar `api/catalog/<demandaId>.json` com os `ItemDaDemanda` (artefatos, variáveis, técnicas, Nós e Subtarefas) derivados de `rastrearDados` e da extração de nós, e escrever `tests/facets/catalogo-demanda.props.test.ts`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258633
+      }
+    ],
+    "9.2 Implementar `site/src/flow-app/catalog.ts` (Catalogo_da_Demanda) sobre o motor de `lib/facets/filtrar.ts`: filtros texto, Raia, categoria, tipo, tipo de artefato, subtipo, Papel e letra RACI, \"N de M\", limpar, \"nenhum item\", estado no hash": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258663
+      }
+    ],
+    "9.3 Implementar a Matriz_RACI (Nó por linha, Papel por coluna, todos os Papéis com a mesma letra na célula) com Filtros \"Papel\" e \"Letra RACI\", total visível sobre total e clique na linha abrindo o Modal": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258691
+      }
+    ],
+    "9.4 Implementar o detalhe do Papel (clique no cabeçalho da coluna): Nós agrupados por letra RACI com o total de cada grupo e as outras Demandas em que o Papel atua com a quantidade de Nós": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258718
+      }
+    ],
+    "9.5 Implementar a Visao_de_Ferramentas_e_Guias no Modal: três grupos (categorias, ferramentas, Guias_Praticos), ferramentas da categoria com link canônico, Guia_Pratico com indicação da tarefa de origem e link de retorno, \"sem ferramentas associadas\" e nenhum texto copiado das Entidades": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258745
+      }
+    ],
+    "9.6 Implementar a visão agregada da Pagina_de_Demanda (por categoria de ferramenta, as tarefas que a usam), as Referencias_de_Entrada de ferramenta, categoria e Guia_Pratico (tarefas, subtarefas e Demandas, via relações inversas do `SiteIndex`) e o link \"Ver no diagrama\" nas páginas canônicas": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258772
+      }
+    ],
+    "9.7 Escrever `tests/browser/catalogo-demanda.spec.ts` e `tests/browser/matriz-raci.spec.ts`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258805
+      }
+    ],
+    "9.8 Escrever `tests/browser/ferramentas-guias.spec.ts`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258834
+      }
+    ],
+    "9.9 Commit `feat(site): catalogo da demanda, matriz raci e visao de ferramentas e guias`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258861
+      }
+    ],
+    "10.1 Auditar e completar as chaves de `site/src/i18n` em pt-BR e en para todos os rótulos, mensagens, legendas e o seletor de Perspectiva": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258892
+      }
+    ],
+    "10.2 Implementar o marcador visível de fallback pt-BR em `en` para conteúdo do guia, Guias_Praticos e Entidades sem tradução, com remoção automática quando a tradução existe": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258920
+      }
+    ],
+    "10.3 Aplicar Fonte_e_Data ou o Marcador_Nao_Verificado nos pontos novos que exibem dado volátil (certificação, tabelas do Catalogo) e incluir os links internos novos no `npm run smoke`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258950
+      }
+    ],
+    "10.4 Escrever o teste de simetria das arestas de `graph.json` (a origem aparece nas Referencias_de_Entrada do destino) e o teste de que o Modal, o Catalogo_da_Demanda e a matriz só referenciam Entidades por link, sem duplicar texto": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654258979
+      }
+    ],
+    "10.5 Commit `feat(site): i18n completo, marcador de fallback e integridade de links`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654259020
+      }
+    ],
+    "11.1 Estender `tests/browser/label-overlap.spec.ts` à matriz da Demanda_Piloto: Views por raia, `geral`, cada Raia expandida isoladamente, Expandir_tudo, com e sem Subtarefas, nos dois idiomas, filtrável por `PLAYWRIGHT_DEMANDS`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654259055
+      }
+    ],
+    "11.2 Transformar `tests/browser/performance.spec.ts` em asserção de tamanho: carga inicial (teto 300 kB), carga do Diagrama (teto 1,1 MB), total (teto 1,4 MB), Modelo_de_Grafo (200 kB) e crescimento de `site/dist` (até 25% sobre a linha de base)": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654259097
+      }
+    ],
+    "11.3 Acrescentar ao `performance.spec.ts` as asserções de tempo com CPU 4x e p95 de 10 execuções: Visão geral interativa em 2,0 s, uma Raia em 1,0 s, estado em cache em 200 ms, Expandir tudo em 5,0 s, `completo` com Subtarefas em 12 s (aviso) e Filtro do Catalogo em 100 ms": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654259140
+      }
+    ],
+    "11.4 Atualizar `.github/workflows/pr.yml` com `npx playwright install --with-deps chromium` e `npm run test:browser` (matriz `PLAYWRIGHT_DEMANDS=feature`), e confirmar que `npm test` segue excluindo `tests/browser/**`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654259173
+      }
+    ],
+    "11.6 Commit `test(site): orcamento de desempenho e matriz de sobreposicao no CI`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654259209
+      }
+    ],
+    "12.1 Escrever `docs/flow-graph-contract.md` (contrato do Modelo_de_Grafo, versão, campos, regras de ordem, interface de Renderizador e Perspectiva para a experiência 3D) e atualizar `docs/content-contract.md` com `categorias_ferramenta`, `guias_praticos` e o marcador de \"sem ferramenta aplicável\"": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654259239
+      }
+    ],
+    "12.2 Atualizar `docs/architecture.md` (diagramas C4 com `lib/flow-graph` e a ilha `flow-app`), `docs/site-map.md`, `docs/pages.md`, `docs/guide-browser-tests.md` (os 7 critérios da etapa 3 com o spec de cada um) e os READMEs": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654259273
+      }
+    ],
+    "12.3 Rodar todas as verificações num clone limpo: `npm ci`, `npm run validate`, `npm test`, `npm run build`, `npm run smoke` e `npm run test:browser`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654259303
+      }
+    ],
+    "12.4 Commit `docs(site): contrato do grafo, arquitetura e mapa de testes de navegador`": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654259343
+      }
+    ],
+    "13.1 Abrir o PR único (`feat/experiencia-fluxos-catalogo` para `main`, título em Conventional Commits, merge por squash), aguardar todos os checks obrigatórios e pedir a aprovação do dono": [
+      {
+        "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
+        "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
+        "timestamp": 1795654259374
+      }
+    ]
+  }
+}
