@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 import '../styles/tokens.css';
 import '../styles/global.css';
+import '../styles/glass.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Diagram from '../components/Diagram.astro';
@@ -27,6 +28,7 @@ const site = t('site.title');
 <html lang={locale}>
   <head>
     <meta charset="utf-8" />
+    <script is:inline>try{document.documentElement.dataset.visual=localStorage.getItem('kit-visual')||'glass'}catch(e){document.documentElement.dataset.visual='glass'}</script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title === site ? site : `${title} | ${site}`}</title>
     {description && <meta name="description" content={description.slice(0, 200)} />}
@@ -42,5 +44,23 @@ const site = t('site.title');
     </main>
     {!immersive && <Footer locale={locale} base={base} t={t} />}
     {hasDiagram && <Diagram base={base} />}
+    <script is:inline>
+      (function () {
+        var raf = 0, alvo = null, x = 0, y = 0;
+        var seletor = '.site-header, .cards li, .glass-btn';
+        document.addEventListener('pointermove', function (e) {
+          var el = e.target.closest && e.target.closest(seletor);
+          if (!el) return;
+          alvo = el; x = e.clientX; y = e.clientY;
+          if (raf) return;
+          raf = requestAnimationFrame(function () {
+            raf = 0;
+            var r = alvo.getBoundingClientRect();
+            alvo.style.setProperty('--mx', x - r.left + 'px');
+            alvo.style.setProperty('--my', y - r.top + 'px');
+          });
+        }, { passive: true });
+      })();
+    </script>
   </body>
 </html>

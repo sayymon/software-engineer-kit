@@ -146,7 +146,8 @@ export function renderHome(ctx: Ctx): string {
   return (
     `<header class="hero"><p class="eyebrow">${esc(ctx.t('site.tagline'))}</p><h1>${esc(ctx.t('site.title'))}</h1><p class="lede">${esc(ctx.t('home.lede'))}</p>` +
     `<form class="search-box hero-search" role="search" action="${esc(ctx.href('search'))}" method="get"><label class="sr-only" for="hero-q">${esc(ctx.t('search.label'))}</label>` +
-    `<input id="hero-q" type="search" name="q" placeholder="${esc(ctx.t('search.placeholder'))}" autocomplete="off"><button type="submit">${esc(ctx.t('search.button'))}</button></form></header>` +
+    `<input id="hero-q" type="search" name="q" placeholder="${esc(ctx.t('search.placeholder'))}" autocomplete="off"><button type="submit">${esc(ctx.t('search.button'))}</button></form>` +
+    `<p class="hero-cta"><a class="glass-btn" href="${esc(ctx.href('ecossistema'))}">${esc(ctx.t('home.ecosystem'))}</a></p></header>` +
     section(ctx.t('home.layers'), `<ul class="cards layer-cards">${cards}</ul>`)
   );
 }

@@ -8,5 +8,26 @@ const { locale, base, t } = Astro.props;
   <div class="inner">
     <p>{t('footer.license')}</p>
     <p><a href={`${base}/${locale}/fundamentals/licenses/`}>{t('footer.licenseLink')}</a></p>
+    <p>
+      <button type="button" class="visual-switch" id="visual-switch" data-glass={t('visual.glass')} data-classic={t('visual.classic')} data-label={t('visual.label')}></button>
+    </p>
   </div>
 </footer>
+<script is:inline>
+  (function () {
+    var b = document.getElementById('visual-switch');
+    if (!b) return;
+    function pintar() {
+      var v = document.documentElement.dataset.visual;
+      b.textContent = b.dataset.label + ': ' + (v === 'glass' ? b.dataset.glass : b.dataset.classic);
+      b.setAttribute('aria-pressed', String(v === 'glass'));
+    }
+    b.addEventListener('click', function () {
+      var novo = document.documentElement.dataset.visual === 'glass' ? 'classic' : 'glass';
+      document.documentElement.dataset.visual = novo;
+      try { localStorage.setItem('kit-visual', novo); } catch (e) {}
+      pintar();
+    });
+    pintar();
+  })();
+</script>

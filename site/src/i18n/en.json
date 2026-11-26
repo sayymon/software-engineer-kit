@@ -475,5 +475,9 @@
   "eco.toggleGroup": "Collapse or expand the group",
   "eco.collapseAll": "Collapse all",
   "eco.expandAll": "Expand all",
-  "eco.home": "Back to the kit home"
+  "eco.home": "Back to the kit home",
+  "home.ecosystem": "Explore the 3D ecosystem",
+  "visual.label": "Look",
+  "visual.glass": "Glass",
+  "visual.classic": "Classic"
 }

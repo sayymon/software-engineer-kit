@@ -1,0 +1,151 @@
+/* SPDX-License-Identifier: MIT */
+/* Visual "vidro" (prototype). Everything is scoped to html[data-visual='glass'], so the classic look stays one click away.
+   Glass is used for the chrome (header, filters, cards, buttons). Reading text sits on a calm, mostly opaque panel. */
+@view-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.38s; animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1); }
+.site-header { view-transition-name: site-header; }
+
+html[data-visual='glass'] {
+  --g-base: #e9eefb;
+  --g-aurora-1: rgba(110, 160, 255, 0.55);
+  --g-aurora-2: rgba(214, 120, 175, 0.38);
+  --g-aurora-3: rgba(0, 170, 125, 0.28);
+  --g-fill: rgba(255, 255, 255, 0.52);
+  --g-fill-strong: rgba(255, 255, 255, 0.7);
+  --g-card: linear-gradient(145deg, rgba(255, 255, 255, 0.78), rgba(170, 195, 255, 0.28));
+  --g-field: rgba(255, 255, 255, 0.85);
+  --g-border: rgba(255, 255, 255, 0.75);
+  --g-edge: rgba(30, 45, 90, 0.2);
+  --g-shine: rgba(255, 255, 255, 0.95);
+  --g-shadow: 0 10px 40px -12px rgba(40, 60, 120, 0.35);
+  --g-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --color-bg: var(--g-base);
+  --color-surface: transparent;
+  --color-border: var(--g-edge);
+  --radius: 14px;
+  background: var(--g-base);
+}
+@media (prefers-color-scheme: dark) {
+  html[data-visual='glass'] {
+    --g-base: #070914;
+    --g-aurora-1: rgba(70, 120, 255, 0.5);
+    --g-aurora-2: rgba(190, 80, 160, 0.34);
+    --g-aurora-3: rgba(0, 160, 120, 0.26);
+    --g-fill: rgba(22, 27, 48, 0.5);
+    --g-fill-strong: rgba(14, 18, 34, 0.74);
+    --g-card: linear-gradient(145deg, rgba(60, 75, 130, 0.38), rgba(25, 30, 60, 0.3));
+    --g-field: rgba(10, 13, 28, 0.55);
+    --g-border: rgba(170, 190, 255, 0.22);
+    --g-edge: rgba(170, 190, 255, 0.2);
+    --g-shine: rgba(255, 255, 255, 0.28);
+    --g-shadow: 0 14px 50px -14px rgba(0, 0, 0, 0.75);
+  }
+}
+
+/* Aurora behind everything, drifting slowly */
+html[data-visual='glass'] body { position: relative; background: transparent; }
+html[data-visual='glass'] body::before {
+  content: ''; position: fixed; inset: -20%; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(40% 40% at 15% 10%, var(--g-aurora-1), transparent 70%),
+    radial-gradient(38% 38% at 85% 20%, var(--g-aurora-2), transparent 70%),
+    radial-gradient(45% 45% at 60% 95%, var(--g-aurora-3), transparent 70%);
+  animation: g-drift 38s ease-in-out infinite alternate;
+}
+@keyframes g-drift { from { transform: translate3d(-2%, -1%, 0) scale(1); } to { transform: translate3d(3%, 2%, 0) scale(1.08); } }
+
+/* Glass surfaces: fill, bright rim, soft shadow, and a specular spot that follows the pointer */
+html[data-visual='glass'] .site-header,
+html[data-visual='glass'] .cards li,
+html[data-visual='glass'] main:not(.immersive),
+html[data-visual='glass'] .site-footer {
+  background: var(--g-fill);
+  border: 1px solid var(--g-border);
+  box-shadow: inset 0 1px 0 var(--g-shine), inset 0 -1px 0 rgba(255, 255, 255, 0.06), var(--g-shadow);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  backdrop-filter: blur(22px) saturate(160%);
+}
+html[data-visual='glass'] .site-header { position: sticky; top: 0.6rem; z-index: 20; margin: 0.6rem auto 0; width: min(calc(100% - 1.2rem), calc(var(--content-width) + 4rem)); border-radius: 22px; }
+html[data-visual='glass'] .site-header .inner { max-width: none; }
+html[data-visual='glass'] main:not(.immersive) { width: min(calc(100% - 1.2rem), calc(var(--content-width) + 4rem)); margin: 1rem auto 0; padding: clamp(1rem, 3vw, 2.2rem); border-radius: 28px; background: var(--g-fill-strong); }
+html[data-visual='glass'] .site-footer { width: min(calc(100% - 1.2rem), calc(var(--content-width) + 4rem)); margin: 1rem auto 1.2rem; border-radius: 22px; }
+html[data-visual='glass'] .hero { padding: clamp(0.4rem, 2vw, 1.4rem) 0 clamp(1rem, 3vw, 2rem); }
+html[data-visual='glass'] .hero h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); letter-spacing: -0.03em; background: linear-gradient(100deg, var(--color-text) 20%, var(--color-accent) 60%, #cc79a7); -webkit-background-clip: text; background-clip: text; color: transparent; }
+html[data-visual='glass'] .brand { background: linear-gradient(100deg, var(--color-text), var(--color-accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+html[data-visual='glass'] .site-header,
+html[data-visual='glass'] .cards li,
+html[data-visual='glass'] .glass-btn { position: relative; overflow: hidden; }
+html[data-visual='glass'] .site-header::before,
+html[data-visual='glass'] .cards li::before,
+html[data-visual='glass'] .glass-btn::before {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity 0.3s;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 0%), var(--g-shine), transparent 62%);
+}
+html[data-visual='glass'] .site-header:hover::before,
+html[data-visual='glass'] .cards li:hover::before,
+html[data-visual='glass'] .glass-btn:hover::before { opacity: 0.55; }
+
+/* Cards swell under the pointer */
+html[data-visual='glass'] .cards { gap: var(--space-3); }
+html[data-visual='glass'] .cards li { background: var(--g-card); border-color: var(--g-border); box-shadow: inset 0 1px 0 var(--g-shine), 0 0 0 1px var(--g-edge), var(--g-shadow); }
+html[data-visual='glass'] .cards li { border-radius: 20px; transition: transform 0.45s var(--g-spring), box-shadow 0.3s; }
+html[data-visual='glass'] .cards li:hover { transform: translateY(-4px) scale(1.015); }
+html[data-visual='glass'] .cards li a { text-decoration: none; }
+html[data-visual='glass'] .cards li a::after { content: ''; position: absolute; inset: 0; }
+
+/* Nav, buttons, inputs */
+html[data-visual='glass'] .site-nav a { display: inline-block; padding: 0.25rem 0.7rem; border-radius: 999px; text-decoration: none; transition: background 0.25s, transform 0.4s var(--g-spring); }
+html[data-visual='glass'] .site-nav a:hover { background: var(--g-fill); transform: translateY(-1px) scale(1.04); }
+html[data-visual='glass'] .site-nav a[aria-current='page'] { background: var(--g-fill-strong); box-shadow: inset 0 1px 0 var(--g-shine), 0 0 0 1px var(--g-border); text-decoration: none; }
+html[data-visual='glass'] .search-box input,
+html[data-visual='glass'] .search-box button,
+html[data-visual='glass'] .lang-switch a,
+html[data-visual='glass'] .search-controls input,
+html[data-visual='glass'] .search-controls select,
+html[data-visual='glass'] .search-controls button,
+html[data-visual='glass'] .glass-btn {
+  background: var(--g-field); border: 1px solid var(--g-edge); border-radius: 999px; color: var(--color-text);
+  box-shadow: inset 0 1px 0 var(--g-shine), 0 1px 6px -2px rgba(30, 45, 90, 0.25); transition: transform 0.4s var(--g-spring), background 0.25s;
+}
+html[data-visual='glass'] .search-box button:hover,
+html[data-visual='glass'] .lang-switch a:hover,
+html[data-visual='glass'] .glass-btn:hover { transform: scale(1.05); background: var(--g-fill-strong); }
+html[data-visual='glass'] .lang-switch a[aria-current='true'] { background: var(--color-accent); color: var(--color-accent-contrast); border-color: transparent; }
+html[data-visual='glass'] .glass-btn { background: linear-gradient(135deg, color-mix(in srgb, var(--color-accent) 85%, white), color-mix(in srgb, var(--color-accent) 60%, #cc79a7)); color: var(--color-accent-contrast); border-color: transparent; display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.3rem; font-weight: 600; text-decoration: none; }
+html[data-visual='glass'] .hero-cta { margin: var(--space-3) 0 0; }
+html:not([data-visual='glass']) .glass-btn { display: inline-block; padding: 0.4rem 0.9rem; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); color: var(--color-text); text-decoration: none; }
+
+/* Tables and code stay calm */
+html[data-visual='glass'] .table-wrap, html[data-visual='glass'] pre, html[data-visual='glass'] .diagram { border-radius: 14px; }
+html[data-visual='glass'] th { background: rgba(127, 150, 220, 0.14); }
+
+/* Visual switcher in the footer */
+.visual-switch { padding: 0.2rem 0.7rem; color: inherit; background: transparent; border: 1px solid var(--color-border); border-radius: 999px; font: inherit; cursor: pointer; }
+
+/* Fallbacks */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  html[data-visual='glass'] { --g-fill: rgba(255, 255, 255, 0.9); --g-fill-strong: rgba(255, 255, 255, 0.96); }
+  @media (prefers-color-scheme: dark) { html[data-visual='glass'] { --g-fill: rgba(20, 24, 42, 0.94); --g-fill-strong: rgba(14, 18, 34, 0.97); } }
+}
+@media (prefers-reduced-transparency: reduce) {
+  html[data-visual='glass'] .site-header, html[data-visual='glass'] .cards li, html[data-visual='glass'] .hero, html[data-visual='glass'] main:not(.immersive), html[data-visual='glass'] .site-footer { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--g-fill-strong); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-visual='glass'] body::before { animation: none; }
+  html[data-visual='glass'] .cards li, html[data-visual='glass'] .site-nav a, html[data-visual='glass'] .glass-btn { transition: none; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+}
+@media (forced-colors: active) {
+  html[data-visual='glass'] body::before { display: none; }
+}
+@media print { html[data-visual='glass'] body::before { display: none; } }
+
+/* Compact header: brand and tools on the first row, navigation on the second */
+html[data-visual='glass'] .site-header .inner { display: grid; grid-template-columns: 1fr auto; grid-template-areas: 'brand tools' 'nav nav'; gap: 0.4rem 1rem; align-items: center; padding-block: 0.6rem; }
+html[data-visual='glass'] .site-header .brand { grid-area: brand; font-size: 1.05rem; }
+html[data-visual='glass'] .site-header .header-tools { grid-area: tools; margin: 0; }
+html[data-visual='glass'] .site-header .site-nav { grid-area: nav; }
+html[data-visual='glass'] .site-nav ul { gap: 0.15rem 0.2rem; }
+html[data-visual='glass'] .site-nav a { padding: 0.2rem 0.65rem; font-size: 0.93rem; }
+@media (max-width: 47.9rem) { html[data-visual='glass'] .site-header .inner { grid-template-columns: 1fr; grid-template-areas: 'brand' 'tools' 'nav'; } }

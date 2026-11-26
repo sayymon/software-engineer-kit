@@ -475,5 +475,9 @@
   "eco.toggleGroup": "Recolher ou expandir o grupo",
   "eco.collapseAll": "Recolher tudo",
   "eco.expandAll": "Expandir tudo",
-  "eco.home": "Voltar para a tela inicial do kit"
+  "eco.home": "Voltar para a tela inicial do kit",
+  "home.ecosystem": "Explorar o ecossistema 3D",
+  "visual.label": "Visual",
+  "visual.glass": "Vidro",
+  "visual.classic": "Clássico"
 }
