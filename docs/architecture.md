@@ -61,3 +61,73 @@ Pagefind indexes the built HTML after `astro build` (`main[data-pagefind-body]`,
 
 ## Preview smoke check
 `npm run smoke` (`tools/preview/smoke.ts`) starts `astro preview` on a free port over `site/dist`, fetches the main page kinds in each built locale (home, tool, category, pattern, algorithm, stack, practical guide with the local Mermaid asset, certification, flow, journeys, search, licenses hub, the MIT note once it exists), checks the en fallback marker, the Pagefind files, the static API and every internal link of the built HTML, and exits non-zero on any failure.
+## C4 diagrams
+Mermaid C4 syntax. Level 1 shows the system in its surroundings, level 2 the containers, level 3 the components of the content and site layers.
+### Level 1: System context
+```mermaid
+C4Context
+  title software-engineer-kit: system context
+  Person(eng, "Software engineer", "Primary persona. Looks up flows, tools and guides.")
+  Person(sec, "QA, PM, Tech Lead, Eng Manager", "Secondary personas. Consult the roles and rituals of a demand.")
+  Person(contrib, "Contributor", "Adds content and translations by Pull Request.")
+  System(kit, "software-engineer-kit", "Static, bilingual, offline site with demand flows, catalog, guides and journeys.")
+  System_Ext(gh, "GitHub", "Repository, Pull Requests, Actions and Pages.")
+  System_Ext(agents, "AI agents (future)", "Consume the static API to run flows and measure kit quality.")
+  Rel(eng, kit, "Navigates and reads")
+  Rel(sec, kit, "Navigates and reads")
+  Rel(contrib, gh, "Opens PRs")
+  Rel(gh, kit, "Builds and publishes")
+  Rel(agents, kit, "Reads api/*.json")
+```
+### Level 2: Containers
+```mermaid
+C4Container
+  title software-engineer-kit: containers
+  Person(contrib, "Contributor")
+  Person(reader, "Reader")
+  System_Boundary(kit, "software-engineer-kit") {
+    Container(content, "Content", "Markdown + YAML", "content/pt-BR, content/en, content/guide, content/data, ids.lock.json")
+    Container(lib, "Shared libraries", "TypeScript", "lib/: schema, content, ids, wikilinks, terms, flow-mermaid, guide")
+    Container(tools, "Tools", "tsx scripts", "tools/: validate, preview, schema, site, guide")
+    Container(site, "Site", "Astro 7, static output", "Pages, islands, Pagefind index, static API")
+  }
+  System_Ext(gh, "GitHub Actions and Pages")
+  Rel(contrib, content, "Edits")
+  Rel(tools, content, "Validates")
+  Rel(tools, lib, "Uses")
+  Rel(site, lib, "Reads content through ContentRepository")
+  Rel(lib, content, "Loads")
+  Rel(gh, tools, "Runs validate and build")
+  Rel(gh, site, "Publishes site/dist")
+  Rel(reader, site, "Browses, offline")
+```
+### Level 3: Components of the content and site layers
+```mermaid
+C4Component
+  title Content pipeline and site rendering
+  Container_Boundary(libc, "lib/") {
+    Component(schema, "schema", "Zod", "Typed entities and JSON Schemas")
+    Component(repo, "content", "ContentRepository", "FsContentRepository merges pt-BR source and en overlay")
+    Component(guide, "guide", "Loader and validator", "44 rule codes, derives typed entities from content/guide")
+    Component(wiki, "wikilinks and ids", "unified plugin", "Resolves links and enforces ids.lock.json")
+    Component(fm, "flow-mermaid", "Generator", "Views visao, raia and completo")
+  }
+  Container_Boundary(sitec, "site/") {
+    Component(index, "SiteIndex", "kit.ts", "Routes, inverse relations, typed edges")
+    Component(render, "Renderers", "render/*.ts", "Front matter to escaped HTML")
+    Component(page, "Catch-all page", "Astro", "[locale]/[...slug].astro")
+    Component(api, "Static API", "JSON", "index, graph, flows/<id>")
+    Component(islands, "Islands", "data-island", "Mermaid today, 3D graph in Wave B")
+    Component(search, "Search", "Pagefind", "Offline index")
+  }
+  Rel(repo, schema, "Validates with")
+  Rel(repo, guide, "Loads guide entities")
+  Rel(repo, wiki, "Resolves links")
+  Rel(index, repo, "Reads")
+  Rel(page, index, "Asks for entity")
+  Rel(page, render, "Renders")
+  Rel(render, fm, "Diagram source")
+  Rel(page, islands, "Mounts")
+  Rel(index, api, "Feeds")
+  Rel(page, search, "Indexed after build")
+```
