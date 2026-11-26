@@ -445,8 +445,6 @@
   "eco.hideGroup": "Ocultar {type}",
   "eco.hint": "Arraste para girar, role para aproximar, clique em um nó para focar.",
   "eco.hubs": "Mapas de navegação",
-  "eco.layer.fluxo": "Fluxos de demanda",
-  "eco.layer.nucleo": "Conceitos e catálogo",
   "eco.layers": "Camadas",
   "eco.lede": "Cada ponto é um conceito, uma ferramenta, uma técnica ou uma etapa de fluxo. Clique em um nó para ver só o que se liga a ele.",
   "eco.legend": "Legenda",
@@ -473,5 +471,8 @@
   "eco.title": "Ecossistema",
   "eco.types": "Tipos",
   "nav.ecosystem": "Ecossistema 3D",
-  "eco.controls": "Controles"
+  "eco.controls": "Controles",
+  "eco.toggleGroup": "Recolher ou expandir o grupo",
+  "eco.collapseAll": "Recolher tudo",
+  "eco.expandAll": "Expandir tudo"
 }

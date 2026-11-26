@@ -22,6 +22,18 @@ test('abre, mostra a contagem e a legenda', async ({ page }) => {
   expect(erros).toEqual([]);
 });
 
+test('a legenda mostra fluxos e fundamentos e os grupos recolhem', async ({ page }) => {
+  await abrir(page);
+  for (const t of ['tarefa', 'papel', 'raia', 'tecnica', 'padrao']) await expect(page.locator(`#eco-legend-list button[data-tipo="${t}"]`)).toBeVisible();
+  await expect(page.locator('[data-camada]')).toHaveCount(0);
+  await page.locator('#eco-legend-list details[open] > summary .eco-chevron').first().click();
+  await expect(page.locator('#eco-legend-list details[open]')).toHaveCount(4);
+  await page.locator('#eco-legend-toggle').click();
+  await expect(page.locator('#eco-legend-list details[open]')).toHaveCount(5);
+  await page.locator('#eco-legend-toggle').click();
+  await expect(page.locator('#eco-legend-list details[open]')).toHaveCount(0);
+});
+
 test('busca leva ao foco, atualiza o hash e abre o painel com vizinhos', async ({ page }) => {
   const erros = await abrir(page);
   await page.fill('#eco-q', 'github copilot');

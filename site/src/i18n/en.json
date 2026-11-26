@@ -445,8 +445,6 @@
   "eco.hideGroup": "Hide {type}",
   "eco.hint": "Drag to rotate, scroll to zoom, click a node to focus.",
   "eco.hubs": "Navigation maps",
-  "eco.layer.fluxo": "Demand flows",
-  "eco.layer.nucleo": "Concepts and catalog",
   "eco.layers": "Layers",
   "eco.lede": "Each point is a concept, a tool, a technique or a flow step. Click a node to see only what connects to it.",
   "eco.legend": "Legend",
@@ -473,5 +471,8 @@
   "eco.title": "Ecosystem",
   "eco.types": "Types",
   "nav.ecosystem": "3D Ecosystem",
-  "eco.controls": "Controls"
+  "eco.controls": "Controls",
+  "eco.toggleGroup": "Collapse or expand the group",
+  "eco.collapseAll": "Collapse all",
+  "eco.expandAll": "Expand all"
 }

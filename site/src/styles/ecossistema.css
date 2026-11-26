@@ -33,7 +33,7 @@ main.immersive { max-width: none; padding: 0; display: flex; flex-direction: col
 .eco-toolbar label { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--eco-text); }
 .eco-layers { display: flex; flex-wrap: wrap; gap: 0.35rem 0.8rem; margin: 0; padding: 0; border: 0; }
 .eco-controls { display: contents; }
-.eco-more { display: none; }
+.eco .eco-more { display: none; }
 .eco-search { position: relative; }
 .eco-search input[type='search'] { width: 13rem; padding: 0.45rem 0.7rem; color: var(--eco-text); background: rgba(255, 255, 255, 0.06); border: 1px solid var(--eco-line); border-radius: 999px; font: inherit; }
 .eco-search input::placeholder { color: var(--eco-muted); }
@@ -119,7 +119,7 @@ main.immersive { max-width: none; padding: 0; display: flex; flex-direction: col
 @media (max-width: 47.9rem) { .eco[data-foco] .eco-toolbar { right: 0.75rem; } }
 
 @media (max-width: 47.9rem) {
-  .eco-more { display: inline-flex; }
+  .eco .eco-more { display: inline-flex; }
   .eco-controls { display: none; flex-direction: column; align-items: flex-start; gap: 0.5rem; width: 100%; }
   .eco[data-controles='aberto'] .eco-controls { display: flex; }
   .eco-hero { top: 5rem; }
@@ -138,3 +138,15 @@ main.immersive { max-width: none; padding: 0; display: flex; flex-direction: col
 .eco-legend-item .eco-icon { flex: none; filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.15)); }
 .eco-chip .eco-icon, .eco-kind .eco-icon { flex: none; vertical-align: -0.2em; }
 .eco-kind { display: flex; align-items: center; gap: 0.4rem; }
+
+/* Collapsible legend groups */
+.eco-legend-bar { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.4rem; }
+.eco-legend-bar h2 { margin: 0; }
+.eco-link { padding: 0; color: var(--eco-muted); background: none; border: 0; font: inherit; font-size: 0.72rem; text-decoration: underline; cursor: pointer; }
+.eco-link:hover { color: var(--eco-text); }
+.eco-legend-group > summary { display: flex; align-items: center; gap: 0.2rem; }
+.eco-legend-group > summary .eco-legend-head { flex: 1; }
+.eco-chevron { flex: none; width: 1.1rem; height: 1.1rem; display: inline-flex; align-items: center; justify-content: center; color: var(--eco-muted); cursor: pointer; }
+.eco-chevron::before { content: ''; width: 0.4rem; height: 0.4rem; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform 0.2s; }
+.eco-legend-group[open] > summary .eco-chevron::before { transform: rotate(45deg); }
+@media (prefers-reduced-motion: reduce) { .eco-chevron::before { transition: none; } }

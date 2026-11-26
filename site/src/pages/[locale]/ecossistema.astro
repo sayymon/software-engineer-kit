@@ -34,12 +34,7 @@ const home = `${ctx.base}/${locale}/`;
       </div>
       <button type="button" class="eco-btn eco-more" id="eco-more" aria-expanded="false" aria-controls="eco-controls">{t('eco.controls')}</button>
       <div class="eco-controls" id="eco-controls">
-      <fieldset class="eco-layers">
-        <legend class="sr-only">{t('eco.layers')}</legend>
-        <label><input type="checkbox" data-camada="nucleo" checked /> {t('eco.layer.nucleo')}</label>
-        <label><input type="checkbox" data-camada="fluxo" checked /> {t('eco.layer.fluxo')}</label>
-        <label><input type="checkbox" id="eco-hubs" /> {t('eco.hubs')}</label>
-      </fieldset>
+      <label class="eco-toggle"><input type="checkbox" id="eco-hubs" /> {t('eco.hubs')}</label>
       <label class="eco-select">{t('eco.depth')}
         <select id="eco-depth"><option value="1">1</option><option value="2">2</option></select>
       </label>
@@ -51,7 +46,7 @@ const home = `${ctx.base}/${locale}/`;
     </div>
 
     <aside class="eco-legend" aria-label={t('eco.legend')}>
-      <h2>{t('eco.legend')}</h2>
+      <div class="eco-legend-bar"><h2>{t('eco.legend')}</h2><button type="button" class="eco-link" id="eco-legend-toggle"></button></div>
       <ul id="eco-legend-list"></ul>
       <p class="eco-status" id="eco-count" role="status"></p>
       <p class="eco-empty" id="eco-empty" hidden>{t('eco.none')} <button type="button" class="eco-btn" id="eco-clear">{t('eco.clear')}</button></p>

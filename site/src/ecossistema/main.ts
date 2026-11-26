@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Orchestrates the Ecossistema page: data, filters, focus, side panel, legend and URL state.
 // The renderer is loaded last, by dynamic import, so the page shell stays small.
-import { GRUPOS, COR_DO_GRUPO, corDe, formaDe, grupoDe, type Camada } from '@lib/ecossistema/camadas';
+import { GRUPOS, COR_DO_GRUPO, corDe, formaDe, grupoDe } from '@lib/ecossistema/camadas';
 import { icone } from './icones';
 import { ESTADO_PADRAO, ler, serializar, type EstadoEcossistema } from '@lib/ecossistema/estado';
 import type { Fato } from '@lib/ecossistema/fatos';
@@ -384,8 +384,12 @@ async function iniciar(host: HTMLElement): Promise<void> {
       if (!tipos.length) continue;
       const det = document.createElement('details');
       det.className = 'eco-legend-group';
-      det.open = g === 'catalogo';
+      det.open = true;
       const sum = document.createElement('summary');
+      const seta = document.createElement('span');
+      seta.className = 'eco-chevron';
+      seta.setAttribute('aria-hidden', 'true');
+      sum.title = tr('eco.toggleGroup');
       const cabeca = document.createElement('button');
       cabeca.type = 'button';
       cabeca.className = 'eco-legend-item eco-legend-head';
@@ -402,7 +406,7 @@ async function iniciar(host: HTMLElement): Promise<void> {
         e.preventDefault();
         alternar('grupo', g);
       };
-      sum.append(cabeca);
+      sum.append(seta, cabeca);
       const ul = document.createElement('ul');
       for (const t of tipos) {
         const li = document.createElement('li');
@@ -425,6 +429,14 @@ async function iniciar(host: HTMLElement): Promise<void> {
       legenda.append(det);
     }
   }
+  const grupos = () => [...legenda.querySelectorAll<HTMLDetailsElement>('details.eco-legend-group')];
+  const alternarTodos = $<HTMLButtonElement>('eco-legend-toggle');
+  alternarTodos.onclick = () => {
+    const abrir = grupos().some((d) => !d.open);
+    for (const d of grupos()) d.open = abrir;
+    alternarTodos.textContent = abrir ? tr('eco.collapseAll') : tr('eco.expandAll');
+  };
+  legenda.addEventListener('toggle', () => (alternarTodos.textContent = grupos().every((d) => d.open) ? tr('eco.collapseAll') : tr('eco.expandAll')), true);
   function atualizarLegenda(): void {
     const porGrupo = contarFaceta(modelo.filtro, criterio(), 'grupo');
     const porTipo = contarFaceta(modelo.filtro, criterio(), 'tipo');
@@ -442,22 +454,6 @@ async function iniciar(host: HTMLElement): Promise<void> {
     else host.dataset.controles = 'aberto';
     maisBtn.setAttribute('aria-expanded', String(!aberto));
   };
-  const camadasBox = document.querySelectorAll<HTMLInputElement>('[data-camada]');
-  camadasBox.forEach((c) => {
-    c.checked = estado.camadas.has(c.dataset.camada as Camada);
-    c.onchange = () => {
-      const s = new Set(estado.camadas);
-      if (c.checked) s.add(c.dataset.camada as Camada);
-      else s.delete(c.dataset.camada as Camada);
-      if (!s.size) {
-        c.checked = true;
-        return;
-      }
-      estado = { ...estado, camadas: s };
-      aplicarFiltros();
-      gravarHash('replace');
-    };
-  });
   const hubsBox = $<HTMLInputElement>('eco-hubs');
   hubsBox.checked = estado.hubs;
   hubsBox.onchange = () => {
@@ -493,7 +489,6 @@ async function iniciar(host: HTMLElement): Promise<void> {
     estado = { ...estado, texto: '', facetas: {}, hubs: false, camadas: new Set(ESTADO_PADRAO.camadas) };
     busca.value = '';
     hubsBox.checked = false;
-    camadasBox.forEach((c) => (c.checked = estado.camadas.has(c.dataset.camada as Camada)));
     aplicarFiltros();
     gravarHash('replace');
   };
@@ -596,7 +591,6 @@ async function iniciar(host: HTMLElement): Promise<void> {
     estado = { ...novo, modo: 'ecossistema' };
     hubsBox.checked = estado.hubs;
     prof.value = String(estado.profundidade);
-    camadasBox.forEach((c) => (c.checked = estado.camadas.has(c.dataset.camada as Camada)));
     busca.value = estado.texto;
     aplicarFiltros();
     const cam = (e.state as { camera?: CameraSalva } | null)?.camera;
@@ -615,6 +609,7 @@ async function iniciar(host: HTMLElement): Promise<void> {
 
   // ---- boot ----
   montarLegenda();
+  alternarTodos.textContent = tr('eco.collapseAll');
   aplicarFiltros();
   if (estado.foco) {
     const i = modelo.porId.get(estado.foco);
