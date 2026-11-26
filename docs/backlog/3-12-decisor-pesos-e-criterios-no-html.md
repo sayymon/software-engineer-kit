@@ -2,7 +2,7 @@
 
 ## Contexto
 
-O checkpoint 3.12 da spec do guia ficou aberto: o julgamento humano dos pesos e dos critérios do Decisor "construir, comprar ou assinar" e a decisão sobre a experiência no HTML. O kit mostra hoje uma tabela de pesos (`matrizTable` em `site/src/render/flow.ts`) e não oferece o cálculo na página. Existem dois modelos no repositório (`lib/decisor.ts` com `content/data/matriz.json` e o bloco `decisor_construir_comprar_assinar` do guia). A comparação está em [decisor-conflict.md](../decisor-conflict.md).
+O checkpoint 3.12 da spec do guia ficou aberto: o julgamento humano dos pesos e dos critérios do Decisor "construir, comprar ou assinar" e a decisão sobre a experiência no HTML. (Atualização: `matriz.json` foi removido; a tabela lê o bloco do guia.) O kit mostra hoje uma tabela de pesos (`matrizTable` em `site/src/render/flow.ts`) e não oferece o cálculo na página. Existem dois modelos no repositório (`lib/decisor.ts` com `content/data/matriz.json` e o bloco `decisor_construir_comprar_assinar` do guia). A comparação está em [decisor-conflict.md](../decisor-conflict.md).
 
 ## Escopo
 

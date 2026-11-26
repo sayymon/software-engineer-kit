@@ -18,7 +18,12 @@
     "build:pt-BR": "tsx tools/site/build.ts pt-BR",
     "build:en": "tsx tools/site/build.ts en",
     "preview": "astro preview --root site",
-    "smoke": "tsx tools/preview/smoke.ts"
+    "guide": "tsx tools/guide/cli.ts",
+    "smoke": "tsx tools/preview/smoke.ts",
+    "test:browser": "playwright test",
+    "agents:sync": "tsx tools/agents/sync.ts",
+    "skills:update": "npx skills update --project --yes",
+    "skills:restore": "npx skills experimental_install --frozen-lockfile --agent claude-code kiro-cli opencode"
   },
   "dependencies": {
     "ajv": "^8.20.0",
@@ -34,7 +39,9 @@
     "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@playwright/test": "^1.65.1",
     "@types/node": "^26.6.6",
+    "fast-check": "^4.11.0",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
     "vitest": "^5.1.1"

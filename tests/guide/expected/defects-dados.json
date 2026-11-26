@@ -1,0 +1,119 @@
+{
+ "CONDICAO_AUSENTE em uso condicional de técnica sem `quando`": [
+  {
+   "code": "CONDICAO_AUSENTE",
+   "item_id": "com_dcs_t3",
+   "message": "o uso condicional da técnica 'tec_adrs' em 'com_dcs_t3' exige `quando`",
+   "nivel": "erro",
+   "path": "decisoes[129].tecnicas[0]"
+  }
+ ],
+ "CONDICAO_INVALIDA \"em\" com lista vazia": [
+  {
+   "code": "CONDICAO_INVALIDA",
+   "item_id": "com_set_t1_st4",
+   "message": "condição de 'com_set_t1_st4': 'em' exige uma lista com ao menos um valor para 'acao_preventiva'",
+   "nivel": "erro",
+   "path": "decisoes[1].subtarefas[3].quando.todos[0].em"
+  }
+ ],
+ "CONDICAO_INVALIDA com dois operadores": [
+  {
+   "code": "CONDICAO_INVALIDA",
+   "item_id": "com_set_t1_st4",
+   "message": "condição de 'com_set_t1_st4': o termo sobre 'acao_preventiva' deve ter exatamente um operador entre igual, diferente, em, maior_que, maior_ou_igual, menor_que, menor_ou_igual (encontrados: igual, diferente)",
+   "nivel": "erro",
+   "path": "decisoes[1].subtarefas[3].quando.todos[0]"
+  }
+ ],
+ "CONDICAO_INVALIDA operador numérico em variável não inteira": [
+  {
+   "code": "CONDICAO_INVALIDA",
+   "item_id": "com_set_t1_st4",
+   "message": "condição de 'com_set_t1_st4': o operador 'maior_que' só vale para variável inteira; 'acao_preventiva' é texto",
+   "nivel": "erro",
+   "path": "decisoes[1].subtarefas[3].quando.todos[0].maior_que"
+  }
+ ],
+ "CONDICAO_INVALIDA sem operador": [
+  {
+   "code": "CONDICAO_INVALIDA",
+   "item_id": "com_set_t1_st4",
+   "message": "condição de 'com_set_t1_st4': o termo sobre 'acao_preventiva' deve ter exatamente um operador entre igual, diferente, em, maior_que, maior_ou_igual, menor_que, menor_ou_igual",
+   "nivel": "erro",
+   "path": "decisoes[1].subtarefas[3].quando.todos[0]"
+  }
+ ],
+ "CONDICAO_INVALIDA valor de \"em\" fora do domínio do enum": [
+  {
+   "code": "CONDICAO_INVALIDA",
+   "item_id": "com_set_t1_st4",
+   "message": "condição de 'com_set_t1_st4': valor de 'em' fora do domínio: 'fora' não está em ['agente', 'pessoa', 'hibrida'] (variável 'alocacao')",
+   "nivel": "erro",
+   "path": "decisoes[1].subtarefas[3].quando.todos[0].em[1]"
+  }
+ ],
+ "CONDICAO_INVALIDA valor de tipo incompatível com inteiro": [
+  {
+   "code": "CONDICAO_INVALIDA",
+   "item_id": "com_set_t1_st4",
+   "message": "condição de 'com_set_t1_st4': o valor 'dois' é incompatível com o tipo inteiro de 'tentativas_iteracao'",
+   "nivel": "erro",
+   "path": "decisoes[1].subtarefas[3].quando.todos[0].igual"
+  }
+ ],
+ "CONDICAO_INVALIDA valor fora do domínio booleano": [
+  {
+   "code": "CONDICAO_INVALIDA",
+   "item_id": "com_set_t1_st4",
+   "message": "condição de 'com_set_t1_st4': valor fora do domínio: 'talvez' não está em ['sim', 'nao'] (variável 'contencao_restrita')",
+   "nivel": "erro",
+   "path": "decisoes[1].subtarefas[3].quando.todos[0].igual"
+  }
+ ],
+ "CONDICAO_INVALIDA valor fora do domínio do enum": [
+  {
+   "code": "CONDICAO_INVALIDA",
+   "item_id": "com_set_t1_st4",
+   "message": "condição de 'com_set_t1_st4': valor fora do domínio: 'valor_que_nao_existe' não está em ['agente', 'pessoa', 'hibrida'] (variável 'alocacao')",
+   "nivel": "erro",
+   "path": "decisoes[1].subtarefas[3].quando.todos[0].igual"
+  }
+ ],
+ "SUBTAREFA_EM_NAO_TAREFA": [
+  {
+   "code": "SUBTAREFA_EM_NAO_TAREFA",
+   "item_id": "com_set_s0",
+   "message": "'com_set_s0' é do tipo 'inicio' mas declara `subtarefas`; só nós 'tarefa' têm subtarefas",
+   "nivel": "erro",
+   "path": "decisoes[0].subtarefas"
+  }
+ ],
+ "SUBTAREFA_ID_PADRAO": [
+  {
+   "code": "SUBTAREFA_ID_PADRAO",
+   "item_id": "com_set_t1_st0",
+   "message": "o id da subtarefa 'com_set_t1_st0' deve ter a forma 'com_set_t1_st<n>' (n inteiro a partir de 1)",
+   "nivel": "erro",
+   "path": "decisoes[1].subtarefas[0].id"
+  }
+ ],
+ "VARIANTE_DUPLICADA": [
+  {
+   "code": "VARIANTE_DUPLICADA",
+   "item_id": "registro_da_necessidade",
+   "message": "o artefato 'registro_da_necessidade' repete o nome de variante 'PRD'",
+   "nivel": "erro",
+   "path": "artefatos[67].variantes[5].nome"
+  }
+ ],
+ "VARIAVEL_ENUM_SEM_VALORES": [
+  {
+   "code": "VARIAVEL_ENUM_SEM_VALORES",
+   "item_id": "alocacao",
+   "message": "a variável enum 'alocacao' deve declarar `valores` com ao menos um item",
+   "nivel": "erro",
+   "path": "variaveis[1].valores"
+  }
+ ]
+}

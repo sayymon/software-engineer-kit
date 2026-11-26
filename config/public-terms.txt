@@ -17,7 +17,7 @@ rei:obsidian://
 rei:segundo[ _-]c[eé]rebro
 rei:second[ _-]brain
 rei:(?<!hashicorp )(?<!hashicorp-)(?<!key )(?<!ansible )(?<!azure )(?<!terraform, )(?<!products/)(?<!secret )\bvault\b
-re:[^\s]\.agent[s]/
+re:[^\s]\.agents/tasks/
 
 # Tokens and secrets
 re:ghp_[A-Za-z0-9]{20,}

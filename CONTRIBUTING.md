@@ -12,7 +12,7 @@ Thanks for helping. Contributions go through Pull Requests.
 4. Open the PR to `main` and fill in the template.
 5. Wait for the required checks and the code owner review (@sayymon). Address review comments with new commits.
 
-Required checks: `build-test`, `guide-oracle`, `dependency-review`, `npm-audit`, `codeql`, `secret-scan`, `public-terms`, `reuse`, `actionlint`.
+Required checks: `build-test`, `dependency-review`, `npm-audit`, `codeql`, `secret-scan`, `public-terms`, `reuse`, `actionlint`.
 
 ### Contributing an English translation
 `content/pt-BR/**` is the source. An English overlay lives at the same relative path under `content/en/**` and carries only the translatable fields plus `source_hash`. Read `docs/i18n.md` for the overlay format and the field list. Keep ids and structural fields out of the overlay. `npm run validate` flags a stale overlay when the pt-BR source changes.
@@ -33,7 +33,7 @@ Obrigado por ajudar. Toda contribuição entra por Pull Request.
 4. Abra o PR para `main` e preencha o template.
 5. Aguarde os checks obrigatórios e a revisão do responsável (@sayymon). Responda aos comentários com novos commits.
 
-Checks obrigatórios: `build-test`, `guide-oracle`, `dependency-review`, `npm-audit`, `codeql`, `secret-scan`, `public-terms`, `reuse`, `actionlint`.
+Checks obrigatórios: `build-test`, `dependency-review`, `npm-audit`, `codeql`, `secret-scan`, `public-terms`, `reuse`, `actionlint`.
 
 ### Contribuir com uma tradução para inglês
 `content/pt-BR/**` é a fonte. A camada em inglês fica no mesmo caminho relativo em `content/en/**` e traz apenas os campos traduzíveis mais `source_hash`. Leia `docs/i18n.md` para o formato e a lista de campos. Mantenha ids e campos estruturais fora da camada. O `npm run validate` sinaliza uma tradução desatualizada quando a fonte pt-BR muda.

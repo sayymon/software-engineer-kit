@@ -1,0 +1,567 @@
+{
+ "BIFURCACAO_SAIDAS": [
+  {
+   "code": "BIFURCACAO_SAIDAS",
+   "item_id": "com_set_g1",
+   "message": "bifurcação 'com_set_g1' tem 1 saída(s); o mínimo é 2",
+   "nivel": "erro",
+   "path": "decisoes[4].proximo"
+  }
+ ],
+ "CHAMADA_INVALIDA to the own lane": [
+  {
+   "code": "CHAMADA_INVALIDA",
+   "item_id": "com_exe_c1",
+   "message": "'com_exe_c1' chama a própria raia 'com_exe'",
+   "nivel": "erro",
+   "path": "decisoes[15].raia_chamada"
+  }
+ ],
+ "ID_DUPLICADO in a collection": [
+  {
+   "code": "ID_DUPLICADO",
+   "item_id": "tec_adrs",
+   "message": "id 'tec_adrs' duplicado em tecnicas: itens tecnicas[0] e tecnicas[127]",
+   "nivel": "erro",
+   "path": "tecnicas[127].id"
+  }
+ ],
+ "ID_DUPLICADO of a subtask against a node": [
+  {
+   "code": "ID_DUPLICADO",
+   "item_id": "com_set_s0",
+   "message": "id de subtarefa 'com_set_s0' duplicado: já existe em decisoes[0]; os ids de subtarefas e de nós são globalmente únicos",
+   "nivel": "erro",
+   "path": "decisoes[1].subtarefas[0].id"
+  },
+  {
+   "code": "SUBTAREFA_ID_PADRAO",
+   "item_id": "com_set_s0",
+   "message": "o id da subtarefa 'com_set_s0' deve ter a forma 'com_set_t1_st<n>' (n inteiro a partir de 1)",
+   "nivel": "erro",
+   "path": "decisoes[1].subtarefas[0].id"
+  }
+ ],
+ "ID_PADRAO of a node and a lane": [
+  {
+   "code": "TRANSICAO_INVALIDA",
+   "item_id": "com_set_s0",
+   "message": "transição de 'com_set_s0' aponta para id inexistente 'com_set_t1'",
+   "nivel": "erro",
+   "path": "decisoes[0].proximo[0].para"
+  },
+  {
+   "code": "RAIA_SEM_INICIO",
+   "item_id": "zz_com_set",
+   "message": "a raia 'zz_com_set' não tem nó 'inicio'; o esperado é exatamente 1",
+   "nivel": "erro",
+   "path": "raias[0]"
+  },
+  {
+   "code": "RAIA_SEM_FIM",
+   "item_id": "zz_com_set",
+   "message": "a raia 'zz_com_set' não tem nó 'fim'; cada fim é um retorno nomeado da raia",
+   "nivel": "erro",
+   "path": "raias[0]"
+  },
+  {
+   "code": "RAIA_ORFA",
+   "item_id": "zz_com_set",
+   "message": "a raia 'zz_com_set' não é orquestradora e nenhuma raia a chama",
+   "nivel": "erro",
+   "path": "raias[0]"
+  },
+  {
+   "code": "ID_PADRAO",
+   "item_id": "zz_com_set",
+   "message": "o id da raia 'zz_com_set' deve começar com 'com_' (sigla da demanda 'comum')",
+   "nivel": "erro",
+   "path": "raias[0].id"
+  },
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set_s0",
+   "message": "'com_set_s0' referencia id inexistente 'com_set' (esperado em raias)",
+   "nivel": "erro",
+   "path": "decisoes[0].raia"
+  },
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set_t1_x",
+   "message": "'com_set_t1_x' referencia id inexistente 'com_set' (esperado em raias)",
+   "nivel": "erro",
+   "path": "decisoes[1].raia"
+  },
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set_t2",
+   "message": "'com_set_t2' referencia id inexistente 'com_set' (esperado em raias)",
+   "nivel": "erro",
+   "path": "decisoes[2].raia"
+  },
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set_t3",
+   "message": "'com_set_t3' referencia id inexistente 'com_set' (esperado em raias)",
+   "nivel": "erro",
+   "path": "decisoes[3].raia"
+  },
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set_g1",
+   "message": "'com_set_g1' referencia id inexistente 'com_set' (esperado em raias)",
+   "nivel": "erro",
+   "path": "decisoes[4].raia"
+  },
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set_t4",
+   "message": "'com_set_t4' referencia id inexistente 'com_set' (esperado em raias)",
+   "nivel": "erro",
+   "path": "decisoes[5].raia"
+  },
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set_t5",
+   "message": "'com_set_t5' referencia id inexistente 'com_set' (esperado em raias)",
+   "nivel": "erro",
+   "path": "decisoes[6].raia"
+  },
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set_g2",
+   "message": "'com_set_g2' referencia id inexistente 'com_set' (esperado em raias)",
+   "nivel": "erro",
+   "path": "decisoes[7].raia"
+  },
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set_t6",
+   "message": "'com_set_t6' referencia id inexistente 'com_set' (esperado em raias)",
+   "nivel": "erro",
+   "path": "decisoes[8].raia"
+  },
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set_t7",
+   "message": "'com_set_t7' referencia id inexistente 'com_set' (esperado em raias)",
+   "nivel": "erro",
+   "path": "decisoes[9].raia"
+  },
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set_g3",
+   "message": "'com_set_g3' referencia id inexistente 'com_set' (esperado em raias)",
+   "nivel": "erro",
+   "path": "decisoes[10].raia"
+  },
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set_t8",
+   "message": "'com_set_t8' referencia id inexistente 'com_set' (esperado em raias)",
+   "nivel": "erro",
+   "path": "decisoes[11].raia"
+  },
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set_e1",
+   "message": "'com_set_e1' referencia id inexistente 'com_set' (esperado em raias)",
+   "nivel": "erro",
+   "path": "decisoes[12].raia"
+  },
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "feat_orq_c6",
+   "message": "'feat_orq_c6' referencia id inexistente 'com_set' (esperado em raias)",
+   "nivel": "erro",
+   "path": "decisoes[147].raia_chamada"
+  },
+  {
+   "code": "SUBTAREFA_ID_PADRAO",
+   "item_id": "com_set_t1_st1",
+   "message": "o id da subtarefa 'com_set_t1_st1' deve ter a forma 'com_set_t1_x_st<n>' (n inteiro a partir de 1)",
+   "nivel": "erro",
+   "path": "decisoes[1].subtarefas[0].id"
+  },
+  {
+   "code": "SUBTAREFA_ID_PADRAO",
+   "item_id": "com_set_t1_st2",
+   "message": "o id da subtarefa 'com_set_t1_st2' deve ter a forma 'com_set_t1_x_st<n>' (n inteiro a partir de 1)",
+   "nivel": "erro",
+   "path": "decisoes[1].subtarefas[1].id"
+  },
+  {
+   "code": "SUBTAREFA_ID_PADRAO",
+   "item_id": "com_set_t1_st3",
+   "message": "o id da subtarefa 'com_set_t1_st3' deve ter a forma 'com_set_t1_x_st<n>' (n inteiro a partir de 1)",
+   "nivel": "erro",
+   "path": "decisoes[1].subtarefas[2].id"
+  },
+  {
+   "code": "SUBTAREFA_ID_PADRAO",
+   "item_id": "com_set_t1_st4",
+   "message": "o id da subtarefa 'com_set_t1_st4' deve ter a forma 'com_set_t1_x_st<n>' (n inteiro a partir de 1)",
+   "nivel": "erro",
+   "path": "decisoes[1].subtarefas[3].id"
+  },
+  {
+   "code": "SUBTAREFA_ID_PADRAO",
+   "item_id": "com_set_t1_st5",
+   "message": "o id da subtarefa 'com_set_t1_st5' deve ter a forma 'com_set_t1_x_st<n>' (n inteiro a partir de 1)",
+   "nivel": "erro",
+   "path": "decisoes[1].subtarefas[4].id"
+  },
+  {
+   "code": "SUBTAREFA_ID_PADRAO",
+   "item_id": "com_set_t1_st6",
+   "message": "o id da subtarefa 'com_set_t1_st6' deve ter a forma 'com_set_t1_x_st<n>' (n inteiro a partir de 1)",
+   "nivel": "erro",
+   "path": "decisoes[1].subtarefas[5].id"
+  },
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "pq_com_set_t1_1",
+   "message": "'pq_com_set_t1_1' referencia id inexistente 'com_set_t1' (esperado em decisoes, subtarefas, tecnicas ou ritos)",
+   "nivel": "erro",
+   "path": "perguntas[70].depende_de[0]"
+  },
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "pq_com_set_t1_2",
+   "message": "'pq_com_set_t1_2' referencia id inexistente 'com_set_t1' (esperado em decisoes, subtarefas, tecnicas ou ritos)",
+   "nivel": "erro",
+   "path": "perguntas[71].depende_de[0]"
+  }
+ ],
+ "ORQUESTRADORA none": [
+  {
+   "code": "ORQUESTRADORA",
+   "item_id": "feature",
+   "message": "a demanda 'feature' tem raias, mas nenhuma é `orquestradora`; o esperado é exatamente 1",
+   "nivel": "erro",
+   "path": "raias[19]"
+  },
+  {
+   "code": "RAIA_ORFA",
+   "item_id": "feat_orq",
+   "message": "a raia 'feat_orq' não é orquestradora e nenhuma raia a chama",
+   "nivel": "erro",
+   "path": "raias[19]"
+  }
+ ],
+ "ORQUESTRADORA twice": [
+  {
+   "code": "ORQUESTRADORA",
+   "item_id": "feat_ent",
+   "message": "a demanda 'feature' tem 7 raias orquestradoras; o esperado é exatamente 1",
+   "nivel": "erro",
+   "path": "raias[20].orquestradora"
+  },
+  {
+   "code": "ORQUESTRADORA",
+   "item_id": "feat_lev",
+   "message": "a demanda 'feature' tem 7 raias orquestradoras; o esperado é exatamente 1",
+   "nivel": "erro",
+   "path": "raias[21].orquestradora"
+  },
+  {
+   "code": "ORQUESTRADORA",
+   "item_id": "feat_cls",
+   "message": "a demanda 'feature' tem 7 raias orquestradoras; o esperado é exatamente 1",
+   "nivel": "erro",
+   "path": "raias[22].orquestradora"
+  },
+  {
+   "code": "ORQUESTRADORA",
+   "item_id": "feat_spc",
+   "message": "a demanda 'feature' tem 7 raias orquestradoras; o esperado é exatamente 1",
+   "nivel": "erro",
+   "path": "raias[23].orquestradora"
+  },
+  {
+   "code": "ORQUESTRADORA",
+   "item_id": "feat_alo",
+   "message": "a demanda 'feature' tem 7 raias orquestradoras; o esperado é exatamente 1",
+   "nivel": "erro",
+   "path": "raias[24].orquestradora"
+  },
+  {
+   "code": "ORQUESTRADORA",
+   "item_id": "feat_ite",
+   "message": "a demanda 'feature' tem 7 raias orquestradoras; o esperado é exatamente 1",
+   "nivel": "erro",
+   "path": "raias[25].orquestradora"
+  }
+ ],
+ "PESOS": [
+  {
+   "code": "PESOS",
+   "item_id": "cumprir_prazo",
+   "message": "pesos do objetivo 'cumprir_prazo' somam 1.25; o esperado é 1 (tolerância 1e-09)",
+   "nivel": "erro",
+   "path": "decisor_construir_comprar_assinar.pesos.cumprir_prazo"
+  }
+ ],
+ "RAIA_SEM_FIM: repeated return": [
+  {
+   "code": "RAIA_SEM_FIM",
+   "item_id": "com_pub_e2",
+   "message": "o retorno 'publicado' do fim 'com_pub_e2' repete o de 'com_pub_e1' na raia 'com_pub'; os retornos de uma raia são únicos",
+   "nivel": "erro",
+   "path": "decisoes[98].retorno"
+  },
+  {
+   "code": "RETORNOS_INCOMPATIVEIS",
+   "item_id": "feat_orq_c8",
+   "message": "as saídas de 'feat_orq_c8' não casam com os retornos da raia 'com_pub': sobram ['falha_na_publicacao']",
+   "nivel": "erro",
+   "path": "decisoes[149].proximo"
+  },
+  {
+   "code": "RETORNOS_INCOMPATIVEIS",
+   "item_id": "bug_orq_c4",
+   "message": "as saídas de 'bug_orq_c4' não casam com os retornos da raia 'com_pub': sobram ['falha_na_publicacao']",
+   "nivel": "erro",
+   "path": "decisoes[220].proximo"
+  },
+  {
+   "code": "RETORNOS_INCOMPATIVEIS",
+   "item_id": "sec_orq_c4",
+   "message": "as saídas de 'sec_orq_c4' não casam com os retornos da raia 'com_pub': sobram ['falha_na_publicacao']",
+   "nivel": "erro",
+   "path": "decisoes[407].proximo"
+  },
+  {
+   "code": "RETORNOS_INCOMPATIVEIS",
+   "item_id": "dvt_orq_c5",
+   "message": "as saídas de 'dvt_orq_c5' não casam com os retornos da raia 'com_pub': sobram ['falha_na_publicacao']",
+   "nivel": "erro",
+   "path": "decisoes[456].proximo"
+  }
+ ],
+ "RAIA_SEM_INICIO and ORFA": [
+  {
+   "code": "RAIA_SEM_INICIO",
+   "item_id": "com_set",
+   "message": "a raia 'com_set' não tem nó 'inicio'; o esperado é exatamente 1",
+   "nivel": "erro",
+   "path": "raias[0]"
+  },
+  {
+   "code": "ID_PADRAO",
+   "item_id": "com_set_s0",
+   "message": "o id 'com_set_s0' deve ter a forma 'com_set_t<n>' (tipo 'tarefa', raia 'com_set')",
+   "nivel": "erro",
+   "path": "decisoes[0].id"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_s0",
+   "message": "decisão 'com_set_s0' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[0]"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_t1",
+   "message": "decisão 'com_set_t1' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[1]"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_t2",
+   "message": "decisão 'com_set_t2' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[2]"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_t3",
+   "message": "decisão 'com_set_t3' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[3]"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_g1",
+   "message": "decisão 'com_set_g1' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[4]"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_t4",
+   "message": "decisão 'com_set_t4' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[5]"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_t5",
+   "message": "decisão 'com_set_t5' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[6]"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_g2",
+   "message": "decisão 'com_set_g2' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[7]"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_t6",
+   "message": "decisão 'com_set_t6' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[8]"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_t7",
+   "message": "decisão 'com_set_t7' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[9]"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_g3",
+   "message": "decisão 'com_set_g3' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[10]"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_t8",
+   "message": "decisão 'com_set_t8' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[11]"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_e1",
+   "message": "decisão 'com_set_e1' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[12]"
+  }
+ ],
+ "REF_QUEBRADA in a playbook and a cell": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "feature:req_que_nao_existe",
+   "message": "'feature:req_que_nao_existe' referencia id inexistente 'req_que_nao_existe' (esperado em requisitos)",
+   "nivel": "erro",
+   "path": "celulas[0].requisito"
+  },
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "pb_com_pub_s0",
+   "message": "'pb_com_pub_s0' referencia id inexistente 'tec_que_nao_existe' (esperado em tecnicas)",
+   "nivel": "erro",
+   "path": "playbooks[0].tecnicas[0]"
+  }
+ ],
+ "RETORNOS_INCOMPATIVEIS: missing, extra and repeated": [
+  {
+   "code": "RETORNOS_INCOMPATIVEIS",
+   "item_id": "com_exe_c2",
+   "message": "as saídas de 'com_exe_c2' não casam com os retornos da raia 'com_dea': faltam ['entrega_gerada']; sobram ['zzz_outro']",
+   "nivel": "erro",
+   "path": "decisoes[17].proximo"
+  }
+ ],
+ "TRANSICAO_INVALIDA": [
+  {
+   "code": "TRANSICAO_INVALIDA",
+   "item_id": "com_set_s0",
+   "message": "transição de 'com_set_s0' aponta para id inexistente 'no_inexistente'",
+   "nivel": "erro",
+   "path": "decisoes[0].proximo[0].para"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_t1",
+   "message": "decisão 'com_set_t1' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[1]"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_t2",
+   "message": "decisão 'com_set_t2' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[2]"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_t3",
+   "message": "decisão 'com_set_t3' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[3]"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_g1",
+   "message": "decisão 'com_set_g1' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[4]"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_t4",
+   "message": "decisão 'com_set_t4' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[5]"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_t5",
+   "message": "decisão 'com_set_t5' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[6]"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_g2",
+   "message": "decisão 'com_set_g2' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[7]"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_t6",
+   "message": "decisão 'com_set_t6' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[8]"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_t7",
+   "message": "decisão 'com_set_t7' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[9]"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_g3",
+   "message": "decisão 'com_set_g3' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[10]"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_t8",
+   "message": "decisão 'com_set_t8' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[11]"
+  },
+  {
+   "code": "ORFA",
+   "item_id": "com_set_e1",
+   "message": "decisão 'com_set_e1' não é alcançável a partir do nó 'inicio' da raia 'com_set'",
+   "nivel": "erro",
+   "path": "decisoes[12]"
+  }
+ ]
+}

@@ -1,0 +1,5 @@
+{
+ "status": 1,
+ "stderr": "1 erro(s) e 0 aviso(s) encontrado(s).\n",
+ "stdout": "<ARQUIVO>: REF_QUEBRADA tecnicas[0].fonte_ids[0] id=tec_adrs: 'tec_adrs' referencia id inexistente 'id_inexistente_xyz' (esperado em fontes)\n"
+}

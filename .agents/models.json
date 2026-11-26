@@ -1,0 +1,7 @@
+{
+  "kiro": {
+    "profundo": "claude-opus-5.5",
+    "padrao": "claude-sonnet-5.5",
+    "rapido": "claude-haiku-5.5"
+  }
+}

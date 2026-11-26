@@ -9,12 +9,12 @@ The kit is a static site built from Markdown and YAML content, with shared TypeS
 | `content/pt-BR/` | Source of truth. One file per entity, named by its stable id. |
 | `content/en/` | Locale overlay. Same relative path as the pt-BR file, translatable fields only. |
 | `content/guide/` | Engineering guide source: 15 YAML files copied verbatim from the frozen guide commit. Single source of the methodology (ADR 0001). Typed entities are derived from it at load time. |
-| `content/data/` | Pure data (tool table rows, decision matrix, checklist base), validated 1:1 with the source rows. |
+| `content/data/` | Pure data (tool table rows, checklist base), validated 1:1 with the source rows. |
 | `content/ids.lock.json` | Frozen ids. The validator fails when a locked id disappears. |
 | `lib/` | Shared code: `schema`, `content`, `ids`, `wikilinks`, `terms`, `flow-mermaid`, `guide`. `lib/guide/` loads `content/guide/`, derives the typed guide entities and ports the artifact taxonomy. |
 | `schema/` | JSON Schemas generated from Zod (`schema/json/`), the vendored guide schema and the frozen id seed. |
 | `site/` | Astro project (pages, components, UI strings, public assets). |
-| `tools/` | Scripts run with `tsx`: `validate`, `preview`, `schema`, `site`, plus the `private` runner for migration tools that need the private folder and `guide-oracle`, the temporary Python reference of the guide (removed in stage 2). |
+| `tools/` | Scripts run with `tsx`: `validate`, `preview`, `schema`, `site`, plus `guide` (the guide command: validar, rastrear, decidir) and the `private` runner for migration tools that need the private folder. |
 | `config/` | `public-terms.txt`, the public ruleset of the `terms` check. |
 | `tests/` | Vitest suites. |
 
@@ -22,7 +22,7 @@ The kit is a static site built from Markdown and YAML content, with shared TypeS
 
 - **Astro 7, static output.** Islands (`client:only`, `client:visible`) keep JavaScript off content pages and give Wave B a place for three.js and 3d-force-graph. Pagefind builds an offline search index after `astro build`.
 - **Own Markdown pipeline.** `unified` with `remark-parse`, `remark-gfm` and a wikilink plugin. Astro content collections cannot express the pt-BR source plus overlay merge or build-time resolution against a global id index.
-- **Node and TypeScript only.** (Node 22.23.4 or newer, TypeScript 7.) One toolchain for CI, the schema, the validators and the site. The site build and the tools are Node only. Python 3.12 exists only in `tools/guide-oracle/`, a temporary oracle that runs in CI (job `guide-oracle`) and is removed in stage 2 of the guide migration.
+- **Node and TypeScript only.** (Node 22.23.4 or newer, TypeScript 7.) One toolchain for CI, the schema, the validators and the site. The site build and the tools are Node only. The former Python reference of the guide was removed in stage 2.
 - **Single root package.** One `package.json`, one lockfile, no workspaces. `lib/` is imported through the `@lib/*` path alias.
 - **Backend readiness.** The site reads content through `lib/content` (`ContentRepository`, filesystem today). The build also emits static JSON (`/{locale}/api/index.json`, `graph.json`, `flows/<id>.json`). A later backend can replace those endpoints, and ids stay the keys for progress, accounts and retrieval.
 
@@ -34,10 +34,10 @@ The kit is a static site built from Markdown and YAML content, with shared TypeS
 
 `npm run validate` runs the registered checks in `tools/validate/checks/`: `schema`, `links`, `ids`, `ids-lock`, `duplicates`, `terms`, `licenses`. Checks that need the private folder (`manifest`) register only when `private/validate/checks.ts` exists. A check that has nothing to inspect yet reports `n/a`. `npm run validate -- --self-test` proves each check against planted good and bad content.
 
-The guide has its own validation. The `flows` check merges `content/guide/` with `loadGuideDoc`, validates it against `schema/flows.schema.json` (Ajv 2020) and runs the structural rules of `lib/flows/index.ts` (17 of the 44 rule codes of the reference validator, see `docs/guide-rules-parity.md`). `lib/guide/entities.ts` derives one typed entity per guide item (tipos listed in `docs/content-contract.md`), registered in `lib/schema/` with Zod like every other tipo, and the loader throws on an unresolved reference or an id collision. The `duplicates` check skips derived entities whose labels repeat across demands by design.
+The guide has its own validation. The `flows` check merges `content/guide/` with `loadGuideDoc`, validates it against `schema/flows.schema.json` (Ajv 2020) and runs all 44 rule codes of the guide validator (`lib/guide/validate/`, strict mode with warnings and completeness on, see `docs/guide-rules-parity.md`). `lib/guide/entities.ts` derives one typed entity per guide item (tipos listed in `docs/content-contract.md`), registered in `lib/schema/` with Zod like every other tipo, and the loader throws on an unresolved reference or an id collision. The `duplicates` check skips derived entities whose labels repeat across demands by design.
 
-### Guide oracle
-`tools/guide-oracle/` holds the reference Python implementation (loader, validator with all 44 rules, Mermaid generator, ordering, decisor, HTML preview) and about 560 tests. It is temporary. It proves parity in three ways: `tests/guide/oracle-parity.test.ts` compares the TypeScript document with the Python document, `tests/mermaid-parity` compares all 159 diagrams (default and with subtasks) against goldens generated by the oracle (`python tools/guide-oracle/dump_doc.py content/guide --fixture`), and the CI job `guide-oracle` runs `validar --estrito` plus the whole suite on every pull request. Run it locally with the commands in `tools/guide-oracle/README.md`. Stage 2 ports the missing rules to TypeScript, removes the folder and renames the check.
+### Guide parity
+The guide validator, loader, Mermaid generator, tracing and Decisor were ported from a Python reference (commit `7abed1c` of the guide repository). That reference was removed in stage 2, so the toolchain is Node and TypeScript only. Parity is proven by regression tests against outputs recorded once from it and stored in `tests/guide/expected/` (rules, planted defects, tracing, Decisor, CLI text, loaded document hashes), plus `tests/mermaid-parity`, which compares all 159 diagrams (default and with subtasks) against goldens. The stored files are the source of truth: regenerate one only on purpose, by hand, after reviewing the behavior change. Details in `docs/guide-rules-parity.md`.
 
 ## Site build (FEAT-003)
 - `npm run build` runs `tools/site/build.ts`: `astro build` (both locales into `site/dist`) followed by `pagefind --site site/dist`. `npm run build:pt-BR` and `npm run build:en` build one locale into `site/dist-<locale>` with its own Pagefind index. Env: `SITE_BASE` (path prefix for Pages), `SITE_URL` (canonical origin), `KIT_LOCALES`, `KIT_OUT_DIR`.
@@ -61,3 +61,73 @@ Pagefind indexes the built HTML after `astro build` (`main[data-pagefind-body]`,
 
 ## Preview smoke check
 `npm run smoke` (`tools/preview/smoke.ts`) starts `astro preview` on a free port over `site/dist`, fetches the main page kinds in each built locale (home, tool, category, pattern, algorithm, stack, practical guide with the local Mermaid asset, certification, flow, journeys, search, licenses hub, the MIT note once it exists), checks the en fallback marker, the Pagefind files, the static API and every internal link of the built HTML, and exits non-zero on any failure.
+## C4 diagrams
+Mermaid C4 syntax. Level 1 shows the system in its surroundings, level 2 the containers, level 3 the components of the content and site layers.
+### Level 1: System context
+```mermaid
+C4Context
+  title software-engineer-kit: system context
+  Person(eng, "Software engineer", "Primary persona. Looks up flows, tools and guides.")
+  Person(sec, "QA, PM, Tech Lead, Eng Manager", "Secondary personas. Consult the roles and rituals of a demand.")
+  Person(contrib, "Contributor", "Adds content and translations by Pull Request.")
+  System(kit, "software-engineer-kit", "Static, bilingual, offline site with demand flows, catalog, guides and journeys.")
+  System_Ext(gh, "GitHub", "Repository, Pull Requests, Actions and Pages.")
+  System_Ext(agents, "AI agents (future)", "Consume the static API to run flows and measure kit quality.")
+  Rel(eng, kit, "Navigates and reads")
+  Rel(sec, kit, "Navigates and reads")
+  Rel(contrib, gh, "Opens PRs")
+  Rel(gh, kit, "Builds and publishes")
+  Rel(agents, kit, "Reads api/*.json")
+```
+### Level 2: Containers
+```mermaid
+C4Container
+  title software-engineer-kit: containers
+  Person(contrib, "Contributor")
+  Person(reader, "Reader")
+  System_Boundary(kit, "software-engineer-kit") {
+    Container(content, "Content", "Markdown + YAML", "content/pt-BR, content/en, content/guide, content/data, ids.lock.json")
+    Container(lib, "Shared libraries", "TypeScript", "lib/: schema, content, ids, wikilinks, terms, flow-mermaid, guide")
+    Container(tools, "Tools", "tsx scripts", "tools/: validate, preview, schema, site, guide")
+    Container(site, "Site", "Astro 7, static output", "Pages, islands, Pagefind index, static API")
+  }
+  System_Ext(gh, "GitHub Actions and Pages")
+  Rel(contrib, content, "Edits")
+  Rel(tools, content, "Validates")
+  Rel(tools, lib, "Uses")
+  Rel(site, lib, "Reads content through ContentRepository")
+  Rel(lib, content, "Loads")
+  Rel(gh, tools, "Runs validate and build")
+  Rel(gh, site, "Publishes site/dist")
+  Rel(reader, site, "Browses, offline")
+```
+### Level 3: Components of the content and site layers
+```mermaid
+C4Component
+  title Content pipeline and site rendering
+  Container_Boundary(libc, "lib/") {
+    Component(schema, "schema", "Zod", "Typed entities and JSON Schemas")
+    Component(repo, "content", "ContentRepository", "FsContentRepository merges pt-BR source and en overlay")
+    Component(guide, "guide", "Loader and validator", "44 rule codes, derives typed entities from content/guide")
+    Component(wiki, "wikilinks and ids", "unified plugin", "Resolves links and enforces ids.lock.json")
+    Component(fm, "flow-mermaid", "Generator", "Views visao, raia and completo")
+  }
+  Container_Boundary(sitec, "site/") {
+    Component(index, "SiteIndex", "kit.ts", "Routes, inverse relations, typed edges")
+    Component(render, "Renderers", "render/*.ts", "Front matter to escaped HTML")
+    Component(page, "Catch-all page", "Astro", "[locale]/[...slug].astro")
+    Component(api, "Static API", "JSON", "index, graph, flows/<id>")
+    Component(islands, "Islands", "data-island", "Mermaid today, 3D graph in Wave B")
+    Component(search, "Search", "Pagefind", "Offline index")
+  }
+  Rel(repo, schema, "Validates with")
+  Rel(repo, guide, "Loads guide entities")
+  Rel(repo, wiki, "Resolves links")
+  Rel(index, repo, "Reads")
+  Rel(page, index, "Asks for entity")
+  Rel(page, render, "Renders")
+  Rel(render, fm, "Diagram source")
+  Rel(page, islands, "Mounts")
+  Rel(index, api, "Feeds")
+  Rel(page, search, "Indexed after build")
+```

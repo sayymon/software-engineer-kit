@@ -16,6 +16,6 @@
       "@lib/*": ["./lib/*"]
     }
   },
-  "include": ["lib", "tools", "tests", "config", "private", "vitest.config.ts", "site/src/i18n", "site/src/render"],
+  "include": ["lib", "tools", "tests", "config", "private", "vitest.config.ts", "playwright.config.ts", "site/src/i18n", "site/src/render"],
   "exclude": ["node_modules", "dist", ".astro", ".agents"]
 }

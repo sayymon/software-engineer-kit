@@ -1,4 +1,0 @@
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-pythonpath = ["."]
-markers = ["integration: testes que dependem de infraestrutura externa (ex.: mermaid-cli)"]

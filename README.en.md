@@ -15,6 +15,15 @@ npm run build        # static site in both locales
 npm run smoke        # checks the built site
 ```
 `npm run preview` serves the built site.
+## Guide command
+`npm run guide -- <command>` validates, traces and decides from the guide in `content/guide/`.
+```bash
+npm run guide -- validar                      # errors and warnings (--estrito also fails on warnings)
+npm run guide -- rastrear                     # producers, consumers and gaps of each data item
+npm run guide -- rastrear <id>                # only the requested item
+npm run guide -- decidir --objetivo <id> --notas notas.yaml
+```
+`--yaml` points to another guide, `--json` swaps the text for JSON. Exit codes: 0 success, 1 problems found, 2 input error.
 
 ## Structure
 | Folder | Content |
@@ -43,7 +52,7 @@ Folder-level mapping lives in `REUSE.toml`. New code files carry the `SPDX-Licen
 1. Fork the repository, or create a branch from `main`.
 2. Make the change and run `npm run validate`, `npm test`, `npm run build` and `npm run smoke`.
 3. Open a Pull Request to `main`, with a Conventional Commits title.
-4. The required checks run on their own: `build-test`, `guide-oracle`, `dependency-review`, `npm-audit`, `codeql`, `secret-scan`, `public-terms`, `reuse` and `actionlint`.
+4. The required checks run on their own: `build-test`, `dependency-review`, `npm-audit`, `codeql`, `secret-scan`, `public-terms`, `reuse` and `actionlint`.
 5. The PR needs a review from the code owner (CODEOWNERS: @sayymon). The merge is a squash merge.
 
 `main` does not accept direct pushes. Translations arrive as files under `content/en`, as described in [CONTRIBUTING.md](CONTRIBUTING.md) and `docs/i18n.md`. Code of conduct: [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md). Vulnerabilities: [SECURITY.md](SECURITY.md).

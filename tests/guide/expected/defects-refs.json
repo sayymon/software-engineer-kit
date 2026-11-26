@@ -1,0 +1,335 @@
+{
+ "artefato duplicado": [
+  {
+   "code": "ID_DUPLICADO",
+   "item_id": "alerta_de_falha",
+   "message": "id 'alerta_de_falha' duplicado: já existe em artefatos[0]; artefatos e variáveis dividem o mesmo espaço de ids",
+   "nivel": "erro",
+   "path": "artefatos[201].id"
+  }
+ ],
+ "artefatos.destinatarios": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "comunicado_do_incidente",
+   "message": "'comunicado_do_incidente' referencia id inexistente 'id_inexistente_xyz' (esperado em papeis)",
+   "nivel": "erro",
+   "path": "artefatos[8].destinatarios[3]"
+  }
+ ],
+ "artefatos.variantes.quando.var": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "registro_da_necessidade",
+   "message": "'registro_da_necessidade' referencia id inexistente 'id_inexistente_xyz' (esperado em variaveis)",
+   "nivel": "erro",
+   "path": "artefatos[67].variantes[0].quando.todos[0].var"
+  }
+ ],
+ "decisoes.apoio": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set_g2",
+   "message": "'com_set_g2' referencia id inexistente 'id_inexistente_xyz' (esperado em papeis)",
+   "nivel": "erro",
+   "path": "decisoes[7].apoio[1]"
+  }
+ ],
+ "decisoes.aprova": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set_g3",
+   "message": "'com_set_g3' referencia id inexistente 'id_inexistente_xyz' (esperado em papeis)",
+   "nivel": "erro",
+   "path": "decisoes[10].aprova"
+  }
+ ],
+ "decisoes.entradas": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set_t1",
+   "message": "'com_set_t1' referencia id inexistente 'id_inexistente_xyz' (esperado em artefatos ou variaveis)",
+   "nivel": "erro",
+   "path": "decisoes[1].entradas[2]"
+  }
+ ],
+ "decisoes.papel": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set_g1",
+   "message": "'com_set_g1' referencia id inexistente 'id_inexistente_xyz' (esperado em papeis)",
+   "nivel": "erro",
+   "path": "decisoes[4].papel"
+  }
+ ],
+ "decisoes.saidas": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set_t1",
+   "message": "'com_set_t1' referencia id inexistente 'id_inexistente_xyz' (esperado em artefatos ou variaveis)",
+   "nivel": "erro",
+   "path": "decisoes[1].saidas[6]"
+  }
+ ],
+ "decisoes.tecnicas.tecnica": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_dcs_t3",
+   "message": "'com_dcs_t3' referencia id inexistente 'id_inexistente_xyz' (esperado em tecnicas)",
+   "nivel": "erro",
+   "path": "decisoes[129].tecnicas[0].tecnica"
+  }
+ ],
+ "fonte_ids": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "tec_adrs",
+   "message": "'tec_adrs' referencia id inexistente 'id_inexistente_xyz' (esperado em fontes)",
+   "nivel": "erro",
+   "path": "tecnicas[0].fonte_ids[0]"
+  }
+ ],
+ "fontes.itens": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "fonte_plantada",
+   "message": "'fonte_plantada' referencia id inexistente 'id_inexistente_xyz' (esperado em itens do guia)",
+   "nivel": "erro",
+   "path": "fontes[0].itens[0]"
+  }
+ ],
+ "ligacoes.demanda_destino": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_mon_t2",
+   "message": "'com_mon_t2' referencia id inexistente 'id_inexistente_xyz' (esperado em demandas)",
+   "nivel": "erro",
+   "path": "decisoes[116].ligacoes[0].demanda_destino"
+  }
+ ],
+ "ligacoes.para": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_mon_t2",
+   "message": "'com_mon_t2' referencia id inexistente 'id_inexistente_xyz' (esperado em decisoes)",
+   "nivel": "erro",
+   "path": "decisoes[116].ligacoes[0].para"
+  }
+ ],
+ "papeis duplicado": [
+  {
+   "code": "ID_DUPLICADO",
+   "item_id": "pm",
+   "message": "id de papel 'pm' duplicado",
+   "nivel": "erro",
+   "path": "papeis[16].id"
+  }
+ ],
+ "perguntas duplicada": [
+  {
+   "code": "ID_DUPLICADO",
+   "item_id": "pq_com_pub_s0_1",
+   "message": "id 'pq_com_pub_s0_1' duplicado em perguntas",
+   "nivel": "erro",
+   "path": "perguntas[451].id"
+  }
+ ],
+ "perguntas.depende_de": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "pq_com_pub_s0_1",
+   "message": "'pq_com_pub_s0_1' referencia id inexistente 'id_inexistente_xyz' (esperado em decisoes, subtarefas, tecnicas ou ritos)",
+   "nivel": "erro",
+   "path": "perguntas[0].depende_de[1]"
+  }
+ ],
+ "perguntas.papel": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "pq_com_pub_s0_1",
+   "message": "'pq_com_pub_s0_1' referencia id inexistente 'id_inexistente_xyz' (esperado em papeis)",
+   "nivel": "erro",
+   "path": "perguntas[0].papel"
+  }
+ ],
+ "perguntas.quando.var": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "pq_com_pub_s0_1",
+   "message": "'pq_com_pub_s0_1' referencia id inexistente 'id_inexistente_xyz' (esperado em variaveis)",
+   "nivel": "erro",
+   "path": "perguntas[0].quando.todos[0].var"
+  }
+ ],
+ "playbooks.perguntas_chave": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "pb_com_pub_s0",
+   "message": "'pb_com_pub_s0' referencia id inexistente 'id_inexistente_xyz' (esperado em perguntas)",
+   "nivel": "erro",
+   "path": "playbooks[0].perguntas_chave[1]"
+  }
+ ],
+ "raias.entradas": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set",
+   "message": "'com_set' referencia id inexistente 'id_inexistente_xyz' (esperado em artefatos ou variaveis)",
+   "nivel": "erro",
+   "path": "raias[0].entradas[9]"
+  }
+ ],
+ "ritos duplicado": [
+  {
+   "code": "ID_DUPLICADO",
+   "item_id": "rito_refinamento",
+   "message": "id 'rito_refinamento' duplicado em ritos",
+   "nivel": "erro",
+   "path": "ritos[16].id"
+  }
+ ],
+ "ritos.acontece_em": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "rito_refinamento",
+   "message": "'rito_refinamento' referencia id inexistente 'id_inexistente_xyz' (esperado em decisoes)",
+   "nivel": "erro",
+   "path": "ritos[0].acontece_em[2]"
+  }
+ ],
+ "ritos.aprova": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "rito_refinamento",
+   "message": "'rito_refinamento' referencia id inexistente 'id_inexistente_xyz' (esperado em papeis)",
+   "nivel": "erro",
+   "path": "ritos[0].aprova"
+  }
+ ],
+ "ritos.entradas": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "rito_refinamento",
+   "message": "'rito_refinamento' referencia id inexistente 'id_inexistente_xyz' (esperado em artefatos ou variaveis)",
+   "nivel": "erro",
+   "path": "ritos[0].entradas[3]"
+  }
+ ],
+ "ritos.perguntas": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "rito_refinamento",
+   "message": "'rito_refinamento' referencia id inexistente 'id_inexistente_xyz' (esperado em perguntas)",
+   "nivel": "erro",
+   "path": "ritos[0].perguntas[3]"
+  }
+ ],
+ "ritos.quando.var": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "rito_planning",
+   "message": "'rito_planning' referencia id inexistente 'id_inexistente_xyz' (esperado em variaveis)",
+   "nivel": "erro",
+   "path": "ritos[1].quando.todos[0].var"
+  }
+ ],
+ "ritos.saidas": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "rito_refinamento",
+   "message": "'rito_refinamento' referencia id inexistente 'id_inexistente_xyz' (esperado em artefatos ou variaveis)",
+   "nivel": "erro",
+   "path": "ritos[0].saidas[2]"
+  }
+ ],
+ "ritos.seguinte": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "rito_refinamento",
+   "message": "'rito_refinamento' referencia id inexistente 'id_inexistente_xyz' (esperado em ritos)",
+   "nivel": "erro",
+   "path": "ritos[0].seguinte"
+  }
+ ],
+ "ritos.tecnicas": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "rito_refinamento",
+   "message": "'rito_refinamento' referencia id inexistente 'id_inexistente_xyz' (esperado em tecnicas)",
+   "nivel": "erro",
+   "path": "ritos[0].tecnicas[2]"
+  }
+ ],
+ "subtarefa duplicada": [
+  {
+   "code": "ID_DUPLICADO",
+   "item_id": "com_set_t1_st1",
+   "message": "id de subtarefa 'com_set_t1_st1' duplicado: já existe em decisoes[1].subtarefas[0]; os ids de subtarefas e de nós são globalmente únicos",
+   "nivel": "erro",
+   "path": "decisoes[1].subtarefas[6].id"
+  }
+ ],
+ "subtarefas.entradas": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set_t1_st6",
+   "message": "'com_set_t1_st6' referencia id inexistente 'id_inexistente_xyz' (esperado em artefatos ou variaveis)",
+   "nivel": "erro",
+   "path": "decisoes[1].subtarefas[5].entradas[1]"
+  }
+ ],
+ "subtarefas.informado": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set_t1_st1",
+   "message": "'com_set_t1_st1' referencia id inexistente 'id_inexistente_xyz' (esperado em papeis)",
+   "nivel": "erro",
+   "path": "decisoes[1].subtarefas[0].informado[0]"
+  }
+ ],
+ "subtarefas.papel": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set_t1_st1",
+   "message": "'com_set_t1_st1' referencia id inexistente 'id_inexistente_xyz' (esperado em papeis)",
+   "nivel": "erro",
+   "path": "decisoes[1].subtarefas[0].papel"
+  }
+ ],
+ "subtarefas.quando.var": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set_t1_st4",
+   "message": "'com_set_t1_st4' referencia id inexistente 'id_inexistente_xyz' (esperado em variaveis)",
+   "nivel": "erro",
+   "path": "decisoes[1].subtarefas[3].quando.todos[0].var"
+  }
+ ],
+ "subtarefas.saidas": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set_t1_st1",
+   "message": "'com_set_t1_st1' referencia id inexistente 'id_inexistente_xyz' (esperado em artefatos ou variaveis)",
+   "nivel": "erro",
+   "path": "decisoes[1].subtarefas[0].saidas[2]"
+  }
+ ],
+ "subtarefas.tecnicas.tecnica": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_set_t1_st1",
+   "message": "'com_set_t1_st1' referencia id inexistente 'id_inexistente_xyz' (esperado em tecnicas)",
+   "nivel": "erro",
+   "path": "decisoes[1].subtarefas[0].tecnicas[0].tecnica"
+  }
+ ],
+ "tecnicas.quando.var": [
+  {
+   "code": "REF_QUEBRADA",
+   "item_id": "com_dcs_t3",
+   "message": "'com_dcs_t3' referencia id inexistente 'id_inexistente_xyz' (esperado em variaveis)",
+   "nivel": "erro",
+   "path": "decisoes[129].tecnicas[0].quando.todos[0].var"
+  }
+ ]
+}

@@ -1,0 +1,54 @@
+{
+ "COR_DUPLICADA com raia de biblioteca chamada": [
+  {
+   "code": "COR_DUPLICADA",
+   "item_id": "feat_orq",
+   "message": "a raia 'feat_orq' repete a cor #607D8B da raia 'com_set' na demanda 'feature'",
+   "nivel": "erro",
+   "path": "raias[19].cor"
+  }
+ ],
+ "COR_DUPLICADA na mesma demanda (sem diferenciar caixa)": [
+  {
+   "code": "COR_DUPLICADA",
+   "item_id": "feat_ent",
+   "message": "a raia 'feat_ent' repete a cor #607D8B da raia 'feat_orq' na demanda 'feature'",
+   "nivel": "erro",
+   "path": "raias[20].cor"
+  }
+ ],
+ "DEMANDA_INCONSISTENTE": [
+  {
+   "code": "DEMANDA_INCONSISTENTE",
+   "item_id": "com_set_s0",
+   "message": "'com_set_s0' declara a demanda 'feature', mas a raia 'com_set' pertence à demanda 'comum'",
+   "nivel": "erro",
+   "path": "decisoes[0].demanda"
+  }
+ ],
+ "LIGACAO_INCONSISTENTE alvo em outra demanda": [
+  {
+   "code": "LIGACAO_INCONSISTENTE",
+   "item_id": "com_mon_t2",
+   "message": "ligação de 'com_mon_t2': 'com_set_s0' pertence à demanda 'comum', não a 'incidente'",
+   "nivel": "erro",
+   "path": "decisoes[116].ligacoes[0].para"
+  }
+ ],
+ "LIGACAO_INCONSISTENTE para a própria demanda": [
+  {
+   "code": "LIGACAO_INCONSISTENTE",
+   "item_id": "com_mon_t2",
+   "message": "ligação de 'com_mon_t2' aponta para a própria demanda 'comum'; use `proximo` para o fluxo interno",
+   "nivel": "erro",
+   "path": "decisoes[116].ligacoes[0].demanda_destino"
+  },
+  {
+   "code": "LIGACAO_INCONSISTENTE",
+   "item_id": "com_mon_t2",
+   "message": "ligação de 'com_mon_t2': 'inc_orq_s0' pertence à demanda 'incidente', não a 'comum'",
+   "nivel": "erro",
+   "path": "decisoes[116].ligacoes[0].para"
+  }
+ ]
+}

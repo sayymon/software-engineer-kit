@@ -1,0 +1,72 @@
+{
+ "COMUNICACAO_SEM_DESTINATARIO (acao/comunicacao)": [
+  {
+   "code": "COMUNICACAO_SEM_DESTINATARIO",
+   "item_id": "comunicado_do_incidente",
+   "message": "a comunicação 'comunicado_do_incidente' não declara `destinatarios` (papéis que a recebem)",
+   "nivel": "aviso",
+   "path": "artefatos[8]"
+  }
+ ],
+ "COMUNICACAO_SEM_DESTINATARIO (destinatarios vazio)": [
+  {
+   "code": "COMUNICACAO_SEM_DESTINATARIO",
+   "item_id": "comunicado_do_incidente",
+   "message": "a comunicação 'comunicado_do_incidente' não declara `destinatarios` (papéis que a recebem)",
+   "nivel": "aviso",
+   "path": "artefatos[8]"
+  }
+ ],
+ "COMUNICACAO_SEM_DESTINATARIO + TIPO_LEGADO (tipo comunicacao)": [
+  {
+   "code": "COMUNICACAO_SEM_DESTINATARIO",
+   "item_id": "raio_de_impacto",
+   "message": "a comunicação 'raio_de_impacto' não declara `destinatarios` (papéis que a recebem)",
+   "nivel": "aviso",
+   "path": "artefatos[2]"
+  },
+  {
+   "code": "TIPO_LEGADO",
+   "item_id": "raio_de_impacto",
+   "message": "'raio_de_impacto' usa o tipo legado 'comunicacao'; use a taxonomia nova (card, comunicação e configuração são subtipos de ação; dado é documento)",
+   "nivel": "aviso",
+   "path": "artefatos[2].tipo"
+  }
+ ],
+ "SUBTIPO_AUSENTE": [
+  {
+   "code": "SUBTIPO_AUSENTE",
+   "item_id": "raio_de_impacto",
+   "message": "'raio_de_impacto' é do tipo 'documento' e não declara `subtipo` (especificacao, plano, analise, relatorio, checklist, registro, guia)",
+   "nivel": "aviso",
+   "path": "artefatos[2]"
+  }
+ ],
+ "SUBTIPO_INVALIDO (subtipo fora da lista)": [
+  {
+   "code": "SUBTIPO_INVALIDO",
+   "item_id": "raio_de_impacto",
+   "message": "o subtipo 'inexistente' de 'raio_de_impacto' não existe no tipo 'documento' (especificacao, plano, analise, relatorio, checklist, registro, guia)",
+   "nivel": "aviso",
+   "path": "artefatos[2].subtipo"
+  }
+ ],
+ "SUBTIPO_INVALIDO (tipo sem subtipos)": [
+  {
+   "code": "SUBTIPO_INVALIDO",
+   "item_id": "pull_request_da_feature",
+   "message": "o tipo 'pull_request' de 'pull_request_da_feature' não tem subtipos",
+   "nivel": "aviso",
+   "path": "artefatos[90].subtipo"
+  }
+ ],
+ "TIPO_LEGADO (dado)": [
+  {
+   "code": "TIPO_LEGADO",
+   "item_id": "raio_de_impacto",
+   "message": "'raio_de_impacto' usa o tipo legado 'dado'; use a taxonomia nova (card, comunicação e configuração são subtipos de ação; dado é documento)",
+   "nivel": "aviso",
+   "path": "artefatos[2].tipo"
+  }
+ ]
+}

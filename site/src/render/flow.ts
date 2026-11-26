@@ -1,35 +1,37 @@
 // SPDX-License-Identifier: MIT
-// Demand flow pages: raias with responsabilidade, Mermaid views, playbooks and the build, buy or subscribe matrix.
+// Demand flow pages: raias with responsabilidade, Mermaid views, playbooks and the build, buy or subscribe table read from the guide.
 import type { Page } from '@lib/content/site';
 import { gerarDiagrama } from '@lib/flow-mermaid';
+import { configDoGuia } from '@lib/decisor';
 import { type Ctx, diagram, esc, inline, label, section, table, dl, val } from './util';
 
 type Item = Record<string, any>;
 
-export type Matriz = {
-  opcoes: Record<string, string>;
-  criterios: string[];
-  escala: { min: number; max: number };
-  leitura_da_nota?: string;
-  ordem_desempate: string[];
-  pesos: Record<string, Record<string, number>>;
-};
-
 const pretty = (id: string) => id.replace(/_/g, ' ');
+const BUDGET_GATE = 'com_dcs_g1';
 
+/** Weights table of the guide Decisor, plus the budget gate and the financial context. Reads only the loaded guide. */
 export function matrizTable(ctx: Ctx): string {
-  const m = ctx.data<Matriz>('matriz.json');
-  const options = Object.entries(m.opcoes).map(([k, v]) => `<li><strong>${esc(k)}</strong>: ${esc(v)}</li>`).join('');
+  const doc = ctx.doc();
+  const m = configDoGuia(doc);
+  const gate = (Array.isArray(doc.decisoes) ? (doc.decisoes as Item[]) : []).find((n) => n.id === BUDGET_GATE);
+  const playbook = gate && (Array.isArray(doc.playbooks) ? (doc.playbooks as Item[]) : []).find((p) => p.id === gate.playbook);
   const rows = Object.entries(m.pesos).map(([objetivo, pesos]) => [
     esc(pretty(objetivo)),
     ...m.criterios.map((c) => esc(String(pesos[c]))),
   ]);
+  const gateHtml = gate
+    ? `<h3>${esc(ctx.t('s.matrix.gate'))}</h3><p>${esc(gate.rotulo)}</p>` +
+      (playbook?.resumo ? `<p class="muted">${esc(playbook.resumo)}</p>` : '') +
+      `<p class="muted">${esc(ctx.t('s.matrix.gate.hint'))}</p>`
+    : '';
   return (
     `<p class="muted">${esc(ctx.t('s.matrix.hint', { min: m.escala.min, max: m.escala.max }))}</p>` +
-    `<ul class="links">${options}</ul>` +
+    `<ul class="links">${m.opcoes.map((o) => `<li><strong>${esc(o)}</strong></li>`).join('')}</ul>` +
     table([ctx.t('col.goal'), ...m.criterios.map(pretty)], rows, 'matrix') +
-    (m.leitura_da_nota ? `<p class="muted">${esc(m.leitura_da_nota)}</p>` : '') +
-    `<p class="muted">${esc(ctx.t('s.matrix.tiebreak'))}: ${esc(m.ordem_desempate.join(' > '))}</p>`
+    `<p class="muted">${esc(ctx.t('s.matrix.tiebreak'))}: ${esc(m.ordem_desempate.join(' > '))}</p>` +
+    gateHtml +
+    `<h3>${esc(ctx.t('s.matrix.finance'))}</h3><p class="muted">${esc(ctx.t('s.matrix.finance.hint'))}</p>`
   );
 }
 

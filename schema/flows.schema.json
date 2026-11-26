@@ -472,7 +472,7 @@
         },
         "subtipo": {
           "type": "string",
-          "description": "Subtipo da categoria, numa lista fechada por tipo (guia_decisao.taxonomia.SUBTIPOS). Documentos antigos podem trazer texto livre; a checagem de completude avisa."
+          "description": "Subtipo da categoria, numa lista fechada por tipo (SUBTIPOS em lib/guide/taxonomia.ts). Documentos antigos podem trazer texto livre; a checagem de completude avisa."
         },
         "variantes": {
           "type": "array",

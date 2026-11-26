@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { checkDoc, validateAgainstSchema, type Doc } from '../../lib/flows';
 import { guideDir, loadGuideDoc } from '../../lib/guide';
+import { guideProblems } from '../../tools/validate/checks/flows';
 const root = new URL('../../', import.meta.url).pathname;
 const schema = JSON.parse(readFileSync(`${root}schema/flows.schema.json`, 'utf8')) as object;
 const doc = () => structuredClone(loadGuideDoc(guideDir(`${root}content`))) as Doc;
@@ -59,5 +60,17 @@ describe('guide flows', () => {
     d.tecnicas[0].chave_inventada = 1;
     d.requisitos[0].nome = 7;
     expect(validateAgainstSchema(d, schema).length).toBeGreaterThan(0);
+  });
+});
+describe('flows check is strict', () => {
+  it('the real guide has no problems, warnings included', () => {
+    expect(guideProblems(doc(), schema)).toEqual([]);
+  });
+  it('a warning in the guide makes the check problems non-empty', () => {
+    const d = doc();
+    const i = d.decisoes.findIndex((n: Doc) => n.tipo === 'tarefa');
+    d.decisoes[i].estado = { ...d.decisoes[i].estado, var_fantasma: 'x' };
+    expect(checkDoc(d)).toEqual([]); // no error-level rule fires
+    expect(guideProblems(d, schema).join('\n')).toContain('VAR_NAO_DECLARADA (aviso)');
   });
 });
