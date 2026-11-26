@@ -17,7 +17,8 @@ async function abrir(page: Page, caminho = '/pt-BR/ecossistema/') {
 test('abre, mostra a contagem e a legenda', async ({ page }) => {
   const erros = await abrir(page);
   await expect(page.locator('#eco-count')).toContainText(/\d+ de \d+ nós/);
-  await expect(page.locator('#eco-legend-list button')).toHaveCount(5);
+  await expect(page.locator('#eco-legend-list button[data-grupo]')).toHaveCount(5);
+  for (const t of ['ferramenta', 'empresa', 'caso-de-uso', 'categoria', 'modelo']) await expect(page.locator(`#eco-legend-list button[data-tipo="${t}"] svg`)).toHaveCount(1);
   expect(erros).toEqual([]);
 });
 
@@ -71,12 +72,15 @@ test('id inexistente abre a visão completa e avisa', async ({ page }) => {
   await expect(page.locator('#eco-panel')).toBeHidden();
 });
 
-test('filtro por grupo reduz os nós visíveis e Limpar restaura', async ({ page }) => {
+test('filtro por tipo isola empresas e entra no hash', async ({ page }) => {
   await abrir(page);
   const total = await page.locator('#eco-count').textContent();
-  await page.locator('#eco-legend-list button[data-grupo="aprendizado"]').click();
+  await page.locator('#eco-legend-list button[data-tipo="empresa"]').click();
   await expect(page.locator('#eco-count')).not.toHaveText(total ?? '');
-  expect(await page.evaluate(() => location.hash)).toContain('grupo=aprendizado');
+  await expect(page.locator('#eco-count')).toContainText(/^301 de /);
+  expect(await page.evaluate(() => location.hash)).toContain('tipo=empresa');
+  await page.locator('#eco-legend-list button[data-tipo="empresa"]').click();
+  await expect(page.locator('#eco-count')).toHaveText(total ?? '');
 });
 
 test('sem WebGL a página oferece o catálogo em lista', async ({ page }) => {

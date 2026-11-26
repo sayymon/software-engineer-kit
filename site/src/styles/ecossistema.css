@@ -127,3 +127,14 @@ main.immersive { max-width: none; padding: 0; display: flex; flex-direction: col
   .eco-lede, .eco-hint { display: none; }
   .eco[data-foco] .eco-toolbar { display: none; }
 }
+
+/* Legend with tipos */
+.eco-legend { top: auto; max-height: calc(100% - 18rem); overflow-y: auto; overscroll-behavior: contain; width: min(18.5rem, calc(100% - 1.5rem)); }
+.eco-legend-group { margin: 0 0 0.25rem; }
+.eco-legend-group > summary { list-style: none; cursor: pointer; }
+.eco-legend-group > summary::-webkit-details-marker { display: none; }
+.eco-legend-head { font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; font-size: 0.72rem; }
+.eco-legend-group ul { margin: 0 0 0.3rem 0.4rem; padding-left: 0.4rem; border-left: 1px solid var(--eco-line); }
+.eco-legend-item .eco-icon { flex: none; filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.15)); }
+.eco-chip .eco-icon, .eco-kind .eco-icon { flex: none; vertical-align: -0.2em; }
+.eco-kind { display: flex; align-items: center; gap: 0.4rem; }

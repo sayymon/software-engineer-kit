@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
 // Orchestrates the Ecossistema page: data, filters, focus, side panel, legend and URL state.
 // The renderer is loaded last, by dynamic import, so the page shell stays small.
-import { GRUPOS, COR_DO_GRUPO, type Camada } from '@lib/ecossistema/camadas';
+import { GRUPOS, COR_DO_GRUPO, corDe, formaDe, grupoDe, type Camada } from '@lib/ecossistema/camadas';
+import { icone } from './icones';
 import { ESTADO_PADRAO, ler, serializar, type EstadoEcossistema } from '@lib/ecossistema/estado';
 import type { Fato } from '@lib/ecossistema/fatos';
 import { contarFaceta, filtrarNos, normalizar, type CriterioFiltro } from '@lib/ecossistema/filtro';
@@ -153,11 +154,8 @@ async function iniciar(host: HTMLElement): Promise<void> {
     b.type = 'button';
     b.className = 'eco-chip';
     b.dataset.idx = String(i);
-    const bolha = document.createElement('span');
-    bolha.className = 'eco-dot';
-    bolha.style.background = COR_DO_GRUPO[GRUPOS[modelo.grupoDoNo[i]]];
-    bolha.setAttribute('aria-hidden', 'true');
-    b.append(bolha, document.createTextNode(rotulo ?? modelo.nomes[i]));
+    const t = modelo.tipos[modelo.tipoDoNo[i]];
+    b.append(icone(formaDe(t), corDe(t), 14), document.createTextNode(rotulo ?? modelo.nomes[i]));
     b.onclick = () => irPara(i);
     return b;
   }
@@ -166,14 +164,14 @@ async function iniciar(host: HTMLElement): Promise<void> {
     const tipo = modelo.tipos[modelo.tipoDoNo[i]];
     const grupo = GRUPOS[modelo.grupoDoNo[i]];
     painel.hidden = false;
-    painel.style.setProperty('--eco-accent', COR_DO_GRUPO[grupo]);
+    painel.style.setProperty('--eco-accent', corDe(tipo));
     corpo.replaceChildren();
     const h = document.createElement('h2');
     h.textContent = modelo.nomes[i];
     h.id = 'eco-panel-title';
     const selo = document.createElement('p');
     selo.className = 'eco-kind';
-    selo.textContent = `${tipoRotulo(tipo)} · ${tr(`eco.group.${grupo}`)}`;
+    selo.append(icone(formaDe(tipo), corDe(tipo), 16), document.createTextNode(` ${tipoRotulo(tipo)} · ${tr(`eco.group.${grupo}`)}`));
     const desc = document.createElement('p');
     desc.className = 'eco-desc';
     desc.textContent = '…';
@@ -365,46 +363,75 @@ async function iniciar(host: HTMLElement): Promise<void> {
     return bloco;
   }
 
-  // ---- legend ----
+  // ---- legend: groups with their tipos, each with its own icon, color, count and filter ----
   const legenda = $('eco-legend-list');
+  const alternar = (faceta: 'grupo' | 'tipo', valor: string) => {
+    const atual = new Set(estado.facetas[faceta] ?? []);
+    if (atual.has(valor)) atual.delete(valor);
+    else atual.add(valor);
+    const facetas = { ...estado.facetas, [faceta]: atual } as Record<string, ReadonlySet<string>>;
+    if (!atual.size) delete facetas[faceta];
+    estado = { ...estado, facetas };
+    aplicarFiltros();
+    gravarHash('replace');
+  };
   function montarLegenda(): void {
     legenda.replaceChildren();
-    GRUPOS.forEach((g, k) => {
-      if (g === 'hubs') return;
-      const li = document.createElement('li');
-      const b = document.createElement('button');
-      b.type = 'button';
-      b.dataset.grupo = g;
-      b.className = 'eco-legend-item';
-      b.setAttribute('aria-pressed', String(estado.facetas.grupo?.has(g) ?? false));
-      const forma = document.createElement('span');
-      forma.className = `eco-shape eco-shape-${g}`;
-      forma.style.background = COR_DO_GRUPO[g];
-      forma.setAttribute('aria-hidden', 'true');
+    const presentes = [...new Set(modelo.tipos)];
+    for (const g of GRUPOS) {
+      if (g === 'hubs') continue;
+      const tipos = presentes.filter((t) => grupoDe(t) === g).sort((a, b) => tipoRotulo(a).localeCompare(tipoRotulo(b), locale));
+      if (!tipos.length) continue;
+      const det = document.createElement('details');
+      det.className = 'eco-legend-group';
+      det.open = g === 'catalogo';
+      const sum = document.createElement('summary');
+      const cabeca = document.createElement('button');
+      cabeca.type = 'button';
+      cabeca.className = 'eco-legend-item eco-legend-head';
+      cabeca.dataset.grupo = g;
+      cabeca.setAttribute('aria-pressed', 'false');
       const nome = document.createElement('span');
       nome.textContent = tr(`eco.group.${g}`);
+      nome.style.color = COR_DO_GRUPO[g];
       const cont = document.createElement('span');
       cont.className = 'eco-legend-count';
       cont.dataset.cont = g;
-      b.append(forma, nome, cont);
-      b.onclick = () => {
-        const atual = new Set(estado.facetas.grupo ?? []);
-        if (atual.has(g)) atual.delete(g);
-        else atual.add(g);
-        estado = { ...estado, facetas: { ...estado.facetas, grupo: atual } };
-        if (!atual.size) delete (estado.facetas as Record<string, unknown>).grupo;
-        aplicarFiltros();
-        gravarHash('replace');
+      cabeca.append(nome, cont);
+      cabeca.onclick = (e) => {
+        e.preventDefault();
+        alternar('grupo', g);
       };
-      li.append(b);
-      legenda.append(li);
-      void k;
-    });
+      sum.append(cabeca);
+      const ul = document.createElement('ul');
+      for (const t of tipos) {
+        const li = document.createElement('li');
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'eco-legend-item';
+        b.dataset.tipo = t;
+        b.setAttribute('aria-pressed', 'false');
+        const n = document.createElement('span');
+        n.textContent = tipoRotulo(t);
+        const c = document.createElement('span');
+        c.className = 'eco-legend-count';
+        c.dataset.contTipo = t;
+        b.append(icone(formaDe(t), corDe(t), 16), n, c);
+        b.onclick = () => alternar('tipo', t);
+        li.append(b);
+        ul.append(li);
+      }
+      det.append(sum, ul);
+      legenda.append(det);
+    }
   }
   function atualizarLegenda(): void {
-    const contagem = contarFaceta(modelo.filtro, criterio(), 'grupo');
-    for (const el of legenda.querySelectorAll<HTMLElement>('[data-cont]')) el.textContent = String(contagem.get(el.dataset.cont ?? '') ?? 0);
+    const porGrupo = contarFaceta(modelo.filtro, criterio(), 'grupo');
+    const porTipo = contarFaceta(modelo.filtro, criterio(), 'tipo');
+    for (const el of legenda.querySelectorAll<HTMLElement>('[data-cont]')) el.textContent = String(porGrupo.get(el.dataset.cont ?? '') ?? 0);
+    for (const el of legenda.querySelectorAll<HTMLElement>('[data-cont-tipo]')) el.textContent = String(porTipo.get(el.dataset.contTipo ?? '') ?? 0);
     for (const b of legenda.querySelectorAll<HTMLButtonElement>('[data-grupo]')) b.setAttribute('aria-pressed', String(estado.facetas.grupo?.has(b.dataset.grupo ?? '') ?? false));
+    for (const b of legenda.querySelectorAll<HTMLButtonElement>('[data-tipo]')) b.setAttribute('aria-pressed', String(estado.facetas.tipo?.has(b.dataset.tipo ?? '') ?? false));
   }
 
   // ---- toolbar ----

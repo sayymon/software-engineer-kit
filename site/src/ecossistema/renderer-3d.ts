@@ -4,14 +4,14 @@
 import ForceGraph3D, { type ForceGraph3DInstance } from '3d-force-graph';
 import * as THREE from 'three';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
-import { COR_DO_GRUPO, GRUPOS, FORMA_DO_GRUPO } from '@lib/ecossistema/camadas';
+import { COR_DO_GRUPO, GRUPOS, corDe, formaDe, type Forma } from '@lib/ecossistema/camadas';
 import type { Modelo } from './dados';
 import type { CameraSalva, EcossistemaRenderer, FocoVisual } from './renderer';
 
 const FUNDO = 0x04050b;
 const reduzMovimento = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-function geometriaDaForma(forma: (typeof FORMA_DO_GRUPO)[keyof typeof FORMA_DO_GRUPO]): THREE.BufferGeometry {
+function geometriaDaForma(forma: Forma): THREE.BufferGeometry {
   switch (forma) {
     case 'esfera':
       return new THREE.SphereGeometry(1, 14, 10);
@@ -25,6 +25,14 @@ function geometriaDaForma(forma: (typeof FORMA_DO_GRUPO)[keyof typeof FORMA_DO_G
       return new THREE.TetrahedronGeometry(1.4);
     case 'anel':
       return new THREE.TorusGeometry(1.2, 0.35, 8, 16);
+    case 'dodecaedro':
+      return new THREE.DodecahedronGeometry(1.2);
+    case 'icosaedro':
+      return new THREE.IcosahedronGeometry(1.25, 0);
+    case 'cilindro':
+      return new THREE.CylinderGeometry(0.9, 0.9, 1.9, 14);
+    case 'prisma':
+      return new THREE.CylinderGeometry(1.1, 1.1, 1.5, 3);
   }
 }
 
@@ -121,18 +129,28 @@ export class Renderer3D implements EcossistemaRenderer {
       this.atual[i * 3 + 1] = this.alvo[i * 3 + 1] = modelo.y[i];
       this.atual[i * 3 + 2] = this.alvo[i * 3 + 2] = modelo.z[i];
     }
-    this.cores = GRUPOS.map((g) => new THREE.Color(COR_DO_GRUPO[g]));
-    const geoms = GRUPOS.map((g) => geometriaDaForma(FORMA_DO_GRUPO[g]));
-    this.geometrias.push(...geoms);
-    const normais = GRUPOS.map((g, k) => new THREE.MeshBasicMaterial({ color: this.cores[k].clone().multiplyScalar(0.95) }));
-    const apagados = GRUPOS.map((g, k) => new THREE.MeshBasicMaterial({ color: this.cores[k], transparent: true, opacity: 0.05, depthWrite: false }));
+    // One color and one shape per tipo; geometries are shared by shape, materials by tipo.
+    this.cores = modelo.tipos.map((t) => new THREE.Color(corDe(t)));
+    const porForma = new Map<Forma, THREE.BufferGeometry>();
+    const geoms = modelo.tipos.map((t) => {
+      const forma = formaDe(t);
+      let g = porForma.get(forma);
+      if (!g) {
+        g = geometriaDaForma(forma);
+        porForma.set(forma, g);
+        this.geometrias.push(g);
+      }
+      return g;
+    });
+    const normais = modelo.tipos.map((_t, k) => new THREE.MeshBasicMaterial({ color: this.cores[k].clone().multiplyScalar(0.95) }));
+    const apagados = modelo.tipos.map((_t, k) => new THREE.MeshBasicMaterial({ color: this.cores[k], transparent: true, opacity: 0.05, depthWrite: false }));
     this.materiais.push(...normais, ...apagados);
     this.normais = normais;
     this.apagados = apagados;
     this.escalaBase = new Float32Array(n);
     const nos = new Array<{ id: number; x: number; y: number; z: number; fx: number; fy: number; fz: number }>(n);
     for (let i = 0; i < n; i++) {
-      const m = new THREE.Mesh(geoms[modelo.grupoDoNo[i]], normais[modelo.grupoDoNo[i]]);
+      const m = new THREE.Mesh(geoms[modelo.tipoDoNo[i]], normais[modelo.tipoDoNo[i]]);
       const r = 2 + 1.05 * Math.log2(1 + modelo.grau[i]);
       this.escalaBase[i] = r;
       m.scale.setScalar(r);
@@ -266,8 +284,8 @@ export class Renderer3D implements EcossistemaRenderer {
         if (!tocaFoco && !entreViz && !(this.vizinhosFoco.has(a) || this.vizinhosFoco.has(b))) f = 0.008;
       }
       pos.push(this.atual[a * 3], this.atual[a * 3 + 1], this.atual[a * 3 + 2], this.atual[b * 3], this.atual[b * 3 + 1], this.atual[b * 3 + 2]);
-      const ca = a0[this.modelo.grupoDoNo[a]];
-      const cb = a0[this.modelo.grupoDoNo[b]];
+      const ca = a0[this.modelo.tipoDoNo[a]];
+      const cb = a0[this.modelo.tipoDoNo[b]];
       cor.push(ca.r * f, ca.g * f, ca.b * f, cb.r * f, cb.g * f, cb.b * f);
     }
     const g = this.linhas.geometry;
@@ -302,7 +320,7 @@ export class Renderer3D implements EcossistemaRenderer {
       }
     }
     for (let i = 0; i < n; i++) {
-      const g = this.modelo.grupoDoNo[i];
+      const g = this.modelo.tipoDoNo[i];
       const m = this.malhas[i];
       const ativo = !foco || i === foco.no || this.vizinhosFoco.has(i);
       m.material = ativo ? this.normais[g] : this.apagados[g];
@@ -315,8 +333,7 @@ export class Renderer3D implements EcossistemaRenderer {
       this.mover.clear();
     }
     if (foco) {
-      const g = this.modelo.grupoDoNo[foco.no];
-      (this.brilho.material as THREE.SpriteMaterial).color.set(COR_DO_GRUPO[GRUPOS[g]]);
+      (this.brilho.material as THREE.SpriteMaterial).color.copy(this.cores[this.modelo.tipoDoNo[foco.no]]);
       (this.brilho.material as THREE.SpriteMaterial).opacity = 0.55;
       this.brilho.scale.setScalar(this.escalaBase[foco.no] * 9);
       this.brilho.position.set(this.alvo[foco.no * 3], this.alvo[foco.no * 3 + 1], this.alvo[foco.no * 3 + 2]);
@@ -329,7 +346,7 @@ export class Renderer3D implements EcossistemaRenderer {
   }
 
   private adicionarRotulo(i: number): void {
-    const cor = COR_DO_GRUPO[GRUPOS[this.modelo.grupoDoNo[i]]];
+    const cor = corDe(this.modelo.tipos[this.modelo.tipoDoNo[i]]);
     const { tex, razao } = texturaDeRotulo(this.modelo.nomes[i], cor);
     this.texturas.push(tex);
     const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false, depthTest: false, fog: false });
