@@ -13,6 +13,12 @@ Checklist para acompanhar o que a fase 0 muda e pode afetar o Ecossistema 3D. Ú
 | `docs`: `comum.yaml` linha 2007 (papéis) | Não | Atualizar a referência em `docs/prd.md` para `content/guide/catalogos/papeis.yaml` |
 | Specs `experiencia-fluxos-catalogo` (`tasks.md` e `tasks.meta.json`) | Sim: define o Catálogo e o módulo de facetas | Quando o módulo de facetas existir, `lib/ecossistema/filtro.ts` passa a usá-lo, e a página vira modo do Catálogo |
 
+## Segunda checagem (HEAD da fase 0: `b51d2e1`, com trabalho novo não commitado)
+
+- O commit `b51d2e1` já segmenta `comum.yaml` em `catalogos/`. Ainda há mudanças soltas em `lib/schema/guide.ts`, `schema/flows.schema.json`, `schema/json/{decisao,no,...}.json`, `content/guide/demandas/feature.yaml`, `content/guide/catalogos/ferramentas.yaml` e `content/ids.lock.json`. Isso indica os campos novos de ligação tarefa e ferramenta (`categorias_ferramenta`, `guias_praticos`) da spec de fluxos.
+- Efeito no 3D: `relationTargets` varre todos os campos, então os novos campos viram arestas sozinhos. Se `categoria-ferramenta` ganhar entidades, o tipo já está em `camadas.ts` (camada `nucleo`, grupo catálogo). Conferir o tamanho do payload (limite de 200 kB gzip) e rodar os testes do 3D.
+- Conflito provável: `ids.lock.json` e `tasks.md` da spec de fluxos. Resolver a favor da fase 0 e rodar `npm run validate`.
+
 ## Como checar
 
 ```bash
