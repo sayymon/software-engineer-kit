@@ -1,0 +1,154 @@
+papeis:
+  - id: pm
+    nome: PM
+    descricao: 'Product Manager. Responde pelo porquê da demanda: qual problema resolve, para quem, como medir o sucesso e o que entra primeiro. Facilita os ritos de produto do time.'
+    responsabilidades:
+    - Definir o problema, o público e as métricas de sucesso
+    - Priorizar e negociar escopo e prazo com os interessados
+    - Facilitar o refinement, a planning e a review
+    - Decidir se um relato é defeito, comportamento esperado ou pedido de feature
+    - Comunicar mudanças, incidentes e resultados a stakeholders e suporte
+    atuacao_de_agente: execucao
+    status: rascunho
+  - id: stakeholder
+    nome: Stakeholder
+    descricao: 'Pessoa ou área fora do time que executa e que pede, aprova ou é afetada pela demanda: liderança, área de negócio ou cliente interno.'
+    responsabilidades:
+    - Trazer a necessidade e o resultado esperado
+    - Aprovar decisões de escopo, prazo e risco
+    - Receber os comunicados de lançamento e de incidente
+    atuacao_de_agente: nao
+    status: rascunho
+  - id: tech_lead
+    nome: Tech Lead
+    descricao: 'Líder técnico do time. Responde pelo como: decompõe e ordena o trabalho, decide quem faz o quê, garante a qualidade técnica e cuida da documentação técnica.'
+    responsabilidades:
+    - Decompor, ordenar e alocar tarefas entre pessoas e agentes
+    - Conduzir o review e a integração das entregas
+    - Facilitar a daily e as iterações do time
+    - Garantir a documentação técnica, as notas de versão e os guias de uso
+    - Decidir hotfix, prontidão (Definition of Ready) e escalada técnica
+    - Conduzir a análise de escape e o post-mortem
+    atuacao_de_agente: execucao
+    status: rascunho
+  - id: arquiteto
+    nome: Arquiteto de Software
+    descricao: 'Responde pelas decisões estruturais: encaixe na arquitetura, integrações, trade-offs e registro em ADR.'
+    responsabilidades:
+    - Avaliar reuso e encaixe arquitetural
+    - Desenhar a solução e registrar as decisões em ADR
+    - Revisar no desenho os riscos de integração, desempenho e segurança
+    atuacao_de_agente: execucao
+    status: rascunho
+  - id: dev
+    nome: Dev
+    descricao: 'Pessoa desenvolvedora. Implementa código, testes e documentação técnica e investiga a causa de defeitos.'
+    responsabilidades:
+    - Implementar com testes, começando pelo teste que falha
+    - Abrir PRs com contexto e revisar os dos colegas
+    - Isolar a causa raiz de bugs e apoiar a resposta a incidentes
+    atuacao_de_agente: execucao
+    status: rascunho
+  - id: qa
+    nome: QA
+    descricao: 'Qualidade. Transforma critérios de aceite em testes, reproduz defeitos com evidências e valida entregas antes da produção.'
+    responsabilidades:
+    - Definir a estratégia de testes pela pirâmide e pelo risco
+    - Reproduzir bugs e reunir evidências
+    - Validar correções e explorar cenários vizinhos
+    - Decidir se os testes e as jornadas passaram
+    atuacao_de_agente: execucao
+    status: rascunho
+  - id: seguranca
+    nome: Segurança
+    descricao: 'Time ou pessoa de segurança da informação. Atua como Blue Team (defesa: permissões, dados sensíveis, monitoramento e resposta) ou como Red Team (ataque simulado: testes de intrusão e de abuso), e leva a prática DevSecOps para o ciclo de entrega.'
+    responsabilidades:
+    - Definir permissões de menor privilégio para pessoas e agentes e proteger dados sensíveis (Blue Team)
+    - Testar a aplicação como um atacante faria, com intrusão e abuso (Red Team)
+    - Integrar as análises de segurança ao pipeline (DevSecOps)
+    - Decidir se a entrega segue com as vulnerabilidades encontradas
+    atuacao_de_agente: execucao
+    status: rascunho
+  - id: sre
+    nome: SRE
+    descricao: 'Confiabilidade em produção. Cuida de SLIs, SLOs, SLAs, observabilidade, implantação segura e resposta a incidentes.'
+    responsabilidades:
+    - Definir indicadores, SLOs e alertas e acompanhar os SLAs
+    - Implantar com rollback pronto e monitorar a produção
+    - Comandar ou conduzir a resposta a incidentes
+    - Decidir severidade, contenção e estabilidade do serviço
+    atuacao_de_agente: execucao
+    status: rascunho
+  - id: engenheiro_de_dados
+    nome: Engenharia de dados
+    descricao: 'Modela dados e pipelines e garante a qualidade, a governança e o uso seguro dos dados.'
+    responsabilidades:
+    - Modelar e evoluir dados e pipelines
+    - Garantir qualidade, governança e mascaramento de dados sensíveis
+    - Apoiar a análise de uso e de impacto com dados
+    atuacao_de_agente: execucao
+    status: rascunho
+  - id: designer
+    nome: Designer
+    descricao: 'Design de produto. Desenha jornadas e interfaces, pesquisa com usuários e cuida da acessibilidade.'
+    responsabilidades:
+    - Desenhar jornadas e interfaces
+    - Validar a experiência com usuários
+    - Garantir a acessibilidade das jornadas
+    atuacao_de_agente: execucao
+    status: rascunho
+  - id: suporte
+    nome: Suporte e atendimento
+    descricao: 'Fala com quem usa o produto: recebe os relatos, coleta o contexto e avisa quando algo muda ou é corrigido.'
+    responsabilidades:
+    - Registrar relatos com o contexto de quem reportou
+    - Pedir evidências adicionais ao relator
+    - Avisar clientes e o atendimento sobre mudanças e correções
+    atuacao_de_agente: apoio
+    status: rascunho
+  - id: times_dependentes
+    nome: Times dependentes
+    descricao: 'Outros times que dependem da mudança ou são afetados por ela, inclusive os acionados numa escalada.'
+    responsabilidades:
+    - Ajustar integrações e processos afetados
+    - Avisar impactos no próprio contexto
+    - Assumir a parte do incidente que é deles quando acionados
+    atuacao_de_agente: nao
+    status: rascunho
+  - id: devops
+    nome: DevOps
+    descricao: 'Engenharia de plataforma e DevOps. Mantém a infraestrutura como código, os pipelines e os ambientes que os times usam para construir, publicar e implantar.'
+    responsabilidades:
+    - Manter a infraestrutura como código e os ambientes
+    - Manter os pipelines de build, publicação e implantação
+    - Planejar mudanças de infraestrutura com janela e rollback
+    atuacao_de_agente: execucao
+    status: rascunho
+  - id: engenheiro_de_ia
+    nome: Engenharia de IA
+    descricao: 'Configura agentes, skills e ferramentas, desenha os evals e acompanha qualidade, custo e observabilidade dos modelos.'
+    responsabilidades:
+    - Definir e ajustar agentes, instruções e skills por papel
+    - Desenhar evals e limiares de qualidade, alucinação, custo e latência
+    - Acompanhar a observabilidade de IA em produção
+    atuacao_de_agente: execucao
+    status: rascunho
+  - id: gerente_de_engenharia
+    nome: Gerente de engenharia
+    descricao: 'Cuida das pessoas, da capacidade e do jeito de trabalhar do time, decide o investimento técnico junto com o produto e é a liderança acionada em escaladas.'
+    responsabilidades:
+    - Equilibrar capacidade entre produto, dívida técnica e sustentação
+    - Facilitar a retrospectiva e acompanhar as ações de melhoria
+    - Decidir investimento técnico com PM e tech lead
+    - Responder pela escalada à liderança e pelo acompanhamento das ações de post-mortem
+    atuacao_de_agente: nao
+    status: rascunho
+  - id: rte
+    nome: Release Train Engineer (RTE)
+    descricao: 'Facilita os ritos de programa (Pre-PI Planning, PI Planning, ART Sync, Inspect & Adapt) e cuida do fluxo, das dependências e dos riscos entre os times de um trem de entrega.'
+    responsabilidades:
+    - Preparar e facilitar o PI Planning
+    - Acompanhar dependências e riscos entre times
+    - Conduzir o Inspect & Adapt e a retrospectiva do PI
+    atuacao_de_agente: apoio
+    status: rascunho

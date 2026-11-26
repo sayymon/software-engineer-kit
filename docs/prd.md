@@ -14,7 +14,7 @@ Persona e papel são conceitos diferentes. A persona é quem usa o kit. O papel 
 
 - **Persona primária:** engenheiro de software.
 - **Personas secundárias:** QA, PM, gerente de engenharia, tech lead e demais participantes do ciclo.
-- **Papéis:** definidos em `content/guide/comum.yaml` (chave `papeis`) e compartilhados entre as personas. Os fluxos, o RACI e os ritos apontam para esses papéis, e o kit nunca os duplica.
+- **Papéis:** definidos em `content/guide/catalogos/papeis.yaml` (chave `papeis`) e compartilhados entre as personas. Os fluxos, o RACI e os ritos apontam para esses papéis, e o kit nunca os duplica.
 
 ## Objetivo
 

@@ -18,7 +18,7 @@ Convenções:
 
 ### Fase 0: segmentar o comum.yaml em catálogos
 
-- [ ] 0.1 Criar o script one-off `tools/guide/split-comum.ts` (determinístico, baseado em texto) que corta `content/guide/comum.yaml` em `content/guide/catalogos/`
+- [x] 0.1 Criar o script one-off `tools/guide/split-comum.ts` (determinístico, baseado em texto) que corta `content/guide/comum.yaml` em `content/guide/catalogos/`
   - cada comentário que precede uma chave de topo vai junto com ela, e os comentários do cabeçalho ficam no `comum.yaml`
   - destino por chave: `tecnicas.yaml` (`tecnicas`, `abordagens`, `padroes`, `estrategias`), `artefatos.yaml`, `variaveis.yaml`, `papeis.yaml`, `requisitos.yaml`, `ferramentas.yaml` (`categorias_ferramenta`), `fontes.yaml` e `decisor.yaml` (`decisor_construir_comprar_assinar`)
   - o `comum.yaml` mantém `versao`, `ordem_das_demandas` e o cabeçalho explicativo
@@ -26,23 +26,23 @@ Convenções:
   - verificação: duas execuções produzem saída idêntica e o modo `--dry-run` lista cada chave com o arquivo de destino
   - agentes: executor `dev`, revisores `arquiteto` e `qa`
   - _Requisitos: 15.7_
-- [ ] 0.2 Alterar `lib/guide/load.ts` para ler a constante ordenada `ARQUIVOS_DE_CATALOGO` (em `catalogos/`, na ordem que mantém a ordem das chaves do documento mesclado igual à de hoje)
+- [x] 0.2 Alterar `lib/guide/load.ts` para ler a constante ordenada `ARQUIVOS_DE_CATALOGO` (em `catalogos/`, na ordem que mantém a ordem das chaves do documento mesclado igual à de hoje)
   - `hasGuide` segue ligado ao `comum.yaml`, e o layout legado de arquivo único continua funcionando (fixtures e `--yaml <arquivo>`)
   - `GuideLoadError` claro quando falta um arquivo de catálogo ou quando uma chave aparece em dois arquivos
   - testes unitários, incluindo chave duplicada entre arquivos e ordem das chaves
   - agentes: executor `dev`, revisores `arquiteto` e `qa`
   - _Requisitos: 15.7_
-- [ ] 0.3 Rodar o corte no guia real e provar a equivalência
+- [x] 0.3 Rodar o corte no guia real e provar a equivalência
   - hashes por coleção iguais aos de `tests/guide/expected/parity.json` e ordem das chaves mesclada idêntica, no novo `tests/guide/catalogos.test.ts`
   - `npm run validate` estrito e `npm test` verdes, com goldens Mermaid e `content/ids.lock.json` sem alteração
   - agentes: executor `dev`, revisores `arquiteto` e `qa`
   - _Requisitos: 15.7, 10.6_
-- [ ] 0.4 Atualizar os leitores do caminho antigo: `lib/content/index.ts`, `lib/guide/entities.ts`, `tools/validate/checks/flows.ts`, `tools/guide/cli.ts` e `tools/agents/sync.ts` (papéis agora vêm de `catalogos/papeis.yaml`)
+- [x] 0.4 Atualizar os leitores do caminho antigo: `lib/content/index.ts`, `lib/guide/entities.ts`, `tools/validate/checks/flows.ts`, `tools/guide/cli.ts` e `tools/agents/sync.ts` (papéis agora vêm de `catalogos/papeis.yaml`)
   - ajustar mensagens de erro e testes que citam `comum.yaml`
   - verificação: `npm run validate`, `npm test` e `npm run build` verdes
   - agentes: executor `dev`, revisores `arquiteto` e `qa`
   - _Requisitos: 15.7_
-- [ ] 0.5 Atualizar os textos que citam o caminho
+- [x] 0.5 Atualizar os textos que citam o caminho
   - `AGENTS.md` (mapa do repositório), prompts de `.agents/roles/*.md` (`papeis` agora em `content/guide/catalogos/papeis.yaml`) e depois `npm run agents:sync`
   - `docs/content-contract.md`, `docs/prd.md`, `docs/reviews/guia-demandas-review.md` onde nomeia o caminho, e `.kiro/steering/product.md`
   - nesta spec: tarefas 2.5 a 2.9, `design.md` e `requirements.md`, em toda menção a `comum.yaml` que agora significa um catálogo (por exemplo `categorias_ferramenta` em `catalogos/ferramentas.yaml`)
@@ -50,7 +50,7 @@ Convenções:
   - verificação: `npm run validate` e o check `public-terms` verdes
   - agentes: executor `dev`, revisores `arquiteto` e `qa`
   - _Requisitos: 15.7_
-- [ ] 0.6 Commit `refactor(guia): segmenta o comum.yaml em catálogos`
+- [-] 0.6 Commit `refactor(guia): segmenta o comum.yaml em catálogos`
   - _Requisitos: 15.7_
 
 ### Fase 1: spike de desempenho

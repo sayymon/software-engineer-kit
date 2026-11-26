@@ -49,3 +49,7 @@ A migração anterior convertia o guia em arquivos de catálogo do kit (`content
 A toolchain do kit é única: Node e TypeScript. Os 44 códigos de regra, o rastreio, o Decisor e a CLI (`npm run guide`) estão em TypeScript. O oráculo Python (`tools/guide-oracle/`), o gerador de HTML e o job `guide-oracle` foram removidos, e o Python deixou de existir no CI e no ambiente de quem contribui.
 
 A paridade com o Python é provada por testes de regressão contra saídas gravadas do oráculo no commit `7abed1c` do repositório do guia, guardadas em `tests/guide/expected/`. Os checks obrigatórios do ruleset passam a ser `build-test`, `dependency-review`, `npm-audit`, `codeql`, `secret-scan`, `public-terms`, `reuse` e `actionlint`. Detalhes em [guide-rules-parity.md](../guide-rules-parity.md).
+
+## Atualização: catálogos em arquivos
+
+O YAML segue como fonte única da metodologia. O `comum.yaml` único foi segmentado em `content/guide/catalogos/*.yaml` (papéis, artefatos, variáveis, técnicas, requisitos, ferramentas, fontes e decisor), e o `comum.yaml` mantém o cabeçalho, `versao` e `ordem_das_demandas`. O loader mescla os arquivos e entrega o mesmo guia, com as mesmas chaves na mesma ordem.

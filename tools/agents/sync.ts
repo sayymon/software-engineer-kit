@@ -1,29 +1,29 @@
 // SPDX-License-Identifier: MIT
 // Gera as definições de agente do Claude Code, do OpenCode e do Kiro a partir de .agents/.
 // Fonte única: .agents/roles/*.md (papéis) e .agents/mcp.servers.json (MCPs).
-// A autonomia vem de `papeis[].atuacao_de_agente` em content/guide/comum.yaml:
+// A autonomia vem de `papeis[].atuacao_de_agente` em content/guide/catalogos/papeis.yaml (lido pelo loader do guia):
 //   execucao -> pode editar e rodar comandos; apoio -> somente leitura; nao -> sem agente.
 import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { parse } from "yaml";
 import matter from "gray-matter";
+import { loadGuideDoc } from "../../lib/guide/load";
 
 const root = process.cwd();
 type Server = { description: string; type: "local" | "remote"; command?: string[]; url?: string; tokenEnv?: string };
 const servers: Record<string, Server> = JSON.parse(readFileSync(join(root, ".agents/mcp.servers.json"), "utf8"));
 // Modelos por nível de raciocínio. Só o Kiro aceita `model` por agente; os ids vêm de `/model`.
 const modelos: { kiro: Record<string, string> } = JSON.parse(readFileSync(join(root, ".agents/models.json"), "utf8"));
-const comum = parse(readFileSync(join(root, "content/guide/comum.yaml"), "utf8")) as {
+const guia = loadGuideDoc(join(root, "content/guide")) as {
   papeis: { id: string; atuacao_de_agente: "nao" | "apoio" | "execucao" }[];
 };
-const atuacao = new Map(comum.papeis.map((p) => [p.id, p.atuacao_de_agente]));
+const atuacao = new Map(guia.papeis.map((p) => [p.id, p.atuacao_de_agente]));
 
 const roles = readdirSync(join(root, ".agents/roles"))
   .filter((f) => f.endsWith(".md"))
   .map((f) => {
     const { data, content } = matter(readFileSync(join(root, ".agents/roles", f), "utf8"));
     const mode = atuacao.get(data.id);
-    if (!mode) throw new Error(`Papel ${data.id} não existe em comum.yaml`);
+    if (!mode) throw new Error(`Papel ${data.id} não existe em catalogos/papeis.yaml`);
     if (mode === "nao") throw new Error(`Papel ${data.id} tem atuacao_de_agente=nao`);
     const mcp: string[] = data.mcp ?? [];
     for (const m of mcp) if (!servers[m]) throw new Error(`MCP ${m} não está em mcp.servers.json`);

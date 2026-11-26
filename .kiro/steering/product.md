@@ -12,7 +12,7 @@ O kit é mais que um catálogo. Cada página responde a uma pergunta prática ("
 
 ## Para quem
 
-Persona e papel são conceitos diferentes. A persona é quem usa o kit. O papel (PM, QA, tech lead e os demais, definidos em `content/guide/comum.yaml`) é a função exercida em uma demanda, e a mesma pessoa exerce vários. O problema, o objetivo e as métricas estão em `docs/prd.md`.
+Persona e papel são conceitos diferentes. A persona é quem usa o kit. O papel (PM, QA, tech lead e os demais, definidos em `content/guide/catalogos/papeis.yaml`) é a função exercida em uma demanda, e a mesma pessoa exerce vários. O problema, o objetivo e as métricas estão em `docs/prd.md`.
 
 1. **Primeiro usuário: o mantenedor.** O kit é o guia que ele consulta para trabalhar e continuar relevante como engenheiro de software e de IA. Toda decisão de produto passa primeiro por esta pergunta: isso torna o kit mais útil no trabalho real do mantenedor?
 2. **Engenheiros de software e de IA** em qualquer nível (persona primária), que querem uma referência aberta, comparável e atualizada. Como personas secundárias entram QA, PM, gerentes de engenharia e tech leads.

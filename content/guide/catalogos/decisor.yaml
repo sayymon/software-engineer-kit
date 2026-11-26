@@ -1,0 +1,16 @@
+# RASCUNHO: revisão humana. Pesos iniciais do decisor (exemplos do design; soma 1 por objetivo).
+# Regras: tempo_ate_valor estritamente maior em cumprir_prazo; diferenciacao em diferenciar_produto;
+# custo_total em reduzir_custo; tempo_ate_valor maior ou igual em validar_hipotese.
+# Decisor construir, comprar ou assinar (raia comum com_dcs). Notas de 1 a 5 em que MAIOR É MELHOR em todos os critérios:
+# diferenciação alta, tempo até o valor curto, custo total baixo, pouca dependência de fornecedor e risco baixo dão nota 5.
+# Custos de curto, médio e longo prazo, ROI e custo de não fazer vêm do relatório de custo e embasam as notas.
+decisor_construir_comprar_assinar:
+  criterios: [diferenciacao, tempo_ate_valor, custo_total, dependencia_fornecedor, risco]
+  escala: {min: 1, max: 5}
+  opcoes: [construir, comprar, assinar]
+  ordem_desempate: [assinar, comprar, construir]
+  pesos:
+    cumprir_prazo:       {diferenciacao: 0.10, tempo_ate_valor: 0.40, custo_total: 0.20, dependencia_fornecedor: 0.10, risco: 0.20}
+    diferenciar_produto: {diferenciacao: 0.40, tempo_ate_valor: 0.15, custo_total: 0.15, dependencia_fornecedor: 0.15, risco: 0.15}
+    reduzir_custo:       {diferenciacao: 0.10, tempo_ate_valor: 0.15, custo_total: 0.40, dependencia_fornecedor: 0.15, risco: 0.20}
+    validar_hipotese:    {diferenciacao: 0.10, tempo_ate_valor: 0.35, custo_total: 0.20, dependencia_fornecedor: 0.10, risco: 0.25}

@@ -1,0 +1,1246 @@
+artefatos:
+  - id: alerta_de_falha
+    nome: "Alerta de falha"
+    descricao: "Alerta ou relato de falha em produção que abre o incidente"
+    exemplo: "Alerta de monitoria: taxa de erro 5xx do checkout em 12% desde as 14h03"
+    tipo: sinal
+    subtipo: alerta
+    status: rascunho
+  - id: alerta_triado
+    nome: "Alerta triado"
+    descricao: "Alerta com a triagem inicial feita"
+    exemplo: "Latência p99 do checkout acima de 3 s há 10 min, 12% das requisições com erro"
+    tipo: sinal
+    subtipo: alerta
+    status: rascunho
+  - id: raio_de_impacto
+    nome: "Raio de impacto"
+    descricao: "Estimativa de clientes, receita e regiões afetados"
+    exemplo: "Cerca de 8 mil compradores na região sul, receita em risco de R$ 40 mil por hora"
+    tipo: documento
+    subtipo: analise
+    status: rascunho
+  - id: linha_do_tempo_do_incidente
+    nome: "Linha do tempo do incidente"
+    descricao: "Registro em ordem de cada fato, decisão e ação do incidente, com horário e autor, aberto no reconhecimento do alerta"
+    exemplo: "14h02 alerta de erro no checkout; 14h05 IC assume; 14h12 rollback da versão 4.12; 14h20 taxa de erro normal"
+    tipo: documento
+    subtipo: registro
+    status: rascunho
+  - id: sinais_do_alerta
+    nome: "Sinais do alerta"
+    descricao: "Métricas, logs, rastros e mudanças recentes no horário do alerta, que confirmam ou descartam o impacto"
+    exemplo: "Erro 500 no checkout subiu de 0,2% para 12% às 14h00; deploy da versão 4.12 às 13h55"
+    tipo: evidencia
+    subtipo: log
+    status: rascunho
+  - id: ajuste_de_runbook_ou_alerta
+    nome: "Ajuste de runbook ou alerta"
+    descricao: "Mudança no alerta (limite, janela, rota) ou no runbook para que o próximo alerta seja mais preciso ou mais rápido de resolver"
+    exemplo: "Limite do alerta de erro do checkout passou de 1% em 1 minuto para 2% em 5 minutos"
+    tipo: acao
+    subtipo: configuracao
+    status: rascunho
+  - id: papeis_do_incidente
+    nome: "Papéis do incidente"
+    descricao: "Quem comanda (IC), quem comunica, quem registra e quem investiga, e como o comando passa de mão"
+    exemplo: "IC: plantonista de SRE; comunicação: PM do checkout; registro: dev do time; investigação: dev e SRE"
+    tipo: documento
+    subtipo: registro
+    status: rascunho
+  - id: handoff_de_turno
+    nome: "Handoff de turno"
+    descricao: "Passagem do comando entre turnos ou fusos, com estado atual, hipóteses, ações em andamento e próximos passos"
+    exemplo: "Handoff às 18h de São Paulo para Lisboa: mitigação 2 em observação, hipótese de cache, próxima checagem às 18h30"
+    tipo: documento
+    subtipo: registro
+    status: rascunho
+  - id: comunicado_do_incidente
+    nome: "Comunicado do incidente"
+    descricao: "Atualização periódica com impacto, o que se sabe, o que está sendo feito e a hora da próxima atualização"
+    exemplo: "14h30: pagamentos com cartão falham para 12% dos compradores; rollback em andamento; próxima atualização às 15h"
+    tipo: acao
+    subtipo: comunicacao
+    destinatarios: [stakeholder, suporte, times_dependentes]
+    status: rascunho
+  - id: acao_de_contencao
+    nome: "Ação de contenção"
+    descricao: "O que foi feito para o dano parar de crescer: reversão, flag desligada, componente isolado ou degradação controlada"
+    exemplo: "Flag do novo cálculo de frete desligada às 14h10; checkout volta a usar o cálculo anterior"
+    tipo: acao
+    subtipo: contencao
+    status: rascunho
+  - id: registro_da_mitigacao
+    nome: "Registro da mitigação"
+    descricao: "Cada tentativa de mitigação com hipótese, ação, horário e resultado"
+    exemplo: "Tentativa 1: rollback da 4.12 às 14h12, erro caiu de 12% para 0,3%"
+    tipo: documento
+    subtipo: registro
+    status: rascunho
+  - id: verificacao_de_estabilidade
+    nome: "Verificação de estabilidade"
+    descricao: "Evidência de que os indicadores voltaram ao normal e ficaram estáveis durante a janela de observação"
+    exemplo: "Taxa de erro abaixo de 0,3% e latência p95 normal por 30 minutos seguidos"
+    tipo: evidencia
+    subtipo: verificacao
+    status: rascunho
+  - id: pedido_de_escalada
+    nome: "Pedido de escalada"
+    descricao: "Acionamento do time dono ou da liderança com o motivo, o impacto, o que já foi tentado e o que se precisa"
+    exemplo: "Para o time de pagamentos: SEV1, 2 mitigações sem efeito, precisamos de quem conhece o gateway"
+    tipo: acao
+    subtipo: comunicacao
+    destinatarios: [times_dependentes, stakeholder]
+    status: rascunho
+  - id: comunicado_de_resolucao
+    nome: "Comunicado de resolução"
+    descricao: "Aviso de que o serviço voltou, com duração, impacto, causa conhecida e o que vem depois"
+    exemplo: "Resolvido às 14h40: 38 minutos de falha em 12% dos pagamentos; correção definitiva segue como bug"
+    tipo: acao
+    subtipo: comunicacao
+    destinatarios: [stakeholder, suporte, times_dependentes]
+    status: rascunho
+  - id: post_mortem
+    nome: "Post-mortem"
+    descricao: "Documento sem culpados com linha do tempo, impacto, causas, o que funcionou, o que não funcionou e as ações"
+    exemplo: "Post-mortem do checkout: causa no cálculo de frete sem flag; detecção em 2 minutos; rollback em 10"
+    tipo: documento
+    subtipo: analise
+    status: rascunho
+  - id: acoes_corretivas
+    nome: "Ações corretivas"
+    descricao: "Cards das ações do post-mortem, cada um com dono, prazo e critério de pronto, acompanhados até o fim"
+    exemplo: "3 cards: flag obrigatória no frete, alerta por país, teste de carga do checkout; donos e prazos definidos"
+    tipo: acao
+    subtipo: card
+    status: rascunho
+  - id: aprendizado_do_incidente
+    nome: "Aprendizado do incidente"
+    descricao: "Resumo do post-mortem compartilhado com os times, sem culpados"
+    exemplo: "O que aprendemos com a falha no checkout: toda mudança de cálculo sai atrás de flag"
+    tipo: acao
+    subtipo: comunicacao
+    destinatarios: [times_dependentes, stakeholder]
+    status: rascunho
+  - id: nota_do_incidente
+    nome: "Nota do incidente"
+    descricao: "Registro leve de um SEV3: o que aconteceu, como foi resolvido e se houve ajuste"
+    exemplo: "SEV3: lentidão no relatório de vendas por 20 minutos; cache reiniciado; limite do alerta ajustado"
+    tipo: documento
+    subtipo: registro
+    status: rascunho
+  - id: objetivo_da_iteracao
+    nome: "Objetivo da iteração"
+    descricao: "O que o time quer alcançar na iteração, em uma frase, com os itens escolhidos para chegar lá"
+    exemplo: "Comprador recorrente paga em um clique; 5 histórias, 34 pontos"
+    tipo: documento
+    subtipo: plano
+    status: rascunho
+  - id: impedimentos
+    nome: "Impedimentos"
+    descricao: "O que está travando o time, com dono e data, visível até ser resolvido"
+    exemplo: "Ambiente de homologação fora do ar desde ontem; dona é a tech lead, previsão hoje à tarde"
+    tipo: acao
+    subtipo: card
+    status: rascunho
+  - id: acoes_de_melhoria
+    nome: "Ações de melhoria"
+    descricao: "Até três ações de melhoria do processo, cada uma com dono e forma de medir se funcionou"
+    exemplo: "Testes de contrato no pipeline do time de cupons; dona é a QA; medir quebras na próxima iteração"
+    tipo: acao
+    subtipo: card
+    status: rascunho
+  - id: backlog_do_programa
+    nome: "Backlog do programa"
+    descricao: "Features candidatas ao próximo PI, ordenadas pelo custo do atraso, com capacidade e dependências conhecidas"
+    exemplo: "14 features ordenadas; 3 dependências com o time de pagamentos já mapeadas"
+    tipo: documento
+    subtipo: plano
+    status: rascunho
+  - id: objetivos_do_pi
+    nome: "Objetivos do PI"
+    descricao: "Objetivos de cada time para o incremento de programa, com valor de negócio atribuído pelas áreas de negócio"
+    exemplo: "Time de checkout: pagamento em um clique (valor 9) e cupom de recompra (valor 7)"
+    tipo: documento
+    subtipo: plano
+    status: rascunho
+  - id: quadro_do_programa
+    nome: "Quadro do programa"
+    descricao: "Quadro com as entregas de cada time por iteração, as dependências entre times e os marcos do PI"
+    exemplo: "11 dependências; a API de cupons do time B é pré-requisito do checkout na iteração 2"
+    tipo: diagrama
+    subtipo: quadro
+    status: rascunho
+  - id: riscos_do_pi
+    nome: "Riscos do PI"
+    descricao: "Riscos do programa classificados pelo ROAM: resolvido, assumido, mitigado ou aceito"
+    exemplo: "Atraso da API de cupons: mitigado (ordem das histórias trocada); dona é a tech lead do checkout"
+    tipo: documento
+    subtipo: analise
+    status: rascunho
+  - id: impacto_no_sla
+    nome: "Impacto no SLA"
+    descricao: "Quanto o incidente consumiu do SLA no período, se houve violação e quais créditos ou avisos contratuais são devidos"
+    exemplo: "38 minutos de falha consumiram 88% do SLA do mês; sem violação; aviso contratual enviado a 2 parceiros"
+    tipo: documento
+    subtipo: relatorio
+    status: rascunho
+  - id: justificativa_da_severidade
+    nome: "Justificativa da severidade"
+    descricao: "Motivo registrado da severidade escolhida e de suas mudanças"
+    exemplo: "Sev1: pagamento indisponível para todos os compradores; revisada para sev2 após o paliativo"
+    tipo: documento
+    subtipo: registro
+    status: rascunho
+  - id: requisitos_classificados
+    nome: "Requisitos classificados"
+    descricao: "Requisitos tipificados com o escopo delimitado"
+    exemplo: "RF-12 funcional (cupom por produto), RNF-03 desempenho (resposta em até 300 ms); fora do escopo: cupom em lote"
+    tipo: documento
+    subtipo: especificacao
+    status: rascunho
+  - id: criterios_de_aceite
+    nome: "Critérios de aceite"
+    descricao: "Critérios de aceite refinados na prontidão"
+    exemplo: "Dado um cupom válido, quando o comprador o aplica no checkout, então o total mostra o desconto em até 1 s"
+    tipo: documento
+    subtipo: especificacao
+    status: rascunho
+  - id: spec
+    nome: Spec
+    descricao: "Especificação SDD que serve de contrato para pessoas e agentes"
+    exemplo: "Spec com requisitos, design e tarefas aprovada pelo dono do produto, pronta para o agente executar"
+    tipo: documento
+    subtipo: especificacao
+    status: rascunho
+  - id: lista_de_tarefas
+    nome: "Lista de tarefas"
+    descricao: "Tarefas pequenas e verificáveis geradas pela spec"
+    exemplo: "1. Criar a tabela de cupons. 2. Expor a API de validação. 3. Cobrir com testes de contrato"
+    tipo: documento
+    subtipo: plano
+    status: rascunho
+  - id: mapa_de_dependencias
+    nome: "Mapa de dependências"
+    descricao: "Qual tarefa precisa sair antes de qual"
+    exemplo: "A tarefa 3 (API de validação) depende da tarefa 1 (tabela de cupons)"
+    tipo: documento
+    subtipo: analise
+    status: rascunho
+  - id: decisoes_bloqueantes
+    nome: "Decisões bloqueantes"
+    descricao: "Decisões humanas que precisam sair antes de o agente executar"
+    exemplo: "Definir se o cupom acumula com a promoção vigente, decisão do produto antes de iniciar"
+    tipo: documento
+    subtipo: registro
+    status: rascunho
+  - id: plano_de_alocacao
+    nome: "Plano de alocação"
+    descricao: "Tarefas alocadas ao agente e às pessoas, com a ordem de execução"
+    exemplo: "Agente: tarefas 1, 2 e 4. Pessoa: tarefa 3 (revisão de segurança). Ordem: 3, 1, 2, 4"
+    tipo: documento
+    subtipo: plano
+    status: rascunho
+  - id: relato_do_bug
+    nome: "Relato do bug"
+    descricao: "Descrição do problema feita por quem reportou"
+    exemplo: "No celular, ao tocar em pagar, a tela fica branca. Acontece desde ontem, no navegador do iPhone"
+    tipo: documento
+    subtipo: registro
+    status: rascunho
+  - id: passos_de_reproducao
+    nome: "Passos de reprodução"
+    descricao: "Passos e evidências que reproduzem o defeito"
+    exemplo: "1. Abrir o checkout no iPhone. 2. Aplicar um cupom. 3. Tocar em pagar. Resultado: tela branca"
+    tipo: documento
+    subtipo: registro
+    status: rascunho
+  - id: ambiente_do_bug
+    nome: "Ambiente do bug"
+    descricao: "Onde e quando o bug aconteceu: versão, dispositivo, navegador, conta de teste, flags ativas e horário"
+    exemplo: "Versão 4.12.0, iPhone 13 com iOS 17, conta de teste comprador_recorrente_02, flag de cupom ligada, 14h32"
+    tipo: evidencia
+    subtipo: contexto
+    status: rascunho
+  - id: logs_do_bug
+    nome: "Logs e rastros do bug"
+    descricao: "Logs, rastros e métricas do horário do erro, ligados por um id de correlação"
+    exemplo: "Erro 500 no serviço de cupons às 14h32, id de correlação 7f3a; rastro mostra timeout na consulta de saldo"
+    tipo: evidencia
+    subtipo: log
+    status: rascunho
+  - id: registro_visual_do_bug
+    nome: "Registro visual do bug"
+    descricao: "Print ou gravação de tela mostrando o comportamento errado"
+    exemplo: "Gravação de 20 s: o comprador toca em pagar e a tela fica branca"
+    tipo: evidencia
+    subtipo: registro_visual
+    status: rascunho
+  - id: estado_dos_dados
+    nome: "Estado dos dados"
+    descricao: "Consulta ou cópia dos registros envolvidos no momento do bug, com dados pessoais mascarados"
+    exemplo: "Pedido 98213 com cupom expirado e status pendente; e-mail e documento do comprador mascarados"
+    tipo: evidencia
+    subtipo: estado_dos_dados
+    status: rascunho
+  - id: teste_que_reproduz
+    nome: "Teste que reproduz o defeito"
+    descricao: "Teste automatizado que falha com o bug e passa com a correção; vira teste de regressão"
+    exemplo: "Teste de integração: aplicar cupom expirado no checkout devolve mensagem de cupom inválido e não erro 500"
+    tipo: teste
+    subtipo: regressao
+    status: rascunho
+  - id: causa_raiz
+    nome: "Causa raiz"
+    descricao: "Onde o defeito nasce, por que acontece e desde quando, com a evidência que comprova"
+    exemplo: "A consulta de saldo do cupom não trata cupom expirado e lança exceção; entrou na versão 4.11 junto com o cache de cupons"
+    tipo: documento
+    subtipo: analise
+    status: rascunho
+  - id: validacao_da_correcao
+    nome: "Validação da correção"
+    descricao: "Evidência de que o cenário do relato e os cenários vizinhos passam com a correção, por QA ou por um par"
+    exemplo: "Cenário do relato e 4 variações (cupom expirado, esgotado, de outro produto, sem cupom) verdes, com gravação anexada"
+    tipo: evidencia
+    subtipo: verificacao
+    status: rascunho
+  - id: verificacao_em_producao
+    nome: "Verificação em produção"
+    descricao: "Evidência de produção de que o defeito não acontece mais: cenário do relato repetido e métricas de erro da área"
+    exemplo: "Zero erros 500 no checkout com cupom nas 24 h seguintes; cenário do relato repetido com sucesso"
+    tipo: evidencia
+    subtipo: verificacao
+    status: rascunho
+  - id: hipoteses_de_causa
+    nome: "Hipóteses de causa"
+    descricao: "Hipóteses levantadas a partir das evidências, cada uma com o teste que a confirma ou descarta"
+    exemplo: "H1 cache de cupons sem tratar expiração (confirmada); H2 fuso no cálculo de validade (descartada pelo log)"
+    tipo: documento
+    subtipo: analise
+    status: rascunho
+  - id: codigo_da_correcao
+    nome: "Código da correção"
+    descricao: "Mudança mínima que trata a causa raiz, com o teste que reproduz o defeito passando"
+    exemplo: "Tratamento de cupom expirado na consulta de saldo, 14 linhas, com o teste do cupom expirado verde"
+    tipo: codigo
+    subtipo: aplicacao
+    status: rascunho
+  - id: contrato_de_api
+    nome: "Contrato da API"
+    descricao: "Especificação versionada da interface (rotas, mensagens, esquemas e erros) que consumidores e provedores seguem"
+    exemplo: "Contrato da validação de cupom: POST /cupons/validar, esquema da resposta e os erros cupom_expirado e cupom_esgotado"
+    tipo: codigo
+    subtipo: contrato_de_api
+    status: rascunho
+  - id: queries_de_dados
+    nome: "Queries de dados"
+    descricao: "Consultas versionadas usadas para ler ou conferir o estado dos dados, com os dados pessoais mascarados"
+    exemplo: "Consulta do pedido 98213 com o cupom e o status, mascarando e-mail e documento"
+    tipo: codigo
+    subtipo: query
+    status: rascunho
+  - id: pipeline_ci_cd
+    nome: "Pipeline de CI/CD"
+    descricao: "Definição como código das etapas de build, testes, análises de segurança, publicação e implantação"
+    exemplo: "Pipeline com testes, análise estática, de dependências e de segredos, build da imagem e publicação no staging"
+    tipo: codigo
+    subtipo: pipeline
+    status: rascunho
+  - id: dashboard_de_observabilidade
+    nome: "Dashboard de observabilidade"
+    descricao: "Painel vivo com os indicadores técnicos e de negócio da entrega em produção, atualizado continuamente"
+    exemplo: "Painel do checkout com taxa de erro, p95, conversão e uso do cupom de recompra, por região"
+    tipo: dashboard
+    subtipo: tecnico
+    status: rascunho
+  - id: analise_de_escape
+    nome: "Análise de escape"
+    descricao: "Por que o defeito passou por todas as barreiras até a produção e em qual delas ele deveria ter parado"
+    exemplo: "O teste de contrato não cobria cupom expirado e a revisão não tinha item sobre datas; a barreira certa era o contrato"
+    tipo: documento
+    subtipo: analise
+    status: rascunho
+  - id: teste_preventivo
+    nome: "Teste preventivo"
+    descricao: "Teste de regressão ou de contrato que fecha a lacuna por onde o defeito escapou"
+    exemplo: "Teste de contrato entre checkout e cupons com os casos de cupom expirado, esgotado e de outro produto"
+    tipo: teste
+    subtipo: regressao
+    status: rascunho
+  - id: regra_de_revisao
+    nome: "Regra de revisão"
+    descricao: "Item novo no checklist de revisão ou regra de análise estática que pega o mesmo tipo de defeito"
+    exemplo: "Item no checklist: toda regra com data de validade tem teste para o dia exato da expiração"
+    tipo: acao
+    subtipo: configuracao
+    status: rascunho
+  - id: alerta_e_slo
+    nome: "Alerta e SLO"
+    descricao: "Alerta ligado a um indicador de nível de serviço que detecta o problema antes do cliente"
+    exemplo: "Alerta quando a taxa de erro do checkout com cupom passa de 0,5% em 5 minutos"
+    tipo: acao
+    subtipo: configuracao
+    status: rascunho
+  - id: protecao_da_mudanca
+    nome: "Proteção da mudança"
+    descricao: "Flag, canary ou rollout gradual configurado para a próxima mudança na mesma área"
+    exemplo: "Mudanças no cálculo de cupons passam a sair atrás de flag, para 5% do tráfego primeiro"
+    tipo: acao
+    subtipo: configuracao
+    status: rascunho
+  - id: registro_da_acao_preventiva
+    nome: "Registro da ação preventiva"
+    descricao: "Card da ação preventiva com dono, prazo e critério de pronto, acompanhado até o fim"
+    exemplo: "Card: teste de contrato de cupons, dono do time de checkout, prazo de 2 semanas, pronto quando roda no pipeline"
+    tipo: acao
+    subtipo: card
+    status: rascunho
+  - id: aprendizado_do_escape
+    nome: "Aprendizado do escape"
+    descricao: "Mensagem curta aos times com o que escapou, por quê e o que mudou, sem culpados"
+    exemplo: "Escapou um erro com cupom expirado porque o contrato não cobria datas; agora cobre e o checklist tem o item"
+    tipo: acao
+    subtipo: comunicacao
+    destinatarios: [times_dependentes, tech_lead]
+    status: rascunho
+  - id: aviso_de_correcao
+    nome: "Aviso de correção"
+    descricao: "Mensagem a quem reportou e ao suporte com a causa, a correção e a versão em que saiu"
+    exemplo: "Corrigimos o erro ao aplicar cupom expirado na versão 4.12.1; agora aparece a mensagem de cupom inválido"
+    tipo: acao
+    subtipo: comunicacao
+    destinatarios: [suporte, stakeholder]
+    status: rascunho
+  - id: suite_de_regressao_core
+    nome: "Suíte de regressão das funcionalidades core"
+    descricao: "Testes das funcionalidades que não podem quebrar em nenhuma entrega, rodados a cada mudança"
+    exemplo: "Login, busca, checkout, pagamento e emissão de nota: 85 testes, 7 minutos no pipeline"
+    tipo: teste
+    subtipo: regressao
+    status: rascunho
+  - id: requisito_de_referencia
+    nome: "Requisito de referência"
+    descricao: "Requisito, spec ou critério de aceite consultado na triagem"
+    exemplo: "Critério de aceite RF-07: o pagamento deve concluir com cupom aplicado em qualquer navegador suportado"
+    tipo: documento
+    subtipo: especificacao
+    status: rascunho
+  - id: resposta_ao_relator
+    nome: "Resposta ao relator"
+    descricao: "Explicação enviada a quem reportou, com a referência ao requisito"
+    exemplo: "Esse comportamento está previsto no requisito RF-09: o cupom vale só para o primeiro pagamento"
+    tipo: acao
+    subtipo: comunicacao
+    destinatarios: [suporte]
+    status: rascunho
+  - id: demanda_de_feature
+    nome: "Demanda de feature"
+    descricao: "Ticket convertido em pedido de produto"
+    exemplo: "Permitir cupom por produto no checkout, pedido por vários produtores nas últimas semanas"
+    tipo: acao
+    subtipo: card
+    status: rascunho
+  - id: incidente_aberto
+    nome: "Incidente aberto"
+    descricao: "Incidente acionado a partir do bug, com os tickets ligados"
+    exemplo: "Incidente aberto a partir do bug da tela branca, com 14 tickets de clientes ligados"
+    tipo: sinal
+    subtipo: alerta
+    status: rascunho
+  - id: avaliacao_de_impacto
+    nome: "Avaliação de impacto"
+    descricao: "Alcance, criticidade do fluxo e existência de contorno"
+    exemplo: "Afeta 5% dos pagamentos, fluxo crítico de compra, existe contorno pelo desktop"
+    tipo: documento
+    subtipo: analise
+    status: rascunho
+  - id: paliativo_aplicado
+    nome: "Paliativo aplicado"
+    descricao: "Mitigação paliativa em vigor até a correção definitiva"
+    exemplo: "Feature flag do novo checkout desligada para iOS até a correção definitiva"
+    tipo: acao
+    subtipo: contencao
+    status: rascunho
+  - id: hotfix_aberto
+    nome: "Card do hotfix"
+    descricao: "Branch e ticket do hotfix com escopo mínimo"
+    exemplo: "Branch hotfix/tela-branca-ios e ticket com escopo mínimo: só a validação do campo de cupom"
+    tipo: acao
+    subtipo: card
+    status: rascunho
+  - id: item_de_backlog
+    nome: "Item de backlog"
+    descricao: "Bug priorizado no backlog com dono e prazo"
+    exemplo: "Bug de arredondamento no resumo do pedido, prioridade média, dono: time de pagamentos, prazo: próxima sprint"
+    tipo: acao
+    subtipo: card
+    status: rascunho
+
+  # RASCUNHO: revisão humana. Artefatos da raia feat_ent (tarefa 2.24).
+  - id: registro_da_necessidade
+    nome: "Registro da necessidade"
+    descricao: "Registro da necessidade ou oportunidade, com origem, interessados, modelo de trabalho, incerteza e métricas de sucesso"
+    exemplo: "PRD curto: aumentar a recompra em 30 dias de 18% para 20% com pagamento em um clique para compradores recorrentes"
+    tipo: documento
+    subtipo: especificacao
+    variantes:
+      - nome: "PRD"
+        descricao: "Documento de requisitos de produto, escrito com o PM"
+        quando: {algum: [{var: modelo_de_trabalho, em: [produto_com_pm]}, {var: modelo_de_trabalho_complementar, em: [produto_com_pm]}]}
+        exemplo: "PRD de uma página com problema do usuário, objetivo, métrica, escopo e fora do escopo"
+      - nome: "Documento de visão"
+        descricao: "Visão do que a capacidade deve oferecer a quem a consome"
+        quando: {algum: [{var: modelo_de_trabalho, em: [plataforma, dados]}, {var: modelo_de_trabalho_complementar, em: [plataforma, dados]}]}
+        exemplo: "Visão da nova trilha de eventos de compra para os times consumidores"
+      - nome: "Termo de abertura do projeto"
+        descricao: "Objetivo, prazo, escopo e patrocinador da squad de projeto"
+        quando: {todos: [{var: modelo_de_trabalho, igual: squad_de_projeto}]}
+        exemplo: "Squad de 3 meses para a migração do checkout, com patrocinador e marco de entrega"
+      - nome: "Card de demanda no fluxo de trabalho"
+        descricao: "Card na ferramenta de gestão de fluxo, com descrição da intenção e critérios de pronto"
+        quando: {algum: [{var: modelo_de_trabalho, em: [interno, sustentacao, squad_de_problema]}, {var: modelo_de_trabalho_complementar, em: [interno, sustentacao, squad_de_problema]}]}
+        exemplo: "Card: permitir exportar o relatório de vendas em planilha para o time financeiro"
+      - nome: "Plano de negócio"
+        descricao: "Retorno esperado, custo, riscos e custo de adiar da oportunidade"
+        quando: {todos: [{var: origem_da_demanda, igual: oportunidade_de_negocio}]}
+        exemplo: "Plano com retorno estimado de 4% de recompra em 6 meses e custo de 2 sprints"
+    status: rascunho
+  - id: levantamento_de_reuso
+    nome: "Levantamento de reuso"
+    descricao: "Soluções, componentes, serviços e decisões existentes avaliados para a necessidade, com o encaixe de cada um"
+    exemplo: "Componente de cupom: atende em parte. Serviço de recomendação: não se aplica."
+    tipo: documento
+    subtipo: analise
+    status: rascunho
+  - id: mapa_de_interessados
+    nome: "Mapa de interessados"
+    descricao: "Quem pede, usa, decide, opera e é afetado pela feature"
+    exemplo: "Pede: liderança comercial. Usa: compradores recorrentes. Decide: PM. Opera: time de pagamentos."
+    tipo: documento
+    subtipo: analise
+    status: rascunho
+  - id: mapa_de_impacto
+    nome: "Mapa de impacto"
+    descricao: "Objetivo, atores, impactos e entregas ligados em um desenho"
+    exemplo: "Mais recompra, comprador recorrente, concluir mais rápido, pagamento em um clique"
+    tipo: diagrama
+    subtipo: mapa_de_impacto
+    status: rascunho
+  - id: caso_de_negocio
+    nome: "Caso de negócio"
+    descricao: "Retorno esperado, custo, risco e custo de adiar da oportunidade"
+    exemplo: "Retorno de 4% de recompra em 6 meses, custo de 2 sprints, risco baixo"
+    tipo: documento
+    subtipo: analise
+    status: rascunho
+  - id: metricas_de_sucesso
+    nome: "Métricas de sucesso"
+    descricao: "OKR e KPI que a iniciativa move, com valor atual, meta e prazo"
+    exemplo: "KR de recompra do trimestre; KPI: recompra em 30 dias de 18% para 20%"
+    tipo: documento
+    subtipo: especificacao
+    status: rascunho
+  - id: necessidade_validada
+    nome: "Necessidade validada"
+    descricao: "Aprovação dos interessados registrada no registro da necessidade"
+    exemplo: "Aprovação do PM e da liderança comercial registrada em 21/11"
+    tipo: acao
+    subtipo: aprovacao
+    status: rascunho
+  - id: comunicado_da_necessidade
+    nome: Comunicado da necessidade
+    descricao: Aviso ao time com o link do registro, o KPI alvo e o próximo passo
+    exemplo: 'Mensagem no canal do time: necessidade validada, KPI de recompra, próximo passo levantamento de requisitos'
+    tipo: acao
+    subtipo: comunicacao
+    status: rascunho
+    destinatarios:
+    - tech_lead
+    - dev
+    - qa
+    - stakeholder
+  # RASCUNHO: revisão humana. Artefatos da seleção, execução e melhoria dos agentes.
+  - id: mapa_de_capacidades
+    nome: Mapa de capacidades por papel
+    descricao: Papel, skills, categorias de ferramenta e limites de autonomia de cada tarefa delegada
+    exemplo: 'Endpoint de cupom: papel Dev, skill de testes de contrato, controle de versão, sem acesso a produção'
+    tipo: documento
+    subtipo: analise
+    status: rascunho
+  - id: selecao_de_agentes
+    nome: Seleção de agentes
+    descricao: Agentes existentes avaliados para cada papel, com o encaixe de cada um
+    exemplo: 'Agente Dev: atende. Agente QA: precisa da skill de evals. Agente de dados: não existe'
+    tipo: documento
+    subtipo: analise
+    status: rascunho
+  - id: agente_do_papel
+    nome: Agente do papel
+    descricao: 'Definição versionada do agente de um papel: instrução, contexto, skills e limites'
+    exemplo: Agente Dev de APIs, versão 3, com instrução para ler a spec de datas
+    tipo: agente
+    status: rascunho
+  - id: skill_do_agente
+    nome: Skill do agente
+    descricao: Capacidade reutilizável que o agente usa para executar um tipo de tarefa
+    exemplo: 'Skill: gerar testes de contrato a partir do esquema da API'
+    tipo: skill
+    status: rascunho
+  - id: configuracao_de_ferramentas
+    nome: Configuração de ferramentas do agente
+    descricao: Categorias de ferramenta liberadas e permissões do agente
+    exemplo: 'Liberados: controle de versão, execução de testes, leitura da documentação. Bloqueado: banco de produção'
+    tipo: acao
+    subtipo: configuracao
+    status: rascunho
+  - id: resultado_dos_testes_de_agentes
+    nome: Resultado dos testes dos agentes
+    descricao: Aprovação, falhas e evidências dos testes dos agentes
+    exemplo: 'Agente Dev: 19 de 20; falhou ao inventar um campo fora da spec'
+    tipo: documento
+    subtipo: relatorio
+    status: rascunho
+  - id: plano_de_agentes
+    nome: Plano de agentes por papel
+    descricao: Quais agentes atuam em cada tarefa, com skills, ferramentas, ondas paralelas e swarm
+    exemplo: 'Onda 2 em swarm: 3 agentes Dev e 1 coordenador; agente QA nos evals; Arquiteto pessoa no ADR'
+    tipo: documento
+    subtipo: plano
+    status: rascunho
+  - id: delegacao_ao_agente
+    nome: Delegação ao agente
+    descricao: Tarefa entregue ao agente com spec, critério de pronto e limites de autonomia
+    exemplo: 'Tarefa delegada ao agente Dev: endpoint de cupom, pronto quando os 6 testes de contrato passarem'
+    tipo: acao
+    subtipo: delegacao
+    status: rascunho
+  - id: codigo_da_feature
+    nome: Código da feature
+    descricao: Código-fonte produzido para a feature
+    exemplo: Endpoint de validação de cupom por histórico de compra
+    tipo: codigo
+    subtipo: aplicacao
+    status: rascunho
+  - id: testes_de_unidade
+    nome: "Testes de unidade"
+    descricao: "Testes rápidos de uma função, classe ou módulo isolado, na base da pirâmide"
+    exemplo: "48 testes da regra de validade do cupom, inclusive o dia exato da expiração"
+    tipo: teste
+    subtipo: unidade
+    status: rascunho
+  - id: testes_de_integracao
+    nome: "Testes de integração"
+    descricao: "Testes que exercitam a entrega com banco, fila, cache ou outro serviço de verdade, no meio da pirâmide"
+    exemplo: "12 testes do checkout com o banco e o cache de cupons em contêiner"
+    tipo: teste
+    subtipo: integracao
+    status: rascunho
+  - id: testes_de_contrato
+    nome: "Testes de contrato"
+    descricao: "Testes que conferem se consumidor e provedor de uma API concordam com o contrato, sem subir os dois juntos"
+    exemplo: "6 contratos entre checkout e cupons, rodando no pipeline dos dois times"
+    tipo: teste
+    subtipo: contrato
+    status: rascunho
+  - id: testes_de_performance
+    nome: "Testes de performance"
+    descricao: "Scripts de carga, estresse e pico com as metas dos requisitos não funcionais"
+    exemplo: "Carga de 2 mil compras por minuto por 30 minutos com p95 abaixo de 300 ms"
+    tipo: teste
+    subtipo: performance
+    status: rascunho
+  - id: testes_de_seguranca
+    nome: "Testes de segurança"
+    descricao: "Testes dinâmicos e de abuso contra a aplicação em execução, como um atacante faria"
+    exemplo: "Injeção, força bruta de códigos de cupom e abuso de taxa no endpoint de validação"
+    tipo: teste
+    subtipo: seguranca
+    status: rascunho
+  - id: documentacao_da_feature
+    nome: Documentação da feature
+    descricao: Documentação técnica e de uso produzida com a feature
+    exemplo: Seção da documentação da API com o novo endpoint e exemplos
+    tipo: documento
+    subtipo: guia
+    status: rascunho
+  - id: pull_request_da_feature
+    nome: Pull request da feature
+    descricao: PR com o código, os testes e a documentação de uma tarefa
+    exemplo: 'PR: valida cupom por histórico, com testes de contrato e documentação'
+    tipo: pull_request
+    status: rascunho
+  - id: entrega_integrada
+    nome: Entrega integrada
+    descricao: Mudança integrada (código, testes e configuração) pronta para publicação e validação; numa feature junta as entregas de agentes e pessoas, num bug é o PR da correção
+    exemplo: PR de integração com os 3 PRs da onda 2 e os ajustes das pessoas
+    tipo: pull_request
+    status: rascunho
+  - id: registro_de_desvio
+    nome: Registro de desvio do agente
+    descricao: Esperado, obtido, evidência e causa de um desvio do agente
+    exemplo: 'Esperado 422, obtido 500 no cupom expirado; causa: contexto'
+    tipo: documento
+    subtipo: registro
+    status: rascunho
+  - id: pedido_de_ajuste_da_spec
+    nome: Pedido de ajuste da spec
+    descricao: Aviso ao dono da spec sobre uma ambiguidade revelada pelo agente
+    exemplo: 'Mensagem ao PM: a spec não define cupom expirado no meio da compra'
+    tipo: acao
+    subtipo: comunicacao
+    status: rascunho
+    destinatarios:
+    - pm
+    - arquiteto
+  - id: aprendizado_do_agente
+    nome: Aprendizado do agente
+    descricao: Desvio, causa e ajuste registrados no catálogo de agentes do time
+    exemplo: 'Agente Dev: erra fuso horário em datas; ajuste na instrução e novo caso de eval'
+    tipo: documento
+    subtipo: registro
+    status: rascunho
+  # RASCUNHO: revisão humana. Artefatos da spec, do setup, dos testes e da homologação.
+  - id: requirements_md
+    nome: requirements.md
+    descricao: Histórias, critérios de aceite em EARS, requisitos não funcionais e, com IA, o requisito probabilístico
+    exemplo: 6 histórias, 14 critérios em EARS e 4 requisitos não funcionais
+    tipo: documento
+    subtipo: especificacao
+    status: rascunho
+  - id: design_md
+    nome: design.md
+    descricao: "Documento que reúne a visão arquitetural: referencia cada diagrama (arquitetura, sequência, entidade e relacionamento, domínio e contextos), os contratos, a stack, a estrutura, os padrões, os riscos e a observabilidade"
+    exemplo: design.md com contexto, contêineres, sequência, contratos e padrões
+    tipo: documento
+    subtipo: especificacao
+    status: rascunho
+  - id: requisitos_de_ia
+    nome: Requisitos de IA
+    descricao: Casos de avaliação, limiar de aceite, custo por chamada, plano B e riscos de alucinação e fornecedor
+    exemplo: Aceite com 90% de sugestões válidas em 50 casos; fallback para regra fixa
+    tipo: documento
+    subtipo: especificacao
+    status: rascunho
+  - id: modelo_de_dominio
+    nome: Modelo de domínio
+    descricao: Eventos, comandos, entidades e regras do domínio
+    exemplo: CupomAplicado, HistoricoConsultado, CupomRecusado
+    tipo: diagrama
+    subtipo: dominio
+    status: rascunho
+  - id: mapa_de_contextos
+    nome: Mapa de contextos
+    descricao: Contextos delimitados, donos, linguagem ubíqua e integrações entre eles
+    exemplo: Promoções consome eventos de Pedidos
+    tipo: diagrama
+    subtipo: contextos
+    status: rascunho
+  - id: diagrama_de_arquitetura
+    nome: Diagrama de arquitetura
+    descricao: Arquitetura em níveis de contexto, contêineres e componentes
+    exemplo: API de promoções, consumidor de eventos, cache de histórico
+    tipo: diagrama
+    subtipo: arquitetura
+    status: rascunho
+  - id: diagrama_de_sequencia
+    nome: Diagrama de sequência
+    descricao: Ordem das chamadas dos fluxos principais
+    exemplo: Checkout chama promoções, que lê o cache de histórico
+    tipo: diagrama
+    subtipo: sequencia
+    status: rascunho
+  - id: diagrama_entidade_relacionamento
+    nome: "Diagrama de entidade e relacionamento (DER)"
+    descricao: "Entidades, atributos, chaves e relacionamentos que a entrega cria, altera, lê ou grava"
+    exemplo: "Cupom 1:N Uso do cupom N:1 Pedido; coluna nova validade_em no cupom, com índice"
+    tipo: diagrama
+    subtipo: der
+    status: rascunho
+  - id: wbs
+    nome: "Estrutura analítica do trabalho (WBS/EAP)"
+    descricao: "A entrega decomposta em pacotes de trabalho, do todo até tarefas pequenas e verificáveis"
+    exemplo: "Cupom de recompra: dados (2 tarefas), regra de validade (3), API (2), tela (2), testes (3)"
+    tipo: diagrama
+    subtipo: wbs
+    status: rascunho
+  - id: cronograma_gantt
+    nome: "Cronograma (Gantt)"
+    descricao: "Tarefas no tempo, com duração, dependências, caminho crítico e marcos"
+    exemplo: "6 semanas; caminho crítico na API de cupons; marco de homologação na semana 5"
+    tipo: diagrama
+    subtipo: gantt
+    status: rascunho
+  - id: roadmap
+    nome: "Roadmap"
+    descricao: "Sequência de entregas e objetivos no tempo (agora, depois, mais tarde), ligada às metas de negócio"
+    exemplo: "Agora: pagamento em um clique; depois: cupom de recompra; mais tarde: assinatura com desconto"
+    tipo: diagrama
+    subtipo: roadmap
+    status: rascunho
+  - id: diagrama_de_ishikawa
+    nome: "Diagrama de Ishikawa (espinha de peixe)"
+    descricao: "Causas possíveis de um problema agrupadas por categoria (método, máquina, material, mão de obra, medida, meio)"
+    exemplo: "Erro 500 com cupom: método (sem teste de expiração), máquina (cache sem invalidação), medida (sem alerta)"
+    tipo: diagrama
+    subtipo: ishikawa
+    status: rascunho
+  - id: grafico_de_pareto
+    nome: "Gráfico de Pareto"
+    descricao: "Causas ou problemas ordenados por frequência ou impacto, mostrando os poucos que concentram a maior parte"
+    exemplo: "3 de 11 origens de escape (contrato, datas, cache) somam 72% dos bugs do trimestre"
+    tipo: diagrama
+    subtipo: pareto
+    status: rascunho
+  - id: visao_de_tecnologia
+    nome: Visão de tecnologia
+    descricao: Tecnologias, stack, estrutura do projeto, padrões de projeto e boas práticas
+    exemplo: Mesmo stack de Promoções, módulo de elegibilidade, Strategy para regras
+    tipo: documento
+    subtipo: especificacao
+    status: rascunho
+  - id: adrs_da_feature
+    nome: ADRs da feature
+    descricao: Registros das decisões de arquitetura da feature
+    exemplo: 'ADR: integração por eventos entre Promoções e Pedidos'
+    tipo: adr
+    status: rascunho
+  - id: adr_de_fornecimento
+    nome: "ADR de fornecimento"
+    descricao: "Decisão registrada de construir, comprar ou assinar, com o relatório de custo, o resultado do Decisor, as alternativas e as consequências"
+    exemplo: "ADR 014: assinar o motor de cupons do fornecedor B; construir custaria R$ 300 mil em 5 anos e atrasaria 4 meses"
+    tipo: adr
+    status: rascunho
+  - id: decisoes_com_stakeholders
+    nome: Decisões aprovadas com stakeholders
+    descricao: Reunião em que os stakeholders afetados aprovam as decisões
+    exemplo: ADR de eventos aprovado com Pedidos e Pagamentos
+    tipo: acao
+    subtipo: aprovacao
+    status: rascunho
+  - id: comunicado_da_spec
+    nome: Comunicado da spec
+    descricao: Aviso ao time com os links da spec e dos ADRs
+    exemplo: Mensagem no canal do time com requirements.md, design.md e ADRs
+    tipo: acao
+    subtipo: comunicacao
+    status: rascunho
+    destinatarios:
+    - tech_lead
+    - dev
+    - qa
+    - arquiteto
+    - times_dependentes
+  - id: matriz_de_papeis
+    nome: Matriz de papéis
+    descricao: Papel principal e de apoio de cada tarefa, com tarefas sensíveis marcadas
+    exemplo: 'Endpoint: Dev, apoio QA; histórico: apoio DevSecOps'
+    tipo: documento
+    subtipo: plano
+    status: rascunho
+  - id: mapa_de_tarefas
+    nome: Mapa de tarefas
+    descricao: Tarefas, papéis, dependências e ordem consolidados
+    exemplo: 9 tarefas, 5 papéis, 3 dependências
+    tipo: documento
+    subtipo: plano
+    status: rascunho
+  - id: ambiente_de_desenvolvimento
+    nome: "Ambiente de desenvolvimento"
+    descricao: "Ambiente compartilhado do time para integrar e rodar a entrega antes da publicação: banco, filas e serviços de apoio de desenvolvimento"
+    exemplo: "Contêineres locais com banco e cache de cupons; ambiente efêmero criado para cada PR"
+    tipo: ambiente
+    subtipo: desenvolvimento
+    status: rascunho
+  - id: ambiente_local
+    nome: "Ambiente local"
+    descricao: "A máquina de quem desenvolve, com as dependências em contêiner e dados sintéticos"
+    exemplo: "Checkout, banco e cache de cupons em contêineres, subidos com um comando"
+    tipo: ambiente
+    subtipo: local
+    status: rascunho
+  - id: ambiente_sandbox
+    nome: "Sandbox do agente"
+    descricao: "Ambiente isolado em que o agente executa, sem acesso a produção nem a segredos reais, descartado ao fim da tarefa"
+    exemplo: "Contêiner por tarefa com o repositório, credenciais de teste e rede restrita"
+    tipo: ambiente
+    subtipo: sandbox
+    status: rascunho
+  - id: ambiente_efemero
+    nome: "Ambiente efêmero por PR"
+    descricao: "Ambiente criado automaticamente para cada pull request e destruído no merge, para testar e revisar a mudança isolada"
+    exemplo: "pr-412.preview com a versão do PR, banco descartável e link no próprio PR"
+    tipo: ambiente
+    subtipo: efemero
+    status: rascunho
+  - id: ambiente_de_qa
+    nome: "Ambiente de QA"
+    descricao: "Ambiente separado do staging em que QA roda testes funcionais e de ponta a ponta sem disputar com outros times"
+    exemplo: "QA do checkout com massa de dados controlada e reset diário"
+    tipo: ambiente
+    subtipo: qa
+    status: rascunho
+  - id: branch_da_feature
+    nome: Branch da feature
+    descricao: Branch isolada onde a feature é desenvolvida
+    exemplo: feature/cupom-recorrente
+    tipo: codigo
+    subtipo: branch
+    status: rascunho
+  - id: contexto_de_execucao
+    nome: Contexto de execução
+    descricao: Spec, design, ADRs, padrões e regras do projeto preparados para pessoas e agentes
+    exemplo: Contexto com estrutura do projeto, convenções de teste e ADRs
+    tipo: documento
+    subtipo: guia
+    status: rascunho
+  - id: plano_de_testes
+    nome: Plano de testes
+    descricao: Critérios de aceite ligados aos testes e à pirâmide
+    exemplo: 14 critérios, 144 testes na pirâmide
+    tipo: documento
+    subtipo: plano
+    status: rascunho
+  - id: resultado_dos_testes
+    nome: Resultado dos testes da feature
+    descricao: Resultado da suíte da feature, com falhas e evidências
+    exemplo: Pipeline verde em 6 minutos
+    tipo: documento
+    subtipo: relatorio
+    status: rascunho
+  - id: jornadas_criticas
+    nome: Jornadas críticas
+    descricao: Jornadas de usuário afetadas que precisam de teste de ponta a ponta
+    exemplo: Compra recorrente com cupom; compra com cupom recusado
+    tipo: documento
+    subtipo: analise
+    status: rascunho
+  - id: testes_e2e
+    nome: Testes de ponta a ponta
+    descricao: Cenários automatizados das jornadas críticas
+    exemplo: 6 cenários de checkout com cupom
+    tipo: teste
+    subtipo: ponta_a_ponta
+    status: rascunho
+  - id: resultado_e2e
+    nome: Resultado dos testes E2E
+    descricao: Resultado dos cenários de ponta a ponta
+    exemplo: 6 de 6 cenários verdes
+    tipo: documento
+    subtipo: relatorio
+    status: rascunho
+  - id: evals
+    nome: "Evals"
+    descricao: "Conjunto de casos, métricas e limiares que avalia um comportamento probabilístico. É o mesmo artefato em dois contextos: a IA aplicada numa feature e os agentes que constroem a entrega"
+    exemplo: "120 casos com resposta esperada, limiar de 90% de acerto, até 2% de alucinação e custo médio abaixo do orçamento"
+    tipo: teste
+    subtipo: evals
+    variantes:
+      - nome: "Evals de IA aplicada"
+        descricao: "Avaliam a feature que usa modelo: qualidade, alucinação, custo por chamada e latência"
+        quando: {todos: [{var: usa_ia, igual: sim}]}
+        exemplo: "Casos de recomendação de produto com o limiar de relevância e o custo por chamada"
+      - nome: "Evals de agente"
+        descricao: "Avaliam o agente que executa tarefas do time: comportamento esperado, limites de permissão e ações proibidas"
+        quando: {todos: [{var: tipo_alocacao, diferente: somente_pessoas}]}
+        exemplo: "Casos que conferem se o agente de código respeita o escopo da tarefa e não toca em segredos"
+    status: rascunho
+  - id: resultado_dos_evals
+    nome: Resultado dos evals
+    descricao: Qualidade, alucinação, custo e latência medidos
+    exemplo: 92% válidas, zero cupons inventados
+    tipo: documento
+    subtipo: relatorio
+    status: rascunho
+  - id: plano_de_performance
+    nome: Plano de performance
+    descricao: Cenários de carga e estresse com metas e dados
+    exemplo: 500 requisições por segundo por 15 minutos
+    tipo: documento
+    subtipo: plano
+    status: rascunho
+  - id: resultado_performance
+    nome: Resultado de performance
+    descricao: Latência, vazão e ponto de ruptura medidos
+    exemplo: p95 de 240 ms; ruptura em 1.800 req/s
+    tipo: documento
+    subtipo: relatorio
+    status: rascunho
+  - id: relatorio_de_seguranca
+    nome: Relatório de segurança
+    descricao: Achados da análise estática, de dependências, de segredos e dos testes dinâmicos
+    exemplo: Nenhum achado alto ou crítico; uma dependência média corrigida
+    tipo: documento
+    subtipo: relatorio
+    status: rascunho
+  - id: relatorio_de_custo
+    nome: "Relatório de custo"
+    descricao: "Custo de construir, de comprar e de assinar no curto (até 6 meses), médio (1 a 2 anos) e longo prazo (3 a 5 anos), mais o custo de não fazer, o ROI esperado e o orçamento previsto"
+    exemplo: "Construir: R$ 180 mil agora e R$ 60 mil por ano; assinar: R$ 20 mil agora e R$ 90 mil por ano; não fazer: R$ 40 mil por mês de recompra perdida; ROI de 3,2 vezes em 2 anos; orçamento previsto de R$ 250 mil"
+    tipo: documento
+    subtipo: relatorio
+    status: rascunho
+  - id: resultado_do_decisor
+    nome: "Resultado do Decisor"
+    descricao: "Justificativa auditável do Decisor: nota, peso e contribuição de cada critério, o total de cada opção, o desempate e o contexto financeiro"
+    exemplo: "Objetivo cumprir_prazo: assinar 4, comprar 3,2, construir 2,8; recomendação: assinar"
+    tipo: documento
+    subtipo: relatorio
+    status: rascunho
+  - id: avaliacao_de_fornecedores
+    nome: "Avaliação de fornecedores"
+    descricao: "Comparação dos fornecedores em aderência aos requisitos, arquitetura, segurança, privacidade, SLA, suporte e plano de saída"
+    exemplo: "3 fornecedores avaliados; o B atende os requisitos, tem SLA de 99,9% e exportação completa dos dados"
+    tipo: documento
+    subtipo: analise
+    status: rascunho
+  - id: contrato_do_fornecedor
+    nome: "Contrato do fornecedor"
+    descricao: "Contrato assinado com escopo, preço, SLA, cláusulas de segurança e privacidade e o plano de saída"
+    exemplo: "Assinatura anual do fornecedor B com SLA de 99,9%, crédito por indisponibilidade e exportação dos dados na saída"
+    tipo: documento
+    subtipo: registro
+    status: rascunho
+  - id: estrategia_de_liberacao
+    nome: Estratégia de liberação
+    descricao: 'Como a feature chega aos usuários: feature branch, feature flag, teste A/B ou liberação gradual'
+    exemplo: Flag ligada para 10% dos compradores recorrentes
+    tipo: documento
+    subtipo: plano
+    status: rascunho
+  - id: plano_de_teste_ab
+    nome: Plano de teste A/B
+    descricao: Variante, controle, métrica, tamanho da amostra e duração
+    exemplo: 50% com o cupom; recompra em 30 dias; 3 semanas
+    tipo: documento
+    subtipo: plano
+    status: rascunho
+  - id: ambiente_de_homologacao
+    nome: "Ambiente de homologação"
+    descricao: Versão integrada publicada em homologação com dados representativos
+    exemplo: Versão publicada em homologação com dados mascarados
+    tipo: ambiente
+    subtipo: homologacao
+    status: rascunho
+  - id: ambiente_de_pre_producao
+    nome: "Ambiente de pré-produção"
+    descricao: "Espelho de produção em infraestrutura, configuração e volume, usado para validar mudanças de alto risco antes de implantar"
+    exemplo: "Pré-produção com a mesma topologia de produção e cópia mascarada dos dados da véspera"
+    tipo: ambiente
+    subtipo: pre_producao
+    status: rascunho
+  - id: resultado_homologacao
+    nome: Resultado da homologação
+    descricao: Resultado dos testes integrados em homologação
+    exemplo: 3 fluxos integrados verdes
+    tipo: documento
+    subtipo: relatorio
+    status: rascunho
+  - id: aceite_do_negocio
+    nome: Aceite do negócio
+    descricao: Aceite do PM e dos interessados registrado após a demonstração
+    exemplo: Aceite registrado pelo PM
+    tipo: acao
+    subtipo: aprovacao
+    status: rascunho
+  - id: parecer_do_review
+    nome: Parecer do review
+    descricao: Resultado da revisão humana, com ajustes pedidos quando houver
+    exemplo: Aprovado com um ajuste em casos de borda
+    tipo: documento
+    subtipo: registro
+    status: rascunho
+  - id: analise_da_reprovacao
+    nome: Análise da reprovação
+    descricao: Evidências e causa de uma reprovação
+    exemplo: 'p95 de 900 ms; causa: histórico sem cache'
+    tipo: documento
+    subtipo: analise
+    status: rascunho
+  - id: ajuste_da_spec
+    nome: Ajuste da spec
+    descricao: Mudança em requirements, design ou ADR a partir de uma reprovação
+    exemplo: Critério de recusa com motivo adicionado
+    tipo: acao
+    subtipo: ajuste
+    status: rascunho
+  - id: tarefa_de_correcao
+    nome: Tarefa de correção
+    descricao: Card com a correção e o teste que precisa passar
+    exemplo: Adicionar cache ao histórico; pronto quando a carga passar
+    tipo: acao
+    subtipo: card
+    status: rascunho
+  # RASCUNHO: revisão humana. Artefatos do levantamento, da revisão de PR, da publicação, da implantação e da validação em produção.
+  - id: requisitos_levantados
+    nome: Requisitos levantados
+    descricao: Requisitos, regras, fluxos e evidências levantados com as técnicas de elicitação
+    exemplo: 14 requisitos, 3 variações de fluxo e o funil de abandono
+    tipo: documento
+    subtipo: especificacao
+    status: rascunho
+  - id: historias_refinadas
+    nome: Histórias refinadas
+    descricao: Histórias INVEST com critérios de aceite em exemplos
+    exemplo: 6 histórias com 14 critérios
+    tipo: documento
+    subtipo: especificacao
+    status: rascunho
+  - id: definition_of_done
+    nome: Definition of Done
+    descricao: 'Mínimo para considerar pronto: critérios de aceite, gates de qualidade e segurança, requisitos cobertos por testes'
+    exemplo: Critérios atendidos, gates de qualidade e segurança aprovados, requisitos funcionais e não funcionais cobertos por testes
+    tipo: documento
+    subtipo: checklist
+    status: rascunho
+  - id: cards_da_feature
+    nome: Cards da feature
+    descricao: Cards descritos na ferramenta de gestão do fluxo do time, com critérios e dependências
+    exemplo: 6 cards com critérios de aceite e link para o registro da necessidade
+    tipo: acao
+    subtipo: card
+    status: rascunho
+  - id: card_do_epico
+    nome: "Card do épico"
+    descricao: "Criação do épico no backlog, com o objetivo, as métricas e as features em que ele se quebra"
+    exemplo: "Épico Programa de fidelidade: objetivo de recompra, 6 features, 3 times, alvo no próximo PI"
+    tipo: acao
+    subtipo: card
+    status: rascunho
+  - id: contrato_funcional_e_tecnico
+    nome: Contrato funcional e técnico de pronto
+    descricao: 'O que a feature precisa cumprir na visão de negócio e técnica: critérios, testes por nível, análise de vulnerabilidades e metas não funcionais'
+    exemplo: Critérios, testes esperados, análise de vulnerabilidades e metas de latência
+    tipo: documento
+    subtipo: especificacao
+    status: rascunho
+  - id: revisao_dos_prs
+    nome: Revisão dos PRs
+    descricao: Comentários classificados por gravidade e nível da pirâmide de revisão, com a validação dos bloqueantes
+    exemplo: 2 bloqueantes de nível 1 corrigidos, 3 sugestões de nível 3
+    tipo: documento
+    subtipo: registro
+    status: rascunho
+  - id: versao_da_feature
+    nome: Versão da feature
+    descricao: Versão gerada pelo pipeline conforme a estratégia de versionamento do time
+    exemplo: Versão 4.12.0 a partir do merge da feature
+    tipo: commit
+    status: rascunho
+  - id: ambiente_de_staging
+    nome: "Ambiente de staging"
+    descricao: "Ambiente de testes integrados atualizado com a versão publicada, igual à produção em configuração e sem dados reais"
+    exemplo: "Staging com a versão 4.12.0, saudável e com a configuração de produção"
+    tipo: ambiente
+    subtipo: staging
+    status: rascunho
+  - id: ambiente_de_carga
+    nome: "Ambiente de carga"
+    descricao: "Ambiente separado, dimensionado como produção, para os testes de carga e estresse não afetarem o staging"
+    exemplo: "Réplica do checkout com a mesma capacidade de produção e massa de dados sintética"
+    tipo: ambiente
+    subtipo: carga
+    status: rascunho
+  - id: ambiente_de_producao
+    nome: "Ambiente de produção"
+    descricao: "Onde os usuários usam a entrega, com a versão implantada, a configuração real e o monitoramento"
+    exemplo: "Produção com a versão 4.12.1 em todas as regiões, flags conferidas e painel de observabilidade ativo"
+    tipo: ambiente
+    subtipo: producao
+    status: rascunho
+  - id: ambiente_de_dr
+    nome: "Ambiente de recuperação de desastre (DR)"
+    descricao: "Réplica de produção em outra região ou provedor, pronta para assumir o tráfego quando a produção principal cai"
+    exemplo: "Região secundária com banco replicado em até 5 minutos e failover por DNS em 15 minutos"
+    tipo: ambiente
+    subtipo: dr
+    status: rascunho
+  - id: implantacao_em_producao
+    nome: Implantação em produção
+    descricao: Versão implantada em produção conforme a estratégia de liberação
+    exemplo: 4.12.0 implantada com a flag desligada
+    tipo: acao
+    subtipo: implantacao
+    status: rascunho
+  - id: checklist_de_implantacao
+    nome: Checklist de implantação
+    descricao: Versão, saúde, indicadores de monitoramento, logs e negócio conferidos após a implantação
+    exemplo: Instâncias na 4.12.0, health checks verdes, erro e latência estáveis
+    tipo: documento
+    subtipo: checklist
+    status: rascunho
+  - id: reversao_da_implantacao
+    nome: Reversão da implantação
+    descricao: Versão revertida ou feature desligada
+    exemplo: Flag desligada em 1 minuto
+    tipo: acao
+    subtipo: reversao
+    status: rascunho
+  - id: comunicado_de_reversao
+    nome: Comunicado de reversão
+    descricao: Aviso ao time sobre a reversão e o motivo
+    exemplo: Implantação revertida por erro no consumidor
+    tipo: acao
+    subtipo: comunicacao
+    status: rascunho
+    destinatarios:
+    - tech_lead
+    - sre
+    - stakeholder
+    - suporte
+  - id: comunicado_de_lancamento
+    nome: Comunicado de lançamento
+    descricao: Aviso aos stakeholders, ao suporte e aos times dependentes
+    exemplo: Aviso com data, público e como desligar
+    tipo: acao
+    subtipo: comunicacao
+    status: rascunho
+    destinatarios:
+    - stakeholder
+    - suporte
+    - times_dependentes
+  - id: notas_de_versao
+    nome: Notas de versão
+    descricao: Notas da versão e documentação de uso publicadas
+    exemplo: Notas da 4.12.0 e guia do atendimento
+    tipo: acao
+    subtipo: comunicacao
+    status: rascunho
+    destinatarios:
+    - suporte
+    - stakeholder
+    - times_dependentes
+  - id: onda_liberada
+    nome: Onda liberada
+    descricao: Público que passou a ver a feature em uma onda do rollout
+    exemplo: 'Onda 1: 10% dos recorrentes do Sudeste'
+    tipo: acao
+    subtipo: liberacao
+    status: rascunho
+  - id: relatorio_de_monitoramento
+    nome: Relatório de monitoramento
+    descricao: Indicadores técnicos e de negócio da feature em produção
+    exemplo: SLO em 99,95%, p95 de 260 ms, recompra de 19,4%
+    tipo: documento
+    subtipo: relatorio
+    status: rascunho
+  - id: resultado_da_validacao
+    nome: Resultado da validação em produção
+    descricao: Resultado contra as metas de sucesso ao fim da janela de validação
+    exemplo: Meta de 20% de recompra atingida em 4 semanas
+    tipo: documento
+    subtipo: relatorio
+    status: rascunho
+  - id: escopo_da_feature
+    nome: Escopo da feature
+    descricao: O que entra, a prioridade e o que fica fora do escopo
+    exemplo: 'Entra: elegibilidade e recusa com motivo. Fora: assinaturas e relatório.'
+    tipo: documento
+    subtipo: especificacao
+    status: rascunho
+  - id: checklist_de_prontidao
+    nome: Checklist de prontidão
+    descricao: Definition of Ready conferida por história
+    exemplo: 6 de 6 histórias prontas, estimadas e sem bloqueio
+    tipo: documento
+    subtipo: checklist
+    status: rascunho

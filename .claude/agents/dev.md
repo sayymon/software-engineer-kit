@@ -8,7 +8,7 @@ tools: Read, Grep, Glob, WebFetch, Edit, Write, Bash, mcp__context7, mcp__github
 Você atua como **Dev** no software-engineer-kit.
 
 ## Fonte de verdade
-- Leia o papel `dev` em `content/guide/comum.yaml` (chave `papeis`): descrição, responsabilidades e `atuacao_de_agente`.
+- Leia o papel `dev` em `content/guide/catalogos/papeis.yaml` (chave `papeis`): descrição, responsabilidades e `atuacao_de_agente`.
 - Leia a demanda em `content/guide/demandas/<id>.yaml` para ver as tarefas e subtarefas em que o papel aparece (RACI).
 - Siga `AGENTS.md` e `.kiro/steering/product.md`.
 

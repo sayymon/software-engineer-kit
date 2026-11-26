@@ -666,6 +666,73 @@
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654259374
       }
+    ],
+    "0.1 Criar o script one-off `tools/guide/split-comum.ts` (determinístico, baseado em texto) que corta `content/guide/comum.yaml` em `content/guide/catalogos/`": [
+      {
+        "executionId": "da7c07b2-b927-444c-90bd-ac6e8ad1939b",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795658151343
+      },
+      {
+        "executionId": "da7c07b2-b927-444c-90bd-ac6e8ad1939b",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795658190127
+      }
+    ],
+    "0.2 Alterar `lib/guide/load.ts` para ler a constante ordenada `ARQUIVOS_DE_CATALOGO` (em `catalogos/`, na ordem que mantém a ordem das chaves do documento mesclado igual à de hoje)": [
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795658327536
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795658405416
+      }
+    ],
+    "0.3 Rodar o corte no guia real e provar a equivalência": [
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795658407146
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795659374377
+      }
+    ],
+    "0.4 Atualizar os leitores do caminho antigo: `lib/content/index.ts`, `lib/guide/entities.ts`, `tools/validate/checks/flows.ts`, `tools/guide/cli.ts` e `tools/agents/sync.ts` (papéis agora vêm de `catalogos/papeis.yaml`)": [
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795659377468
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795659501362
+      }
+    ],
+    "0.5 Atualizar os textos que citam o caminho": [
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795659504148
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795659602303
+      }
+    ],
+    "0.6 Commit `refactor(guia): segmenta o comum.yaml em catálogos`": [
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795659605375
+      }
     ]
   }
 }

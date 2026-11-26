@@ -4,7 +4,7 @@
 // the suffix `_<tipo>` (papel `seguranca` becomes `seguranca_papel`). Guide techniques merged into a kit note
 // (`guia_ids`) get no entity: their id stays an alias of the kit note.
 import { dirname, join } from 'node:path';
-import type { GuideFile } from './load';
+import { ARQUIVO_COMUM, ARQUIVO_RAIAS_COMUNS, ARQUIVO_RITOS, PASTA_CATALOGOS, PASTA_DEMANDAS, type GuideFile } from './load';
 import { SUBTIPOS, TIPOS, TIPOS_LEGADOS } from './taxonomia';
 
 type Obj = Record<string, any>;
@@ -99,13 +99,15 @@ export function deriveGuideEntities(files: GuideFile[], kit: KitRef[], contentRo
   const demandOf = new Map<string, GuideFile>();
   // Collect items per tipo in the order of the plan (demandas, raias, nodes, ...).
   const byFile = (name: string) => files.find((f) => f.name === name);
-  const comum = byFile('comum.yaml');
-  const raiasComuns = byFile('raias-comuns.yaml');
-  const ritos = byFile('ritos.yaml');
-  const demandFiles = files.filter((f) => f.name.startsWith('demandas/'));
+  // Common files: comum.yaml and the catalog files, as ordered by the loader (lib/guide/load.ts).
+  const comum = byFile(ARQUIVO_COMUM);
+  const commonFiles = files.filter((f) => f.name === ARQUIVO_COMUM || f.name.startsWith(`${PASTA_CATALOGOS}/`));
+  const raiasComuns = byFile(ARQUIVO_RAIAS_COMUNS);
+  const ritos = byFile(ARQUIVO_RITOS);
+  const demandFiles = files.filter((f) => f.name.startsWith(`${PASTA_DEMANDAS}/`));
   for (const f of files) for (const key of Object.keys(f.data)) if (!KNOWN_KEYS.has(key) && Array.isArray(f.data[key]) && f.data[key].length > 0) problems.push(`${f.name}: collection "${key}" has no mapping`);
   const demandSources: Array<{ file: GuideFile; header: Obj; parts: GuideFile[] }> = [];
-  if (raiasComuns) demandSources.push({ file: raiasComuns, header: (raiasComuns.data.demandas as Obj[])[0], parts: [comum as GuideFile, raiasComuns] });
+  if (raiasComuns) demandSources.push({ file: raiasComuns, header: (raiasComuns.data.demandas as Obj[])[0], parts: [...commonFiles, raiasComuns] });
   for (const f of demandFiles) demandSources.push({ file: f, header: (f.data.demandas as Obj[])[0], parts: [f] });
   for (const d of demandSources) demandOf.set(d.header.id, d.file);
 
@@ -143,10 +145,10 @@ export function deriveGuideEntities(files: GuideFile[], kit: KitRef[], contentRo
   for (const d of demandSources) for (const part of d.parts) for (const p of (part.data.playbooks as Obj[] | undefined) ?? []) add('playbook', p.id, fileOf(part), p);
   for (const f of files) for (const q of (f.data.perguntas as Obj[] | undefined) ?? []) add('pergunta', q.id, fileOf(f), q);
   for (const d of demandSources) for (const part of d.parts) for (const c of (part.data.celulas as Obj[] | undefined) ?? []) add('celula', `celula_${c.demanda}_${c.requisito}`, fileOf(part), c);
-  for (const a of (comum?.data.artefatos as Obj[] | undefined) ?? []) add('artefato', a.id, fileOf(comum as GuideFile), a);
+  for (const f of commonFiles) for (const a of (f.data.artefatos as Obj[] | undefined) ?? []) add('artefato', a.id, fileOf(f), a);
   for (const d of demandFiles) for (const a of (d.data.artefatos as Obj[] | undefined) ?? []) add('artefato', a.id, fileOf(d), a);
-  for (const v of (comum?.data.variaveis as Obj[] | undefined) ?? []) add('variavel', v.id, fileOf(comum as GuideFile), v);
-  for (const p of (comum?.data.papeis as Obj[] | undefined) ?? []) add('papel', p.id, fileOf(comum as GuideFile), p);
+  for (const f of commonFiles) for (const v of (f.data.variaveis as Obj[] | undefined) ?? []) add('variavel', v.id, fileOf(f), v);
+  for (const f of commonFiles) for (const p of (f.data.papeis as Obj[] | undefined) ?? []) add('papel', p.id, fileOf(f), p);
   for (const r of (ritos?.data.ritos as Obj[] | undefined) ?? []) add('rito', r.id, fileOf(ritos as GuideFile), r);
   for (const [collection, tipo] of Object.entries(COLLECTION_TIPO)) {
     for (const f of files) {
@@ -302,7 +304,7 @@ export function deriveGuideEntities(files: GuideFile[], kit: KitRef[], contentRo
           ...strip(i, ['id', 'nome']),
           publico: i.publico ?? false,
           ...(p.guideId === 'comum' && comum
-            ? { versao: comum.data.versao, ordem_das_demandas: comum.data.ordem_das_demandas, decisor_construir_comprar_assinar: comum.data.decisor_construir_comprar_assinar }
+            ? { versao: comum.data.versao, ordem_das_demandas: comum.data.ordem_das_demandas, decisor_construir_comprar_assinar: parts.map((f) => f.data.decisor_construir_comprar_assinar).find((v) => v !== undefined) }
             : {}),
           ...lists,
         };
