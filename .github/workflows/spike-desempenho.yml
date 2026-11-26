@@ -1,0 +1,63 @@
+name: spike-desempenho
+# Medições do spike de desempenho (spec experiencia-fluxos-catalogo, fase 1). Roda só sob demanda,
+# sempre no mesmo tipo de runner, e publica os JSON de docs/spike-fluxos/ como artefato.
+on:
+  workflow_dispatch:
+permissions: {}
+concurrency:
+  group: spike-desempenho-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  medir:
+    name: medir
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22.23.4
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Register the runner type
+        env:
+          RUNS_ON: ubuntu-latest
+        run: |
+          mkdir -p docs/spike-fluxos
+          {
+            echo "runs-on label: $RUNS_ON"
+            echo "RUNNER_OS: $RUNNER_OS"
+            echo "RUNNER_ARCH: $RUNNER_ARCH"
+            echo "RUNNER_ENVIRONMENT: $RUNNER_ENVIRONMENT"
+            echo "ImageOS: ${ImageOS:-unknown}"
+            echo "ImageVersion: ${ImageVersion:-unknown}"
+            echo "vCPU: $(nproc)"
+            echo "Memory: $(awk '/MemTotal/ {printf "%.1f GiB", $2/1048576}' /proc/meminfo)"
+          } | tee "$RUNNER_TEMP/runner-info.txt"
+          RUNNER_INFO="$(cat "$RUNNER_TEMP/runner-info.txt")" node -e '
+            const info = Object.fromEntries(process.env.RUNNER_INFO.split("\n").map((l) => l.split(/: (.*)/s).slice(0, 2)));
+            require("node:fs").writeFileSync("docs/spike-fluxos/runner.json", JSON.stringify(info, null, 2) + "\n");
+          '
+      - run: npm run build
+        env:
+          KIT_LOCALES: pt-BR
+      - name: Run the performance and spike specs
+        run: |
+          specs=(tests/browser/performance.spec.ts)
+          if [ -d tests/browser/spike ] && [ -n "$(find tests/browser/spike -name '*.spec.ts' -print -quit)" ]; then
+            specs+=(tests/browser/spike/)
+          else
+            echo "tests/browser/spike/ ausente ou sem specs: rodando só o performance.spec.ts"
+          fi
+          npx playwright test "${specs[@]}"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: ${{ !cancelled() }}
+        with:
+          name: spike-fluxos-json
+          path: docs/spike-fluxos/*.json
+          if-no-files-found: error
