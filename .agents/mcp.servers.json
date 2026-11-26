@@ -1,0 +1,18 @@
+{
+  "context7": {
+    "description": "Documentação atual de bibliotecas e frameworks",
+    "type": "local",
+    "command": ["npx", "-y", "@upstash/context7-mcp"]
+  },
+  "playwright": {
+    "description": "Navegador para testes de jornada e inspeção de telas",
+    "type": "local",
+    "command": ["npx", "-y", "@playwright/mcp@latest"]
+  },
+  "github": {
+    "description": "Issues, PRs, code scanning e workflows. Exige a variável GITHUB_PERSONAL_ACCESS_TOKEN no ambiente",
+    "type": "remote",
+    "url": "https://api.githubcopilot.com/mcp/",
+    "tokenEnv": "GITHUB_PERSONAL_ACCESS_TOKEN"
+  }
+}

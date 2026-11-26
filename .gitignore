@@ -1,4 +1,12 @@
-.agents/
+.agents/*
+!.agents/roles/
+!.agents/mcp.servers.json
+!.agents/models.json
+!.agents/README.md
+!.agents/SKILLS.md
+# Externally sourced skills are regenerated from skills-lock.json.
+.claude/skills/
+.kiro/skills/
 node_modules/
 dist/
 .astro/

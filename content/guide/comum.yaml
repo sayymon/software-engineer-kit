@@ -2014,7 +2014,7 @@ papeis:
     - Facilitar o refinement, a planning e a review
     - Decidir se um relato é defeito, comportamento esperado ou pedido de feature
     - Comunicar mudanças, incidentes e resultados a stakeholders e suporte
-    atuacao_de_agente: apoio
+    atuacao_de_agente: execucao
     status: rascunho
   - id: stakeholder
     nome: Stakeholder
@@ -2035,7 +2035,7 @@ papeis:
     - Garantir a documentação técnica, as notas de versão e os guias de uso
     - Decidir hotfix, prontidão (Definition of Ready) e escalada técnica
     - Conduzir a análise de escape e o post-mortem
-    atuacao_de_agente: apoio
+    atuacao_de_agente: execucao
     status: rascunho
   - id: arquiteto
     nome: Arquiteto de Software
@@ -2044,7 +2044,7 @@ papeis:
     - Avaliar reuso e encaixe arquitetural
     - Desenhar a solução e registrar as decisões em ADR
     - Revisar no desenho os riscos de integração, desempenho e segurança
-    atuacao_de_agente: apoio
+    atuacao_de_agente: execucao
     status: rascunho
   - id: dev
     nome: Dev
@@ -2083,7 +2083,7 @@ papeis:
     - Implantar com rollback pronto e monitorar a produção
     - Comandar ou conduzir a resposta a incidentes
     - Decidir severidade, contenção e estabilidade do serviço
-    atuacao_de_agente: apoio
+    atuacao_de_agente: execucao
     status: rascunho
   - id: engenheiro_de_dados
     nome: Engenharia de dados
@@ -2101,7 +2101,7 @@ papeis:
     - Desenhar jornadas e interfaces
     - Validar a experiência com usuários
     - Garantir a acessibilidade das jornadas
-    atuacao_de_agente: apoio
+    atuacao_de_agente: execucao
     status: rascunho
   - id: suporte
     nome: Suporte e atendimento
