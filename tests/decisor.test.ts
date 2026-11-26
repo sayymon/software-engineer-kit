@@ -28,6 +28,11 @@ describe('decisor (bloco do guia)', () => {
     expect(r.avaliacoes[0].total).toBe(3.8);
     expect(r.avaliacoes[0].linhas[0]).toEqual({ criterio: 'diferenciacao', nota: 5, peso: 0.4, contribuicao: 2 });
   });
+  it('escapes backslashes and quotes in a non-numeric note like Python repr', () => {
+    const notas = flat(3);
+    (notas.construir as Record<string, unknown>).risco = 'a\\b\'c\nd';
+    expect(() => decidir(config, 'reduzir_custo', notas as Notas)).toThrow("não é um número: \"a\\\\b'c\\nd\"");
+  });
   it('rejects unknown goals and options, missing or out of scale notes with DecisorError', () => {
     expect(() => decidir(config, 'inexistente', flat(3))).toThrow(DecisorError);
     const missing = flat(3);

@@ -81,7 +81,11 @@ function pyStr(v: unknown): string {
 
 /** Python `repr()` of a JSON scalar, for error messages. */
 function pyRepr(v: unknown): string {
-  if (typeof v === 'string') return v.includes("'") && !v.includes('"') ? `"${v}"` : `'${v.replace(/'/g, "\\'")}'`;
+  if (typeof v === 'string') {
+    const aspas = v.includes("'") && !v.includes('"') ? '"' : "'";
+    const esc = v.replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/\r/g, '\\r').replace(/\t/g, '\\t');
+    return aspas + (aspas === "'" ? esc.replace(/'/g, "\\'") : esc) + aspas;
+  }
   return pyStr(v);
 }
 
