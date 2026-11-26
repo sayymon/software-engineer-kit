@@ -50,7 +50,7 @@ Convenções:
   - verificação: `npm run validate` e o check `public-terms` verdes
   - agentes: executor `dev`, revisores `arquiteto` e `qa`
   - _Requisitos: 15.7_
-- [-] 0.6 Commit `refactor(guia): segmenta o comum.yaml em catálogos`
+- [x] 0.6 Commit `refactor(guia): segmenta o comum.yaml em catálogos`
   - _Requisitos: 15.7_
 
 ### Fase 1: spike de desempenho
@@ -93,38 +93,38 @@ Convenções:
 
 ### Fase 2: dados do guia e regras do validador (somente `feature`)
 
-- [ ] 2.1 Estender `schema/flows.schema.json` com `categorias_ferramenta`, `guias_praticos` e o marcador explícito de "sem ferramenta aplicável" (campo opcional booleano, nome fixado nesta tarefa) em `$defs/Decisao` e `$defs/Subtarefa`
+- [x] 2.1 Estender `schema/flows.schema.json` com `categorias_ferramenta`, `guias_praticos` e o marcador explícito de "sem ferramenta aplicável" (campo opcional booleano, nome fixado nesta tarefa) em `$defs/Decisao` e `$defs/Subtarefa`
   - listar os campos nas `properties`, porque `additionalProperties` é `false`
   - verificação: `npm run validate` segue verde e um documento com os campos novos passa no schema (teste em `tests/guide/`)
   - _Requisitos: 10.1, 10.2, 18.6_
-- [ ] 2.2 Acrescentar `categorias_ferramenta` e `guias_praticos` a `REF_FIELDS` em `lib/guide/entities.ts` e emitir `REF_QUEBRADA` com o id da tarefa, o campo e o id não resolvido
+- [x] 2.2 Acrescentar `categorias_ferramenta` e `guias_praticos` a `REF_FIELDS` em `lib/guide/entities.ts` e emitir `REF_QUEBRADA` com o id da tarefa, o campo e o id não resolvido
   - `guias_praticos` resolve só para notas `guia-pratico`
   - defeitos plantados em `tests/guide/defeitos/` para os dois campos, em tarefa e em subtarefa
   - _Requisitos: 10.3, 13.5_
-- [ ] 2.3 Portar as regras novas para `lib/guide/validate/`: aviso de duplicidade (`CATEGORIA_FERRAMENTA_DUPLICADA`, `GUIA_PRATICO_DUPLICADO`) e completude `SEM_FERRAMENTA_OU_GUIA`
+- [x] 2.3 Portar as regras novas para `lib/guide/validate/`: aviso de duplicidade (`CATEGORIA_FERRAMENTA_DUPLICADA`, `GUIA_PRATICO_DUPLICADO`) e completude `SEM_FERRAMENTA_OU_GUIA`
   - a completude lê a constante `DEMANDAS_COM_LIGACAO_OBRIGATORIA`, que nasce vazia (a tarefa 2.9 inclui `feature`)
   - defeitos plantados e teste de que demandas sem os campos seguem válidas
   - _Requisitos: 10.4, 10.16, 18.3, 18.6_
-- [ ] 2.4 Escrever o adendo "Atualização da etapa 3" em `docs/adr/0001-yaml-como-fonte-unica.md` e o teste de guarda de `content/ids.lock.json`
+- [x] 2.4 Escrever o adendo "Atualização da etapa 3" em `docs/adr/0001-yaml-como-fonte-unica.md` e o teste de guarda de `content/ids.lock.json`
   - o adendo registra a extensão do schema e a regra de que a ligação tarefa para ferramenta e guia vive no Guia_YAML
   - o teste compara o lock atual com o da `main` e falha se um id sumir
   - _Requisitos: 10.5, 10.6_
-- [ ] 2.5 Declarar em `content/guide/catalogos/ferramentas.yaml` as Categorias_de_Ferramenta que as tarefas da `feature` usam (`categorias_ferramenta`, hoje vazio), com nome e descrição agnósticos
+- [x] 2.5 Declarar em `content/guide/catalogos/ferramentas.yaml` as Categorias_de_Ferramenta que as tarefas da `feature` usam (`categorias_ferramenta`, hoje vazio), com nome e descrição agnósticos
   - verificação: `npm run validate`, e os ids novos entram em `content/ids.lock.json` sem remover nenhum antigo
   - _Requisitos: 10.1, 10.6_
-- [ ] 2.6 Ligar a `categorias_ferramenta` e `guias_praticos` as tarefas e subtarefas da `feature` na primeira terça parte das raias, na ordem do guia (`content/guide/demandas/feature.yaml`)
+- [x] 2.6 Ligar a `categorias_ferramenta` e `guias_praticos` as tarefas e subtarefas da `feature` na primeira terça parte das raias, na ordem do guia (`content/guide/demandas/feature.yaml`)
   - ligar só a guias que já existem em `content/pt-BR/guides/`, e marcar "sem ferramenta aplicável" quando for o caso
   - o texto dos passos permanece agnóstico, sem nome de ferramenta
   - verificação: `npm run validate` sem erro
   - _Requisitos: 10.8, 10.16, 18.3_
-- [ ] 2.7 Mesma ligação para a segunda terça parte das raias da `feature`
+- [x] 2.7 Mesma ligação para a segunda terça parte das raias da `feature`
   - _Requisitos: 10.8, 10.16, 18.3_
-- [ ] 2.8 Mesma ligação para a terceira terça parte das raias da `feature`
+- [x] 2.8 Mesma ligação para a terceira terça parte das raias da `feature`
   - _Requisitos: 10.8, 10.16, 18.3_
-- [ ] 2.9 Incluir `feature` em `DEMANDAS_COM_LIGACAO_OBRIGATORIA` e confirmar `npm run validate` estrito sem avisos de completude
+- [x] 2.9 Incluir `feature` em `DEMANDAS_COM_LIGACAO_OBRIGATORIA` e confirmar `npm run validate` estrito sem avisos de completude
   - confirmar que as outras 11 Demandas seguem sem alteração (`npm test` verde)
   - _Requisitos: 10.16, 18.3, 18.5_
-- [ ] 2.10 Commit `feat(guia): ligação de tarefas a categorias de ferramenta e guias práticos`
+- [-] 2.10 Commit `feat(guia): ligação de tarefas a categorias de ferramenta e guias práticos`
   - _Requisitos: 10.1, 10.5_
 
 ### Fase 3: Modelo_de_Grafo e `lib/flow-graph`

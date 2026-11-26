@@ -75,6 +75,7 @@ const REF_FIELDS: Record<string, string[]> = {
   padroes: ['padrao-guia'],
   estrategias: ['estrategia'],
   categorias_ferramenta: ['categoria-ferramenta'],
+  guias_praticos: ['guia-pratico'],
   entradas: ARTEFATO_OU_VARIAVEL,
   saidas: ARTEFATO_OU_VARIAVEL,
   perguntas: ['pergunta'],
@@ -87,6 +88,11 @@ const REF_FIELDS: Record<string, string[]> = {
   demanda: ['demanda'],
   requisito: ['requisito'],
 };
+/**
+ * Fields resolved strictly: an id that is not of the expected tipo is a REF_QUEBRADA (no fallback to another tipo).
+ * `guias_praticos` points to kit notes of tipo `guia-pratico`; `categorias_ferramenta` to guide tool categories.
+ */
+const STRICT_REF_FIELDS: Record<string, true> = { categorias_ferramenta: true, guias_praticos: true };
 const wiki = (id: string) => `[[${id}]]`;
 const strip = (o: Obj, drop: string[]): Obj => Object.fromEntries(Object.entries(o).filter(([k, v]) => !drop.includes(k) && v !== undefined));
 const asList = (v: unknown): unknown[] => (Array.isArray(v) ? v : v === undefined || v === null ? [] : [v]);
@@ -163,6 +169,10 @@ export function deriveGuideEntities(files: GuideFile[], kit: KitRef[], contentRo
 
   // Resolution of a guide id to a final id.
   const unresolved = new Set<string>();
+  const broken = new Set<string>();
+  const kitGuideIds = new Map(kit.filter((k) => k.tipo === 'guia-pratico').map((k) => [k.id, k.id]));
+  const resolveStrict = (guideId: unknown, tipo: string): string | undefined =>
+    typeof guideId !== 'string' ? undefined : tipo === 'guia-pratico' ? kitGuideIds.get(guideId) : registry.get(guideId)?.find((x) => x.tipo === tipo)?.id;
   const resolve = (guideId: unknown, prefer: string[]): string | undefined => {
     if (typeof guideId !== 'string') return undefined;
     const list = registry.get(guideId);
@@ -224,7 +234,16 @@ export function deriveGuideEntities(files: GuideFile[], kit: KitRef[], contentRo
       if (target !== p.id && !out.includes(target)) out.push(wiki(target));
     };
     const item = p.item;
+    for (const [field, [tipo]] of Object.entries(REF_FIELDS).filter(([f]) => f in STRICT_REF_FIELDS)) {
+      for (const v of asList(item[field])) {
+        const target = resolveStrict(v, tipo);
+        if (target) {
+          if (target !== p.id && !out.includes(wiki(target))) out.push(wiki(target));
+        } else if (typeof v === 'string') broken.add(`REF_QUEBRADA ${p.guideId}: ${field} referencia id não resolvido '${v}'`);
+      }
+    }
     for (const [field, prefer] of Object.entries(REF_FIELDS)) {
+      if (field in STRICT_REF_FIELDS) continue;
       if (p.tipo === 'celula' && field === 'perguntas_chave') continue;
       for (const v of asList(item[field])) add1(typeof v === 'object' && v !== null ? (v as Obj).tecnica : v, prefer);
     }
@@ -365,5 +384,6 @@ export function deriveGuideEntities(files: GuideFile[], kit: KitRef[], contentRo
     entities.push({ id: p.id, guideId: p.guideId, tipo: p.tipo, relPath, file: p.file, data: JSON.parse(JSON.stringify(data)) as Obj });
   }
   for (const u of [...unresolved].sort()) problems.push(`unresolved guide reference ${u}`);
+  problems.push(...broken);
   return { entities, aliases, problems };
 }

@@ -215,6 +215,23 @@
     "aprova": {
       "type": "string",
       "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+    },
+    "categorias_ferramenta": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+      }
+    },
+    "guias_praticos": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+      }
+    },
+    "sem_ferramenta": {
+      "type": "boolean"
     }
   },
   "required": [

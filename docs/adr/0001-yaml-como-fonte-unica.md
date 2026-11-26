@@ -53,3 +53,13 @@ A paridade com o Python é provada por testes de regressão contra saídas grava
 ## Atualização: catálogos em arquivos
 
 O YAML segue como fonte única da metodologia. O `comum.yaml` único foi segmentado em `content/guide/catalogos/*.yaml` (papéis, artefatos, variáveis, técnicas, requisitos, ferramentas, fontes e decisor), e o `comum.yaml` mantém o cabeçalho, `versao` e `ordem_das_demandas`. O loader mescla os arquivos e entrega o mesmo guia, com as mesmas chaves na mesma ordem.
+
+## Atualização da etapa 3
+
+A etapa 3 (catálogo, fluxos e guias práticos) estende o schema do guia, `schema/flows.schema.json`, sem trocar a fonte única:
+
+- `categorias_ferramenta` e `guias_praticos` passam a ser campos opcionais de tarefas e subtarefas (`$defs/Decisao` e `$defs/Subtarefa`). Cada item é um id que resolve para uma categoria de ferramenta ou para uma nota `guia-pratico`. Id que não resolve gera `REF_QUEBRADA`.
+- `sem_ferramenta` é um marcador booleano opcional que declara que nenhuma ferramenta se aplica àquela tarefa ou subtarefa. Ele distingue "sem ferramenta aplicável" de "ligação esquecida" na regra de completude `SEM_FERRAMENTA_OU_GUIA`.
+- A ligação tarefa para ferramenta e guia vive no Guia_YAML, no fluxo da demanda. Ferramentas, categorias e guias não guardam a lista de tarefas que os usam. A página deles obtém essa lista pelas relações inversas, e os fluxos apontam para a nota sem copiar o conteúdo dela.
+- Demandas sem os campos novos seguem válidas. A completude só vale para as demandas listadas em `DEMANDAS_COM_LIGACAO_OBRIGATORIA` (a `feature` primeiro).
+- `content/ids.lock.json` só cresce. O teste `tests/ids/lock-vs-main.test.ts` compara o lock atual com o da `main` (ou `origin/main`) e falha se um id de entidade, de guia ou de passo sumir.
