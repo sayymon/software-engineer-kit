@@ -3,7 +3,7 @@
 // explicit `ordem`, subtasks and edges. No fs or node:* imports: this module also compiles for the client.
 import { descreverCondicao } from '../guide/rastreio';
 import { ModeloDeGrafo, VERSAO_MODELO_DE_GRAFO } from '../schema/grafo';
-import type { ArestaDoGrafo, NoDoGrafo, RaiaDoGrafo, SubtarefaGrafo } from '../schema/grafo';
+import type { ArestaDoGrafo, LigacaoDoGrafo, NoDoGrafo, RaiaDoGrafo, SubtarefaGrafo } from '../schema/grafo';
 import { type Contexto, GeracaoError, contexto, isMap, lista } from './contexto';
 import { ordenarNatural } from '../flow-mermaid/order';
 import type { Item } from '../flow-mermaid/types';
@@ -21,7 +21,7 @@ const truthy = (v: unknown): boolean => !(v == null || v === '' || v === 0 || v 
 const texto = (v: unknown, padrao: string): string => (truthy(v) ? String(v) : padrao);
 const cor = (v: unknown): string => (typeof v === 'string' && RE_COR.test(v) ? v.toUpperCase() : COR_PADRAO);
 
-function subtarefas(no: Item): SubtarefaGrafo[] {
+function subtarefas(no: Item, papeis: Map<string, string>): SubtarefaGrafo[] {
   if (no.tipo !== 'tarefa') return [];
   const subs = (no.subtarefas ?? []).filter((s: unknown) => isMap(s) && truthy(s.id));
   return subs.map((s: Item, ordem: number) => {
@@ -33,10 +33,25 @@ function subtarefas(no: Item): SubtarefaGrafo[] {
       condicional: truthy(s.quando),
     };
     if (quando) sub.quando = quando;
-    if (truthy(s.papel)) sub.papel = String(s.papel);
+    if (truthy(s.papel)) {
+      sub.papel = String(s.papel);
+      const nome = papeis.get(String(s.papel));
+      if (nome !== undefined) sub.papelNome = nome;
+    }
     if (truthy(s.responsavel)) sub.responsavel = s.responsavel;
     return sub as SubtarefaGrafo;
   });
+}
+
+function ligacoes(ctx: Contexto, no: Item): LigacaoDoGrafo[] {
+  return (no.ligacoes ?? [])
+    .filter((l: unknown) => isMap(l))
+    .map((l: Item) => ({
+      rotulo: texto(l.rotulo, 'ligação'),
+      tipo: texto(l.tipo, ''),
+      demandaDestino: texto(ctx.demandas.get(String(l.demanda_destino))?.nome, texto(l.demanda_destino, '')),
+      para: texto(l.para, ''),
+    }));
 }
 
 function nosDoGrafo(ctx: Contexto, playbooks: Set<string>): NoDoGrafo[] {
@@ -49,7 +64,9 @@ function nosDoGrafo(ctx: Contexto, playbooks: Set<string>): NoDoGrafo[] {
     const saida: Record<string, unknown> = { id, tipo: no.tipo, rotulo: texto(no.rotulo, id), raia, ordem };
     if (no.tipo === 'chamada') saida.raiaChamada = String(no.raia_chamada);
     if (no.tipo === 'fim' && truthy(no.retorno)) saida.retorno = String(no.retorno);
-    saida.subtarefas = subtarefas(no);
+    saida.subtarefas = subtarefas(no, ctx.papeis);
+    const ligs = ligacoes(ctx, no);
+    if (ligs.length) saida.ligacoes = ligs;
     saida.temPlaybook = truthy(no.playbook) && playbooks.has(String(no.playbook));
     return saida as NoDoGrafo;
   });
@@ -63,6 +80,17 @@ function inicioDaRaia(ctx: Contexto, raiaId: string): string | null {
     if (n.raia === raiaId && n.tipo === 'inicio') return i;
   }
   return null;
+}
+
+/** Plain `proximo` edges in display order. */
+function transicoesDoGrafo(ctx: Contexto): ArestaDoGrafo[] {
+  const saida: ArestaDoGrafo[] = [];
+  for (const i of ctx.ordemNos) {
+    for (const p of (ctx.nos.get(i) as Item).proximo ?? []) {
+      if (isMap(p) && ctx.nos.has(String(p.para))) saida.push(aresta(i, String(p.para), texto(p.condicao, '')));
+    }
+  }
+  return saida;
 }
 
 /** `proximo` edges plus call and return edges, same selection as the Mermaid `completo` view. */
@@ -138,6 +166,7 @@ export function gerarGrafo(doc: Item, demandaId: string): ModeloDeGrafo {
     raias: raiasDoGrafo(ctx),
     nos: nosDoGrafo(ctx, playbooks),
     arestas: arestasDoGrafo(ctx),
+    transicoes: transicoesDoGrafo(ctx),
   };
   const r = ModeloDeGrafo.safeParse(bruto);
   if (!r.success) {
@@ -159,3 +188,6 @@ export function gerarGrafos(doc: Item): Map<string, ModeloDeGrafo> {
   }
   return saida;
 }
+
+export { textoAcessivel } from './texto-acessivel';
+export type { NoTexto, RaiaTexto, TransicaoTexto } from './texto-acessivel';

@@ -344,6 +344,11 @@
         "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
         "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
         "timestamp": 1795661550552
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661620931
       }
     ],
     "4.1 Adaptar `lib/flow-mermaid/index.ts` para montar o texto a partir de `ModeloDeGrafo` em `gerarDiagramaDoGrafo` nas Views `visao`, `raia:<id>` e `completo`, sem Subtarefas": [
@@ -351,6 +356,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257321
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661625809
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661814374
       }
     ],
     "4.2 Cobrir Subtarefas, legenda e `mapaIds` em `gerarDiagramaDoGrafo` e manter `gerarDiagrama(doc, demandaId, visao, ...)` como camada de compatibilidade, inclusive `visoesDoGuia` e `guiaParaDoc` das 3 notas": [
@@ -358,6 +373,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257348
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661817773
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661921101
       }
     ],
     "4.3 Escrever os testes de propriedade `tests/flow-graph/mermaid.props.test.ts`": [
@@ -365,6 +390,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257374
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661921116
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662037564
       }
     ],
     "4.4 Implementar `textoAcessivel(grafo)` em `lib/flow-graph/` e usá-lo em `site/src/render/flow.ts` para a lista ordenada de Nós por Raia com as transições, mantendo os playbooks em `<details>`": [
@@ -372,6 +407,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257400
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661625816
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661814383
       }
     ],
     "4.5 Remover do build o caminho que lê o YAML direto, deixando-o só como oráculo de teste em `tests/`, e documentar no `docs/architecture.md` que o grafo é a fonte do Texto_Mermaid": [
@@ -379,6 +424,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257425
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662037575
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662161345
       }
     ],
     "4.6 Commit `refactor(fluxos): texto mermaid derivado do modelo de grafo`": [
@@ -386,6 +441,11 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257451
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662161354
       }
     ],
     "5.1 Implementar `lib/flow-graph/expansao.ts` (`ConjuntoExpandido`, `ClusterDeRaia`, `ArestaVisivel`, `GrafoVisivel`, `projetar`, `chaveDoConjunto`, `lerConjunto` e `normalizar`) em TypeScript puro": [

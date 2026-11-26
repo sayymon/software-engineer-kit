@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
 // Static JSON API payloads. A backend can replace these endpoints later; ids stay the keys.
 import type { Page } from '@lib/content/site';
-import { gerarDiagrama } from '@lib/flow-mermaid';
+import { gerarGrafo } from '@lib/flow-graph';
+import { gerarDiagramaDoGrafo } from '@lib/flow-mermaid';
 import { construirFatos } from '@lib/ecossistema/fatos';
 import { construirJornadas } from '@lib/home/jornadas';
 import { construirPayload, construirShards } from '@lib/ecossistema/payload';
@@ -37,7 +38,8 @@ export function flowJson(ctx: Ctx, page: Page) {
   const raias = Array.isArray(d.raias) ? d.raias : [];
   const diagrams: Record<string, string> = {};
   if (!library && raias.length) {
-    for (const view of ['visao', 'completo']) diagrams[view] = gerarDiagrama(ctx.doc(), page.id, view).texto;
+    const grafo = gerarGrafo(ctx.doc(), page.id);
+    for (const view of ['visao', 'completo']) diagrams[view] = gerarDiagramaDoGrafo(grafo, view).texto;
   }
   return {
     id: page.id,

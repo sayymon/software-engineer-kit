@@ -109,6 +109,9 @@
                 "papel": {
                   "type": "string"
                 },
+                "papelNome": {
+                  "type": "string"
+                },
                 "responsavel": {
                   "type": "string",
                   "enum": [
@@ -123,6 +126,33 @@
                 "rotulo",
                 "ordem",
                 "condicional"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "ligacoes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "rotulo": {
+                  "type": "string"
+                },
+                "tipo": {
+                  "type": "string"
+                },
+                "demandaDestino": {
+                  "type": "string"
+                },
+                "para": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "rotulo",
+                "tipo",
+                "demandaDestino",
+                "para"
               ],
               "additionalProperties": false
             }
@@ -144,6 +174,33 @@
       }
     },
     "arestas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "origem": {
+            "type": "string"
+          },
+          "destino": {
+            "type": "string"
+          },
+          "rotulo": {
+            "type": "string"
+          },
+          "tracejada": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "origem",
+          "destino",
+          "rotulo",
+          "tracejada"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "transicoes": {
       "type": "array",
       "items": {
         "type": "object",

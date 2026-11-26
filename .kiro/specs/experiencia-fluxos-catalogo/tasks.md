@@ -150,29 +150,29 @@ Convenções:
 - [x] 3.6 Criar a rota Astro `site/src/pages/[locale]/api/flows/[id].graph.json.ts` com `getStaticPaths` sobre as Demandas não biblioteca
   - teste que cada grafo publicado tem no máximo 200 kB gzip, e `npm run smoke` cobre as rotas novas
   - _Requisitos: 17.1, 15.8_
-- [-] 3.7 Commit `feat(site): modelo de grafo do fluxo e API estática`
+- [x] 3.7 Commit `feat(site): modelo de grafo do fluxo e API estática`
   - _Requisitos: 17.1_
 
 ### Fase 4: Mermaid derivado do Modelo_de_Grafo, com paridade dos goldens
 
-- [ ] 4.1 Adaptar `lib/flow-mermaid/index.ts` para montar o texto a partir de `ModeloDeGrafo` em `gerarDiagramaDoGrafo` nas Views `visao`, `raia:<id>` e `completo`, sem Subtarefas
+- [x] 4.1 Adaptar `lib/flow-mermaid/index.ts` para montar o texto a partir de `ModeloDeGrafo` em `gerarDiagramaDoGrafo` nas Views `visao`, `raia:<id>` e `completo`, sem Subtarefas
   - o módulo não usa `fs` nem `node:*`, para compilar também para o cliente
   - verificação: goldens dessas Views iguais byte a byte nas 12 Demandas
   - _Requisitos: 19.6, 19.8_
-- [ ] 4.2 Cobrir Subtarefas, legenda e `mapaIds` em `gerarDiagramaDoGrafo` e manter `gerarDiagrama(doc, demandaId, visao, ...)` como camada de compatibilidade, inclusive `visoesDoGuia` e `guiaParaDoc` das 3 notas
+- [x] 4.2 Cobrir Subtarefas, legenda e `mapaIds` em `gerarDiagramaDoGrafo` e manter `gerarDiagrama(doc, demandaId, visao, ...)` como camada de compatibilidade, inclusive `visoesDoGuia` e `guiaParaDoc` das 3 notas
   - verificação: `tests/mermaid-parity` verde sem edição, com e sem Subtarefas
   - _Requisitos: 19.6, 19.8_
-- [ ] 4.3 Escrever os testes de propriedade `tests/flow-graph/mermaid.props.test.ts`
+- [x] 4.3 Escrever os testes de propriedade `tests/flow-graph/mermaid.props.test.ts`
   - **Property 4: O Texto_Mermaid é função pura do Modelo_de_Grafo**
   - **Property 5: Paridade byte a byte entre o gerador antigo e o novo caminho**
   - **Validates: Requirements 19.8, 19.9**
-- [ ] 4.4 Implementar `textoAcessivel(grafo)` em `lib/flow-graph/` e usá-lo em `site/src/render/flow.ts` para a lista ordenada de Nós por Raia com as transições, mantendo os playbooks em `<details>`
+- [x] 4.4 Implementar `textoAcessivel(grafo)` em `lib/flow-graph/` e usá-lo em `site/src/render/flow.ts` para a lista ordenada de Nós por Raia com as transições, mantendo os playbooks em `<details>`
   - teste unitário da função e do HTML gerado para a `feature`
   - _Requisitos: 2.10, 19.7_
-- [ ] 4.5 Remover do build o caminho que lê o YAML direto, deixando-o só como oráculo de teste em `tests/`, e documentar no `docs/architecture.md` que o grafo é a fonte do Texto_Mermaid
+- [x] 4.5 Remover do build o caminho que lê o YAML direto, deixando-o só como oráculo de teste em `tests/`, e documentar no `docs/architecture.md` que o grafo é a fonte do Texto_Mermaid
   - verificação: `npm run build`, `npm test` e `npm run smoke` verdes
   - _Requisitos: 19.6, 19.10_
-- [ ] 4.6 Commit `refactor(fluxos): texto mermaid derivado do modelo de grafo`
+- [-] 4.6 Commit `refactor(fluxos): texto mermaid derivado do modelo de grafo`
   - _Requisitos: 19.6, 19.8_
 
 ### Fase 5: expansão progressiva no modelo

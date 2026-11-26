@@ -11,7 +11,7 @@ The kit is a static site built from Markdown and YAML content, with shared TypeS
 | `content/guide/` | Engineering guide source: 15 YAML files copied verbatim from the frozen guide commit. Single source of the methodology (ADR 0001). Typed entities are derived from it at load time. |
 | `content/data/` | Pure data (tool table rows, checklist base), validated 1:1 with the source rows. |
 | `content/ids.lock.json` | Frozen ids. The validator fails when a locked id disappears. |
-| `lib/` | Shared code: `schema`, `content`, `ids`, `wikilinks`, `terms`, `flow-mermaid`, `guide`. `lib/guide/` loads `content/guide/`, derives the typed guide entities and ports the artifact taxonomy. |
+| `lib/` | Shared code: `schema`, `content`, `ids`, `wikilinks`, `terms`, `flow-graph`, `flow-mermaid`, `guide`. `lib/guide/` loads `content/guide/`, derives the typed guide entities and ports the artifact taxonomy. |
 | `schema/` | JSON Schemas generated from Zod (`schema/json/`), the vendored guide schema and the frozen id seed. |
 | `site/` | Astro project (pages, components, UI strings, public assets). |
 | `tools/` | Scripts run with `tsx`: `validate`, `preview`, `schema`, `site`, plus `guide` (the guide command: validar, rastrear, decidir) and the `private` runner for migration tools that need the private folder. |
@@ -28,7 +28,7 @@ The kit is a static site built from Markdown and YAML content, with shared TypeS
 
 ## Mermaid
 
-`lib/flow-mermaid` ports the reference diagram generator (flow order, ids, Okabe-Ito colors, escapes, views `visao`, `raia:<id>` and `completo`). `tests/mermaid-parity` compares its output byte for byte with goldens produced by the reference. The browser renders diagrams with the vendored Mermaid bundle in `site/public/vendor/mermaid/`, loaded only on pages that contain a diagram, with the Mermaid source in a `<pre>` as the no-JavaScript fallback.
+`lib/flow-graph` builds the Modelo_de_Grafo of each demand from the guide document (`gerarGrafo`). The graph is the source of the Mermaid text: `lib/flow-mermaid` renders it (`gerarDiagramaDoGrafo`) and the accessible text, the `api/flows/<id>.graph.json` endpoint and the diagrams all derive from the same graph. No build path reads the guide YAML straight into Mermaid; the former YAML-driven generator survives only as a test oracle in `tests/flow-graph/oraculo-antigo.ts`. `lib/flow-mermaid` ports the reference diagram generator (flow order, ids, Okabe-Ito colors, escapes, views `visao`, `raia:<id>` and `completo`). `tests/mermaid-parity` compares its output byte for byte with goldens produced by the reference. The browser renders diagrams with the vendored Mermaid bundle in `site/public/vendor/mermaid/`, loaded only on pages that contain a diagram, with the Mermaid source in a `<pre>` as the no-JavaScript fallback.
 
 ## Validation
 
@@ -87,7 +87,7 @@ C4Container
   Person(reader, "Reader")
   System_Boundary(kit, "software-engineer-kit") {
     Container(content, "Content", "Markdown + YAML", "content/pt-BR, content/en, content/guide, content/data, ids.lock.json")
-    Container(lib, "Shared libraries", "TypeScript", "lib/: schema, content, ids, wikilinks, terms, flow-mermaid, guide")
+    Container(lib, "Shared libraries", "TypeScript", "lib/: schema, content, ids, wikilinks, terms, flow-graph, flow-mermaid, guide")
     Container(tools, "Tools", "tsx scripts", "tools/: validate, preview, schema, site, guide")
     Container(site, "Site", "Astro 7, static output", "Pages, islands, Pagefind index, static API")
   }
@@ -110,7 +110,8 @@ C4Component
     Component(repo, "content", "ContentRepository", "FsContentRepository merges pt-BR source and en overlay")
     Component(guide, "guide", "Loader and validator", "44 rule codes, derives typed entities from content/guide")
     Component(wiki, "wikilinks and ids", "unified plugin", "Resolves links and enforces ids.lock.json")
-    Component(fm, "flow-mermaid", "Generator", "Views visao, raia and completo")
+    Component(fg, "flow-graph", "Graph model", "Modelo_de_Grafo per demand, source of the Mermaid text")
+    Component(fm, "flow-mermaid", "Generator", "Renders the graph: views visao, raia and completo")
   }
   Container_Boundary(sitec, "site/") {
     Component(index, "SiteIndex", "kit.ts", "Routes, inverse relations, typed edges")
@@ -126,6 +127,9 @@ C4Component
   Rel(index, repo, "Reads")
   Rel(page, index, "Asks for entity")
   Rel(page, render, "Renders")
+  Rel(fg, guide, "Reads the guide document")
+  Rel(fm, fg, "Renders the graph")
+  Rel(render, fg, "Builds the graph")
   Rel(render, fm, "Diagram source")
   Rel(page, islands, "Mounts")
   Rel(index, api, "Feeds")

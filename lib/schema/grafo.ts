@@ -20,9 +20,23 @@ export const SubtarefaGrafo = z.strictObject({
   /** Descrição legível da condição. */
   quando: z.string().optional(),
   papel: z.string().optional(),
+  /** Nome legível do papel, quando o guia o declara. */
+  papelNome: z.string().optional(),
   responsavel: z.enum(['agente', 'pessoa', 'ambos']).optional(),
 });
 export type SubtarefaGrafo = z.infer<typeof SubtarefaGrafo>;
+
+/** Ligação de um nó para outra Demanda (ponte tracejada nas Views `visao` e `completo`). */
+export const LigacaoDoGrafo = z.strictObject({
+  rotulo: z.string(),
+  /** Tipo da ligação, texto pronto para exibição (pode ser vazio). */
+  tipo: z.string(),
+  /** Nome legível da Demanda de destino. */
+  demandaDestino: z.string(),
+  /** Id do nó de destino. */
+  para: z.string(),
+});
+export type LigacaoDoGrafo = z.infer<typeof LigacaoDoGrafo>;
 
 export const NoDoGrafo = z.strictObject({
   id,
@@ -37,6 +51,8 @@ export const NoDoGrafo = z.strictObject({
   /** Só tipo `fim`. */
   retorno: z.string().optional(),
   subtarefas: z.array(SubtarefaGrafo),
+  /** Ligações para outras Demandas. Ausente quando o nó não tem nenhuma. */
+  ligacoes: z.array(LigacaoDoGrafo).optional(),
   temPlaybook: z.boolean(),
 });
 export type NoDoGrafo = z.infer<typeof NoDoGrafo>;
@@ -68,6 +84,12 @@ export const ModeloDeGrafo = z.strictObject({
   raias: z.array(RaiaDoGrafo),
   nos: z.array(NoDoGrafo),
   arestas: z.array(ArestaDoGrafo),
+  /**
+   * Transições `proximo` de cada nó, na ordem de exibição, sem as arestas de chamada/retorno e sem a
+   * substituição das saídas de chamadas. O texto Mermaid das Views `visao` e `raia:<id>` parte delas,
+   * porque `arestas` já traz a seleção da View `completo`. Ausente em grafos montados à mão.
+   */
+  transicoes: z.array(ArestaDoGrafo).optional(),
 });
 export type ModeloDeGrafo = z.infer<typeof ModeloDeGrafo>;
 

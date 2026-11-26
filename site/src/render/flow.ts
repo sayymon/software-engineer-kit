@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
 // Demand flow pages: raias with responsabilidade, Mermaid views, playbooks and the build, buy or subscribe table read from the guide.
 import type { Page } from '@lib/content/site';
-import { gerarDiagrama } from '@lib/flow-mermaid';
+import { gerarGrafo, textoAcessivel } from '@lib/flow-graph';
+import { gerarDiagramaDoGrafo } from '@lib/flow-mermaid';
 import { configDoGuia } from '@lib/decisor';
 import { type Ctx, diagram, esc, inline, label, section, table, dl, val } from './util';
 
@@ -35,6 +36,32 @@ export function matrizTable(ctx: Ctx): string {
   );
 }
 
+/** Ordered list of nodes per lane with their transitions, generated from the Modelo_de_Grafo. Visible without JavaScript. */
+export function textoAcessivelHtml(ctx: Ctx, demandaId: string): string {
+  const lanes = textoAcessivel(gerarGrafo(ctx.doc(), demandaId));
+  return lanes
+    .map((r) => {
+      const items = r.nos
+        .map((n) => {
+          const out = n.transicoes
+            .map((t) => {
+              const cond = t.rotulo ? `${esc(t.rotulo)}: ` : '';
+              const alvo = `${esc(t.destinoRotulo)} (${esc(t.destinoRaia)})`;
+              return `<li>${esc(ctx.t(t.tracejada ? 'flow.text.cross' : 'flow.text.to'))} ${cond}${alvo}</li>`;
+            })
+            .join('');
+          return (
+            `<li><strong>${esc(n.rotulo)}</strong> <span class="muted">(${esc(ctx.t(`node.${n.tipo}`))})</span>` +
+            (out ? `<ul>${out}</ul>` : '') +
+            `</li>`
+          );
+        })
+        .join('');
+      return `<h3>${esc(r.nome)}</h3><ol>${items}</ol>`;
+    })
+    .join('');
+}
+
 export function renderDemand(ctx: Ctx, page: Page): { html: string; diagrams: number } {
   const d = page.entity.data;
   const raias = Array.isArray(d.raias) ? (d.raias as Item[]) : [];
@@ -43,13 +70,15 @@ export function renderDemand(ctx: Ctx, page: Page): { html: string; diagrams: nu
   const library = d.biblioteca === true;
   let diagrams = 0;
   let diagramHtml = '';
+  let textHtml = '';
   if (!library && raias.length) {
-    const doc = ctx.doc();
+    const grafo = gerarGrafo(ctx.doc(), page.id);
     for (const view of ['visao', 'completo'] as const) {
-      const g = gerarDiagrama(doc, page.id, view);
+      const g = gerarDiagramaDoGrafo(grafo, view);
       diagramHtml += diagram(ctx, `${page.id}.${view}`, ctx.t(`view.${view}`), g.texto);
       diagrams += 1;
     }
+    textHtml = textoAcessivelHtml(ctx, page.id);
   }
   const raiaRows = raias.map((r) => [
     `<span class="swatch" style="background:${esc(r.cor ?? '#888888')}" aria-hidden="true"></span> ${esc(r.nome)}`,
@@ -88,6 +117,7 @@ export function renderDemand(ctx: Ctx, page: Page): { html: string; diagrams: nu
       [ctx.t('col.lanes'), esc(raias.length)],
     ]) +
     section(ctx.t('s.diagrams'), diagramHtml ? `<p class="muted">${esc(ctx.t('s.diagrams.hint'))}</p>${diagramHtml}` : '', 'diagrams') +
+    section(ctx.t('s.textflow'), textHtml ? `<p class="muted">${esc(ctx.t('s.textflow.hint'))}</p>${textHtml}` : '', 'textflow') +
     section(ctx.t('s.lanes'), table([ctx.t('col.lane'), ctx.t('col.responsibility'), ctx.t('col.orchestrator')], raiaRows)) +
     section(ctx.t('s.playbooks'), playbookHtml) +
     section(ctx.t('s.roles'), papeisHtml) +
