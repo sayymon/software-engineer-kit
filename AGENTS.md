@@ -39,7 +39,7 @@ npm run skills:restore # restaura as versões fixadas no skills-lock.json
 - Um conceito, uma nota, um tipo. Fluxos, stacks e guias apontam para a nota e nunca copiam o conteúdo.
 - Dados com fonte e data. O que não foi confirmado fica como "não verificado".
 - Conteúdo nasce em pt-BR. Ids e campos estruturais ficam fora do overlay `en`.
-- Arquivos de código levam `SPDX-License-Identifier: MIT`. Conteúdo é CC BY 4.0.
+- Arquivos de código levam o cabeçalho SPDX com a licença MIT. Conteúdo é CC BY 4.0.
 - Nada de dados pessoais, caminhos absolutos locais, e-mails ou segredos (o check `public-terms` bloqueia).
 - Commits e título de PR em Conventional Commits. Merge por squash para `main`.
 - Segurança: siga `.kiro/steering/appsec-rules.md` (espelhado em `.claude/rules/`). O gate `.appsec/` roda a cada escrita.

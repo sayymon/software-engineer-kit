@@ -12,7 +12,7 @@ Convenções:
 - Toda propriedade do design vira teste `fast-check` com no mínimo 100 execuções e o comentário `Feature: experiencia-fluxos-catalogo, Property N: <enunciado>`. Propriedades do mesmo módulo ficam na mesma tarefa de teste.
 - Specs de navegador usam movimento real do ponteiro (mouse down, move, up) e leem `page.url()` depois de cada interação (Requisitos 15.10 e 16.6).
 - Todo texto novo de interface entra em `site/src/i18n` em pt-BR e en na mesma tarefa que o cria. A fase 10 audita a paridade das chaves.
-- Arquivos de código novos levam `SPDX-License-Identifier: MIT`. Nenhuma tarefa escreve caminho absoluto local, e-mail ou segredo (check `public-terms`).
+- Arquivos de código novos levam o cabeçalho SPDX com a licença MIT. Nenhuma tarefa escreve caminho absoluto local, e-mail ou segredo (check `public-terms`).
 
 ## Tasks
 

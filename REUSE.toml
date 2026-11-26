@@ -16,6 +16,12 @@ path = [
   "CODE_OF_CONDUCT.pt-BR.md",
   "SECURITY.md",
   "LICENSE-CONTENT",
+  "AGENTS.md",
+  ".agents/**/*.md",
+  ".kiro/steering/**",
+  ".kiro/specs/**",
+  ".claude/agents/**",
+  ".opencode/agents/**",
 ]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Saymon Silva"
@@ -51,6 +57,12 @@ path = [
   "REUSE.toml",
   ".gitignore",
   ".gitleaks.toml",
+  ".agents/*.json",
+  ".kiro/agents/**",
+  ".kiro/settings/**",
+  ".mcp.json",
+  "opencode.json",
+  "skills-lock.json",
 ]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Saymon Silva"

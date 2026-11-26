@@ -9,7 +9,7 @@ Decisões do dono incorporadas: o bundle adiado tem limite de 450 kB gzip; a tel
 Regras de execução:
 
 - Toda tarefa que muda código roda `npm run validate` e `npm test` antes de fechar.
-- Arquivos de código levam `SPDX-License-Identifier: MIT`.
+- Arquivos de código levam o cabeçalho SPDX com a licença MIT.
 - A tarefa 1.1 (spike) é um portão: se ela não provar 30 quadros por segundo, as tarefas de renderizador (fase 4) esperam a revisão do design de arestas.
 
 ## Tasks
