@@ -28,6 +28,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654630171
+      },
+      {
+        "executionId": "4678af7d-b33b-47d4-9d32-47847663619f",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795710039070
+      },
+      {
+        "executionId": "4678af7d-b33b-47d4-9d32-47847663619f",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795712562730
       }
     ],
     "1.3 Medir S3 e S4 em `tests/browser/spike/s3-s4.spec.ts`": [
@@ -35,6 +45,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654256617
+      },
+      {
+        "executionId": "4678af7d-b33b-47d4-9d32-47847663619f",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795712565617
+      },
+      {
+        "executionId": "4678af7d-b33b-47d4-9d32-47847663619f",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795713687664
       }
     ],
     "1.4 Medir S5 em `tests/browser/spike/s5.spec.ts`: protótipo descartável do Renderizador próprio (`@dagrejs/dagre` em Worker, SVG gerado pelo kit) para 224 nós": [
@@ -42,6 +62,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654256652
+      },
+      {
+        "executionId": "4678af7d-b33b-47d4-9d32-47847663619f",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795713690929
+      },
+      {
+        "executionId": "4678af7d-b33b-47d4-9d32-47847663619f",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795719491505
       }
     ],
     "1.5 Medir S6 em `tests/browser/spike/s6.spec.ts`: build ESM dividida do Mermaid 11.17.2 (flowchart e dagre por `import()`) servida por `tests/browser/serve.ts`": [
@@ -49,6 +79,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654256693
+      },
+      {
+        "executionId": "4678af7d-b33b-47d4-9d32-47847663619f",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795719494950
+      },
+      {
+        "executionId": "4678af7d-b33b-47d4-9d32-47847663619f",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795720045420
       }
     ],
     "1.6 Escrever `docs/spike-fluxos-desempenho.md` com as tabelas de S1 a S6 e a seção \"Resultado do spike\" no `design.md`": [
@@ -56,6 +96,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654256727
+      },
+      {
+        "executionId": "4678af7d-b33b-47d4-9d32-47847663619f",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795720048678
+      },
+      {
+        "executionId": "4678af7d-b33b-47d4-9d32-47847663619f",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795721741648
       }
     ],
     "1.7 Checkpoint: apresentar ao dono o go/no-go do spike e aguardar a decisão": [
@@ -63,6 +113,11 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654256759
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795734656705
       }
     ],
     "1.8 Commit `docs(site): spike de desempenho do diagrama de fluxos`": [
@@ -70,6 +125,11 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654256786
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795734659646
       }
     ],
     "2.1 Estender `schema/flows.schema.json` com `categorias_ferramenta`, `guias_praticos` e o marcador explícito de \"sem ferramenta aplicável\" (campo opcional booleano, nome fixado nesta tarefa) em `$defs/Decisao` e `$defs/Subtarefa`": [
@@ -446,6 +506,11 @@
         "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
         "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
         "timestamp": 1795662161354
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662214227
       }
     ],
     "5.1 Implementar `lib/flow-graph/expansao.ts` (`ConjuntoExpandido`, `ClusterDeRaia`, `ArestaVisivel`, `GrafoVisivel`, `projetar`, `chaveDoConjunto`, `lerConjunto` e `normalizar`) em TypeScript puro": [
@@ -453,6 +518,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257484
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662221955
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662348523
       }
     ],
     "5.2 Escrever os testes de propriedade `tests/flow-graph/expansao.props.test.ts` com grafos aleatórios e os grafos reais das 12 Demandas": [
@@ -460,6 +535,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257521
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662353073
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662523961
       }
     ],
     "5.3 Implementar `gerarDiagramaExpandido(grafo, conj, comLegenda)` em `lib/flow-mermaid/index.ts`": [
@@ -467,6 +552,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257549
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662353080
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662523973
       }
     ],
     "5.4 Gerar o golden `tests/fixtures/mermaid/golden/feature.geral.mmd` e escrever `tests/flow-graph/expansao-mermaid.props.test.ts`": [
@@ -474,6 +569,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257579
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662528398
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662654586
       }
     ],
     "5.5 Escrever o teste de exemplo `tests/flow-graph/limites-mermaid.test.ts` que gera o texto de Expandir_tudo, com e sem Subtarefas, das 12 Demandas e confere `maxTextSize` e `maxEdges` configurados": [
@@ -481,6 +586,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257608
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662528404
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662654596
       }
     ],
     "5.6 Checkpoint: pedir ao dono a revisão do golden `feature.geral.mmd` e fixá-lo depois da aprovação": [

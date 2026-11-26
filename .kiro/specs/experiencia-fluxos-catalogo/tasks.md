@@ -60,35 +60,35 @@ Convenções:
   - registrar a linha de base atual como JSON em `docs/spike-fluxos/baseline.json`
   - verificação: `npm run build` e `npx playwright test tests/browser/performance.spec.ts` produzem o JSON
   - _Requisitos: 15.8, 20.13_
-- [ ] 1.2 Medir S1 e S2 em `tests/browser/spike/s1-s2.spec.ts`
+- [x] 1.2 Medir S1 e S2 em `tests/browser/spike/s1-s2.spec.ts`
   - S1: um `mermaid.render` por Conjunto_Expandido (Visão geral sintética, 1 raia, 5 raias, `completo`) e verificação do modelo linear previsto
   - S2: `maxTextSize` e `maxEdges` elevados, `layout: 'elk'` contra dagre (com custo em kB gzip), `htmlLabels: false` e `flowchart.curve`, com efeito no tempo, no SVG e no `label-overlap`
   - gravar os números em `docs/spike-fluxos/s1-s2.json`
   - _Requisitos: 20.13, 20.9, 20.10_
-- [ ] 1.3 Medir S3 e S4 em `tests/browser/spike/s3-s4.spec.ts`
+- [x] 1.3 Medir S3 e S4 em `tests/browser/spike/s3-s4.spec.ts`
   - S3: Mermaid em iframe com `sandbox` sem `allow-same-origin` e tentativa em Worker, medindo a resposta do mouse (alvo: menos de 100 ms durante um render de 3 s)
   - S4: cache de SVG por conjunto, render antecipado com `requestIdleCallback`, custo de memória e de CPU
   - gravar os números em `docs/spike-fluxos/s3-s4.json`
   - _Requisitos: 20.9, 20.13_
-- [ ] 1.4 Medir S5 em `tests/browser/spike/s5.spec.ts`: protótipo descartável do Renderizador próprio (`@dagrejs/dagre` em Worker, SVG gerado pelo kit) para 224 nós
+- [x] 1.4 Medir S5 em `tests/browser/spike/s5.spec.ts`: protótipo descartável do Renderizador próprio (`@dagrejs/dagre` em Worker, SVG gerado pelo kit) para 224 nós
   - medir tempo, kB gzip e diferença visual contra o golden `feature.completo.mmd`
   - o protótipo vive só em `tests/browser/spike/` e não entra no build
   - gravar os números em `docs/spike-fluxos/s5.json`
   - _Requisitos: 20.13, 19.2_
-- [ ] 1.5 Medir S6 em `tests/browser/spike/s6.spec.ts`: build ESM dividida do Mermaid 11.17.2 (flowchart e dagre por `import()`) servida por `tests/browser/serve.ts`
+- [x] 1.5 Medir S6 em `tests/browser/spike/s6.spec.ts`: build ESM dividida do Mermaid 11.17.2 (flowchart e dagre por `import()`) servida por `tests/browser/serve.ts`
   - provar SVG idêntico ao do bundle único para `feature.completo`, `feature.feat_orq` e a Visão geral sintética
   - medir kB gzip pela rede, número de requisições e `label-overlap`
   - gravar os números em `docs/spike-fluxos/s6.json`
   - _Requisitos: 15.8, 15.12, 20.13_
-- [ ] 1.6 Escrever `docs/spike-fluxos-desempenho.md` com as tabelas de S1 a S6 e a seção "Resultado do spike" no `design.md`
+- [x] 1.6 Escrever `docs/spike-fluxos-desempenho.md` com as tabelas de S1 a S6 e a seção "Resultado do spike" no `design.md`
   - decisão registrada para: Mermaid (ESM dividida, bundle único como fallback ou Renderizador próprio), estratégia de expansão (um render por conjunto com cache e fila, ou outra) e confirmação ou ajuste dos tetos de 15.8
   - cada decisão traz o número que a sustenta e o critério de go/no-go
   - verificação: `npm run validate` e `validate_spec_format` do `design.md` sem erros
   - _Requisitos: 15.8, 20.13_
-- [ ] 1.7 Checkpoint: apresentar ao dono o go/no-go do spike e aguardar a decisão
+- [x] 1.7 Checkpoint: apresentar ao dono o go/no-go do spike e aguardar a decisão
   - se a decisão alterar o orçamento ou escolher o Renderizador próprio, atualizar `requirements.md` e `design.md` antes de seguir
   - _Requisitos: 15.8, 20.13_
-- [ ] 1.8 Commit `docs(site): spike de desempenho do diagrama de fluxos`
+- [-] 1.8 Commit `docs(site): spike de desempenho do diagrama de fluxos`
   - _Requisitos: 20.13_
 
 ### Fase 2: dados do guia e regras do validador (somente `feature`)
@@ -172,28 +172,28 @@ Convenções:
 - [x] 4.5 Remover do build o caminho que lê o YAML direto, deixando-o só como oráculo de teste em `tests/`, e documentar no `docs/architecture.md` que o grafo é a fonte do Texto_Mermaid
   - verificação: `npm run build`, `npm test` e `npm run smoke` verdes
   - _Requisitos: 19.6, 19.10_
-- [-] 4.6 Commit `refactor(fluxos): texto mermaid derivado do modelo de grafo`
+- [x] 4.6 Commit `refactor(fluxos): texto mermaid derivado do modelo de grafo`
   - _Requisitos: 19.6, 19.8_
 
 ### Fase 5: expansão progressiva no modelo
 
-- [ ] 5.1 Implementar `lib/flow-graph/expansao.ts` (`ConjuntoExpandido`, `ClusterDeRaia`, `ArestaVisivel`, `GrafoVisivel`, `projetar`, `chaveDoConjunto`, `lerConjunto` e `normalizar`) em TypeScript puro
+- [x] 5.1 Implementar `lib/flow-graph/expansao.ts` (`ConjuntoExpandido`, `ClusterDeRaia`, `ArestaVisivel`, `GrafoVisivel`, `projetar`, `chaveDoConjunto`, `lerConjunto` e `normalizar`) em TypeScript puro
   - Raia desconhecida em `lerConjunto` é ignorada, e conjunto com todas as raias normaliza para `completo`
   - _Requisitos: 17.5, 20.2, 20.4, 20.5, 20.8_
-- [ ] 5.2 Escrever os testes de propriedade `tests/flow-graph/expansao.props.test.ts` com grafos aleatórios e os grafos reais das 12 Demandas
+- [x] 5.2 Escrever os testes de propriedade `tests/flow-graph/expansao.props.test.ts` com grafos aleatórios e os grafos reais das 12 Demandas
   - **Property 10: A expansão é monótona**
   - **Property 11: A projeção conserva arestas, Nós e extremos**
   - **Property 13: O estado de expansão faz round trip no Fragmento_de_Estado e normaliza**
   - **Validates: Requirements 20.2, 20.4, 20.5, 20.7, 20.8**
-- [ ] 5.3 Implementar `gerarDiagramaExpandido(grafo, conj, comLegenda)` em `lib/flow-mermaid/index.ts`
+- [x] 5.3 Implementar `gerarDiagramaExpandido(grafo, conj, comLegenda)` em `lib/flow-mermaid/index.ts`
   - todas as raias expandidas delegam ao caminho do `completo`, e o caso parcial gera clusters `z_CL_<raia>` com cor da raia, contagens, arestas agregadas `×N` e a legenda da Visão geral
   - texto independente da ordem de expansão
   - _Requisitos: 20.1, 20.2, 20.6, 17.5_
-- [ ] 5.4 Gerar o golden `tests/fixtures/mermaid/golden/feature.geral.mmd` e escrever `tests/flow-graph/expansao-mermaid.props.test.ts`
+- [x] 5.4 Gerar o golden `tests/fixtures/mermaid/golden/feature.geral.mmd` e escrever `tests/flow-graph/expansao-mermaid.props.test.ts`
   - **Property 12: Expandir tudo equivale ao `completo` dos goldens**
   - **Property 14: O Texto_Mermaid do conjunto não depende do caminho de expansão**
   - **Validates: Requirements 20.6, 19.8, 17.5**
-- [ ] 5.5 Escrever o teste de exemplo `tests/flow-graph/limites-mermaid.test.ts` que gera o texto de Expandir_tudo, com e sem Subtarefas, das 12 Demandas e confere `maxTextSize` e `maxEdges` configurados
+- [x] 5.5 Escrever o teste de exemplo `tests/flow-graph/limites-mermaid.test.ts` que gera o texto de Expandir_tudo, com e sem Subtarefas, das 12 Demandas e confere `maxTextSize` e `maxEdges` configurados
   - _Requisitos: 20.10_
 - [ ] 5.6 Checkpoint: pedir ao dono a revisão do golden `feature.geral.mmd` e fixá-lo depois da aprovação
   - _Requisitos: 20.1, 20.2_

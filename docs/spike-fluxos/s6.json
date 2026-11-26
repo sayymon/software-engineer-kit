@@ -1,0 +1,442 @@
+{
+  "aviso": "local, indicativo, não valida orçamento",
+  "medido_em": "2026-11-26T19:06:46.999Z",
+  "requisitos": [
+    "15.8",
+    "15.12",
+    "20.13"
+  ],
+  "demanda": "feature",
+  "versoes": {
+    "mermaid_esm": "11.17.2",
+    "mermaid_bundle_vendorizado": "11.17.2"
+  },
+  "metodo": {
+    "servidor": "servidor estático próprio do spec em porta livre (127.0.0.1), resposta com Content-Encoding gzip nível 9, cache-control no-store (carga fria a cada execução); não é tests/browser/serve.ts (fixo em site/dist, sem compressão)",
+    "esm": "pacote mermaid@11.17.2 (dist/mermaid.esm.min.mjs + dist/chunks/mermaid.esm.min/*), instalado fora do repositório; package.json do kit intocado",
+    "bundle_unico": "site/dist/vendor/mermaid/mermaid.min.js, servido pelo mesmo servidor e com a mesma compressão",
+    "rede": "CDP Network: corpo_gzip = Content-Length da resposta (bytes de corpo enviados em gzip); transferido = encodedDataLength do loadingFinished (corpo mais cabeçalhos)",
+    "fases_esm": "core = import() do mermaid.esm.min.mjs e seus chunks estáticos; sob_demanda = o que o primeiro mermaid.render da Visão geral busca por import() (diagrama flowchart, dagre, layout, renderizador)",
+    "fases_bundle": "carga = mermaid.min.js inteiro; o primeiro render não busca mais nada",
+    "execucoes": 10,
+    "cpu_throttling_rate": 4,
+    "contexto_novo_por_execucao": true,
+    "configuracao_mermaid": {
+      "startOnLoad": false,
+      "securityLevel": "strict",
+      "theme": "default",
+      "maxTextSize": 200000,
+      "maxEdges": 1000,
+      "flowchart": {
+        "useMaxWidth": false
+      },
+      "handDrawnSeed": 1
+    },
+    "configuracao_dos_tempos_e_da_rede": "a mesma CONFIG (com semente) nos dois motores",
+    "comparacao_de_svg": "mesmo texto, mesmo id de render (`s6-<id>`), mesma configuração, Chromium sem throttling; comparação byte a byte da string do SVG retornada por mermaid.render. Sem normalização de ids: os ids derivam do id de render e do texto. A única fonte de diferença é o rough.js, que sorteia a semente dos contornos dos nós; por isso a configuração fixa `handDrawnSeed` (nos dois motores), em vez de mexer no SVG. `controle_sem_semente` mostra que, sem a semente, nem o bundle é idêntico a ele mesmo. `svg_identico_com_espacos_normalizados` só colapsa espaços em branco",
+    "label_overlap": "mesmo oráculo de tests/browser/label-overlap.spec.ts (g.node cobrindo o rótulo de um g.cluster), aplicado ao SVG renderizado pelo ESM e pelo bundle"
+  },
+  "svg_identidade": [
+    {
+      "id": "feature.completo",
+      "descricao": "completo (todas as raias, sem Subtarefas)",
+      "texto_igual_ao_golden": true,
+      "svg_bytes_esm": 4294070,
+      "svg_bytes_bundle": 4294070,
+      "svg_identico_byte_a_byte": true,
+      "svg_identico_com_espacos_normalizados": true,
+      "primeira_diferenca": null,
+      "nos": {
+        "esm": 224,
+        "bundle": 224
+      },
+      "clusters": {
+        "esm": 27,
+        "bundle": 27
+      },
+      "arestas": {
+        "esm": 257,
+        "bundle": 257
+      },
+      "label_overlap": {
+        "esm": {
+          "sobreposicoes": 0,
+          "exemplos": []
+        },
+        "bundle": {
+          "sobreposicoes": 0,
+          "exemplos": []
+        }
+      }
+    },
+    {
+      "id": "feature.feat_orq",
+      "descricao": "raia feat_orq (golden)",
+      "texto_igual_ao_golden": true,
+      "svg_bytes_esm": 494317,
+      "svg_bytes_bundle": 494317,
+      "svg_identico_byte_a_byte": true,
+      "svg_identico_com_espacos_normalizados": true,
+      "primeira_diferenca": null,
+      "nos": {
+        "esm": 49,
+        "bundle": 49
+      },
+      "clusters": {
+        "esm": 2,
+        "bundle": 2
+      },
+      "arestas": {
+        "esm": 39,
+        "bundle": 39
+      },
+      "label_overlap": {
+        "esm": {
+          "sobreposicoes": 0,
+          "exemplos": []
+        },
+        "bundle": {
+          "sobreposicoes": 0,
+          "exemplos": []
+        }
+      }
+    },
+    {
+      "id": "feature.geral",
+      "descricao": "Visão geral sintética (conjunto vazio)",
+      "texto_igual_ao_golden": true,
+      "svg_bytes_esm": 152405,
+      "svg_bytes_bundle": 152405,
+      "svg_identico_byte_a_byte": true,
+      "svg_identico_com_espacos_normalizados": true,
+      "primeira_diferenca": null,
+      "nos": {
+        "esm": 33,
+        "bundle": 33
+      },
+      "clusters": {
+        "esm": 1,
+        "bundle": 1
+      },
+      "arestas": {
+        "esm": 50,
+        "bundle": 50
+      },
+      "label_overlap": {
+        "esm": {
+          "sobreposicoes": 0,
+          "exemplos": []
+        },
+        "bundle": {
+          "sobreposicoes": 0,
+          "exemplos": []
+        }
+      }
+    }
+  ],
+  "controle_sem_semente": {
+    "descricao": "sem handDrawnSeed (aleatório por render): mostra por que a semente é fixada",
+    "resultado": [
+      {
+        "id": "feature.completo",
+        "bundle_contra_ele_mesmo_identico": false,
+        "esm_contra_bundle_identico": false
+      },
+      {
+        "id": "feature.feat_orq",
+        "bundle_contra_ele_mesmo_identico": false,
+        "esm_contra_bundle_identico": false
+      },
+      {
+        "id": "feature.geral",
+        "bundle_contra_ele_mesmo_identico": false,
+        "esm_contra_bundle_identico": false
+      }
+    ]
+  },
+  "estabilidade_com_semente": [
+    {
+      "id": "feature.completo",
+      "esm_com_semente_duas_vezes_identico": true
+    },
+    {
+      "id": "feature.feat_orq",
+      "esm_com_semente_duas_vezes_identico": true
+    },
+    {
+      "id": "feature.geral",
+      "esm_com_semente_duas_vezes_identico": true
+    }
+  ],
+  "rede": {
+    "esm_dividido": {
+      "nucleo_ate_importar": {
+        "requisicoes": 19,
+        "corpo_gzip_kb": 194.29,
+        "transferido_kb": 198.38,
+        "arquivos_por_tamanho": [
+          {
+            "arquivo": "esm/chunks/mermaid.esm.min/chunk-H7VHZCWX.mjs",
+            "corpo_gzip_kb": 38.2,
+            "transferido_kb": 38.42
+          },
+          {
+            "arquivo": "esm/chunks/mermaid.esm.min/chunk-QJSWEUOL.mjs",
+            "corpo_gzip_kb": 35.44,
+            "transferido_kb": 35.66
+          },
+          {
+            "arquivo": "esm/chunks/mermaid.esm.min/chunk-Z6V44ARX.mjs",
+            "corpo_gzip_kb": 25.5,
+            "transferido_kb": 25.71
+          },
+          {
+            "arquivo": "esm/chunks/mermaid.esm.min/chunk-DZP67EKU.mjs",
+            "corpo_gzip_kb": 15.75,
+            "transferido_kb": 15.96
+          },
+          {
+            "arquivo": "esm/chunks/mermaid.esm.min/chunk-NUDPKBEF.mjs",
+            "corpo_gzip_kb": 15.71,
+            "transferido_kb": 15.92
+          },
+          {
+            "arquivo": "esm/chunks/mermaid.esm.min/chunk-4CAJECRU.mjs",
+            "corpo_gzip_kb": 15.2,
+            "transferido_kb": 15.42
+          },
+          {
+            "arquivo": "esm/mermaid.esm.min.mjs",
+            "corpo_gzip_kb": 10.95,
+            "transferido_kb": 11.17
+          },
+          {
+            "arquivo": "esm/chunks/mermaid.esm.min/chunk-5IMINLNL.mjs",
+            "corpo_gzip_kb": 9.35,
+            "transferido_kb": 9.57
+          },
+          {
+            "arquivo": "esm/chunks/mermaid.esm.min/chunk-4OADUZ5Q.mjs",
+            "corpo_gzip_kb": 7.87,
+            "transferido_kb": 8.09
+          },
+          {
+            "arquivo": "esm/chunks/mermaid.esm.min/chunk-VY2OSTJR.mjs",
+            "corpo_gzip_kb": 6.77,
+            "transferido_kb": 6.98
+          }
+        ]
+      },
+      "sob_demanda_primeiro_diagrama": {
+        "requisicoes": 8,
+        "corpo_gzip_kb": 35.35,
+        "transferido_kb": 37.06,
+        "arquivos_por_tamanho": [
+          {
+            "arquivo": "esm/chunks/mermaid.esm.min/chunk-CLS4B6BI.mjs",
+            "corpo_gzip_kb": 19.34,
+            "transferido_kb": 19.55
+          },
+          {
+            "arquivo": "esm/chunks/mermaid.esm.min/chunk-R7JDMUKV.mjs",
+            "corpo_gzip_kb": 9.96,
+            "transferido_kb": 10.18
+          },
+          {
+            "arquivo": "esm/chunks/mermaid.esm.min/dagre-MPVFI544.mjs",
+            "corpo_gzip_kb": 4.06,
+            "transferido_kb": 4.27
+          },
+          {
+            "arquivo": "esm/chunks/mermaid.esm.min/chunk-EICP7K5X.mjs",
+            "corpo_gzip_kb": 0.86,
+            "transferido_kb": 1.08
+          },
+          {
+            "arquivo": "esm/chunks/mermaid.esm.min/chunk-VTHDQ7BV.mjs",
+            "corpo_gzip_kb": 0.38,
+            "transferido_kb": 0.59
+          },
+          {
+            "arquivo": "esm/chunks/mermaid.esm.min/flowDiagram-YHGXBVSY.mjs",
+            "corpo_gzip_kb": 0.26,
+            "transferido_kb": 0.48
+          },
+          {
+            "arquivo": "esm/chunks/mermaid.esm.min/chunk-AZZRMDJM.mjs",
+            "corpo_gzip_kb": 0.26,
+            "transferido_kb": 0.48
+          },
+          {
+            "arquivo": "esm/chunks/mermaid.esm.min/chunk-RCXAM2GK.mjs",
+            "corpo_gzip_kb": 0.22,
+            "transferido_kb": 0.43
+          }
+        ]
+      },
+      "total_ate_primeiro_diagrama_visao_geral": {
+        "requisicoes": 27,
+        "corpo_gzip_kb": 229.64,
+        "transferido_kb": 235.44
+      },
+      "requisicoes_estaveis_entre_execucoes": true
+    },
+    "bundle_unico": {
+      "carga_total": {
+        "requisicoes": 1,
+        "corpo_gzip_kb": 960.63,
+        "transferido_kb": 960.85
+      },
+      "requisicoes_depois_da_carga": 0
+    },
+    "comparacao": {
+      "economia_transferido_kb_ate_primeiro_diagrama": 725.41,
+      "economia_percentual": 75.5,
+      "so_nucleo_sem_diagrama_kb": 198.38,
+      "nota": "o núcleo é o que uma página sem Diagrama pagaria se importasse o Mermaid; carregar só quando há Diagrama (O2) leva a página sem Diagrama a 0 kB de Mermaid"
+    }
+  },
+  "tempo_ms_cpu_4x": {
+    "esm_import_core": {
+      "n": 10,
+      "mediana": 63.6,
+      "p95": 74.2,
+      "max": 74.2,
+      "amostras": [
+        73.2,
+        62.9,
+        63.6,
+        63.6,
+        62.6,
+        74.2,
+        64,
+        62,
+        64.9,
+        62.1
+      ]
+    },
+    "esm_primeiro_render_visao_geral_com_chunks_sob_demanda": {
+      "n": 10,
+      "mediana": 527,
+      "p95": 613.7,
+      "max": 613.7,
+      "amostras": [
+        572,
+        518.6,
+        517.1,
+        508.7,
+        534.1,
+        613.7,
+        527,
+        571.8,
+        538.9,
+        523.5
+      ]
+    },
+    "esm_total_ate_primeiro_diagrama": {
+      "n": 10,
+      "mediana": 591,
+      "p95": 687.9,
+      "max": 687.9,
+      "amostras": [
+        645.2,
+        581.5,
+        580.7,
+        572.3,
+        596.7,
+        687.9,
+        591,
+        633.8,
+        603.8,
+        585.6
+      ]
+    },
+    "bundle_carga_do_script": {
+      "n": 10,
+      "mediana": 435.6,
+      "p95": 481.2,
+      "max": 481.2,
+      "amostras": [
+        435.6,
+        431.7,
+        423.9,
+        422.2,
+        481.2,
+        456.2,
+        439.4,
+        437.6,
+        438.6,
+        434.8
+      ]
+    },
+    "bundle_primeiro_render_visao_geral": {
+      "n": 10,
+      "mediana": 509.1,
+      "p95": 581.5,
+      "max": 581.5,
+      "amostras": [
+        517.1,
+        505.1,
+        503.5,
+        500.3,
+        581.5,
+        558.8,
+        508.5,
+        528,
+        524.1,
+        509.1
+      ]
+    },
+    "bundle_total_ate_primeiro_diagrama": {
+      "n": 10,
+      "mediana": 947.9,
+      "p95": 1062.7,
+      "max": 1062.7,
+      "amostras": [
+        952.7,
+        936.8,
+        927.4,
+        922.5,
+        1062.7,
+        1015,
+        947.9,
+        965.6,
+        962.7,
+        943.9
+      ]
+    },
+    "observacao": "rede em loopback (latência quase zero): o tempo mostra custo de parse e execução, não de download; use a coluna de kB para estimar a rede real"
+  },
+  "resumo": {
+    "svg_identico_nos_3_conjuntos": true,
+    "label_overlap_total_esm": 0,
+    "kb_gzip_transferido_esm_ate_primeiro_diagrama": 235.44,
+    "kb_gzip_transferido_bundle_unico": 960.85,
+    "requisicoes_esm": 27,
+    "requisicoes_bundle": 1
+  },
+  "carga_da_maquina": {
+    "inicio": [
+      4.9,
+      10.67,
+      23.81
+    ],
+    "fim": [
+      4.41,
+      9.99,
+      23.11
+    ],
+    "ordem": "1, 5 e 15 minutos (os.loadavg)"
+  },
+  "maquina": {
+    "plataforma": "darwin arm64",
+    "so": "25.6.0",
+    "cpus": {
+      "modelo": "Apple M3",
+      "quantidade": 8
+    },
+    "memoria_total_gb": 16,
+    "node": "v22.23.5",
+    "chromium": "159.0.8154.6"
+  }
+}

@@ -1,0 +1,1235 @@
+{
+  "aviso": "local, carga alta, indicativo, não valida orçamento",
+  "medido_em": "2026-11-26T16:52:21.072Z",
+  "requisitos": [
+    "20.13",
+    "20.9",
+    "20.10"
+  ],
+  "demanda": "feature",
+  "metodo": {
+    "cpu_throttling_rate": 4,
+    "execucoes": 10,
+    "p95": "nearest-rank sobre as amostras ordenadas",
+    "por_execucao": "contexto novo do navegador por execução; uma renderização de aquecimento (diagrama de 2 nós, fora da medida); depois um mermaid.render por conjunto, em sequência",
+    "tempo": "performance.now() em volta de `await mermaid.render`, com CPU 4x (CDP Emulation.setCPUThrottlingRate)",
+    "limites_do_kit": {
+      "maxTextSize": 200000,
+      "maxEdges": 1000
+    },
+    "observacao_svg_e_overlap": "SVG e label-overlap vêm da primeira execução de cada caso (determinísticos para o mesmo texto e configuração)",
+    "label_overlap": "mesmo oráculo de tests/browser/label-overlap.spec.ts: nó g.node cobrindo o rótulo de um g.cluster"
+  },
+  "conjuntos": [
+    {
+      "id": "visao_geral",
+      "descricao": "Visão geral sintética (conjunto vazio, todas as raias recolhidas)",
+      "raias": [],
+      "todasSubtarefas": false,
+      "caracteres": 8405,
+      "arestas_texto": 50,
+      "nos_visiveis": {
+        "clusters": 26,
+        "nos": 0,
+        "subtarefas": 0,
+        "total": 26
+      }
+    },
+    {
+      "id": "uma_raia",
+      "descricao": "1 raia expandida (a maior: feat_orq)",
+      "raias": [
+        "feat_orq"
+      ],
+      "todasSubtarefas": false,
+      "caracteres": 14364,
+      "arestas_texto": 67,
+      "nos_visiveis": {
+        "clusters": 25,
+        "nos": 25,
+        "subtarefas": 0,
+        "total": 50
+      }
+    },
+    {
+      "id": "cinco_raias",
+      "descricao": "5 raias expandidas (as 5 primeiras na ordem de exibição)",
+      "raias": [
+        "feat_orq",
+        "feat_ent",
+        "feat_lev",
+        "feat_cls",
+        "feat_spc"
+      ],
+      "todasSubtarefas": false,
+      "caracteres": 20578,
+      "arestas_texto": 99,
+      "nos_visiveis": {
+        "clusters": 21,
+        "nos": 59,
+        "subtarefas": 0,
+        "total": 80
+      }
+    },
+    {
+      "id": "completo",
+      "descricao": "completo (todas as raias, sem Subtarefas)",
+      "raias": [
+        "feat_orq",
+        "feat_ent",
+        "feat_lev",
+        "feat_cls",
+        "feat_spc",
+        "feat_alo",
+        "com_set",
+        "com_exe",
+        "com_pub",
+        "com_val",
+        "feat_ite",
+        "com_e2e",
+        "com_evl",
+        "com_prf",
+        "com_seg",
+        "com_rev",
+        "com_hml",
+        "com_etg",
+        "com_lib",
+        "com_mon",
+        "com_dcs",
+        "com_pro",
+        "com_frn",
+        "com_exp",
+        "com_dea",
+        "com_mel"
+      ],
+      "todasSubtarefas": false,
+      "caracteres": 47345,
+      "arestas_texto": 257,
+      "nos_visiveis": {
+        "clusters": 0,
+        "nos": 215,
+        "subtarefas": 0,
+        "total": 215
+      }
+    },
+    {
+      "id": "cinco_raias_subtarefas",
+      "descricao": "5 raias expandidas com Subtarefas",
+      "raias": [
+        "feat_orq",
+        "feat_ent",
+        "feat_lev",
+        "feat_cls",
+        "feat_spc"
+      ],
+      "todasSubtarefas": true,
+      "caracteres": 33391,
+      "arestas_texto": 149,
+      "nos_visiveis": {
+        "clusters": 21,
+        "nos": 59,
+        "subtarefas": 50,
+        "total": 130
+      }
+    },
+    {
+      "id": "completo_subtarefas",
+      "descricao": "completo com Subtarefas",
+      "raias": [
+        "feat_orq",
+        "feat_ent",
+        "feat_lev",
+        "feat_cls",
+        "feat_spc",
+        "feat_alo",
+        "com_set",
+        "com_exe",
+        "com_pub",
+        "com_val",
+        "feat_ite",
+        "com_e2e",
+        "com_evl",
+        "com_prf",
+        "com_seg",
+        "com_rev",
+        "com_hml",
+        "com_etg",
+        "com_lib",
+        "com_mon",
+        "com_dcs",
+        "com_pro",
+        "com_frn",
+        "com_exp",
+        "com_dea",
+        "com_mel"
+      ],
+      "todasSubtarefas": true,
+      "caracteres": 97878,
+      "arestas_texto": 443,
+      "nos_visiveis": {
+        "clusters": 0,
+        "nos": 215,
+        "subtarefas": 186,
+        "total": 401
+      }
+    }
+  ],
+  "referencia": {
+    "mermaid_vendorizado_gzip_kb": 960.6,
+    "mermaid_vendorizado_versao": "11.17.2"
+  },
+  "s1": {
+    "caso": {
+      "rotulo": "S1 linha de base: Mermaid vendorizado, dagre, limites elevados",
+      "motor": "iife",
+      "config": {
+        "startOnLoad": false,
+        "securityLevel": "strict",
+        "theme": "default",
+        "maxTextSize": 200000,
+        "maxEdges": 1000,
+        "flowchart": {
+          "useMaxWidth": false
+        }
+      },
+      "execucoes_pedidas": 10,
+      "por_conjunto": {
+        "visao_geral": {
+          "execucoes_ok": 10,
+          "p95_ms": 509.2,
+          "mediana_ms": 475.1,
+          "amostras_ms": [
+            509.2,
+            468.6,
+            481.7,
+            484,
+            492.2,
+            475.2,
+            471.7,
+            475.1,
+            474.2,
+            463.2
+          ],
+          "erro": null,
+          "svg": {
+            "bytes": 149485,
+            "nos": 33,
+            "clusters": 1,
+            "arestas": 50,
+            "foreign_objects": 90,
+            "tags_literais": 0
+          },
+          "label_overlap": {
+            "clusters_medidos": 1,
+            "sobreposicoes": 0,
+            "exemplos": []
+          }
+        },
+        "uma_raia": {
+          "execucoes_ok": 10,
+          "p95_ms": 714.6,
+          "mediana_ms": 679.3,
+          "amostras_ms": [
+            707.7,
+            672.5,
+            687.4,
+            671.6,
+            692.2,
+            714.6,
+            672.3,
+            662.6,
+            679.3,
+            682.5
+          ],
+          "erro": null,
+          "svg": {
+            "bytes": 484904,
+            "nos": 58,
+            "clusters": 2,
+            "arestas": 67,
+            "foreign_objects": 133,
+            "tags_literais": 0
+          },
+          "label_overlap": {
+            "clusters_medidos": 2,
+            "sobreposicoes": 0,
+            "exemplos": []
+          }
+        },
+        "cinco_raias": {
+          "execucoes_ok": 10,
+          "p95_ms": 1115.7,
+          "mediana_ms": 1076.5,
+          "amostras_ms": [
+            1073.1,
+            1099.9,
+            1091.5,
+            1080.5,
+            1074.7,
+            1084.5,
+            1076,
+            1076.5,
+            1115.7,
+            1059.6
+          ],
+          "erro": null,
+          "svg": {
+            "bytes": 1066497,
+            "nos": 88,
+            "clusters": 6,
+            "arestas": 99,
+            "foreign_objects": 199,
+            "tags_literais": 0
+          },
+          "label_overlap": {
+            "clusters_medidos": 6,
+            "sobreposicoes": 0,
+            "exemplos": []
+          }
+        },
+        "completo": {
+          "execucoes_ok": 10,
+          "p95_ms": 3597.9,
+          "mediana_ms": 3548,
+          "amostras_ms": [
+            3518.7,
+            3521.4,
+            3560.2,
+            3560.8,
+            3597.9,
+            3566.6,
+            3503.9,
+            3481.7,
+            3561.4,
+            3548
+          ],
+          "erro": null,
+          "svg": {
+            "bytes": 4283526,
+            "nos": 224,
+            "clusters": 27,
+            "arestas": 257,
+            "foreign_objects": 512,
+            "tags_literais": 0
+          },
+          "label_overlap": {
+            "clusters_medidos": 27,
+            "sobreposicoes": 0,
+            "exemplos": []
+          }
+        },
+        "cinco_raias_subtarefas": {
+          "execucoes_ok": 10,
+          "p95_ms": 1956.6,
+          "mediana_ms": 1745.6,
+          "amostras_ms": [
+            1719.1,
+            1734,
+            1956.6,
+            1745.6,
+            1803.7,
+            1724.3,
+            1766.8,
+            1740.1,
+            1907.4,
+            1776.5
+          ],
+          "erro": null,
+          "svg": {
+            "bytes": 1189185,
+            "nos": 138,
+            "clusters": 19,
+            "arestas": 149,
+            "foreign_objects": 312,
+            "tags_literais": 0
+          },
+          "label_overlap": {
+            "clusters_medidos": 19,
+            "sobreposicoes": 0,
+            "exemplos": []
+          }
+        },
+        "completo_subtarefas": {
+          "execucoes_ok": 10,
+          "p95_ms": 10303.8,
+          "mediana_ms": 9971.7,
+          "amostras_ms": [
+            9792.8,
+            10303.8,
+            10019.9,
+            10005.6,
+            9929.2,
+            9934.2,
+            9824.2,
+            10101.5,
+            10065.4,
+            9971.7
+          ],
+          "erro": null,
+          "svg": {
+            "bytes": 4942000,
+            "nos": 412,
+            "clusters": 90,
+            "arestas": 443,
+            "foreign_objects": 951,
+            "tags_literais": 0
+          },
+          "label_overlap": {
+            "clusters_medidos": 90,
+            "sobreposicoes": 0,
+            "exemplos": []
+          }
+        }
+      },
+      "aquecimento_p95_ms": 162.8
+    },
+    "modelo_linear": {
+      "previsao_do_design": "200 ms fixos mais 15 a 17 ms por nó visível (CPU 4x), design.md, Tempos por passo",
+      "no_visivel": "clusters + nós das raias expandidas + subtarefas expandidas",
+      "comparacao": [
+        {
+          "conjunto": "visao_geral",
+          "nos_visiveis": 26,
+          "previsto_min_ms": 590,
+          "previsto_max_ms": 642,
+          "medido_p95_ms": 509.2,
+          "razao_medido_sobre_previsto_max": 0.79
+        },
+        {
+          "conjunto": "uma_raia",
+          "nos_visiveis": 50,
+          "previsto_min_ms": 950,
+          "previsto_max_ms": 1050,
+          "medido_p95_ms": 714.6,
+          "razao_medido_sobre_previsto_max": 0.68
+        },
+        {
+          "conjunto": "cinco_raias",
+          "nos_visiveis": 80,
+          "previsto_min_ms": 1400,
+          "previsto_max_ms": 1560,
+          "medido_p95_ms": 1115.7,
+          "razao_medido_sobre_previsto_max": 0.72
+        },
+        {
+          "conjunto": "completo",
+          "nos_visiveis": 215,
+          "previsto_min_ms": 3425,
+          "previsto_max_ms": 3855,
+          "medido_p95_ms": 3597.9,
+          "razao_medido_sobre_previsto_max": 0.93
+        },
+        {
+          "conjunto": "cinco_raias_subtarefas",
+          "nos_visiveis": 130,
+          "previsto_min_ms": 2150,
+          "previsto_max_ms": 2410,
+          "medido_p95_ms": 1956.6,
+          "razao_medido_sobre_previsto_max": 0.81
+        },
+        {
+          "conjunto": "completo_subtarefas",
+          "nos_visiveis": 401,
+          "previsto_min_ms": 6215,
+          "previsto_max_ms": 7017,
+          "medido_p95_ms": 10303.8,
+          "razao_medido_sobre_previsto_max": 1.47
+        }
+      ],
+      "ajuste_por_nos": {
+        "fixo_ms": -901.5,
+        "inclinacao_ms": 26.171,
+        "r2": 0.9612
+      },
+      "ajuste_por_caracteres": {
+        "fixo_ms": -1115.7,
+        "inclinacao_ms": 0.112,
+        "r2": 0.9782
+      },
+      "ms_por_no_entre_pares": [
+        {
+          "de": "visao_geral",
+          "para": "uma_raia",
+          "ms_por_no_adicional": 8.56
+        },
+        {
+          "de": "uma_raia",
+          "para": "cinco_raias",
+          "ms_por_no_adicional": 13.37
+        },
+        {
+          "de": "cinco_raias",
+          "para": "completo",
+          "ms_por_no_adicional": 18.39
+        },
+        {
+          "de": "completo",
+          "para": "cinco_raias_subtarefas",
+          "ms_por_no_adicional": 19.31
+        },
+        {
+          "de": "cinco_raias_subtarefas",
+          "para": "completo_subtarefas",
+          "ms_por_no_adicional": 30.8
+        }
+      ]
+    }
+  },
+  "maquina": {
+    "plataforma": "darwin arm64",
+    "so": "25.6.0",
+    "cpus": {
+      "modelo": "Apple M3",
+      "quantidade": 8
+    },
+    "memoria_total_gb": 16,
+    "memoria_livre_gb_no_fim": 0.1,
+    "node": "v22.23.5",
+    "chromium": "159.0.8154.6"
+  },
+  "load_average": {
+    "inicio": [
+      4.85,
+      5.81,
+      25.21
+    ],
+    "fim": [
+      2.62,
+      4.14,
+      14.87
+    ],
+    "ordem": "1, 5 e 15 minutos (os.loadavg)"
+  },
+  "medido_ate": "2026-11-26T17:01:56.507Z",
+  "s2": {
+    "limites": {
+      "padrao_do_mermaid": {
+        "rotulo": "S2 limites padrão do Mermaid (50.000 / 500)",
+        "motor": "iife",
+        "config": {
+          "startOnLoad": false,
+          "securityLevel": "strict",
+          "theme": "default",
+          "maxTextSize": 50000,
+          "maxEdges": 500,
+          "flowchart": {
+            "useMaxWidth": false
+          }
+        },
+        "execucoes_pedidas": 2,
+        "por_conjunto": {
+          "completo": {
+            "execucoes_ok": 2,
+            "p95_ms": 3744.8,
+            "mediana_ms": 3734.5,
+            "amostras_ms": [
+              3744.8,
+              3734.5
+            ],
+            "erro": null,
+            "svg": {
+              "bytes": 4283952,
+              "nos": 224,
+              "clusters": 27,
+              "arestas": 257,
+              "foreign_objects": 512,
+              "tags_literais": 0
+            },
+            "label_overlap": {
+              "clusters_medidos": 27,
+              "sobreposicoes": 0,
+              "exemplos": []
+            }
+          },
+          "completo_subtarefas": {
+            "execucoes_ok": 0,
+            "p95_ms": null,
+            "mediana_ms": null,
+            "amostras_ms": [],
+            "erro": "maxTextSize excedido: o Mermaid não rejeitou o render, trocou o diagrama por um nó de aviso (Maximum Text size in diagram exceeded)",
+            "svg": {
+              "bytes": 9743,
+              "nos": 1,
+              "clusters": 0,
+              "arestas": 0,
+              "foreign_objects": 1,
+              "tags_literais": 0
+            },
+            "label_overlap": {
+              "clusters_medidos": 0,
+              "sobreposicoes": 0,
+              "exemplos": []
+            }
+          }
+        },
+        "aquecimento_p95_ms": 100.5
+      },
+      "elevados_do_kit": {
+        "maxTextSize": 200000,
+        "maxEdges": 1000
+      },
+      "elevados_medidos_em": "s1.caso"
+    },
+    "configuracao": [
+      {
+        "rotulo": "S2 htmlLabels: false",
+        "motor": "iife",
+        "config": {
+          "startOnLoad": false,
+          "securityLevel": "strict",
+          "theme": "default",
+          "maxTextSize": 200000,
+          "maxEdges": 1000,
+          "flowchart": {
+            "useMaxWidth": false,
+            "htmlLabels": false
+          },
+          "htmlLabels": false
+        },
+        "execucoes_pedidas": 10,
+        "por_conjunto": {
+          "cinco_raias": {
+            "execucoes_ok": 10,
+            "p95_ms": 1371.4,
+            "mediana_ms": 1352.5,
+            "amostras_ms": [
+              1336.5,
+              1337,
+              1352.6,
+              1356.9,
+              1337.5,
+              1364.5,
+              1344.4,
+              1363.4,
+              1371.4,
+              1352.5
+            ],
+            "erro": null,
+            "svg": {
+              "bytes": 1222512,
+              "nos": 88,
+              "clusters": 6,
+              "arestas": 99,
+              "foreign_objects": 0,
+              "tags_literais": 178
+            },
+            "label_overlap": {
+              "clusters_medidos": 6,
+              "sobreposicoes": 0,
+              "exemplos": []
+            }
+          },
+          "completo": {
+            "execucoes_ok": 10,
+            "p95_ms": 4319.2,
+            "mediana_ms": 3967.8,
+            "amostras_ms": [
+              3923.8,
+              4006.6,
+              3965.4,
+              4081.4,
+              4319.2,
+              4055.5,
+              3949.9,
+              3962.9,
+              4092.8,
+              3967.8
+            ],
+            "erro": null,
+            "svg": {
+              "bytes": 4699054,
+              "nos": 224,
+              "clusters": 27,
+              "arestas": 257,
+              "foreign_objects": 0,
+              "tags_literais": 583
+            },
+            "label_overlap": {
+              "clusters_medidos": 27,
+              "sobreposicoes": 0,
+              "exemplos": []
+            }
+          }
+        },
+        "aquecimento_p95_ms": 102.1
+      },
+      {
+        "rotulo": "S2 curve: linear",
+        "motor": "iife",
+        "config": {
+          "startOnLoad": false,
+          "securityLevel": "strict",
+          "theme": "default",
+          "maxTextSize": 200000,
+          "maxEdges": 1000,
+          "flowchart": {
+            "useMaxWidth": false,
+            "curve": "linear"
+          }
+        },
+        "execucoes_pedidas": 10,
+        "por_conjunto": {
+          "cinco_raias": {
+            "execucoes_ok": 10,
+            "p95_ms": 1404.7,
+            "mediana_ms": 1243.5,
+            "amostras_ms": [
+              1243.5,
+              1217.9,
+              1243.7,
+              1199.3,
+              1289.3,
+              1207.1,
+              1247.8,
+              1404.7,
+              1242.7,
+              1258.6
+            ],
+            "erro": null,
+            "svg": {
+              "bytes": 1043743,
+              "nos": 88,
+              "clusters": 6,
+              "arestas": 99,
+              "foreign_objects": 199,
+              "tags_literais": 0
+            },
+            "label_overlap": {
+              "clusters_medidos": 6,
+              "sobreposicoes": 0,
+              "exemplos": []
+            }
+          },
+          "completo": {
+            "execucoes_ok": 10,
+            "p95_ms": 3757.2,
+            "mediana_ms": 3522.8,
+            "amostras_ms": [
+              3512.7,
+              3554.7,
+              3488.5,
+              3757.2,
+              3496.8,
+              3522.8,
+              3516.4,
+              3641.3,
+              3600.7,
+              3639.5
+            ],
+            "erro": null,
+            "svg": {
+              "bytes": 4189913,
+              "nos": 224,
+              "clusters": 27,
+              "arestas": 257,
+              "foreign_objects": 512,
+              "tags_literais": 0
+            },
+            "label_overlap": {
+              "clusters_medidos": 27,
+              "sobreposicoes": 0,
+              "exemplos": []
+            }
+          }
+        },
+        "aquecimento_p95_ms": 112.2
+      },
+      {
+        "rotulo": "S2 curve: step",
+        "motor": "iife",
+        "config": {
+          "startOnLoad": false,
+          "securityLevel": "strict",
+          "theme": "default",
+          "maxTextSize": 200000,
+          "maxEdges": 1000,
+          "flowchart": {
+            "useMaxWidth": false,
+            "curve": "step"
+          }
+        },
+        "execucoes_pedidas": 10,
+        "por_conjunto": {
+          "cinco_raias": {
+            "execucoes_ok": 10,
+            "p95_ms": 1289.9,
+            "mediana_ms": 1223.1,
+            "amostras_ms": [
+              1218,
+              1233.2,
+              1289.9,
+              1222.7,
+              1206.4,
+              1223.1,
+              1206.2,
+              1250.6,
+              1224.4,
+              1231.1
+            ],
+            "erro": null,
+            "svg": {
+              "bytes": 1054502,
+              "nos": 88,
+              "clusters": 6,
+              "arestas": 99,
+              "foreign_objects": 199,
+              "tags_literais": 0
+            },
+            "label_overlap": {
+              "clusters_medidos": 6,
+              "sobreposicoes": 0,
+              "exemplos": []
+            }
+          },
+          "completo": {
+            "execucoes_ok": 10,
+            "p95_ms": 3638.9,
+            "mediana_ms": 3552.9,
+            "amostras_ms": [
+              3563.5,
+              3638.9,
+              3502.2,
+              3533.3,
+              3618.3,
+              3552.9,
+              3564.5,
+              3587,
+              3520.9,
+              3552.5
+            ],
+            "erro": null,
+            "svg": {
+              "bytes": 4236788,
+              "nos": 224,
+              "clusters": 27,
+              "arestas": 257,
+              "foreign_objects": 512,
+              "tags_literais": 0
+            },
+            "label_overlap": {
+              "clusters_medidos": 27,
+              "sobreposicoes": 0,
+              "exemplos": []
+            }
+          }
+        },
+        "aquecimento_p95_ms": 105.4
+      },
+      {
+        "rotulo": "S2 curve: basis (padrão do Mermaid, controle)",
+        "motor": "iife",
+        "config": {
+          "startOnLoad": false,
+          "securityLevel": "strict",
+          "theme": "default",
+          "maxTextSize": 200000,
+          "maxEdges": 1000,
+          "flowchart": {
+            "useMaxWidth": false,
+            "curve": "basis"
+          }
+        },
+        "execucoes_pedidas": 10,
+        "por_conjunto": {
+          "cinco_raias": {
+            "execucoes_ok": 10,
+            "p95_ms": 1400,
+            "mediana_ms": 1225.7,
+            "amostras_ms": [
+              1207.1,
+              1253.5,
+              1209.4,
+              1400,
+              1330.9,
+              1225.7,
+              1203,
+              1242,
+              1204.3,
+              1249
+            ],
+            "erro": null,
+            "svg": {
+              "bytes": 1066483,
+              "nos": 88,
+              "clusters": 6,
+              "arestas": 99,
+              "foreign_objects": 199,
+              "tags_literais": 0
+            },
+            "label_overlap": {
+              "clusters_medidos": 6,
+              "sobreposicoes": 0,
+              "exemplos": []
+            }
+          },
+          "completo": {
+            "execucoes_ok": 10,
+            "p95_ms": 3829.5,
+            "mediana_ms": 3536.7,
+            "amostras_ms": [
+              3536.7,
+              3620.9,
+              3544.7,
+              3829.5,
+              3513,
+              3636.1,
+              3517.9,
+              3493.2,
+              3525.8,
+              3546.3
+            ],
+            "erro": null,
+            "svg": {
+              "bytes": 4283788,
+              "nos": 224,
+              "clusters": 27,
+              "arestas": 257,
+              "foreign_objects": 512,
+              "tags_literais": 0
+            },
+            "label_overlap": {
+              "clusters_medidos": 27,
+              "sobreposicoes": 0,
+              "exemplos": []
+            }
+          }
+        },
+        "aquecimento_p95_ms": 113.6
+      }
+    ],
+    "controle": "s1.caso (htmlLabels padrão, curve padrão)",
+    "elk": {
+      "versoes": {
+        "mermaid_esm": "11.17.2",
+        "layout_elk": "0.2.3"
+      },
+      "custo_gzip_kb": {
+        "elk_pacote_carregado_no_render": 687.2,
+        "elk_arquivos": 21,
+        "mermaid_esm_carregado_com_dagre": 229.6,
+        "mermaid_vendorizado_iife": 960.6,
+        "nota": "gzip nível 9 de cada arquivo servido ao navegador até o fim das medições da primeira execução (carga dinâmica por diagrama e layout); compara o que o ELK acrescenta, não o bundle único do site"
+      },
+      "casos": [
+        {
+          "rotulo": "S2 dagre no Mermaid ESM (controle do ELK)",
+          "motor": "esm",
+          "config": {
+            "startOnLoad": false,
+            "securityLevel": "strict",
+            "theme": "default",
+            "maxTextSize": 200000,
+            "maxEdges": 1000,
+            "flowchart": {
+              "useMaxWidth": false
+            },
+            "layout": "dagre"
+          },
+          "execucoes_pedidas": 10,
+          "por_conjunto": {
+            "visao_geral": {
+              "execucoes_ok": 10,
+              "p95_ms": 488.4,
+              "mediana_ms": 474,
+              "amostras_ms": [
+                481.5,
+                479.9,
+                463.2,
+                488.4,
+                481.8,
+                474,
+                471.3,
+                468.6,
+                477.3,
+                467.3
+              ],
+              "erro": null,
+              "svg": {
+                "bytes": 149491,
+                "nos": 33,
+                "clusters": 1,
+                "arestas": 50,
+                "foreign_objects": 90,
+                "tags_literais": 0
+              },
+              "label_overlap": {
+                "clusters_medidos": 1,
+                "sobreposicoes": 0,
+                "exemplos": []
+              }
+            },
+            "cinco_raias": {
+              "execucoes_ok": 10,
+              "p95_ms": 1149.1,
+              "mediana_ms": 1105.2,
+              "amostras_ms": [
+                1105.3,
+                1113.7,
+                1105.2,
+                1149.1,
+                1101.7,
+                1100.7,
+                1116.2,
+                1112.5,
+                1101.6,
+                1099.3
+              ],
+              "erro": null,
+              "svg": {
+                "bytes": 1066477,
+                "nos": 88,
+                "clusters": 6,
+                "arestas": 99,
+                "foreign_objects": 199,
+                "tags_literais": 0
+              },
+              "label_overlap": {
+                "clusters_medidos": 6,
+                "sobreposicoes": 0,
+                "exemplos": []
+              }
+            },
+            "completo": {
+              "execucoes_ok": 10,
+              "p95_ms": 3589.6,
+              "mediana_ms": 3540.6,
+              "amostras_ms": [
+                3558.2,
+                3586,
+                3589.6,
+                3529.6,
+                3537.5,
+                3529.1,
+                3563.1,
+                3540.6,
+                3564.4,
+                3516.7
+              ],
+              "erro": null,
+              "svg": {
+                "bytes": 4283734,
+                "nos": 224,
+                "clusters": 27,
+                "arestas": 257,
+                "foreign_objects": 512,
+                "tags_literais": 0
+              },
+              "label_overlap": {
+                "clusters_medidos": 27,
+                "sobreposicoes": 0,
+                "exemplos": []
+              }
+            }
+          },
+          "aquecimento_p95_ms": 114.5,
+          "carga_esm_gzip_kb": 229.6
+        },
+        {
+          "rotulo": "S2 layout: elk (@mermaid-js/layout-elk)",
+          "motor": "esm-elk",
+          "config": {
+            "startOnLoad": false,
+            "securityLevel": "strict",
+            "theme": "default",
+            "maxTextSize": 200000,
+            "maxEdges": 1000,
+            "flowchart": {
+              "useMaxWidth": false
+            },
+            "layout": "elk"
+          },
+          "execucoes_pedidas": 10,
+          "por_conjunto": {
+            "visao_geral": {
+              "execucoes_ok": 10,
+              "p95_ms": 616.4,
+              "mediana_ms": 571.1,
+              "amostras_ms": [
+                567.9,
+                571.1,
+                566.8,
+                573.8,
+                569.4,
+                616.4,
+                564.9,
+                575.5,
+                590.3,
+                575.1
+              ],
+              "erro": null,
+              "svg": {
+                "bytes": 161477,
+                "nos": 33,
+                "clusters": 1,
+                "arestas": 50,
+                "foreign_objects": 84,
+                "tags_literais": 0
+              },
+              "label_overlap": {
+                "clusters_medidos": 1,
+                "sobreposicoes": 0,
+                "exemplos": []
+              }
+            },
+            "cinco_raias": {
+              "execucoes_ok": 10,
+              "p95_ms": 1185.8,
+              "mediana_ms": 1167.2,
+              "amostras_ms": [
+                1184.4,
+                1157.3,
+                1170.5,
+                1167.2,
+                1177.6,
+                1185.8,
+                1149.6,
+                1165.6,
+                1183.9,
+                1153.2
+              ],
+              "erro": null,
+              "svg": {
+                "bytes": 1078057,
+                "nos": 88,
+                "clusters": 6,
+                "arestas": 99,
+                "foreign_objects": 175,
+                "tags_literais": 0
+              },
+              "label_overlap": {
+                "clusters_medidos": 6,
+                "sobreposicoes": 0,
+                "exemplos": []
+              }
+            },
+            "completo": {
+              "execucoes_ok": 10,
+              "p95_ms": 2921.1,
+              "mediana_ms": 2775.7,
+              "amostras_ms": [
+                2759.5,
+                2768.7,
+                2775.7,
+                2778.5,
+                2795.4,
+                2813,
+                2772.9,
+                2921.1,
+                2814.9,
+                2739.9
+              ],
+              "erro": null,
+              "svg": {
+                "bytes": 4121638,
+                "nos": 224,
+                "clusters": 27,
+                "arestas": 257,
+                "foreign_objects": 412,
+                "tags_literais": 0
+              },
+              "label_overlap": {
+                "clusters_medidos": 27,
+                "sobreposicoes": 0,
+                "exemplos": []
+              }
+            }
+          },
+          "aquecimento_p95_ms": 598.9,
+          "carga_esm_gzip_kb": 215.6,
+          "carga_elk_gzip_kb": 687.2,
+          "carga_elk_arquivos": 21
+        },
+        {
+          "rotulo": "S2 dagre ESM, completo com Subtarefas",
+          "motor": "esm",
+          "config": {
+            "startOnLoad": false,
+            "securityLevel": "strict",
+            "theme": "default",
+            "maxTextSize": 200000,
+            "maxEdges": 1000,
+            "flowchart": {
+              "useMaxWidth": false
+            },
+            "layout": "dagre"
+          },
+          "execucoes_pedidas": 3,
+          "por_conjunto": {
+            "completo_subtarefas": {
+              "execucoes_ok": 3,
+              "p95_ms": 10127.4,
+              "mediana_ms": 10062.9,
+              "amostras_ms": [
+                10127.4,
+                10062.9,
+                10026.9
+              ],
+              "erro": null,
+              "svg": {
+                "bytes": 4941990,
+                "nos": 412,
+                "clusters": 90,
+                "arestas": 443,
+                "foreign_objects": 951,
+                "tags_literais": 0
+              },
+              "label_overlap": {
+                "clusters_medidos": 90,
+                "sobreposicoes": 0,
+                "exemplos": []
+              }
+            }
+          },
+          "aquecimento_p95_ms": 116.7,
+          "carga_esm_gzip_kb": 229.6
+        },
+        {
+          "rotulo": "S2 elk, completo com Subtarefas",
+          "motor": "esm-elk",
+          "config": {
+            "startOnLoad": false,
+            "securityLevel": "strict",
+            "theme": "default",
+            "maxTextSize": 200000,
+            "maxEdges": 1000,
+            "flowchart": {
+              "useMaxWidth": false
+            },
+            "layout": "elk"
+          },
+          "execucoes_pedidas": 3,
+          "por_conjunto": {
+            "completo_subtarefas": {
+              "execucoes_ok": 3,
+              "p95_ms": 4844.9,
+              "mediana_ms": 4829.6,
+              "amostras_ms": [
+                4844.9,
+                4708.3,
+                4829.6
+              ],
+              "erro": null,
+              "svg": {
+                "bytes": 4468735,
+                "nos": 412,
+                "clusters": 90,
+                "arestas": 443,
+                "foreign_objects": 663,
+                "tags_literais": 0
+              },
+              "label_overlap": {
+                "clusters_medidos": 90,
+                "sobreposicoes": 0,
+                "exemplos": []
+              }
+            }
+          },
+          "aquecimento_p95_ms": 581.6,
+          "carga_esm_gzip_kb": 215.6,
+          "carga_elk_gzip_kb": 687.2,
+          "carga_elk_arquivos": 21
+        }
+      ]
+    }
+  }
+}
