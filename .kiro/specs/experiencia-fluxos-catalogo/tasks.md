@@ -57,28 +57,28 @@ Convenções:
 
 - [x] 1.1 Criar o harness de medição em `tests/browser/performance.spec.ts` (sem asserção ainda) e `tests/browser/helpers/medicao.ts`
   - CPU 4x via CDP `Emulation.setCPUThrottlingRate`, p95 de 10 execuções, tamanho gzip nível 9 por grupo (carga inicial e carga do Diagrama) e `du -sk site/dist`
-  - registrar a linha de base atual como JSON em `.agents/tasks/spike-fluxos/baseline.json`
+  - registrar a linha de base atual como JSON em `docs/spike-fluxos/baseline.json`
   - verificação: `npm run build` e `npx playwright test tests/browser/performance.spec.ts` produzem o JSON
   - _Requisitos: 15.8, 20.13_
 - [ ] 1.2 Medir S1 e S2 em `tests/browser/spike/s1-s2.spec.ts`
   - S1: um `mermaid.render` por Conjunto_Expandido (Visão geral sintética, 1 raia, 5 raias, `completo`) e verificação do modelo linear previsto
   - S2: `maxTextSize` e `maxEdges` elevados, `layout: 'elk'` contra dagre (com custo em kB gzip), `htmlLabels: false` e `flowchart.curve`, com efeito no tempo, no SVG e no `label-overlap`
-  - gravar os números em `.agents/tasks/spike-fluxos/s1-s2.json`
+  - gravar os números em `docs/spike-fluxos/s1-s2.json`
   - _Requisitos: 20.13, 20.9, 20.10_
 - [ ] 1.3 Medir S3 e S4 em `tests/browser/spike/s3-s4.spec.ts`
   - S3: Mermaid em iframe com `sandbox` sem `allow-same-origin` e tentativa em Worker, medindo a resposta do mouse (alvo: menos de 100 ms durante um render de 3 s)
   - S4: cache de SVG por conjunto, render antecipado com `requestIdleCallback`, custo de memória e de CPU
-  - gravar os números em `.agents/tasks/spike-fluxos/s3-s4.json`
+  - gravar os números em `docs/spike-fluxos/s3-s4.json`
   - _Requisitos: 20.9, 20.13_
 - [ ] 1.4 Medir S5 em `tests/browser/spike/s5.spec.ts`: protótipo descartável do Renderizador próprio (`@dagrejs/dagre` em Worker, SVG gerado pelo kit) para 224 nós
   - medir tempo, kB gzip e diferença visual contra o golden `feature.completo.mmd`
   - o protótipo vive só em `tests/browser/spike/` e não entra no build
-  - gravar os números em `.agents/tasks/spike-fluxos/s5.json`
+  - gravar os números em `docs/spike-fluxos/s5.json`
   - _Requisitos: 20.13, 19.2_
 - [ ] 1.5 Medir S6 em `tests/browser/spike/s6.spec.ts`: build ESM dividida do Mermaid 11.17.2 (flowchart e dagre por `import()`) servida por `tests/browser/serve.ts`
   - provar SVG idêntico ao do bundle único para `feature.completo`, `feature.feat_orq` e a Visão geral sintética
   - medir kB gzip pela rede, número de requisições e `label-overlap`
-  - gravar os números em `.agents/tasks/spike-fluxos/s6.json`
+  - gravar os números em `docs/spike-fluxos/s6.json`
   - _Requisitos: 15.8, 15.12, 20.13_
 - [ ] 1.6 Escrever `docs/spike-fluxos-desempenho.md` com as tabelas de S1 a S6 e a seção "Resultado do spike" no `design.md`
   - decisão registrada para: Mermaid (ESM dividida, bundle único como fallback ou Renderizador próprio), estratégia de expansão (um render por conjunto com cache e fila, ou outra) e confirmação ou ajuste dos tetos de 15.8

@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
 // Measurement harness for the performance budget (Requirement 15.8, 20.13). No limit is asserted yet:
-// it records the current baseline in .agents/tasks/spike-fluxos/baseline.json.
+// it records the current baseline in docs/spike-fluxos/baseline.json.
 // Requires a built site: KIT_LOCALES=pt-BR npm run build
 import { expect, test } from '@playwright/test';
 import { existsSync } from 'node:fs';
 import { CPU_RATE, RUNS, coletarRecursos, duSk, gravarJson, p95, round, throttleCpu } from './helpers/medicao';
 
 const DEMANDA = process.env.PERF_DEMAND ?? 'feature';
-const SAIDA = '.agents/tasks/spike-fluxos/baseline.json';
+const SAIDA = 'docs/spike-fluxos/baseline.json';
 const pagina = `/pt-BR/flows/${DEMANDA}/`;
 
 if (!existsSync('site/dist/pt-BR/flows')) throw new Error('site/dist ausente: rode KIT_LOCALES=pt-BR npm run build');
