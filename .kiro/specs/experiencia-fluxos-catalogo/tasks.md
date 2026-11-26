@@ -124,33 +124,33 @@ Convenções:
 - [x] 2.9 Incluir `feature` em `DEMANDAS_COM_LIGACAO_OBRIGATORIA` e confirmar `npm run validate` estrito sem avisos de completude
   - confirmar que as outras 11 Demandas seguem sem alteração (`npm test` verde)
   - _Requisitos: 10.16, 18.3, 18.5_
-- [-] 2.10 Commit `feat(guia): ligação de tarefas a categorias de ferramenta e guias práticos`
+- [x] 2.10 Commit `feat(guia): ligação de tarefas a categorias de ferramenta e guias práticos`
   - _Requisitos: 10.1, 10.5_
 
 ### Fase 3: Modelo_de_Grafo e `lib/flow-graph`
 
-- [ ] 3.1 Criar `lib/schema/grafo.ts` (Zod, `VERSAO_MODELO_DE_GRAFO = 1`, `ModeloDeGrafo` e tipos filhos do design) e gerar `schema/json/grafo-fluxo.json` por `tools/schema/generate.ts`
+- [x] 3.1 Criar `lib/schema/grafo.ts` (Zod, `VERSAO_MODELO_DE_GRAFO = 1`, `ModeloDeGrafo` e tipos filhos do design) e gerar `schema/json/grafo-fluxo.json` por `tools/schema/generate.ts`
   - verificação: `npm run build` regenera o JSON sem diff depois do commit
   - _Requisitos: 17.1, 17.3_
-- [ ] 3.2 Extrair `contexto()` de `lib/flow-mermaid/index.ts` para `lib/flow-graph/contexto.ts`, sem mudar comportamento
+- [x] 3.2 Extrair `contexto()` de `lib/flow-mermaid/index.ts` para `lib/flow-graph/contexto.ts`, sem mudar comportamento
   - `lib/flow-mermaid` passa a importá-lo, e `ordemFluxo`, `ordemRaias` e `raiasDoContexto` seguem importadas de `lib/flow-mermaid/order.ts`
   - verificação: `tests/mermaid-parity` verde sem edição
   - _Requisitos: 17.2, 17.7_
-- [ ] 3.3 Implementar `gerarGrafo` e `gerarGrafos` em `lib/flow-graph/index.ts`, validando o resultado contra o schema e falhando com o id da Demanda e o caminho do campo
+- [x] 3.3 Implementar `gerarGrafo` e `gerarGrafos` em `lib/flow-graph/index.ts`, validando o resultado contra o schema e falhando com o id da Demanda e o caminho do campo
   - nós e raias na ordem de exibição, campo `ordem` explícito, `temPlaybook`, subtarefas com `descreverCondicao`
   - teste unitário com o grafo real da `feature` (224 nós, 25 raias)
   - _Requisitos: 17.1, 17.2, 17.3, 17.7_
-- [ ] 3.4 Escrever `tests/flow-graph/geradores.ts` e os testes de propriedade `tests/flow-graph/grafo.props.test.ts`
+- [x] 3.4 Escrever `tests/flow-graph/geradores.ts` e os testes de propriedade `tests/flow-graph/grafo.props.test.ts`
   - **Property 1: Round trip de serialização do Modelo_de_Grafo**
   - **Property 2: O Modelo_de_Grafo não acrescenta nem perde elementos do Guia_YAML**
   - **Validates: Requirements 17.8, 17.9**
-- [ ] 3.5 Escrever o teste de propriedade `tests/flow-graph/ordem.props.test.ts`
+- [x] 3.5 Escrever o teste de propriedade `tests/flow-graph/ordem.props.test.ts`
   - **Property 3: Ordem relativa estável dentro da Raia**
   - **Validates: Requirements 17.7**
-- [ ] 3.6 Criar a rota Astro `site/src/pages/[locale]/api/flows/[id].graph.json.ts` com `getStaticPaths` sobre as Demandas não biblioteca
+- [x] 3.6 Criar a rota Astro `site/src/pages/[locale]/api/flows/[id].graph.json.ts` com `getStaticPaths` sobre as Demandas não biblioteca
   - teste que cada grafo publicado tem no máximo 200 kB gzip, e `npm run smoke` cobre as rotas novas
   - _Requisitos: 17.1, 15.8_
-- [ ] 3.7 Commit `feat(site): modelo de grafo do fluxo e API estática`
+- [-] 3.7 Commit `feat(site): modelo de grafo do fluxo e API estática`
   - _Requisitos: 17.1_
 
 ### Fase 4: Mermaid derivado do Modelo_de_Grafo, com paridade dos goldens

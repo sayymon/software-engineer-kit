@@ -225,6 +225,11 @@
         "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
         "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
         "timestamp": 1795660991916
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661052461
       }
     ],
     "3.1 Criar `lib/schema/grafo.ts` (Zod, `VERSAO_MODELO_DE_GRAFO = 1`, `ModeloDeGrafo` e tipos filhos do design) e gerar `schema/json/grafo-fluxo.json` por `tools/schema/generate.ts`": [
@@ -232,6 +237,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257130
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661052471
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661179301
       }
     ],
     "3.2 Extrair `contexto()` de `lib/flow-mermaid/index.ts` para `lib/flow-graph/contexto.ts`, sem mudar comportamento": [
@@ -239,6 +254,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257158
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661052476
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661179310
       }
     ],
     "3.3 Implementar `gerarGrafo` e `gerarGrafos` em `lib/flow-graph/index.ts`, validando o resultado contra o schema e falhando com o id da Demanda e o caminho do campo": [
@@ -246,6 +271,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257186
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661182804
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661332645
       }
     ],
     "3.4 Escrever `tests/flow-graph/geradores.ts` e os testes de propriedade `tests/flow-graph/grafo.props.test.ts`": [
@@ -253,6 +288,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257211
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661340519
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661474185
       }
     ],
     "3.5 Escrever o teste de propriedade `tests/flow-graph/ordem.props.test.ts`": [
@@ -260,6 +305,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257241
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661477600
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661550538
       }
     ],
     "3.6 Criar a rota Astro `site/src/pages/[locale]/api/flows/[id].graph.json.ts` com `getStaticPaths` sobre as Demandas não biblioteca": [
@@ -267,6 +322,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257265
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661340525
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661474198
       }
     ],
     "3.7 Commit `feat(site): modelo de grafo do fluxo e API estática`": [
@@ -274,6 +339,11 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257291
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661550552
       }
     ],
     "4.1 Adaptar `lib/flow-mermaid/index.ts` para montar o texto a partir de `ModeloDeGrafo` em `gerarDiagramaDoGrafo` nas Views `visao`, `raia:<id>` e `completo`, sem Subtarefas": [

@@ -224,6 +224,17 @@ async function main() {
           fail(`${locale} ${api}: not JSON (status ${status})`);
         }
       }
+      for (const p of index.ofTipo('demanda').filter((d) => d.entity.data.biblioteca !== true)) {
+        const api = `api/flows/${p.id}.graph.json`;
+        const { status, text } = await get(origin, `${base}/${locale}/${api}`);
+        try {
+          const json = JSON.parse(text);
+          if (status === 200 && json.demanda === p.id && json.nos?.length > 0 && json.raias?.length > 0) pass(`${locale} ${api}`);
+          else fail(`${locale} ${api}: unexpected payload`);
+        } catch {
+          fail(`${locale} ${api}: not JSON (status ${status})`);
+        }
+      }
       const rito = index.ofTipo('rito').sort((a, b) => a.id.localeCompare(b.id))[0];
       const found = await searchPagefind(origin, locale as Locale, rito.nome);
       if (found.some((u) => u.includes(`/${rito.route}/`))) pass(`${locale} pagefind finds rito "${rito.nome}"`);
