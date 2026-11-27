@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Lazy loaders for the data each scene draws. Each file is fetched once, when its scene gets close.
-import { corDe } from '@lib/ecossistema/camadas';
+import { corDe, grupoDe } from '@lib/ecossistema/camadas';
 import { ESCALA } from '@lib/ecossistema/constantes';
 import type { FluxoDados, NoCatalogo } from '@lib/home/layouts';
 import type { DadosJornadas } from '@lib/home/layouts-cena';
@@ -29,7 +29,7 @@ export async function carregarFluxo(base: string, locale: string, demanda: strin
 export async function carregarCatalogo(base: string, locale: string): Promise<{ nos: NoCatalogo[]; ids: string[]; nomes: string[]; tipos: string[] }> {
   const p = await json<PayloadEcossistema>(`${base}/${locale}/api/ecossistema/index.json`);
   return {
-    nos: p.nos.map((n) => ({ x: n[3] / ESCALA, y: n[4] / ESCALA, z: n[5] / ESCALA, grau: n[6], cor: corDe(p.tipos[n[1]]), hub: p.tipos[n[1]] === 'hub' })),
+    nos: p.nos.map((n) => ({ x: n[3] / ESCALA, y: n[4] / ESCALA, z: n[5] / ESCALA, grau: n[6], cor: corDe(p.tipos[n[1]]), hub: p.tipos[n[1]] === 'hub', grupo: grupoDe(p.tipos[n[1]]) })),
     ids: p.nos.map((n) => n[0]),
     nomes: p.nos.map((n) => n[2]),
     tipos: p.nos.map((n) => p.tipos[n[1]]),

@@ -3,12 +3,12 @@
 // The loop pauses when the tab is hidden. Quality steps down when frames get slow (never up).
 import * as THREE from 'three';
 import { hexParaRgb, layoutCatalogo, layoutTitulo, layoutVazio, preencherPoeira, type Area, type Layout, type NoCatalogo } from '@lib/home/layouts';
-import { layoutIcone, layoutJornadas, type DadosJornadas } from '@lib/home/layouts-cena';
+import { layoutIcone, layoutJornadas, type DadosJornadas, type FocoJornadas } from '@lib/home/layouts-cena';
 import { janelaDeMorph } from '@lib/home/progresso';
 import { AvaliadorDeQuadros, CONFIG, nivelInicial, type Nivel } from '@lib/home/qualidade';
 import { carregarCatalogo, carregarJornadas } from './dados';
 import { criarCircuito, type Circuito } from './circuito';
-import { criarGlifos, type Glifos } from './glifos';
+import { criarTermos, type Termos } from './termos';
 import { criarParticulas } from './particulas';
 import { amostrarTitulo } from './titulo';
 
@@ -77,12 +77,12 @@ export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Pro
   scene.add(particulas.pontos);
   // Technology backdrop: circuit board with data packets, and floating code symbols.
   let circuito: Circuito = criarCircuito(CONFIG[nivel].trilhas, CONFIG[nivel].pulsos);
-  let glifos: Glifos = criarGlifos(CONFIG[nivel].glifos);
-  scene.add(circuito.grupo, glifos.malha);
+  scene.add(circuito.grupo);
+  let termos: Termos | null = null;
 
   const base = home.dataset.base ?? document.documentElement.dataset.base ?? '';
   const locale = document.documentElement.lang || 'pt-BR';
-  const dados: { demanda: string; catalogo?: NoCatalogo[]; jornadas?: DadosJornadas } = { demanda: '' };
+  const dados: { demanda: string; catalogo?: NoCatalogo[]; jornadas?: DadosJornadas; grupo: string | null; foco: FocoJornadas | null } = { demanda: '', grupo: null, foco: null };
   const demandas = [...home.querySelectorAll<HTMLAnchorElement>('[data-demanda]')];
   const carregados = new Set<string>();
   let layouts: Layout[] = [];
@@ -126,8 +126,8 @@ export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Pro
     return [
       titulo,
       icone,
-      dados.catalogo ? layoutCatalogo(dados.catalogo, area, n, 31) : poeira(31),
-      dados.jornadas ? layoutJornadas(dados.jornadas, area, n, 41) : poeira(41),
+      dados.catalogo ? layoutCatalogo(dados.catalogo, area, n, 31, dados.grupo) : poeira(31),
+      dados.jornadas ? layoutJornadas(dados.jornadas, area, n, 41, dados.foco) : poeira(41),
     ];
   }
   function aplicarLayouts(): void {
@@ -196,8 +196,8 @@ export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Pro
     }
   }
   // Choosing a demand in scene 2: the particles glide from the current icon to the new one.
-  let transicao: { de: Float32Array; para: Layout; inicio: number; indice: number } | null = null;
-  function aplicarLayoutsSuave(indice: 1): void {
+  let transicao: { de: Float32Array; deCores: Float32Array; para: Layout; inicio: number; indice: number } | null = null;
+  function aplicarLayoutsSuave(indice: 1 | 2 | 3): void {
     const novo = construirLayouts();
     const atual = layouts[indice];
     layouts = layouts.map((l, i) => (i === indice ? l : novo[i]));
@@ -206,7 +206,7 @@ export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Pro
       particulas.definirLayout(indice, layouts[indice]);
       return;
     }
-    transicao = { de: atual.posicoes.slice(), para: novo[indice], inicio: performance.now(), indice };
+    transicao = { de: atual.posicoes.slice(), deCores: atual.cores.slice(), para: novo[indice], inicio: performance.now(), indice };
     layouts[indice] = { posicoes: atual.posicoes.slice(), cores: atual.cores.slice() };
   }
   const cenaFluxos = home.querySelector<HTMLElement>('[data-cena="fluxos"]');
@@ -234,7 +234,35 @@ export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Pro
       aplicarLayoutsSuave(1);
     });
   });
+  // Chips of scenes 3 and 4 change the animation (the chosen part shines, the rest fades) and the two actions below them.
+  function ligarChips(cena: string, seletor: string, valor: (a: HTMLAnchorElement) => string | null, aplicar: (v: string | null) => void, indice: 2 | 3): void {
+    const raiz = home.querySelector<HTMLElement>(`[data-cena="${cena}"]`);
+    if (!raiz) return;
+    const chips = [...raiz.querySelectorAll<HTMLAnchorElement>(seletor)];
+    const lista = raiz.querySelector<HTMLAnchorElement>('[data-acao="lista"]');
+    const tres = raiz.querySelector<HTMLAnchorElement>('[data-acao="3d"]');
+    const padraoLista = lista?.getAttribute('href') ?? '';
+    const padrao3d = tres?.getAttribute('href') ?? '';
+    chips.forEach((a) => {
+      a.setAttribute('aria-pressed', 'false');
+      a.addEventListener('click', (e) => {
+        if (!document.documentElement.classList.contains('home-imersiva')) return;
+        e.preventDefault();
+        const ligar = a.getAttribute('aria-pressed') !== 'true';
+        chips.forEach((x) => x.setAttribute('aria-pressed', String(ligar && x === a)));
+        aplicar(ligar ? valor(a) : null);
+        if (lista) lista.href = ligar ? a.dataset.lista ?? padraoLista : padraoLista;
+        if (tres) tres.href = ligar ? a.dataset['3d'] ?? padrao3d : padrao3d;
+        aplicarLayoutsSuave(indice);
+      });
+    });
+  }
+  ligarChips('catalogo', '[data-grupo]', (a) => a.dataset.grupo ?? null, (v) => (dados.grupo = v), 2);
+  ligarChips('jornadas', '[data-tipo-home]', (a) => a.dataset.tipoHome ?? null, (v) => (dados.foco = v as FocoJornadas | null), 3);
   garantir(0);
+  // Floating catalog terms: fetched after the stage is up, so they never delay the first scene.
+  const rotulos = JSON.parse(document.getElementById('home-i18n')?.textContent ?? '{}') as Record<string, string>;
+  void criarTermos(base, locale, CONFIG[nivel].termos, rotulos).then((t) => (termos = t));
 
   let progressos = estado.progressos;
   let ativa = estado.ativa;
@@ -261,12 +289,10 @@ export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Pro
     particulas.destruir();
     particulas = criarParticulas(CONFIG[nivel].particulas, Math.min(devicePixelRatio, CONFIG[nivel].dpr));
     scene.add(particulas.pontos);
-    scene.remove(circuito.grupo, glifos.malha);
+    scene.remove(circuito.grupo);
     circuito.destruir();
-    glifos.destruir();
     circuito = criarCircuito(CONFIG[nivel].trilhas, CONFIG[nivel].pulsos);
-    glifos = criarGlifos(CONFIG[nivel].glifos);
-    scene.add(circuito.grupo, glifos.malha);
+    scene.add(circuito.grupo);
     redimensionar();
     aplicarLayouts();
     home.dataset.qualidade = nivel;
@@ -303,7 +329,8 @@ export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Pro
     particulas.definirGanho(GANHO[seg] * (1 - mistura) + GANHO[seg + 1] * mistura);
     particulas.atualizar(t);
     circuito.atualizar(t, Math.min(dt, 50) / 1000, camera.position.x, camera.position.y);
-    glifos.atualizar(t);
+    camera.updateMatrixWorld();
+    termos?.atualizar(t, camera, Math.max(0, Math.min(1, 1 - tLinha * 1.7)));
     alvoPonteiro.atualX += (alvoPonteiro.x - alvoPonteiro.atualX) * 0.12;
     alvoPonteiro.atualY += (alvoPonteiro.y - alvoPonteiro.atualY) * 0.12;
     alvoPonteiro.atualF += (alvoPonteiro.forca - alvoPonteiro.atualF) * 0.08;
@@ -323,7 +350,9 @@ export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Pro
       const p = alvo.posicoes;
       const q = transicao.para.posicoes;
       for (let i = 0; i < p.length; i++) p[i] = transicao.de[i] + (q[i] - transicao.de[i]) * e;
-      alvo.cores.set(transicao.para.cores);
+      const cc = alvo.cores;
+      const qc = transicao.para.cores;
+      for (let i = 0; i < cc.length; i++) cc[i] = transicao.deCores[i] + (qc[i] - transicao.deCores[i]) * e;
       particulas.definirLayout(transicao.indice as 0 | 1 | 2 | 3, alvo);
       if (k >= 1) transicao = null;
     }
@@ -353,7 +382,7 @@ export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Pro
       document.removeEventListener('pointerleave', onSaiu);
       particulas.destruir();
       circuito.destruir();
-      glifos.destruir();
+      termos?.destruir();
       renderer.dispose();
       canvas.remove();
       badge?.remove();

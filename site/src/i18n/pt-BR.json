@@ -508,5 +508,12 @@
   "home.flows.cap.teste_qa": "Garantir qualidade com testes e critérios de aceite.",
   "home.flows.cap.documentacao": "Registrar o que importa para quem vem depois.",
   "home.flows.cap.migracao": "Mover e atualizar com segurança, com plano de volta.",
-  "home.flows.cap.descontinuacao": "Aposentar com cuidado: avisar, migrar e desligar."
+  "home.flows.cap.descontinuacao": "Aposentar com cuidado: avisar, migrar e desligar.",
+  "home.viewList": "Ver em lista",
+  "home.view3d": "Ver em 3D",
+  "home.chip.jornada": "Jornadas",
+  "home.chip.competencia": "Competências",
+  "home.chip.certificacao": "Certificações",
+  "home.catalog.groups": "Áreas do catálogo",
+  "home.journeys.groups": "Jornadas, competências e certificações"
 }

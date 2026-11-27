@@ -68,6 +68,68 @@ test('na cena de fluxos o "abrir fluxo" só aparece depois de escolher uma deman
   await expect(acao).toHaveAttribute('href', /\/flows\/bug\/$/);
 });
 
+test('catálogo e jornadas não mostram números e os botões mudam a animação e os links de lista e 3D', async ({ page }) => {
+  await abrir(page);
+  await expect(page.locator('.home-count')).toHaveCount(0);
+  await page.locator('[data-cena-link="catalogo"]').click();
+  const lista = page.locator('[data-cena="catalogo"] [data-acao="lista"]');
+  const tres = page.locator('[data-cena="catalogo"] [data-acao="3d"]');
+  await expect(lista).toHaveText('Ver em lista');
+  await expect(tres).toHaveText('Ver em 3D');
+  const antes = await page.locator('[data-cena="catalogo"] [data-grupo="fundamentos"]').getAttribute('aria-pressed');
+  expect(antes).toBe('false');
+  await page.locator('[data-cena="catalogo"] [data-grupo="fundamentos"]').click();
+  await expect(page.locator('[data-cena="catalogo"] [data-grupo="fundamentos"]')).toHaveAttribute('aria-pressed', 'true');
+  await expect(lista).toHaveAttribute('href', /\/pt-BR\/fundamentals\/$/);
+  await expect(tres).toHaveAttribute('href', /\/pt-BR\/ecossistema\/#grupo=fundamentos$/);
+  await page.locator('[data-cena="catalogo"] [data-grupo="fundamentos"]').click();
+  await expect(lista).toHaveAttribute('href', /\/pt-BR\/tools\/$/);
+  await page.locator('[data-cena-link="jornadas"]').click();
+  await page.locator('[data-cena="jornadas"] [data-tipo-home="certificacao"]').click();
+  await expect(page.locator('[data-cena="jornadas"] [data-acao="lista"]')).toHaveAttribute('href', /\/pt-BR\/certifications\/$/);
+  await expect(page.locator('[data-cena="jornadas"] [data-acao="3d"]')).toHaveAttribute('href', /#tipo=certificacao$/);
+});
+
+test('termos aleatórios do catálogo flutuam na primeira cena, são links e mudam a cada visita', async ({ page, browser }) => {
+  await abrir(page);
+  await expect.poll(() => page.locator('#termos .termo').count(), { timeout: 20_000 }).toBeGreaterThan(10);
+  const termos = await page.locator('#termos .termo').evaluateAll((els) => els.map((e) => ({ t: e.textContent, h: (e as HTMLAnchorElement).getAttribute('href') })));
+  for (const t of termos) {
+    expect(t.t).toBeTruthy();
+    expect(t.h).toMatch(/^\/pt-BR\/.+\/$/);
+  }
+  expect(new Set(termos.map((t) => t.t)).size).toBe(termos.length);
+  const tipos = new Set(await page.locator('#termos .termo').evaluateAll((els) => els.map((e) => (e as HTMLElement).dataset.tipo)));
+  expect(tipos.size).toBeGreaterThan(4);
+  // A second visit draws a different set.
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  const outra = await ctx.newPage();
+  await outra.goto('/pt-BR/');
+  await expect.poll(() => outra.locator('#termos .termo').count(), { timeout: 20_000 }).toBeGreaterThan(10);
+  const segundos = await outra.locator('#termos .termo').evaluateAll((els) => els.map((e) => e.textContent));
+  expect(segundos.join('|')).not.toBe(termos.map((t) => t.t).join('|'));
+  await ctx.close();
+});
+
+test('clicar em um termo abre a página dele', async ({ page }) => {
+  await abrir(page);
+  await expect.poll(() => page.locator('#termos .termo').count(), { timeout: 20_000 }).toBeGreaterThan(10);
+  // Pick a term that is actually on top at its center (some sit behind the scene text).
+  const href = await page.evaluate(() => {
+    for (const el of document.querySelectorAll<HTMLAnchorElement>('#termos .termo')) {
+      const r = el.getBoundingClientRect();
+      const x = r.left + r.width / 2;
+      const y = r.top + r.height / 2;
+      if (x < 5 || y < 5 || x > innerWidth - 5 || y > innerHeight - 5) continue;
+      if (document.elementFromPoint(x, y) === el) return el.getAttribute('href');
+    }
+    return null;
+  });
+  expect(href).toBeTruthy();
+  await page.locator(`#termos .termo[href="${href}"]`).click();
+  await expect(page).toHaveURL(new RegExp(`${href!.replace(/\//g, '\\/')}$`));
+});
+
 test('a cena ativa fica legível logo depois de pular pelo indicador, sem rolar mais', async ({ page }) => {
   await abrir(page);
   for (const id of ['fluxos', 'catalogo', 'jornadas']) {

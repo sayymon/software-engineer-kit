@@ -4,7 +4,8 @@ import type { Page, SiteLayer } from '@lib/content/site';
 import { type Ctx, anchor, cardList, esc, groupBy, inline, section, table, val } from './util';
 import { LAYER_PAGES, LICENSES_SLUG } from './routes';
 import { licenseNotice } from './entity';
-import { GRUPOS, camadaDe, grupoDe } from '@lib/ecossistema/camadas';
+import { GRUPOS } from '@lib/ecossistema/camadas';
+import { messages } from '../i18n';
 
 /** Sections of a layer: the sub folders that hold entities, in a stable order. */
 export function sectionsOf(ctx: Ctx, layer: SiteLayer): Array<{ dir: string; key: string; pages: Page[] }> {
@@ -165,16 +166,25 @@ export function renderHome(ctx: Ctx): string {
   }).join('');
   const demandas = ctx.index.ofTipo('demanda').filter((p) => p.entity.data.biblioteca !== true);
   const demandaLinks = demandas.map((p) => `<li><a href="${esc(ctx.href(p.route))}" data-demanda="${esc(p.id)}" data-nome="${esc(p.nome)}" data-legenda="${esc(t.has(`home.flows.cap.${p.id}`) ? t(`home.flows.cap.${p.id}`) : '')}">${svgIcone(p.id)}<span>${esc(p.nome)}</span></a></li>`).join('');
-  // Counts per visual group, from the same rule the 3D ecosystem uses (the detail layer is not counted).
-  const porGrupo = new Map<string, number>();
-  for (const p of ctx.index.pages) {
-    if (camadaDe(p.tipo) === 'detalhe') continue;
-    const g = grupoDe(p.tipo);
-    porGrupo.set(g, (porGrupo.get(g) ?? 0) + 1);
-  }
-  const grupos = GRUPOS.filter((g) => g !== 'hubs' && porGrupo.has(g))
-    .map((g) => `<li data-grupo="${g}"><span class="home-count">${porGrupo.get(g)}</span> <span>${esc(t(`eco.group.${g}`))}</span></li>`)
-    .join('');
+  // Chips that change the animation of scenes 3 and 4. No numbers: the choice is the point. Without JavaScript they are plain links.
+  const svg = (d: string) => `<svg class="chip-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="${d}"/></svg>`;
+  const ICONE_GRUPO: Record<string, string> = {
+    fluxos: 'M6 3v12 M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M18 9a9 9 0 0 1-9 9',
+    artefatos: 'M12 3l8 4.5v9L12 21l-8-4.5v-9z M12 12l8-4.5 M12 12v9 M12 12L4 7.5',
+    catalogo: 'M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z',
+    fundamentos: 'M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z M4 19V5',
+    aprendizado: 'M12 14a5 5 0 1 0 0-10 5 5 0 0 0 0 10z M8.5 13.5L7 21l5-3 5 3-1.5-7.5',
+    jornada: 'M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z M9 3v15 M15 6v15',
+    competencia: 'M5 8h14v10H5z M12 4v4 M9 13h.01 M15 13h.01 M3 12v3 M21 12v3',
+    certificacao: 'M12 14a5 5 0 1 0 0-10 5 5 0 0 0 0 10z M8.5 13.5L7 21l5-3 5 3-1.5-7.5',
+  };
+  const LISTA_GRUPO: Record<string, string> = { fluxos: 'flows', artefatos: 'flows', catalogo: 'tools', fundamentos: 'fundamentals', aprendizado: 'journeys' };
+  const chipGrupo = (g: string) => `<li><a href="${esc(ctx.href(LISTA_GRUPO[g]))}" data-grupo="${g}" data-lista="${esc(ctx.href(LISTA_GRUPO[g]))}" data-3d="${esc(`${ctx.href('ecossistema')}#grupo=${g}`)}">${svg(ICONE_GRUPO[g])}<span>${esc(t(`eco.group.${g}`))}</span></a></li>`;
+  const grupos = GRUPOS.filter((g) => g !== 'hubs').map(chipGrupo).join('');
+  const chipTipo = (tipo: string, lista: string, rotulo: string) => `<li><a href="${esc(ctx.href(lista))}" data-tipo-home="${tipo}" data-lista="${esc(ctx.href(lista))}" data-3d="${esc(`${ctx.href('ecossistema')}#tipo=${tipo}`)}">${svg(ICONE_GRUPO[tipo])}<span>${esc(rotulo)}</span></a></li>`;
+  const tiposJornada = chipTipo('jornada', 'journeys', t('home.chip.jornada')) + chipTipo('competencia', 'journeys', t('home.chip.competencia')) + chipTipo('certificacao', 'certifications', t('home.chip.certificacao'));
+  const acoes = (lista: string, tres: string) =>
+    `<p class="home-links"><a class="glass-btn" data-acao="lista" href="${esc(ctx.href(lista))}">${esc(t('home.viewList'))}</a> <a class="glass-btn" data-acao="3d" href="${esc(tres)}">${esc(t('home.view3d'))}</a></p>`;
   const cena = (id: string, faixa: string, corpo: string, extra = '') =>
     `<section id="cena-${id}" class="cena" data-cena="${id}" style="--faixa:${faixa}" aria-labelledby="titulo-${id}"><div class="cena-fixa"><div class="cena-texto">${corpo}</div>${extra}</div></section>`;
   const indicador = ['apresentacao', 'fluxos', 'catalogo', 'jornadas']
@@ -182,6 +192,7 @@ export function renderHome(ctx: Ctx): string {
     .join('');
   return (
     `<div class="home" data-home data-base="${esc(ctx.base)}" id="topo">` +
+    `<script type="application/json" id="home-i18n">${JSON.stringify(Object.fromEntries(Object.entries(messages[ctx.locale]).filter(([k]) => k.startsWith('tipo.')))).replace(/</g, '\\u003c')}</script>` +
     `<nav class="home-lang" aria-label="${esc(t('lang.label'))}"><a href="${esc(ctx.href(''))}" lang="${ctx.locale}" aria-current="true">${ctx.locale === 'pt-BR' ? 'PT' : 'EN'}</a><a href="${esc(`${ctx.base}/${other}/`)}" lang="${other}" hreflang="${other}" aria-label="${esc(t(`lang.switchTo.${other}`))}">${other === 'pt-BR' ? 'PT' : 'EN'}</a></nav>` +
     `<a class="pular" href="#fim">${esc(t('home.skip.visible'))}</a>` +
     `<nav class="indicador" aria-label="${esc(t('home.scenes'))}"><ol>${indicador}</ol></nav>` +
@@ -208,15 +219,15 @@ export function renderHome(ctx: Ctx): string {
       'catalogo',
       '300vh',
       `<p class="eyebrow">${esc(t('home.scene.catalogo'))}</p><h2 id="titulo-catalogo">${esc(t('home.catalog.title'))}</h2><p class="lede">${esc(t('home.catalog.lede'))}</p>` +
-        `<ul class="home-groups">${grupos}</ul>` +
-        `<p class="home-links"><a class="glass-btn" href="${esc(ctx.href('tools'))}">${esc(t('home.catalog.list'))}</a> <a class="glass-btn" href="${esc(ctx.href('ecossistema'))}">${esc(t('home.ecosystem'))}</a></p>`,
+        `<ul class="home-chips home-grupos" role="list" aria-label="${esc(t('home.catalog.groups'))}">${grupos}</ul>` +
+        acoes('tools', ctx.href('ecossistema')),
     ) +
     cena(
       'jornadas',
       '300vh',
       `<p class="eyebrow">${esc(t('home.scene.jornadas'))}</p><h2 id="titulo-jornadas">${esc(t('home.journeys.title'))}</h2><p class="lede">${esc(t('home.journeys.lede'))}</p>` +
-        `<ul class="home-groups"><li><span class="home-count">${ctx.index.ofTipo('jornada').length}</span> <span>${esc(t('tipo.jornada'))}</span></li><li><span class="home-count">${ctx.index.ofTipo('competencia').length}</span> <span>${esc(t('tipo.competencia'))}</span></li><li><span class="home-count">${ctx.index.ofTipo('certificacao').length}</span> <span>${esc(t('tipo.certificacao'))}</span></li></ul>` +
-        `<p class="home-links"><a class="glass-btn" href="${esc(ctx.href('journeys'))}">${esc(t('layer.journeys'))}</a> <a class="glass-btn" href="${esc(ctx.href('certifications'))}">${esc(t('layer.certifications'))}</a></p>`,
+        `<ul class="home-chips home-tipos" role="list" aria-label="${esc(t('home.journeys.groups'))}">${tiposJornada}</ul>` +
+        acoes('journeys', `${ctx.href('ecossistema')}#grupo=aprendizado`),
     ) +
     `<section id="fim" class="home-fim" aria-labelledby="titulo-fim"><h2 id="titulo-fim">${esc(t('home.layers'))}</h2><ul class="cards layer-cards">${cards}</ul></section>` +
     `</div>`

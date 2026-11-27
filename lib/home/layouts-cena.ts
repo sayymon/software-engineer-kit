@@ -59,6 +59,8 @@ const CIRCUITO: Cor = [0.3, 0.85, 1];
 /** Draws particles; stops silently when the budget of particles is used. */
 class Pincel {
   private i = 0;
+  /** Multiplies the brightness of what is drawn next; used to fade the parts that are not highlighted. */
+  mult = 1;
   constructor(private readonly l: Layout, private readonly r: () => number, private readonly k: number) {}
   get usado(): number {
     return this.i;
@@ -69,7 +71,7 @@ class Pincel {
   ponto(p: P3, tam: number, cor: Cor, brilho = 1): void {
     if (this.i >= this.l.posicoes.length / 4) return;
     // Line work uses small pixels; nodes (size 1 or more) keep their size.
-    pôr(this.l, this.i++, p[0], p[1], p[2], tam < 1 ? tam * 0.62 : tam, cor, brilho);
+    pôr(this.l, this.i++, p[0], p[1], p[2], tam < 1 ? tam * 0.62 : tam, cor, brilho * this.mult);
   }
   linha(a: P3, b: P3, passo: number, tam: number, cor: Cor, brilho = 1): void {
     const n = Math.max(1, Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1], b[2] - a[2]) / (passo * 1.3 * this.k)));
@@ -189,7 +191,10 @@ function desenharBot(pc: Pincel, c: P3, e: number, cor: Cor): void {
   pc.linha(R(-0.35, -0.95), R(0.35, -0.95), 0.09, 0.7, cor, 0.7);
 }
 
-export function layoutJornadas(d: DadosJornadas, a: Area, n: number, seed: number): Layout {
+export type FocoJornadas = 'jornada' | 'competencia' | 'certificacao';
+
+/** `destaque` makes one part shine (journeys, competencies or certifications) and fades the others. */
+export function layoutJornadas(d: DadosJornadas, a: Area, n: number, seed: number, destaque?: FocoJornadas | null): Layout {
   const l = layoutVazio(n);
   const r = semeada(seed);
   // On smaller budgets the drawing keeps its shape with fewer particles per line.
@@ -197,6 +202,8 @@ export function layoutJornadas(d: DadosJornadas, a: Area, n: number, seed: numbe
   const cx = a.largura * (a.desloc + 0.055);
   const e = Math.min(a.altura * 0.155, (a.largura * 0.2) / 1.4);
   const cy = 0.1 * e;
+  const brilho = (parte: FocoJornadas) => (!destaque ? 1 : destaque === parte ? 1.5 : 0.18);
+  pc.mult = brilho('certificacao');
   desenharCerebro(pc, [cx, cy, 0], e, 0, Math.max(5, Math.floor(n / 110)));
   // Certifications: bright nodes on the lobes, bigger for higher levels.
   const contagem = new Map<AreaCert, number>();
@@ -206,15 +213,18 @@ export function layoutJornadas(d: DadosJornadas, a: Area, n: number, seed: numbe
     const p = pontoNoCerebro(c.area, k, r);
     pc.ponto([cx + p[0] * e, cy + p[1] * e, p[2] * e], TAMANHO_NIVEL[c.nivel], hexParaRgb(COR_AREA[c.area]), 1.15);
   }
+  pc.mult = brilho('jornada');
   // Journeys: bigger nodes on an orbit around the scene.
   for (let k = 0; k < d.jornadas; k++) {
     const ang = (k / Math.max(d.jornadas, 1)) * Math.PI * 2 + 0.4;
     pc.ponto([cx + Math.cos(ang) * e * 3.2, Math.sin(ang) * e * 2.3, -0.4], 2.4, hexParaRgb('#7fd0ff'), 1.2);
   }
+  pc.mult = brilho('competencia');
   // Bots (competencies) and digital books with neural nets (one per area).
   const bots: Array<[number, number]> = [[-3.6, 2.4], [3.8, 2.3], [-4.3, -0.2], [4.5, -0.1]];
   for (let k = 0; k < Math.min(d.competencias, bots.length); k++) desenharBot(pc, [cx + bots[k][0], bots[k][1], 0], e * 0.5, [0.6, 0.78, 0.95]);
   const livros: Array<[AreaCert, number, number]> = [['tecnica', 3.6, -2.9], ['soft-skill', -3.6, -2.9], ['ia', 0.1, 3.9]];
+  pc.mult = brilho('certificacao');
   for (const [area, dx, dy] of livros) desenharLivro(pc, [cx + dx, dy, 0], e * 0.55, hexParaRgb(COR_AREA[area]));
   preencherPoeira(l, pc.usado, seed + 9, [0.4, 0.5, 0.85]);
   return l;

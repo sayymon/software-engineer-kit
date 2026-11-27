@@ -508,5 +508,12 @@
   "home.flows.cap.teste_qa": "Guarantee quality with tests and acceptance criteria.",
   "home.flows.cap.documentacao": "Record what matters for whoever comes next.",
   "home.flows.cap.migracao": "Move and upgrade safely, with a way back.",
-  "home.flows.cap.descontinuacao": "Retire with care: announce, migrate and switch off."
+  "home.flows.cap.descontinuacao": "Retire with care: announce, migrate and switch off.",
+  "home.viewList": "View as list",
+  "home.view3d": "View in 3D",
+  "home.chip.jornada": "Journeys",
+  "home.chip.competencia": "Competencies",
+  "home.chip.certificacao": "Certifications",
+  "home.catalog.groups": "Catalog areas",
+  "home.journeys.groups": "Journeys, competencies and certifications"
 }

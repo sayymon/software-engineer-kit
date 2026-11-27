@@ -232,9 +232,12 @@ export interface NoCatalogo {
   grau: number;
   cor: string;
   hub: boolean;
+  /** Visual group of the entity (fluxos, artefatos, catalogo, fundamentos, aprendizado). */
+  grupo?: string;
 }
 
-export function layoutCatalogo(nos: ReadonlyArray<NoCatalogo>, a: Area, n: number, seed: number): Layout {
+/** `destaque` is a visual group: its nodes shine and the rest fades, so a choice in the scene changes the picture. */
+export function layoutCatalogo(nos: ReadonlyArray<NoCatalogo>, a: Area, n: number, seed: number, destaque?: string | null): Layout {
   const l = layoutVazio(n);
   const uteis = nos.filter((x) => !x.hub);
   // Scale the precomputed 3D positions (about +-700 units) to the visible world.
@@ -244,7 +247,9 @@ export function layoutCatalogo(nos: ReadonlyArray<NoCatalogo>, a: Area, n: numbe
   const total = Math.min(n, uteis.length);
   for (let i = 0; i < total; i++) {
     const no = uteis[Math.floor(i * passo)];
-    pôr(l, i, cx + no.x * escala, no.y * escala, no.z * escala, 0.8 + Math.min(1.7, Math.log2(1 + no.grau) * 0.3), hexParaRgb(no.cor), 0.62);
+    const aceso = !destaque || no.grupo === destaque;
+    const tam = (0.8 + Math.min(1.7, Math.log2(1 + no.grau) * 0.3)) * (destaque && aceso ? 1.25 : 1);
+    pôr(l, i, cx + no.x * escala, no.y * escala, no.z * escala, tam, hexParaRgb(no.cor), aceso ? (destaque ? 1.05 : 0.62) : 0.14);
   }
   preencherPoeira(l, total, seed, [0.4, 0.5, 0.8]);
   return l;
