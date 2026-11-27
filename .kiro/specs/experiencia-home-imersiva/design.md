@@ -106,7 +106,7 @@ O morph usa dois buffers de posição por partícula (`aPosA`, `aPosB`) e um uni
 | `site/src/home/palco.ts` | Renderer único, câmera, laço, resize, pausa, descarte | Cliente |
 | `site/src/home/particulas.ts` | Geometria de partículas, `ShaderMaterial` com morph, cores por tipo | Cliente |
 | `site/src/home/titulo.ts` | Malha do título, shader de água e ímã, amostragem de pontos das letras | Cliente |
-| `site/src/home/cenas/*.ts` | `apresentacao`, `fluxos`, `catalogo`, `jornadas` | Cliente |
+| `cenas/*.ts` (dentro da pasta `home` do site) | `apresentacao`, `fluxos`, `catalogo`, `jornadas` | Cliente |
 | `site/src/home/dados.ts` | Carregamento preguiçoso de cada Fonte_de_Dados | Cliente |
 | `site/src/home/dom.ts` | Indicador, Barra_de_Atalhos, tooltips, textos por progresso (variáveis CSS) | Cliente |
 | `site/src/pages/[locale]/index.astro`, `site/src/render/layers.ts` | HTML da Home e do Fallback_Estatico | Build |
