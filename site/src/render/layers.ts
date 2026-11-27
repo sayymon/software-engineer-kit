@@ -165,7 +165,7 @@ export function renderHome(ctx: Ctx): string {
     .map((id, i) => `<li><a href="#cena-${id}" data-cena-link="${id}"${i === 0 ? ' aria-current="true"' : ''}><span class="sr-only">${esc(t(`home.scene.${id}`))}</span></a></li>`)
     .join('');
   return (
-    `<div class="home" data-home id="topo">` +
+    `<div class="home" data-home data-base="${esc(ctx.base)}" id="topo">` +
     `<nav class="atalhos" aria-label="${esc(t('nav.label'))}"><a class="atalhos-marca" href="${esc(ctx.href(''))}">${esc(t('site.title'))}</a>` +
     `<ul class="atalhos-lista">${layerLinks}</ul>` +
     `<a class="atalhos-eco" href="${esc(ctx.href('ecossistema'))}">${esc(t('nav.ecosystem'))}</a>` +

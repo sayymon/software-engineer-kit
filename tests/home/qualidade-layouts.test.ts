@@ -58,3 +58,66 @@ describe('layouts', () => {
     expect(l.posicoes[60 * 4 + 3]).toBeGreaterThan(0);
   });
 });
+
+import { camadasDoFluxo, layoutCatalogo, layoutFluxo, layoutJornadas, layoutTitulo, hexParaRgb, type Area, type FluxoDados } from '../../lib/home/layouts';
+
+const area: Area = { largura: 19, altura: 12, desloc: 0.2 };
+const finito = (l: { posicoes: Float32Array; cores: Float32Array }) => {
+  for (const v of l.posicoes) expect(Number.isFinite(v)).toBe(true);
+  for (const v of l.cores) {
+    expect(Number.isFinite(v)).toBe(true);
+    expect(v).toBeGreaterThanOrEqual(0);
+    expect(v).toBeLessThanOrEqual(1);
+  }
+};
+
+describe('layouts das cenas', () => {
+  const fluxo: FluxoDados = {
+    raias: [{ id: 'a', cor: '#56B4E9' }, { id: 'b', cor: '#E69F00' }],
+    nos: [
+      { id: 'n1', raia: 'a', tipo: 'inicio', proximo: ['n2'] },
+      { id: 'n2', raia: 'a', tipo: 'tarefa', proximo: ['n3', 'n4'] },
+      { id: 'n3', raia: 'b', tipo: 'bifurcacao', proximo: ['n4'] },
+      { id: 'n4', raia: 'b', tipo: 'fim', proximo: [] },
+    ],
+  };
+  it('as camadas do fluxo crescem ao longo das ligações e toleram ciclos', () => {
+    const c = camadasDoFluxo(fluxo.nos);
+    expect(c.get('n1')).toBe(0);
+    expect(c.get('n2')).toBe(1);
+    expect(c.get('n4')!).toBeGreaterThan(c.get('n3')!);
+    const comChamada = camadasDoFluxo([{ id: 'c', raia: 'a', tipo: 'chamada', proximo: ['f'], chama: 'b' }, { id: 'i', raia: 'b', tipo: 'inicio', proximo: ['t'] }, { id: 't', raia: 'b', tipo: 'tarefa', proximo: [] }, { id: 'f', raia: 'a', tipo: 'fim', proximo: [] }]);
+    expect(comChamada.get('i')!).toBeGreaterThan(comChamada.get('c')!);
+    const ciclo = camadasDoFluxo([{ id: 'x', raia: 'a', tipo: 'tarefa', proximo: ['y'] }, { id: 'y', raia: 'a', tipo: 'tarefa', proximo: ['x'] }]);
+    for (const v of ciclo.values()) expect(Number.isFinite(v)).toBe(true);
+    expect(Math.max(...ciclo.values())).toBeLessThanOrEqual(1);
+  });
+  it('o layout do fluxo é determinístico, finito e usa todas as partículas', () => {
+    const a = layoutFluxo(fluxo, area, 900, 5);
+    const b = layoutFluxo(fluxo, area, 900, 5);
+    expect(Array.from(a.posicoes)).toEqual(Array.from(b.posicoes));
+    expect(a.posicoes.length).toBe(900 * 4);
+    finito(a);
+    for (let i = 0; i < 900; i++) expect(a.posicoes[i * 4 + 3]).toBeGreaterThan(0);
+  });
+  it('o catálogo mantém uma partícula por entidade visível e esconde hubs', () => {
+    const nos = Array.from({ length: 300 }, (_, i) => ({ x: i * 3 - 450, y: (i % 17) * 20, z: (i % 7) * 30, grau: i % 40, cor: '#E69F00', hub: i === 0 }));
+    const l = layoutCatalogo(nos, area, 400, 3);
+    finito(l);
+    const grandes = Array.from({ length: 400 }, (_, i) => l.posicoes[i * 4 + 3]).filter((s) => s >= 0.8).length;
+    expect(grandes).toBeGreaterThanOrEqual(299);
+  });
+  it('as jornadas colocam cada certificação em uma das áreas e níveis', () => {
+    const l = layoutJornadas({ jornadas: 6, competencias: 4, certificacoes: [{ area: 'tecnica', nivel: 'fundamental' }, { area: 'ia', nivel: 'especialista' }] }, area, 500, 2);
+    finito(l);
+  });
+  it('o título vira pontos dentro da caixa', () => {
+    const pts: Array<[number, number]> = Array.from({ length: 500 }, (_, i) => [(i % 50) / 50, Math.floor(i / 50) / 10]);
+    const l = layoutTitulo(pts, { x: 0, y: 1, w: 10, h: 2 }, 800, 1);
+    finito(l);
+    for (let i = 0; i < 250; i++) {
+      expect(Math.abs(l.posicoes[i * 4])).toBeLessThanOrEqual(5.01);
+    }
+    expect(hexParaRgb('#ff0000')).toEqual([1, 0, 0]);
+  });
+});

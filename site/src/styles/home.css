@@ -50,7 +50,7 @@ main[data-layer='home'] { max-width: none; padding: 0; }
 .cena[data-cena='apresentacao'] .cena-texto { width: min(calc(100% - 2rem), 80rem); }
 .home-chips, .home-groups { list-style: none; margin: 1rem 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .home-chips a { display: inline-block; padding: 0.3rem 0.8rem; border: 1px solid var(--h-line); border-radius: 999px; background: rgba(255, 255, 255, 0.05); text-decoration: none; font-size: 0.88rem; }
-.home-chips a:hover, .home-chips a[aria-current='true'] { background: rgba(255, 255, 255, 0.16); border-color: var(--h-accent); }
+.home-chips a:hover, .home-chips a[aria-pressed='true'], .home-chips a[aria-current='true'] { background: rgba(255, 255, 255, 0.16); border-color: var(--h-accent); }
 .home-groups li { display: flex; align-items: baseline; gap: 0.5rem; padding: 0.4rem 0.9rem; border: 1px solid var(--h-line); border-radius: 14px; background: var(--h-glass); }
 .home-count { font-size: 1.6rem; font-weight: 800; font-variant-numeric: tabular-nums; }
 .home-links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1rem 0; }
@@ -72,3 +72,10 @@ html.home-imersiva .cena[data-cena='apresentacao'] .cena-texto { --entra: 1; }
 html.home-imersiva .cena-texto { text-shadow: 0 2px 24px rgba(0, 0, 0, 0.6); }
 html.home-imersiva .hero-title-text { opacity: 1; }
 @media print { #palco, .atalhos, .indicador { display: none; } }
+
+/* The glass look of the site chrome must not tint the Home fields */
+html[data-visual] .home .search-box input, html[data-visual] .home .atalhos-busca input { background: rgba(255, 255, 255, 0.07); color: #eef1ff; border: 1px solid rgba(160, 180, 255, 0.3); box-shadow: none; }
+html[data-visual] .home .search-box button { background: rgba(255, 255, 255, 0.1); color: #eef1ff; border: 1px solid rgba(160, 180, 255, 0.3); box-shadow: none; }
+html[data-visual] .home .search-box button:hover { background: rgba(255, 255, 255, 0.18); }
+html[data-visual] .home .glass-btn { color: #fff; }
+.home .glass-btn { text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35); }

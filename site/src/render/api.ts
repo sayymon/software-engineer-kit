@@ -3,6 +3,7 @@
 import type { Page } from '@lib/content/site';
 import { gerarDiagrama } from '@lib/flow-mermaid';
 import { construirFatos } from '@lib/ecossistema/fatos';
+import { construirJornadas } from '@lib/home/jornadas';
 import { construirPayload, construirShards } from '@lib/ecossistema/payload';
 import type { Ctx } from './util';
 
@@ -61,4 +62,9 @@ export function ecossistemaShards(ctx: Ctx) {
 }
 export function ecossistemaFatos(ctx: Ctx) {
   return construirFatos(ctx.index);
+}
+
+/** Journeys, competencies and certifications for the immersive Home. */
+export function jornadasHomeJson(ctx: Ctx) {
+  return construirJornadas(ctx.index, ctx.href);
 }

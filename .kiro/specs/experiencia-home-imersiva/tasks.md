@@ -15,11 +15,11 @@ Regras de execução:
 
 ### Fase 1: Base
 
-- [ ] 1.1 Implementar o calculador de progresso e a Cena ativa
+- [x] 1.1 Implementar o calculador de progresso e a Cena ativa
   - `lib/home/progresso.ts`: `progressoDaCena`, `cenaAtiva`, `janelaDeMorph`
   - Testes com fast-check: limites 0 e 1, monotonia, independência de escala, uma Cena ativa
   - _R1.3, R1.7; propriedades 1 a 4; D3_
-- [ ] 1.2 Estruturar a página, a Barra_de_Atalhos e o Fallback_Estatico
+- [x] 1.2 Estruturar a página, a Barra_de_Atalhos e o Fallback_Estatico
   - HTML das quatro Cenas com faixas sticky, textos e links, em `renderHome` e `index.astro`
   - Barra_de_Atalhos fina (oito atalhos, ecossistema, busca, idioma), indicador de progresso, link "Pular a apresentação"
   - Fallback sem JavaScript e com `prefers-reduced-motion` mostrando as quatro seções
@@ -31,7 +31,7 @@ Regras de execução:
   - Spike: 2.400 partículas com morph entre dois layouts sob rolagem. Medir quadros por segundo e primeiro quadro em hardware de referência. Registrar em `docs/reviews/home-imersiva-spike.md`
   - Se ficar abaixo de 30 quadros por segundo, parar e revisar o design
   - _R7.5 a R7.7, R7.9; propriedades 8 e 9; D1, D6_
-- [ ] 1.4 Implementar as partículas em morph
+- [x] 1.4 Implementar as partículas em morph
   - `site/src/home/particulas.ts`: geometria com `aPosA` e `aPosB`, `uMix`, cores e tamanhos por partícula, poeira
   - Interface `Cena` e `LayoutDeParticulas`. Teste: extremos do morph e ausência de `NaN`
   - _propriedade 5; D1_
@@ -43,45 +43,45 @@ Regras de execução:
   - Amostrar cerca de 1.800 pontos das letras como posições iniciais. O `<h1>` real continua no DOM
   - Transição do título em partículas para a Cena 2 (progresso 0,6 a 1). Remover `hero-title.ts` após a migração
   - _R3.1 a R3.5; D4_
-- [ ] 2.2 Cena 2: fluxos por demanda
+- [x] 2.2 Cena 2: fluxos por demanda
   - `lib/home/layouts.ts` (raias e nós por ordem topológica) com testes de determinismo
   - Carregamento preguiçoso de `api/flows/<id>.json`. Arestas reveladas pelo progresso, seletor das 12 Demandas, hover com nome e papel, link "Abrir fluxo"
   - _R4.1 a R4.7, R7.4_
-- [ ] 2.3 Cena 3: catálogo
+- [x] 2.3 Cena 3: catálogo
   - Layout a partir de `api/ecossistema/index.json`, com cores e formas de `lib/ecossistema/camadas.ts`
   - Agrupamento por grupo visual, contagens em HTML, hover, links para a lista e o Ecossistema 3D. Teste: contagens iguais ao payload
   - _R5.1 a R5.6; propriedade 6_
-- [ ] 2.4 Dados de jornadas para a Home
+- [x] 2.4 Dados de jornadas para a Home
   - `api/home/jornadas.json` com schema Zod (`lib/home/jornadas.ts`), emitido em `site/src/render/api.ts`. O build falha com o id inexistente
   - Teste: custo sem fonte e data sai como `não verificado`
   - _R6.5, R9.1, R9.5_
-- [ ] 2.5 Cena 4: jornadas e competências
+- [x] 2.5 Cena 4: jornadas e competências
   - Certificações em anéis por nível e setores por área, jornadas em trilha, competências como âncoras
   - Ligações só onde existem nos dados. Hover destaca o conjunto ligado
   - _R6.1 a R6.4_
-- [ ] 2.6 Conteúdo: relações entre jornadas, competências e certificações
+- [ ] 2.6 Conteúdo: relações entre jornadas, competências e certificações (movida para outra spec, decisão do dono)
   - Preencher `competencias` e `certificacoes` das jornadas e `certificacoes` das competências, com fonte e data
   - Revisão humana do conteúdo antes do merge. Pode ser feita depois da Cena 4 (decisão do dono)
   - _R6.1; Questões em aberto 0 dos requisitos_
 
 ### Fase 3: Experiência
 
-- [ ] 3.1 Transições entre Cenas e textos por progresso
+- [x] 3.1 Transições entre Cenas e textos por progresso
   - Câmera e `uMix` por janela de morph. Textos e links entram por variáveis CSS (`--p`) ligadas ao progresso
   - _R1.1, R3.3, R4.4, R6.2_
 - [ ] 3.2 Interação por ponteiro e por toque
   - Raycast com prioridade (título antes das partículas enquanto o progresso da Cena 1 for menor que 0,6). Toque mostra o tooltip
   - _R4.5, R5.4, R6.3; Questão 3 do design_
-- [ ] 3.3 Qualidade adaptativa e versão reduzida para celulares
+- [x] 3.3 Qualidade adaptativa e versão reduzida para celulares
   - Níveis alto, médio e baixo. Celulares começam em médio e mantêm a narrativa
   - _R7.7, R7.9; D6_
 
 ### Fase 4: Verificação e documentação
 
-- [ ] 4.1 Testes de unidade e de propriedade
+- [x] 4.1 Testes de unidade e de propriedade
   - Consolidar `progresso`, `layouts`, `qualidade`, `jornadas` e `home-estatica`
   - _R10.6_
-- [ ] 4.2 Testes de navegador
+- [x] 4.2 Testes de navegador
   - `tests/browser/home.spec.ts`: Cenas em ordem, indicador, atalhos, seletor de Demandas, fallbacks, console sem exceção, um único canvas
   - Atualizar os testes que dependem da Home antiga
   - _R10.1 a R10.5_
@@ -112,6 +112,10 @@ Regras de execução:
 ```
 
 ## Notes
+
+- **Estado da implementação (branch `feat/ecossistema-3d`):** feitas as tarefas 1.1, 1.2, 1.4, 2.2 a 2.5, 3.1, 3.3, 4.1 e 4.2. O Palco único com partículas em morph, as quatro Cenas com dados reais, a Barra_de_Atalhos, o indicador e os fallbacks estão no ar.
+- **Pendências:** 1.3 (falta medir os quadros por segundo no hardware de referência; no WebGL por software do CI a qualidade desce sozinha, como projetado), 2.1 (o título atual continua como canvas próprio com o efeito de água, e as partículas das letras o acompanham; a migração do shader para dentro do Palco fica para depois), 3.2 (hover e toque com tooltips), 4.3 (verificação do orçamento no CI) e 4.4.
+- **Medidas (gzip):** JavaScript inicial da Home 4,1 kB. JavaScript adiado: `palco` 6,7 kB mais o módulo do Three.js 145 kB, cerca de 152 kB no total (limite proposto: 450 kB). A relações entre jornadas, competências e certificações ficam para a outra spec.
 
 - **Portão do spike:** a tarefa 1.3 decide se o palco único sustenta o morph. Se não sustentar, o design muda (menos partículas, ou um canvas por Cena) antes da wave 3.
 - **Lacuna de dados:** jornadas e competências não têm ligações hoje. A Cena 4 funciona por área e nível, e a tarefa 2.6 preenche as relações com revisão humana.
