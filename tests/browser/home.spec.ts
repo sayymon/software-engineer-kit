@@ -111,6 +111,36 @@ test('termos aleatórios do catálogo flutuam na primeira cena, são links e mud
   await ctx.close();
 });
 
+test('os termos nunca passam atrás do texto nem da busca, e nas outras cenas aparecem em menor número', async ({ page }) => {
+  await abrir(page);
+  await expect.poll(() => page.locator('#termos .termo').count(), { timeout: 20_000 }).toBeGreaterThan(10);
+  const medir = () =>
+    page.evaluate(() => {
+      const texto = document.querySelector('.cena[data-ativa="true"] .cena-texto')!.getBoundingClientRect();
+      const busca = document.querySelector('.cena[data-ativa="true"] input[type="search"]')?.getBoundingClientRect();
+      const cruza = (a: DOMRect, b: DOMRect) => a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
+      let visiveis = 0;
+      let atrasDoTexto = 0;
+      for (const el of document.querySelectorAll<HTMLElement>('#termos .termo')) {
+        if (Number(el.style.getPropertyValue('--o')) < 0.05) continue;
+        visiveis++;
+        const r = el.getBoundingClientRect();
+        if (cruza(r, texto) || (busca && cruza(r, busca))) atrasDoTexto++;
+      }
+      return { visiveis, atrasDoTexto };
+    });
+  await page.waitForTimeout(800);
+  const inicial = await medir();
+  expect(inicial.visiveis).toBeGreaterThan(10);
+  expect(inicial.atrasDoTexto).toBe(0);
+  await page.locator('[data-cena-link="catalogo"]').click();
+  await page.waitForTimeout(1500);
+  const noCatalogo = await medir();
+  expect(noCatalogo.visiveis).toBeGreaterThan(2);
+  expect(noCatalogo.visiveis).toBeLessThan(inicial.visiveis);
+  expect(noCatalogo.atrasDoTexto).toBe(0);
+});
+
 test('clicar em um termo abre a página dele', async ({ page }) => {
   await abrir(page);
   await expect.poll(() => page.locator('#termos .termo').count(), { timeout: 20_000 }).toBeGreaterThan(10);

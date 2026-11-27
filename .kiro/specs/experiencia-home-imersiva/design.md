@@ -283,3 +283,18 @@ O CI usa Chromium com renderização por software. Os testes de comportamento ro
 2. **Limites de orçamento.** Os valores acima são propostas, para confirmar com a medição da tarefa de base.
 3. **Hover no título.** O raycast contra a malha do título e contra as partículas precisa de uma regra de prioridade. O design propõe: título primeiro enquanto o progresso da Cena 1 estiver abaixo de 0,6.
 4. **Altura das faixas.** Os valores `--faixa` são pontos de partida e serão ajustados com revisão visual.
+
+## Revisões após a revisão do dono
+
+Mudanças feitas depois da primeira versão do design, a pedido do dono. Elas prevalecem sobre o texto acima onde houver conflito.
+
+| Tema | Decisão |
+|---|---|
+| Tema visual | Tecnologia: placa de circuito com trilhas, chips e vias, racks de servidor com LEDs, pacotes de dados que correm pelas trilhas (`circuito.ts`). As partículas são pixels quadrados e os maiores viram chips com pinos |
+| Título | Efeito elétrico (glitch em fatias, separação de cor, contorno que estala em ciano e azul, raios do cursor). Sem halo branco em repouso. O título continua em um canvas próprio (`site/src/scripts/hero-title.ts`); a migração para dentro do Palco não foi feita |
+| Menu do topo | Removido. Ficam o idioma, o link "Ir direto às camadas" e os cards no fim |
+| Cena 2 | Ícone da Demanda feito de partículas, com legenda ao lado. O "Abrir os fluxos" só aparece depois da escolha. A cena não carrega mais `api/flows` |
+| Cena 3 | Sem contagens. Botões por grupo acendem a área escolhida. Ações "Ver em lista" e "Ver em 3D" |
+| Cena 4 | Cérebro de perfil com circuitos e as certificações nos lobos, três livros com redes neurais, quatro bots e as jornadas em órbita (`lib/home/layouts-cena.ts`). Botões acendem a parte escolhida |
+| Termos | Camada DOM com nomes reais do catálogo, sorteados a cada visita, em duas faixas acima e abaixo do texto. 40% ficam nas outras cenas (`termos.ts`). Substituiu os símbolos de código em WebGL |
+| Qualidade | `?nivel=alto|medio|baixo` fixa o nível. `?fps` mostra o contador. Medida do dono: cerca de 50 quadros por segundo com 2.400 partículas (nível alto) |

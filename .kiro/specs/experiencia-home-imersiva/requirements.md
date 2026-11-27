@@ -26,6 +26,7 @@ A home atual (título em WebGL com água e ímã, atalho para o ecossistema e ca
 
 - **Home**: a página inicial de cada idioma (`/pt-BR/` e `/en/`).
 - **Cena**: uma seção da Home em tela cheia, com conteúdo HTML e uma visualização WebGL.
+- **Termo**: nome de uma entidade do catálogo exibido como link flutuante na Home.
 - **Cena_Fixa**: Cena que fica presa à tela (`position: sticky`) enquanto a pessoa rola por uma faixa de altura própria.
 - **Progresso_da_Cena**: número de 0 a 1 que indica quanto da faixa de rolagem da Cena já foi percorrido.
 - **Palco**: o canvas WebGL único e fixo atrás das Cenas, compartilhado por todas elas.
@@ -73,7 +74,7 @@ A home atual (título em WebGL com água e ímã, atalho para o ecossistema e ca
 
 #### Acceptance Criteria
 
-1. THE Cena Apresentando o kit SHALL exibir o título "Software Engineer Kit" com o efeito de água e ímã que reage ao ponteiro.
+1. THE Cena Apresentando o kit SHALL exibir o título "Software Engineer Kit" com um efeito elétrico que reage ao ponteiro: fatias em glitch, separação de cor, contorno das letras que estala em ciano e azul e raios que saltam do cursor, sem halo branco em repouso.
 2. THE Cena SHALL exibir a frase "O Kit com um catálogo curado para consultar e decidir, de ferramentas a fundamentos, para usar nos seus fluxos por demanda e nas jornadas de aprendizado em engenharia de software e IA" e o atalho "Explorar o Kit em 3D" ao lado da busca.
 3. WHEN o Progresso_da_Cena avança, THE Cena SHALL animar a transição do título para a Cena seguinte.
 4. THE Cena SHALL manter o `<h1>` real da página no DOM, legível por leitores de tela e selecionável.
@@ -93,30 +94,27 @@ A home atual (título em WebGL com água e ímã, atalho para o ecossistema e ca
 6. WHEN a pessoa escolhe uma Demanda, THE Cena SHALL exibir uma legenda curta ao lado do ícone e, abaixo da descrição da Cena, o link "Abrir os fluxos" para a página da Demanda escolhida. Antes da escolha, o link SHALL ficar oculto.
 7. THE Cena SHALL obter nomes e papéis dos dados do kit, sem texto próprio duplicado.
 
-### Requirement 5: Cena Catálogo
-
-**User Story:** Como engenheiro, quero ter noção do tamanho e da forma do catálogo, para saber que o kit cobre ferramentas de software e IA, fundamentos e stacks.
+### Requirement 5: Cena Catálogo (revisado)
+**User Story:** Como engenheiro, quero ter noção da forma do catálogo e escolher uma área para vê-la em destaque, para saber que o kit cobre ferramentas de software e IA, fundamentos e stacks.
 
 #### Acceptance Criteria
-
 1. THE Cena Catálogo SHALL desenhar as entidades do catálogo a partir da Fonte_de_Dados `api/ecossistema/index.json`.
-2. WHEN o Progresso_da_Cena avança, THE Cena SHALL agrupar as entidades por grupo visual (catálogo, fundamentos, fluxos, aprendizado) e exibir a contagem de cada grupo.
-3. THE Cena SHALL usar as mesmas cores e formas por tipo do Ecossistema 3D.
-4. WHEN a pessoa passa o ponteiro sobre um grupo, THE Cena SHALL destacar o grupo e exibir o nome e a contagem.
-5. THE Cena SHALL oferecer os links para o Catálogo em lista e para o Ecossistema 3D.
-6. THE contagem exibida na Cena SHALL ser igual ao número de entidades do payload do grupo.
+2. THE Cena SHALL oferecer um botão por grupo visual (Fluxos, Artefatos e variáveis, Catálogo, Fundamentos, Aprendizado), sem exibir contagens.
+3. WHEN a pessoa aciona o botão de um grupo, THE Cena SHALL acender as entidades do grupo e esmaecer as demais, com transição suave, e WHEN aciona o mesmo botão de novo, THE Cena SHALL voltar à visão completa.
+4. THE Cena SHALL usar as mesmas cores por tipo do Ecossistema 3D.
+5. THE Cena SHALL oferecer as ações "Ver em lista" e "Ver em 3D", e WHEN um grupo está escolhido, THE ações SHALL apontar para a lista da camada do grupo e para o Ecossistema 3D filtrado pelo grupo.
+6. WHERE JavaScript não está disponível, THE botões de grupo SHALL funcionar como links para a página da camada do grupo.
 
-### Requirement 6: Cena Jornadas e competências
-
-**User Story:** Como engenheiro, quero ver como as trilhas de estudo se ligam às competências e às certificações, para planejar o que estudar.
+### Requirement 6: Cena Jornadas e competências (revisado)
+**User Story:** Como engenheiro, quero ver como as trilhas de estudo, as competências e as certificações se organizam, para planejar o que estudar.
 
 #### Acceptance Criteria
-
-1. THE Cena Jornadas e competências SHALL desenhar as jornadas, as competências e as certificações, ligadas pelas relações declaradas nos dados, e WHERE uma entidade não tem relação declarada, THE Cena SHALL posicioná-la por área e nível da certificação ou por ordem da jornada.
-2. WHEN o Progresso_da_Cena avança, THE Cena SHALL revelar as jornadas, depois as competências e depois as certificações.
-3. WHEN a pessoa passa o ponteiro sobre uma jornada, THE Cena SHALL destacar as competências e certificações ligadas a ela.
-4. THE Cena SHALL oferecer os links para a página de jornadas e para a de certificações.
-5. WHEN uma certificação não tem Fonte_e_Data para custo ou validade, THE Cena SHALL exibir `não verificado` no lugar do valor.
+1. THE Cena Jornadas e competências SHALL desenhar um cérebro de perfil com circuitos (certificações em nós nos lobos: técnica no frontal, soft skills no temporal, IA no parietal e occipital), três livros digitais com redes neurais (um por área), quatro bots (as competências) e as jornadas em órbita, a partir do `api/home/jornadas.json`.
+2. THE Cena SHALL posicionar a entidade que não tem relação declarada por área e nível da certificação ou por ordem da jornada.
+3. THE Cena SHALL oferecer um botão para Jornadas, um para Competências e um para Certificações, sem exibir contagens.
+4. WHEN a pessoa aciona um desses botões, THE Cena SHALL acender a parte correspondente da imagem e esmaecer as outras, com transição suave, e WHEN aciona o mesmo botão de novo, THE Cena SHALL voltar à visão completa.
+5. THE Cena SHALL oferecer as ações "Ver em lista" e "Ver em 3D", apontando para a página de jornadas ou de certificações e para o Ecossistema 3D filtrado pelo tipo escolhido.
+6. WHEN uma certificação não tem Fonte_e_Data para custo ou validade, THE dado do `jornadas.json` SHALL ter `não verificado` no lugar do valor.
 
 ### Requirement 7: Desempenho e carregamento
 
@@ -167,12 +165,27 @@ A home atual (título em WebGL com água e ímã, atalho para o ecossistema e ca
 #### Acceptance Criteria
 
 1. THE Teste_de_Navegador SHALL provar que a Home exibe quatro Cenas em ordem e que o indicador de progresso acompanha a rolagem.
-2. THE Teste_de_Navegador SHALL provar que a Barra_de_Atalhos tem os oito atalhos, o atalho do ecossistema, a busca e o idioma.
-3. THE Teste_de_Navegador SHALL provar que a troca de Demanda na Cena de fluxos atualiza o desenho sem recarregar a página.
+2. THE Teste_de_Navegador SHALL provar que a Home não tem menu no topo, que tem a troca de idioma, o link "Ir direto às camadas" e os cards das oito camadas no fim, e que o texto da apresentação e o botão "Explorar o Kit em 3D" estão corretos.
+3. THE Teste_de_Navegador SHALL provar que a escolha de uma Demanda na Cena de fluxos mostra a legenda e o link "Abrir os fluxos" sem recarregar a página, e que o link está oculto antes da escolha.
 4. THE Teste_de_Navegador SHALL provar o Fallback_Estatico com WebGL desativado e com `prefers-reduced-motion`.
 5. THE Teste_de_Navegador SHALL provar que nenhuma exceção não tratada aparece no console durante a rolagem completa.
 6. THE suíte de testes SHALL incluir testes unitários do calculador de Progresso_da_Cena (limites 0 e 1, monotonia e independência do tamanho da janela).
 7. THE verificação SHALL medir o Orcamento_de_Desempenho (JavaScript inicial e adiado, tempo até o primeiro quadro interativo) e SHALL falhar quando um limite é excedido.
+
+### Requirement 11: Termos do catálogo flutuantes
+
+**User Story:** Como engenheiro, quero ver termos reais do catálogo flutuando na página inicial e poder clicar neles, para descobrir conteúdo que eu não procuraria.
+
+#### Acceptance Criteria
+
+1. THE Home SHALL exibir, na primeira Cena, termos sorteados do catálogo (técnicas, ferramentas, papéis, padrões, algoritmos, estruturas de dados, stacks, modelos, ritos, certificações, guias, artefatos, categorias, casos de uso, abordagens e estratégias), com no mínimo 4 tipos diferentes.
+2. THE Home SHALL sortear um conjunto novo a cada visita e SHALL renovar um termo por vez enquanto a página está aberta.
+3. THE Home SHALL exibir cada termo como link para a página da entidade, colorido pelo tipo, com o nome do tipo ao passar o ponteiro.
+4. THE termos SHALL ficar em duas faixas, acima e abaixo do texto da Cena ativa, e SHALL NOT passar atrás do título, do texto nem da busca.
+5. WHEN a faixa livre tem menos de 44 px de altura, THE Home SHALL ocultar os termos dessa faixa.
+6. WHILE a Cena ativa não é a primeira, THE Home SHALL manter cerca de 40% dos termos visíveis, nas mesmas faixas.
+7. THE termos SHALL ser decorativos para tecnologias assistivas (`aria-hidden` e fora da ordem de tabulação), porque as mesmas páginas existem nas listas e na busca.
+8. THE termos SHALL vir de `api/index.json`, carregado depois da primeira renderização, sem texto próprio duplicado.
 
 ## Questões em aberto
 

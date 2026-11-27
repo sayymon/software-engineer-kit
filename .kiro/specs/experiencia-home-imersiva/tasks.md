@@ -113,9 +113,9 @@ Regras de execução:
 
 ## Notes
 
-- **Estado da implementação (branch `feat/ecossistema-3d`):** feitas as tarefas 1.1, 1.2, 1.4, 2.2 a 2.5, 3.1, 3.3, 4.1 e 4.2. O Palco único com partículas em morph, as quatro Cenas com dados reais, a Barra_de_Atalhos, o indicador e os fallbacks estão no ar.
-- **Pendências:** 1.3 (falta medir os quadros por segundo no hardware de referência; no WebGL por software do CI a qualidade desce sozinha, como projetado), 2.1 (o título atual continua como canvas próprio com o efeito de água, e as partículas das letras o acompanham; a migração do shader para dentro do Palco fica para depois), 3.2 (hover e toque com tooltips), 4.3 (verificação do orçamento no CI) e 4.4.
-- **Medidas (gzip):** JavaScript inicial da Home 4,1 kB. JavaScript adiado: `palco` 6,7 kB mais o módulo do Three.js 145 kB, cerca de 152 kB no total (limite proposto: 450 kB). A relações entre jornadas, competências e certificações ficam para a outra spec.
+- **Estado da implementação (branch `feat/ecossistema-3d`):** feitas as tarefas 1.1, 1.2, 1.4, 2.2 a 2.5, 3.1, 3.3, 4.1 e 4.2. As cenas foram revisadas pelo dono (ver "Revisões após a revisão do dono" no design): tema tecnológico, título elétrico, ícones nas demandas, cérebro e livros nas jornadas, termos do catálogo e nenhum menu no topo.
+- **Pendências:** 1.3 (spike formal: o dono mediu cerca de 50 quadros por segundo no nível alto, falta registrar o modelo do equipamento), 2.1 (o título continua em canvas próprio), 3.2 (tooltips por hover e toque nos nós), 4.3 (orçamento no CI) e 4.4 (documentação do site).
+- **Medidas (gzip):** ver `docs/reviews/home-imersiva-orcamento.md`. JavaScript inicial cerca de 4 kB e adiado cerca de 160 kB.
 
 - **Portão do spike:** a tarefa 1.3 decide se o palco único sustenta o morph. Se não sustentar, o design muda (menos partículas, ou um canvas por Cena) antes da wave 3.
 - **Lacuna de dados:** jornadas e competências não têm ligações hoje. A Cena 4 funciona por área e nível, e a tarefa 2.6 preenche as relações com revisão humana.

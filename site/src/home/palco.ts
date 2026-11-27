@@ -4,7 +4,7 @@
 import * as THREE from 'three';
 import { hexParaRgb, layoutCatalogo, layoutTitulo, layoutVazio, preencherPoeira, type Area, type Layout, type NoCatalogo } from '@lib/home/layouts';
 import { layoutIcone, layoutJornadas, type DadosJornadas, type FocoJornadas } from '@lib/home/layouts-cena';
-import { janelaDeMorph } from '@lib/home/progresso';
+import { CENAS, janelaDeMorph } from '@lib/home/progresso';
 import { AvaliadorDeQuadros, CONFIG, nivelInicial, type Nivel } from '@lib/home/qualidade';
 import { carregarCatalogo, carregarJornadas } from './dados';
 import { criarCircuito, type Circuito } from './circuito';
@@ -268,6 +268,8 @@ export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Pro
   let ativa = estado.ativa;
   const avaliador = new AvaliadorDeQuadros(nivel);
   let tLinha = 0;
+  let quadroN = 0;
+  let retanguloTexto: DOMRect | null = null;
   let rodando = true;
   let rafId = 0;
   let ultimo = performance.now();
@@ -330,7 +332,8 @@ export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Pro
     particulas.atualizar(t);
     circuito.atualizar(t, Math.min(dt, 50) / 1000, camera.position.x, camera.position.y);
     camera.updateMatrixWorld();
-    termos?.atualizar(t, camera, Math.max(0, Math.min(1, 1 - tLinha * 1.7)));
+    if (quadroN++ % 6 === 0) retanguloTexto = home.querySelector(`[data-cena="${CENAS[ativa]}"] .cena-texto`)?.getBoundingClientRect() ?? null;
+    termos?.atualizar(t, camera, Math.max(0, Math.min(1, 1 - tLinha * 1.7)), retanguloTexto);
     alvoPonteiro.atualX += (alvoPonteiro.x - alvoPonteiro.atualX) * 0.12;
     alvoPonteiro.atualY += (alvoPonteiro.y - alvoPonteiro.atualY) * 0.12;
     alvoPonteiro.atualF += (alvoPonteiro.forca - alvoPonteiro.atualF) * 0.08;
