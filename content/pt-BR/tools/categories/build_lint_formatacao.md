@@ -12,12 +12,12 @@ maisBarata:
   - tabela:eslint
 custoBeneficio:
   - tabela:biome
-  - tabela:vite
+  - tabela:maven
   - "[[gradle|Gradle]]"
 qualidadeMaxima:
   - tabela:nx
   - tabela:bazel
-  - tabela:turborepo
+  - tabela:cargo
 essenciais:
   - tabela:eslint
   - tabela:prettier
@@ -35,7 +35,7 @@ Ferramentas de build, empacotamento, lint e formatação que mantêm o código c
 - Cada faixa tem 3 opções; a primeira de cada faixa é a referência e tem nota própria quando existe.
 ## 🥇 Faixas
 - **Mais barata:** Ruff, Prettier, ESLint
-- **Melhor custo-benefício:** Biome, Vite, [[gradle|Gradle]]
-- **Qualidade máxima:** Nx, Bazel, Turborepo
+- **Melhor custo-benefício:** Biome, Maven, [[gradle|Gradle]]
+- **Qualidade máxima:** Nx, Bazel, Cargo
 ## 🔗 Relacionamentos
 - **Mapa:** [[hub_tools|Mapa de Ferramentas de Engenharia]]

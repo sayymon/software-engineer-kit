@@ -17,7 +17,7 @@ custoBeneficio:
 qualidadeMaxima:
   - "[[xunit_net|xUnit.net]]"
   - tabela:kotest
-  - tabela:hypothesis
+  - tabela:testify
 essenciais:
   - "[[pytest|pytest]]"
   - "[[jest|Jest]]"
@@ -38,6 +38,6 @@ Frameworks de teste unitário e de propriedades.
 ## 🥇 Faixas
 - **Mais barata:** [[pytest|pytest]], Vitest, JUnit 5
 - **Melhor custo-benefício:** [[jest|Jest]], RSpec, PHPUnit
-- **Qualidade máxima:** [[xunit_net|xUnit.net]], Kotest, Hypothesis
+- **Qualidade máxima:** [[xunit_net|xUnit.net]], Kotest, Testify
 ## 🔗 Relacionamentos
 - **Mapa:** [[hub_tools|Mapa de Ferramentas de Engenharia]]

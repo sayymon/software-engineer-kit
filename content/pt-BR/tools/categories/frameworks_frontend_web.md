@@ -17,7 +17,7 @@ custoBeneficio:
 qualidadeMaxima:
   - "[[angular|Angular]]"
   - tabela:nuxt
-  - tabela:sveltekit
+  - tabela:blazor
 essenciais:
   - "[[react|React]]"
   - tabela:vue
@@ -37,6 +37,6 @@ Frameworks para interfaces web, de componentes reativos a full stack com renderi
 ## 🥇 Faixas
 - **Mais barata:** [[svelte|Svelte]], SolidJS, Astro
 - **Melhor custo-benefício:** [[react|React]], Vue.js, Next.js
-- **Qualidade máxima:** [[angular|Angular]], Nuxt, SvelteKit
+- **Qualidade máxima:** [[angular|Angular]], Nuxt, Blazor
 ## 🔗 Relacionamentos
 - **Mapa:** [[hub_tools|Mapa de Ferramentas de Engenharia]]

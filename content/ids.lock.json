@@ -3852,7 +3852,9 @@
     "zuora",
     "zuora_inc",
     "zustand",
-    "zustand_comunidade"
+    "zustand_comunidade",
+    "bibliotecas_cli",
+    "logs_estruturados"
   ],
   "guides": {
     "criar_api": [
