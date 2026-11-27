@@ -6,10 +6,14 @@
 // HTML comes from the static site) and pushes the Demanda route to `history`.
 // The View opens in `geral`. `completo` opens only when the URL asks for it. `visao` (old name of the Visão geral) is an alias.
 import type { ModeloDeGrafo } from '../../../lib/schema/grafo';
-import { carregarGrafo } from './loader';
+import { carregarFatos, carregarFluxo, carregarGrafo, type FatosDaPagina, type FluxoJson } from './loader';
+import { planejarDestaque } from './destaque';
 import { EVENTO_ABRIR_RAIA, EVENTO_EXPANDIR_RAIA, montarInteracao } from './interaction';
+import { montarModal } from './modal';
+import { criarRenderizadorDeConteudo } from './modal-conteudo';
 import { criarBarraDeRaias } from './raias';
 import { criarSeletorDePerspectiva, fragmentoTemPersp, guardarPerspectiva, perspectivaEfetiva } from './perspectiva';
+import { criarBarraDeSubtarefas } from './subtarefas';
 import { HistoricoDeViews, criarBotaoVoltar, type Rolagem } from './voltar';
 import { perspectivaDe, type EstadoDiagrama, type InstanciaRenderizador } from './renderer';
 import { VIEW_COMPLETO, VIEW_GERAL, atualizarEstado, escreverEstado, lerDaUrl, type EstadoDoFragmento } from './state';
@@ -22,6 +26,10 @@ export type Traduzir = (chave: string, vars?: Record<string, string | number>) =
 
 export interface DependenciasDaIlha {
   carregarGrafo(id: string, base: string): Promise<ModeloDeGrafo>;
+  /** Content of the Modal_de_Playbook (`api/flows/<id>.json`), fetched on the first opening. Defaults to the loader. */
+  carregarFluxo?(id: string, base: string): Promise<FluxoJson>;
+  /** Facts of a Pagina_Canonica (description, example) shown in the detail of an artefact or variable. Defaults to the loader. */
+  carregarFatos?(url: string): Promise<FatosDaPagina>;
   /** HTML of another page of the site (the Demanda chosen in the selector). */
   buscarPagina(url: string): Promise<string>;
   /** Hard navigation, the fallback when the in-place swap is not possible. */
@@ -160,6 +168,8 @@ export function criarControlador(deps: DependenciasDaIlha = dependenciasPadrao, 
     let instancia: InstanciaRenderizador | undefined;
     let perspectiva = '';
     let desenho = 0;
+    /** Nó to highlight in the next draw: set when closing the modal goes through `history.back()` (the draw then comes from popstate). */
+    let destaqueAgendado: string | undefined;
     /** The URL opened with a `persp` this site does not know: the default applies and the stored choice is ignored until the user chooses. */
     let perspDesconhecida = false;
 
@@ -193,6 +203,25 @@ export function criarControlador(deps: DependenciasDaIlha = dependenciasPadrao, 
     });
     abas.after(barra.elemento);
 
+    // Barra "Subtarefas" (Requirement 5): same mechanism as the lane expansion (a push, the same redraw queue, the same View, zoom
+    // and scroll). Nothing here draws by itself: `completo` with Subtarefas (about 10 s) only starts on the click.
+    const barraSub = criarBarraDeSubtarefas(doc, grafo, t, {
+      alternar: () => {
+        const corrente = lerDaUrl(grafo, win);
+        // On and off both clear the per-task set: "on" already covers every task, "off" returns to the drawing without Subtarefas (5.3).
+        const exp = { ...corrente.exp, subtarefas: new Set<string>(), todasSubtarefas: !corrente.exp.todasSubtarefas };
+        void desenhar(empurrar({ exp }));
+      },
+      alternarTarefa: (tarefa) => {
+        const corrente = lerDaUrl(grafo, win);
+        if (corrente.exp.todasSubtarefas || viewDe(corrente).startsWith('raia:')) return;
+        const subtarefas = new Set(corrente.exp.subtarefas);
+        if (!subtarefas.delete(tarefa)) subtarefas.add(tarefa);
+        void desenhar(empurrar({ exp: { ...corrente.exp, subtarefas } }));
+      },
+    });
+    barra.elemento.after(barraSub.elemento);
+
     // Seletor de Perspectiva: the choice goes to the Fragmento_de_Estado (a push, so Back undoes it) and to `localStorage`.
     // The state is merged, so View, Conjunto_Expandido, Subtarefas and Nó stay; only the drawing engine changes.
     const seletorPersp = criarSeletorDePerspectiva(doc, t, (id) => {
@@ -210,19 +239,28 @@ export function criarControlador(deps: DependenciasDaIlha = dependenciasPadrao, 
     if (toolbar) toolbar.append(seletorPersp.elemento);
     else abas.before(seletorPersp.elemento);
 
-    const desenhar = async (estado: EstadoDoFragmento, focar?: string, rolagem?: Rolagem): Promise<void> => {
+    const desenhar = async (estado: EstadoDoFragmento, focar?: string, rolagem?: Rolagem, destacado?: string): Promise<void> => {
+      // A highlight belongs to the draw that asked for it; the "Voltar" of the browser lands here with the one scheduled by `destacar`.
+      if (destacado === undefined && destaqueAgendado !== undefined) {
+        destacado = destaqueAgendado;
+        focar ??= destacado;
+      }
+      destaqueAgendado = undefined;
       const meu = ++desenho;
       const view = viewDe(estado);
       // Same View (expanding, collapsing, Back inside the View): the user keeps the scroll of the stage, and the zoom lives in `interacao`.
       const esq = palco.scrollLeft;
       const topo = palco.scrollTop;
       const mesmaView = palco.dataset.view === view;
+      // A redraw replaces the svg and drops the focus (Requirement 6.10: closing the modal returns it to a Nó, and Back redraws right after).
+      const focoAntes = doc.activeElement instanceof Element && palco.contains(doc.activeElement) ? doc.activeElement.closest<HTMLElement>('[data-id]')?.dataset.id : undefined;
       marcarAba(raiz, view);
       barra.atualizar(estado.exp.raias, !view.startsWith('raia:'), view === VIEW_COMPLETO ? estado.semRaias !== true : undefined);
+      barraSub.atualizar(estado);
       voltar.atualizar(historico.podeVoltar);
       palco.dataset.view = view;
       palco.dataset.rendered = 'false';
-      const diagrama = paraDiagrama(estado);
+      const diagrama = { ...paraDiagrama(estado), noDestacado: destacado };
       const escolhida = perspectivaEfetiva(estado.persp, perspDesconhecida || fragmentoTemPersp(win.location.hash), win);
       seletorPersp.atualizar(escolhida);
       if (!instancia || perspectiva !== escolhida) {
@@ -243,6 +281,12 @@ export function criarControlador(deps: DependenciasDaIlha = dependenciasPadrao, 
         palco.scrollTop = topo;
       }
       if (focar) instancia?.focarNo(focar);
+      else if (focoAntes && (doc.activeElement === doc.body || !doc.activeElement?.isConnected)) instancia?.focarNo(focoAntes);
+      if (destacado) {
+        // Requirement 8.4: bring the highlighted Nó into view (the stage scrolls, and so may the page).
+        const alvo = [...palco.querySelectorAll('[data-destacado]')][0];
+        (alvo as Element | undefined)?.scrollIntoView?.({ block: 'center', inline: 'center' });
+      }
       palco.dataset.rendered = palco.querySelector('.flow-erro') ? 'error' : 'true';
     };
 
@@ -253,6 +297,78 @@ export function criarControlador(deps: DependenciasDaIlha = dependenciasPadrao, 
       const proximo = atualizarEstado(grafo, mudanca, 'push', win);
       if (win.location.hash !== antes) historico.empilhar(win.location.hash, rolagem);
       return proximo;
+    };
+
+    // Modal_de_Playbook: opening pushes `no=<id>` (Back closes it), closing undoes that push or, when the URL opened it, rewrites the entry.
+    const modal = montarModal({
+      raiz,
+      grafo,
+      t,
+      gravar: (no, modo) => {
+        if (modo === 'push') {
+          empurrar({ no });
+          voltar.atualizar(historico.podeVoltar);
+        } else {
+          atualizarEstado(grafo, { no }, 'replace', win);
+          historico.substituir(win.location.hash);
+        }
+      },
+      recuar: () => win.history.back(),
+      focoReserva: () => palco,
+      renderizar: criarRenderizadorDeConteudo({
+        carregar: () => (deps.carregarFluxo ?? carregarFluxo)(raiz.dataset.flowId ?? '', base),
+        carregarFatos: (url) => (deps.carregarFatos ?? carregarFatos)(url),
+      }),
+      abrirRaia: (id) => irParaRaia(id),
+      destacarNo: (id) => destacar(id),
+    });
+
+    /**
+     * "Destacar no Diagrama" (Requirements 8.3, 8.4): closes the modal (the page is inert while it is open), activates the View that
+     * draws the Nó (expanding its lane or switching to its lane View, see destaque.ts), highlights it, scrolls to it and focuses it.
+     * The highlight is not part of the URL: it lasts until the next redraw. History follows `irParaRaia`: the `no=` entry of this
+     * opening becomes the entry of the new state, or is undone with Back when nothing changes, so there is no duplicate step.
+     */
+    const destacar = (id: string): void => {
+      const corrente = lerDaUrl(grafo, win);
+      const plano = planejarDestaque(grafo, corrente, id);
+      if (!plano) return;
+      const nosso = modal.fecharParaNavegar();
+      const alteracao = { ...plano.mudanca, no: undefined };
+      if (plano.mudanca) {
+        const proximo = nosso ? atualizarEstado(grafo, alteracao, 'replace', win) : empurrar(alteracao);
+        if (nosso) historico.substituir(win.location.hash);
+        voltar.atualizar(historico.podeVoltar);
+        void desenhar(proximo, plano.alvo, undefined, plano.alvo);
+      } else if (nosso) {
+        destaqueAgendado = plano.alvo; // undo the `no=` entry: the draw comes from the popstate
+        win.history.back();
+      } else {
+        const proximo = atualizarEstado(grafo, { no: undefined }, 'replace', win);
+        historico.substituir(win.location.hash);
+        void desenhar(proximo, plano.alvo, undefined, plano.alvo);
+      }
+    };
+
+    /** The button of a chamada de Raia (Requirement 4.2): closes the modal and activates the View of the called Raia. */
+    const irParaRaia = (id: string): void => {
+      const view = `raia:${id}`;
+      const corrente = lerDaUrl(grafo, win);
+      if (view === viewDe(corrente)) return modal.fechar(); // already there: the normal close undoes the `no=` push
+      const nosso = modal.fecharParaNavegar();
+      const exp = { raias: new Set<string>(), subtarefas: new Set<string>(), todasSubtarefas: corrente.exp.todasSubtarefas };
+      let proximo: EstadoDoFragmento;
+      if (nosso) {
+        // The entry of `no=` becomes the entry of the View: Back returns to where the modal was opened from, with no duplicate step.
+        proximo = atualizarEstado(grafo, { view, exp, no: undefined }, 'replace', win);
+        historico.substituir(win.location.hash);
+      } else {
+        proximo = empurrar({ view, exp, no: undefined });
+      }
+      voltar.atualizar(historico.podeVoltar);
+      void desenhar(proximo).then(() => {
+        if (vivo && (doc.activeElement === doc.body || !doc.activeElement?.isConnected)) abas.querySelector<HTMLElement>('[role="tab"][aria-selected="true"]')?.focus();
+      });
     };
 
     const ativarView = (view: string): void => {
@@ -306,7 +422,9 @@ export function criarControlador(deps: DependenciasDaIlha = dependenciasPadrao, 
     // The stack follows the browser: the scroll saved for the entry we came back to is restored after the redraw.
     const aoMudarEstado = (): void => {
       const rolagem = historico.sincronizar(win.location.hash, rolagemDoPalco());
-      void desenhar(lerDaUrl(grafo, win), undefined, rolagem);
+      const estado = lerDaUrl(grafo, win);
+      modal.sincronizar(estado.no); // Back/Forward over `no=` closes, opens or switches the Modal_de_Playbook
+      void desenhar(estado, undefined, rolagem);
     };
 
     abas.addEventListener('click', aoClicar);
@@ -326,8 +444,10 @@ export function criarControlador(deps: DependenciasDaIlha = dependenciasPadrao, 
         palco.removeEventListener(EVENTO_EXPANDIR_RAIA, aoExpandirRaia);
         palco.removeEventListener(EVENTO_ABRIR_RAIA, aoAbrirRaia);
         barra.destruir();
+        barraSub.destruir();
         seletorPersp.destruir();
         voltar.destruir();
+        modal.destruir();
         interacao.destruir();
         instancia?.destruir();
       },
@@ -339,6 +459,7 @@ export function criarControlador(deps: DependenciasDaIlha = dependenciasPadrao, 
     const inicial = lerDaUrl(grafo, win);
     escreverEstado(inicial, 'replace', win); // canonical fragment: `view=visao` and old forms collapse to the current one
     historico.substituir(win.location.hash);
+    modal.sincronizar(inicial.no); // a URL with `no=` reopens the Modal_de_Playbook (an unknown `no` was already dropped by lerDaUrl)
     await desenhar(inicial);
   }
 

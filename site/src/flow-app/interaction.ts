@@ -126,11 +126,12 @@ export function montarInteracao(palco: HTMLElement, opcoes: OpcoesDeInteracao): 
   };
   barra.addEventListener('click', aoZoomClicar);
 
-  // A redraw replaces the svg: apply the current zoom to the new one.
+  // A redraw replaces the svg (inside the Perspectiva container, not as a direct child of the stage): apply the current zoom to the new one.
+  // `aplicarZoom` only writes `style`, which a `childList` observer does not see, so it cannot loop.
   const observador = new MutationObserver(() => {
     if (zoom !== 1) aplicarZoom();
   });
-  observador.observe(palco, { childList: true });
+  observador.observe(palco, { childList: true, subtree: true });
 
   // --- opening a Nó ---
   const abrir = (id: string): void => {

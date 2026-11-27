@@ -48,6 +48,7 @@ describe('Fragmento_de_Estado', () => {
     expect(lerEstado('#no=zzz&view=raia:b', grafo)).toEqual({ exp: { raias: new Set(), subtarefas: new Set(), todasSubtarefas: false }, view: 'raia:b' });
     expect(lerEstado('#no=b1', grafo).no).toBe('b1');
     expect(lerEstado('#no=a', grafo).no).toBeUndefined();
+    expect(lerEstado('#no=a1_s1', { ...grafo, nos: grafo.nos.map((n) => (n.id === 'a1' ? { ...n, subtarefas: [{ id: 'a1_s1', rotulo: 's', ordem: 0, condicional: false }] } : n)) }).no).toBe('a1_s1'); // a Subtarefa opens the modal too
   });
 
   it('usa o padrão quando persp não é uma perspectiva conhecida', () => {

@@ -8,6 +8,7 @@ import type { ModeloDeGrafo } from '../../../../lib/schema/grafo';
 import { chaveDoEstado, criarExpansao } from '../expansao';
 import { carregarMermaid, renderizarDiagrama, type MermaidApi } from '../mermaid-loader';
 import type { EstadoDiagrama, InstanciaRenderizador, Renderizador } from '../renderer';
+import { contagemDeSubtarefas } from '../subtarefas';
 
 export const PERSPECTIVA_MERMAID = 'mermaid';
 const PREFIXO_CLUSTER = 'cluster:';
@@ -24,7 +25,7 @@ export function diagramaDoEstado(grafo: ModeloDeGrafo, estado: EstadoDiagrama): 
 
 type Traduzir = (chave: string, vars?: Record<string, string | number>) => string;
 
-/** Accessible name of each real id: node and subtask labels, lane names for lanes, and for `cluster:<raia>` the name with the counts. */
+/** Accessible name of each real id: node labels (with "N subtarefas" when the task has Subtarefas), subtask labels, lane names for lanes, and for `cluster:<raia>` the name with the counts. */
 function rotulosDo(grafo: ModeloDeGrafo, t?: Traduzir): Map<string, string> {
   const m = new Map<string, string>();
   const totais = new Map(projetar(grafo, { raias: new Set(), subtarefas: new Set(), todasSubtarefas: false }).clusters.map((c) => [c.raia, c.totais]));
@@ -37,7 +38,8 @@ function rotulosDo(grafo: ModeloDeGrafo, t?: Traduzir): Map<string, string> {
     );
   }
   for (const n of grafo.nos) {
-    m.set(n.id, n.rotulo);
+    // Requirement 5.4: a task with Subtarefas says how many (the drawing prints "N subtarefas" while they are hidden).
+    m.set(n.id, t && n.subtarefas.length ? t('flow.no.rotulo_subtarefas', { nome: n.rotulo, contagem: contagemDeSubtarefas(t, n.subtarefas.length) }) : n.rotulo);
     for (const s of n.subtarefas) m.set(s.id, s.rotulo);
   }
   return m;

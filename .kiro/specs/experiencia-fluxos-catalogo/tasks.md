@@ -240,32 +240,32 @@ Convenções:
 - [x] 6.12 Escrever `tests/browser/expansao-progressiva.spec.ts` e `tests/browser/perspectiva.spec.ts`
   - abre em `geral`, expandir uma raia desenha só o conjunto novo (contagem de chamadas a `mermaid.render`), recolher, Expandir tudo com indicador em até 100 ms e `data-id` igual ao golden, pedido obsoleto descartado, teclado do cluster, URL com `exp=` reaberta
   - _Requisitos: 20.1 a 20.11, 19.1, 19.3, 19.4, 19.5, 19.11_
-- [-] 6.13 Commit `feat(site): diagrama interativo de fluxos com visao geral e expansao`
+- [x] 6.13 Commit `feat(site): diagrama interativo de fluxos com visao geral e expansao`
   - _Requisitos: 3.1, 20.1_
 
 ### Fase 7: Modal de Playbook, Subtarefas, entradas e saídas
 
-- [ ] 7.1 Ampliar `api/flows/<id>.json` (`site/src/render/api.ts`) com `papeis`, letras RACI por nó, entradas e saídas, produtores e consumidores por artefato e variável (via `rastrearDados`) e o indicador "sem produtor" (via `lacunasDeDados`)
+- [x] 7.1 Ampliar `api/flows/<id>.json` (`site/src/render/api.ts`) com `papeis`, letras RACI por nó, entradas e saídas, produtores e consumidores por artefato e variável (via `rastrearDados`) e o indicador "sem produtor" (via `lacunasDeDados`)
   - teste unitário do formato para a `feature`
   - _Requisitos: 7.10, 8.1, 8.2, 8.5, 17.6_
-- [ ] 7.2 Criar `site/src/flow-app/modal.ts` com `<dialog>` nativo, `inert` no resto da página, foco preso, Esc e botão fechar devolvendo o foco, e `no=` no Fragmento_de_Estado
+- [x] 7.2 Criar `site/src/flow-app/modal.ts` com `<dialog>` nativo, `inert` no resto da página, foco preso, Esc e botão fechar devolvendo o foco, e `no=` no Fragmento_de_Estado
   - Historico_do_Modal como pilha em memória, que persiste só o topo
   - _Requisitos: 6.5, 6.6, 6.7, 6.9, 6.10, 6.11_
-- [ ] 7.3 Renderizar o conteúdo do Modal por tipo de Nó: tarefa (nome, tipo, Raia, resumo, Fazer, Evitar, perguntas-chave na ordem do guia, entradas, saídas, técnicas e papéis com letra RACI), gateway (pergunta, saídas com condição, papel que decide), Subtarefa condicional ("Executar quando") e chamada de Raia (Raia chamada, retornos e botão para abrir a View)
+- [x] 7.3 Renderizar o conteúdo do Modal por tipo de Nó: tarefa (nome, tipo, Raia, resumo, Fazer, Evitar, perguntas-chave na ordem do guia, entradas, saídas, técnicas e papéis com letra RACI), gateway (pergunta, saídas com condição, papel que decide), Subtarefa condicional ("Executar quando") e chamada de Raia (Raia chamada, retornos e botão para abrir a View)
   - _Requisitos: 6.1, 6.2, 6.3, 6.4, 4.1, 4.2, 8.6, 6.12_
-- [ ] 7.4 Tornar clicáveis papel, técnica, artefato, variável, rito e pergunta dentro do Modal (empilha, botão voltar, link para a Pagina_Canonica) e implementar o detalhe de artefato e variável com tipo, subtipo, exemplo, produtores, consumidores, aviso "sem produtor" e a ação "destacar no Diagrama"
+- [x] 7.4 Tornar clicáveis papel, técnica, artefato, variável, rito e pergunta dentro do Modal (empilha, botão voltar, link para a Pagina_Canonica) e implementar o detalhe de artefato e variável com tipo, subtipo, exemplo, produtores, consumidores, aviso "sem produtor" e a ação "destacar no Diagrama"
   - destacar ativa a View que contém o Nó, rola até ele e aplica o destaque
   - _Requisitos: 6.5, 6.6, 6.8, 8.1, 8.2, 8.3, 8.4, 8.5, 8.7, 13.2_
-- [ ] 7.5 Implementar na ilha o alternador "Subtarefas" (expande as de toda raia expandida), a expansão por tarefa, a indicação "N subtarefas", a borda tracejada com ◆ nas condicionais e o alternador oculto quando a View não tem Subtarefas
+- [x] 7.5 Implementar na ilha o alternador "Subtarefas" (expande as de toda raia expandida), a expansão por tarefa, a indicação "N subtarefas", a borda tracejada com ◆ nas condicionais e o alternador oculto quando a View não tem Subtarefas
   - preservar View, zoom e rolagem ao alternar
   - _Requisitos: 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.8, 20.5_
-- [ ] 7.6 Escrever `tests/browser/modal-playbook.spec.ts` e `tests/browser/entradas-saidas.spec.ts`
+- [x] 7.6 Escrever `tests/browser/modal-playbook.spec.ts` e `tests/browser/entradas-saidas.spec.ts`
   - conteúdo por tipo, histórico e botão voltar, foco preso (loop de Tab), Esc devolve o foco, URL com `no=` reabre o modal, "sem produtor", destacar produtor
   - _Requisitos: 6.1 a 6.12, 8.1 a 8.7_
-- [ ] 7.7 Escrever `tests/browser/subtarefas.spec.ts`
+- [x] 7.7 Escrever `tests/browser/subtarefas.spec.ts`
   - alternador, contagem real "N subtarefas", marcador ◆, alternador oculto sem Subtarefas, estado preservado
   - _Requisitos: 5.1 a 5.6, 5.8_
-- [ ] 7.8 Commit `feat(site): modal de playbook, subtarefas e rastreio de entradas e saidas`
+- [-] 7.8 Commit `feat(site): modal de playbook, subtarefas e rastreio de entradas e saidas`
   - _Requisitos: 6.1, 5.1_
 
 ### Fase 8: motor de facetas e as três Areas

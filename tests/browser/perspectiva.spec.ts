@@ -37,7 +37,9 @@ test('escolher a Perspectiva guarda no localStorage e mantém View, Subtarefas e
   await abrir(page, `${URL_FEATURE}#view=completo&sub=1&no=${no}&persp=mermaid`);
   await expect(selecionado(page)).toHaveAttribute('data-id', no);
 
-  await seletor(page).selectOption('mermaid');
+  // A URL with `no=` opens the Modal_de_Playbook (task 7.2), which makes the rest of the page inert: the choice is driven past the
+  // actionability check because this test is about the merged state, not about the gesture.
+  await seletor(page).selectOption('mermaid', { force: true });
   await pronto(page);
   await expect(palco(page)).toHaveAttribute('data-view', 'completo');
   for (const parte of ['view=completo', 'sub=1', `no=${no}`, 'persp=mermaid']) expect(hash(page)).toContain(parte);
@@ -46,7 +48,7 @@ test('escolher a Perspectiva guarda no localStorage e mantém View, Subtarefas e
 
   // Same with a Conjunto_Expandido (the `geral` View, which does not carry `view=`).
   await abrir(page, `${URL_FEATURE}#exp=feat_ent,feat_lev&sub=1&no=${no}&persp=mermaid`);
-  await seletor(page).selectOption('mermaid');
+  await seletor(page).selectOption('mermaid', { force: true });
   await pronto(page);
   await expect(palco(page)).toHaveAttribute('data-view', 'geral');
   for (const parte of ['exp=feat_ent,feat_lev', 'sub=1', `no=${no}`, 'persp=mermaid']) expect(hash(page)).toContain(parte);

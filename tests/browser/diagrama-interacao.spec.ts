@@ -32,6 +32,16 @@ async function abrir(page: Page, url: string) {
   };
 }
 
+/** Since task 7.2 opening a Nó also opens the Modal_de_Playbook (`no=<id>` in the URL, rest of the page inert): check it and close it. */
+async function fecharModal(page: Page, id: string, urlAntes: string) {
+  expect(new URL(page.url()).hash).toContain(`no=${id}`);
+  await expect(page.locator('dialog[data-flow-modal]')).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(page.locator('dialog[data-flow-modal]')).toBeHidden();
+  await expect.poll(() => page.url()).toBe(urlAntes);
+  await pronto(page);
+}
+
 /** Moves the pointer onto a point of the stage that is inside the viewport (a wheel event off-screen never reaches the page). */
 async function apontarParaOPalco(page: Page) {
   await palco(page).scrollIntoViewIfNeeded();
@@ -64,7 +74,7 @@ test('clique de 0 e de 3 px abre o Nó sem rolar a área; o Nó expõe papel, r�
   await page.mouse.down();
   await page.mouse.up();
   expect(await abertos()).toEqual([id]);
-  expect(page.url()).toBe(urlAntes);
+  await fecharModal(page, id, urlAntes);
 
   // Click with exactly 3 px of movement between press and release.
   await page.mouse.move(x, y);
@@ -72,7 +82,7 @@ test('clique de 0 e de 3 px abre o Nó sem rolar a área; o Nó expõe papel, r�
   await page.mouse.move(x + 3, y);
   await page.mouse.up();
   expect(await abertos()).toEqual([id, id]);
-  expect(page.url()).toBe(urlAntes);
+  await fecharModal(page, id, urlAntes);
   await expect(palco(page)).not.toHaveCSS('cursor', 'grabbing');
   expect(await rolagem(page)).toEqual(antes);
   expect(erros).toEqual([]);
@@ -113,7 +123,7 @@ test('arraste de 150 px rola o palco com cursor grabbing, não abre o Nó e não
   await noAtual.scrollIntoViewIfNeeded();
   await noAtual.click();
   expect(await abertos()).toEqual([id]);
-  expect(page.url()).toBe(urlAntes);
+  await fecharModal(page, id, urlAntes);
   expect(erros).toEqual([]);
 });
 
@@ -294,11 +304,11 @@ test('foco visível: Nó focado por teclado tem contorno calculado; Enter e Espa
   await no.focus();
   await page.keyboard.press('Enter');
   expect(await abertos()).toEqual([id]);
-  expect(page.url()).toBe(urlAntes);
+  await fecharModal(page, id, urlAntes);
   await no.focus();
   await page.keyboard.press('Space');
   expect(await abertos()).toEqual([id, id]);
-  expect(page.url()).toBe(urlAntes);
+  await fecharModal(page, id, urlAntes);
 
   // The zoom buttons also show a visible focus.
   await page.locator('[data-flow-zoom="mais"]').focus();

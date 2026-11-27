@@ -841,6 +841,11 @@
         "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
         "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
         "timestamp": 1795739404449
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795739479913
       }
     ],
     "7.1 Ampliar `api/flows/<id>.json` (`site/src/render/api.ts`) com `papeis`, letras RACI por nó, entradas e saídas, produtores e consumidores por artefato e variável (via `rastrearDados`) e o indicador \"sem produtor\" (via `lacunasDeDados`)": [
@@ -848,6 +853,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654258057
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795739485730
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795741075923
       }
     ],
     "7.2 Criar `site/src/flow-app/modal.ts` com `<dialog>` nativo, `inert` no resto da página, foco preso, Esc e botão fechar devolvendo o foco, e `no=` no Fragmento_de_Estado": [
@@ -855,6 +870,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654258086
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795739485740
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795741075938
       }
     ],
     "7.3 Renderizar o conteúdo do Modal por tipo de Nó: tarefa (nome, tipo, Raia, resumo, Fazer, Evitar, perguntas-chave na ordem do guia, entradas, saídas, técnicas e papéis com letra RACI), gateway (pergunta, saídas com condição, papel que decide), Subtarefa condicional (\"Executar quando\") e chamada de Raia (Raia chamada, retornos e botão para abrir a View)": [
@@ -862,6 +887,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654258114
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795741080750
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795742354902
       }
     ],
     "7.4 Tornar clicáveis papel, técnica, artefato, variável, rito e pergunta dentro do Modal (empilha, botão voltar, link para a Pagina_Canonica) e implementar o detalhe de artefato e variável com tipo, subtipo, exemplo, produtores, consumidores, aviso \"sem produtor\" e a ação \"destacar no Diagrama\"": [
@@ -869,6 +904,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654258142
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795743480863
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795744613090
       }
     ],
     "7.5 Implementar na ilha o alternador \"Subtarefas\" (expande as de toda raia expandida), a expansão por tarefa, a indicação \"N subtarefas\", a borda tracejada com ◆ nas condicionais e o alternador oculto quando a View não tem Subtarefas": [
@@ -876,6 +921,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654258173
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795744613117
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795745405655
       }
     ],
     "7.6 Escrever `tests/browser/modal-playbook.spec.ts` e `tests/browser/entradas-saidas.spec.ts`": [
@@ -883,6 +938,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654258206
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795745412819
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795745650481
       }
     ],
     "7.7 Escrever `tests/browser/subtarefas.spec.ts`": [
@@ -890,6 +955,11 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654258299
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795745412803
       }
     ],
     "7.8 Commit `feat(site): modal de playbook, subtarefas e rastreio de entradas e saidas`": [
@@ -897,6 +967,11 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654258325
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795745650496
       }
     ],
     "8.1 Criar `lib/facets/index.ts` com `derivarFacetas(schemas)` e `construirIndice(facetas, entidades)`, a partir de `schema/json/*.json`, sem nome de campo fixo": [

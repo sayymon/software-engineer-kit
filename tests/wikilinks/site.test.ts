@@ -74,9 +74,13 @@ describe('site index (real content)', () => {
     expect(index.byRoute.get(tool.route)).toBe(tool);
   });
 
+  // `repo.list('en')` is a cold, uncached load of the whole content tree: it re-reads and re-parses (YAML + front matter) every pt-BR
+  // source file (~1450), then each existing overlay, then derives the guide. That is synchronous CPU/IO work that takes ~2 s on an idle
+  // machine and scales linearly with contention, so under a loaded `npm test` it can cross the global 30 s `testTimeout`. The work is
+  // the point of the test (the real `en` fallback), so the limit is raised locally for this test only instead of mocking the loader.
   it('serves the en locale as fallback with a marker for entities that have no overlay', () => {
     const en = new SiteIndex('en', repo.list('en'));
     expect(en.pages.length).toBe(index.pages.length);
     expect(en.pages.some((p) => p.entity.fallback)).toBe(true);
-  });
+  }, 120_000);
 });

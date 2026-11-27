@@ -44,7 +44,7 @@ const todasAsRaias = (grafo: ModeloDeGrafo): Set<string> => new Set(grafo.raias.
 
 /**
  * Normalizes a state against the graph: `visao` becomes `geral`, unknown lanes/tasks/views are dropped, all lanes
- * expanded means `completo`, a `no` that is not a node id is ignored, and a `persp` outside `PERSPECTIVAS_CONHECIDAS`
+ * expanded means `completo`, a `no` that is neither a node id nor a Subtarefa id is ignored, and a `persp` outside `PERSPECTIVAS_CONHECIDAS`
  * falls back to the default (absent).
  */
 export function normalizarEstado(estado: EstadoDoFragmento, grafo: ModeloDeGrafo): EstadoDoFragmento {
@@ -62,7 +62,7 @@ export function normalizarEstado(estado: EstadoDoFragmento, grafo: ModeloDeGrafo
   }
   if (view === VIEW_GERAL) view = undefined;
   const saida: EstadoDoFragmento = { exp };
-  if (estado.no && grafo.nos.some((n) => n.id === estado.no)) saida.no = estado.no;
+  if (estado.no && grafo.nos.some((n) => n.id === estado.no || n.subtarefas.some((s) => s.id === estado.no))) saida.no = estado.no;
   if (view) saida.view = view;
   if (estado.semRaias && view === VIEW_COMPLETO) saida.semRaias = true;
   if (estado.persp && PERSPECTIVAS_CONHECIDAS.includes(estado.persp)) saida.persp = estado.persp;

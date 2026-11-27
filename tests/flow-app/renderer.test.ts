@@ -77,6 +77,18 @@ describe('aplicarDataIds (SVG real do Mermaid)', () => {
     expect(cluster.getAttribute('aria-label')).toBe('flow.cluster.label:Raia Dois:1:1:0:0');
   });
 
+  it('names a task with Subtarefas with the real N (Requirement 5.4) and leaves the others alone', () => {
+    document.body.innerHTML = svgReal;
+    const comSub = {
+      ...mini,
+      nos: mini.nos.map((n) => (n.id === 'a1' ? { ...n, subtarefas: [{ id: 'a1.1' }, { id: 'a1.2' }, { id: 'a1.3' }] } : n)),
+    } as unknown as typeof mini;
+    const t = (c: string, v: Record<string, string | number> = {}) => (c === 'flow.sub.contagem' ? `${v.n} subtarefas` : c === 'flow.no.rotulo_subtarefas' ? `${v.nome}, ${v.contagem}` : c);
+    aplicarDataIds(document, mapa, comSub, t);
+    expect(document.querySelector('g.node[data-id="a1"]')?.getAttribute('aria-label')).toBe('Tarefa A, 3 subtarefas');
+    expect(document.querySelector('g.node[data-id="g1"]')?.getAttribute('aria-label')).toBe('Decide');
+  });
+
   it('leaves elements outside the map untouched', () => {
     document.body.innerHTML = svgReal;
     aplicarDataIds(document, { a1: 'a1' }, mini);
