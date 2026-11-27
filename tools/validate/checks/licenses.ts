@@ -27,6 +27,7 @@ export const EXPECTED_LICENSES: Record<string, string> = {
   epl_2_0: 'EPL-2.0',
   gpl_2_0: 'GPL-2.0-only',
   lgpl_2_1: 'LGPL-2.1-only',
+  python_2_0: 'Python-2.0',
 };
 export const LICENSES_DIR = 'fundamentals/licenses/';
 export const DECISION_GUIDE_ID = 'guia_de_escolha_de_licenca';
