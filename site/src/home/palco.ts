@@ -6,6 +6,8 @@ import { layoutCatalogo, layoutFluxo, layoutJornadas, layoutTitulo, layoutVazio,
 import { janelaDeMorph } from '@lib/home/progresso';
 import { AvaliadorDeQuadros, CONFIG, nivelInicial, type Nivel } from '@lib/home/qualidade';
 import { carregarCatalogo, carregarFluxo, carregarJornadas } from './dados';
+import { criarCircuito, type Circuito } from './circuito';
+import { criarGlifos, type Glifos } from './glifos';
 import { criarParticulas } from './particulas';
 import { amostrarTitulo } from './titulo';
 
@@ -37,6 +39,10 @@ export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Pro
 
   let particulas = criarParticulas(CONFIG[nivel].particulas, Math.min(devicePixelRatio, CONFIG[nivel].dpr));
   scene.add(particulas.pontos);
+  // Technology backdrop: circuit board with data packets, and floating code symbols.
+  let circuito: Circuito = criarCircuito(CONFIG[nivel].trilhas, CONFIG[nivel].pulsos);
+  let glifos: Glifos = criarGlifos(CONFIG[nivel].glifos);
+  scene.add(circuito.grupo, glifos.malha);
 
   const base = home.dataset.base ?? document.documentElement.dataset.base ?? '';
   const locale = document.documentElement.lang || 'pt-BR';
@@ -195,6 +201,7 @@ export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Pro
   let progressos = estado.progressos;
   let ativa = estado.ativa;
   const avaliador = new AvaliadorDeQuadros(nivel);
+  let tLinha = 0;
   let rodando = true;
   let rafId = 0;
   let ultimo = performance.now();
@@ -216,6 +223,12 @@ export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Pro
     particulas.destruir();
     particulas = criarParticulas(CONFIG[nivel].particulas, Math.min(devicePixelRatio, CONFIG[nivel].dpr));
     scene.add(particulas.pontos);
+    scene.remove(circuito.grupo, glifos.malha);
+    circuito.destruir();
+    glifos.destruir();
+    circuito = criarCircuito(CONFIG[nivel].trilhas, CONFIG[nivel].pulsos);
+    glifos = criarGlifos(CONFIG[nivel].glifos);
+    scene.add(circuito.grupo, glifos.malha);
     redimensionar();
     aplicarLayouts();
     home.dataset.qualidade = nivel;
@@ -242,9 +255,14 @@ export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Pro
       }
     }
     const t = (agora - t0) / 1000;
-    const { de, mistura } = janelaDeMorph(progressos, ativa);
-    particulas.definirMorph(de, mistura);
+    // The morph follows the scroll with a little inertia, so a jump from the indicator flies through the scenes.
+    const alvo = janelaDeMorph(progressos, ativa);
+    tLinha += (alvo.de + alvo.mistura - tLinha) * (1 - Math.exp(-dt / 170));
+    const seg = Math.min(2, Math.floor(tLinha + 1e-6));
+    particulas.definirMorph(seg, Math.min(1, tLinha - seg));
     particulas.atualizar(t);
+    circuito.atualizar(t, Math.min(dt, 50) / 1000, camera.position.x, camera.position.y);
+    glifos.atualizar(t);
     alvoPonteiro.atualX += (alvoPonteiro.x - alvoPonteiro.atualX) * 0.12;
     alvoPonteiro.atualY += (alvoPonteiro.y - alvoPonteiro.atualY) * 0.12;
     alvoPonteiro.atualF += (alvoPonteiro.forca - alvoPonteiro.atualF) * 0.08;
@@ -291,6 +309,8 @@ export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Pro
       removeEventListener('pointermove', onPonteiro);
       document.removeEventListener('pointerleave', onSaiu);
       particulas.destruir();
+      circuito.destruir();
+      glifos.destruir();
       renderer.dispose();
       canvas.remove();
       badge?.remove();

@@ -9,14 +9,18 @@ export interface ConfigDeNivel {
   particulas: number;
   /** Maximum device pixel ratio. */
   dpr: number;
-  /** Simultaneous water ripples on the title. */
+  /** Simultaneous bursts on the title. */
   ondas: number;
+  /** Circuit traces, data packets and code glyphs of the background. */
+  trilhas: number;
+  pulsos: number;
+  glifos: number;
 }
 
 export const CONFIG: Record<Nivel, ConfigDeNivel> = {
-  alto: { particulas: 2400, dpr: 2, ondas: 8 },
-  medio: { particulas: 1600, dpr: 1.5, ondas: 8 },
-  baixo: { particulas: 900, dpr: 1, ondas: 4 },
+  alto: { particulas: 2400, dpr: 2, ondas: 8, trilhas: 110, pulsos: 180, glifos: 36 },
+  medio: { particulas: 1600, dpr: 1.5, ondas: 8, trilhas: 70, pulsos: 110, glifos: 26 },
+  baixo: { particulas: 900, dpr: 1, ondas: 4, trilhas: 40, pulsos: 60, glifos: 16 },
 };
 
 export interface Aparelho {

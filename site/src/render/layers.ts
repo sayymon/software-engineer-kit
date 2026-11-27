@@ -139,6 +139,22 @@ export function renderJourneys(ctx: Ctx): string {
   );
 }
 
+/** 24x24 stroke icons by demand id, for the flow chips of the Home. Decorative: the name next to each carries the meaning. */
+const ICONE_DEMANDA: Record<string, string> = {
+  feature: 'M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z M19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z',
+  bug: 'M8 9h8v7a4 4 0 0 1-8 0z M12 5v4 M4.5 10l3 1 M19.5 10l-3 1 M4.5 16l3-1 M19.5 16l-3-1 M9 4.5l1.5 2 M15 4.5l-1.5 2',
+  incidente: 'M12 3l9.5 17h-19z M12 10v4 M12 17v.5',
+  chore: 'M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z',
+  seguranca: 'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z M9 12l2 2 4-4',
+  spike: 'M9 3h6 M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3 M8 15h8',
+  divida_tecnica: 'M12 3l9 5-9 5-9-5z M3 13l9 5 9-5 M3 17.5l9 5 9-5',
+  infraestrutura: 'M4 4h16v6H4z M4 14h16v6H4z M8 7h.01 M8 17h.01 M12 7h4 M12 17h4',
+  teste_qa: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M8 12l3 3 5-6',
+  documentacao: 'M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z M4 19V5 M9 8h6 M9 12h6',
+  migracao: 'M4 8h14 M14 4l4 4-4 4 M20 16H6 M10 12l-4 4 4 4',
+  descontinuacao: 'M12 3v8 M7 6.5a8 8 0 1 0 10 0',
+};
+const svgIcone = (id: string) => `<svg class="chip-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="${ICONE_DEMANDA[id] ?? ICONE_DEMANDA.feature}"/></svg>`;
 export function renderHome(ctx: Ctx): string {
   const t = ctx.t;
   const other = ctx.locale === 'pt-BR' ? 'en' : 'pt-BR';
@@ -148,7 +164,7 @@ export function renderHome(ctx: Ctx): string {
     return `<li><a href="${esc(ctx.href(layer))}">${esc(t(`layer.${layer}`))}</a><span class="muted">${esc(t(`layerdesc.${layer}`))}</span><span class="count">${esc(t('count.items', { n: countOf(layer) }))}</span></li>`;
   }).join('');
   const demandas = ctx.index.ofTipo('demanda').filter((p) => p.entity.data.biblioteca !== true);
-  const demandaLinks = demandas.map((p) => `<li><a href="${esc(ctx.href(p.route))}" data-demanda="${esc(p.id)}">${esc(p.nome)}</a></li>`).join('');
+  const demandaLinks = demandas.map((p) => `<li><a href="${esc(ctx.href(p.route))}" data-demanda="${esc(p.id)}">${svgIcone(p.id)}<span>${esc(p.nome)}</span></a></li>`).join('');
   // Counts per visual group, from the same rule the 3D ecosystem uses (the detail layer is not counted).
   const porGrupo = new Map<string, number>();
   for (const p of ctx.index.pages) {
@@ -188,7 +204,7 @@ export function renderHome(ctx: Ctx): string {
       '340vh',
       `<p class="eyebrow">${esc(t('home.scene.fluxos'))}</p><h2 id="titulo-fluxos">${esc(t('home.flows.title'))}</h2><p class="lede">${esc(t('home.flows.lede'))}</p>` +
         `<ul class="home-chips" role="list" aria-label="${esc(t('home.flows.select'))}">${demandaLinks}</ul>` +
-        `<p><a class="glass-btn" href="${esc(ctx.href('flows'))}">${esc(t('home.flows.open'))}</a></p>`,
+        `<p class="cena-acao"><a class="glass-btn" href="${esc(ctx.href('flows'))}">${esc(t('home.flows.open'))}</a></p>`,
     ) +
     cena(
       'catalogo',

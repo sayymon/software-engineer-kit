@@ -9,48 +9,81 @@ precision highp float;
 varying vec2 vUv;
 uniform sampler2D uTex;
 uniform float uAspect, uTime, uPower;
-uniform vec2 uMouse, uVel;
+uniform vec2 uMouse, uVel, uTexel;
 uniform vec3 uRip[8];
 uniform vec3 uAccent;
-float height(vec2 p){
-  float h = 0.0;
+float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+float noise(vec2 p){
+  vec2 i = floor(p), f = fract(p);
+  f = f * f * (3.0 - 2.0 * f);
+  return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x), mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x), f.y);
+}
+float edge(vec2 uv){
+  float a = texture2D(uTex, uv + vec2(uTexel.x * 2.0, 0.0)).a - texture2D(uTex, uv - vec2(uTexel.x * 2.0, 0.0)).a;
+  float b = texture2D(uTex, uv + vec2(0.0, uTexel.y * 2.0)).a - texture2D(uTex, uv - vec2(0.0, uTexel.y * 2.0)).a;
+  return clamp(length(vec2(a, b)) * 1.6, 0.0, 1.0);
+}
+// A jagged bolt between a and b: distance to a line whose middle is bent by noise.
+float bolt(vec2 p, vec2 a, vec2 b, float seed){
+  vec2 ab = b - a;
+  float len = max(length(ab), 1e-4);
+  vec2 dir = ab / len;
+  vec2 nrm = vec2(-dir.y, dir.x);
+  float t = clamp(dot(p - a, dir) / len, 0.0, 1.0);
+  float wob = (noise(vec2(t * 14.0 + seed, uTime * 14.0)) - 0.5) * 0.09 * sin(t * 3.14159);
+  float d = abs(dot(p - a, nrm) - wob);
+  return exp(-d * d * 52000.0) * smoothstep(0.0, 0.08, t) * (1.0 - 0.4 * t);
+}
+void main(){
+  vec2 uv = vUv;
+  vec2 p = vec2(uv.x * uAspect, uv.y);
+  vec2 m = vec2(uMouse.x * uAspect, uMouse.y);
+  float dist = distance(p, m);
+  float near = exp(-dist * dist * 40.0) * uPower;
+  // Click bursts: a short surge of glitch around the click.
+  float surge = 0.0;
   for (int i = 0; i < 8; i++) {
     vec3 r = uRip[i];
     if (r.z < 0.0) continue;
     float age = uTime - r.z;
     float d = distance(p, vec2(r.x * uAspect, r.y));
-    float front = age * 0.5;
-    float env = exp(-age * 1.5) * exp(-pow((d - front) * 6.0, 2.0));
-    h += sin((d - front) * 34.0) * env * 0.7;
+    surge += exp(-age * 4.5) * exp(-d * d * 14.0);
   }
-  h += 0.05 * sin(p.x * 9.0 + uTime * 1.2) * sin(p.y * 7.0 - uTime * 1.0);
-  return h;
-}
-void main(){
-  vec2 uv = vUv;
-  vec2 p = vec2(uv.x * uAspect, uv.y);
-  float e = 0.004;
-  float h = height(p);
-  vec2 g = vec2(height(p + vec2(e, 0.0)) - h, height(p + vec2(0.0, e)) - h) / e;
-  vec2 m = vec2(uMouse.x * uAspect, uMouse.y);
+  float ativa = clamp(near + surge, 0.0, 1.6);
+  // Glitch: horizontal slices jump sideways. A few at rest, many near the pointer.
+  float fatia = floor(uv.y * 28.0);
+  float tick = floor(uTime * 9.0);
+  float acaso = hash(vec2(fatia, tick));
+  float pula = step(0.965 - ativa * 0.3, acaso);
+  float desloc = (hash(vec2(fatia, tick + 7.0)) - 0.5) * (0.018 + ativa * 0.05) * pula;
+  // The pointer also pulls the text a little, like a magnetic field.
   vec2 dm = p - m;
-  float dist = length(dm);
-  float fall = exp(-dist * dist * 55.0) * uPower;
-  vec2 pull = -normalize(dm + 1e-5) * fall * 0.075;
-  vec2 disp = g * 0.0011 + vec2(pull.x / uAspect, pull.y) * 0.8 + uVel * fall * 0.1;
-  float len = length(disp);
-  if (len > 0.045) disp *= 0.045 / len;
-  float k = 0.05 + min(length(disp) * 5.0, 0.18);
-  vec4 a = texture2D(uTex, uv + disp * (1.0 + k));
-  vec4 b = texture2D(uTex, uv + disp);
-  vec4 c = texture2D(uTex, uv + disp * (1.0 - k));
+  vec2 puxa = -normalize(dm + 1e-5) * exp(-dot(dm, dm) * 55.0) * uPower * 0.02;
+  vec2 q = vec2(uv.x + desloc + puxa.x / uAspect, uv.y + puxa.y);
+  float k = 0.0035 + ativa * 0.012 + pula * 0.008;
+  vec4 a = texture2D(uTex, q + vec2(k, 0.0));
+  vec4 b = texture2D(uTex, q);
+  vec4 c = texture2D(uTex, q - vec2(k, 0.0));
   vec3 col = vec3(a.r, b.g, c.b);
   float alpha = max(max(a.a, b.a), c.a);
-  vec3 n = normalize(vec3(-g * 0.02, 1.0));
-  float spec = pow(clamp(dot(n, normalize(vec3(-0.4, 0.6, 0.7))), 0.0, 1.0), 28.0) * smoothstep(0.0, 1.0, length(g) * 0.04);
-  col += vec3(1.0) * spec * alpha * 0.9;
-  col += uAccent * fall * 0.35 * alpha;
-  gl_FragColor = vec4(col, alpha);
+  // Electric edges: the outline of the letters crackles, more where the pointer is.
+  float e = edge(q);
+  float estala = smoothstep(0.52 - ativa * 0.25, 0.9, noise(vec2(q.x * 46.0 + uTime * 9.0, q.y * 7.0 - uTime * 3.0)));
+  float arco = e * estala * (0.35 + ativa * 1.6);
+  vec3 eletrico = mix(vec3(0.25, 0.8, 1.0), vec3(1.0), smoothstep(0.7, 1.2, arco + hash(q * 90.0 + tick) * 0.4));
+  col += eletrico * arco * 1.4;
+  alpha = max(alpha, arco * 0.9);
+  // Bolts from the pointer to two moving points on the text.
+  float quando = floor(uTime * 7.0);
+  vec2 alvoA = vec2((0.1 + 0.8 * hash(vec2(quando, 1.0))) * uAspect, 0.25 + 0.5 * hash(vec2(quando, 2.0)));
+  vec2 alvoB = vec2((0.1 + 0.8 * hash(vec2(quando, 3.0))) * uAspect, 0.25 + 0.5 * hash(vec2(quando, 4.0)));
+  float raio = (bolt(p, m, alvoA, 1.0) + bolt(p, m, alvoB, 5.0) * 0.7) * smoothstep(0.15, 0.6, uPower) * (0.4 + near);
+  col += vec3(0.6, 0.9, 1.0) * raio * 1.6;
+  alpha = max(alpha, clamp(raio, 0.0, 1.0));
+  // A thin scanline flicker over the text and a hot core near the pointer.
+  col *= 0.94 + 0.06 * sin(uv.y * 340.0 + uTime * 30.0);
+  col += uAccent * near * 0.4 * alpha;
+  gl_FragColor = vec4(col, min(alpha, 1.0));
 }`;
 
 const h1 = document.querySelector<HTMLElement>('[data-hero-title]');
@@ -93,6 +126,7 @@ function iniciar(titulo: HTMLElement): void {
   gl.enableVertexAttribArray(loc);
   gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
   const U = (n: string) => gl.getUniformLocation(prog, n);
+  const uTexel = U('uTexel');
   const uTex = U('uTex'), uAspect = U('uAspect'), uTime = U('uTime'), uPower = U('uPower'), uMouse = U('uMouse'), uVel = U('uVel'), uRip = U('uRip'), uAccent = U('uAccent');
   const tex = gl.createTexture();
   gl.bindTexture(gl.TEXTURE_2D, tex);
@@ -157,6 +191,7 @@ function iniciar(titulo: HTMLElement): void {
     gl!.bindTexture(gl!.TEXTURE_2D, tex);
     gl!.texImage2D(gl!.TEXTURE_2D, 0, gl!.RGBA, gl!.RGBA, gl!.UNSIGNED_BYTE, t);
     gl!.uniform1f(uAspect, canvas.width / canvas.height);
+    gl!.uniform2f(uTexel, 1 / canvas.width, 1 / canvas.height);
     const acento = cor('--color-accent', '#1f5fd1');
     const n = parseInt(acento.replace('#', '').padEnd(6, '0').slice(0, 6), 16);
     gl!.uniform3f(uAccent, ((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255);

@@ -8,7 +8,7 @@ attribute vec4 aP0; attribute vec4 aP1; attribute vec4 aP2; attribute vec4 aP3;
 attribute vec3 aC0; attribute vec3 aC1; attribute vec3 aC2; attribute vec3 aC3;
 attribute float aSeed;
 uniform float uSeg; uniform float uMix; uniform float uTime; uniform float uPx; uniform vec2 uPointer; uniform float uPointerForce;
-varying vec3 vCol; varying float vAlpha;
+varying vec3 vCol; varying float vAlpha; varying float vSize;
 vec4 pickP(float i){ return i < 0.5 ? aP0 : (i < 1.5 ? aP1 : (i < 2.5 ? aP2 : aP3)); }
 vec3 pickC(float i){ return i < 0.5 ? aC0 : (i < 1.5 ? aC1 : (i < 2.5 ? aC2 : aC3)); }
 void main(){
@@ -30,15 +30,29 @@ void main(){
   float size = mix(a.w, b.w, m);
   gl_PointSize = size * uPx * (240.0 / -mv.z) * (1.0 + f * 0.8);
   vCol = mix(pickC(uSeg), pickC(next), m) * (1.0 + f * 0.6);
-  vAlpha = 0.55 + 0.45 * smoothstep(0.0, 1.0, size / 2.5);
+  vAlpha = 0.6 + 0.4 * smoothstep(0.0, 1.0, size / 2.5);
+  vSize = size;
 }`;
 const FRAG = `
 precision mediump float;
-varying vec3 vCol; varying float vAlpha;
+varying vec3 vCol; varying float vAlpha; varying float vSize;
 void main(){
-  float d = length(gl_PointCoord - 0.5);
-  float a = smoothstep(0.5, 0.05, d);
-  gl_FragColor = vec4(vCol, a * vAlpha);
+  vec2 p = gl_PointCoord - 0.5;
+  float d = max(abs(p.x), abs(p.y));
+  float quadrado = smoothstep(0.5, 0.42, d);
+  // Small points are glowing pixels. Large ones read as a chip: a body, a thin rim and pins on the four sides.
+  float corpo = smoothstep(0.34, 0.28, d);
+  float aro = smoothstep(0.38, 0.34, d) - smoothstep(0.3, 0.26, d);
+  float pinos = 0.0;
+  if (vSize > 2.2) {
+    // Pins: short ticks on the four sides, aligned to the axes.
+    float lateral = step(abs(p.y), abs(p.x));
+    float faixa = mix(step(fract(p.x * 6.0 + 0.5), 0.5), step(fract(p.y * 6.0 + 0.5), 0.5), lateral);
+    pinos = step(0.34, d) * step(d, 0.5) * faixa;
+  }
+  float miolo = mix(quadrado * 0.75, corpo * 0.55 + aro * 0.9 + pinos * 0.8 + smoothstep(0.1, 0.0, d) * 0.5, step(2.2, vSize));
+  float brilho = smoothstep(0.5, 0.0, length(p)) * 0.35;
+  gl_FragColor = vec4(vCol * (miolo + brilho), clamp(miolo + brilho, 0.0, 1.0) * vAlpha);
 }`;
 
 export interface Particulas {

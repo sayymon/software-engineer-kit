@@ -33,7 +33,12 @@ function iniciar(home: HTMLElement): void {
     });
     estado.progressos = faixas.map((f) => progressoDaCena(f.topo, f.altura, janela));
     estado.ativa = cenaAtiva(faixas, janela);
-    secoes.forEach((s, i) => s.style.setProperty('--p', estado.progressos[i].toFixed(4)));
+    secoes.forEach((s, i) => {
+      s.style.setProperty('--p', estado.progressos[i].toFixed(4));
+      s.dataset.ativa = String(i === estado.ativa);
+      // Actions that wait for the animation (the flow link) become clickable once the scene is well under way.
+      s.dataset.acao = estado.progressos[i] > 0.5 ? 'sim' : 'nao';
+    });
     if (estado.ativa !== atual) {
       atual = estado.ativa;
       links.forEach((a, i) => a && (i === atual ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current')));
