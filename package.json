@@ -46,6 +46,8 @@
     "@types/three": "0.187.0",
     "d3-force-3d": "3.0.6",
     "fast-check": "4.11.0",
+    "jsdom": "31.0.1",
+    "mermaid": "11.17.2",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
     "vitest": "^5.1.1"

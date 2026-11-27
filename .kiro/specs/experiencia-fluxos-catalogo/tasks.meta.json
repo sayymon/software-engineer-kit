@@ -130,6 +130,11 @@
         "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
         "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
         "timestamp": 1795734659646
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795734756819
       }
     ],
     "2.1 Estender `schema/flows.schema.json` com `categorias_ferramenta`, `guias_praticos` e o marcador explícito de \"sem ferramenta aplicável\" (campo opcional booleano, nome fixado nesta tarefa) em `$defs/Decisao` e `$defs/Subtarefa`": [
@@ -610,6 +615,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257668
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795739338870
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795739404429
       }
     ],
     "6.1 Criar `site/src/flow-app/state.ts` e `site/src/flow-app/loader.ts`": [
@@ -617,6 +632,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257695
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795734763309
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795735058518
       }
     ],
     "6.2 Empacotar o Mermaid no build conforme a decisão do spike (ESM dividida de flowchart e dagre, ou bundle único como fallback) em `tools/site/build.ts`": [
@@ -624,6 +649,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257725
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795734763317
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795735058558
       }
     ],
     "6.3 Implementar `site/src/flow-app/renderer.ts` (interfaces `Renderizador`, `InstanciaRenderizador`, `EstadoDiagrama` e registro `PERSPECTIVAS`) e `perspectives/mermaid.ts`": [
@@ -631,6 +666,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257759
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795735419369
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795735635259
       }
     ],
     "6.4 Implementar `site/src/flow-app/expansao.ts`: fila com número de sequência e descarte de resultado obsoleto, cache de SVG por `chaveDoConjunto` com limite de bytes e indicador de progresso (`role=\"status\"`, `aria-busy`, até 100 ms)": [
@@ -638,6 +683,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257786
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795735635292
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795735863138
       }
     ],
     "6.5 Reescrever a Pagina_de_Demanda (`site/src/render/flow.ts` e a página Astro) com a ilha `data-island=\"flow\"`: seletor das 12 Demandas na ordem de `ordem_das_demandas`, Abas_de_View (`geral`, raias, `completo`) com cor da Raia, legenda e troca de Demanda sem recarregar": [
@@ -645,6 +700,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257813
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795735866613
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795736596941
       }
     ],
     "6.6 Implementar `site/src/flow-app/interaction.ts`: clique (até 3 px), arraste com `grabbing`, setas, Ctrl ou Cmd com a roda, botões de zoom e rótulo acessível dos gestos": [
@@ -652,6 +717,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257840
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795736605657
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795736815008
       }
     ],
     "6.7 Implementar Cluster_de_Raia na ilha: clique expande no lugar, \"Abrir raia\" ativa `raia:<id>`, \"Recolher\" volta ao cluster, Enter expande, ação própria por teclado e Expandir_tudo": [
@@ -659,6 +734,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257866
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795736815021
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795737173736
       }
     ],
     "6.8 Implementar o botão \"Voltar\" (histórico de Views e rolagem, desabilitado sem histórico) e o alternador \"Raias\" da View `completo`": [
@@ -666,6 +751,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257891
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795737173977
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795737483918
       }
     ],
     "6.9 Implementar o seletor de Perspectiva (opção `mermaid`, registro aberto), com escolha no Fragmento_de_Estado e no `localStorage`, preservando View, Conjunto_Expandido, Subtarefas e Nó": [
@@ -673,6 +768,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257920
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795737483938
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795737720850
       }
     ],
     "6.10 Escrever `tests/browser/diagrama-ids.spec.ts` e `tests/browser/diagrama-interacao.spec.ts`": [
@@ -680,6 +785,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257949
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795737724804
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795738071227
       }
     ],
     "6.11 Escrever `tests/browser/demanda-troca.spec.ts` e `tests/browser/ordem-views.spec.ts`": [
@@ -687,6 +802,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257975
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795738071249
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795738842934
       }
     ],
     "6.12 Escrever `tests/browser/expansao-progressiva.spec.ts` e `tests/browser/perspectiva.spec.ts`": [
@@ -694,6 +819,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654258001
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795738842947
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795739338857
       }
     ],
     "6.13 Commit `feat(site): diagrama interativo de fluxos com visao geral e expansao`": [
@@ -701,6 +836,11 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654258028
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795739404449
       }
     ],
     "7.1 Ampliar `api/flows/<id>.json` (`site/src/render/api.ts`) com `papeis`, letras RACI por nó, entradas e saídas, produtores e consumidores por artefato e variável (via `rastrearDados`) e o indicador \"sem produtor\" (via `lacunasDeDados`)": [

@@ -6,6 +6,7 @@ import '../styles/glass.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Diagram from '../components/Diagram.astro';
+import FlowIsland from '../components/FlowIsland.astro';
 import { makeT } from '../i18n';
 interface Props {
   locale: 'pt-BR' | 'en';
@@ -17,10 +18,11 @@ interface Props {
   tipo?: string;
   fallback?: boolean;
   hasDiagram?: boolean;
+  hasFlow?: boolean;
   searchPage?: boolean;
   immersive?: boolean;
 }
-const { locale, title, slug, base, description = '', layer = 'site', tipo = 'page', fallback = false, hasDiagram = false, immersive = false } = Astro.props;
+const { locale, title, slug, base, description = '', layer = 'site', tipo = 'page', fallback = false, hasDiagram = false, hasFlow = false, immersive = false } = Astro.props;
 const t = makeT(locale);
 const home = layer === 'home';
 const other = locale === 'pt-BR' ? 'en' : 'pt-BR';
@@ -65,5 +67,6 @@ const site = t('site.title');
         }, { passive: true });
       })();
     </script>
+    {hasFlow && <FlowIsland />}
   </body>
 </html>

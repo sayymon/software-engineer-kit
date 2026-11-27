@@ -88,7 +88,7 @@ Convenções:
 - [x] 1.7 Checkpoint: apresentar ao dono o go/no-go do spike e aguardar a decisão
   - se a decisão alterar o orçamento ou escolher o Renderizador próprio, atualizar `requirements.md` e `design.md` antes de seguir
   - _Requisitos: 15.8, 20.13_
-- [-] 1.8 Commit `docs(site): spike de desempenho do diagrama de fluxos`
+- [x] 1.8 Commit `docs(site): spike de desempenho do diagrama de fluxos`
   - _Requisitos: 20.13_
 
 ### Fase 2: dados do guia e regras do validador (somente `feature`)
@@ -197,50 +197,50 @@ Convenções:
   - _Requisitos: 20.10_
 - [ ] 5.6 Checkpoint: pedir ao dono a revisão do golden `feature.geral.mmd` e fixá-lo depois da aprovação
   - _Requisitos: 20.1, 20.2_
-- [ ] 5.7 Commit `feat(fluxos): visao geral e expansao progressiva no modelo`
+- [x] 5.7 Commit `feat(fluxos): visao geral e expansao progressiva no modelo`
   - _Requisitos: 20.1, 20.6_
 
 ### Fase 6: ilha `flow-app` e Diagrama
 
-- [ ] 6.1 Criar `site/src/flow-app/state.ts` e `site/src/flow-app/loader.ts`
+- [x] 6.1 Criar `site/src/flow-app/state.ts` e `site/src/flow-app/loader.ts`
   - `state.ts` lê e escreve o Fragmento_de_Estado (`no`, `view`, `exp`, `sub`, `persp`, `f`) com `history.replaceState` ou `pushState`, trata `visao` como alias de `geral` e ignora Raias inexistentes
   - `loader.ts` busca `api/flows/<id>.graph.json` uma única vez por página
   - testes unitários em Vitest com jsdom, sem recarga e sem nova busca ao mudar estado
   - _Requisitos: 15.10, 20.8, 2.7_
-- [ ] 6.2 Empacotar o Mermaid no build conforme a decisão do spike (ESM dividida de flowchart e dagre, ou bundle único como fallback) em `tools/site/build.ts`
+- [x] 6.2 Empacotar o Mermaid no build conforme a decisão do spike (ESM dividida de flowchart e dagre, ou bundle único como fallback) em `tools/site/build.ts`
   - copiar para `site/dist` todos os arquivos que o Diagrama pode carregar, sem CDN, e carregar só em página com Diagrama
   - verificação: `npm run build`, `npm run smoke` e medição da carga do Diagrama
   - _Requisitos: 15.3, 15.12_
-- [ ] 6.3 Implementar `site/src/flow-app/renderer.ts` (interfaces `Renderizador`, `InstanciaRenderizador`, `EstadoDiagrama` e registro `PERSPECTIVAS`) e `perspectives/mermaid.ts`
+- [x] 6.3 Implementar `site/src/flow-app/renderer.ts` (interfaces `Renderizador`, `InstanciaRenderizador`, `EstadoDiagrama` e registro `PERSPECTIVAS`) e `perspectives/mermaid.ts`
   - `initialize` com limites elevados, `data-id` aplicado nos `g.node` e `g.cluster` pelo `mapaIds` e nós focáveis com `tabindex`
   - _Requisitos: 17.4, 17.10, 19.2, 19.3, 3.1, 20.10_
-- [ ] 6.4 Implementar `site/src/flow-app/expansao.ts`: fila com número de sequência e descarte de resultado obsoleto, cache de SVG por `chaveDoConjunto` com limite de bytes e indicador de progresso (`role="status"`, `aria-busy`, até 100 ms)
+- [x] 6.4 Implementar `site/src/flow-app/expansao.ts`: fila com número de sequência e descarte de resultado obsoleto, cache de SVG por `chaveDoConjunto` com limite de bytes e indicador de progresso (`role="status"`, `aria-busy`, até 100 ms)
   - falha de render mantém o Diagrama anterior e oferece "Tentar de novo" e a alternativa textual
   - testes unitários da fila e do cache com `mermaid.render` simulado
   - _Requisitos: 20.9, 20.10, 15.8_
-- [ ] 6.5 Reescrever a Pagina_de_Demanda (`site/src/render/flow.ts` e a página Astro) com a ilha `data-island="flow"`: seletor das 12 Demandas na ordem de `ordem_das_demandas`, Abas_de_View (`geral`, raias, `completo`) com cor da Raia, legenda e troca de Demanda sem recarregar
+- [x] 6.5 Reescrever a Pagina_de_Demanda (`site/src/render/flow.ts` e a página Astro) com a ilha `data-island="flow"`: seletor das 12 Demandas na ordem de `ordem_das_demandas`, Abas_de_View (`geral`, raias, `completo`) com cor da Raia, legenda e troca de Demanda sem recarregar
   - abre em `geral`, e a URL antiga com `visao` vira alias
   - _Requisitos: 2.1, 2.2, 2.3, 2.5, 2.7, 2.8, 2.9, 18.1_
-- [ ] 6.6 Implementar `site/src/flow-app/interaction.ts`: clique (até 3 px), arraste com `grabbing`, setas, Ctrl ou Cmd com a roda, botões de zoom e rótulo acessível dos gestos
+- [x] 6.6 Implementar `site/src/flow-app/interaction.ts`: clique (até 3 px), arraste com `grabbing`, setas, Ctrl ou Cmd com a roda, botões de zoom e rótulo acessível dos gestos
   - Enter e Espaço abrem o Nó focado (o modal chega na fase 7, e aqui o evento é emitido e testado)
   - _Requisitos: 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 3.10, 3.11_
-- [ ] 6.7 Implementar Cluster_de_Raia na ilha: clique expande no lugar, "Abrir raia" ativa `raia:<id>`, "Recolher" volta ao cluster, Enter expande, ação própria por teclado e Expandir_tudo
+- [x] 6.7 Implementar Cluster_de_Raia na ilha: clique expande no lugar, "Abrir raia" ativa `raia:<id>`, "Recolher" volta ao cluster, Enter expande, ação própria por teclado e Expandir_tudo
   - atualizar `exp=` no Fragmento_de_Estado e preservar zoom e rolagem
   - _Requisitos: 4.3, 20.3, 20.4, 20.6, 20.8, 20.11_
-- [ ] 6.8 Implementar o botão "Voltar" (histórico de Views e rolagem, desabilitado sem histórico) e o alternador "Raias" da View `completo`
+- [x] 6.8 Implementar o botão "Voltar" (histórico de Views e rolagem, desabilitado sem histórico) e o alternador "Raias" da View `completo`
   - _Requisitos: 4.4, 4.5, 4.6_
-- [ ] 6.9 Implementar o seletor de Perspectiva (opção `mermaid`, registro aberto), com escolha no Fragmento_de_Estado e no `localStorage`, preservando View, Conjunto_Expandido, Subtarefas e Nó
+- [x] 6.9 Implementar o seletor de Perspectiva (opção `mermaid`, registro aberto), com escolha no Fragmento_de_Estado e no `localStorage`, preservando View, Conjunto_Expandido, Subtarefas e Nó
   - _Requisitos: 19.1, 19.3, 19.4, 19.5_
-- [ ] 6.10 Escrever `tests/browser/diagrama-ids.spec.ts` e `tests/browser/diagrama-interacao.spec.ts`
+- [x] 6.10 Escrever `tests/browser/diagrama-ids.spec.ts` e `tests/browser/diagrama-interacao.spec.ts`
   - todo nó expõe `data-id`, clique de 3 px abre e arraste de 150 px rola sem abrir, setas, zoom com Ctrl e roda comum sem zoom, foco visível
   - _Requisitos: 3.1 a 3.11, 16.3, 16.6_
-- [ ] 6.11 Escrever `tests/browser/demanda-troca.spec.ts` e `tests/browser/ordem-views.spec.ts`
+- [x] 6.11 Escrever `tests/browser/demanda-troca.spec.ts` e `tests/browser/ordem-views.spec.ts`
   - troca de Demanda e de View sem recarregar e sem exceção no console, mesma ordem horizontal dos Nós em cada View e em cada Conjunto_Expandido, abertura por URL com View
   - _Requisitos: 2.2, 2.4, 2.5, 2.6, 2.7, 16.4_
-- [ ] 6.12 Escrever `tests/browser/expansao-progressiva.spec.ts` e `tests/browser/perspectiva.spec.ts`
+- [x] 6.12 Escrever `tests/browser/expansao-progressiva.spec.ts` e `tests/browser/perspectiva.spec.ts`
   - abre em `geral`, expandir uma raia desenha só o conjunto novo (contagem de chamadas a `mermaid.render`), recolher, Expandir tudo com indicador em até 100 ms e `data-id` igual ao golden, pedido obsoleto descartado, teclado do cluster, URL com `exp=` reaberta
   - _Requisitos: 20.1 a 20.11, 19.1, 19.3, 19.4, 19.5, 19.11_
-- [ ] 6.13 Commit `feat(site): diagrama interativo de fluxos com visao geral e expansao`
+- [-] 6.13 Commit `feat(site): diagrama interativo de fluxos com visao geral e expansao`
   - _Requisitos: 3.1, 20.1_
 
 ### Fase 7: Modal de Playbook, Subtarefas, entradas e saídas

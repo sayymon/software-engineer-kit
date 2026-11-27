@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
-// Demand flow pages: raias with responsabilidade, Mermaid views, playbooks and the build, buy or subscribe table read from the guide.
+// Demand flow pages: the interactive Diagrama island (demand selector, view tabs, legend), the textual alternative, raias with
+// responsabilidade, playbooks and the build, buy or subscribe table read from the guide.
 import type { Page } from '@lib/content/site';
 import { gerarGrafo, textoAcessivel } from '@lib/flow-graph';
-import { gerarDiagramaDoGrafo } from '@lib/flow-mermaid';
 import { configDoGuia } from '@lib/decisor';
-import { type Ctx, diagram, esc, inline, label, section, table, dl, val } from './util';
+import { type Ctx, esc, inline, label, section, table, dl, val } from './util';
 
 type Item = Record<string, any>;
 
@@ -62,22 +62,99 @@ export function textoAcessivelHtml(ctx: Ctx, demandaId: string): string {
     .join('');
 }
 
-export function renderDemand(ctx: Ctx, page: Page): { html: string; diagrams: number } {
+/** UI strings the island needs on the client (progress and error messages of the redraw queue). Sent in the page, never bundled. */
+export const CHAVES_DO_CLIENTE = [
+  'flow.progress.drawing',
+  'flow.progress.drawing.nodes',
+  'flow.progress.elapsed',
+  'flow.error.render',
+  'flow.error.limit',
+  'flow.error.retry',
+  'flow.error.textual',
+  'flow.error.graph',
+  'flow.persp.label',
+  'flow.persp.mermaid',
+  'flow.gestures.help',
+  'flow.zoom.group',
+  'flow.zoom.in',
+  'flow.zoom.out',
+  'flow.zoom.reset',
+  'flow.raias.group',
+  'flow.raias.resumo',
+  'flow.raias.expandir',
+  'flow.raias.expandir.rotulo',
+  'flow.raias.recolher',
+  'flow.raias.recolher.rotulo',
+  'flow.raias.abrir',
+  'flow.raias.abrir.rotulo',
+  'flow.raias.expandir_tudo',
+  'flow.raias.recolher_tudo',
+  'flow.raias.alternador',
+  'flow.raias.alternador.rotulo',
+  'flow.voltar',
+  'flow.voltar.rotulo',
+  'flow.cluster.label',
+] as const;
+
+const LEGENDA = ['inicio', 'tarefa', 'bifurcacao', 'chamada', 'fim', 'subtarefa', 'subtarefa.cond'] as const;
+
+/** The Demandas of the selector: the guide order (`ordem_das_demandas`), library entries left out. */
+export function demandasDoSeletor(ctx: Ctx): Page[] {
+  // `ordem_das_demandas` lives in the `comum` entity (the merged guide document keeps only the demand list, in that same order).
+  const ordem = ctx.index.byId.get('comum')?.entity.data.ordem_das_demandas;
+  const doc = Array.isArray((ctx.doc() as Item).demandas) ? ((ctx.doc() as Item).demandas as Item[]).map((d) => String(d.id)) : [];
+  const ids = (Array.isArray(ordem) ? (ordem as unknown[]).map(String) : doc).filter((id) => id !== 'comum');
+  const pages: Page[] = [];
+  for (const id of ids) {
+    const p = ctx.index.byId.get(id);
+    if (p && p.tipo === 'demanda' && p.entity.data.biblioteca !== true) pages.push(p);
+  }
+  return pages;
+}
+
+/** Island of the Diagrama. Server HTML only: the controls start `hidden` and the island shows them once it runs, so without
+ *  JavaScript the page keeps the textual alternative and the playbooks (Requirement 2.10). */
+function ilhaDoDiagrama(ctx: Ctx, page: Page, raias: Item[]): string {
+  const demandas = demandasDoSeletor(ctx);
+  const opcoes = demandas
+    .map((p) => `<option value="${esc(ctx.href(p.route))}"${p.id === page.id ? ' selected' : ''}>${esc(p.nome)}</option>`)
+    .join('');
+  const aba = (view: string, texto: string, n: number, cor?: string): string =>
+    `<button type="button" role="tab" id="flow-tab-${n}" class="flow-tab${cor ? ' flow-tab--raia' : ''}" data-view="${esc(view)}" aria-selected="${view === 'geral'}" aria-controls="flow-panel" tabindex="${view === 'geral' ? 0 : -1}"${cor ? ` style="--raia-cor:${esc(cor)}"` : ''}>` +
+    (cor ? `<span class="swatch" aria-hidden="true"></span> ` : '') +
+    `${esc(texto)}</button>`;
+  const abas = [
+    aba('geral', ctx.t('flow.tab.geral'), 0),
+    ...raias.map((r, i) => aba(`raia:${r.id}`, String(r.nome), i + 1, String(r.cor ?? '#888888'))),
+    aba('completo', ctx.t('flow.tab.completo'), raias.length + 1),
+  ].join('');
+  const legenda = LEGENDA.map(
+    (k) => `<li><span class="flow-legend__icon flow-legend__icon--${k.replace('.', '-')}" aria-hidden="true"></span>${esc(ctx.t(`flow.legend.${k}`))}</li>`,
+  ).join('');
+  const textos = Object.fromEntries(CHAVES_DO_CLIENTE.map((k) => [k, ctx.t(k)]));
+  return (
+    `<div class="flow-app" data-island="flow" data-flow-id="${esc(page.id)}" data-flow-base="${esc(ctx.base)}" data-flow-locale="${esc(ctx.locale)}" data-flow-i18n="${esc(JSON.stringify(textos))}">` +
+    `<noscript><p class="muted">${esc(ctx.t('flow.nojs'))}</p></noscript>` +
+    `<div class="flow-controls" data-flow-controls hidden>` +
+    `<div class="flow-toolbar"><label for="flow-demanda">${esc(ctx.t('flow.demand.label'))}</label>` +
+    `<select id="flow-demanda" data-flow-select>${opcoes}</select></div>` +
+    `<div class="flow-tabs" role="tablist" aria-label="${esc(ctx.t('flow.tabs.label'))}" data-flow-tabs>${abas}</div>` +
+    `<div id="flow-panel" class="flow-stage" role="tabpanel" tabindex="0" aria-labelledby="flow-tab-0" data-flow-stage></div>` +
+    `<div class="flow-legend"><h3>${esc(ctx.t('flow.legend.title'))}</h3><ul>${legenda}</ul></div>` +
+    `</div></div>`
+  );
+}
+
+export function renderDemand(ctx: Ctx, page: Page): { html: string; diagrams: number; flow: boolean } {
   const d = page.entity.data;
   const raias = Array.isArray(d.raias) ? (d.raias as Item[]) : [];
   const decisoes = Array.isArray(d.decisoes) ? (d.decisoes as Item[]) : [];
   const playbooks = new Map((Array.isArray(d.playbooks) ? (d.playbooks as Item[]) : []).map((p) => [String(p.id), p]));
   const library = d.biblioteca === true;
-  let diagrams = 0;
   let diagramHtml = '';
   let textHtml = '';
   if (!library && raias.length) {
-    const grafo = gerarGrafo(ctx.doc(), page.id);
-    for (const view of ['visao', 'completo'] as const) {
-      const g = gerarDiagramaDoGrafo(grafo, view);
-      diagramHtml += diagram(ctx, `${page.id}.${view}`, ctx.t(`view.${view}`), g.texto);
-      diagrams += 1;
-    }
+    diagramHtml = ilhaDoDiagrama(ctx, page, raias);
     textHtml = textoAcessivelHtml(ctx, page.id);
   }
   const raiaRows = raias.map((r) => [
@@ -122,5 +199,5 @@ export function renderDemand(ctx: Ctx, page: Page): { html: string; diagrams: nu
     section(ctx.t('s.playbooks'), playbookHtml) +
     section(ctx.t('s.roles'), papeisHtml) +
     section(ctx.t('s.matrix'), matrizTable(ctx));
-  return { html, diagrams };
+  return { html, diagrams: 0, flow: diagramHtml !== '' };
 }

@@ -21,12 +21,14 @@ let layer = 'site';
 let tipo = 'page';
 let fallback = false;
 let diagrams = 0;
+let flow = false;
 switch (route.kind) {
   case 'entity': {
     const page = ctx.index.byId.get(route.id)!;
     const r = renderEntity(ctx, page);
     html = r.html;
     diagrams = r.diagrams;
+    flow = r.flow === true;
     title = page.nome;
     description = String(page.entity.data.descricao ?? '');
     layer = page.layer;
@@ -63,7 +65,7 @@ switch (route.kind) {
     break;
 }
 ---
-<Base locale={locale} title={title} slug={route.slug} base={ctx.base} description={description} layer={layer} tipo={tipo} fallback={fallback} hasDiagram={diagrams > 0}>
+<Base locale={locale} title={title} slug={route.slug} base={ctx.base} description={description} layer={layer} tipo={tipo} fallback={fallback} hasDiagram={diagrams > 0} hasFlow={flow}>
   <article>
     <Fragment set:html={html} />
   </article>

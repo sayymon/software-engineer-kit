@@ -41,9 +41,10 @@ export interface Recursos {
   diagrama: { arquivos: number; bytes: number; gzipBytes: number };
 }
 
-/** Everything under /vendor/mermaid/ belongs to the Diagram load; the rest is the initial load. */
+/** Everything under /vendor/mermaid/ and /vendor/mermaid-esm/ belongs to the Diagram load; the rest is the initial load. */
 export function grupoDe(url: string): GrupoCarga {
-  return new URL(url).pathname.includes('/vendor/mermaid/') ? 'diagrama' : 'inicial';
+  const caminho = new URL(url).pathname;
+  return caminho.includes('/vendor/mermaid/') || caminho.includes('/vendor/mermaid-esm/') ? 'diagrama' : 'inicial';
 }
 
 /** Collects the body of every successful response of the page, grouped by load group. */
