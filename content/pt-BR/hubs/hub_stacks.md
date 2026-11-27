@@ -17,6 +17,9 @@ ordem: 5
 - **Relevância Atual:** Sim
 ## 📖 Descrição
 Hub das stacks do kit. Uma stack é um arquétipo agnóstico: um conjunto de slots (categorias do catálogo com as 3 faixas), as condições para adotá-lo em 7 eixos, um checklist de setup por domínio, os padrões que aplica e os casos de uso que atende. Instâncias de mercado (por exemplo uma sigla conhecida) aparecem dentro do arquétipo e só com fonte oficial. Cada stack é uma nota `tipo: Stack` (modelo Template-Stack), e o contrato de campos está em `docs/content-contract.md`. Ferramentas ficam em [[hub_tools|Mapa de Ferramentas de Engenharia]] e [[hub_ai_tools|Mapa de Ferramentas de IA]], e os padrões em [[hub_patterns|Mapa de Padrões de Engenharia]].
+## Stacks
+- [[servico_rust_alto_desempenho|Serviço Rust de alto desempenho]] — API de alto desempenho em Rust com framework de rotas sobre runtime assíncrono, acesso a dados assíncrono e binário único de implantação.
+- [[monolito_jvm_corporativo|Monólito JVM corporativo]] — Monólito transacional em Java com Spring Boot, Hibernate, JUnit 5 e Maven, para domínios corporativos com regras ricas e integrações legadas.
 ## 🔗 Relacionamentos
 - **Mapas:** [[hub_tools|Mapa de Ferramentas de Engenharia]], [[hub_ai_tools|Mapa de Ferramentas de IA]], [[hub_patterns|Mapa de Padrões de Engenharia]]
 - **Área:** Engenharia de Software
