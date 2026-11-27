@@ -16,12 +16,12 @@ Regras de execução:
 
 ### Fase 1: Fundação e spike
 
-- [ ] 1.2 Adicionar as dependências do ecossistema
+- [x] 1.2 Adicionar as dependências do ecossistema
   - Adicionar `3d-force-graph@1.80.2` e `three@0.187.0` (dependencies), `d3-force-3d` e `fast-check` (devDependencies), fixando versões
   - Registrar licenças em `THIRD-PARTY-NOTICES.md` e `REUSE.toml`, e passar no check `licenses`
   - Confirmar que `npm ci` e `npm run build` continuam verdes
   - _R9.1, R9.3; D1_
-- [ ] 1.3 Criar o mapa de camadas e grupos visuais
+- [x] 1.3 Criar o mapa de camadas e grupos visuais
   - Criar `lib/ecossistema/camadas.ts` com `Record<Tipo, ...>` exaustivo para camada (`nucleo`, `fluxo`, `detalhe`) e grupo visual (fluxos, artefatos e variáveis, catálogo, fundamentos, aprendizado, hubs)
   - Teste `camadas.test.ts`: todo tipo do schema tem camada e grupo; tipo novo sem entrada falha
   - _R3.1, R3.2, R3.3, R3.4, R3.10, R12.7; D7_
@@ -34,11 +34,11 @@ Regras de execução:
 
 ### Fase 2: Dados no build
 
-- [ ] 2.1 Implementar a adjacência
+- [x] 2.1 Implementar a adjacência
   - `lib/ecossistema/adjacencia.ts`: constrói adjacência simétrica sem direção, vizinhança por profundidade 1 e 2 e agrupamento por tipo
   - Testes com fast-check: simetria, ausência de aresta órfã, independência da ordem de inserção
   - _R7.6, R7.7, R7.8, R12.6; propriedades 2 e 3_
-- [ ] 2.2 Implementar o layout pré-calculado
+- [x] 2.2 Implementar o layout pré-calculado
   - `lib/ecossistema/layout.ts` com `d3-force-3d`: semente fixa, 300 passos, repulsão com Barnes-Hut, mola por aresta (peso menor para `body`) e atração fraca para a âncora da Área
   - Hubs de navegação fora da simulação e posicionados no centroide dos vizinhos
   - Posições arredondadas para inteiros. Medir e registrar o tempo de build
@@ -49,17 +49,17 @@ Regras de execução:
   - Gerar um shard por Demanda com gateways, subtarefas, perguntas, nós, células e playbooks, cada um com o id do pai
   - Posicionamento no cliente em anel ao redor do pai, determinístico pelo hash do id (função em `lib/ecossistema`, com teste)
   - _R3.4, R3.8, R3.9, R7.4; D5_
-- [ ] 2.5 Gerar os fatos por tipo
+- [x] 2.5 Gerar os fatos por tipo
   - Arquivos `fatos/<tipo>.json` para ferramenta, modelo, certificacao, tarefa, raia e demanda
   - Todo dado volátil com `fonte` e `data`, ou `naoVerificado: true`
   - Teste: nenhum preço, versão ou benchmark sai sem fonte e data ou marcador
   - _R5.5, R5.7, R5.9_
-- [ ] 2.3 Montar o payload colunar com schema
+- [x] 2.3 Montar o payload colunar com schema
   - `lib/ecossistema/payload.ts`: tabelas de tipos, grupos e kinds, nós com posição e grau, arestas por índice, sem os tipos de `detalhe`
   - Schema Zod versionado para payload e shard. O build falha com o id do nó ou da aresta inválida
   - Testes: round-trip colunar para objeto, índices válidos, tamanho gzip dentro do limite
   - _R7.2, R7.3, R7.5, R7.6, R9.4; D4_
-- [ ] 2.6 Publicar os arquivos em `api/ecossistema/`
+- [x] 2.6 Publicar os arquivos em `api/ecossistema/`
   - Estender `site/src/render/api.ts` e `routes.ts`: `index.json`, `detalhe/<demanda>.json` e `fatos/<tipo>.json` por idioma
   - Manter `graph.json` inalterado
   - Verificar tamanho gzip no build e falhar acima de 200 kB para o payload principal
@@ -67,17 +67,17 @@ Regras de execução:
 
 ### Fase 3: Lógica pura do cliente
 
-- [ ] 3.1 Implementar filtros compartilhados com a lista
+- [x] 3.1 Implementar filtros compartilhados com a lista
   - `lib/ecossistema/filtro.ts`: camadas, hubs, facetas e texto, com E entre facetas e OU dentro da faceta
   - Se o módulo de facetas do Catálogo (spec `experiencia-fluxos-catalogo`, Requirement 11) ainda não existir, criar aqui e fazer a lista usá-lo depois. Há um único código de filtro
   - Testes com fast-check: independência da ordem, paridade com filtragem direta de `api/index.json`, aresta visível se e somente se os dois extremos estão visíveis
   - _R3.6, R3.7, R6.1, R6.2, R6.3, R6.7, R12.6; propriedades 4, 5 e 6_
-- [ ] 3.2 Implementar o cálculo de foco
+- [x] 3.2 Implementar o cálculo de foco
   - `lib/ecossistema/foco.ts`: vizinhança por profundidade 1 ou 2, teto de 400 nós na profundidade 2, hubs fora da profundidade 2, agrupamento por tipo acima de 150 vizinhos e expansão de um grupo por vez
   - Função de arranjo em casca esférica ao redor do nó focado
   - Testes: teto, agrupamento, exclusão de hubs, arranjo sem sobreposição de posições
   - _R4.1, R4.9, R4.10, R5.2; D6; propriedade 8_
-- [ ] 3.3 Implementar o estado e o hash
+- [x] 3.3 Implementar o estado e o hash
   - `site/src/ecossistema/estado.ts`: serialização canônica (`m`, `f`, `d`, `l`, `h`, `q` e facetas), leitura tolerante a parâmetros inválidos e desconhecidos
   - `replaceState` para filtros, `pushState` para foco. Câmera em `history.state`
   - Testes: round-trip do estado, hash inválido, id inexistente
@@ -85,17 +85,17 @@ Regras de execução:
 
 ### Fase 4: Renderizador
 
-- [ ] 4.1 Definir a interface do renderizador e o renderer falso
+- [x] 4.1 Definir a interface do renderizador e o renderer falso
   - `site/src/ecossistema/renderer.ts` com `EcossistemaRenderer` conforme o design
   - Renderer falso para testes de lógica e de contrato (a lógica só usa a interface)
   - _R12.1; D1_
-- [ ] 4.2 Implementar o adaptador de `3d-force-graph`
+- [x] 4.2 Implementar o adaptador de `3d-force-graph`
   - Nós com geometria e material compartilhados por grupo (forma e cor Okabe-Ito), tamanho por grau com teto
   - Posições fixas do payload e simulação desligada. Arestas em um único `LineSegments`, com opacidade menor para `body`
   - Visibilidade por camada e filtro sem recalcular posições. `destruir()` libera geometrias, materiais, texturas e o laço de animação
   - Teste de navegador de vazamento: contagem de recursos volta a zero após sair do modo
   - _R2.1, R2.2, R2.3, R2.6, R2.9, R3.6, R8.1, R8.3, R8.6, R8.7, R9.9, R10.6; D3, D7; propriedade 11_
-- [ ] 4.3 Implementar o foco visual
+- [x] 4.3 Implementar o foco visual
   - Destacar o nó focado e a vizinhança, atenuar o resto, expandir o nó e arranjar a vizinhança em casca
   - Animação de câmera de até 1 s, e salto direto com `prefers-reduced-motion`
   - Voltar restaura o foco anterior, Esc e clique no fundo saem do foco
@@ -111,16 +111,16 @@ Regras de execução:
   - Carregador por `import()` dinâmico, só no modo `ecossistema`. Teste de WebGL com fallback para `lista` e mensagem. Indicador de progresso. Tratamento de perda de contexto e de falha de download
   - Manter os filtros ao alternar o modo
   - _R1.1, R1.2, R1.3, R1.5, R1.6, R9.2, R9.8, R10.1; Error Handling_
-- [ ] 5.2 Implementar a barra lateral
+- [x] 5.2 Implementar a barra lateral
   - Nome, tipo, área, descrição e vizinhança por tipo com contagens, a partir de `api/index.json` (cache compartilhado com a lista) e da adjacência
   - Fatos por tipo carregados ao focar o primeiro nó do tipo. Links "Abrir página", "Abrir fluxo" e "Ver no diagrama"
   - Itens de detalhe exibidos somente quando ligados ao nó em Foco, com a ação "Mostrar detalhes deste nó"
   - Esc fecha e sai do foco. Painel inferior abaixo de 768 px. Foco gerenciado, `aria-live` e navegação por teclado na lista de vizinhos
   - _R3.9, R5.1 a R5.12, R10.2, R10.3, R10.4_
-- [ ] 5.3 Implementar legenda e controles
+- [x] 5.3 Implementar legenda e controles
   - Legenda com cor, forma, contagem e caixas por tipo. Controles de camadas, hubs, profundidade 1 ou 2, Recentralizar, Voltar, Sair do foco, busca e facetas, Limpar filtros, contador "N de M" e "nenhum item"
   - _R2.4, R2.7, R2.8, R3.5, R3.6, R4.6, R4.9, R6.1, R6.4, R6.5, R6.8, R6.9_
-- [ ] 5.4 Traduzir rótulos e mensagens
+- [x] 5.4 Traduzir rótulos e mensagens
   - Todos os textos em `site/src/i18n` para `pt-BR` e `en`, incluindo o marcador de fallback para conteúdo sem tradução
   - _R5.9; spec de fluxos Requirement 15.4_
 - [ ] 5.5 Integrar com os Fluxos de demandas e as páginas canônicas
@@ -132,7 +132,7 @@ Regras de execução:
 
 ### Fase 6: Verificação e documentação
 
-- [ ] 6.1 Escrever os testes de navegador
+- [x] 6.1 Escrever os testes de navegador
   - `tests/browser/ecossistema.spec.ts`: abertura e contagem por camada, foco com vizinhança igual à calculada do JSON, `detalhe` baixando só ao pedir, restauração por URL e pelo Voltar, fallback sem WebGL, navegação por teclado, console sem exceção
   - _R12.1 a R12.5_
 - [ ] 6.2 Verificar o orçamento no CI
@@ -168,6 +168,10 @@ Regras de execução:
 ```
 
 ## Notes
+
+- **Estado da implementação (branch `feat/ecossistema-3d`):** feitas as fases 2 a 4 e quase toda a 5. A página vive em `/{locale}/ecossistema/` (entrada de transição no cabeçalho), não como modo do Catálogo, porque o Catálogo unificado ainda não existe. Quando a spec `experiencia-fluxos-catalogo` entregar o Catálogo, a página vira o modo `ecossistema` e a entrada do cabeçalho sai (tarefa 5.1 e 5.5).
+- **Pendências:** 1.1 (medir quadros por segundo no hardware de referência, a spike formal), 2.4 (itens de detalhe só em lista no painel, ainda sem nós 3D), 4.4 (rótulos: dica ao passar o ponteiro e rótulos do foco existem, falta controle de densidade), 5.1 (modo do Catálogo), 5.5 (integração com Fluxos), 6.2 a 6.4.
+- **Desvio do Requirement 8.6:** arrastar nós está desligado. As posições vêm do build e as arestas são desenhadas em lote, então mover um nó dessincronizaria o lote. Rever se a interação fizer falta.
 
 - **Portão do spike:** a tarefa 1.1 decide se as arestas em lote bastam. Se o resultado ficar abaixo de 30 quadros por segundo, o design muda antes da wave 4.
 - **Dependência da spec de fluxos:** o seletor de modo e as facetas do Catálogo vêm da spec `experiencia-fluxos-catalogo` (Requirement 11). Se ela ainda não tiver entregue o módulo de facetas, a tarefa 3.1 o cria e a lista passa a usá-lo, para existir um único código de filtro.

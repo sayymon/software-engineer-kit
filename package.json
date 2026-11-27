@@ -26,6 +26,7 @@
     "skills:restore": "npx skills experimental_install --frozen-lockfile --agent claude-code kiro-cli opencode"
   },
   "dependencies": {
+    "3d-force-graph": "1.80.2",
     "ajv": "^8.20.0",
     "astro": "^7.4.13",
     "gray-matter": "^4.0.3",
@@ -34,6 +35,7 @@
     "remark-gfm": "^4.0.1",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.2",
+    "three": "0.187.0",
     "unified": "^11.0.5",
     "yaml": "^2.9.1",
     "zod": "^4.6.7"
@@ -41,7 +43,9 @@
   "devDependencies": {
     "@playwright/test": "^1.65.1",
     "@types/node": "^26.6.6",
-    "fast-check": "^4.11.0",
+    "@types/three": "0.187.0",
+    "d3-force-3d": "3.0.6",
+    "fast-check": "4.11.0",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
     "vitest": "^5.1.1"

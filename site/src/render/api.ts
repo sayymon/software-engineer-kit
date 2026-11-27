@@ -2,6 +2,9 @@
 // Static JSON API payloads. A backend can replace these endpoints later; ids stay the keys.
 import type { Page } from '@lib/content/site';
 import { gerarDiagrama } from '@lib/flow-mermaid';
+import { construirFatos } from '@lib/ecossistema/fatos';
+import { construirJornadas } from '@lib/home/jornadas';
+import { construirPayload, construirShards } from '@lib/ecossistema/payload';
 import type { Ctx } from './util';
 
 export function indexJson(ctx: Ctx) {
@@ -48,4 +51,20 @@ export function flowJson(ctx: Ctx, page: Page) {
     playbooks: d.playbooks ?? [],
     diagrams,
   };
+}
+
+/** Ecossistema 3D: columnar payload of the nucleo and fluxo layers (see lib/ecossistema/payload.ts). */
+export function ecossistemaJson(ctx: Ctx) {
+  return construirPayload(ctx.index);
+}
+export function ecossistemaShards(ctx: Ctx) {
+  return construirShards(ctx.index);
+}
+export function ecossistemaFatos(ctx: Ctx) {
+  return construirFatos(ctx.index);
+}
+
+/** Journeys, competencies and certifications for the immersive Home. */
+export function jornadasHomeJson(ctx: Ctx) {
+  return construirJornadas(ctx.index, ctx.href);
 }
