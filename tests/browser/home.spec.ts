@@ -157,7 +157,7 @@ test('clicar em um termo abre a página dele', async ({ page }) => {
   });
   expect(href).toBeTruthy();
   await page.locator(`#termos .termo[href="${href}"]`).click();
-  await expect(page).toHaveURL(new RegExp(`${href!.replace(/\//g, '\\/')}$`));
+  await expect.poll(() => new URL(page.url()).pathname).toBe(href);
 });
 
 test('a cena ativa fica legível logo depois de pular pelo indicador, sem rolar mais', async ({ page }) => {

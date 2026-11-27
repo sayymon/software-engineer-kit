@@ -6,7 +6,7 @@ Plano de implementação da Home imersiva: palco único com partículas em morph
 
 Regras de execução:
 
-- Toda tarefa de código roda `npm run validate` e `npm test` antes de fechar. Arquivos de código levam `SPDX-License-Identifier: MIT`.
+- Toda tarefa de código roda `npm run validate` e `npm test` antes de fechar. Arquivos de código levam o cabeçalho SPDX com a licença MIT.
 - Sem dependência nova de animação (decisão do dono). Usar o Three.js já instalado.
 - A tarefa 1.3 é um portão: se o palco não sustentar 30 quadros por segundo no hardware de referência, as tarefas de Cenas esperam a revisão do design.
 - O conteúdo das Cenas vem dos dados. Nenhum texto de entidade é copiado.
