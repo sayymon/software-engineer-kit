@@ -54,18 +54,18 @@ A home atual (título em WebGL com água e ímã, atalho para o ecossistema e ca
 6. THE Home SHALL oferecer, em toda Cena, ao menos um link direto para a página de leitura do assunto da Cena.
 7. THE Home SHALL ter uma única Cena_Fixa visível por vez.
 
-### Requirement 2: Barra de atalhos discreta
+### Requirement 2: Atalhos sem menu no topo (revisado)
 
 **User Story:** Como engenheiro que já conhece o kit, quero chegar à camada que preciso sem percorrer a narrativa, para que a Home não atrapalhe o meu trabalho.
 
 #### Acceptance Criteria
 
-1. THE Home SHALL exibir a Barra_de_Atalhos fixa no topo, com um link para cada uma das oito Camadas_do_Kit.
-2. THE Barra_de_Atalhos SHALL incluir o atalho para o Ecossistema 3D, a busca e a troca de idioma.
-3. THE Barra_de_Atalhos SHALL ocupar no máximo 3,5 rem de altura em telas de 768 px ou mais.
-4. WHILE a pessoa rola a Home, THE Barra_de_Atalhos SHALL permanecer visível e legível sobre qualquer Cena.
-5. WHERE a tela tem menos de 768 px de largura, THE Barra_de_Atalhos SHALL agrupar os atalhos em um botão de menu.
-6. THE Barra_de_Atalhos SHALL permitir navegação por teclado em todos os controles, com indicador de foco visível.
+1. THE Home SHALL NOT exibir barra ou menu fixo no topo.
+2. THE Home SHALL exibir a troca de idioma em um controle pequeno no canto superior direito.
+3. THE Home SHALL exibir o link "Ir direto às camadas", visível e discreto, que leva aos cards das oito Camadas_do_Kit no fim da página.
+4. THE cards das Camadas_do_Kit SHALL ter texto com contraste mínimo de 4,5:1 sobre o fundo.
+5. THE Home SHALL oferecer a busca e o atalho "Explorar o Kit em 3D" na primeira Cena.
+6. THE controles da Home SHALL permitir navegação por teclado, com indicador de foco visível.
 
 ### Requirement 3: Cena Apresentando o kit
 
@@ -74,7 +74,7 @@ A home atual (título em WebGL com água e ímã, atalho para o ecossistema e ca
 #### Acceptance Criteria
 
 1. THE Cena Apresentando o kit SHALL exibir o título "Software Engineer Kit" com o efeito de água e ímã que reage ao ponteiro.
-2. THE Cena SHALL exibir a frase de apresentação do kit e o atalho "Explorar o ecossistema 3D" ao lado da busca.
+2. THE Cena SHALL exibir a frase "O Kit com um catálogo curado para consultar e decidir, de ferramentas a fundamentos, para usar nos seus fluxos por demanda e nas jornadas de aprendizado em engenharia de software e IA" e o atalho "Explorar o Kit em 3D" ao lado da busca.
 3. WHEN o Progresso_da_Cena avança, THE Cena SHALL animar a transição do título para a Cena seguinte.
 4. THE Cena SHALL manter o `<h1>` real da página no DOM, legível por leitores de tela e selecionável.
 5. THE Cena SHALL caber em uma tela de 1440 por 900 px sem rolagem interna.
@@ -85,12 +85,12 @@ A home atual (título em WebGL com água e ímã, atalho para o ecossistema e ca
 
 #### Acceptance Criteria
 
-1. THE Cena Fluxos por demanda SHALL desenhar as raias e os nós de uma Demanda, a partir da Fonte_de_Dados `api/flows/<id>.json`.
-2. THE Cena SHALL oferecer um seletor com as 12 Demandas, na ordem definida em `ordem_das_demandas`.
+1. THE Cena Fluxos por demanda SHALL desenhar, com partículas, um ícone animado da Demanda escolhida (revisado: o desenho das raias e nós foi trocado por ícones porque ficava poluído).
+2. THE Cena SHALL oferecer um seletor com as 12 Demandas, cada uma com seu ícone, na ordem definida em `ordem_das_demandas`.
 3. WHEN a pessoa escolhe outra Demanda, THE Cena SHALL animar a troca do desenho sem recarregar a página.
 4. WHEN o Progresso_da_Cena avança, THE Cena SHALL revelar as raias e os nós em sequência, na ordem do fluxo.
 5. WHEN a pessoa passa o ponteiro sobre uma raia ou nó, THE Cena SHALL exibir o nome e o papel responsável.
-6. THE Cena SHALL oferecer o link "Abrir fluxo" para a página da Demanda escolhida.
+6. WHEN a pessoa escolhe uma Demanda, THE Cena SHALL exibir uma legenda curta ao lado do ícone e, abaixo da descrição da Cena, o link "Abrir os fluxos" para a página da Demanda escolhida. Antes da escolha, o link SHALL ficar oculto.
 7. THE Cena SHALL obter nomes e papéis dos dados do kit, sem texto próprio duplicado.
 
 ### Requirement 5: Cena Catálogo

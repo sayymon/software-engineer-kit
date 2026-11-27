@@ -96,7 +96,7 @@ export function layoutTitulo(pontos: ReadonlyArray<readonly [number, number]>, c
     const t = p[0];
     // Same blue to violet sweep as the title text.
     const cor: [number, number, number] = [0.45 + 0.45 * t, 0.62 - 0.15 * t, 1 - 0.1 * t];
-    pôr(l, i, caixa.x + (p[0] - 0.5) * caixa.w, caixa.y - (p[1] - 0.5) * caixa.h, (r() - 0.5) * 0.25, 0.9 + r() * 0.5, cor);
+    pôr(l, i, caixa.x + (p[0] - 0.5) * caixa.w, caixa.y - (p[1] - 0.5) * caixa.h, (r() - 0.5) * 0.25, 0.45 + r() * 0.3, cor, 0.55);
   }
   preencherPoeira(l, m, seed + 5, [0.5, 0.62, 0.95]);
   return l;
@@ -244,66 +244,8 @@ export function layoutCatalogo(nos: ReadonlyArray<NoCatalogo>, a: Area, n: numbe
   const total = Math.min(n, uteis.length);
   for (let i = 0; i < total; i++) {
     const no = uteis[Math.floor(i * passo)];
-    pôr(l, i, cx + no.x * escala, no.y * escala, no.z * escala, 0.8 + Math.min(1.7, Math.log2(1 + no.grau) * 0.3), hexParaRgb(no.cor), 0.85);
+    pôr(l, i, cx + no.x * escala, no.y * escala, no.z * escala, 0.8 + Math.min(1.7, Math.log2(1 + no.grau) * 0.3), hexParaRgb(no.cor), 0.62);
   }
   preencherPoeira(l, total, seed, [0.4, 0.5, 0.8]);
-  return l;
-}
-
-// ----- Scene 4: journeys, competencies and certifications -----------------------------------------------------------
-
-export type AreaCert = 'tecnica' | 'soft-skill' | 'ia';
-export type NivelCert = 'fundamental' | 'associado' | 'profissional' | 'especialista';
-
-export interface DadosJornadas {
-  jornadas: number;
-  competencias: number;
-  certificacoes: ReadonlyArray<{ area: AreaCert; nivel: NivelCert }>;
-}
-
-export const COR_AREA: Record<AreaCert, string> = { tecnica: '#56B4E9', 'soft-skill': '#E69F00', ia: '#CC79A7' };
-const RAIO_NIVEL: Record<NivelCert, number> = { fundamental: 2.3, associado: 3.4, profissional: 4.5, especialista: 5.6 };
-const SETOR: Record<AreaCert, number> = { tecnica: 0, 'soft-skill': 1, ia: 2 };
-
-export function layoutJornadas(d: DadosJornadas, a: Area, n: number, seed: number): Layout {
-  const l = layoutVazio(n);
-  const r = semeada(seed);
-  const cx = a.largura * a.desloc;
-  const escala = Math.min(1, (a.altura * 0.42) / 5.6);
-  let i = 0;
-  // Faint rings, one per level.
-  const aneis = Object.values(RAIO_NIVEL);
-  const porAnel = Math.floor(n * 0.12);
-  for (const raio of aneis) {
-    for (let k = 0; k < porAnel && i < n; k++) {
-      const ang = (k / porAnel) * Math.PI * 2;
-      pôr(l, i++, cx + Math.cos(ang) * raio * escala, Math.sin(ang) * raio * escala * 0.82, (r() - 0.5) * 0.3, 0.5 + r() * 0.25, [0.5, 0.58, 0.85], 0.55);
-    }
-  }
-  // Certifications: sector by area, ring by level.
-  const contagem = new Map<string, number>();
-  for (const c of d.certificacoes) {
-    if (i >= n) break;
-    const chave = `${c.area}:${c.nivel}`;
-    const k = contagem.get(chave) ?? 0;
-    contagem.set(chave, k + 1);
-    const base = (SETOR[c.area] / 3) * Math.PI * 2 + 0.25;
-    const ang = base + (((k * 0.37) % 1) * (Math.PI * 2)) / 3 * 0.85 + (r() - 0.5) * 0.12;
-    const raio = RAIO_NIVEL[c.nivel] + (r() - 0.5) * 0.25;
-    pôr(l, i++, cx + Math.cos(ang) * raio * escala, Math.sin(ang) * raio * escala * 0.82, (r() - 0.5) * 0.6, 2.6, hexParaRgb(COR_AREA[c.area]), 1.4);
-  }
-  // Competencies: four anchors near the center.
-  for (let k = 0; k < d.competencias && i < n; k++) {
-    const ang = (k / Math.max(d.competencias, 1)) * Math.PI * 2 + 0.6;
-    pôr(l, i++, cx + Math.cos(ang) * 1.1 * escala, Math.sin(ang) * 0.9 * escala, 0.2, 4.2, [0.95, 0.95, 1], 1.1);
-  }
-  // Journeys: a path of larger particles that winds from the center outward.
-  for (let k = 0; k < d.jornadas && i < n; k++) {
-    const t = d.jornadas > 1 ? k / (d.jornadas - 1) : 0;
-    const ang = -0.9 + t * 4.4;
-    const raio = (0.9 + t * 4.6) * escala;
-    pôr(l, i++, cx + Math.cos(ang) * raio, Math.sin(ang) * raio * 0.82, 0.6, 4.8, hexParaRgb('#56B4E9'), 1.5);
-  }
-  preencherPoeira(l, i, seed + 9, [0.45, 0.5, 0.85]);
   return l;
 }

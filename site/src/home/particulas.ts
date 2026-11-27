@@ -7,7 +7,7 @@ const VERT = `
 attribute vec4 aP0; attribute vec4 aP1; attribute vec4 aP2; attribute vec4 aP3;
 attribute vec3 aC0; attribute vec3 aC1; attribute vec3 aC2; attribute vec3 aC3;
 attribute float aSeed;
-uniform float uSeg; uniform float uMix; uniform float uTime; uniform float uPx; uniform vec2 uPointer; uniform float uPointerForce;
+uniform float uGain; uniform float uSeg; uniform float uMix; uniform float uTime; uniform float uPx; uniform vec2 uPointer; uniform float uPointerForce;
 varying vec3 vCol; varying float vAlpha; varying float vSize;
 vec4 pickP(float i){ return i < 0.5 ? aP0 : (i < 1.5 ? aP1 : (i < 2.5 ? aP2 : aP3)); }
 vec3 pickC(float i){ return i < 0.5 ? aC0 : (i < 1.5 ? aC1 : (i < 2.5 ? aC2 : aC3)); }
@@ -29,7 +29,7 @@ void main(){
   gl_Position = projectionMatrix * mv;
   float size = mix(a.w, b.w, m);
   gl_PointSize = size * uPx * (240.0 / -mv.z) * (1.0 + f * 0.8);
-  vCol = mix(pickC(uSeg), pickC(next), m) * (1.0 + f * 0.6);
+  vCol = mix(pickC(uSeg), pickC(next), m) * (1.0 + f * 0.6) * uGain;
   vAlpha = 0.6 + 0.4 * smoothstep(0.0, 1.0, size / 2.5);
   vSize = size;
 }`;
@@ -59,6 +59,7 @@ export interface Particulas {
   pontos: THREE.Points;
   definirLayout(indice: 0 | 1 | 2 | 3, l: Layout): void;
   definirMorph(de: number, mistura: number): void;
+  definirGanho(g: number): void;
   definirPonteiro(x: number, y: number, forca: number): void;
   atualizar(tempo: number): void;
   destruir(): void;
@@ -82,7 +83,7 @@ export function criarParticulas(n: number, pixelRatio: number): Particulas {
     transparent: true,
     depthWrite: false,
     blending: THREE.AdditiveBlending,
-    uniforms: { uSeg: { value: 0 }, uMix: { value: 0 }, uTime: { value: 0 }, uPx: { value: pixelRatio }, uPointer: { value: new THREE.Vector2(9, 9) }, uPointerForce: { value: 0 } },
+    uniforms: { uGain: { value: 1 }, uSeg: { value: 0 }, uMix: { value: 0 }, uTime: { value: 0 }, uPx: { value: pixelRatio }, uPointer: { value: new THREE.Vector2(9, 9) }, uPointerForce: { value: 0 } },
   });
   const pontos = new THREE.Points(geo, mat);
   pontos.frustumCulled = false;
@@ -99,6 +100,9 @@ export function criarParticulas(n: number, pixelRatio: number): Particulas {
     definirMorph(de, mistura) {
       mat.uniforms.uSeg.value = Math.min(de, 3);
       mat.uniforms.uMix.value = mistura;
+    },
+    definirGanho(g) {
+      mat.uniforms.uGain.value = g;
     },
     definirPonteiro(x, y, forca) {
       mat.uniforms.uPointer.value.set(x, y);

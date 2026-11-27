@@ -164,7 +164,7 @@ export function renderHome(ctx: Ctx): string {
     return `<li><a href="${esc(ctx.href(layer))}">${esc(t(`layer.${layer}`))}</a><span class="muted">${esc(t(`layerdesc.${layer}`))}</span><span class="count">${esc(t('count.items', { n: countOf(layer) }))}</span></li>`;
   }).join('');
   const demandas = ctx.index.ofTipo('demanda').filter((p) => p.entity.data.biblioteca !== true);
-  const demandaLinks = demandas.map((p) => `<li><a href="${esc(ctx.href(p.route))}" data-demanda="${esc(p.id)}">${svgIcone(p.id)}<span>${esc(p.nome)}</span></a></li>`).join('');
+  const demandaLinks = demandas.map((p) => `<li><a href="${esc(ctx.href(p.route))}" data-demanda="${esc(p.id)}" data-nome="${esc(p.nome)}" data-legenda="${esc(t.has(`home.flows.cap.${p.id}`) ? t(`home.flows.cap.${p.id}`) : '')}">${svgIcone(p.id)}<span>${esc(p.nome)}</span></a></li>`).join('');
   // Counts per visual group, from the same rule the 3D ecosystem uses (the detail layer is not counted).
   const porGrupo = new Map<string, number>();
   for (const p of ctx.index.pages) {
@@ -175,19 +175,15 @@ export function renderHome(ctx: Ctx): string {
   const grupos = GRUPOS.filter((g) => g !== 'hubs' && porGrupo.has(g))
     .map((g) => `<li data-grupo="${g}"><span class="home-count">${porGrupo.get(g)}</span> <span>${esc(t(`eco.group.${g}`))}</span></li>`)
     .join('');
-  const cena = (id: string, faixa: string, corpo: string) =>
-    `<section id="cena-${id}" class="cena" data-cena="${id}" style="--faixa:${faixa}" aria-labelledby="titulo-${id}"><div class="cena-fixa"><div class="cena-texto">${corpo}</div></div></section>`;
+  const cena = (id: string, faixa: string, corpo: string, extra = '') =>
+    `<section id="cena-${id}" class="cena" data-cena="${id}" style="--faixa:${faixa}" aria-labelledby="titulo-${id}"><div class="cena-fixa"><div class="cena-texto">${corpo}</div>${extra}</div></section>`;
   const indicador = ['apresentacao', 'fluxos', 'catalogo', 'jornadas']
     .map((id, i) => `<li><a href="#cena-${id}" data-cena-link="${id}"${i === 0 ? ' aria-current="true"' : ''}><span class="sr-only">${esc(t(`home.scene.${id}`))}</span></a></li>`)
     .join('');
   return (
     `<div class="home" data-home data-base="${esc(ctx.base)}" id="topo">` +
-    `<nav class="atalhos" aria-label="${esc(t('nav.label'))}"><a class="atalhos-marca" href="${esc(ctx.href(''))}">${esc(t('site.title'))}</a>` +
-    `<ul class="atalhos-lista">${layerLinks}</ul>` +
-    `<a class="atalhos-eco" href="${esc(ctx.href('ecossistema'))}">${esc(t('nav.ecosystem'))}</a>` +
-    `<form class="atalhos-busca" role="search" action="${esc(ctx.href('search'))}" method="get"><label class="sr-only" for="atalho-q">${esc(t('search.label'))}</label><input id="atalho-q" type="search" name="q" placeholder="${esc(t('search.placeholder'))}" autocomplete="off"></form>` +
-    `<span class="atalhos-lang"><a href="${esc(ctx.href(''))}" lang="${ctx.locale}" aria-current="true">${ctx.locale === 'pt-BR' ? 'PT' : 'EN'}</a><a href="${esc(`${ctx.base}/${other}/`)}" lang="${other}" hreflang="${other}" aria-label="${esc(t(`lang.switchTo.${other}`))}">${other === 'pt-BR' ? 'PT' : 'EN'}</a></span></nav>` +
-    `<a class="pular" href="#fim">${esc(t('home.skip'))}</a>` +
+    `<nav class="home-lang" aria-label="${esc(t('lang.label'))}"><a href="${esc(ctx.href(''))}" lang="${ctx.locale}" aria-current="true">${ctx.locale === 'pt-BR' ? 'PT' : 'EN'}</a><a href="${esc(`${ctx.base}/${other}/`)}" lang="${other}" hreflang="${other}" aria-label="${esc(t(`lang.switchTo.${other}`))}">${other === 'pt-BR' ? 'PT' : 'EN'}</a></nav>` +
+    `<a class="pular" href="#fim">${esc(t('home.skip.visible'))}</a>` +
     `<nav class="indicador" aria-label="${esc(t('home.scenes'))}"><ol>${indicador}</ol></nav>` +
     cena(
       'apresentacao',
@@ -203,8 +199,10 @@ export function renderHome(ctx: Ctx): string {
       'fluxos',
       '340vh',
       `<p class="eyebrow">${esc(t('home.scene.fluxos'))}</p><h2 id="titulo-fluxos">${esc(t('home.flows.title'))}</h2><p class="lede">${esc(t('home.flows.lede'))}</p>` +
+        `<p class="flow-dica">${esc(t('home.flows.pick'))}</p>` +
         `<ul class="home-chips" role="list" aria-label="${esc(t('home.flows.select'))}">${demandaLinks}</ul>` +
         `<p class="cena-acao"><a class="glass-btn" href="${esc(ctx.href('flows'))}">${esc(t('home.flows.open'))}</a></p>`,
+      `<div class="flow-legenda" aria-live="polite" hidden><p class="flow-nome"></p><p class="flow-desc"></p></div>`,
     ) +
     cena(
       'catalogo',

@@ -16,16 +16,15 @@ async function abrir(page: Page) {
   return erros;
 }
 
-test('quatro cenas em ordem, um único palco e a barra de atalhos', async ({ page }) => {
+test('quatro cenas em ordem, um único palco e nenhum menu no topo', async ({ page }) => {
   const erros = await abrir(page);
   expect(await page.locator('[data-cena]').evaluateAll((els) => els.map((e) => (e as HTMLElement).dataset.cena))).toEqual([...CENAS]);
   await expect(page.locator('canvas#palco')).toHaveCount(1);
-  await expect(page.locator('nav.atalhos .atalhos-lista a')).toHaveCount(8);
-  await expect(page.locator('nav.atalhos a.atalhos-eco')).toHaveAttribute('href', /\/pt-BR\/ecossistema\/$/);
-  await expect(page.locator('nav.atalhos form[role="search"]')).toHaveCount(1);
-  await expect(page.locator('nav.atalhos .atalhos-lang a')).toHaveCount(2);
-  const altura = await page.locator('nav.atalhos').evaluate((e) => e.getBoundingClientRect().height);
-  expect(altura).toBeLessThanOrEqual(56);
+  await expect(page.locator('nav.atalhos')).toHaveCount(0);
+  await expect(page.locator('header.site-header')).toHaveCount(0);
+  await expect(page.locator('nav.home-lang a')).toHaveCount(2);
+  await expect(page.locator('.hero-actions a.glass-btn')).toHaveText('Explorar o Kit em 3D');
+  await expect(page.locator('.cena[data-cena="apresentacao"] .lede')).toContainText('catálogo curado para consultar e decidir');
   expect(erros).toEqual([]);
 });
 
@@ -51,14 +50,30 @@ test('a rolagem continua do navegador e a faixa de cada cena vira progresso de 0
   expect(p).toBeLessThanOrEqual(1);
 });
 
-test('escolher uma demanda na cena de fluxos não sai da página e atualiza o link', async ({ page }) => {
+test('na cena de fluxos o "abrir fluxo" só aparece depois de escolher uma demanda, com ícone e legenda', async ({ page }) => {
   await abrir(page);
-  await page.evaluate(() => document.querySelector('[data-cena="fluxos"]')!.scrollIntoView());
+  await page.locator('[data-cena-link="fluxos"]').click();
+  const acao = page.locator('[data-cena="fluxos"] .cena-acao a');
+  await expect(acao).toBeHidden();
+  await expect(page.locator('[data-cena="fluxos"] .flow-legenda')).toBeHidden();
+  const icones = await page.locator('[data-cena="fluxos"] .home-chips a svg').count();
+  expect(icones).toBe(12);
   const bug = page.locator('[data-demanda="bug"]');
   await bug.click();
   await expect(bug).toHaveAttribute('aria-pressed', 'true');
   await expect(page).toHaveURL(/\/pt-BR\/(#.*)?$/);
-  await expect(page.locator('[data-cena="fluxos"] a.glass-btn')).toHaveAttribute('href', /\/flows\/bug\/$/);
+  await expect(page.locator('[data-cena="fluxos"] .flow-nome')).toHaveText('Bug');
+  await expect(page.locator('[data-cena="fluxos"] .flow-desc')).toContainText('defeito');
+  await expect(acao).toBeVisible();
+  await expect(acao).toHaveAttribute('href', /\/flows\/bug\/$/);
+});
+
+test('a cena ativa fica legível logo depois de pular pelo indicador, sem rolar mais', async ({ page }) => {
+  await abrir(page);
+  for (const id of ['fluxos', 'catalogo', 'jornadas']) {
+    await page.locator(`[data-cena-link="${id}"]`).click();
+    await expect.poll(async () => Number(await page.locator(`[data-cena="${id}"] .cena-texto`).evaluate((e) => getComputedStyle(e).opacity))).toBeGreaterThan(0.95);
+  }
 });
 
 test('uma rolagem completa não gera exceções nem cria um segundo canvas', async ({ page }) => {
@@ -81,6 +96,7 @@ test('com movimento reduzido a home vira seções estáticas com os mesmos links
   for (const id of CENAS) await expect(page.locator(`[data-cena="${id}"]`)).toBeVisible();
   const links = await page.locator('main a[href]').evaluateAll((as) => [...new Set(as.map((a) => (a as HTMLAnchorElement).getAttribute('href')))]);
   for (const l of ['/pt-BR/tools/', '/pt-BR/flows/', '/pt-BR/journeys/', '/pt-BR/certifications/', '/pt-BR/ecossistema/']) expect(links).toContain(l);
+  await expect(page.locator('[data-cena="fluxos"] .cena-acao a')).toBeVisible();
   await ctx.close();
 });
 

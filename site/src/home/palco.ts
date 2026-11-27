@@ -2,10 +2,11 @@
 // The single WebGL stage of the Home: one renderer, one camera, one particle system, one animation loop.
 // The loop pauses when the tab is hidden. Quality steps down when frames get slow (never up).
 import * as THREE from 'three';
-import { layoutCatalogo, layoutFluxo, layoutJornadas, layoutTitulo, layoutVazio, preencherPoeira, type Area, type DadosJornadas, type FluxoDados, type Layout, type NoCatalogo } from '@lib/home/layouts';
+import { hexParaRgb, layoutCatalogo, layoutTitulo, layoutVazio, preencherPoeira, type Area, type Layout, type NoCatalogo } from '@lib/home/layouts';
+import { layoutIcone, layoutJornadas, type DadosJornadas } from '@lib/home/layouts-cena';
 import { janelaDeMorph } from '@lib/home/progresso';
 import { AvaliadorDeQuadros, CONFIG, nivelInicial, type Nivel } from '@lib/home/qualidade';
-import { carregarCatalogo, carregarFluxo, carregarJornadas } from './dados';
+import { carregarCatalogo, carregarJornadas } from './dados';
 import { criarCircuito, type Circuito } from './circuito';
 import { criarGlifos, type Glifos } from './glifos';
 import { criarParticulas } from './particulas';
@@ -22,11 +23,46 @@ export interface Palco {
 }
 
 const COR_FUNDO = 0x04050b;
+const GANHO = [1, 1, 0.42, 0.75];
+/** Color of each demand icon (Okabe-Ito based). */
+const COR_DEMANDA: Record<string, string> = {
+  feature: '#56B4E9', bug: '#D55E00', incidente: '#E69F00', chore: '#9fb2d9', seguranca: '#009E73', spike: '#CC79A7',
+  divida_tecnica: '#F0E442', infraestrutura: '#56B4E9', teste_qa: '#009E73', documentacao: '#7aa8ff', migracao: '#E69F00', descontinuacao: '#aab3c5',
+};
+/** Neutral branching icon shown before a demand is chosen. */
+const ICONE_PADRAO = 'M6 3v12 M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M18 9a9 9 0 0 1-9 9';
+const cacheIcones = new Map<string, Array<[number, number]>>();
+/** Rasterizes a 24x24 stroke icon and returns its points (0..1) for the particles. */
+function amostrarIcone(caminho: string, maximo = 900): Array<[number, number]> {
+  const memo = cacheIcones.get(caminho);
+  if (memo) return memo;
+  const T = 240;
+  const c = document.createElement('canvas');
+  c.width = c.height = T;
+  const g = c.getContext('2d', { willReadFrequently: true })!;
+  g.scale(T / 24, T / 24);
+  g.strokeStyle = '#fff';
+  g.lineWidth = 2.1;
+  g.lineCap = 'round';
+  g.lineJoin = 'round';
+  g.stroke(new Path2D(caminho));
+  const dados = g.getImageData(0, 0, T, T).data;
+  const todos: Array<[number, number]> = [];
+  for (let y = 0; y < T; y += 2) for (let x = 0; x < T; x += 2) if (dados[(y * T + x) * 4 + 3] > 120) todos.push([x / T, y / T]);
+  const passo = Math.max(1, todos.length / maximo);
+  const saida: Array<[number, number]> = [];
+  for (let i = 0; i < todos.length && saida.length < maximo; i += passo) saida.push(todos[Math.floor(i)]);
+  cacheIcones.set(caminho, saida);
+  return saida;
+}
 
 export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Promise<Palco> {
   const coarse = matchMedia('(pointer: coarse)').matches;
   const nav = navigator as Navigator & { deviceMemory?: number };
   let nivel: Nivel = nivelInicial({ toqueGrosso: coarse, nucleos: nav.hardwareConcurrency, memoriaGb: nav.deviceMemory });
+  // ?nivel=alto|medio|baixo pins the quality level (useful to compare machines); without it quality adapts by itself.
+  const forcado = new URLSearchParams(location.search).get('nivel');
+  if (forcado === 'alto' || forcado === 'medio' || forcado === 'baixo') nivel = forcado;
   const canvas = document.createElement('canvas');
   canvas.id = 'palco';
   canvas.setAttribute('aria-hidden', 'true');
@@ -46,7 +82,8 @@ export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Pro
 
   const base = home.dataset.base ?? document.documentElement.dataset.base ?? '';
   const locale = document.documentElement.lang || 'pt-BR';
-  const dados: { fluxos: Map<string, FluxoDados>; demanda: string; catalogo?: NoCatalogo[]; jornadas?: DadosJornadas } = { fluxos: new Map(), demanda: '' };
+  const dados: { demanda: string; catalogo?: NoCatalogo[]; jornadas?: DadosJornadas } = { demanda: '' };
+  const demandas = [...home.querySelectorAll<HTMLAnchorElement>('[data-demanda]')];
   const carregados = new Set<string>();
   let layouts: Layout[] = [];
   /** Visible world size at z = 0 for the current window. */
@@ -82,10 +119,13 @@ export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Pro
         titulo = layoutTitulo(amostra, { x: cx, y: cy, w: Math.abs(x2 - cx) * 2, h: Math.abs(cy - y2) * 2 }, n, 11);
       }
     }
-    const fluxo = dados.fluxos.get(dados.demanda);
+    const escolhida = demandas.find((a) => a.dataset.demanda === dados.demanda);
+    const caminho = escolhida?.querySelector('path')?.getAttribute('d') ?? ICONE_PADRAO;
+    const corIcone = hexParaRgb(escolhida ? COR_DEMANDA[dados.demanda] ?? '#56B4E9' : '#7aa8ff');
+    const icone = layoutIcone(amostrarIcone(caminho, Math.floor(n * 0.4)), [area.largura * (area.desloc - 0.06), 0], Math.min(area.altura * 0.46, area.largura * 0.3), n, corIcone, 21);
     return [
       titulo,
-      fluxo ? layoutFluxo(fluxo, area, n, 21) : poeira(21),
+      icone,
       dados.catalogo ? layoutCatalogo(dados.catalogo, area, n, 31) : poeira(31),
       dados.jornadas ? layoutJornadas(dados.jornadas, area, n, 41) : poeira(41),
     ];
@@ -127,22 +167,9 @@ export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Pro
   document.addEventListener('pointerleave', onSaiu);
 
   // ----- data loading: each scene's file is fetched when the scene before it becomes active -----
-  const demandas = [...home.querySelectorAll<HTMLAnchorElement>('[data-demanda]')];
-  dados.demanda = demandas[0]?.dataset.demanda ?? 'feature';
-  async function carregarFluxoEscolhido(): Promise<void> {
-    if (!dados.fluxos.has(dados.demanda)) {
-      try {
-        dados.fluxos.set(dados.demanda, await carregarFluxo(base, locale, dados.demanda));
-      } catch (e) {
-        console.warn('home: fluxo indisponível', e);
-        return;
-      }
-    }
-    aplicarLayoutsSuave(1);
-  }
   const buscar: Array<() => Promise<void>> = [
     async () => {},
-    carregarFluxoEscolhido,
+    async () => {},
     async () => {
       try {
         dados.catalogo = (await carregarCatalogo(base, locale)).nos;
@@ -168,12 +195,12 @@ export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Pro
       void buscar[i]();
     }
   }
-  // Selecting a demand in scene 2: the particles glide to the new flow instead of jumping.
+  // Choosing a demand in scene 2: the particles glide from the current icon to the new one.
   let transicao: { de: Float32Array; para: Layout; inicio: number; indice: number } | null = null;
   function aplicarLayoutsSuave(indice: 1): void {
     const novo = construirLayouts();
     const atual = layouts[indice];
-    layouts = layouts.length ? layouts.map((l, i) => (i === indice ? l : novo[i])) : novo;
+    layouts = layouts.map((l, i) => (i === indice ? l : novo[i]));
     if (!atual) {
       layouts[indice] = novo[indice];
       particulas.definirLayout(indice, layouts[indice]);
@@ -182,20 +209,31 @@ export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Pro
     transicao = { de: atual.posicoes.slice(), para: novo[indice], inicio: performance.now(), indice };
     layouts[indice] = { posicoes: atual.posicoes.slice(), cores: atual.cores.slice() };
   }
+  const cenaFluxos = home.querySelector<HTMLElement>('[data-cena="fluxos"]');
+  const legenda = cenaFluxos?.querySelector<HTMLElement>('.flow-legenda') ?? null;
+  const abrirFluxo = cenaFluxos?.querySelector<HTMLAnchorElement>('.cena-acao a') ?? null;
   demandas.forEach((a) => {
-    a.setAttribute('aria-pressed', String(a.dataset.demanda === dados.demanda));
+    a.setAttribute('aria-pressed', 'false');
     a.addEventListener('click', (e) => {
       if (!document.documentElement.classList.contains('home-imersiva')) return;
       e.preventDefault();
       dados.demanda = a.dataset.demanda ?? dados.demanda;
       demandas.forEach((x) => x.setAttribute('aria-pressed', String(x === a)));
-      const abrir = home.querySelector<HTMLAnchorElement>('[data-cena="fluxos"] a.glass-btn');
-      if (abrir) abrir.href = a.href;
-      void carregarFluxoEscolhido();
+      if (cenaFluxos) cenaFluxos.dataset.escolhida = 'sim';
+      if (abrirFluxo) abrirFluxo.href = a.href;
+      if (legenda) {
+        legenda.hidden = false;
+        // Restart the entrance animation of the caption for every choice.
+        legenda.classList.remove('entra');
+        void legenda.offsetWidth;
+        legenda.classList.add('entra');
+        legenda.style.setProperty('--cor', COR_DEMANDA[dados.demanda] ?? '#56B4E9');
+        legenda.querySelector('.flow-nome')!.textContent = a.dataset.nome ?? '';
+        legenda.querySelector('.flow-desc')!.textContent = a.dataset.legenda ?? '';
+      }
+      aplicarLayoutsSuave(1);
     });
   });
-  const abrirFluxo = home.querySelector<HTMLAnchorElement>('[data-cena="fluxos"] a.glass-btn');
-  if (abrirFluxo && demandas[0]) abrirFluxo.href = demandas[0].href;
   garantir(0);
 
   let progressos = estado.progressos;
@@ -243,7 +281,7 @@ export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Pro
     }
     const dt = agora - ultimo;
     ultimo = agora;
-    const descer = avaliador.registrar(dt);
+    const descer = forcado ? null : avaliador.registrar(dt);
     if (descer) trocarNivel(descer);
     if (badge) {
       acumulado += dt;
@@ -259,7 +297,10 @@ export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Pro
     const alvo = janelaDeMorph(progressos, ativa);
     tLinha += (alvo.de + alvo.mistura - tLinha) * (1 - Math.exp(-dt / 170));
     const seg = Math.min(2, Math.floor(tLinha + 1e-6));
-    particulas.definirMorph(seg, Math.min(1, tLinha - seg));
+    const mistura = Math.min(1, tLinha - seg);
+    particulas.definirMorph(seg, mistura);
+    // The catalog cloud is dense, so it is drawn with less light.
+    particulas.definirGanho(GANHO[seg] * (1 - mistura) + GANHO[seg + 1] * mistura);
     particulas.atualizar(t);
     circuito.atualizar(t, Math.min(dt, 50) / 1000, camera.position.x, camera.position.y);
     glifos.atualizar(t);
@@ -271,7 +312,9 @@ export async function criarPalco(home: HTMLElement, estado: EstadoDeScroll): Pro
     camera.position.x = Math.sin(t * 0.13) * 0.5 + alvoPonteiro.atualX * 0.3 * (alvoPonteiro.atualF);
     camera.position.y = Math.cos(t * 0.1) * 0.3 + alvoPonteiro.atualY * 0.2 * (alvoPonteiro.atualF);
     camera.lookAt(0, 0, 0);
+    // Scene 2 sways the icon a little, scene 3 turns the cloud slowly, the others settle back.
     if (ativa === 2) particulas.pontos.rotation.y += 0.0014;
+    else if (ativa === 1) particulas.pontos.rotation.y += (Math.sin(t * 0.8) * 0.5 - particulas.pontos.rotation.y) * 0.06;
     else particulas.pontos.rotation.y *= 0.96;
     if (transicao) {
       const k = Math.min(1, (agora - transicao.inicio) / 650);

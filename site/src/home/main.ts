@@ -39,6 +39,7 @@ function iniciar(home: HTMLElement): void {
       // Actions that wait for the animation (the flow link) become clickable once the scene is well under way.
       s.dataset.acao = estado.progressos[i] > 0.5 ? 'sim' : 'nao';
     });
+    home.dataset.fim = estado.progressos[3] > 0.97 ? 'sim' : 'nao';
     if (estado.ativa !== atual) {
       atual = estado.ativa;
       links.forEach((a, i) => a && (i === atual ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current')));

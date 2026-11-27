@@ -69,10 +69,11 @@ void main(){
   // Electric edges: the outline of the letters crackles, more where the pointer is.
   float e = edge(q);
   float estala = smoothstep(0.52 - ativa * 0.25, 0.9, noise(vec2(q.x * 46.0 + uTime * 9.0, q.y * 7.0 - uTime * 3.0)));
-  float arco = e * estala * (0.35 + ativa * 1.6);
-  vec3 eletrico = mix(vec3(0.25, 0.8, 1.0), vec3(1.0), smoothstep(0.7, 1.2, arco + hash(q * 90.0 + tick) * 0.4));
-  col += eletrico * arco * 1.4;
-  alpha = max(alpha, arco * 0.9);
+  // At rest only a few thin cyan sparks crackle on the edges; the glow grows near the pointer, and it is never white.
+  float arco = e * estala * (0.08 + ativa * 0.9);
+  vec3 eletrico = mix(vec3(0.15, 0.55, 1.0), vec3(0.35, 0.9, 1.0), hash(q * 90.0 + tick));
+  col += eletrico * arco * 0.9;
+  alpha = max(alpha, arco * 0.55);
   // Bolts from the pointer to two moving points on the text.
   float quando = floor(uTime * 7.0);
   vec2 alvoA = vec2((0.1 + 0.8 * hash(vec2(quando, 1.0))) * uAspect, 0.25 + 0.5 * hash(vec2(quando, 2.0)));
@@ -81,8 +82,8 @@ void main(){
   col += vec3(0.6, 0.9, 1.0) * raio * 1.6;
   alpha = max(alpha, clamp(raio, 0.0, 1.0));
   // A thin scanline flicker over the text and a hot core near the pointer.
-  col *= 0.94 + 0.06 * sin(uv.y * 340.0 + uTime * 30.0);
-  col += uAccent * near * 0.4 * alpha;
+  col *= 0.96 + 0.04 * sin(uv.y * 340.0 + uTime * 30.0);
+  col += uAccent * near * 0.25 * alpha;
   gl_FragColor = vec4(col, min(alpha, 1.0));
 }`;
 

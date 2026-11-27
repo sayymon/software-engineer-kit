@@ -2,7 +2,8 @@
 // Lazy loaders for the data each scene draws. Each file is fetched once, when its scene gets close.
 import { corDe } from '@lib/ecossistema/camadas';
 import { ESCALA } from '@lib/ecossistema/constantes';
-import type { DadosJornadas, FluxoDados, NoCatalogo } from '@lib/home/layouts';
+import type { FluxoDados, NoCatalogo } from '@lib/home/layouts';
+import type { DadosJornadas } from '@lib/home/layouts-cena';
 import type { JornadasHome } from '@lib/home/jornadas';
 import type { PayloadEcossistema } from '@lib/ecossistema/payload';
 

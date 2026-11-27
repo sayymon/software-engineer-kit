@@ -59,7 +59,8 @@ describe('layouts', () => {
   });
 });
 
-import { camadasDoFluxo, layoutCatalogo, layoutFluxo, layoutJornadas, layoutTitulo, hexParaRgb, type Area, type FluxoDados } from '../../lib/home/layouts';
+import { camadasDoFluxo, layoutCatalogo, layoutFluxo, layoutTitulo, hexParaRgb, type Area, type FluxoDados } from '../../lib/home/layouts';
+import { layoutIcone, layoutJornadas } from '../../lib/home/layouts-cena';
 
 const area: Area = { largura: 19, altura: 12, desloc: 0.2 };
 const finito = (l: { posicoes: Float32Array; cores: Float32Array }) => {
@@ -108,8 +109,20 @@ describe('layouts das cenas', () => {
     expect(grandes).toBeGreaterThanOrEqual(299);
   });
   it('as jornadas colocam cada certificação em uma das áreas e níveis', () => {
-    const l = layoutJornadas({ jornadas: 6, competencias: 4, certificacoes: [{ area: 'tecnica', nivel: 'fundamental' }, { area: 'ia', nivel: 'especialista' }] }, area, 500, 2);
+    const certs = Array.from({ length: 45 }, (_, i) => ({ area: (['tecnica', 'soft-skill', 'ia'] as const)[i % 3], nivel: (['fundamental', 'associado', 'profissional', 'especialista'] as const)[i % 4] }));
+    for (const n of [900, 1600, 2400]) {
+      const l = layoutJornadas({ jornadas: 6, competencias: 4, certificacoes: certs }, area, n, 2);
+      finito(l);
+      const b = layoutJornadas({ jornadas: 6, competencias: 4, certificacoes: certs }, area, n, 2);
+      expect(Array.from(b.posicoes)).toEqual(Array.from(l.posicoes));
+      for (let i = 0; i < n; i++) expect(l.posicoes[i * 4 + 3]).toBeGreaterThan(0);
+    }
+  });
+  it('o ícone da demanda vira partículas ao redor do centro', () => {
+    const pts: Array<[number, number]> = Array.from({ length: 400 }, (_, i) => [(i % 20) / 20, Math.floor(i / 20) / 20]);
+    const l = layoutIcone(pts, [4, 0], 6, 900, [0.3, 0.7, 1], 3);
     finito(l);
+    for (let i = 0; i < 100; i++) expect(Math.abs(l.posicoes[i * 4] - 4)).toBeLessThanOrEqual(3.01);
   });
   it('o título vira pontos dentro da caixa', () => {
     const pts: Array<[number, number]> = Array.from({ length: 500 }, (_, i) => [(i % 50) / 50, Math.floor(i / 50) / 10]);
