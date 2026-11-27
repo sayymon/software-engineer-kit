@@ -13,10 +13,10 @@ maisBarata:
 custoBeneficio:
   - "[[pydantic|Pydantic]]"
   - tabela:joi
-  - tabela:jackson
+  - "[[jackson|Jackson]]"
 qualidadeMaxima:
   - "[[typebox|TypeBox]]"
-  - tabela:serde
+  - "[[serde|serde]]"
   - tabela:ajv
 essenciais:
   - "[[zod|Zod]]"
@@ -35,7 +35,7 @@ Validação de dados e definição de schemas em tempo de execução.
 - Cada faixa tem 3 opções; a primeira de cada faixa é a referência e tem nota própria.
 ## 🥇 Faixas
 - **Mais barata:** [[zod|Zod]], Valibot, Yup
-- **Melhor custo-benefício:** [[pydantic|Pydantic]], Joi, Jackson
-- **Qualidade máxima:** [[typebox|TypeBox]], Serde, Ajv
+- **Melhor custo-benefício:** [[pydantic|Pydantic]], Joi, [[jackson|Jackson]]
+- **Qualidade máxima:** [[typebox|TypeBox]], [[serde|serde]], Ajv
 ## 🔗 Relacionamentos
 - **Mapa:** [[hub_tools|Mapa de Ferramentas de Engenharia]]

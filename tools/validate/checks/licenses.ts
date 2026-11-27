@@ -23,6 +23,7 @@ export const EXPECTED_LICENSES: Record<string, string> = {
   sspl_1_0: 'SSPL-1.0',
   fsl_1_1_mit: 'FSL-1.1-MIT',
   elastic_2_0: 'Elastic-2.0',
+  epl_2_0: 'EPL-2.0',
 };
 export const LICENSES_DIR = 'fundamentals/licenses/';
 export const DECISION_GUIDE_ID = 'guia_de_escolha_de_licenca';
@@ -40,6 +41,7 @@ export const OFFICIAL_HOSTS = [
   'fsl.software',
   'www.elastic.co',
   'spdx.org',
+  'www.eclipse.org',
 ];
 /** Words that signal a guess. A text that guesses must also carry the "não verificado" marker. */
 const HEDGES = /\b(provavelmente|talvez|possivelmente|aparentemente|acredito|parece que)\b/i;

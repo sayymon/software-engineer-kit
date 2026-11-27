@@ -274,7 +274,7 @@ nos:
       ferramentas:
         - "[[axios|Axios]]"
         - "[[okhttp|OkHttp]]"
-        - tabela:httpx
+        - "[[httpx|HTTPX]]"
   - id: itp_ctx_s0
     raia: itp_ctx
     tipo: inicio
@@ -553,7 +553,7 @@ ferramentas:
   - tabela:zapier
   - "[[axios|Axios]]"
   - "[[okhttp|OkHttp]]"
-  - tabela:httpx
+  - "[[httpx|HTTPX]]"
 casosDeUso:
   - "[[integracao_de_apis_e_webhooks|Integração de APIs e webhooks]]"
   - "[[automacao_de_processos|Automação de processos]]"

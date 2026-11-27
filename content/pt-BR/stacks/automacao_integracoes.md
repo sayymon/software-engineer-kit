@@ -78,7 +78,7 @@ slots:
       - "[[ky|ky]]"
     custoBeneficio:
       - "[[axios|Axios]]"
-      - tabela:httpx
+      - "[[httpx|HTTPX]]"
     qualidadeMaxima: []
     lacuna: "qualidadeMaxima: os clientes HTTP da categoria dessa faixa pertencem a outras linguagens, e as escolhas acima cobrem JavaScript e Python."
   - id: gateway
@@ -453,7 +453,7 @@ ferramentas:
   - tabela:prefect
   - "[[ky|ky]]"
   - "[[axios|Axios]]"
-  - tabela:httpx
+  - "[[httpx|HTTPX]]"
   - tabela:nginx
   - "[[kong_gateway|Kong Gateway]]"
   - tabela:amazon-api-gateway

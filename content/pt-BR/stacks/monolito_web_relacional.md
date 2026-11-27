@@ -151,10 +151,10 @@ slots:
     obrigatorio: true
     maisBarata:
       - "[[pytest|pytest]]"
-      - tabela:junit5
+      - "[[junit5|JUnit 5]]"
     custoBeneficio:
-      - tabela:rspec
-      - tabela:phpunit
+      - "[[rspec|RSpec]]"
+      - "[[phpunit|PHPUnit]]"
     qualidadeMaxima:
       - "[[xunit_net|xUnit.net]]"
     lacuna: ""
@@ -524,9 +524,9 @@ ferramentas:
   - tabela:sentry
   - "[[datadog|Datadog]]"
   - "[[pytest|pytest]]"
-  - tabela:junit5
-  - tabela:rspec
-  - tabela:phpunit
+  - "[[junit5|JUnit 5]]"
+  - "[[rspec|RSpec]]"
+  - "[[phpunit|PHPUnit]]"
   - "[[xunit_net|xUnit.net]]"
   - "[[woodpecker_ci|Woodpecker CI]]"
   - "[[github_actions|GitHub Actions]]"
