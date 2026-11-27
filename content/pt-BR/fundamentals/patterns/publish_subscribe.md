@@ -66,11 +66,11 @@ casosDeUso:
 variacoes:
   - arq-mensageria
 ferramentas:
-  - tabela:apache-kafka
+  - "[[apache_kafka|Apache Kafka]]"
   - tabela:amazon-sns
   - tabela:google-pubsub
   - "[[rabbitmq|RabbitMQ]]"
-  - tabela:nats
+  - "[[nats|NATS]]"
   - tabela:amazon-eventbridge
   - tabela:apache-pulsar
   - tabela:azure-service-bus

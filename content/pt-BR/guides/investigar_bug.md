@@ -120,7 +120,7 @@ nos:
       categoria: "[[observabilidade_apm|Observabilidade e APM]]"
       ferramentas:
         - "[[opentelemetry|OpenTelemetry]]"
-        - tabela:prometheus
+        - "[[prometheus|Prometheus]]"
         - tabela:signoz
   - id: dbg_orq_e2
     raia: dbg_orq
@@ -158,7 +158,7 @@ nos:
       categoria: "[[observabilidade_apm|Observabilidade e APM]]"
       ferramentas:
         - "[[grafana_cloud|Grafana Cloud]]"
-        - tabela:sentry
+        - "[[sentry|Sentry]]"
         - tabela:better-stack
   - id: dbg_ctx_s0
     raia: dbg_ctx
@@ -395,10 +395,10 @@ stacks:
   - "[[monolito_web_relacional|Monolito web com banco relacional]]"
 ferramentas:
   - "[[opentelemetry|OpenTelemetry]]"
-  - tabela:prometheus
+  - "[[prometheus|Prometheus]]"
   - tabela:signoz
   - "[[grafana_cloud|Grafana Cloud]]"
-  - tabela:sentry
+  - "[[sentry|Sentry]]"
   - tabela:better-stack
 casosDeUso:
   - "[[depuracao_e_correcao_de_bugs|Depuração e correção de bugs]]"

@@ -74,7 +74,7 @@ ferramentas:
   - "[[quarkus|Quarkus]]"
   - "[[micronaut|Micronaut]]"
   - tabela:dapr
-  - tabela:istio
+  - "[[istio|Istio]]"
   - "[[opentelemetry|OpenTelemetry]]"
   - tabela:dropwizard
   - tabela:open-liberty

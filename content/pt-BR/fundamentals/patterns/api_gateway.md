@@ -66,11 +66,11 @@ variacoes: []
 ferramentas:
   - "[[kong_gateway|Kong Gateway]]"
   - tabela:amazon-api-gateway
-  - tabela:nginx
-  - tabela:traefik
+  - "[[nginx|NGINX]]"
+  - "[[traefik|Traefik]]"
   - tabela:apache-apisix
   - tabela:tyk
-  - tabela:envoy
+  - "[[envoy|Envoy]]"
 notaCompleta:
   - "[[api_gateway|API Gateway]]"
 dataVerificacao: 2026-11-22

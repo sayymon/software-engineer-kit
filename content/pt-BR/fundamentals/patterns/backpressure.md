@@ -65,8 +65,8 @@ variacoes:
   - arq-mensageria
 ferramentas:
   - "[[rxjs|RxJS]]"
-  - tabela:apache-kafka
-  - tabela:nats
+  - "[[apache_kafka|Apache Kafka]]"
+  - "[[nats|NATS]]"
   - tabela:redpanda
   - tabela:apache-pulsar
   - tabela:apache-flink

@@ -67,7 +67,7 @@ ferramentas:
   - "[[spring_boot|Spring Boot]]"
   - tabela:nestjs
   - tabela:masstransit
-  - tabela:apache-kafka
+  - "[[apache_kafka|Apache Kafka]]"
 notaCompleta: []
 dataVerificacao: 2026-11-22
 tags:

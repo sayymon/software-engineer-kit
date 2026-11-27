@@ -135,7 +135,7 @@ nos:
       ferramentas:
         - "[[podman|Podman]]"
         - tabela:k3s
-        - tabela:helm
+        - "[[helm|Helm]]"
   - id: dep_orq_e2
     raia: dep_orq
     tipo: fim
@@ -406,7 +406,7 @@ stacks:
 ferramentas:
   - "[[podman|Podman]]"
   - tabela:k3s
-  - tabela:helm
+  - "[[helm|Helm]]"
   - "[[render|Render]]"
   - tabela:railway
   - tabela:flyio

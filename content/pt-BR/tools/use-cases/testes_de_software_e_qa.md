@@ -43,11 +43,11 @@ faixasPadrao:
   maisBarata:
     - "[[playwright|Playwright]]"
     - tabela:selenium
-    - tabela:k6
+    - "[[k6|Grafana k6]]"
   custoBeneficio:
     - "[[cypress|Cypress (ferramenta)]]"
-    - tabela:testcontainers
-    - tabela:locust
+    - "[[testcontainers|Testcontainers]]"
+    - "[[locust|Locust]]"
   qualidadeMaxima:
     - "[[browserstack|BrowserStack]]"
     - tabela:applitools
@@ -92,7 +92,7 @@ variacoes:
       - "[[avaliacao_de_qualidade|Avaliação de qualidade]]"
     herdaFerramentas: false
     maisBarata:
-      - tabela:testcontainers
+      - "[[testcontainers|Testcontainers]]"
       - "[[podman|Podman]]"
       - "[[pytest|pytest]]"
     custoBeneficio:
@@ -144,13 +144,13 @@ variacoes:
       - "[[tracing|Tracing]]"
     herdaFerramentas: false
     maisBarata:
-      - tabela:locust
-      - tabela:k6
+      - "[[locust|Locust]]"
+      - "[[k6|Grafana k6]]"
       - "[[opentelemetry|OpenTelemetry]]"
     custoBeneficio:
       - "[[grafana_cloud|Grafana Cloud]]"
       - tabela:signoz
-      - tabela:prometheus
+      - "[[prometheus|Prometheus]]"
     qualidadeMaxima:
       - "[[datadog|Datadog]]"
       - "[[new_relic|New Relic (ferramenta)]]"

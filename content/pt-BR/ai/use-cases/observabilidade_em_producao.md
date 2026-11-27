@@ -74,11 +74,11 @@ variacoes:
     herdaFerramentas: false
     maisBarata:
       - "[[opentelemetry|OpenTelemetry]]"
-      - tabela:prometheus
+      - "[[prometheus|Prometheus]]"
       - tabela:signoz
     custoBeneficio:
       - "[[grafana_cloud|Grafana Cloud]]"
-      - tabela:sentry
+      - "[[sentry|Sentry]]"
       - tabela:better-stack
     qualidadeMaxima:
       - "[[datadog|Datadog]]"

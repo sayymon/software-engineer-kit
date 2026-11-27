@@ -8,10 +8,10 @@ slug: testes-carga-desempenho
 grupo: Desenvolvimento e entrega
 maisBarata:
   - "[[apache_jmeter|Apache JMeter]]"
-  - tabela:locust
+  - "[[locust|Locust]]"
   - tabela:vegeta
 custoBeneficio:
-  - tabela:k6
+  - "[[k6|Grafana k6]]"
   - "[[gatling|Gatling]]"
   - tabela:artillery
 qualidadeMaxima:
@@ -19,7 +19,7 @@ qualidadeMaxima:
   - tabela:opentext-loadrunner
   - tabela:tricentis-neoload
 essenciais:
-  - tabela:k6
+  - "[[k6|Grafana k6]]"
 excecao: ""
 guia: []
 tags:
@@ -33,8 +33,8 @@ Ferramentas que geram carga sobre APIs e sistemas para medir latência, vazão e
 - Grupo do kit: Desenvolvimento e entrega.
 - Cada faixa tem 3 opções; a primeira de cada faixa é a referência e tem nota própria quando existe.
 ## 🥇 Faixas
-- **Mais barata:** [[apache_jmeter|Apache JMeter]], Locust, Vegeta
-- **Melhor custo-benefício:** Grafana k6, [[gatling|Gatling]], Artillery
+- **Mais barata:** [[apache_jmeter|Apache JMeter]], [[locust|Locust]], Vegeta
+- **Melhor custo-benefício:** [[k6|Grafana k6]], [[gatling|Gatling]], Artillery
 - **Qualidade máxima:** BlazeMeter, OpenText LoadRunner, Tricentis NeoLoad
 ## 🔗 Relacionamentos
 - **Mapa:** [[hub_tools|Mapa de Ferramentas de Engenharia]]

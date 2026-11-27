@@ -22,8 +22,11 @@ export const EXPECTED_LICENSES: Record<string, string> = {
   busl_1_1: 'BUSL-1.1',
   sspl_1_0: 'SSPL-1.0',
   fsl_1_1_mit: 'FSL-1.1-MIT',
+  fsl_1_1_alv2: 'FSL-1.1-ALv2',
   elastic_2_0: 'Elastic-2.0',
   epl_2_0: 'EPL-2.0',
+  gpl_2_0: 'GPL-2.0-only',
+  lgpl_2_1: 'LGPL-2.1-only',
 };
 export const LICENSES_DIR = 'fundamentals/licenses/';
 export const DECISION_GUIDE_ID = 'guia_de_escolha_de_licenca';

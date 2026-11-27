@@ -75,12 +75,12 @@ variacoes:
     herdaFerramentas: false
     maisBarata:
       - "[[gitleaks|Gitleaks (ferramenta)]]"
-      - tabela:trivy
+      - "[[trivy|Trivy]]"
       - tabela:semgrep-oss
     custoBeneficio:
       - "[[github_advanced_security|GitHub Advanced Security]]"
-      - tabela:snyk
-      - tabela:sonarqube
+      - "[[snyk|Snyk]]"
+      - "[[sonarqube|SonarQube]]"
     qualidadeMaxima:
       - "[[veracode|Veracode]]"
       - tabela:checkmarx
@@ -109,13 +109,13 @@ variacoes:
       - tabela:danger-js
       - tabela:semgrep-oss
     custoBeneficio:
-      - tabela:sonarqube
+      - "[[sonarqube|SonarQube]]"
       - tabela:coderabbit
       - tabela:sourcery
     qualidadeMaxima:
       - tabela:qodo-merge
       - "[[greptile|Greptile]]"
-      - tabela:snyk
+      - "[[snyk|Snyk]]"
     justificativaFerramentas: "Muda Foco da revisão para convenções, cobertura de testes e complexidade: as ferramentas acompanham esse contexto e diferem do padrão do caso."
     excecao: ""
     parametros:

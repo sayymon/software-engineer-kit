@@ -44,11 +44,11 @@ macro: "[[desenvolvimento_de_software|Desenvolvimento de software]]"
 faixasPadrao:
   maisBarata:
     - "[[opentelemetry|OpenTelemetry]]"
-    - tabela:prometheus
+    - "[[prometheus|Prometheus]]"
     - tabela:signoz
   custoBeneficio:
     - "[[grafana_cloud|Grafana Cloud]]"
-    - tabela:sentry
+    - "[[sentry|Sentry]]"
     - tabela:better-stack
   qualidadeMaxima:
     - "[[datadog|Datadog]]"
@@ -144,13 +144,13 @@ variacoes:
     maisBarata:
       - tabela:signoz
       - "[[opentelemetry|OpenTelemetry]]"
-      - tabela:prometheus
+      - "[[prometheus|Prometheus]]"
     custoBeneficio:
       - tabela:better-stack
       - "[[grafana_cloud|Grafana Cloud]]"
       - tabela:dynatrace
     qualidadeMaxima:
-      - tabela:sentry
+      - "[[sentry|Sentry]]"
       - "[[datadog|Datadog]]"
       - "[[new_relic|New Relic (ferramenta)]]"
     justificativaFerramentas: "Muda Fase do diagnóstico para agrupamento de exceções por release: as ferramentas acompanham esse contexto e diferem do padrão do caso."

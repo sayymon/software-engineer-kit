@@ -62,9 +62,9 @@ casosDeUso:
   - "[[marketplace_e_plataformas_grande_empresa|Marketplace e plataformas (grande empresa)]]"
 variacoes: []
 ferramentas:
-  - tabela:envoy
-  - tabela:nginx
-  - tabela:istio
+  - "[[envoy|Envoy]]"
+  - "[[nginx|NGINX]]"
+  - "[[istio|Istio]]"
   - "[[kong_gateway|Kong Gateway]]"
   - tabela:amazon-api-gateway
 notaCompleta: []

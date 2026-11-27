@@ -65,9 +65,9 @@ casosDeUso:
   - "[[bancos_e_seguros_grande_empresa|Bancos e seguros (grande empresa)]]"
 variacoes: []
 ferramentas:
-  - tabela:istio
+  - "[[istio|Istio]]"
   - tabela:linkerd
-  - tabela:envoy
+  - "[[envoy|Envoy]]"
   - "[[kubernetes|Kubernetes (ferramenta)]]"
   - "[[opentelemetry|OpenTelemetry]]"
   - tabela:dapr

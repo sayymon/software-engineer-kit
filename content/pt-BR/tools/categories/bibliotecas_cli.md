@@ -7,13 +7,13 @@ descricao: Bibliotecas para construir interfaces de linha de comando com parsing
 slug: bibliotecas-cli
 grupo: Bibliotecas
 maisBarata:
-  - tabela:cobra
+  - "[[cobra|Cobra]]"
 custoBeneficio:
-  - tabela:clap
+  - "[[clap|clap]]"
 qualidadeMaxima: []
 essenciais:
-  - tabela:clap
-  - tabela:cobra
+  - "[[clap|clap]]"
+  - "[[cobra|Cobra]]"
 excecao: "qualidadeMaxima vazia: clap e cobra são as bibliotecas convencionais dos seus ecossistemas e ambas são open-source gratuitas; não há faixa premium em bibliotecas de CLI."
 guia: []
 tags:
@@ -28,7 +28,7 @@ Bibliotecas para construir interfaces de linha de comando com parsing de argumen
 - Cada linguagem tem sua biblioteca; use o filtro Linguagem. Ferramentas de build ficam em Build, lint e formatação.
 - A faixa de qualidade máxima fica vazia: não há tier premium em bibliotecas de CLI; a escolha é pela linguagem do projeto.
 ## 🥇 Faixas
-- **Mais barata:** Cobra
-- **Melhor custo-benefício:** clap
+- **Mais barata:** [[cobra|Cobra]]
+- **Melhor custo-benefício:** [[clap|clap]]
 ## 🔗 Relacionamentos
 - **Mapa:** [[hub_tools|Mapa de Ferramentas de Engenharia]]

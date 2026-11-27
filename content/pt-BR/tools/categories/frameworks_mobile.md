@@ -17,7 +17,7 @@ custoBeneficio:
 qualidadeMaxima:
   - "[[kotlin_multiplatform|Kotlin Multiplatform]]"
   - tabela:jetpack-compose
-  - tabela:dotnet-maui
+  - "[[dotnet_maui|dotNET MAUI]]"
 essenciais:
   - "[[flutter|Flutter]]"
   - tabela:react-native

@@ -80,7 +80,7 @@ slots:
     categoria: "[[mensageria_streaming|Mensageria e streaming]]"
     obrigatorio: true
     maisBarata:
-      - tabela:apache-kafka
+      - "[[apache_kafka|Apache Kafka]]"
       - "[[rabbitmq|RabbitMQ]]"
     custoBeneficio:
       - "[[amazon_sqs|Amazon SQS]]"
@@ -129,7 +129,7 @@ slots:
     obrigatorio: true
     maisBarata:
       - "[[opentelemetry|OpenTelemetry]]"
-      - tabela:prometheus
+      - "[[prometheus|Prometheus]]"
     custoBeneficio:
       - "[[grafana_cloud|Grafana Cloud]]"
     qualidadeMaxima:
@@ -188,7 +188,7 @@ instancias:
     ferramentas:
       - "[[spring_boot|Spring Boot]]"
       - "[[postgresql|PostgreSQL]]"
-      - tabela:apache-kafka
+      - "[[apache_kafka|Apache Kafka]]"
     fonte_ids:
       - spring_boot_kafka
       - spring_boot_sql
@@ -513,7 +513,7 @@ ferramentas:
   - tabela:cockroachdb
   - "[[amazon_aurora|Amazon Aurora (ferramenta)]]"
   - tabela:google-cloud-spanner
-  - tabela:apache-kafka
+  - "[[apache_kafka|Apache Kafka]]"
   - "[[rabbitmq|RabbitMQ]]"
   - "[[amazon_sqs|Amazon SQS]]"
   - tabela:redpanda
@@ -529,7 +529,7 @@ ferramentas:
   - "[[upstash|Upstash]]"
   - "[[amazon_dynamodb|Amazon DynamoDB (ferramenta)]]"
   - "[[opentelemetry|OpenTelemetry]]"
-  - tabela:prometheus
+  - "[[prometheus|Prometheus]]"
   - "[[grafana_cloud|Grafana Cloud]]"
   - "[[datadog|Datadog]]"
   - "[[opentofu|OpenTofu]]"

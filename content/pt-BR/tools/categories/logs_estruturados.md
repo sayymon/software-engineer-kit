@@ -7,18 +7,18 @@ descricao: "Bibliotecas de log estruturado por linguagem: eventos como dados, pr
 slug: logs-estruturados
 grupo: Bibliotecas
 maisBarata:
-  - tabela:structlog
-  - tabela:pino
-  - tabela:zap
+  - "[[structlog|structlog]]"
+  - "[[pino|pino]]"
+  - "[[zap|zap]]"
 custoBeneficio:
-  - tabela:logback
-  - tabela:serilog
-  - tabela:tracing
+  - "[[logback|Logback]]"
+  - "[[serilog|Serilog]]"
+  - "[[tracing_rust|tracing]]"
 qualidadeMaxima: []
 essenciais:
-  - tabela:pino
-  - tabela:logback
-  - tabela:zap
+  - "[[pino|pino]]"
+  - "[[logback|Logback]]"
+  - "[[zap|zap]]"
 excecao: "qualidadeMaxima vazia: as bibliotecas da categoria são open-source e gratuitas, sem faixa premium; a escolha é pela linguagem do projeto, não pela faixa."
 guia: []
 tags:
@@ -33,7 +33,7 @@ Bibliotecas de log estruturado por linguagem: eventos como dados, prontos para b
 - Cada linguagem tem sua biblioteca; use o filtro Linguagem. Plataformas de agregação e observabilidade ficam em Observabilidade e APM.
 - A faixa de qualidade máxima fica vazia: todas as opções são gratuitas e a escolha é pela linguagem, não pela faixa.
 ## 🥇 Faixas
-- **Mais barata:** structlog, pino, zap
-- **Melhor custo-benefício:** Logback, Serilog, tracing
+- **Mais barata:** [[structlog|structlog]], [[pino|pino]], [[zap|zap]]
+- **Melhor custo-benefício:** [[logback|Logback]], [[serilog|Serilog]], [[tracing_rust|tracing]]
 ## 🔗 Relacionamentos
 - **Mapa:** [[hub_tools|Mapa de Ferramentas de Engenharia]]

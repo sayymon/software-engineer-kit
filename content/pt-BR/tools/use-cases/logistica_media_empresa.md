@@ -35,8 +35,8 @@ macro: "[[negocios_por_porte_e_segmento|Negócios por porte e segmento]]"
 faixasPadrao:
   maisBarata:
     - "[[rabbitmq|RabbitMQ]]"
-    - tabela:nats
-    - tabela:apache-kafka
+    - "[[nats|NATS]]"
+    - "[[apache_kafka|Apache Kafka]]"
   custoBeneficio:
     - "[[amazon_sqs|Amazon SQS]]"
     - tabela:google-pubsub
@@ -81,7 +81,7 @@ variacoes:
     qualidadeMaxima:
       - "[[kotlin_multiplatform|Kotlin Multiplatform]]"
       - tabela:jetpack-compose
-      - tabela:dotnet-maui
+      - "[[dotnet_maui|dotNET MAUI]]"
     justificativaFerramentas: "Muda Volume típico para milhares de motoristas ativos: as ferramentas acompanham esse contexto e diferem do padrão do caso."
     excecao: ""
     parametros:

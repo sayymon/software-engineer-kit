@@ -106,7 +106,7 @@ slots:
       - "[[svelte|Svelte]]"
     custoBeneficio:
       - "[[react|React]]"
-      - tabela:vue
+      - "[[vue|Vue.js]]"
     qualidadeMaxima:
       - "[[angular|Angular]]"
     lacuna: ""
@@ -141,7 +141,7 @@ slots:
     maisBarata:
       - "[[opentelemetry|OpenTelemetry]]"
     custoBeneficio:
-      - tabela:sentry
+      - "[[sentry|Sentry]]"
     qualidadeMaxima:
       - "[[datadog|Datadog]]"
     lacuna: ""
@@ -510,7 +510,7 @@ ferramentas:
   - "[[temporal|Temporal]]"
   - "[[svelte|Svelte]]"
   - "[[react|React]]"
-  - tabela:vue
+  - "[[vue|Vue.js]]"
   - "[[angular|Angular]]"
   - "[[coolify|Coolify]]"
   - "[[render|Render]]"
@@ -521,7 +521,7 @@ ferramentas:
   - "[[postmark|Postmark]]"
   - "[[twilio_sendgrid|Twilio SendGrid]]"
   - "[[opentelemetry|OpenTelemetry]]"
-  - tabela:sentry
+  - "[[sentry|Sentry]]"
   - "[[datadog|Datadog]]"
   - "[[pytest|pytest]]"
   - "[[junit5|JUnit 5]]"

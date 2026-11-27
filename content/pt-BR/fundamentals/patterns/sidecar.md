@@ -63,8 +63,8 @@ casosDeUso:
   - "[[marketplace_e_plataformas_grande_empresa|Marketplace e plataformas (grande empresa)]]"
 variacoes: []
 ferramentas:
-  - tabela:envoy
-  - tabela:istio
+  - "[[envoy|Envoy]]"
+  - "[[istio|Istio]]"
   - tabela:linkerd
   - tabela:dapr
   - "[[kubernetes|Kubernetes (ferramenta)]]"

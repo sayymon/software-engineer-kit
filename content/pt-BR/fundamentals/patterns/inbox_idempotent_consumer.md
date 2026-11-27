@@ -70,7 +70,7 @@ variacoes:
 ferramentas:
   - "[[amazon_sqs|Amazon SQS]]"
   - "[[rabbitmq|RabbitMQ]]"
-  - tabela:apache-kafka
+  - "[[apache_kafka|Apache Kafka]]"
   - "[[postgresql|PostgreSQL]]"
   - "[[redis|Redis (ferramenta)]]"
 notaCompleta: []

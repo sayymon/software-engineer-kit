@@ -101,7 +101,7 @@ slots:
     maisBarata:
       - "[[opentelemetry|OpenTelemetry]]"
     custoBeneficio:
-      - tabela:sentry
+      - "[[sentry|Sentry]]"
     qualidadeMaxima:
       - "[[datadog|Datadog]]"
     lacuna: ""
@@ -439,7 +439,7 @@ ferramentas:
   - "[[statsig|Statsig]]"
   - "[[launchdarkly|LaunchDarkly]]"
   - "[[opentelemetry|OpenTelemetry]]"
-  - tabela:sentry
+  - "[[sentry|Sentry]]"
   - "[[datadog|Datadog]]"
   - tabela:maestro
   - tabela:detox

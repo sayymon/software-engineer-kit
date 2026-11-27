@@ -44,7 +44,7 @@ faixasPadrao:
   qualidadeMaxima:
     - "[[kotlin_multiplatform|Kotlin Multiplatform]]"
     - tabela:jetpack-compose
-    - tabela:dotnet-maui
+    - "[[dotnet_maui|dotNET MAUI]]"
 variacoes:
   - id: edtech-app-aluno
     nome: Aplicativo do aluno

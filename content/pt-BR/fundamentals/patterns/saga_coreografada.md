@@ -65,7 +65,7 @@ casosDeUso:
 variacoes:
   - arq-mensageria
 ferramentas:
-  - tabela:apache-kafka
+  - "[[apache_kafka|Apache Kafka]]"
   - "[[rabbitmq|RabbitMQ]]"
   - tabela:amazon-eventbridge
   - tabela:amazon-sns

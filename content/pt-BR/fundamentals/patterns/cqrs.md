@@ -73,7 +73,7 @@ ferramentas:
   - tabela:kurrent-eventstoredb
   - tabela:marten
   - "[[postgresql|PostgreSQL]]"
-  - tabela:apache-kafka
+  - "[[apache_kafka|Apache Kafka]]"
   - "[[mongodb|MongoDB (ferramenta)]]"
 notaCompleta: []
 dataVerificacao: 2026-11-22

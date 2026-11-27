@@ -45,7 +45,7 @@ slots:
       - tabela:astro
       - "[[svelte|Svelte]]"
     custoBeneficio:
-      - tabela:nextjs
+      - "[[nextjs|Next.js]]"
     qualidadeMaxima:
       - tabela:sveltekit
     lacuna: ""
@@ -415,7 +415,7 @@ variacoes:
 ferramentas:
   - tabela:astro
   - "[[svelte|Svelte]]"
-  - tabela:nextjs
+  - "[[nextjs|Next.js]]"
   - tabela:sveltekit
   - tabela:ghost
   - tabela:strapi

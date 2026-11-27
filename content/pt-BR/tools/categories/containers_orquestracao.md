@@ -21,7 +21,7 @@ qualidadeMaxima:
 essenciais:
   - "[[docker_desktop|Docker Desktop]]"
   - "[[kubernetes|Kubernetes (ferramenta)]]"
-  - tabela:helm
+  - "[[helm|Helm]]"
 excecao: ""
 guia: []
 tags:

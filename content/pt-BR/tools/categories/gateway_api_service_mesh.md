@@ -7,20 +7,20 @@ descricao: Gateways de API, proxies de borda e service meshes que roteiam, prote
 slug: gateway-api-service-mesh
 grupo: Nuvem e PaaS
 maisBarata:
-  - tabela:traefik
-  - tabela:nginx
+  - "[[traefik|Traefik]]"
+  - "[[nginx|NGINX]]"
   - tabela:apache-apisix
 custoBeneficio:
   - "[[kong_gateway|Kong Gateway]]"
-  - tabela:envoy
+  - "[[envoy|Envoy]]"
   - tabela:tyk
 qualidadeMaxima:
-  - tabela:istio
+  - "[[istio|Istio]]"
   - tabela:linkerd
   - tabela:amazon-api-gateway
 essenciais:
-  - tabela:nginx
-  - tabela:envoy
+  - "[[nginx|NGINX]]"
+  - "[[envoy|Envoy]]"
 excecao: ""
 guia: []
 tags:
@@ -34,8 +34,8 @@ Gateways de API, proxies de borda e service meshes que roteiam, protegem e obser
 - Grupo do kit: Nuvem e PaaS.
 - Cada faixa tem 3 opções; a primeira de cada faixa é a referência e tem nota própria quando existe.
 ## 🥇 Faixas
-- **Mais barata:** Traefik, NGINX, Apache APISIX
-- **Melhor custo-benefício:** [[kong_gateway|Kong Gateway]], Envoy, Tyk
-- **Qualidade máxima:** Istio, Linkerd, Amazon API Gateway
+- **Mais barata:** [[traefik|Traefik]], [[nginx|NGINX]], Apache APISIX
+- **Melhor custo-benefício:** [[kong_gateway|Kong Gateway]], [[envoy|Envoy]], Tyk
+- **Qualidade máxima:** [[istio|Istio]], Linkerd, Amazon API Gateway
 ## 🔗 Relacionamentos
 - **Mapa:** [[hub_tools|Mapa de Ferramentas de Engenharia]]

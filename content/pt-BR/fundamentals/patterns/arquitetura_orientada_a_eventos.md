@@ -70,12 +70,12 @@ casosDeUso:
 variacoes:
   - arq-mensageria
 ferramentas:
-  - tabela:apache-kafka
+  - "[[apache_kafka|Apache Kafka]]"
   - tabela:amazon-eventbridge
   - "[[rabbitmq|RabbitMQ]]"
   - tabela:amazon-sns
   - "[[amazon_sqs|Amazon SQS]]"
-  - tabela:nats
+  - "[[nats|NATS]]"
   - tabela:apache-pulsar
   - tabela:amazon-kinesis
   - tabela:apache-flink
