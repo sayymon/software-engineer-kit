@@ -191,3 +191,5 @@ export function gerarGrafos(doc: Item): Map<string, ModeloDeGrafo> {
 
 export { textoAcessivel } from './texto-acessivel';
 export type { NoTexto, RaiaTexto, TransicaoTexto } from './texto-acessivel';
+export { projetar, chaveDoConjunto, lerConjunto, normalizar } from './expansao';
+export type { ArestaVisivel, ClusterDeRaia, ConjuntoExpandido, GrafoVisivel } from './expansao';

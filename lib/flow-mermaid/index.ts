@@ -4,6 +4,7 @@
 // match the Python reference byte for byte. See tests/mermaid-parity.
 import { type Contexto, GeracaoError, LETRA_TIPO, contexto, isMap, lista, pyRepr } from '../flow-graph/contexto';
 import { gerarGrafo } from '../flow-graph';
+import { type ConjuntoExpandido, projetar } from '../flow-graph/expansao';
 import type { LigacaoDoGrafo, ModeloDeGrafo } from '../schema/grafo';
 import { chaveNatural, cmpKey } from './order';
 import type { Diagrama, Item } from './types';
@@ -303,6 +304,7 @@ function montar(
   comPontes: boolean,
   comLegenda: boolean,
   subtarefas = false,
+  agruparRaias = true,
 ): Diagrama {
   const chamadasIds = new Set([...ids].filter((i) => (ctx.nos.get(i) as Item).tipo === 'chamada').map((i) => (ctx.nos.get(i) as Item).raia_chamada));
   const visiveis = new Set(raiasVisiveis);
@@ -324,8 +326,10 @@ function montar(
   for (const rid of raiasVisiveis) {
     const raia = ctx.raias.get(rid) as Item;
     const titulo = `<b>${escaparRotulo(or(raia.nome, rid))}</b>`;
-    linhas.push(`  subgraph ${idSg(rid)}["${titulo}"]`);
-    linhas.push('    direction LR');
+    if (agruparRaias) {
+      linhas.push(`  subgraph ${idSg(rid)}["${titulo}"]`);
+      linhas.push('    direction LR');
+    }
     for (const i of ordenar(ctx, ids)) {
       const no = ctx.nos.get(i) as Item;
       if (no.raia !== rid) continue;
@@ -346,7 +350,7 @@ function montar(
         linhas.push('    ' + declaracaoNo(ctx, no, !subtarefas));
       }
     }
-    linhas.push('  end');
+    if (agruparRaias) linhas.push('  end');
   }
   const arestas = arestasBase.map((a) => aresta(saidaDe.get(a.origem) ?? a.origem, a.destino, a.rotulo, a.tracejada));
   const vistas = new Set<string>();
@@ -419,7 +423,7 @@ function montar(
   const gateways = ordenar(ctx, ids).filter((i) => (ctx.nos.get(i) as Item).tipo === 'bifurcacao').map(sanitizarId);
   if (gateways.length) linhas.push(`  class ${gateways.join(',')} gw`);
   if (pontesIds.length) linhas.push(`  class ${pontesIds.join(',')} ponte`);
-  for (const rid of raiasVisiveis) {
+  for (const rid of agruparRaias ? raiasVisiveis : []) {
     const cor = corRaia(ctx, rid);
     linhas.push(`  style ${idSg(rid)} fill:${clarear(cor, 0.85)},stroke:${cor},stroke-width:3px,color:#000000`);
   }
@@ -487,7 +491,13 @@ function contextoDoGrafo(grafo: ModeloDeGrafo): Contexto {
  * Text of one view derived from a Modelo_de_Grafo (`visao`, `raia:<id>` or `completo`). Pure TypeScript,
  * no fs or node:*: it runs at build time and in the client. `subtarefas=true` expands the subtasks of each task.
  */
-export function gerarDiagramaDoGrafo(grafo: ModeloDeGrafo, visao: string, comLegenda = true, subtarefas = false): Diagrama {
+export function gerarDiagramaDoGrafo(
+  grafo: ModeloDeGrafo,
+  visao: string,
+  comLegenda = true,
+  subtarefas = false,
+  agruparRaias = true,
+): Diagrama {
   const ctx = contextoDoGrafo(grafo);
   const ligacoes: Ligacoes = new Map(grafo.nos.filter((n) => n.ligacoes?.length).map((n) => [n.id, n.ligacoes as LigacaoDoGrafo[]]));
   const transicoes = (ids: Set<string>): Aresta[] =>
@@ -501,7 +511,7 @@ export function gerarDiagramaDoGrafo(grafo: ModeloDeGrafo, visao: string, comLeg
   }
   if (visao === COMPLETO) {
     const arestas = grafo.arestas.map((a) => aresta(a.origem, a.destino, a.rotulo, a.tracejada));
-    return montar(ctx, [...ctx.ordemRaias], new Set(ctx.nos.keys()), arestas, ligacoes, true, comLegenda, subtarefas);
+    return montar(ctx, [...ctx.ordemRaias], new Set(ctx.nos.keys()), arestas, ligacoes, true, comLegenda, subtarefas, agruparRaias);
   }
   if (visao.startsWith(PREFIXO_RAIA)) {
     const rid = visao.slice(PREFIXO_RAIA.length);
@@ -510,6 +520,183 @@ export function gerarDiagramaDoGrafo(grafo: ModeloDeGrafo, visao: string, comLeg
     return montar(ctx, [rid], ids, transicoes(ids), ligacoes, false, comLegenda, subtarefas);
   }
   throw new GeracaoError(`visão desconhecida: ${pyRepr(visao)}`);
+}
+
+// ---------------------------------------------------------- progressive expansion (Requirement 20)
+const PREFIXO_CLUSTER = 'cluster:';
+const idCluster = (raiaId: string) => `z_CL_${sanitizarId(raiaId)}`;
+const idMermaidVisivel = (id: string) => (id.startsWith(PREFIXO_CLUSTER) ? idCluster(id.slice(PREFIXO_CLUSTER.length)) : sanitizarId(id));
+const plural = (n: number, um: string, varios: string) => `${n} ${n === 1 ? um : varios}`;
+
+/** Legend of the Visão geral: element kinds only, no entry per lane (clusters carry the lane name). */
+function legendaGeral(): { texto: string[]; classes: string[] } {
+  const elementos = [
+    `${LEG}_cl["<b>raia</b>: recolhida<br/>cor da raia, com contagens"]`,
+    `${LEG}_t["<b>t</b>: tarefa"]`,
+    `${LEG}_g{"<b>g</b>: gateway"}`,
+    `${LEG}_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]]`,
+    `${LEG}_e(["<b>e</b>: fim ou retorno"])`,
+    `${LEG}_st("<b>st</b>: subtarefa")`,
+    `${LEG}_sc("<b>◆ st</b>: subtarefa condicional<br/>borda tracejada")`,
+  ];
+  return {
+    texto: [`subgraph ${LEG}["Legenda"]`, '  direction LR', '  ' + elementos.join(' ~~~ '), 'end'],
+    classes: [
+      'classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000',
+      'classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000',
+      'classDef legcond fill:#FFFFFF,stroke:#333333,stroke-width:2px,stroke-dasharray:4 3,color:#000000',
+      `class ${LEG}_cl,${LEG}_t,${LEG}_g,${LEG}_e,${LEG}_st leg`,
+      `class ${LEG}_c legc`,
+      `class ${LEG}_sc legcond`,
+      `style ${LEG} fill:#FAFAFA,stroke:#999999,stroke-width:1px`,
+    ],
+  };
+}
+
+/**
+ * Text for an expansion set. All lanes expanded delegates to the `completo` path (byte for byte, Property 12).
+ * `agruparRaias=false` (the "Raias" toggle, Requirement 4.6) drops the lane `subgraph`s of that `completo` path: the nodes stay, with
+ * their lane color and every edge, only the lane frames go away. It has no effect while some lane is collapsed.
+ * Otherwise expanded lanes are `subgraph`s and collapsed lanes are `z_CL_<raia>` nodes with lane color, counts and
+ * aggregated edges (`×N`). Pure function of `(grafo, conj)`: the order of expansion never matters. `mapaIds` also
+ * maps each cluster node to `cluster:<raia>`.
+ */
+export function gerarDiagramaExpandido(grafo: ModeloDeGrafo, conj: ConjuntoExpandido, comLegenda = true, agruparRaias = true): Diagrama {
+  const todas = grafo.raias.every((r) => conj.raias.has(r.id));
+  const seletivo = !conj.todasSubtarefas && conj.subtarefas.size > 0;
+  if (todas && !seletivo) return gerarDiagramaDoGrafo(grafo, COMPLETO, comLegenda, conj.todasSubtarefas, agruparRaias);
+
+  const v = projetar(grafo, conj);
+  const ids = new Set(v.nos.map((n) => n.id));
+  const ctx = contextoDoGrafo({ ...grafo, nos: grafo.nos.filter((n) => ids.has(n.id)) });
+  const ligacoes: Ligacoes = new Map(
+    grafo.nos.filter((n) => ids.has(n.id) && n.ligacoes?.length).map((n) => [n.id, n.ligacoes as LigacaoDoGrafo[]]),
+  );
+  const expandeSub = new Set(v.nos.filter((n) => n.subtarefas.length > 0).map((n) => n.id));
+  const comSub = ordenar(ctx, ids).filter((i) => expandeSub.has(i));
+  const saidaDe = new Map<string, string>();
+  for (const i of comSub) {
+    const subs = subtarefasDoNo(ctx.nos.get(i) as Item);
+    saidaDe.set(i, String(subs[subs.length - 1].id));
+  }
+  const raiasExpandidas = ctx.ordemRaias.filter((r) => conj.raias.has(r));
+  const linhas: string[] = ['flowchart LR'];
+  const leg = legendaGeral();
+  if (comLegenda) linhas.push(...leg.texto.map((x) => '  ' + x));
+
+  const cadeia: Aresta[] = [];
+  for (const rid of raiasExpandidas) {
+    linhas.push(`  subgraph ${idSg(rid)}["<b>${escaparRotulo(nomeRaia(ctx, rid))}</b>"]`);
+    linhas.push('    direction LR');
+    for (const i of ordenar(ctx, ids)) {
+      const no = ctx.nos.get(i) as Item;
+      if (no.raia !== rid) continue;
+      if (expandeSub.has(i)) {
+        linhas.push(`    subgraph ${idTs(i)}["<b>${escaparRotulo(or(no.rotulo, i))}</b>"]`);
+        linhas.push('      direction LR');
+        linhas.push('      ' + declaracaoNo(ctx, no));
+        const subs = subtarefasDoNo(no);
+        for (const sub of subs) linhas.push('      ' + declaracaoSubtarefa(sub, ctx.papeis));
+        linhas.push('    end');
+        let anterior = i;
+        for (const sub of subs) {
+          cadeia.push(aresta(anterior, String(sub.id), ''));
+          anterior = String(sub.id);
+        }
+      } else {
+        linhas.push('    ' + declaracaoNo(ctx, no, true));
+      }
+    }
+    linhas.push('  end');
+  }
+  for (const c of v.clusters) {
+    const t = c.totais;
+    const texto = `${plural(t.tarefas, 'tarefa', 'tarefas')}, ${plural(t.gateways, 'gateway', 'gateways')}, ${plural(t.subtarefas, 'subtarefa', 'subtarefas')}`;
+    linhas.push(`  ${idCluster(c.raia)}["<b>${escaparRotulo(nomeRaia(ctx, c.raia))}</b><br/>${texto}"]`);
+  }
+
+  const vistas = new Set<string>();
+  const textos: string[] = [];
+  const empilha = (k: string, t: string) => {
+    if (!vistas.has(k)) {
+      vistas.add(k);
+      textos.push('  ' + t);
+    }
+  };
+  for (const a of cadeia) empilha(chaveAresta(a), arestaTexto(a));
+  for (const a of v.arestas) {
+    const origem = saidaDe.get(a.origem) ?? a.origem;
+    const seta = a.tracejada ? '-.->' : '-->';
+    const rot = limparTexto(a.rotulo) ? `|"${escaparRotulo(a.rotulo)}"|` : '';
+    empilha(JSON.stringify([origem, a.destino, a.rotulo, a.tracejada]), `${idMermaidVisivel(origem)} ${seta}${rot} ${idMermaidVisivel(a.destino)}`);
+  }
+  linhas.push(...textos);
+  const p = pontes(ctx, ids, ligacoes);
+  linhas.push(...p.decl.map((d) => '  ' + d));
+  linhas.push(...p.arestas.map((a) => '  ' + arestaPonteTexto(aresta(saidaDe.get(a.origem) ?? a.origem, a.destino, a.rotulo, a.tracejada))));
+
+  for (const rid of ctx.ordemRaias) {
+    const cor = corRaia(ctx, rid);
+    linhas.push('  ' + defClasse(classeRaia(ctx, rid), cor, escurecer(cor, 0.4), 1));
+  }
+  const porIndice = (a: string, b: string) => indice(ctx, a) - indice(ctx, b);
+  const raiaDe = (i: string) => String((ctx.nos.get(i) as Item).raia);
+  const temCond = (i: string) => subtarefasDoNo(ctx.nos.get(i) as Item).some((s) => truthy(s.quando));
+  for (const rid of [...new Set(comSub.map(raiaDe))].sort(porIndice)) {
+    const cor = corRaia(ctx, rid);
+    linhas.push('  ' + defClasse(classeSub(ctx, rid), clarear(cor, 0.55), escurecer(cor, 0.4), 1) + ',font-size:12px');
+  }
+  for (const rid of [...new Set(comSub.filter(temCond).map(raiaDe))].sort(porIndice)) {
+    const cor = corRaia(ctx, rid);
+    linhas.push('  ' + defClasse(classeSubCond(ctx, rid), clarear(cor, 0.55), escurecer(cor, 0.4), 2) + ',font-size:12px,stroke-dasharray:4 3');
+  }
+  const paresMap = new Map<string, [string, string]>();
+  for (const i of ids) {
+    const n = ctx.nos.get(i) as Item;
+    if (n.tipo === 'chamada') paresMap.set(JSON.stringify([n.raia, n.raia_chamada]), [String(n.raia), String(n.raia_chamada)]);
+  }
+  const pares = [...paresMap.values()].sort((a, b) => porIndice(a[0], b[0]) || porIndice(a[1], b[1]));
+  for (const [chamadora, chamada] of pares) {
+    linhas.push('  ' + defClasse(classeChamada(ctx, chamadora, chamada), corRaia(ctx, chamada), corRaia(ctx, chamadora), 4));
+  }
+  linhas.push(`  classDef gw font-size:${FONTE_GATEWAY_PX}px`);
+  linhas.push('  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000');
+  if (comLegenda) linhas.push(...leg.classes.map((x) => '  ' + x));
+
+  const porClasse = new Map<string, string[]>();
+  const push = (k: string, val: string) => {
+    if (!porClasse.has(k)) porClasse.set(k, []);
+    (porClasse.get(k) as string[]).push(val);
+  };
+  for (const i of ordenar(ctx, ids)) push(classeDoNo(ctx, ctx.nos.get(i) as Item), sanitizarId(i));
+  for (const c of v.clusters) push(classeRaia(ctx, c.raia), idCluster(c.raia));
+  for (const i of comSub) {
+    for (const s of subtarefasDoNo(ctx.nos.get(i) as Item)) {
+      push((truthy(s.quando) ? classeSubCond : classeSub)(ctx, raiaDe(i)), sanitizarId(String(s.id)));
+    }
+  }
+  for (const classe of [...porClasse.keys()].sort((a, b) => cmpKey(chaveNatural(a), chaveNatural(b)))) {
+    linhas.push(`  class ${(porClasse.get(classe) as string[]).join(',')} ${classe}`);
+  }
+  const gateways = ordenar(ctx, ids).filter((i) => (ctx.nos.get(i) as Item).tipo === 'bifurcacao').map(sanitizarId);
+  if (gateways.length) linhas.push(`  class ${gateways.join(',')} gw`);
+  if (p.ids.length) linhas.push(`  class ${p.ids.join(',')} ponte`);
+  for (const rid of raiasExpandidas) {
+    const cor = corRaia(ctx, rid);
+    linhas.push(`  style ${idSg(rid)} fill:${clarear(cor, 0.85)},stroke:${cor},stroke-width:3px,color:#000000`);
+  }
+  for (const i of comSub) {
+    const cor = corRaia(ctx, raiaDe(i));
+    linhas.push(
+      `  style ${idTs(i)} fill:${clarear(cor, 0.94)},stroke:${escurecer(cor, 0.3)},` +
+        'stroke-width:1.5px,stroke-dasharray:5 3,color:#000000',
+    );
+  }
+  const mapaIds: Record<string, string> = {};
+  for (const i of ordenar(ctx, ids)) mapaIds[sanitizarId(i)] = i;
+  for (const i of comSub) for (const s of subtarefasDoNo(ctx.nos.get(i) as Item)) mapaIds[sanitizarId(String(s.id))] = String(s.id);
+  for (const c of v.clusters) mapaIds[idCluster(c.raia)] = PREFIXO_CLUSTER + c.raia;
+  return { texto: linhas.join('\n') + '\n', mapaIds };
 }
 
 /** All diagrams of the document by file name, in stable order. */

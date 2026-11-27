@@ -1,0 +1,142 @@
+flowchart LR
+  subgraph z_LEG["Legenda"]
+    direction LR
+    z_LEG_cl["<b>raia</b>: recolhida<br/>cor da raia, com contagens"] ~~~ z_LEG_t["<b>t</b>: tarefa"] ~~~ z_LEG_g{"<b>g</b>: gateway"} ~~~ z_LEG_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]] ~~~ z_LEG_e(["<b>e</b>: fim ou retorno"]) ~~~ z_LEG_st("<b>st</b>: subtarefa") ~~~ z_LEG_sc("<b>◆ st</b>: subtarefa condicional<br/>borda tracejada")
+  end
+  z_CL_feat_orq["<b>Orquestração da feature</b><br/>0 tarefas, 0 gateways, 0 subtarefas"]
+  z_CL_feat_ent["<b>Entendimento da necessidade e contexto</b><br/>4 tarefas, 3 gateways, 12 subtarefas"]
+  z_CL_feat_lev["<b>Levantamento e enriquecimento de requisitos</b><br/>3 tarefas, 1 gateway, 13 subtarefas"]
+  z_CL_feat_cls["<b>Classificação, escopo, fornecimento e prontidão</b><br/>1 tarefa, 0 gateways, 6 subtarefas"]
+  z_CL_feat_spc["<b>Especificação (SDD): requirements e design</b><br/>5 tarefas, 2 gateways, 19 subtarefas"]
+  z_CL_feat_alo["<b>Decomposição e mapeamento de tarefas</b><br/>3 tarefas, 0 gateways, 11 subtarefas"]
+  z_CL_com_set["<b>Preparação para execução (setup)</b><br/>8 tarefas, 3 gateways, 24 subtarefas"]
+  z_CL_com_exe["<b>Execução por papéis</b><br/>1 tarefa, 3 gateways, 5 subtarefas"]
+  z_CL_com_pub["<b>Publicação em ambiente de testes</b><br/>2 tarefas, 1 gateway, 5 subtarefas"]
+  z_CL_com_val["<b>Testes automatizados e regressão</b><br/>3 tarefas, 1 gateway, 9 subtarefas"]
+  z_CL_feat_ite["<b>Análise da reprovação e iteração</b><br/>4 tarefas, 2 gateways, 7 subtarefas"]
+  z_CL_com_e2e["<b>Testes de ponta a ponta (E2E)</b><br/>2 tarefas, 2 gateways, 6 subtarefas"]
+  z_CL_com_evl["<b>Avaliação de IA (evals)</b><br/>2 tarefas, 2 gateways, 4 subtarefas"]
+  z_CL_com_prf["<b>Testes de performance</b><br/>2 tarefas, 2 gateways, 4 subtarefas"]
+  z_CL_com_seg["<b>Testes de segurança</b><br/>2 tarefas, 1 gateway, 7 subtarefas"]
+  z_CL_com_rev["<b>Review humano</b><br/>1 tarefa, 1 gateway, 3 subtarefas"]
+  z_CL_com_hml["<b>Testes integrados</b><br/>5 tarefas, 2 gateways, 11 subtarefas"]
+  z_CL_com_etg["<b>Implantação</b><br/>4 tarefas, 2 gateways, 8 subtarefas"]
+  z_CL_com_lib["<b>Liberação e comunicação</b><br/>2 tarefas, 1 gateway, 5 subtarefas"]
+  z_CL_com_mon["<b>Validação em produção e monitoramento</b><br/>3 tarefas, 2 gateways, 7 subtarefas"]
+  z_CL_com_dcs["<b>Decisão construir, comprar ou assinar</b><br/>3 tarefas, 2 gateways, 7 subtarefas"]
+  z_CL_com_pro["<b>Prontidão (Definition of Ready)</b><br/>1 tarefa, 1 gateway, 3 subtarefas"]
+  z_CL_com_frn["<b>Fornecedor e contratação</b><br/>2 tarefas, 1 gateway, 3 subtarefas"]
+  z_CL_com_exp["<b>Execução pelas pessoas por papel</b><br/>2 tarefas, 1 gateway, 0 subtarefas"]
+  z_CL_com_dea["<b>Execução pelos agentes por papel</b><br/>2 tarefas, 1 gateway, 0 subtarefas"]
+  z_CL_com_mel["<b>Melhoria contínua dos agentes</b><br/>3 tarefas, 1 gateway, 7 subtarefas"]
+  z_CL_feat_orq -.->|"chama"| z_CL_feat_ent
+  z_CL_feat_ent -.->|"×4"| z_CL_feat_orq
+  z_CL_feat_orq -.->|"chama"| z_CL_feat_lev
+  z_CL_feat_lev -.->|"retorno: requisitos_claros"| z_CL_feat_orq
+  z_CL_feat_orq -.->|"chama"| z_CL_feat_cls
+  z_CL_feat_cls -.->|"×2"| z_CL_feat_orq
+  z_CL_feat_orq -.->|"chama"| z_CL_feat_spc
+  z_CL_feat_spc -.->|"retorno: spec_pronta"| z_CL_feat_orq
+  z_CL_feat_orq -.->|"chama"| z_CL_feat_alo
+  z_CL_feat_alo -.->|"retorno: tarefas_mapeadas"| z_CL_feat_orq
+  z_CL_feat_orq -.->|"chama"| z_CL_com_set
+  z_CL_com_set -.->|"retorno: pronto_para_executar"| z_CL_feat_orq
+  z_CL_feat_orq -.->|"chama"| z_CL_com_exe
+  z_CL_com_exe -.->|"retorno: execucao_integrada"| z_CL_feat_orq
+  z_CL_feat_orq -.->|"chama"| z_CL_com_pub
+  z_CL_com_pub -.->|"×2"| z_CL_feat_orq
+  z_CL_feat_orq -.->|"chama"| z_CL_com_val
+  z_CL_com_val -.->|"×2"| z_CL_feat_orq
+  z_CL_feat_orq -.->|"chama"| z_CL_feat_ite
+  z_CL_feat_ite -.->|"×3"| z_CL_feat_orq
+  z_CL_feat_orq -.->|"chama"| z_CL_com_e2e
+  z_CL_com_e2e -.->|"×3"| z_CL_feat_orq
+  z_CL_feat_orq -.->|"chama"| z_CL_com_evl
+  z_CL_com_evl -.->|"×3"| z_CL_feat_orq
+  z_CL_feat_orq -.->|"chama"| z_CL_com_prf
+  z_CL_com_prf -.->|"×3"| z_CL_feat_orq
+  z_CL_feat_orq -.->|"chama"| z_CL_com_seg
+  z_CL_com_seg -.->|"×2"| z_CL_feat_orq
+  z_CL_feat_orq -.->|"chama"| z_CL_com_rev
+  z_CL_com_rev -.->|"×2"| z_CL_feat_orq
+  z_CL_feat_orq -.->|"chama"| z_CL_com_hml
+  z_CL_com_hml -.->|"×2"| z_CL_feat_orq
+  z_CL_feat_orq -.->|"chama"| z_CL_com_etg
+  z_CL_com_etg -.->|"×2"| z_CL_feat_orq
+  z_CL_feat_orq -.->|"chama"| z_CL_com_lib
+  z_CL_com_lib -.->|"retorno: liberado"| z_CL_feat_orq
+  z_CL_feat_orq -.->|"chama"| z_CL_com_mon
+  z_CL_com_mon -.->|"×2"| z_CL_feat_orq
+  z_CL_feat_cls -.->|"chama"| z_CL_com_dcs
+  z_CL_com_dcs -.->|"×4"| z_CL_feat_cls
+  z_CL_feat_cls -.->|"chama"| z_CL_com_pro
+  z_CL_com_pro -.->|"retorno: pronto_para_iniciar"| z_CL_feat_cls
+  z_CL_feat_cls -.->|"chama"| z_CL_com_frn
+  z_CL_com_frn -.->|"×2"| z_CL_feat_cls
+  z_CL_com_exe -.->|"×2"| z_CL_com_exp
+  z_CL_com_exp -.->|"×2"| z_CL_com_exe
+  z_CL_com_exe -.->|"chama"| z_CL_com_dea
+  z_CL_com_dea -.->|"×2"| z_CL_com_exe
+  z_CL_com_exe -.->|"chama"| z_CL_com_mel
+  z_CL_com_mel -.->|"×2"| z_CL_com_exe
+  classDef z_R_0 fill:#607D8B,stroke:#3A4B53,stroke-width:1px,color:#000000
+  classDef z_R_1 fill:#332288,stroke:#1F1452,stroke-width:1px,color:#FFFFFF
+  classDef z_R_2 fill:#117733,stroke:#0A471F,stroke-width:1px,color:#FFFFFF
+  classDef z_R_3 fill:#CC6677,stroke:#7A3D47,stroke-width:1px,color:#000000
+  classDef z_R_4 fill:#44AA99,stroke:#29665C,stroke-width:1px,color:#000000
+  classDef z_R_5 fill:#0072B2,stroke:#00446B,stroke-width:1px,color:#FFFFFF
+  classDef z_R_6 fill:#AA4499,stroke:#66295C,stroke-width:1px,color:#FFFFFF
+  classDef z_R_7 fill:#009E73,stroke:#005F45,stroke-width:1px,color:#000000
+  classDef z_R_8 fill:#BBCC33,stroke:#707A1F,stroke-width:1px,color:#000000
+  classDef z_R_9 fill:#D55E00,stroke:#803800,stroke-width:1px,color:#000000
+  classDef z_R_10 fill:#CC79A7,stroke:#7A4964,stroke-width:1px,color:#000000
+  classDef z_R_11 fill:#F0E442,stroke:#908928,stroke-width:1px,color:#000000
+  classDef z_R_12 fill:#88CCEE,stroke:#527A8F,stroke-width:1px,color:#000000
+  classDef z_R_13 fill:#661100,stroke:#3D0A00,stroke-width:1px,color:#FFFFFF
+  classDef z_R_14 fill:#EE7733,stroke:#8F471F,stroke-width:1px,color:#000000
+  classDef z_R_15 fill:#56B4E9,stroke:#346C8C,stroke-width:1px,color:#000000
+  classDef z_R_16 fill:#997700,stroke:#5C4700,stroke-width:1px,color:#000000
+  classDef z_R_17 fill:#999933,stroke:#5C5C1F,stroke-width:1px,color:#000000
+  classDef z_R_18 fill:#EE8866,stroke:#8F523D,stroke-width:1px,color:#000000
+  classDef z_R_19 fill:#77AADD,stroke:#476685,stroke-width:1px,color:#000000
+  classDef z_R_20 fill:#4477AA,stroke:#294766,stroke-width:1px,color:#FFFFFF
+  classDef z_R_21 fill:#DDCC77,stroke:#857A47,stroke-width:1px,color:#000000
+  classDef z_R_22 fill:#AA3377,stroke:#661F47,stroke-width:1px,color:#FFFFFF
+  classDef z_R_23 fill:#882255,stroke:#521433,stroke-width:1px,color:#FFFFFF
+  classDef z_R_24 fill:#E69F00,stroke:#8A5F00,stroke-width:1px,color:#000000
+  classDef z_R_25 fill:#6699CC,stroke:#3D5C7A,stroke-width:1px,color:#000000
+  classDef gw font-size:11px
+  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000
+  classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000
+  classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000
+  classDef legcond fill:#FFFFFF,stroke:#333333,stroke-width:2px,stroke-dasharray:4 3,color:#000000
+  class z_LEG_cl,z_LEG_t,z_LEG_g,z_LEG_e,z_LEG_st leg
+  class z_LEG_c legc
+  class z_LEG_sc legcond
+  style z_LEG fill:#FAFAFA,stroke:#999999,stroke-width:1px
+  class z_CL_feat_orq z_R_0
+  class z_CL_feat_ent z_R_1
+  class z_CL_feat_lev z_R_2
+  class z_CL_feat_cls z_R_3
+  class z_CL_feat_spc z_R_4
+  class z_CL_feat_alo z_R_5
+  class z_CL_com_set z_R_6
+  class z_CL_com_exe z_R_7
+  class z_CL_com_pub z_R_8
+  class z_CL_com_val z_R_9
+  class z_CL_feat_ite z_R_10
+  class z_CL_com_e2e z_R_11
+  class z_CL_com_evl z_R_12
+  class z_CL_com_prf z_R_13
+  class z_CL_com_seg z_R_14
+  class z_CL_com_rev z_R_15
+  class z_CL_com_hml z_R_16
+  class z_CL_com_etg z_R_17
+  class z_CL_com_lib z_R_18
+  class z_CL_com_mon z_R_19
+  class z_CL_com_dcs z_R_20
+  class z_CL_com_pro z_R_21
+  class z_CL_com_frn z_R_22
+  class z_CL_com_exp z_R_23
+  class z_CL_com_dea z_R_24
+  class z_CL_com_mel z_R_25
