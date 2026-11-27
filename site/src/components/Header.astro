@@ -7,6 +7,18 @@ const { locale, base, slug, t } = Astro.props;
 const other = locale === 'pt-BR' ? 'en' : 'pt-BR';
 const home = `${base}/${locale}/`;
 const current = slug.split('/')[0];
+// 24x24 stroke icons, one per layer. Decorative: the label next to each one carries the meaning.
+const ICONS: Record<string, string> = {
+  tools: 'M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z',
+  ai: 'M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z M19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z',
+  fundamentals: 'M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z M4 19V5',
+  stacks: 'M12 3l9 5-9 5-9-5z M3 13l9 5 9-5',
+  guides: 'M6 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4z M18 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4z M8 17h5a3 3 0 0 0 0-6h-2a3 3 0 0 1 0-6h5',
+  certifications: 'M12 14a5 5 0 1 0 0-10 5 5 0 0 0 0 10z M8.5 13.5L7 21l5-3 5 3-1.5-7.5',
+  flows: 'M6 3v12 M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M18 9a9 9 0 0 1-9 9',
+  journeys: 'M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z M9 3v15 M15 6v15',
+  ecosystem: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M3 12h18 M12 3c3 3 3 15 0 18 M12 3c-3 3-3 15 0 18',
+};
 const here = (l: string) => `${base}/${l}/${slug ? `${slug}/` : ''}`;
 ---
 <a class="skip-link" href="#main">{t('a11y.skip')}</a>
@@ -16,12 +28,12 @@ const here = (l: string) => `${base}/${l}/${slug ? `${slug}/` : ''}`;
     <nav class="site-nav" aria-label={t('nav.label')}>
       <ul>
         {LAYER_PAGES.map((l) => (
-          <li><a href={`${home}${l}/`} aria-current={current === l ? 'page' : undefined}>{t(`layer.${l}`)}</a></li>
+          <li><a href={`${home}${l}/`} aria-current={current === l ? 'page' : undefined}><svg class="nav-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d={ICONS[l]} /></svg><span>{t(`layer.${l}`)}</span></a></li>
         ))}
-        <li><a class="nav-eco" href={`${home}ecossistema/`} aria-current={current === 'ecossistema' ? 'page' : undefined}>{t('nav.ecosystem')}</a></li>
       </ul>
     </nav>
     <div class="header-tools">
+      <a class="nav-eco" href={`${home}ecossistema/`} aria-current={current === 'ecossistema' ? 'page' : undefined}><svg class="nav-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d={ICONS.ecosystem} /></svg><span>{t('nav.ecosystem')}</span></a>
       <form class="search-box" role="search" action={`${home}search/`} method="get">
         <label class="sr-only" for="header-q">{t('search.label')}</label>
         <input id="header-q" type="search" name="q" placeholder={t('search.placeholder')} autocomplete="off" />

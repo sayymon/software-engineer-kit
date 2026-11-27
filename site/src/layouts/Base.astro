@@ -22,6 +22,8 @@ interface Props {
 }
 const { locale, title, slug, base, description = '', layer = 'site', tipo = 'page', fallback = false, hasDiagram = false, immersive = false } = Astro.props;
 const t = makeT(locale);
+const home = layer === 'home';
+const other = locale === 'pt-BR' ? 'en' : 'pt-BR';
 const site = t('site.title');
 ---
 <!doctype html>
@@ -36,7 +38,13 @@ const site = t('site.title');
     <link rel="alternate" hreflang="en" href={`${base}/en/${slug ? `${slug}/` : ''}`} />
   </head>
   <body>
-    {!immersive && <Header locale={locale} base={base} slug={slug} t={t} />}
+    {!immersive && !home && <Header locale={locale} base={base} slug={slug} t={t} />}
+    {home && (
+      <nav class="home-lang lang-switch" aria-label={t('lang.label')}>
+        <a href={`${base}/${locale}/`} lang={locale} hreflang={locale} aria-current="true">{locale === 'pt-BR' ? 'PT' : 'EN'}</a>
+        <a href={`${base}/${other}/`} lang={other} hreflang={other} aria-label={t(`lang.switchTo.${other}`)}>{other === 'pt-BR' ? 'PT' : 'EN'}</a>
+      </nav>
+    )}
     {immersive && <a class="skip-link" href="#eco-stage">{t('a11y.skip')}</a>}
     <main id="main" class={immersive ? 'immersive' : undefined} data-pagefind-body data-pagefind-filter="layer[data-layer]" data-fallback={fallback ? 'true' : 'false'} data-layer={layer} data-tipo={tipo}>
       {fallback && <p class="banner" role="note" data-pagefind-ignore>{t('fallback.banner')}</p>}

@@ -12,3 +12,6 @@ const ctx = ctxFor(locale);
 <Base locale={locale} title={ctx.t('site.title')} slug="" base={ctx.base} description={ctx.t('home.lede')} layer="home" tipo="home">
   <Fragment set:html={renderHome(ctx)} />
 </Base>
+<script>
+  import '../../scripts/hero-title';
+</script>

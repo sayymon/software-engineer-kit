@@ -70,7 +70,7 @@ html[data-visual='glass'] .site-header .inner { max-width: none; }
 html[data-visual='glass'] main:not(.immersive) { width: min(calc(100% - 1.2rem), calc(var(--content-width) + 4rem)); margin: 1rem auto 0; padding: clamp(1rem, 3vw, 2.2rem); border-radius: 28px; background: var(--g-fill-strong); }
 html[data-visual='glass'] .site-footer { width: min(calc(100% - 1.2rem), calc(var(--content-width) + 4rem)); margin: 1rem auto 1.2rem; border-radius: 22px; }
 html[data-visual='glass'] .hero { padding: clamp(0.4rem, 2vw, 1.4rem) 0 clamp(1rem, 3vw, 2rem); }
-html[data-visual='glass'] .hero h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); letter-spacing: -0.03em; background: linear-gradient(100deg, var(--color-text) 20%, var(--color-accent) 60%, #cc79a7); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
 html[data-visual='glass'] .brand { background: linear-gradient(100deg, var(--color-text), var(--color-accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
 html[data-visual='glass'] .site-header,
@@ -149,3 +149,36 @@ html[data-visual='glass'] .site-header .site-nav { grid-area: nav; }
 html[data-visual='glass'] .site-nav ul { gap: 0.15rem 0.2rem; }
 html[data-visual='glass'] .site-nav a { padding: 0.2rem 0.65rem; font-size: 0.93rem; }
 @media (max-width: 47.9rem) { html[data-visual='glass'] .site-header .inner { grid-template-columns: 1fr; grid-template-areas: 'brand' 'tools' 'nav'; } }
+
+/* ---- Home: no top menu, a big WebGL title, the layer cards as the menu ---- */
+html[data-visual='glass'] main[data-layer='home'] { width: min(calc(100% - 1.2rem), 76rem); margin-top: 0; background: transparent; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; padding-inline: clamp(0.6rem, 2vw, 1.2rem); }
+.hero-title { position: relative; margin: 0.2rem 0 0.6rem; font-size: clamp(2.2rem, 6.1vw, 6.2rem); line-height: 1.04; letter-spacing: -0.04em; font-weight: 800; }
+.hero-title-text { background: linear-gradient(100deg, var(--color-text) 10%, var(--color-accent) 58%, #cc79a7); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero-title.is-webgl .hero-title-text { opacity: 0; }
+.hero-title .hero-canvas { pointer-events: none; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 0.8rem 1rem; align-items: center; margin-top: var(--space-3); }
+.hero-actions .hero-search { flex: 1 1 22rem; max-width: 34rem; margin-top: 0; }
+html[data-visual='glass'] .hero-cta { display: none; }
+.home-lang { position: fixed; z-index: 30; top: 0.9rem; right: clamp(0.9rem, 2vw, 1.6rem); display: flex; gap: 0.3rem; }
+html[data-visual='glass'] .home-lang a { background: var(--g-fill); border: 1px solid var(--g-border); border-radius: 999px; padding: 0.35rem 0.8rem; text-decoration: none; color: var(--color-text); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+html[data-visual='glass'] .home-lang a[aria-current='true'] { background: var(--color-accent); color: var(--color-accent-contrast); }
+
+/* ---- Menu: icons, soft active glow, the 3D entry as a gradient pill ---- */
+.nav-icon { flex: none; opacity: 0.85; }
+html[data-visual='glass'] .site-nav a { display: inline-flex; align-items: center; gap: 0.42rem; }
+html[data-visual='glass'] .site-nav a[aria-current='page'] { background: linear-gradient(135deg, color-mix(in srgb, var(--color-accent) 22%, var(--g-fill-strong)), var(--g-fill-strong)); box-shadow: inset 0 1px 0 var(--g-shine), 0 0 0 1px color-mix(in srgb, var(--color-accent) 45%, transparent), 0 6px 18px -8px var(--color-accent); font-weight: 600; }
+html[data-visual='glass'] .site-nav a[aria-current='page'] .nav-icon { opacity: 1; color: var(--color-accent); }
+html[data-visual='glass'] .nav-eco { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.9rem; border-radius: 999px; text-decoration: none; font-size: 0.9rem; color: var(--color-accent-contrast); background: linear-gradient(135deg, color-mix(in srgb, var(--color-accent) 88%, white), color-mix(in srgb, var(--color-accent) 55%, #cc79a7)); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 8px 20px -10px var(--color-accent); font-weight: 600; }
+html[data-visual='glass'] .nav-eco:hover { background: linear-gradient(135deg, color-mix(in srgb, var(--color-accent) 80%, white), color-mix(in srgb, var(--color-accent) 45%, #cc79a7)); }
+html[data-visual='glass'] .site-nav ul { padding: 0.25rem; border-radius: 999px; background: color-mix(in srgb, var(--g-fill) 60%, transparent); box-shadow: inset 0 0 0 1px var(--g-edge); width: fit-content; max-width: 100%; }
+@media (max-width: 64rem) { html[data-visual='glass'] .site-nav ul { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; } html[data-visual='glass'] .site-nav ul::-webkit-scrollbar { display: none; } html[data-visual='glass'] .site-nav li { flex: none; } }
+html:not([data-visual='glass']) .nav-icon { display: none; }
+
+/* Tighter menu so the nine entries fit one row at desktop widths; narrower screens scroll sideways */
+html[data-visual='glass'] .site-nav ul { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 0.05rem; }
+html[data-visual='glass'] .site-nav ul::-webkit-scrollbar { display: none; }
+html[data-visual='glass'] .site-nav li { flex: none; }
+html[data-visual='glass'] .site-nav a { padding: 0.22rem 0.52rem; font-size: 0.87rem; gap: 0.32rem; }
+html[data-visual='glass'] .nav-eco { margin-left: 0.2rem; }
+
+html:not([data-visual='glass']) .nav-eco { padding: 0.4rem 0.8rem; border: 1px solid var(--color-border); border-radius: var(--radius); text-decoration: none; }

@@ -156,3 +156,20 @@ test('o carregador do ecossistema não vai para as outras páginas', async ({ pa
   await page.goto('/pt-BR/');
   expect(js.filter((u) => /renderer-3d|three/.test(u))).toEqual([]);
 });
+
+test('a home não tem o menu de cima, tem o título em WebGL e o atalho para o ecossistema', async ({ page }) => {
+  const erros: string[] = [];
+  page.on('pageerror', (e) => erros.push(e.message));
+  await page.goto('/pt-BR/');
+  await expect(page.locator('header.site-header')).toHaveCount(0);
+  await expect(page.locator('.hero-title.is-webgl canvas')).toHaveCount(1);
+  await expect(page.locator('.hero-title h1, h1.hero-title')).toHaveText('Software Engineer Kit');
+  await expect(page.locator('.hero-actions a.glass-btn')).toHaveAttribute('href', /\/pt-BR\/ecossistema\/$/);
+  expect(erros).toEqual([]);
+});
+
+test('nas páginas internas o menu aparece com o atalho do ecossistema', async ({ page }) => {
+  await page.goto('/pt-BR/tools/');
+  await expect(page.locator('header.site-header .site-nav a')).toHaveCount(8);
+  await expect(page.locator('header.site-header a.nav-eco')).toHaveAttribute('href', /\/pt-BR\/ecossistema\/$/);
+});

@@ -144,10 +144,12 @@ export function renderHome(ctx: Ctx): string {
     return `<li><a href="${esc(ctx.href(layer))}">${esc(ctx.t(`layer.${layer}`))}</a><span class="muted">${esc(ctx.t(`layerdesc.${layer}`))}</span><span class="count">${esc(ctx.t('count.items', { n: count }))}</span></li>`;
   }).join('');
   return (
-    `<header class="hero"><p class="eyebrow">${esc(ctx.t('site.tagline'))}</p><h1>${esc(ctx.t('site.title'))}</h1><p class="lede">${esc(ctx.t('home.lede'))}</p>` +
-    `<form class="search-box hero-search" role="search" action="${esc(ctx.href('search'))}" method="get"><label class="sr-only" for="hero-q">${esc(ctx.t('search.label'))}</label>` +
+    `<header class="hero"><p class="eyebrow">${esc(ctx.t('site.tagline'))}</p>` +
+    `<h1 class="hero-title" data-hero-title><span class="hero-title-text">${esc(ctx.t('site.title'))}</span></h1>` +
+    `<p class="lede">${esc(ctx.t('home.lede'))}</p>` +
+    `<div class="hero-actions"><form class="search-box hero-search" role="search" action="${esc(ctx.href('search'))}" method="get"><label class="sr-only" for="hero-q">${esc(ctx.t('search.label'))}</label>` +
     `<input id="hero-q" type="search" name="q" placeholder="${esc(ctx.t('search.placeholder'))}" autocomplete="off"><button type="submit">${esc(ctx.t('search.button'))}</button></form>` +
-    `<p class="hero-cta"><a class="glass-btn" href="${esc(ctx.href('ecossistema'))}">${esc(ctx.t('home.ecosystem'))}</a></p></header>` +
+    `<a class="glass-btn" href="${esc(ctx.href('ecossistema'))}">${esc(ctx.t('home.ecosystem'))}</a></div></header>` +
     section(ctx.t('home.layers'), `<ul class="cards layer-cards">${cards}</ul>`)
   );
 }
