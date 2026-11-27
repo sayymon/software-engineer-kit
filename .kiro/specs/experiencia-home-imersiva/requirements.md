@@ -112,7 +112,7 @@ A home atual (título em WebGL com água e ímã, atalho para o ecossistema e ca
 
 #### Acceptance Criteria
 
-1. THE Cena Jornadas e competências SHALL desenhar as jornadas, as competências e as certificações, ligadas pelas relações declaradas nos dados.
+1. THE Cena Jornadas e competências SHALL desenhar as jornadas, as competências e as certificações, ligadas pelas relações declaradas nos dados, e WHERE uma entidade não tem relação declarada, THE Cena SHALL posicioná-la por área e nível da certificação ou por ordem da jornada.
 2. WHEN o Progresso_da_Cena avança, THE Cena SHALL revelar as jornadas, depois as competências e depois as certificações.
 3. WHEN a pessoa passa o ponteiro sobre uma jornada, THE Cena SHALL destacar as competências e certificações ligadas a ela.
 4. THE Cena SHALL oferecer os links para a página de jornadas e para a de certificações.
@@ -175,6 +175,8 @@ A home atual (título em WebGL com água e ímã, atalho para o ecossistema e ca
 7. THE verificação SHALL medir o Orcamento_de_Desempenho (JavaScript inicial e adiado, tempo até o primeiro quadro interativo) e SHALL falhar quando um limite é excedido.
 
 ## Questões em aberto
+
+0. **Lacuna de dados (verificada em `api/ecossistema/index.json`).** Hoje as 6 jornadas e as 4 competências não têm nenhuma ligação com outras entidades no grafo, e as 45 certificações ligam só a categorias e ferramentas. Os campos `competencias` e `certificacoes` das jornadas e `certificacoes` das competências estão vazios. A Cena 4 funciona só com o agrupamento por área e nível (Requirement 6.1). Preencher essas relações é trabalho de conteúdo, com fonte e data, e entra como tarefa própria. O dono decide se vem antes ou depois da Cena.
 
 1. **Palco único ou canvas por Cena.** O design propõe um canvas único para respeitar o limite de contextos WebGL. A alternativa é um canvas por Cena, mais simples e mais pesado.
 2. **Título em WebGL.** O título atual usa um canvas próprio. O design decide se ele passa a ser parte do Palco ou continua independente na primeira Cena.
