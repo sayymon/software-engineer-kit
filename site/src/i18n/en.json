@@ -479,5 +479,20 @@
   "home.ecosystem": "Explore the 3D ecosystem",
   "visual.label": "Look",
   "visual.glass": "Glass",
-  "visual.classic": "Classic"
+  "visual.classic": "Classic",
+  "home.skip": "Skip the intro",
+  "home.scenes": "Home scenes",
+  "home.scene.apresentacao": "Introducing the kit",
+  "home.scene.fluxos": "Flows by demand",
+  "home.scene.catalogo": "Catalog",
+  "home.scene.jornadas": "Journeys and competencies",
+  "home.flows.title": "Flows by demand",
+  "home.flows.lede": "Each kind of work has its own path: lanes, tasks, gateways and roles, from request to delivery.",
+  "home.flows.select": "Demands",
+  "home.flows.open": "Open the flows",
+  "home.catalog.title": "Everything in one catalog",
+  "home.catalog.lede": "Software and AI tools, fundamentals, stacks and practical guides, all linked together.",
+  "home.catalog.list": "See the catalog as a list",
+  "home.journeys.title": "Journeys and competencies",
+  "home.journeys.lede": "Study paths, the competencies they build and the certifications that prove them."
 }

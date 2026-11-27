@@ -1,0 +1,74 @@
+/* SPDX-License-Identifier: MIT */
+/* Immersive Home: four scenes over one fixed WebGL stage. Always a dark stage, like the 3D ecosystem.
+   Without JavaScript, without WebGL or with reduced motion the scenes are plain stacked sections (no sticky, no stage). */
+html[data-visual]:has(.home), html:has(.home) { background: #04050b; --color-bg: #04050b; --color-text: #eef1ff; --color-accent: #7aa8ff; --color-accent-contrast: #04050b; --color-muted: #9aa5c8; --color-border: rgba(160, 180, 255, 0.2); color-scheme: dark; }
+body:has(.home) { background: #04050b; color: #eef1ff; }
+html[data-visual='glass'] body:has(.home)::before { display: none; }
+html[data-visual='glass'] main[data-layer='home'] { width: 100%; max-width: none; margin: 0; padding: 0; background: transparent; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; border-radius: 0; }
+main[data-layer='home'] { max-width: none; padding: 0; }
+.home {
+  --h-text: #eef1ff; --h-muted: #9aa5c8; --h-line: rgba(160, 180, 255, 0.2); --h-glass: rgba(10, 13, 26, 0.62); --h-accent: #56b4e9;
+  position: relative; color: var(--h-text);
+}
+.home a { color: inherit; }
+.home .eyebrow { color: var(--h-muted); letter-spacing: 0.22em; }
+.home .lede { color: #cfd6f2; max-width: 34rem; }
+.home h2 { font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1.04; letter-spacing: -0.03em; margin: 0.3rem 0 0.8rem; }
+.home :focus-visible { outline: 3px solid #ffb000; outline-offset: 2px; }
+
+/* The stage */
+#palco { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.home, .site-footer { position: relative; z-index: 1; }
+
+/* Shortcuts bar: thin, always visible */
+.atalhos { position: fixed; z-index: 40; top: 0.6rem; left: 50%; transform: translateX(-50%); width: min(calc(100% - 1.2rem), 76rem); display: flex; align-items: center; gap: 0.5rem 1rem; padding: 0.35rem 0.6rem 0.35rem 1rem; border: 1px solid var(--h-line); border-radius: 999px; background: var(--h-glass); -webkit-backdrop-filter: blur(16px) saturate(150%); backdrop-filter: blur(16px) saturate(150%); font-size: 0.85rem; min-height: 2.6rem; }
+.atalhos-marca { font-weight: 700; text-decoration: none; white-space: nowrap; background: linear-gradient(100deg, #fff, #56b4e9); -webkit-background-clip: text; background-clip: text; color: transparent !important; }
+.atalhos-lista { display: flex; gap: 0.1rem; list-style: none; margin: 0 auto 0 0.4rem; padding: 0; overflow-x: auto; scrollbar-width: none; min-width: 0; }
+.atalhos-lista::-webkit-scrollbar { display: none; }
+.atalhos-lista a, .atalhos-eco, .atalhos-lang a { display: inline-block; padding: 0.25rem 0.6rem; border-radius: 999px; text-decoration: none; white-space: nowrap; color: var(--h-text); transition: background 0.2s; }
+.atalhos-lista a:hover, .atalhos-lang a:hover { background: rgba(255, 255, 255, 0.1); }
+.atalhos-eco { background: linear-gradient(135deg, #5b8def, #b078c9); font-weight: 600; color: #fff; }
+.atalhos-busca input { width: 9.5rem; padding: 0.3rem 0.7rem; color: var(--h-text); background: rgba(255, 255, 255, 0.07); border: 1px solid var(--h-line); border-radius: 999px; font: inherit; }
+.atalhos-busca input::placeholder { color: var(--h-muted); }
+.atalhos-lang { display: flex; gap: 0.15rem; }
+.atalhos-lang a[aria-current='true'] { background: rgba(255, 255, 255, 0.16); }
+.pular { position: fixed; z-index: 41; top: -4rem; left: 1rem; padding: 0.5rem 1rem; border-radius: 999px; background: #fff; color: #111 !important; }
+.pular:focus { top: 4rem; }
+@media (max-width: 64rem) { .atalhos-busca { display: none; } }
+@media (max-width: 47.9rem) { .atalhos-lista { display: none; } .atalhos { padding-inline: 0.8rem; } .atalhos-marca { margin-right: auto; } }
+
+/* Scene indicator */
+.indicador { position: fixed; z-index: 35; right: clamp(0.6rem, 2vw, 1.4rem); top: 50%; transform: translateY(-50%); }
+.indicador ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.9rem; }
+.indicador a { display: block; width: 0.7rem; height: 0.7rem; border-radius: 50%; border: 1.5px solid rgba(255, 255, 255, 0.6); background: transparent; transition: transform 0.3s, background 0.3s; }
+.indicador a[aria-current='true'] { background: #fff; transform: scale(1.5); box-shadow: 0 0 14px #56b4e9; }
+@media (max-width: 47.9rem) { .indicador { display: none; } }
+
+/* Scenes: static by default */
+.cena { padding: clamp(5rem, 12vw, 8rem) 0 clamp(2rem, 6vw, 4rem); }
+.cena-texto { width: min(calc(100% - 2rem), 34rem); margin-left: clamp(1rem, 7vw, 7rem); }
+.cena[data-cena='apresentacao'] .cena-texto { width: min(calc(100% - 2rem), 80rem); }
+.home-chips, .home-groups { list-style: none; margin: 1rem 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.home-chips a { display: inline-block; padding: 0.3rem 0.8rem; border: 1px solid var(--h-line); border-radius: 999px; background: rgba(255, 255, 255, 0.05); text-decoration: none; font-size: 0.88rem; }
+.home-chips a:hover, .home-chips a[aria-current='true'] { background: rgba(255, 255, 255, 0.16); border-color: var(--h-accent); }
+.home-groups li { display: flex; align-items: baseline; gap: 0.5rem; padding: 0.4rem 0.9rem; border: 1px solid var(--h-line); border-radius: 14px; background: var(--h-glass); }
+.home-count { font-size: 1.6rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.home-links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1rem 0; }
+.home .glass-btn { display: inline-flex; align-items: center; padding: 0.65rem 1.2rem; border-radius: 999px; font-weight: 600; text-decoration: none; color: #fff; background: linear-gradient(135deg, #5b8def, #b078c9); border: 1px solid rgba(255, 255, 255, 0.25); }
+.home .hero-actions { display: flex; flex-wrap: wrap; gap: 0.8rem 1rem; align-items: center; margin-top: 1.2rem; }
+.home .search-box { display: flex; gap: 0.3rem; flex: 1 1 20rem; max-width: 32rem; }
+.home .search-box input { flex: 1; padding: 0.6rem 1rem; color: var(--h-text); background: rgba(255, 255, 255, 0.07); border: 1px solid var(--h-line); border-radius: 999px; font: inherit; }
+.home .search-box button { padding: 0.6rem 1.1rem; color: var(--h-text); background: rgba(255, 255, 255, 0.1); border: 1px solid var(--h-line); border-radius: 999px; font: inherit; cursor: pointer; }
+.home-fim { width: min(calc(100% - 2rem), 76rem); margin: 0 auto; padding: 3rem 0 4rem; }
+.home-fim .cards li { border: 1px solid var(--h-line); border-radius: 18px; background: var(--h-glass); padding: 0.9rem 1rem; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.home-fim .cards li a { font-weight: 700; text-decoration: none; }
+.home-fim .cards .muted { color: var(--h-muted); }
+
+/* Immersive mode: set by JavaScript only when WebGL works and motion is allowed */
+html.home-imersiva .cena { height: var(--faixa); padding: 0; }
+html.home-imersiva .cena-fixa { position: sticky; top: 0; height: 100svh; display: flex; align-items: center; }
+html.home-imersiva .cena-texto { --entra: clamp(0, calc(var(--p, 0) * 12), 1); --sai: clamp(0, calc((1 - var(--p, 0)) * 7), 1); opacity: min(var(--entra), var(--sai)); transform: translateY(calc((1 - var(--entra)) * 1.5rem)); will-change: opacity, transform; }
+html.home-imersiva .cena[data-cena='apresentacao'] .cena-texto { --entra: 1; }
+html.home-imersiva .cena-texto { text-shadow: 0 2px 24px rgba(0, 0, 0, 0.6); }
+html.home-imersiva .hero-title-text { opacity: 1; }
+@media print { #palco, .atalhos, .indicador { display: none; } }

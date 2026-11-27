@@ -16,6 +16,6 @@
       "@lib/*": ["./lib/*"]
     }
   },
-  "include": ["lib", "tools", "tests", "config", "private", "vitest.config.ts", "playwright.config.ts", "site/src/i18n", "site/src/render", "site/src/ecossistema"],
+  "include": ["lib", "tools", "tests", "config", "private", "vitest.config.ts", "playwright.config.ts", "site/src/i18n", "site/src/render", "site/src/ecossistema", "site/src/home"],
   "exclude": ["node_modules", "dist", ".astro", ".agents"]
 }

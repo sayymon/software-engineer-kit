@@ -4,6 +4,7 @@ import type { Page, SiteLayer } from '@lib/content/site';
 import { type Ctx, anchor, cardList, esc, groupBy, inline, section, table, val } from './util';
 import { LAYER_PAGES, LICENSES_SLUG } from './routes';
 import { licenseNotice } from './entity';
+import { GRUPOS, camadaDe, grupoDe } from '@lib/ecossistema/camadas';
 
 /** Sections of a layer: the sub folders that hold entities, in a stable order. */
 export function sectionsOf(ctx: Ctx, layer: SiteLayer): Array<{ dir: string; key: string; pages: Page[] }> {
@@ -139,17 +140,71 @@ export function renderJourneys(ctx: Ctx): string {
 }
 
 export function renderHome(ctx: Ctx): string {
+  const t = ctx.t;
+  const other = ctx.locale === 'pt-BR' ? 'en' : 'pt-BR';
+  const countOf = (layer: SiteLayer) => ctx.index.ofLayer(layer).length;
+  const layerLinks = LAYER_PAGES.map((layer) => `<li><a href="${esc(ctx.href(layer))}">${esc(t(`layer.${layer}`))}</a></li>`).join('');
   const cards = LAYER_PAGES.map((layer) => {
-    const count = ctx.index.ofLayer(layer).length;
-    return `<li><a href="${esc(ctx.href(layer))}">${esc(ctx.t(`layer.${layer}`))}</a><span class="muted">${esc(ctx.t(`layerdesc.${layer}`))}</span><span class="count">${esc(ctx.t('count.items', { n: count }))}</span></li>`;
+    return `<li><a href="${esc(ctx.href(layer))}">${esc(t(`layer.${layer}`))}</a><span class="muted">${esc(t(`layerdesc.${layer}`))}</span><span class="count">${esc(t('count.items', { n: countOf(layer) }))}</span></li>`;
   }).join('');
+  const demandas = ctx.index.ofTipo('demanda').filter((p) => p.entity.data.biblioteca !== true);
+  const demandaLinks = demandas.map((p) => `<li><a href="${esc(ctx.href(p.route))}" data-demanda="${esc(p.id)}">${esc(p.nome)}</a></li>`).join('');
+  // Counts per visual group, from the same rule the 3D ecosystem uses (the detail layer is not counted).
+  const porGrupo = new Map<string, number>();
+  for (const p of ctx.index.pages) {
+    if (camadaDe(p.tipo) === 'detalhe') continue;
+    const g = grupoDe(p.tipo);
+    porGrupo.set(g, (porGrupo.get(g) ?? 0) + 1);
+  }
+  const grupos = GRUPOS.filter((g) => g !== 'hubs' && porGrupo.has(g))
+    .map((g) => `<li data-grupo="${g}"><span class="home-count">${porGrupo.get(g)}</span> <span>${esc(t(`eco.group.${g}`))}</span></li>`)
+    .join('');
+  const cena = (id: string, faixa: string, corpo: string) =>
+    `<section id="cena-${id}" class="cena" data-cena="${id}" style="--faixa:${faixa}" aria-labelledby="titulo-${id}"><div class="cena-fixa"><div class="cena-texto">${corpo}</div></div></section>`;
+  const indicador = ['apresentacao', 'fluxos', 'catalogo', 'jornadas']
+    .map((id, i) => `<li><a href="#cena-${id}" data-cena-link="${id}"${i === 0 ? ' aria-current="true"' : ''}><span class="sr-only">${esc(t(`home.scene.${id}`))}</span></a></li>`)
+    .join('');
   return (
-    `<header class="hero"><p class="eyebrow">${esc(ctx.t('site.tagline'))}</p>` +
-    `<h1 class="hero-title" data-hero-title><span class="hero-title-text">${esc(ctx.t('site.title'))}</span></h1>` +
-    `<p class="lede">${esc(ctx.t('home.lede'))}</p>` +
-    `<div class="hero-actions"><form class="search-box hero-search" role="search" action="${esc(ctx.href('search'))}" method="get"><label class="sr-only" for="hero-q">${esc(ctx.t('search.label'))}</label>` +
-    `<input id="hero-q" type="search" name="q" placeholder="${esc(ctx.t('search.placeholder'))}" autocomplete="off"><button type="submit">${esc(ctx.t('search.button'))}</button></form>` +
-    `<a class="glass-btn" href="${esc(ctx.href('ecossistema'))}">${esc(ctx.t('home.ecosystem'))}</a></div></header>` +
-    section(ctx.t('home.layers'), `<ul class="cards layer-cards">${cards}</ul>`)
+    `<div class="home" data-home id="topo">` +
+    `<nav class="atalhos" aria-label="${esc(t('nav.label'))}"><a class="atalhos-marca" href="${esc(ctx.href(''))}">${esc(t('site.title'))}</a>` +
+    `<ul class="atalhos-lista">${layerLinks}</ul>` +
+    `<a class="atalhos-eco" href="${esc(ctx.href('ecossistema'))}">${esc(t('nav.ecosystem'))}</a>` +
+    `<form class="atalhos-busca" role="search" action="${esc(ctx.href('search'))}" method="get"><label class="sr-only" for="atalho-q">${esc(t('search.label'))}</label><input id="atalho-q" type="search" name="q" placeholder="${esc(t('search.placeholder'))}" autocomplete="off"></form>` +
+    `<span class="atalhos-lang"><a href="${esc(ctx.href(''))}" lang="${ctx.locale}" aria-current="true">${ctx.locale === 'pt-BR' ? 'PT' : 'EN'}</a><a href="${esc(`${ctx.base}/${other}/`)}" lang="${other}" hreflang="${other}" aria-label="${esc(t(`lang.switchTo.${other}`))}">${other === 'pt-BR' ? 'PT' : 'EN'}</a></span></nav>` +
+    `<a class="pular" href="#fim">${esc(t('home.skip'))}</a>` +
+    `<nav class="indicador" aria-label="${esc(t('home.scenes'))}"><ol>${indicador}</ol></nav>` +
+    cena(
+      'apresentacao',
+      '230vh',
+      `<p class="eyebrow">${esc(t('site.tagline'))}</p>` +
+        `<h1 class="hero-title" id="titulo-apresentacao" data-hero-title><span class="hero-title-text">${esc(t('site.title'))}</span></h1>` +
+        `<p class="lede">${esc(t('home.lede'))}</p>` +
+        `<div class="hero-actions"><form class="search-box hero-search" role="search" action="${esc(ctx.href('search'))}" method="get"><label class="sr-only" for="hero-q">${esc(t('search.label'))}</label>` +
+        `<input id="hero-q" type="search" name="q" placeholder="${esc(t('search.placeholder'))}" autocomplete="off"><button type="submit">${esc(t('search.button'))}</button></form>` +
+        `<a class="glass-btn" href="${esc(ctx.href('ecossistema'))}">${esc(t('home.ecosystem'))}</a></div>`,
+    ) +
+    cena(
+      'fluxos',
+      '340vh',
+      `<p class="eyebrow">${esc(t('home.scene.fluxos'))}</p><h2 id="titulo-fluxos">${esc(t('home.flows.title'))}</h2><p class="lede">${esc(t('home.flows.lede'))}</p>` +
+        `<ul class="home-chips" role="list" aria-label="${esc(t('home.flows.select'))}">${demandaLinks}</ul>` +
+        `<p><a class="glass-btn" href="${esc(ctx.href('flows'))}">${esc(t('home.flows.open'))}</a></p>`,
+    ) +
+    cena(
+      'catalogo',
+      '300vh',
+      `<p class="eyebrow">${esc(t('home.scene.catalogo'))}</p><h2 id="titulo-catalogo">${esc(t('home.catalog.title'))}</h2><p class="lede">${esc(t('home.catalog.lede'))}</p>` +
+        `<ul class="home-groups">${grupos}</ul>` +
+        `<p class="home-links"><a class="glass-btn" href="${esc(ctx.href('tools'))}">${esc(t('home.catalog.list'))}</a> <a class="glass-btn" href="${esc(ctx.href('ecossistema'))}">${esc(t('home.ecosystem'))}</a></p>`,
+    ) +
+    cena(
+      'jornadas',
+      '300vh',
+      `<p class="eyebrow">${esc(t('home.scene.jornadas'))}</p><h2 id="titulo-jornadas">${esc(t('home.journeys.title'))}</h2><p class="lede">${esc(t('home.journeys.lede'))}</p>` +
+        `<ul class="home-groups"><li><span class="home-count">${ctx.index.ofTipo('jornada').length}</span> <span>${esc(t('tipo.jornada'))}</span></li><li><span class="home-count">${ctx.index.ofTipo('competencia').length}</span> <span>${esc(t('tipo.competencia'))}</span></li><li><span class="home-count">${ctx.index.ofTipo('certificacao').length}</span> <span>${esc(t('tipo.certificacao'))}</span></li></ul>` +
+        `<p class="home-links"><a class="glass-btn" href="${esc(ctx.href('journeys'))}">${esc(t('layer.journeys'))}</a> <a class="glass-btn" href="${esc(ctx.href('certifications'))}">${esc(t('layer.certifications'))}</a></p>`,
+    ) +
+    `<section id="fim" class="home-fim" aria-labelledby="titulo-fim"><h2 id="titulo-fim">${esc(t('home.layers'))}</h2><ul class="cards layer-cards">${cards}</ul></section>` +
+    `</div>`
   );
 }

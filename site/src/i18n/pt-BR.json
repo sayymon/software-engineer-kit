@@ -479,5 +479,20 @@
   "home.ecosystem": "Explorar o ecossistema 3D",
   "visual.label": "Visual",
   "visual.glass": "Vidro",
-  "visual.classic": "Clássico"
+  "visual.classic": "Clássico",
+  "home.skip": "Pular a apresentação",
+  "home.scenes": "Cenas da página inicial",
+  "home.scene.apresentacao": "Apresentando o kit",
+  "home.scene.fluxos": "Fluxos por demanda",
+  "home.scene.catalogo": "Catálogo",
+  "home.scene.jornadas": "Jornadas e competências",
+  "home.flows.title": "Fluxos por demanda",
+  "home.flows.lede": "Cada tipo de trabalho tem o seu caminho: raias, tarefas, gateways e papéis, do pedido à entrega.",
+  "home.flows.select": "Demandas",
+  "home.flows.open": "Abrir os fluxos",
+  "home.catalog.title": "Tudo em um catálogo",
+  "home.catalog.lede": "Ferramentas de software e de IA, fundamentos, stacks e guias práticos, todos ligados entre si.",
+  "home.catalog.list": "Ver o catálogo em lista",
+  "home.journeys.title": "Jornadas e competências",
+  "home.journeys.lede": "Trilhas de estudo, as competências que elas desenvolvem e as certificações que as comprovam."
 }
