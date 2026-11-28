@@ -44,9 +44,10 @@ const dependenciasPadrao: DependenciasDaIlha = {
     return r.text();
   },
   navegar: (url) => {
-    // Só caminhos same-origin navegam: o destino vem do DOM (valor de select) e não pode carregar esquema.
-    if (!/^\/(?!\/)/.test(url)) return;
-    window.location.assign(url);
+    // O destino vem do DOM (valor de select): só navega same-origin, e só as partes parseadas do URL.
+    const u = new URL(url, win.location.origin);
+    if (u.origin !== win.location.origin) return;
+    window.location.assign(u.pathname + u.search + u.hash);
   },
 };
 

@@ -260,10 +260,11 @@ type Aresta = { origem: string; destino: string; rotulo: string; tracejada: bool
 const chaveAresta = (a: Aresta) => JSON.stringify([a.origem, a.destino, a.rotulo, a.tracejada]);
 const aresta = (origem: string, destino: string, rotulo: string, tracejada = false): Aresta => ({ origem, destino, rotulo, tracejada });
 
-// Setas do Mermaid: montadas por concatenação para o literal `--` + `>` não aparecer fechado no código
-// (auditorias de HTML leem a sequência fechada como fim de comentário HTML).
+// Setas de aresta do Mermaid: sintaxe do diagrama, não filtro de HTML. O CodeQL lê a sequência
+// fechada como fim de comentário HTML; a regra não se aplica a texto de diagrama.
+// codeql[js/bad-tag-filter]
 const SETA_TRACEJADA = '-.->';
-const SETA_RETA = '--' + '>';
+const SETA_RETA = '-->';
 
 function arestaTexto(a: Aresta): string {
   const seta = a.tracejada ? SETA_TRACEJADA : SETA_RETA;
