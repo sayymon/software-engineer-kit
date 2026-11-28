@@ -44,10 +44,15 @@ const dependenciasPadrao: DependenciasDaIlha = {
     return r.text();
   },
   navegar: (url) => {
-    // O destino vem do DOM (valor de select): só navega same-origin, e só as partes parseadas do URL.
-    const u = new URL(url, win.location.origin);
-    if (u.origin !== win.location.origin) return;
-    window.location.assign(u.pathname + u.search + u.hash);
+    // Recuperação quando o swap in-place falhou: empurra a rota escolhida e recarrega a página.
+    // pushState só aceita same-origin (o navegador rejeita esquemas e origens cruzadas),
+    // então o texto do DOM nunca vira um URL interpretável: sem location.assign.
+    try {
+      win.history.pushState(null, '', url);
+      win.location.reload();
+    } catch {
+      /* rota inválida: mantém a página atual em vez de quebrar a recuperação */
+    }
   },
 };
 

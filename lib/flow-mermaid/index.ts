@@ -262,8 +262,8 @@ const aresta = (origem: string, destino: string, rotulo: string, tracejada = fal
 
 // Setas de aresta do Mermaid: sintaxe do diagrama, não filtro de HTML. O CodeQL lê a sequência
 // fechada como fim de comentário HTML; a regra não se aplica a texto de diagrama.
-// codeql[js/bad-tag-filter]
 const SETA_TRACEJADA = '-.->';
+// codeql[js/bad-tag-filter]
 const SETA_RETA = '-->';
 
 function arestaTexto(a: Aresta): string {
