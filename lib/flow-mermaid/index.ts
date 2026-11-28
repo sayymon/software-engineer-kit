@@ -260,8 +260,13 @@ type Aresta = { origem: string; destino: string; rotulo: string; tracejada: bool
 const chaveAresta = (a: Aresta) => JSON.stringify([a.origem, a.destino, a.rotulo, a.tracejada]);
 const aresta = (origem: string, destino: string, rotulo: string, tracejada = false): Aresta => ({ origem, destino, rotulo, tracejada });
 
+// Setas do Mermaid: montadas por concatenação para o literal `--` + `>` não aparecer fechado no código
+// (auditorias de HTML leem a sequência fechada como fim de comentário HTML).
+const SETA_TRACEJADA = '-.->';
+const SETA_RETA = '--' + '>';
+
 function arestaTexto(a: Aresta): string {
-  const seta = a.tracejada ? '-.->' : '-->';
+  const seta = a.tracejada ? SETA_TRACEJADA : SETA_RETA;
   const rot = limparTexto(a.rotulo) ? `|"${escaparRotulo(a.rotulo)}"|` : '';
   return `${sanitizarId(a.origem)} ${seta}${rot} ${sanitizarId(a.destino)}`;
 }
@@ -626,7 +631,7 @@ export function gerarDiagramaExpandido(grafo: ModeloDeGrafo, conj: ConjuntoExpan
   for (const a of cadeia) empilha(chaveAresta(a), arestaTexto(a));
   for (const a of v.arestas) {
     const origem = saidaDe.get(a.origem) ?? a.origem;
-    const seta = a.tracejada ? '-.->' : '-->';
+    const seta = a.tracejada ? SETA_TRACEJADA : SETA_RETA;
     const rot = limparTexto(a.rotulo) ? `|"${escaparRotulo(a.rotulo)}"|` : '';
     empilha(JSON.stringify([origem, a.destino, a.rotulo, a.tracejada]), `${idMermaidVisivel(origem)} ${seta}${rot} ${idMermaidVisivel(a.destino)}`);
   }

@@ -14,7 +14,7 @@ const contarArestas = (texto: string): number => {
   for (const linha of texto.split('\n')) {
     const l = linha.trim();
     if (/^(class|classDef|style|linkStyle|click|subgraph|end|flowchart|direction)\b/.test(l)) continue;
-    n += (l.replace(/"[^"]*"/g, '""').match(/(?:-->|-\.->|==>|---|-\.-|===)/g) ?? []).length;
+    n += (l.replace(/"[^"]*"/g, '""').match(/(?:--!>|-->|-\.->|==>|---|-\.-|===)/g) ?? []).length;
   }
   return n;
 };

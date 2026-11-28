@@ -32,7 +32,7 @@ export const tituloEstatico = (demanda: string): string => {
   const html = readFileSync(join('site', 'dist', 'pt-BR', 'flows', demanda, 'index.html'), 'utf8');
   const m = /<title>([^<]*)<\/title>/.exec(html);
   if (!m) throw new Error(`sem <title> em ${demanda}`);
-  return m[1].replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&quot;/g, '"');
+  return m[1].replace(/&amp;|&#39;|&quot;/g, (ent) => ({ '&amp;': '&', '&#39;': "'", '&quot;': '"' })[ent] as string);
 };
 
 export const palco = (page: Page) => page.locator('[data-flow-stage]');

@@ -43,7 +43,11 @@ const dependenciasPadrao: DependenciasDaIlha = {
     if (!r.ok) throw new Error(`HTTP ${r.status} em ${url}`);
     return r.text();
   },
-  navegar: (url) => window.location.assign(url),
+  navegar: (url) => {
+    // Só caminhos same-origin navegam: o destino vem do DOM (valor de select) e não pode carregar esquema.
+    if (!/^\/(?!\/)/.test(url)) return;
+    window.location.assign(url);
+  },
 };
 
 /**
