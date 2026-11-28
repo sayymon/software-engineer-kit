@@ -1,0 +1,580 @@
+variaveis:
+  - id: acao_preventiva
+    nome: "Ação preventiva"
+    descricao: "Ação registrada para o defeito não escapar de novo"
+    exemplo: "Adicionar teste de contrato para o campo de cupom no pipeline"
+    tipo: texto
+    status: rascunho
+  - id: alocacao
+    nome: "Alocação da tarefa"
+    descricao: "Quem executa a tarefa: o agente, a pessoa ou os dois (híbrida, que na subtarefa vira ambos)"
+    exemplo: "hibrida (o agente escreve, a pessoa revisa)"
+    tipo: enum
+    valores: [agente, pessoa, hibrida]
+    status: rascunho
+  - id: contencao
+    nome: "Postura de contenção"
+    descricao: "Intensidade da contenção de danos definida pela severidade"
+    exemplo: "seletiva"
+    tipo: enum
+    valores: [agressiva, seletiva, condicional]
+    status: rascunho
+  - id: contencao_restrita
+    nome: "Contenção restrita pela janela"
+    descricao: "Na janela crítica, evitar deploy e preferir feature flag a rollback de grande escopo"
+    exemplo: "sim (janela de alta demanda, preferir feature flag a rollback grande)"
+    tipo: booleano
+    status: rascunho
+  - id: corrigido_em_producao
+    nome: "Corrigido em produção"
+    descricao: "A correção foi verificada em produção"
+    exemplo: "sim (taxa de erro voltou ao normal após o deploy)"
+    tipo: booleano
+    status: rascunho
+  - id: criterios_incidente
+    nome: "Critérios de incidente atendidos"
+    descricao: "Lista dos critérios de potencial incidente que o bug atende"
+    exemplo: "Perda de pagamentos e mais de 10 tickets de clientes em uma hora"
+    tipo: texto
+    status: rascunho
+  - id: dependencia_humana
+    nome: "Dependência humana bloqueia o agente"
+    descricao: "Há decisão humana que precisa sair antes de o agente executar"
+    exemplo: "sim (falta decidir a regra de acúmulo de cupons)"
+    tipo: booleano
+    status: rascunho
+  - id: estrutura_time
+    nome: "Estrutura do time"
+    descricao: "Modelo de plantão e comando do time dono do serviço"
+    exemplo: "you_build_you_run"
+    tipo: enum
+    valores: [oncall_dedicado, you_build_you_run, pequeno_horario_comercial, follow_the_sun]
+    status: rascunho
+  - id: handoff_confirmado
+    nome: "Passagem de turno confirmada"
+    descricao: "Handoff de turno confirmado; em SEV1 o comando só muda de turno com sim"
+    exemplo: "sim (quem assume leu o resumo e confirmou no canal do incidente)"
+    tipo: booleano
+    status: rascunho
+  - id: impacto_confirmado
+    nome: "Impacto confirmado"
+    descricao: "A triagem confirmou impacto real no cliente"
+    exemplo: "sim (clientes reais sem conseguir pagar)"
+    tipo: booleano
+    status: rascunho
+  - id: janela_critica
+    nome: "Janela crítica ativa"
+    descricao: "O fluxo é afetado por janela crítica, evento repentino ou sazonalidade"
+    exemplo: "sim (campanha de fim de ano em andamento)"
+    tipo: booleano
+    status: rascunho
+  - id: mitigacao_paliativa
+    nome: "Mitigação paliativa aplicada"
+    descricao: "Há paliativo seguro até a correção definitiva"
+    exemplo: "sim (feature flag desligada)"
+    tipo: booleano
+    status: rascunho
+  - id: motivo_escalada
+    nome: "Motivo da escalada"
+    descricao: "Por que o incidente foi escalado"
+    exemplo: "sem_progresso_sev1"
+    tipo: enum
+    valores: [dependencia_externa, sem_progresso_sev1, mitigacao_esgotada]
+    status: rascunho
+  - id: orcamento_erro_estourado
+    nome: "Orçamento de erro estourado"
+    descricao: "O orçamento de erro do serviço acabou"
+    exemplo: "sim (99,9% de disponibilidade prometidos, 99,2% no mês)"
+    tipo: booleano
+    status: rascunho
+  - id: ordem_execucao
+    nome: "Ordem de execução"
+    descricao: "Lista de tarefas na ordem de execução, decisões humanas primeiro"
+    exemplo: "Decisões humanas primeiro, depois tabela de cupons, API e testes"
+    tipo: texto
+    status: rascunho
+  - id: origem_escape
+    nome: "Origem do escape"
+    descricao: "Onde o defeito deveria ter sido barrado"
+    exemplo: "teste (nenhum teste cobria cupom com valor zero)"
+    tipo: enum
+    valores: [teste, requisito, revisao, observabilidade, protecao_mudanca]
+    status: rascunho
+  - id: potencial_incidente
+    nome: "Potencial incidente"
+    descricao: "O bug atende a algum critério de incidente"
+    exemplo: "sim (atende ao critério de perda de pagamentos)"
+    tipo: booleano
+    status: rascunho
+  - id: prioridade
+    nome: "Prioridade da correção"
+    descricao: "Ordem de tratamento do bug"
+    exemplo: "hotfix"
+    tipo: enum
+    valores: [hotfix, backlog]
+    status: rascunho
+  - id: reproduzido
+    nome: "Bug reproduzido"
+    descricao: "O problema foi reproduzido"
+    exemplo: "sim (a tela branca apareceu em 3 de 3 tentativas no iPhone)"
+    tipo: booleano
+    status: rascunho
+  - id: corrige_defeito
+    nome: "Corrige um defeito"
+    descricao: "A entrega corrige um defeito reproduzido. As raias comuns usam esta variável para exigir que o teste que reproduzia o defeito passe"
+    exemplo: "sim (correção do erro 500 com cupom expirado)"
+    tipo: booleano
+    inicial: nao
+    status: rascunho
+  - id: requer_escalada
+    nome: "Requer escalada"
+    descricao: "O comando decidiu escalar para outro time ou para a liderança"
+    exemplo: "sim (precisa do time de plataforma)"
+    tipo: booleano
+    status: rascunho
+  - id: servico_restaurado
+    nome: "Serviço restaurado"
+    descricao: "O serviço voltou ao normal"
+    exemplo: "sim (checkout respondendo em 800 ms desde as 15h20)"
+    tipo: booleano
+    status: rascunho
+  - id: severidade
+    nome: "Severidade"
+    descricao: "Severidade do incidente"
+    exemplo: "sev1"
+    tipo: enum
+    valores: [sev1, sev2, sev3]
+    status: rascunho
+  - id: severidade_anterior
+    nome: "Severidade anterior"
+    descricao: "Severidade vigente antes da reavaliação"
+    exemplo: "sev2"
+    tipo: enum
+    valores: [sev1, sev2, sev3]
+    status: rascunho
+  - id: severidade_atual
+    nome: "Severidade atual"
+    descricao: "Severidade depois da reavaliação"
+    exemplo: "sev1"
+    tipo: enum
+    valores: [sev1, sev2, sev3]
+    status: rascunho
+  - id: severidade_bug
+    nome: "Severidade do bug"
+    descricao: "Gravidade do defeito, usada para priorizar a correção"
+    exemplo: "alta"
+    tipo: enum
+    valores: [bloqueante, alta, media, baixa]
+    status: rascunho
+  - id: severidade_mudou
+    nome: "Severidade mudou"
+    descricao: "A reavaliação mudou a severidade"
+    exemplo: "sim (de sev2 para sev1 após medir o raio de impacto)"
+    tipo: booleano
+    status: rascunho
+  - id: tarefas_agente
+    nome: "Tarefas do agente"
+    descricao: "Tarefas alocadas ao agente, inclusive as híbridas"
+    exemplo: "Criar a tabela de cupons, expor a API de validação, escrever testes"
+    tipo: texto
+    status: rascunho
+  - id: tarefas_pessoa
+    nome: "Tarefas das pessoas"
+    descricao: "Tarefas alocadas a pessoas, inclusive as híbridas"
+    exemplo: "Revisão de segurança da API e aprovação do texto da mensagem de erro"
+    tipo: texto
+    status: rascunho
+  - id: tem_integracao
+    nome: "Há integração com outro sistema"
+    descricao: "A feature integra com sistema ou serviço externo, declarado na spec"
+    exemplo: "sim (integra com o gateway de pagamento)"
+    tipo: booleano
+    status: rascunho
+  - id: tem_oncall
+    nome: "Tem on-call"
+    descricao: "O time tem plantão formal"
+    exemplo: "sim (escala semanal com duas pessoas)"
+    tipo: booleano
+    status: rascunho
+  - id: tem_qa_dedicado
+    nome: "Tem QA dedicado"
+    descricao: "O time conta com pessoa de qualidade dedicada"
+    exemplo: "nao (a revisão de qualidade é feita entre pares)"
+    tipo: booleano
+    inicial: nao
+    status: rascunho
+  - id: tem_runbook
+    nome: "Tem runbook"
+    descricao: "Existe runbook para o alerta ou serviço"
+    exemplo: "sim (roteiro de queda do checkout na wiki do time)"
+    tipo: booleano
+    status: rascunho
+  - id: custo_aceitavel
+    nome: "Custo dentro do previsto ou aceitável"
+    descricao: "O custo estimado de pelo menos uma das opções está dentro do orçamento previsto ou é aceitável no horizonte do relatório de custo"
+    exemplo: "sim (assinar custa R$ 20 mil agora, dentro dos R$ 250 mil previstos para o ano)"
+    tipo: booleano
+    status: rascunho
+  - id: objetivo_do_demandante
+    nome: "Objetivo do demandante"
+    descricao: "O que mais importa para quem pede, e define os pesos do Decisor"
+    exemplo: "cumprir_prazo (a campanha de recompra começa em 8 semanas)"
+    tipo: enum
+    valores: [cumprir_prazo, diferenciar_produto, reduzir_custo, validar_hipotese]
+    status: rascunho
+  - id: opcao_de_fornecimento
+    nome: "Opção de fornecimento"
+    descricao: "A decisão de construir, comprar ou assinar a solução"
+    exemplo: "assinar"
+    tipo: enum
+    valores: [construir, comprar, assinar]
+    status: rascunho
+  - id: houve_exposicao_de_dados
+    nome: "Houve exposição de dados pessoais"
+    descricao: "A vulnerabilidade ou o ataque expôs dados pessoais, o que obriga a notificar a autoridade e os titulares"
+    exemplo: "nao (as tentativas foram bloqueadas pela regra de WAF)"
+    tipo: booleano
+    status: rascunho
+  - id: e_epico
+    nome: "É um épico"
+    descricao: "A demanda é grande demais para uma iteração ou um PI e precisa ser quebrada em features menores"
+    exemplo: "sim (o programa de fidelidade tem 6 features e atravessa 3 times)"
+    tipo: booleano
+    status: rascunho
+  - id: tem_ambiente_efemero
+    nome: "Tem ambiente efêmero por PR"
+    descricao: "O time cria um ambiente por pull request para testar e revisar a mudança isolada"
+    exemplo: "sim (cada PR ganha um link de preview)"
+    tipo: booleano
+    inicial: nao
+    status: rascunho
+  - id: tem_ambiente_de_qa
+    nome: "Tem ambiente de QA"
+    descricao: "O time tem um ambiente de QA separado do staging"
+    exemplo: "nao (os testes de ponta a ponta rodam no staging)"
+    tipo: booleano
+    inicial: nao
+    status: rascunho
+  - id: tem_ambiente_de_dr
+    nome: "Tem ambiente de DR"
+    descricao: "O serviço tem ambiente de recuperação de desastre pronto para assumir o tráfego"
+    exemplo: "sim (região secundária com failover testado no trimestre)"
+    tipo: booleano
+    inicial: nao
+    status: rascunho
+  - id: tem_slo
+    nome: "Serviço tem SLO"
+    descricao: "O serviço tem SLO definido"
+    exemplo: "sim (99,9% de disponibilidade mensal)"
+    tipo: booleano
+    status: rascunho
+  - id: tem_sla
+    nome: "Tem SLA"
+    descricao: "O serviço tem acordo de nível de serviço com clientes ou parceiros, com prazos e consequências contratuais"
+    exemplo: "sim (99,9% de disponibilidade mensal com parceiros, com crédito abaixo disso)"
+    tipo: booleano
+    status: rascunho
+  - id: tentativas_iteracao
+    nome: "Tentativas de iteração"
+    descricao: "Contador de reprovações na validação, limite de 3"
+    exemplo: "2 (a terceira reprovação volta o item ao planejamento)"
+    tipo: inteiro
+    inicial: 0
+    status: rascunho
+  - id: tentativas_mitigacao
+    nome: "Tentativas de mitigação"
+    descricao: "Contador de mitigações que falharam, limite de 3"
+    exemplo: "2 (a terceira falha escala)"
+    tipo: inteiro
+    inicial: 0
+    status: rascunho
+  - id: tipo_alocacao
+    nome: "Tipo de alocação"
+    descricao: "Resumo da alocação: só agente, só pessoas ou as duas frentes"
+    exemplo: "misto"
+    tipo: enum
+    valores: [somente_agente, somente_pessoas, misto]
+    status: rascunho
+  - id: tipo_defeito
+    nome: "Tipo do relato"
+    descricao: "Resultado da triagem do relato"
+    exemplo: "defeito"
+    tipo: enum
+    valores: [defeito, comportamento_esperado, pedido_feature]
+    status: rascunho
+  - id: tipo_janela
+    nome: "Tipo de janela"
+    descricao: "Categoria da janela crítica em vigor"
+    exemplo: "sazonal"
+    tipo: enum
+    valores: [sazonal, repentina, freeze, manutencao, nenhuma]
+    status: rascunho
+  - id: turno_ativo
+    nome: "Turno ativo"
+    descricao: "Região ou fuso que detém o comando agora"
+    exemplo: "América do Sul, das 8h às 16h (horário de Brasília)"
+    tipo: texto
+    status: rascunho
+  - id: usa_ia
+    nome: "Usa IA"
+    descricao: "A feature usa IA ou modelo probabilístico"
+    exemplo: "sim (a feature usa um modelo para sugerir o preço)"
+    tipo: booleano
+    status: rascunho
+
+  # RASCUNHO: revisão humana. Variáveis de classificação da feature (tarefa 2.24).
+  - id: origem_da_demanda
+    nome: "Origem da demanda"
+    descricao: "De onde vem a feature"
+    exemplo: "oportunidade_de_negocio"
+    tipo: enum
+    valores: [necessidade_de_usuario, oportunidade_de_negocio, objetivo_estrategico, regulatoria, melhoria_interna]
+    status: rascunho
+  - id: tipo_de_feature
+    nome: "Tipo de feature"
+    descricao: "Variante da feature. Não muda o fluxo: só pré-preenche as variáveis genéricas que as raias comuns leem (performance, experimento, integração, acessibilidade, segurança reforçada e comportamento existente). A spec confirma ou ajusta cada uma."
+    exemplo: "melhoria_funcional (o checkout já existe e ganha o cupom de recompra)"
+    tipo: enum
+    valores: [nova_funcionalidade, melhoria_funcional, performance, acessibilidade, seguranca, integracao, experimento]
+    inicial: nova_funcionalidade
+    status: rascunho
+  - id: tem_requisito_de_acessibilidade
+    nome: "Tem requisito de acessibilidade"
+    descricao: "A entrega precisa atender a um nível de conformidade de acessibilidade ou corrige uma barreira de acesso"
+    exemplo: "sim (formulário de checkout navegável só por teclado e leitor de tela)"
+    tipo: booleano
+    status: rascunho
+  - id: exige_seguranca_reforcada
+    nome: "Exige segurança reforçada"
+    descricao: "A entrega mexe em autenticação, autorização, dados sensíveis ou corrige uma vulnerabilidade, e pede modelagem de ameaças e teste de intrusão"
+    exemplo: "sim (troca o fluxo de recuperação de senha)"
+    tipo: booleano
+    status: rascunho
+  - id: altera_comportamento_existente
+    nome: "Altera comportamento existente"
+    descricao: "A entrega muda algo que já está em produção, então precisa de uma linha de base do comportamento atual para comparar"
+    exemplo: "sim (o cálculo do frete muda para compradores recorrentes)"
+    tipo: booleano
+    status: rascunho
+  - id: modelo_de_trabalho
+    nome: "Modelo de trabalho"
+    descricao: "Modelo principal do time que vai atender a demanda"
+    exemplo: "produto_com_pm"
+    tipo: enum
+    valores: [produto_com_pm, plataforma, interno, squad_de_projeto, squad_de_problema, dados, sustentacao]
+    status: rascunho
+  - id: modelo_de_trabalho_complementar
+    nome: "Modelo de trabalho complementar"
+    descricao: "Segundo modelo envolvido quando há combinação, por exemplo um time de dados apoiando um time de produto"
+    exemplo: "dados"
+    tipo: enum
+    valores: [nenhum, produto_com_pm, plataforma, interno, squad_de_projeto, squad_de_problema, dados, sustentacao]
+    inicial: nenhum
+    status: rascunho
+  - id: cadencia_do_time
+    nome: "Cadência do time"
+    descricao: "Como o time organiza o trabalho no tempo: em iterações com planning, review e retrospectiva, ou em fluxo contínuo"
+    exemplo: "iteracoes (sprints de 2 semanas)"
+    tipo: enum
+    valores: [iteracoes, fluxo_continuo]
+    inicial: iteracoes
+    status: rascunho
+  - id: atua_em_programa
+    nome: "Atua em programa"
+    descricao: "O time faz parte de um programa com vários times que planejam juntos em incrementos (trem de entrega no SAFe)"
+    exemplo: "sim (5 times no trem de pagamentos, PI de 10 semanas)"
+    tipo: booleano
+    inicial: nao
+    status: rascunho
+  - id: nivel_de_incerteza
+    nome: "Nível de incerteza"
+    descricao: "Quanto já se sabe sobre a necessidade e a solução"
+    exemplo: "media (o público é conhecido, a solução não)"
+    tipo: enum
+    valores: [baixa, media, alta]
+    status: rascunho
+  - id: existe_solucao_reutilizavel
+    nome: "Existe solução reutilizável"
+    descricao: "Se uma solução existente atende a necessidade"
+    exemplo: "parcial (o componente de cupom atende 70%)"
+    tipo: enum
+    valores: [atende, parcial, nao_existe]
+    status: rascunho
+  - id: alinhada_aos_objetivos
+    nome: "Alinhada aos objetivos"
+    descricao: "A iniciativa move um OKR ou um KPI atual do demandante"
+    exemplo: "sim (move o KR de recompra do trimestre)"
+    tipo: booleano
+    status: rascunho
+
+# RASCUNHO: revisão humana. Papéis que executam ou apoiam subtarefas. Quem exerce o papel (pessoa ou agente do papel)
+  # RASCUNHO: revisão humana. Variáveis da seleção, execução e melhoria dos agentes.
+  - id: cobertura_de_agentes
+    nome: Cobertura de agentes
+    descricao: Se os agentes existentes cobrem os papéis das tarefas
+    exemplo: precisam_de_ajuste (o agente QA precisa da skill de evals)
+    tipo: enum
+    valores:
+    - cobrem
+    - precisam_de_ajuste
+    - faltam
+    status: rascunho
+  - id: tentativas_preparacao_agentes
+    nome: Tentativas de preparação dos agentes
+    descricao: Quantas vezes os agentes foram refinados e testados de novo
+    exemplo: 1 (a segunda reprovação ainda permite refinar)
+    tipo: inteiro
+    inicial: 0
+    status: rascunho
+  - id: tarefas_independentes
+    nome: Tarefas independentes
+    descricao: Quantas tarefas da mesma onda não dependem umas das outras
+    exemplo: 3 (endpoint, tela e evals)
+    tipo: inteiro
+    inicial: 0
+    status: rascunho
+  - id: causa_do_desvio
+    nome: Causa do desvio
+    descricao: Onde está a causa do desvio do agente
+    exemplo: contexto (o agente não recebeu a regra de fuso horário)
+    tipo: enum
+    valores:
+    - spec
+    - contexto
+    - instrucao
+    - skill
+    - ferramenta
+    - permissao
+    - modelo
+    status: rascunho
+  - id: tentativas_de_agente
+    nome: Repetições do desvio
+    descricao: Quantas vezes o mesmo desvio do agente se repetiu nesta feature
+    exemplo: 2 (no terceiro, a tarefa passa a uma pessoa)
+    tipo: inteiro
+    inicial: 0
+    status: rascunho
+  # RASCUNHO: revisão humana. Variáveis da spec, dos testes e da liberação.
+  - id: muda_jornada
+    nome: Muda jornada de usuário
+    descricao: A entrega muda, cria ou corrige uma jornada de usuário
+    exemplo: sim (muda o checkout)
+    tipo: booleano
+    status: rascunho
+  - id: tem_requisito_de_performance
+    nome: Tem requisito de performance
+    descricao: Há meta de latência, vazão ou risco de carga
+    exemplo: sim (p95 abaixo de 300 ms)
+    tipo: booleano
+    status: rascunho
+  - id: expoe_interface_externa
+    nome: Expõe interface externa
+    descricao: A feature expõe endpoint ou interface a clientes ou parceiros
+    exemplo: sim (endpoint de validação de cupom)
+    tipo: booleano
+    status: rascunho
+  - id: risco_de_liberacao
+    nome: Risco de liberação
+    descricao: Risco de liberar a feature para todos de uma vez
+    exemplo: medio (mexe no checkout)
+    tipo: enum
+    valores:
+    - baixo
+    - medio
+    - alto
+    status: rascunho
+  - id: precisa_de_experimento
+    nome: Precisa de experimento
+    descricao: O resultado de negócio é uma hipótese que precisa ser medida
+    exemplo: sim (o efeito na recompra ainda é hipótese)
+    tipo: booleano
+    status: rascunho
+  - id: causa_da_reprovacao
+    nome: Causa da reprovação
+    descricao: Onde está a causa de uma reprovação
+    exemplo: implementacao (consulta sem cache)
+    tipo: enum
+    valores:
+    - spec
+    - contexto
+    - implementacao
+    - teste
+    - ambiente
+    status: rascunho
+  # RASCUNHO: revisão humana. Variáveis do levantamento, dos testes integrados e da validação em produção.
+  - id: tipo_de_contexto
+    nome: Tipo de contexto
+    descricao: Importância do contexto de negócio que a feature toca
+    exemplo: core (checkout)
+    tipo: enum
+    valores:
+    - core
+    - suporte
+    - generico
+    status: rascunho
+  - id: tem_muitos_dependentes
+    nome: Tem muitos sistemas dependentes
+    descricao: Vários sistemas dependem da área que a feature muda
+    exemplo: sim (4 sistemas)
+    tipo: booleano
+    status: rascunho
+  - id: complexidade_do_fluxo
+    nome: Complexidade do fluxo
+    descricao: Quão complexo é o fluxo e se ele tem variações
+    exemplo: com_variacoes (cartão, boleto e saldo)
+    tipo: enum
+    valores:
+    - simples
+    - complexo
+    - com_variacoes
+    status: rascunho
+  - id: existe_processo_atual
+    nome: Existe processo atual
+    descricao: Há um processo hoje, manual ou não, que pode ser observado
+    exemplo: sim (planilha do atendimento)
+    tipo: booleano
+    status: rascunho
+  - id: ha_dados_disponiveis
+    nome: Há dados disponíveis
+    descricao: Há logs, métricas ou funis que medem a necessidade
+    exemplo: sim (funil do checkout)
+    tipo: booleano
+    status: rascunho
+  - id: ambiente_de_teste_integrado
+    nome: Ambiente dos testes integrados
+    descricao: Onde os testes integrados acontecem
+    exemplo: homologacao
+    tipo: enum
+    valores:
+    - staging
+    - homologacao
+    - producao
+    status: rascunho
+  - id: tem_rollout_gradual
+    nome: Tem rollout gradual
+    descricao: A estratégia prevê liberação por tipo de usuário ou região
+    exemplo: sim (por região)
+    tipo: booleano
+    status: rascunho
+  - id: incidente_causado_pela_feature
+    nome: Incidente causado pela feature
+    descricao: A feature causou incidente ou degradação em produção
+    exemplo: nao
+    tipo: booleano
+    status: rascunho
+  - id: metas_atingidas
+    nome: Metas atingidas
+    descricao: As metas de sucesso foram atingidas na janela de validação
+    exemplo: sim (recompra de 20%)
+    tipo: booleano
+    status: rascunho
+  - id: impacto_da_falha
+    nome: Impacto da falha
+    descricao: Se a falha ficou só na feature ou impactou vários usuários em produção
+    exemplo: so_na_feature (ainda em homologação)
+    tipo: enum
+    valores:
+    - so_na_feature
+    - multiplos_usuarios
+    status: rascunho
+# é decidido na alocação (feat_alo) e na seleção de agentes (feat_age). atuacao_de_agente: nao, apoio ou execucao.

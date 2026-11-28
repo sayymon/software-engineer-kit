@@ -270,7 +270,7 @@ nos:
       categoria: "[[ide_ia|IDE com IA]]"
       ferramentas:
         - "[[visual_studio_code|Visual Studio Code]]"
-        - tabela:eslint
+        - "[[eslint|ESLint]]"
   - id: ide_ctx_s0
     raia: ide_ctx
     tipo: inicio
@@ -567,7 +567,7 @@ ferramentas:
   - "[[github_copilot|GitHub Copilot]]"
   - tabela:continue-dev
   - tabela:llama-cpp
-  - tabela:eslint
+  - "[[eslint|ESLint]]"
 casosDeUso:
   - "[[programacao_em_par|Programação em par]]"
   - "[[depuracao_e_correcao_de_bugs|Depuração e correção de bugs]]"

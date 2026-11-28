@@ -1,0 +1,2698 @@
+{
+  "aviso": "local, carga alta, indicativo, não valida orçamento",
+  "medido_em": "2026-11-26T17:10:29.916Z",
+  "requisitos": [
+    "20.9",
+    "20.13"
+  ],
+  "demanda": "feature",
+  "metodo": {
+    "cpu_throttling_rate": 4,
+    "execucoes": 10,
+    "execucoes_casos_pesados": 3,
+    "p95": "nearest-rank sobre as amostras ordenadas",
+    "por_execucao": "contexto novo do navegador por execução, CPU 4x (CDP Emulation.setCPUThrottlingRate), uma renderização de aquecimento (diagrama de 2 nós, fora da medida)",
+    "alvo_s3": "resposta do mouse abaixo de 100 ms durante um render de cerca de 3 s",
+    "resposta_do_mouse": {
+      "evento_handler_ms": "performance.now() no handler de mousemove menos event.timeStamp (atraso entre o evento chegar ao navegador e a thread principal tratá-lo)",
+      "roundtrip_mouse_ms": "tempo de page.mouse.move (CDP Input.dispatchMouseEvent), que só retorna depois que a página trata o evento; um mousemove a cada ~20 ms",
+      "long_tasks": "PerformanceObserver longtask (> 50 ms) do documento principal",
+      "raf_gap_max_ms": "maior intervalo entre quadros requestAnimationFrame do documento principal",
+      "resposta_do_mouse_pior_momento_ms": "por execução, o maior entre evento_handler e roundtrip; o p95 entre execuções é comparado ao alvo"
+    },
+    "limites_do_kit": {
+      "maxTextSize": 200000,
+      "maxEdges": 1000
+    },
+    "iframe_carga_do_mermaid": "inline no srcdoc: com origem opaca (sandbox sem allow-same-origin) o Chromium bloqueou o <script src> do servidor de loopback (\"Permission was denied for this request to access the `loopback` address space\"); o bundle de ~3 MB vai no próprio srcdoc e o tempo de carga fica fora da medida (aquecimento)"
+  },
+  "conjuntos": {
+    "visao_geral": {
+      "descricao": "Visão geral (todas as raias recolhidas)",
+      "caracteres": 8405
+    },
+    "uma_raia": {
+      "descricao": "1 raia expandida (a maior: feat_orq)",
+      "caracteres": 14364
+    },
+    "cinco_raias": {
+      "descricao": "5 raias expandidas",
+      "caracteres": 20578
+    },
+    "completo": {
+      "descricao": "completo (todas as raias, sem Subtarefas)",
+      "caracteres": 47345
+    },
+    "completo_subtarefas": {
+      "descricao": "completo com Subtarefas",
+      "caracteres": 97878
+    },
+    "raia_feat_orq": {
+      "descricao": "1 raia expandida (feat_orq)",
+      "caracteres": 14364
+    },
+    "raia_feat_ent": {
+      "descricao": "1 raia expandida (feat_ent)",
+      "caracteres": 10773
+    },
+    "raia_feat_lev": {
+      "descricao": "1 raia expandida (feat_lev)",
+      "caracteres": 9446
+    }
+  },
+  "s3": {
+    "alvo": "resposta do mouse abaixo de 100 ms durante um render de cerca de 3 s",
+    "nota_sobre_render_de_3s": "o conjunto `completo` leva cerca de 3 a 4 s com CPU 4x (s1-s2.json); `completo_subtarefas` leva cerca de 10 s e entra com menos execuções",
+    "casos": {
+      "controle_sem_render": {
+        "modo": "controle",
+        "conjunto": "completo",
+        "execucoes_pedidas": 3,
+        "execucoes_ok": 3,
+        "erros": [],
+        "render_p95_ms": 3000.2,
+        "render_mediana_ms": 3000.2,
+        "render_amostras_ms": [
+          3000.2,
+          3000.2,
+          3000.1
+        ],
+        "iframe": null,
+        "resposta_do_mouse": {
+          "execucoes": 3,
+          "moves_por_execucao_mediana": 89,
+          "evento_handler_max_ms": {
+            "p95_das_execucoes": 24.9,
+            "pior": 24.9
+          },
+          "roundtrip_mouse_max_ms": {
+            "p95_das_execucoes": 26.9,
+            "pior": 26.9
+          },
+          "long_task_max_ms": {
+            "p95_das_execucoes": null,
+            "pior": null
+          },
+          "raf_gap_max_ms": {
+            "p95_das_execucoes": 33.8,
+            "pior": 33.8
+          },
+          "resposta_do_mouse_pior_momento_ms": {
+            "p95_das_execucoes": 26.9,
+            "pior": 26.9
+          },
+          "atende_alvo_menor_que_100ms": true,
+          "por_execucao": [
+            {
+              "moves": 89,
+              "evento_handler_ms": {
+                "p95": 13.5,
+                "max": 24.9
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 13.9,
+                "max": 26.9
+              },
+              "long_tasks": {
+                "quantidade": 0,
+                "max_ms": null,
+                "soma_ms": 0
+              },
+              "raf_gap_max_ms": 33.8
+            },
+            {
+              "moves": 89,
+              "evento_handler_ms": {
+                "p95": 13.3,
+                "max": 15.1
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 13.7,
+                "max": 15.6
+              },
+              "long_tasks": {
+                "quantidade": 0,
+                "max_ms": null,
+                "soma_ms": 0
+              },
+              "raf_gap_max_ms": 17.9
+            },
+            {
+              "moves": 89,
+              "evento_handler_ms": {
+                "p95": 14,
+                "max": 16.1
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 14.3,
+                "max": 16.8
+              },
+              "long_tasks": {
+                "quantidade": 0,
+                "max_ms": null,
+                "soma_ms": 0
+              },
+              "raf_gap_max_ms": 18.9
+            }
+          ]
+        }
+      },
+      "principal_completo": {
+        "modo": "principal",
+        "conjunto": "completo",
+        "execucoes_pedidas": 10,
+        "execucoes_ok": 10,
+        "erros": [],
+        "render_p95_ms": 3905.4,
+        "render_mediana_ms": 3751.5,
+        "render_amostras_ms": [
+          3905.4,
+          3711.6,
+          3848.7,
+          3814,
+          3781.7,
+          3808.6,
+          3722.7,
+          3737.5,
+          3717.5,
+          3751.5
+        ],
+        "iframe": null,
+        "resposta_do_mouse": {
+          "execucoes": 10,
+          "moves_por_execucao_mediana": 1,
+          "evento_handler_max_ms": {
+            "p95_das_execucoes": 3857,
+            "pior": 3857
+          },
+          "roundtrip_mouse_max_ms": {
+            "p95_das_execucoes": 3857.8,
+            "pior": 3857.8
+          },
+          "long_task_max_ms": {
+            "p95_das_execucoes": 3906,
+            "pior": 3906
+          },
+          "raf_gap_max_ms": {
+            "p95_das_execucoes": 3935.4,
+            "pior": 3935.4
+          },
+          "resposta_do_mouse_pior_momento_ms": {
+            "p95_das_execucoes": 3857.8,
+            "pior": 3857.8
+          },
+          "atende_alvo_menor_que_100ms": false,
+          "por_execucao": [
+            {
+              "moves": 1,
+              "evento_handler_ms": {
+                "p95": 3857,
+                "max": 3857
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3857.8,
+                "max": 3857.8
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3906,
+                "soma_ms": 3906
+              },
+              "raf_gap_max_ms": 3935.4
+            },
+            {
+              "moves": 1,
+              "evento_handler_ms": {
+                "p95": 3662.3,
+                "max": 3662.3
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3663,
+                "max": 3663
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3712,
+                "soma_ms": 3712
+              },
+              "raf_gap_max_ms": 3733
+            },
+            {
+              "moves": 1,
+              "evento_handler_ms": {
+                "p95": 3801.2,
+                "max": 3801.2
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3802,
+                "max": 3802
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3851,
+                "soma_ms": 3851
+              },
+              "raf_gap_max_ms": 3883
+            },
+            {
+              "moves": 1,
+              "evento_handler_ms": {
+                "p95": 3766.9,
+                "max": 3766.9
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3767.9,
+                "max": 3767.9
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3815,
+                "soma_ms": 3815
+              },
+              "raf_gap_max_ms": 3842.4
+            },
+            {
+              "moves": 1,
+              "evento_handler_ms": {
+                "p95": 3731.4,
+                "max": 3731.4
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3732.9,
+                "max": 3732.9
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3782,
+                "soma_ms": 3782
+              },
+              "raf_gap_max_ms": 3820.8
+            },
+            {
+              "moves": 1,
+              "evento_handler_ms": {
+                "p95": 3760.8,
+                "max": 3760.8
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3763.1,
+                "max": 3763.1
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3809,
+                "soma_ms": 3809
+              },
+              "raf_gap_max_ms": 3833.2
+            },
+            {
+              "moves": 1,
+              "evento_handler_ms": {
+                "p95": 3672.3,
+                "max": 3672.3
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3673,
+                "max": 3673
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3723,
+                "soma_ms": 3723
+              },
+              "raf_gap_max_ms": 3749.3
+            },
+            {
+              "moves": 1,
+              "evento_handler_ms": {
+                "p95": 3688.6,
+                "max": 3688.6
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3689.3,
+                "max": 3689.3
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3737,
+                "soma_ms": 3737
+              },
+              "raf_gap_max_ms": 3761.5
+            },
+            {
+              "moves": 1,
+              "evento_handler_ms": {
+                "p95": 3669.5,
+                "max": 3669.5
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3670.3,
+                "max": 3670.3
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3718,
+                "soma_ms": 3718
+              },
+              "raf_gap_max_ms": 3744.7
+            },
+            {
+              "moves": 1,
+              "evento_handler_ms": {
+                "p95": 3701.5,
+                "max": 3701.5
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3702.4,
+                "max": 3702.4
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3752,
+                "soma_ms": 3752
+              },
+              "raf_gap_max_ms": 3769.8
+            }
+          ]
+        }
+      },
+      "iframe_sandbox_completo": {
+        "modo": "iframe",
+        "conjunto": "completo",
+        "execucoes_pedidas": 10,
+        "execucoes_ok": 10,
+        "erros": [],
+        "render_p95_ms": 3984.8,
+        "render_mediana_ms": 3835.7,
+        "render_amostras_ms": [
+          3844.7,
+          3839.8,
+          3835.7,
+          3865.1,
+          3984.8,
+          3848.6,
+          3825.8,
+          3831,
+          3822.9,
+          3786.2
+        ],
+        "iframe": {
+          "processo_proprio": false,
+          "throttling_do_iframe": "iframe no mesmo processo da página, o throttling da página já vale (browserContext.newCDPSession: This frame does not have a separate CDP session, i)",
+          "alvos": {
+            "page": 1
+          }
+        },
+        "resposta_do_mouse": {
+          "execucoes": 10,
+          "moves_por_execucao_mediana": 2,
+          "evento_handler_max_ms": {
+            "p95_das_execucoes": 3905.7,
+            "pior": 3905.7
+          },
+          "roundtrip_mouse_max_ms": {
+            "p95_das_execucoes": 3906.6,
+            "pior": 3906.6
+          },
+          "long_task_max_ms": {
+            "p95_das_execucoes": 3955,
+            "pior": 3955
+          },
+          "raf_gap_max_ms": {
+            "p95_das_execucoes": 3985.3,
+            "pior": 3985.3
+          },
+          "resposta_do_mouse_pior_momento_ms": {
+            "p95_das_execucoes": 3906.6,
+            "pior": 3906.6
+          },
+          "atende_alvo_menor_que_100ms": false,
+          "por_execucao": [
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 3761.2,
+                "max": 3761.2
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3762,
+                "max": 3762
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3808,
+                "soma_ms": 3808
+              },
+              "raf_gap_max_ms": 3842.3
+            },
+            {
+              "moves": 1,
+              "evento_handler_ms": {
+                "p95": 3774.8,
+                "max": 3774.8
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3775.9,
+                "max": 3775.9
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3822,
+                "soma_ms": 3822
+              },
+              "raf_gap_max_ms": 3839.5
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 3762.1,
+                "max": 3762.1
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3763.1,
+                "max": 3763.1
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3811,
+                "soma_ms": 3811
+              },
+              "raf_gap_max_ms": 3835.4
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 3783.2,
+                "max": 3783.2
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3784.2,
+                "max": 3784.2
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3830,
+                "soma_ms": 3830
+              },
+              "raf_gap_max_ms": 3866
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 3905.7,
+                "max": 3905.7
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3906.6,
+                "max": 3906.6
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3955,
+                "soma_ms": 3955
+              },
+              "raf_gap_max_ms": 3985.3
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 3771.1,
+                "max": 3771.1
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3772,
+                "max": 3772
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3819,
+                "soma_ms": 3819
+              },
+              "raf_gap_max_ms": 3857.6
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 3748.9,
+                "max": 3748.9
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3750,
+                "max": 3750
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3798,
+                "soma_ms": 3798
+              },
+              "raf_gap_max_ms": 3827
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 3752.7,
+                "max": 3752.7
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3754,
+                "max": 3754
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3802,
+                "soma_ms": 3802
+              },
+              "raf_gap_max_ms": 3842.1
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 3752.1,
+                "max": 3752.1
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3753.1,
+                "max": 3753.1
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3802,
+                "soma_ms": 3802
+              },
+              "raf_gap_max_ms": 3836.4
+            },
+            {
+              "moves": 1,
+              "evento_handler_ms": {
+                "p95": 3717.4,
+                "max": 3717.4
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3718.3,
+                "max": 3718.3
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3765,
+                "soma_ms": 3765
+              },
+              "raf_gap_max_ms": 3784.6
+            }
+          ]
+        }
+      },
+      "principal_completo_subtarefas": {
+        "modo": "principal",
+        "conjunto": "completo_subtarefas",
+        "execucoes_pedidas": 3,
+        "execucoes_ok": 3,
+        "erros": [],
+        "render_p95_ms": 10269.1,
+        "render_mediana_ms": 10235.7,
+        "render_amostras_ms": [
+          10129.6,
+          10269.1,
+          10235.7
+        ],
+        "iframe": null,
+        "resposta_do_mouse": {
+          "execucoes": 3,
+          "moves_por_execucao_mediana": 1,
+          "evento_handler_max_ms": {
+            "p95_das_execucoes": 10219.9,
+            "pior": 10219.9
+          },
+          "roundtrip_mouse_max_ms": {
+            "p95_das_execucoes": 10220.8,
+            "pior": 10220.8
+          },
+          "long_task_max_ms": {
+            "p95_das_execucoes": 10270,
+            "pior": 10270
+          },
+          "raf_gap_max_ms": {
+            "p95_das_execucoes": 10298.5,
+            "pior": 10298.5
+          },
+          "resposta_do_mouse_pior_momento_ms": {
+            "p95_das_execucoes": 10220.8,
+            "pior": 10220.8
+          },
+          "atende_alvo_menor_que_100ms": false,
+          "por_execucao": [
+            {
+              "moves": 1,
+              "evento_handler_ms": {
+                "p95": 10080.1,
+                "max": 10080.1
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 10080.7,
+                "max": 10080.7
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 10130,
+                "soma_ms": 10130
+              },
+              "raf_gap_max_ms": 10157.9
+            },
+            {
+              "moves": 1,
+              "evento_handler_ms": {
+                "p95": 10219.9,
+                "max": 10219.9
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 10220.8,
+                "max": 10220.8
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 10270,
+                "soma_ms": 10270
+              },
+              "raf_gap_max_ms": 10298.5
+            },
+            {
+              "moves": 1,
+              "evento_handler_ms": {
+                "p95": 10186.6,
+                "max": 10186.6
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 10187.7,
+                "max": 10187.7
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 10237,
+                "soma_ms": 10237
+              },
+              "raf_gap_max_ms": 10272.2
+            }
+          ]
+        }
+      },
+      "iframe_sandbox_completo_subtarefas": {
+        "modo": "iframe",
+        "conjunto": "completo_subtarefas",
+        "execucoes_pedidas": 3,
+        "execucoes_ok": 3,
+        "erros": [],
+        "render_p95_ms": 10246.5,
+        "render_mediana_ms": 10103.3,
+        "render_amostras_ms": [
+          10246.5,
+          10103.3,
+          9979
+        ],
+        "iframe": {
+          "processo_proprio": false,
+          "throttling_do_iframe": "iframe no mesmo processo da página, o throttling da página já vale (browserContext.newCDPSession: This frame does not have a separate CDP session, i)",
+          "alvos": {
+            "page": 1
+          }
+        },
+        "resposta_do_mouse": {
+          "execucoes": 3,
+          "moves_por_execucao_mediana": 2,
+          "evento_handler_max_ms": {
+            "p95_das_execucoes": 10171.7,
+            "pior": 10171.7
+          },
+          "roundtrip_mouse_max_ms": {
+            "p95_das_execucoes": 10172.9,
+            "pior": 10172.9
+          },
+          "long_task_max_ms": {
+            "p95_das_execucoes": 10220,
+            "pior": 10220
+          },
+          "raf_gap_max_ms": {
+            "p95_das_execucoes": 10246.7,
+            "pior": 10246.7
+          },
+          "resposta_do_mouse_pior_momento_ms": {
+            "p95_das_execucoes": 10172.9,
+            "pior": 10172.9
+          },
+          "atende_alvo_menor_que_100ms": false,
+          "por_execucao": [
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 10171.7,
+                "max": 10171.7
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 10172.9,
+                "max": 10172.9
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 10220,
+                "soma_ms": 10220
+              },
+              "raf_gap_max_ms": 10246.7
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 10031.4,
+                "max": 10031.4
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 10032.3,
+                "max": 10032.3
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 10080,
+                "soma_ms": 10080
+              },
+              "raf_gap_max_ms": 10103.4
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 9909.3,
+                "max": 9909.3
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 9910.5,
+                "max": 9910.5
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 9958,
+                "soma_ms": 9958
+              },
+              "raf_gap_max_ms": 9990.4
+            }
+          ]
+        }
+      },
+      "iframe_sandbox_processo_isolado_completo": {
+        "modo": "iframe",
+        "conjunto": "completo",
+        "execucoes_pedidas": 10,
+        "execucoes_ok": 10,
+        "erros": [],
+        "render_p95_ms": 3925.1,
+        "render_mediana_ms": 3825.4,
+        "render_amostras_ms": [
+          3825.4,
+          3875.8,
+          3925.1,
+          3791.9,
+          3862.1,
+          3814.4,
+          3808.6,
+          3809.6,
+          3849.3,
+          3875.3
+        ],
+        "iframe": {
+          "processo_proprio": false,
+          "throttling_do_iframe": "iframe no mesmo processo da página, o throttling da página já vale (browserContext.newCDPSession: This frame does not have a separate CDP session, i)",
+          "alvos": {
+            "page": 1
+          }
+        },
+        "resposta_do_mouse": {
+          "execucoes": 10,
+          "moves_por_execucao_mediana": 2,
+          "evento_handler_max_ms": {
+            "p95_das_execucoes": 3856.4,
+            "pior": 3856.4
+          },
+          "roundtrip_mouse_max_ms": {
+            "p95_das_execucoes": 3857.5,
+            "pior": 3857.5
+          },
+          "long_task_max_ms": {
+            "p95_das_execucoes": 3906,
+            "pior": 3906
+          },
+          "raf_gap_max_ms": {
+            "p95_das_execucoes": 3936,
+            "pior": 3936
+          },
+          "resposta_do_mouse_pior_momento_ms": {
+            "p95_das_execucoes": 3857.5,
+            "pior": 3857.5
+          },
+          "atende_alvo_menor_que_100ms": false,
+          "por_execucao": [
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 3734.1,
+                "max": 3734.1
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3734.9,
+                "max": 3734.9
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3780,
+                "soma_ms": 3780
+              },
+              "raf_gap_max_ms": 3831.9
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 3802.6,
+                "max": 3802.6
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3804.1,
+                "max": 3804.1
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3852,
+                "soma_ms": 3852
+              },
+              "raf_gap_max_ms": 3876.7
+            },
+            {
+              "moves": 1,
+              "evento_handler_ms": {
+                "p95": 3856.4,
+                "max": 3856.4
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3857.5,
+                "max": 3857.5
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3906,
+                "soma_ms": 3906
+              },
+              "raf_gap_max_ms": 3936
+            },
+            {
+              "moves": 1,
+              "evento_handler_ms": {
+                "p95": 3722,
+                "max": 3722
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3722.9,
+                "max": 3722.9
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3770,
+                "soma_ms": 3770
+              },
+              "raf_gap_max_ms": 3791.5
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 3787.7,
+                "max": 3787.7
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3788.8,
+                "max": 3788.8
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3838,
+                "soma_ms": 3838
+              },
+              "raf_gap_max_ms": 3861.8
+            },
+            {
+              "moves": 1,
+              "evento_handler_ms": {
+                "p95": 3746.5,
+                "max": 3746.5
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3747.5,
+                "max": 3747.5
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3791,
+                "soma_ms": 3791
+              },
+              "raf_gap_max_ms": 3814.1
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 3736.1,
+                "max": 3736.1
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3737.4,
+                "max": 3737.4
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3785,
+                "soma_ms": 3785
+              },
+              "raf_gap_max_ms": 3818.8
+            },
+            {
+              "moves": 1,
+              "evento_handler_ms": {
+                "p95": 3739.9,
+                "max": 3739.9
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3741.4,
+                "max": 3741.4
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3789,
+                "soma_ms": 3789
+              },
+              "raf_gap_max_ms": 3819
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 3776.7,
+                "max": 3776.7
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3778.1,
+                "max": 3778.1
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3825,
+                "soma_ms": 3825
+              },
+              "raf_gap_max_ms": 3849.2
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 3803.1,
+                "max": 3803.1
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 3804,
+                "max": 3804
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 3852,
+                "soma_ms": 3852
+              },
+              "raf_gap_max_ms": 3883.6
+            }
+          ]
+        }
+      },
+      "iframe_sandbox_processo_isolado_completo_subtarefas": {
+        "modo": "iframe",
+        "conjunto": "completo_subtarefas",
+        "execucoes_pedidas": 3,
+        "execucoes_ok": 3,
+        "erros": [],
+        "render_p95_ms": 10182.7,
+        "render_mediana_ms": 10042.9,
+        "render_amostras_ms": [
+          10042.9,
+          10035.6,
+          10182.7
+        ],
+        "iframe": {
+          "processo_proprio": false,
+          "throttling_do_iframe": "iframe no mesmo processo da página, o throttling da página já vale (browserContext.newCDPSession: This frame does not have a separate CDP session, i)",
+          "alvos": {
+            "page": 1
+          }
+        },
+        "resposta_do_mouse": {
+          "execucoes": 3,
+          "moves_por_execucao_mediana": 2,
+          "evento_handler_max_ms": {
+            "p95_das_execucoes": 10106.4,
+            "pior": 10106.4
+          },
+          "roundtrip_mouse_max_ms": {
+            "p95_das_execucoes": 10107.7,
+            "pior": 10107.7
+          },
+          "long_task_max_ms": {
+            "p95_das_execucoes": 10155,
+            "pior": 10155
+          },
+          "raf_gap_max_ms": {
+            "p95_das_execucoes": 10182.2,
+            "pior": 10182.2
+          },
+          "resposta_do_mouse_pior_momento_ms": {
+            "p95_das_execucoes": 10107.7,
+            "pior": 10107.7
+          },
+          "atende_alvo_menor_que_100ms": false,
+          "por_execucao": [
+            {
+              "moves": 1,
+              "evento_handler_ms": {
+                "p95": 9975.6,
+                "max": 9975.6
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 9976.6,
+                "max": 9976.6
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 10025,
+                "soma_ms": 10025
+              },
+              "raf_gap_max_ms": 10043.8
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 9960.1,
+                "max": 9960.1
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 9962.1,
+                "max": 9962.1
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 10008,
+                "soma_ms": 10008
+              },
+              "raf_gap_max_ms": 10035.7
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 10106.4,
+                "max": 10106.4
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 10107.7,
+                "max": 10107.7
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 10155,
+                "soma_ms": 10155
+              },
+              "raf_gap_max_ms": 10182.2
+            }
+          ]
+        }
+      }
+    },
+    "nota_isolado": "os dois últimos casos usam um Chromium lançado com --enable-features=IsolateSandboxedIframes, que pede processo próprio para iframes com sandbox; veja `iframe.processo_proprio` em cada caso",
+    "worker": {
+      "viavel": false,
+      "conjunto_testado": "uma_raia",
+      "evidencia": {
+        "rel": {
+          "tipo": "object",
+          "document": "undefined",
+          "window": "undefined",
+          "domparser": "undefined",
+          "offscreenCanvas": "function"
+        },
+        "passos": [
+          {
+            "etapa": "importScripts",
+            "ok": true,
+            "mermaid": "object"
+          },
+          {
+            "etapa": "initialize",
+            "ok": true
+          },
+          {
+            "etapa": "render",
+            "ok": false,
+            "erro": "ReferenceError: document is not defined\n    at Object.render (http://127.0.0.1:4321/vendor/mermaid/mermaid.min.js:3586:785)\n    at http://127.0.0.1:4321/vendor/mermaid/mermaid.min.js:3586:5639\n    at new Promise (<anonymous>)\n    at performCall (http://127.0.0.1:4321/vendor/mermaid/mermaid.min.js:3586:5616)\n    at executeQueue (http://127.0.0.1:4321/vendor/mermaid/mermaid.min.js:3586:5274)\n    at "
+          }
+        ]
+      },
+      "leitura": "o bundle do Mermaid depende de document/window (DOM) para o layout e a limpeza do SVG; um Worker não tem DOM, então o render não conclui. Resultado esperado confirmado quando `viavel` é false."
+    }
+  },
+  "maquina": {
+    "plataforma": "darwin arm64",
+    "so": "25.6.0",
+    "cpus": {
+      "modelo": "Apple M3",
+      "quantidade": 8
+    },
+    "memoria_total_gb": 16,
+    "memoria_livre_gb_no_fim": 0.1,
+    "node": "v22.23.5",
+    "chromium": "159.0.8154.6"
+  },
+  "load_average": {
+    "inicio": [
+      3.16,
+      3.98,
+      9.97
+    ],
+    "fim": [
+      3.5,
+      3.52,
+      7.29
+    ],
+    "ordem": "1, 5 e 15 minutos (os.loadavg)"
+  },
+  "medido_ate": "2026-11-26T17:17:49.379Z",
+  "s4": {
+    "cache": {
+      "metodo": "por execução: render (miss) do conjunto, inserção do SVG no DOM, guarda em Map, esvazia o DOM e insere de novo a partir do Map (hit). Tempo até o quadro = innerHTML + layout forçado + 2 rAF. Heap com GC forçado (HeapProfiler.collectGarbage + Runtime.getHeapUsage) depois de cada conjunto guardado; o cache acumula os conjuntos na ordem da lista.",
+      "ordem_de_acumulo": [
+        "visao_geral",
+        "uma_raia",
+        "cinco_raias",
+        "completo"
+      ],
+      "execucoes_pedidas": 10,
+      "execucoes_pesado_pedidas": 3,
+      "erros": [],
+      "por_conjunto": {
+        "visao_geral": {
+          "execucoes_ok": 10,
+          "render_miss_ms": {
+            "n": 10,
+            "mediana": 482.7,
+            "p95": 560.4,
+            "max": 560.4,
+            "amostras": [
+              477.4,
+              482.7,
+              481.5,
+              483.4,
+              479.6,
+              486.9,
+              484.7,
+              560.4,
+              513.8,
+              479.9
+            ]
+          },
+          "miss_total_ms_render_mais_insercao_ate_quadro": {
+            "n": 10,
+            "mediana": 499.7,
+            "p95": 579,
+            "max": 579,
+            "amostras": [
+              499.7,
+              499.7,
+              498.6,
+              500.7,
+              496.1,
+              503.6,
+              500.6,
+              579,
+              532.2,
+              496.5
+            ]
+          },
+          "hit_insercao_sync_ms": {
+            "n": 10,
+            "mediana": 10.3,
+            "p95": 11.7,
+            "max": 11.7,
+            "amostras": [
+              10.7,
+              10,
+              9.2,
+              10.3,
+              10.4,
+              10.7,
+              10.3,
+              11.5,
+              11.7,
+              9.1
+            ]
+          },
+          "hit_ate_quadro_ms": {
+            "n": 10,
+            "mediana": 27.2,
+            "p95": 34.8,
+            "max": 34.8,
+            "amostras": [
+              25.8,
+              34.8,
+              24.9,
+              27.9,
+              29.8,
+              21.3,
+              27.2,
+              18.6,
+              29.6,
+              30.8
+            ]
+          },
+          "ganho_mediano_ms": 472.5,
+          "svg_kb_utf16": 288.9,
+          "heap_delta_kb_mediana": 1029.3,
+          "heap_cumulativo_kb_mediana": 1029.3,
+          "nos_dom_pagina_com_o_svg_mediana": 1785
+        },
+        "uma_raia": {
+          "execucoes_ok": 10,
+          "render_miss_ms": {
+            "n": 10,
+            "mediana": 694.2,
+            "p95": 734,
+            "max": 734,
+            "amostras": [
+              688,
+              697.4,
+              694.2,
+              688.5,
+              703.9,
+              733.5,
+              691.9,
+              734,
+              707,
+              693.2
+            ]
+          },
+          "miss_total_ms_render_mais_insercao_ate_quadro": {
+            "n": 10,
+            "mediana": 719.2,
+            "p95": 763,
+            "max": 763,
+            "amostras": [
+              711.5,
+              721.9,
+              719.2,
+              712.2,
+              728.2,
+              758.8,
+              715.3,
+              763,
+              731.1,
+              716.8
+            ]
+          },
+          "hit_insercao_sync_ms": {
+            "n": 10,
+            "mediana": 17.9,
+            "p95": 21.5,
+            "max": 21.5,
+            "amostras": [
+              17.8,
+              17.6,
+              19.7,
+              17.3,
+              18.5,
+              18.6,
+              18.5,
+              21.5,
+              17.9,
+              17.8
+            ]
+          },
+          "hit_ate_quadro_ms": {
+            "n": 10,
+            "mediana": 32.3,
+            "p95": 40.9,
+            "max": 40.9,
+            "amostras": [
+              26.2,
+              35,
+              40.9,
+              30.9,
+              29.3,
+              32.3,
+              39.5,
+              34.9,
+              36.2,
+              21.4
+            ]
+          },
+          "ganho_mediano_ms": 686.9,
+          "svg_kb_utf16": 942.8,
+          "heap_delta_kb_mediana": 392.3,
+          "heap_cumulativo_kb_mediana": 1423.3,
+          "nos_dom_pagina_com_o_svg_mediana": 2779
+        },
+        "cinco_raias": {
+          "execucoes_ok": 10,
+          "render_miss_ms": {
+            "n": 10,
+            "mediana": 1133.5,
+            "p95": 1192.3,
+            "max": 1192.3,
+            "amostras": [
+              1133.5,
+              1133.1,
+              1164.2,
+              1145.9,
+              1126.5,
+              1192.3,
+              1128.3,
+              1158.2,
+              1130.1,
+              1135.2
+            ]
+          },
+          "miss_total_ms_render_mais_insercao_ate_quadro": {
+            "n": 10,
+            "mediana": 1172.5,
+            "p95": 1231.5,
+            "max": 1231.5,
+            "amostras": [
+              1172.5,
+              1171.8,
+              1202.8,
+              1185,
+              1165.2,
+              1231.5,
+              1166.7,
+              1196.3,
+              1168.9,
+              1174.5
+            ]
+          },
+          "hit_insercao_sync_ms": {
+            "n": 10,
+            "mediana": 30.8,
+            "p95": 35.9,
+            "max": 35.9,
+            "amostras": [
+              30.8,
+              35.9,
+              29.7,
+              30.7,
+              31.2,
+              32.8,
+              30.9,
+              30.6,
+              30.5,
+              31.2
+            ]
+          },
+          "hit_ate_quadro_ms": {
+            "n": 10,
+            "mediana": 50.9,
+            "p95": 58.3,
+            "max": 58.3,
+            "amostras": [
+              53.3,
+              58.3,
+              51.9,
+              42,
+              48.6,
+              41.3,
+              52.1,
+              51.2,
+              50.9,
+              48.4
+            ]
+          },
+          "ganho_mediano_ms": 1121.6,
+          "svg_kb_utf16": 2077.5,
+          "heap_delta_kb_mediana": 206.3,
+          "heap_cumulativo_kb_mediana": 1629,
+          "nos_dom_pagina_com_o_svg_mediana": 4293
+        },
+        "completo": {
+          "execucoes_ok": 10,
+          "render_miss_ms": {
+            "n": 10,
+            "mediana": 3616.3,
+            "p95": 3702.6,
+            "max": 3702.6,
+            "amostras": [
+              3645.1,
+              3592.8,
+              3612.9,
+              3673.4,
+              3556.9,
+              3616.3,
+              3620.5,
+              3667.4,
+              3588.7,
+              3702.6
+            ]
+          },
+          "miss_total_ms_render_mais_insercao_ate_quadro": {
+            "n": 10,
+            "mediana": 3722.8,
+            "p95": 3810.8,
+            "max": 3810.8,
+            "amostras": [
+              3755.3,
+              3700.5,
+              3721.2,
+              3779.6,
+              3665.1,
+              3722.8,
+              3726,
+              3790.9,
+              3695.4,
+              3810.8
+            ]
+          },
+          "hit_insercao_sync_ms": {
+            "n": 10,
+            "mediana": 91.6,
+            "p95": 95.6,
+            "max": 95.6,
+            "amostras": [
+              92.6,
+              92.8,
+              91.9,
+              90.9,
+              90.7,
+              91.6,
+              91.1,
+              95.6,
+              90.7,
+              92.3
+            ]
+          },
+          "hit_ate_quadro_ms": {
+            "n": 10,
+            "mediana": 109,
+            "p95": 115.9,
+            "max": 115.9,
+            "amostras": [
+              111.8,
+              113.7,
+              112.7,
+              107.2,
+              103,
+              108.4,
+              109,
+              115.9,
+              104.5,
+              110.3
+            ]
+          },
+          "ganho_mediano_ms": 3613.8,
+          "svg_kb_utf16": 8356.9,
+          "heap_delta_kb_mediana": 432.2,
+          "heap_cumulativo_kb_mediana": 2061.3,
+          "nos_dom_pagina_com_o_svg_mediana": 11399
+        },
+        "completo_subtarefas": {
+          "execucoes_ok": 3,
+          "render_miss_ms": {
+            "n": 3,
+            "mediana": 10163.4,
+            "p95": 10166.7,
+            "max": 10166.7,
+            "amostras": [
+              9927.5,
+              10163.4,
+              10166.7
+            ]
+          },
+          "miss_total_ms_render_mais_insercao_ate_quadro": {
+            "n": 3,
+            "mediana": 10329,
+            "p95": 10372.1,
+            "max": 10372.1,
+            "amostras": [
+              10090.8,
+              10329,
+              10372.1
+            ]
+          },
+          "hit_insercao_sync_ms": {
+            "n": 3,
+            "mediana": 154,
+            "p95": 156.3,
+            "max": 156.3,
+            "amostras": [
+              156.3,
+              154,
+              138.2
+            ]
+          },
+          "hit_ate_quadro_ms": {
+            "n": 3,
+            "mediana": 194.2,
+            "p95": 198.4,
+            "max": 198.4,
+            "amostras": [
+              194.2,
+              198.4,
+              174.6
+            ]
+          },
+          "ganho_mediano_ms": 10134.8,
+          "svg_kb_utf16": 9635.6,
+          "heap_delta_kb_mediana": 2206.1,
+          "heap_cumulativo_kb_mediana": 2206.1,
+          "nos_dom_pagina_com_o_svg_mediana": 20411
+        }
+      },
+      "memoria_total_do_cache_dos_4_conjuntos_kb_mediana": 2061.3,
+      "nota_memoria": "heap_delta inclui o que o Mermaid retém ao renderizar o conjunto (estado interno) além da string do SVG; svg_kb_utf16 é só a string (2 bytes por caractere)"
+    },
+    "antecipacao": {
+      "metodo": "por execução: Visão geral renderizada; 1,5 s ocioso (controle de mouse); depois, para cada uma das 3 primeiras raias, um requestIdleCallback (timeout 2 s) dispara um mermaid.render de 1 raia e guarda o SVG; por fim o clique na primeira raia (acerto do cache) e o mesmo conjunto sem cache (erro). O mouse se move a cada ~20 ms durante todas as fases. CPU = delta de Performance.getMetrics (TaskDuration, ScriptDuration, LayoutDuration, RecalcStyleDuration) entre o início e o fim da antecipação.",
+      "raias_antecipadas": [
+        "feat_orq",
+        "feat_ent",
+        "feat_lev"
+      ],
+      "execucoes_pedidas": 10,
+      "execucoes_ok": 10,
+      "erros": [],
+      "visao_geral_ate_quadro_ms": {
+        "n": 10,
+        "mediana": 520.5,
+        "p95": 552.9,
+        "max": 552.9,
+        "amostras": [
+          550.8,
+          530.5,
+          509.8,
+          521.1,
+          520.4,
+          525.1,
+          552.9,
+          520.5,
+          515.8,
+          520.4
+        ]
+      },
+      "render_de_cada_raia_antecipada": [
+        {
+          "id": "feat_orq",
+          "render_ms": {
+            "n": 10,
+            "mediana": 716.8,
+            "p95": 734.3,
+            "max": 734.3,
+            "amostras": [
+              722.6,
+              722.3,
+              734.3,
+              721.4,
+              716.8,
+              710.1,
+              710.1,
+              711.6,
+              714.3,
+              718
+            ]
+          },
+          "espera_pelo_idle_ms": {
+            "n": 10,
+            "mediana": 7.5,
+            "p95": 16.5,
+            "max": 16.5,
+            "amostras": [
+              7.5,
+              16.5,
+              10.2,
+              2.8,
+              1.7,
+              10.4,
+              12.7,
+              2.6,
+              0.1,
+              14.1
+            ]
+          },
+          "did_timeout_em": 0
+        },
+        {
+          "id": "feat_ent",
+          "render_ms": {
+            "n": 10,
+            "mediana": 517,
+            "p95": 540.7,
+            "max": 540.7,
+            "amostras": [
+              519.2,
+              517,
+              540.7,
+              516.7,
+              521.6,
+              513.7,
+              517.9,
+              512.1,
+              521.7,
+              511.9
+            ]
+          },
+          "espera_pelo_idle_ms": {
+            "n": 10,
+            "mediana": 4.1,
+            "p95": 6.1,
+            "max": 6.1,
+            "amostras": [
+              5.5,
+              4.3,
+              3.9,
+              4.7,
+              4.1,
+              4,
+              6.1,
+              3.9,
+              4.2,
+              4
+            ]
+          },
+          "did_timeout_em": 0
+        },
+        {
+          "id": "feat_lev",
+          "render_ms": {
+            "n": 10,
+            "mediana": 425.5,
+            "p95": 461.7,
+            "max": 461.7,
+            "amostras": [
+              461.7,
+              430.3,
+              432.7,
+              425.5,
+              423.5,
+              424.2,
+              419.7,
+              422,
+              458,
+              432.7
+            ]
+          },
+          "espera_pelo_idle_ms": {
+            "n": 10,
+            "mediana": 3,
+            "p95": 3.4,
+            "max": 3.4,
+            "amostras": [
+              2,
+              3.2,
+              3,
+              3,
+              3.2,
+              2.9,
+              2.5,
+              3.4,
+              2.8,
+              3.1
+            ]
+          },
+          "did_timeout_em": 0
+        }
+      ],
+      "duracao_total_da_antecipacao_ms": {
+        "n": 10,
+        "mediana": 1674.2,
+        "p95": 1724.9,
+        "max": 1724.9,
+        "amostras": [
+          1722.7,
+          1693.6,
+          1724.9,
+          1674.2,
+          1671.6,
+          1665.4,
+          1669.1,
+          1655.7,
+          1701.3,
+          1683.9
+        ]
+      },
+      "clique_na_raia_antecipada": {
+        "com_cache_acerto_ate_quadro_ms": {
+          "n": 10,
+          "mediana": 27.9,
+          "p95": 39.5,
+          "max": 39.5,
+          "amostras": [
+            39.5,
+            28.5,
+            26.8,
+            27.7,
+            28.2,
+            27.9,
+            26.2,
+            30.5,
+            29.6,
+            26.9
+          ]
+        },
+        "sem_cache_erro_ate_quadro_ms": {
+          "n": 10,
+          "mediana": 727.2,
+          "p95": 823,
+          "max": 823,
+          "amostras": [
+            823,
+            733.3,
+            727.2,
+            718.2,
+            717.7,
+            734.7,
+            730.1,
+            715.6,
+            724.3,
+            759.2
+          ]
+        },
+        "ganho_mediano_ms": 699.3
+      },
+      "cpu_da_antecipacao_ms": {
+        "tarefa": {
+          "n": 10,
+          "mediana": 1717.3,
+          "p95": 1790.1,
+          "max": 1790.1,
+          "amostras": [
+            1790.1,
+            1722.2,
+            1757.4,
+            1717.3,
+            1713.8,
+            1699.9,
+            1700.6,
+            1695.8,
+            1752.1,
+            1724.5
+          ]
+        },
+        "script": {
+          "n": 10,
+          "mediana": 3.2,
+          "p95": 4.4,
+          "max": 4.4,
+          "amostras": [
+            3.2,
+            3.4,
+            2.8,
+            4.1,
+            2.5,
+            2.7,
+            2.9,
+            3.5,
+            4.4,
+            3.3
+          ]
+        },
+        "layout": {
+          "n": 10,
+          "mediana": 48.5,
+          "p95": 52.5,
+          "max": 52.5,
+          "amostras": [
+            46.4,
+            51.3,
+            48.1,
+            52.5,
+            50.5,
+            49.7,
+            48.5,
+            46.9,
+            51.4,
+            46.3
+          ]
+        },
+        "estilo": {
+          "n": 10,
+          "mediana": 41,
+          "p95": 46.1,
+          "max": 46.1,
+          "amostras": [
+            46.1,
+            41.3,
+            39.2,
+            41,
+            38.7,
+            40.5,
+            42.5,
+            41.7,
+            43.7,
+            38.9
+          ]
+        },
+        "nota": "tempo de CPU gasto à toa se a pessoa nunca abrir essas raias; os valores vêm do contador do navegador com CPU 4x ativo"
+      },
+      "memoria": {
+        "heap_delta_kb": {
+          "n": 10,
+          "mediana": 583.1,
+          "p95": 586,
+          "max": 586,
+          "amostras": [
+            584,
+            582.1,
+            584.8,
+            585.3,
+            583.1,
+            582.3,
+            585,
+            582.8,
+            565.8,
+            586
+          ]
+        },
+        "heap_depois_kb": {
+          "n": 10,
+          "mediana": 6043.4,
+          "p95": 6048.1,
+          "max": 6048.1,
+          "amostras": [
+            6039.6,
+            6034.2,
+            6040,
+            6048.1,
+            6044.9,
+            6043.4,
+            6044,
+            6045.1,
+            6024.9,
+            6044.8
+          ]
+        },
+        "nos_dom_depois": {
+          "n": 10,
+          "mediana": 1918,
+          "p95": 1918,
+          "max": 1918,
+          "amostras": [
+            1918,
+            1918,
+            1918,
+            1918,
+            1918,
+            1918,
+            1918,
+            1918,
+            1918,
+            1918
+          ]
+        }
+      },
+      "resposta_do_mouse_por_fase": {
+        "visao_geral_render": {
+          "execucoes": 10,
+          "moves_por_execucao_mediana": 2,
+          "evento_handler_max_ms": {
+            "p95_das_execucoes": 500.5,
+            "pior": 500.5
+          },
+          "roundtrip_mouse_max_ms": {
+            "p95_das_execucoes": 501.3,
+            "pior": 501.3
+          },
+          "long_task_max_ms": {
+            "p95_das_execucoes": 524,
+            "pior": 524
+          },
+          "raf_gap_max_ms": {
+            "p95_das_execucoes": 562.6,
+            "pior": 562.6
+          },
+          "resposta_do_mouse_pior_momento_ms": {
+            "p95_das_execucoes": 501.3,
+            "pior": 501.3
+          },
+          "atende_alvo_menor_que_100ms": false,
+          "por_execucao": [
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 480.8,
+                "max": 480.8
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 481.8,
+                "max": 481.8
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 503,
+                "soma_ms": 503
+              },
+              "raf_gap_max_ms": 562.6
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 475.1,
+                "max": 475.1
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 475.8,
+                "max": 475.8
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 497,
+                "soma_ms": 497
+              },
+              "raf_gap_max_ms": 525.8
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 458.2,
+                "max": 458.2
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 458.9,
+                "max": 458.9
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 482,
+                "soma_ms": 482
+              },
+              "raf_gap_max_ms": 507.7
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 466.7,
+                "max": 466.7
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 467.2,
+                "max": 467.2
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 490,
+                "soma_ms": 490
+              },
+              "raf_gap_max_ms": 518.9
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 462.7,
+                "max": 462.7
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 463.4,
+                "max": 463.4
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 487,
+                "soma_ms": 487
+              },
+              "raf_gap_max_ms": 517.6
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 467.3,
+                "max": 467.3
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 468.3,
+                "max": 468.3
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 492,
+                "soma_ms": 492
+              },
+              "raf_gap_max_ms": 523.2
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 500.5,
+                "max": 500.5
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 501.3,
+                "max": 501.3
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 524,
+                "soma_ms": 524
+              },
+              "raf_gap_max_ms": 550.1
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 466.6,
+                "max": 466.6
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 467.3,
+                "max": 467.3
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 490,
+                "soma_ms": 490
+              },
+              "raf_gap_max_ms": 517.6
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 459.5,
+                "max": 459.5
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 460.1,
+                "max": 460.1
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 486,
+                "soma_ms": 486
+              },
+              "raf_gap_max_ms": 512.4
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 469.2,
+                "max": 469.2
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 469.9,
+                "max": 469.9
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 492,
+                "soma_ms": 492
+              },
+              "raf_gap_max_ms": 518.2
+            }
+          ]
+        },
+        "controle_ocioso": {
+          "execucoes": 10,
+          "moves_por_execucao_mediana": 45,
+          "evento_handler_max_ms": {
+            "p95_das_execucoes": 15.7,
+            "pior": 15.7
+          },
+          "roundtrip_mouse_max_ms": {
+            "p95_das_execucoes": 26.5,
+            "pior": 26.5
+          },
+          "long_task_max_ms": {
+            "p95_das_execucoes": null,
+            "pior": null
+          },
+          "raf_gap_max_ms": {
+            "p95_das_execucoes": 18.9,
+            "pior": 18.9
+          },
+          "resposta_do_mouse_pior_momento_ms": {
+            "p95_das_execucoes": 26.5,
+            "pior": 26.5
+          },
+          "atende_alvo_menor_que_100ms": true,
+          "por_execucao": [
+            {
+              "moves": 45,
+              "evento_handler_ms": {
+                "p95": 13.5,
+                "max": 14.3
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 13.7,
+                "max": 14.6
+              },
+              "long_tasks": {
+                "quantidade": 0,
+                "max_ms": null,
+                "soma_ms": 0
+              },
+              "raf_gap_max_ms": 18.9
+            },
+            {
+              "moves": 45,
+              "evento_handler_ms": {
+                "p95": 14,
+                "max": 14.2
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 14.3,
+                "max": 14.5
+              },
+              "long_tasks": {
+                "quantidade": 0,
+                "max_ms": null,
+                "soma_ms": 0
+              },
+              "raf_gap_max_ms": 18.5
+            },
+            {
+              "moves": 45,
+              "evento_handler_ms": {
+                "p95": 14.1,
+                "max": 14.9
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 14.3,
+                "max": 15.2
+              },
+              "long_tasks": {
+                "quantidade": 0,
+                "max_ms": null,
+                "soma_ms": 0
+              },
+              "raf_gap_max_ms": 18.9
+            },
+            {
+              "moves": 45,
+              "evento_handler_ms": {
+                "p95": 13.4,
+                "max": 13.5
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 13.5,
+                "max": 13.6
+              },
+              "long_tasks": {
+                "quantidade": 0,
+                "max_ms": null,
+                "soma_ms": 0
+              },
+              "raf_gap_max_ms": 17.4
+            },
+            {
+              "moves": 45,
+              "evento_handler_ms": {
+                "p95": 14.4,
+                "max": 15.3
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 14.9,
+                "max": 26.5
+              },
+              "long_tasks": {
+                "quantidade": 0,
+                "max_ms": null,
+                "soma_ms": 0
+              },
+              "raf_gap_max_ms": 18.8
+            },
+            {
+              "moves": 45,
+              "evento_handler_ms": {
+                "p95": 13.5,
+                "max": 14.7
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 13.8,
+                "max": 16.4
+              },
+              "long_tasks": {
+                "quantidade": 0,
+                "max_ms": null,
+                "soma_ms": 0
+              },
+              "raf_gap_max_ms": 18.3
+            },
+            {
+              "moves": 45,
+              "evento_handler_ms": {
+                "p95": 13.7,
+                "max": 15.3
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 14,
+                "max": 15.8
+              },
+              "long_tasks": {
+                "quantidade": 0,
+                "max_ms": null,
+                "soma_ms": 0
+              },
+              "raf_gap_max_ms": 18.6
+            },
+            {
+              "moves": 45,
+              "evento_handler_ms": {
+                "p95": 13.9,
+                "max": 14.2
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 14.2,
+                "max": 14.8
+              },
+              "long_tasks": {
+                "quantidade": 0,
+                "max_ms": null,
+                "soma_ms": 0
+              },
+              "raf_gap_max_ms": 18.7
+            },
+            {
+              "moves": 45,
+              "evento_handler_ms": {
+                "p95": 14.4,
+                "max": 14.9
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 14.7,
+                "max": 15.1
+              },
+              "long_tasks": {
+                "quantidade": 0,
+                "max_ms": null,
+                "soma_ms": 0
+              },
+              "raf_gap_max_ms": 18.6
+            },
+            {
+              "moves": 44,
+              "evento_handler_ms": {
+                "p95": 13.7,
+                "max": 15.7
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 13.9,
+                "max": 14.3
+              },
+              "long_tasks": {
+                "quantidade": 0,
+                "max_ms": null,
+                "soma_ms": 0
+              },
+              "raf_gap_max_ms": 18.4
+            }
+          ]
+        },
+        "durante_antecipacao": {
+          "execucoes": 10,
+          "moves_por_execucao_mediana": 3,
+          "evento_handler_max_ms": {
+            "p95_das_execucoes": 718,
+            "pior": 718
+          },
+          "roundtrip_mouse_max_ms": {
+            "p95_das_execucoes": 718.7,
+            "pior": 718.7
+          },
+          "long_task_max_ms": {
+            "p95_das_execucoes": 734,
+            "pior": 734
+          },
+          "raf_gap_max_ms": {
+            "p95_das_execucoes": 736.8,
+            "pior": 736.8
+          },
+          "resposta_do_mouse_pior_momento_ms": {
+            "p95_das_execucoes": 718.7,
+            "pior": 718.7
+          },
+          "atende_alvo_menor_que_100ms": false,
+          "por_execucao": [
+            {
+              "moves": 3,
+              "evento_handler_ms": {
+                "p95": 718,
+                "max": 718
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 718.7,
+                "max": 718.7
+              },
+              "long_tasks": {
+                "quantidade": 2,
+                "max_ms": 726,
+                "soma_ms": 1245
+              },
+              "raf_gap_max_ms": 728.3
+            },
+            {
+              "moves": 4,
+              "evento_handler_ms": {
+                "p95": 702,
+                "max": 702
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 702.5,
+                "max": 702.5
+              },
+              "long_tasks": {
+                "quantidade": 2,
+                "max_ms": 722,
+                "soma_ms": 1239
+              },
+              "raf_gap_max_ms": 724.7
+            },
+            {
+              "moves": 3,
+              "evento_handler_ms": {
+                "p95": 713.2,
+                "max": 713.2
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 713.9,
+                "max": 713.9
+              },
+              "long_tasks": {
+                "quantidade": 2,
+                "max_ms": 734,
+                "soma_ms": 1274
+              },
+              "raf_gap_max_ms": 736.8
+            },
+            {
+              "moves": 3,
+              "evento_handler_ms": {
+                "p95": 707.5,
+                "max": 707.5
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 708.1,
+                "max": 708.1
+              },
+              "long_tasks": {
+                "quantidade": 2,
+                "max_ms": 721,
+                "soma_ms": 1239
+              },
+              "raf_gap_max_ms": 723.5
+            },
+            {
+              "moves": 3,
+              "evento_handler_ms": {
+                "p95": 703,
+                "max": 703
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 703.7,
+                "max": 703.7
+              },
+              "long_tasks": {
+                "quantidade": 2,
+                "max_ms": 717,
+                "soma_ms": 1238
+              },
+              "raf_gap_max_ms": 719.3
+            },
+            {
+              "moves": 3,
+              "evento_handler_ms": {
+                "p95": 702.1,
+                "max": 702.1
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 702.7,
+                "max": 702.7
+              },
+              "long_tasks": {
+                "quantidade": 2,
+                "max_ms": 710,
+                "soma_ms": 1223
+              },
+              "raf_gap_max_ms": 712.3
+            },
+            {
+              "moves": 3,
+              "evento_handler_ms": {
+                "p95": 689.4,
+                "max": 689.4
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 689.9,
+                "max": 689.9
+              },
+              "long_tasks": {
+                "quantidade": 2,
+                "max_ms": 710,
+                "soma_ms": 1228
+              },
+              "raf_gap_max_ms": 712.1
+            },
+            {
+              "moves": 3,
+              "evento_handler_ms": {
+                "p95": 709.9,
+                "max": 709.9
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 710.5,
+                "max": 710.5
+              },
+              "long_tasks": {
+                "quantidade": 2,
+                "max_ms": 711,
+                "soma_ms": 1223
+              },
+              "raf_gap_max_ms": 713.1
+            },
+            {
+              "moves": 3,
+              "evento_handler_ms": {
+                "p95": 713.5,
+                "max": 713.5
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 714,
+                "max": 714
+              },
+              "long_tasks": {
+                "quantidade": 2,
+                "max_ms": 714,
+                "soma_ms": 1235
+              },
+              "raf_gap_max_ms": 716
+            },
+            {
+              "moves": 3,
+              "evento_handler_ms": {
+                "p95": 714.3,
+                "max": 714.3
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 714.9,
+                "max": 714.9
+              },
+              "long_tasks": {
+                "quantidade": 2,
+                "max_ms": 718,
+                "soma_ms": 1229
+              },
+              "raf_gap_max_ms": 719.7
+            }
+          ]
+        },
+        "clique": {
+          "execucoes": 10,
+          "moves_por_execucao_mediana": 2,
+          "evento_handler_max_ms": {
+            "p95_das_execucoes": 786.6,
+            "pior": 786.6
+          },
+          "roundtrip_mouse_max_ms": {
+            "p95_das_execucoes": 789.1,
+            "pior": 789.1
+          },
+          "long_task_max_ms": {
+            "p95_das_execucoes": 805,
+            "pior": 805
+          },
+          "raf_gap_max_ms": {
+            "p95_das_execucoes": 806.8,
+            "pior": 806.8
+          },
+          "resposta_do_mouse_pior_momento_ms": {
+            "p95_das_execucoes": 789.1,
+            "pior": 789.1
+          },
+          "atende_alvo_menor_que_100ms": false,
+          "por_execucao": [
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 786.6,
+                "max": 786.6
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 789.1,
+                "max": 789.1
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 805,
+                "soma_ms": 805
+              },
+              "raf_gap_max_ms": 806.8
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 705.6,
+                "max": 705.6
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 706.4,
+                "max": 706.4
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 723,
+                "soma_ms": 723
+              },
+              "raf_gap_max_ms": 724.8
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 700,
+                "max": 700
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 700.9,
+                "max": 700.9
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 717,
+                "soma_ms": 717
+              },
+              "raf_gap_max_ms": 718.8
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 684.5,
+                "max": 684.5
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 685.3,
+                "max": 685.3
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 701,
+                "soma_ms": 701
+              },
+              "raf_gap_max_ms": 702.7
+            },
+            {
+              "moves": 1,
+              "evento_handler_ms": {
+                "p95": 694.3,
+                "max": 694.3
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 695,
+                "max": 695
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 712,
+                "soma_ms": 712
+              },
+              "raf_gap_max_ms": 714
+            },
+            {
+              "moves": 1,
+              "evento_handler_ms": {
+                "p95": 699.3,
+                "max": 699.3
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 700.2,
+                "max": 700.2
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 718,
+                "soma_ms": 718
+              },
+              "raf_gap_max_ms": 718.9
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 695.1,
+                "max": 695.1
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 695.8,
+                "max": 695.8
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 714,
+                "soma_ms": 714
+              },
+              "raf_gap_max_ms": 715.8
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 696.6,
+                "max": 696.6
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 697.6,
+                "max": 697.6
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 709,
+                "soma_ms": 709
+              },
+              "raf_gap_max_ms": 711.4
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 700.3,
+                "max": 700.3
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 701.1,
+                "max": 701.1
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 718,
+                "soma_ms": 718
+              },
+              "raf_gap_max_ms": 720.5
+            },
+            {
+              "moves": 2,
+              "evento_handler_ms": {
+                "p95": 734.9,
+                "max": 734.9
+              },
+              "roundtrip_mouse_ms": {
+                "p95": 735.6,
+                "max": 735.6
+              },
+              "long_tasks": {
+                "quantidade": 1,
+                "max_ms": 754,
+                "soma_ms": 754
+              },
+              "raf_gap_max_ms": 756.1
+            }
+          ]
+        }
+      }
+    }
+  }
+}

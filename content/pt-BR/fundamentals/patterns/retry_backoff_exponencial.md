@@ -68,8 +68,8 @@ variacoes:
 ferramentas:
   - tabela:resilience4j
   - tabela:polly
-  - tabela:istio
-  - tabela:envoy
+  - "[[istio|Istio]]"
+  - "[[envoy|Envoy]]"
   - "[[temporal|Temporal]]"
 notaCompleta: []
 dataVerificacao: 2026-11-22

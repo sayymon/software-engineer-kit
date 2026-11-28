@@ -58,7 +58,7 @@ ferramentas:
   - tabela:retrofit
   - "[[okhttp|OkHttp]]"
   - "[[spring_boot|Spring Boot]]"
-  - tabela:sqlalchemy
+  - "[[sqlalchemy|SQLAlchemy]]"
 notaCompleta: []
 dataVerificacao: 2026-11-22
 tags:

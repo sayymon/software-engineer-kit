@@ -13,7 +13,7 @@ const clone = (e: LoadedEntity, data: Record<string, unknown>): LoadedEntity => 
 const withNote = (id: string, data: Record<string, unknown>): LoadedEntity[] => entities.map((e) => (e.id === id ? clone(e, data) : e));
 
 describe('license notes', () => {
-  it('ships the 18 notes with the exact SPDX ids', () => {
+  it('ships the expected notes with the exact SPDX ids', () => {
     expect(notes.map((n) => n.id).sort()).toEqual(Object.keys(EXPECTED_LICENSES).sort());
     for (const [id, spdx] of Object.entries(EXPECTED_LICENSES)) expect(notes.find((n) => n.id === id)?.data.spdx).toBe(spdx);
   });

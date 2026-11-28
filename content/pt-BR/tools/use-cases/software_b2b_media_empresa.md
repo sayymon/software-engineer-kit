@@ -37,12 +37,12 @@ macro: "[[negocios_por_porte_e_segmento|Negócios por porte e segmento]]"
 faixasPadrao:
   maisBarata:
     - "[[woodpecker_ci|Woodpecker CI]]"
-    - tabela:jenkins
+    - "[[jenkins|Jenkins]]"
     - tabela:drone
   custoBeneficio:
     - "[[github_actions|GitHub Actions]]"
     - tabela:circleci
-    - tabela:argo-cd
+    - "[[argo_cd|Argo CD]]"
   qualidadeMaxima:
     - "[[harness|Harness]]"
     - tabela:buildkite
@@ -74,11 +74,11 @@ variacoes:
     herdaFerramentas: false
     maisBarata:
       - "[[opentelemetry|OpenTelemetry]]"
-      - tabela:prometheus
+      - "[[prometheus|Prometheus]]"
       - tabela:signoz
     custoBeneficio:
       - "[[grafana_cloud|Grafana Cloud]]"
-      - tabela:sentry
+      - "[[sentry|Sentry]]"
       - tabela:better-stack
     qualidadeMaxima:
       - "[[datadog|Datadog]]"

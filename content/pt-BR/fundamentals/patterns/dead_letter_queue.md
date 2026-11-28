@@ -67,7 +67,7 @@ variacoes:
 ferramentas:
   - "[[amazon_sqs|Amazon SQS]]"
   - "[[rabbitmq|RabbitMQ]]"
-  - tabela:apache-kafka
+  - "[[apache_kafka|Apache Kafka]]"
   - tabela:amazon-sns
   - tabela:apache-pulsar
 notaCompleta: []

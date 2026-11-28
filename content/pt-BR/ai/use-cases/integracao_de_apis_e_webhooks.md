@@ -47,11 +47,11 @@ faixasPadrao:
   custoBeneficio:
     - "[[axios|Axios]]"
     - tabela:requests
-    - tabela:httpx
+    - "[[httpx|HTTPX]]"
   qualidadeMaxima:
     - "[[okhttp|OkHttp]]"
     - tabela:retrofit
-    - tabela:reqwest
+    - "[[reqwest|reqwest]]"
 variacoes:
   - id: api-cliente-http
     nome: Cliente HTTP

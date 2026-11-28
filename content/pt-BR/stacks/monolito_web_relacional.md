@@ -106,7 +106,7 @@ slots:
       - "[[svelte|Svelte]]"
     custoBeneficio:
       - "[[react|React]]"
-      - tabela:vue
+      - "[[vue|Vue.js]]"
     qualidadeMaxima:
       - "[[angular|Angular]]"
     lacuna: ""
@@ -141,7 +141,7 @@ slots:
     maisBarata:
       - "[[opentelemetry|OpenTelemetry]]"
     custoBeneficio:
-      - tabela:sentry
+      - "[[sentry|Sentry]]"
     qualidadeMaxima:
       - "[[datadog|Datadog]]"
     lacuna: ""
@@ -151,10 +151,10 @@ slots:
     obrigatorio: true
     maisBarata:
       - "[[pytest|pytest]]"
-      - tabela:junit5
+      - "[[junit5|JUnit 5]]"
     custoBeneficio:
-      - tabela:rspec
-      - tabela:phpunit
+      - "[[rspec|RSpec]]"
+      - "[[phpunit|PHPUnit]]"
     qualidadeMaxima:
       - "[[xunit_net|xUnit.net]]"
     lacuna: ""
@@ -510,7 +510,7 @@ ferramentas:
   - "[[temporal|Temporal]]"
   - "[[svelte|Svelte]]"
   - "[[react|React]]"
-  - tabela:vue
+  - "[[vue|Vue.js]]"
   - "[[angular|Angular]]"
   - "[[coolify|Coolify]]"
   - "[[render|Render]]"
@@ -521,12 +521,12 @@ ferramentas:
   - "[[postmark|Postmark]]"
   - "[[twilio_sendgrid|Twilio SendGrid]]"
   - "[[opentelemetry|OpenTelemetry]]"
-  - tabela:sentry
+  - "[[sentry|Sentry]]"
   - "[[datadog|Datadog]]"
   - "[[pytest|pytest]]"
-  - tabela:junit5
-  - tabela:rspec
-  - tabela:phpunit
+  - "[[junit5|JUnit 5]]"
+  - "[[rspec|RSpec]]"
+  - "[[phpunit|PHPUnit]]"
   - "[[xunit_net|xUnit.net]]"
   - "[[woodpecker_ci|Woodpecker CI]]"
   - "[[github_actions|GitHub Actions]]"

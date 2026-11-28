@@ -9,7 +9,7 @@ empresa: "[[jetbrains|JetBrains]]"
 aliases:
   - Kotlin
 categorias:
-  - "[[frameworks_mobile|Frameworks de mobile]]"
+  - "[[linguagens_programacao|Linguagens de programação]]"
 funcionalidades: []
 casosDeUso: []
 modelos: []
@@ -47,7 +47,7 @@ tags:
 - **Tipos:** FRAMEWORK, SOFTWARE
 - **Empresa/Fabricante:** [[jetbrains|JetBrains]]
 - **Website:** https://kotlinlang.org
-- **Categorias:** [[frameworks_mobile|Frameworks de mobile]]
+- **Categorias:** [[linguagens_programacao|Linguagens de programação]]
 - **Modelo de contratação:** open-source, free
 - **Preço (USD):** Gratuito, licença Apache-2.0 (arquivo de licença do repositório lido em 2026-11-21)
 - **Data de verificação:** 2026-11-21
@@ -55,7 +55,7 @@ tags:
 ## 📝 Descrição
 Linguagem moderna oficial do Android e da JVM.
 ## ⏰ Quando Utilizar
-- Outra opção em [[frameworks_mobile|Frameworks de mobile]]; filtre pela linguagem do projeto no kit.
+- Outra opção em [[linguagens_programacao|Linguagens de programação]]; filtre pela linguagem do projeto no kit.
 - Escolha quando a linguagem e o ecossistema do projeto combinam com a ferramenta.
 ### Quando NÃO utilizar
 - Quando suporte dedicado, SLA ou recursos corporativos forem requisito.
@@ -80,5 +80,5 @@ Linguagem moderna oficial do Android e da JVM.
 - **Fonte:** https://github.com/JetBrains/kotlin
 ## 🔗 Relacionamentos
 - **Empresa:** [[jetbrains|JetBrains]]
-- **Categorias:** [[frameworks_mobile|Frameworks de mobile]]
+- **Categorias:** [[linguagens_programacao|Linguagens de programação]]
 - **Mapa:** [[hub_tools|Mapa de Ferramentas de Engenharia]]

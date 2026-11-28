@@ -1,0 +1,112 @@
+# Categorias de ferramenta que as tarefas da demanda feature usam. Nome e descrição agnósticos: nenhum produto aparece aqui.
+# As ferramentas de cada categoria vivem no catálogo (content/pt-BR/tools); o kit tem uma categoria equivalente por id citado no comentário.
+# RASCUNHO: revisão humana.
+categorias_ferramenta:
+  # equivale a: gestao_projetos
+  - id: cf_rastreio_de_tarefas
+    nome: Rastreio de tarefas e backlog
+    descricao: Registra, prioriza e acompanha demandas, cards e o estado de cada um, do backlog à entrega.
+    custo: baixo
+    beneficio: alto
+    dependencia_fornecedor: medio
+    status: rascunho
+    publico: false
+  # equivale a: controle_versao_colaboracao
+  - id: cf_controle_de_versao
+    nome: Controle de versão
+    descricao: Guarda o histórico de mudanças do código e dos documentos, permite ramificar, mesclar e voltar atrás.
+    custo: baixo
+    beneficio: alto
+    dependencia_fornecedor: baixo
+    status: rascunho
+    publico: false
+  # equivale a: revisao_codigo_pr
+  - id: cf_revisao_de_codigo
+    nome: Revisão de código e pedidos de mudança
+    descricao: Reúne uma mudança proposta, a discussão, as aprovações e as verificações automáticas antes de ela entrar na base principal.
+    custo: baixo
+    beneficio: alto
+    dependencia_fornecedor: medio
+    status: rascunho
+    publico: false
+  # equivale a: ci_cd_deploy
+  - id: cf_integracao_e_entrega_continuas
+    nome: Integração e entrega contínuas
+    descricao: Executa build, testes e verificações a cada mudança e publica o resultado de forma repetível e com possibilidade de reverter.
+    custo: medio
+    beneficio: alto
+    dependencia_fornecedor: medio
+    status: rascunho
+    publico: false
+  # equivale a: frameworks_testes
+  - id: cf_testes_automatizados
+    nome: Testes automatizados
+    descricao: Escreve e executa testes unitários, de integração, de propriedade e de ponta a ponta para provar que o comportamento esperado se mantém.
+    custo: baixo
+    beneficio: alto
+    dependencia_fornecedor: baixo
+    status: rascunho
+    publico: false
+  # equivale a: seguranca_codigo
+  - id: cf_seguranca_de_codigo
+    nome: Segurança do código e das dependências
+    descricao: Procura vulnerabilidades, segredos expostos e dependências inseguras no código e no processo de entrega.
+    custo: medio
+    beneficio: alto
+    dependencia_fornecedor: medio
+    status: rascunho
+    publico: false
+  # equivale a: observabilidade_apm
+  - id: cf_observabilidade
+    nome: Observabilidade e monitoramento
+    descricao: Coleta logs, métricas e rastros, e dispara alertas para saber como a feature se comporta em produção.
+    custo: medio
+    beneficio: alto
+    dependencia_fornecedor: medio
+    status: rascunho
+    publico: false
+  # equivale a: analytics_produto_web
+  - id: cf_analise_de_uso_do_produto
+    nome: Análise de uso do produto
+    descricao: Mede como as pessoas usam o produto, em funis, retenção e eventos, para validar se a feature entrega o resultado esperado.
+    custo: medio
+    beneficio: medio
+    dependencia_fornecedor: medio
+    status: rascunho
+    publico: false
+  # equivale a: feature_flags_experimentacao
+  - id: cf_sinalizadores_e_experimentos
+    nome: Sinalizadores de funcionalidade e experimentos
+    descricao: Liga e desliga comportamento sem nova publicação, libera aos poucos e compara variantes em experimentos controlados.
+    custo: medio
+    beneficio: medio
+    dependencia_fornecedor: medio
+    status: rascunho
+    publico: false
+  # equivale a: documentacao_diagramas
+  - id: cf_documentacao_e_diagramas
+    nome: Documentação e diagramas
+    descricao: Escreve documentos técnicos e desenha diagramas de arquitetura e de fluxo que ficam versionados junto do código.
+    custo: baixo
+    beneficio: medio
+    dependencia_fornecedor: baixo
+    status: rascunho
+    publico: false
+  # equivale a: wiki_base_conhecimento
+  - id: cf_base_de_conhecimento
+    nome: Base de conhecimento do time
+    descricao: Concentra decisões, contexto de negócio e aprendizados num lugar pesquisável para quem chega depois.
+    custo: baixo
+    beneficio: medio
+    dependencia_fornecedor: medio
+    status: rascunho
+    publico: false
+  # equivale a: comunicacao_equipe
+  - id: cf_comunicacao_da_equipe
+    nome: Comunicação da equipe
+    descricao: Reúne conversas, alinhamentos e avisos com os interessados e com o time durante a feature.
+    custo: baixo
+    beneficio: medio
+    dependencia_fornecedor: medio
+    status: rascunho
+    publico: false

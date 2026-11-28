@@ -7,20 +7,20 @@ descricao: Ferramentas de build, empacotamento, lint e formatação que mantêm 
 slug: build-lint-formatacao
 grupo: Desenvolvimento e entrega
 maisBarata:
-  - tabela:ruff
-  - tabela:prettier
-  - tabela:eslint
+  - "[[ruff|ruff]]"
+  - "[[prettier|Prettier]]"
+  - "[[eslint|ESLint]]"
 custoBeneficio:
-  - tabela:biome
-  - tabela:vite
+  - "[[biome|Biome]]"
+  - "[[maven|Maven]]"
   - "[[gradle|Gradle]]"
 qualidadeMaxima:
   - tabela:nx
   - tabela:bazel
-  - tabela:turborepo
+  - "[[cargo|cargo]]"
 essenciais:
-  - tabela:eslint
-  - tabela:prettier
+  - "[[eslint|ESLint]]"
+  - "[[prettier|Prettier]]"
 excecao: ""
 guia: []
 tags:
@@ -34,8 +34,8 @@ Ferramentas de build, empacotamento, lint e formatação que mantêm o código c
 - Grupo do kit: Desenvolvimento e entrega.
 - Cada faixa tem 3 opções; a primeira de cada faixa é a referência e tem nota própria quando existe.
 ## 🥇 Faixas
-- **Mais barata:** Ruff, Prettier, ESLint
-- **Melhor custo-benefício:** Biome, Vite, [[gradle|Gradle]]
-- **Qualidade máxima:** Nx, Bazel, Turborepo
+- **Mais barata:** [[ruff|ruff]], [[prettier|Prettier]], [[eslint|ESLint]]
+- **Melhor custo-benefício:** [[biome|Biome]], [[maven|Maven]], [[gradle|Gradle]]
+- **Qualidade máxima:** Nx, Bazel, [[cargo|cargo]]
 ## 🔗 Relacionamentos
 - **Mapa:** [[hub_tools|Mapa de Ferramentas de Engenharia]]

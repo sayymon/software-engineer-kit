@@ -57,6 +57,7 @@ path = [
   "REUSE.toml",
   ".gitignore",
   ".gitleaks.toml",
+  ".nvmrc",
   ".agents/*.json",
   ".kiro/agents/**",
   ".kiro/settings/**",

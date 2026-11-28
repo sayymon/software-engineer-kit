@@ -63,9 +63,9 @@ variacoes: []
 ferramentas:
   - tabela:resilience4j
   - tabela:polly
-  - tabela:envoy
-  - tabela:istio
-  - tabela:nginx
+  - "[[envoy|Envoy]]"
+  - "[[istio|Istio]]"
+  - "[[nginx|NGINX]]"
   - "[[okhttp|OkHttp]]"
 notaCompleta: []
 dataVerificacao: 2026-11-22

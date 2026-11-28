@@ -1,0 +1,1729 @@
+{
+  "aviso": "local, indicativo, não valida orçamento",
+  "medido_em": "2026-11-26T18:53:57.965Z",
+  "requisitos": [
+    "20.13",
+    "19.2"
+  ],
+  "demanda": "feature",
+  "prototipo": {
+    "descricao": "Renderizador próprio descartável: Modelo_de_Grafo -> projetar -> entrada do dagre (tamanhos estimados por contagem de caracteres) -> layout com @dagrejs/dagre em Web Worker -> SVG gerado como texto pelo kit (clusters de raia e de tarefa, arestas em curva basis com seta, rótulos de aresta, formas por tipo de nó, cor por raia) -> innerHTML",
+    "codigo": "tests/browser/spike/s5/ (fora do build, descartável)",
+    "dagre": "@dagrejs/dagre 3.1.4, instalado fora do repositório (SPIKE_DAGRE_DIR); o kit não o declara em package.json",
+    "fora_do_prototipo": "legenda, interatividade (clique, foco, playbook), reuso de layout entre expansões, medição real de texto, roteamento de aresta com desvio de cluster"
+  },
+  "metodo": {
+    "cpu_throttling_rate": 4,
+    "execucoes": 10,
+    "execucoes_controle_thread_principal": 5,
+    "p95": "nearest-rank sobre as amostras ordenadas",
+    "por_execucao": "contexto novo do navegador por execução, CPU 4x (CDP Emulation.setCPUThrottlingRate); um Worker novo por execução; a primeira renderização (Visão geral) é registrada à parte como `primeira_visao_geral` e as demais ficam a quente",
+    "tempo_total": "performance.now() desde a conversão do Modelo_de_Grafo até depois de `innerHTML` + leitura de offsetHeight (layout síncrono do navegador); `ate_quadro_ms` acrescenta a espera de 2 requestAnimationFrame",
+    "fases": [
+      "entrada_ms (projetar + conversão)",
+      "layout_ms (ida e volta ao Worker, inclui cópia estruturada)",
+      "layout_no_worker_ms (dentro do Worker)",
+      "svg_ms (gerar o texto)",
+      "insercao_ms (innerHTML + layout síncrono)"
+    ],
+    "limites_do_kit_mermaid": {
+      "maxTextSize": 200000,
+      "maxEdges": 1000
+    },
+    "cpu_4x_e_worker": "ver `calibragem_do_cpu_4x`: o CDP aplica o throttling à thread principal; o Worker pode rodar sem ele. O controle (layout na thread principal) roda 100% sob 4x e dá o teto conservador."
+  },
+  "conjuntos": {
+    "visao_geral": {
+      "descricao": "Visão geral (todas as raias recolhidas)",
+      "raias_expandidas": 0,
+      "clusters_recolhidos": 26,
+      "nos_do_modelo": 0,
+      "subtarefas": 0,
+      "arestas_do_modelo": 50
+    },
+    "cinco_raias": {
+      "descricao": "5 raias expandidas (as 5 primeiras na ordem de exibição)",
+      "raias_expandidas": 5,
+      "clusters_recolhidos": 21,
+      "nos_do_modelo": 59,
+      "subtarefas": 0,
+      "arestas_do_modelo": 98
+    },
+    "completo": {
+      "descricao": "completo (todas as raias, sem Subtarefas)",
+      "raias_expandidas": 26,
+      "clusters_recolhidos": 0,
+      "nos_do_modelo": 215,
+      "subtarefas": 0,
+      "arestas_do_modelo": 253
+    },
+    "completo_subtarefas": {
+      "descricao": "completo com Subtarefas",
+      "raias_expandidas": 26,
+      "clusters_recolhidos": 0,
+      "nos_do_modelo": 215,
+      "subtarefas": 186,
+      "arestas_do_modelo": 253
+    }
+  },
+  "tamanho": {
+    "gzip_nivel": 9,
+    "pagina_do_prototipo": {
+      "bytes": 10018,
+      "gzip_bytes": 4296,
+      "gzip_kb": 4.2,
+      "conteudo": "conversão (inclui `projetar`, que o kit já terá no cliente) + gerador de SVG + ponte com o Worker"
+    },
+    "worker_dagre_mais_glue": {
+      "bytes": 50521,
+      "gzip_bytes": 17673,
+      "gzip_kb": 17.26,
+      "conteudo": "dagre.min.js (@dagrejs/dagre 3.1.4, inclui graphlib) + glue do layout"
+    },
+    "total_prototipo_mais_dagre_gzip_bytes": 21969,
+    "total_prototipo_mais_dagre_gzip_kb": 21.45,
+    "total_menos_projetar_nota": "o total inclui `projetar` (lib/flow-graph/expansao.ts), código que a expansão progressiva já leva ao cliente; veja `partes` para a parte de cada módulo isolada",
+    "partes": {
+      "dagre_min": {
+        "bytes": 49377,
+        "gzip_bytes": 17246,
+        "gzip_kb": 16.84
+      },
+      "glue_do_layout": {
+        "bytes": 1142,
+        "gzip_bytes": 586,
+        "gzip_kb": 0.57
+      },
+      "conversao_mais_projetar": {
+        "bytes": 4888,
+        "gzip_bytes": 2172,
+        "gzip_kb": 2.12
+      },
+      "gerador_de_svg": {
+        "bytes": 3908,
+        "gzip_bytes": 1716,
+        "gzip_kb": 1.68
+      }
+    },
+    "comparacao": "mermaid.min.js vendorizado: ver `referencia.mermaid_vendorizado_gzip_kb` em docs/spike-fluxos/s1-s2.json",
+    "mermaid_vendorizado_gzip_kb_medido_aqui": 960.63,
+    "razao_prototipo_sobre_mermaid": 0.022
+  },
+  "maquina": {
+    "plataforma": "darwin arm64",
+    "so": "25.6.0",
+    "cpus": {
+      "modelo": "Apple M3",
+      "quantidade": 8
+    },
+    "memoria_total_gb": 16,
+    "memoria_livre_gb_no_fim": 0.1,
+    "node": "v22.23.5",
+    "chromium": "159.0.8154.6"
+  },
+  "load_average": {
+    "inicio": [
+      4.39,
+      12.32,
+      34.82
+    ],
+    "fim": [
+      6.97,
+      11.91,
+      30.68
+    ],
+    "ordem": "1, 5 e 15 minutos (os.loadavg)"
+  },
+  "medido_ate": "2026-11-26T18:57:36.783Z",
+  "desempenho": {
+    "execucoes_ok": 10,
+    "erros": [],
+    "worker_boot_ms": {
+      "n": 10,
+      "mediana": 13.1,
+      "p95": 26.6,
+      "max": 26.6,
+      "amostras": [
+        26.6,
+        12.1,
+        13.1,
+        12.5,
+        14.2,
+        12.7,
+        12.5,
+        13.6,
+        13.8,
+        15.6
+      ]
+    },
+    "primeira_visao_geral": {
+      "descricao": "primeira renderização depois do boot do Worker, sem aquecimento (JIT do dagre e do gerador a frio)",
+      "total_ms": {
+        "n": 10,
+        "mediana": 33.9,
+        "p95": 71.3,
+        "max": 71.3,
+        "amostras": [
+          71.3,
+          32.6,
+          38.4,
+          33.2,
+          38.1,
+          33.9,
+          33.6,
+          42.5,
+          32.8,
+          40.1
+        ]
+      },
+      "layout_no_worker_ms": {
+        "n": 10,
+        "mediana": 7.1,
+        "p95": 8.2,
+        "max": 8.2,
+        "amostras": [
+          8.2,
+          7.5,
+          7.2,
+          7,
+          7.1,
+          7.1,
+          7,
+          7.2,
+          6.8,
+          7.3
+        ]
+      }
+    },
+    "por_conjunto": {
+      "visao_geral": {
+        "worker": {
+          "execucoes_ok": 10,
+          "total_ms": {
+            "n": 10,
+            "mediana": 10.8,
+            "p95": 11.9,
+            "max": 11.9,
+            "amostras": [
+              10.1,
+              10.5,
+              11.2,
+              10.6,
+              11.9,
+              10.8,
+              11,
+              10.8,
+              11.2,
+              11.7
+            ]
+          },
+          "ate_quadro_ms": {
+            "n": 10,
+            "mediana": 33,
+            "p95": 33.8,
+            "max": 33.8,
+            "amostras": [
+              33.5,
+              33.2,
+              32.1,
+              33.8,
+              33.8,
+              33.7,
+              32.9,
+              32.6,
+              32.7,
+              33
+            ]
+          },
+          "entrada_ms": {
+            "n": 10,
+            "mediana": 0.6,
+            "p95": 0.8,
+            "max": 0.8,
+            "amostras": [
+              0.1,
+              0.7,
+              0.6,
+              0.5,
+              0.7,
+              0.2,
+              0.8,
+              0.6,
+              0.6,
+              0.6
+            ]
+          },
+          "layout_ms": {
+            "n": 10,
+            "mediana": 4.9,
+            "p95": 5.4,
+            "max": 5.4,
+            "amostras": [
+              4.9,
+              4.3,
+              4.9,
+              4.8,
+              5,
+              5.1,
+              4.9,
+              4.5,
+              4.3,
+              5.4
+            ]
+          },
+          "layout_no_worker_ms": {
+            "n": 10,
+            "mediana": 4,
+            "p95": 4.5,
+            "max": 4.5,
+            "amostras": [
+              4,
+              4,
+              4,
+              3.9,
+              4.5,
+              4,
+              4,
+              4,
+              3.8,
+              4.4
+            ]
+          },
+          "svg_ms": {
+            "n": 10,
+            "mediana": 0.5,
+            "p95": 0.8,
+            "max": 0.8,
+            "amostras": [
+              0.8,
+              0.5,
+              0.5,
+              0,
+              0.6,
+              0.7,
+              0.2,
+              0.4,
+              0.6,
+              0.1
+            ]
+          },
+          "insercao_ms": {
+            "n": 10,
+            "mediana": 5.2,
+            "p95": 5.7,
+            "max": 5.7,
+            "amostras": [
+              4.3,
+              5,
+              5.2,
+              5.3,
+              5.6,
+              4.8,
+              5.1,
+              5.3,
+              5.7,
+              5.6
+            ]
+          },
+          "total_estimado_se_o_worker_fosse_4x_ms": {
+            "n": 10,
+            "mediana": 22.8,
+            "p95": 25.4,
+            "max": 25.4,
+            "amostras": [
+              22.1,
+              22.5,
+              23.2,
+              22.3,
+              25.4,
+              22.8,
+              23,
+              22.8,
+              22.6,
+              24.9
+            ]
+          },
+          "tamanho": {
+            "nos_no_layout": 26,
+            "clusters": 0,
+            "arestas": 50,
+            "svg_chars": 33677
+          }
+        },
+        "controle_layout_na_thread_principal_cpu_4x": {
+          "execucoes_ok": 5,
+          "total_ms": {
+            "n": 5,
+            "mediana": 24.1,
+            "p95": 30.2,
+            "max": 30.2,
+            "amostras": [
+              29.1,
+              30.2,
+              23.6,
+              24.1,
+              23.8
+            ]
+          },
+          "ate_quadro_ms": {
+            "n": 5,
+            "mediana": 33.2,
+            "p95": 49.8,
+            "max": 49.8,
+            "amostras": [
+              33.2,
+              49.8,
+              33.2,
+              33.2,
+              32.4
+            ]
+          },
+          "entrada_ms": {
+            "n": 5,
+            "mediana": 0.6,
+            "p95": 0.8,
+            "max": 0.8,
+            "amostras": [
+              0.6,
+              0.7,
+              0.5,
+              0.1,
+              0.8
+            ]
+          },
+          "layout_ms": {
+            "n": 5,
+            "mediana": 18.3,
+            "p95": 22.4,
+            "max": 22.4,
+            "amostras": [
+              21.3,
+              22.4,
+              17.7,
+              18.3,
+              17.8
+            ]
+          },
+          "layout_no_worker_ms": {
+            "n": 5,
+            "mediana": 18.3,
+            "p95": 22.4,
+            "max": 22.4,
+            "amostras": [
+              21.3,
+              22.4,
+              17.7,
+              18.3,
+              17.8
+            ]
+          },
+          "svg_ms": {
+            "n": 5,
+            "mediana": 0.2,
+            "p95": 0.9,
+            "max": 0.9,
+            "amostras": [
+              0,
+              0.8,
+              0.1,
+              0.9,
+              0.2
+            ]
+          },
+          "insercao_ms": {
+            "n": 5,
+            "mediana": 5.3,
+            "p95": 7.2,
+            "max": 7.2,
+            "amostras": [
+              7.2,
+              6.3,
+              5.3,
+              4.8,
+              5
+            ]
+          },
+          "tamanho": {
+            "nos_no_layout": 26,
+            "clusters": 0,
+            "arestas": 50,
+            "svg_chars": 33677
+          }
+        },
+        "mermaid_s1_p95_ms": 509.2,
+        "ganho_sobre_mermaid_x": 42.8,
+        "ganho_sobre_mermaid_controle_x": 16.9,
+        "ganho_sobre_mermaid_worker_estimado_4x_x": 20
+      },
+      "cinco_raias": {
+        "worker": {
+          "execucoes_ok": 10,
+          "total_ms": {
+            "n": 10,
+            "mediana": 108.3,
+            "p95": 119.2,
+            "max": 119.2,
+            "amostras": [
+              119.2,
+              105.2,
+              113.2,
+              108.2,
+              116.1,
+              107,
+              108.2,
+              113.4,
+              108.3,
+              113.2
+            ]
+          },
+          "ate_quadro_ms": {
+            "n": 10,
+            "mediana": 112.3,
+            "p95": 120.9,
+            "max": 120.9,
+            "amostras": [
+              120.9,
+              108.3,
+              116,
+              111.1,
+              119.9,
+              110.2,
+              112.3,
+              117,
+              111.3,
+              116.7
+            ]
+          },
+          "entrada_ms": {
+            "n": 10,
+            "mediana": 1.7,
+            "p95": 1.9,
+            "max": 1.9,
+            "amostras": [
+              1.6,
+              1.5,
+              1.4,
+              1.7,
+              1.9,
+              1.8,
+              1.7,
+              1.8,
+              1.9,
+              1.4
+            ]
+          },
+          "layout_ms": {
+            "n": 10,
+            "mediana": 38.1,
+            "p95": 39.3,
+            "max": 39.3,
+            "amostras": [
+              38.1,
+              37.1,
+              38.3,
+              37.7,
+              38.2,
+              38.1,
+              38.4,
+              37.9,
+              37.5,
+              39.3
+            ]
+          },
+          "layout_no_worker_ms": {
+            "n": 10,
+            "mediana": 36.9,
+            "p95": 37.7,
+            "max": 37.7,
+            "amostras": [
+              36.7,
+              36.4,
+              37,
+              36.9,
+              37.4,
+              36.9,
+              37.3,
+              36.9,
+              37.1,
+              37.7
+            ]
+          },
+          "svg_ms": {
+            "n": 10,
+            "mediana": 2.2,
+            "p95": 2.5,
+            "max": 2.5,
+            "amostras": [
+              2.3,
+              2.4,
+              1.5,
+              2.5,
+              2.2,
+              2.2,
+              2,
+              2,
+              2.2,
+              2
+            ]
+          },
+          "insercao_ms": {
+            "n": 10,
+            "mediana": 66.7,
+            "p95": 77.2,
+            "max": 77.2,
+            "amostras": [
+              77.2,
+              64.2,
+              72,
+              66.3,
+              73.8,
+              64.9,
+              66.1,
+              71.7,
+              66.7,
+              70.5
+            ]
+          },
+          "total_estimado_se_o_worker_fosse_4x_ms": {
+            "n": 10,
+            "mediana": 220.1,
+            "p95": 229.3,
+            "max": 229.3,
+            "amostras": [
+              229.3,
+              214.4,
+              224.2,
+              218.9,
+              228.3,
+              217.7,
+              220.1,
+              224.1,
+              219.6,
+              226.3
+            ]
+          },
+          "tamanho": {
+            "nos_no_layout": 81,
+            "clusters": 5,
+            "arestas": 99,
+            "svg_chars": 100199
+          }
+        },
+        "controle_layout_na_thread_principal_cpu_4x": {
+          "execucoes_ok": 5,
+          "total_ms": {
+            "n": 5,
+            "mediana": 182.5,
+            "p95": 208.5,
+            "max": 208.5,
+            "amostras": [
+              208.5,
+              189.4,
+              182.5,
+              167.5,
+              169.4
+            ]
+          },
+          "ate_quadro_ms": {
+            "n": 5,
+            "mediana": 200.9,
+            "p95": 223.5,
+            "max": 223.5,
+            "amostras": [
+              223.5,
+              203.8,
+              200.9,
+              182.8,
+              188.3
+            ]
+          },
+          "entrada_ms": {
+            "n": 5,
+            "mediana": 1.1,
+            "p95": 1.4,
+            "max": 1.4,
+            "amostras": [
+              1.4,
+              1.3,
+              0.8,
+              1.1,
+              1
+            ]
+          },
+          "layout_ms": {
+            "n": 5,
+            "mediana": 168,
+            "p95": 188.5,
+            "max": 188.5,
+            "amostras": [
+              188.5,
+              173.3,
+              168,
+              153.9,
+              154.9
+            ]
+          },
+          "layout_no_worker_ms": {
+            "n": 5,
+            "mediana": 168,
+            "p95": 188.5,
+            "max": 188.5,
+            "amostras": [
+              188.5,
+              173.3,
+              168,
+              153.9,
+              154.9
+            ]
+          },
+          "svg_ms": {
+            "n": 5,
+            "mediana": 1.6,
+            "p95": 2.2,
+            "max": 2.2,
+            "amostras": [
+              2.2,
+              1.7,
+              1.6,
+              0.9,
+              1.6
+            ]
+          },
+          "insercao_ms": {
+            "n": 5,
+            "mediana": 12.1,
+            "p95": 16.4,
+            "max": 16.4,
+            "amostras": [
+              16.4,
+              13.1,
+              12.1,
+              11.6,
+              11.9
+            ]
+          },
+          "tamanho": {
+            "nos_no_layout": 81,
+            "clusters": 5,
+            "arestas": 99,
+            "svg_chars": 100199
+          }
+        },
+        "mermaid_s1_p95_ms": 1115.7,
+        "ganho_sobre_mermaid_x": 9.4,
+        "ganho_sobre_mermaid_controle_x": 5.4,
+        "ganho_sobre_mermaid_worker_estimado_4x_x": 4.9
+      },
+      "completo": {
+        "worker": {
+          "execucoes_ok": 10,
+          "total_ms": {
+            "n": 10,
+            "mediana": 212.8,
+            "p95": 227.8,
+            "max": 227.8,
+            "amostras": [
+              227.8,
+              211,
+              210.4,
+              212.1,
+              221.9,
+              212.3,
+              214.9,
+              212.8,
+              213,
+              220.5
+            ]
+          },
+          "ate_quadro_ms": {
+            "n": 10,
+            "mediana": 215.7,
+            "p95": 231.4,
+            "max": 231.4,
+            "amostras": [
+              231.4,
+              214.2,
+              213.6,
+              215.1,
+              225.3,
+              215.4,
+              217.7,
+              216.2,
+              215.7,
+              223.5
+            ]
+          },
+          "entrada_ms": {
+            "n": 10,
+            "mediana": 3.1,
+            "p95": 3.8,
+            "max": 3.8,
+            "amostras": [
+              3.8,
+              3.1,
+              3.1,
+              3.2,
+              2.8,
+              3.1,
+              2.8,
+              2.7,
+              3.2,
+              3.2
+            ]
+          },
+          "layout_ms": {
+            "n": 10,
+            "mediana": 171,
+            "p95": 182.9,
+            "max": 182.9,
+            "amostras": [
+              182.9,
+              170.6,
+              168.8,
+              171,
+              178.6,
+              170.8,
+              174.1,
+              172.6,
+              171,
+              177.4
+            ]
+          },
+          "layout_no_worker_ms": {
+            "n": 10,
+            "mediana": 168.1,
+            "p95": 179.1,
+            "max": 179.1,
+            "amostras": [
+              179.1,
+              167.7,
+              165.9,
+              167.3,
+              174.6,
+              168.1,
+              170.6,
+              168.8,
+              167.6,
+              174.1
+            ]
+          },
+          "svg_ms": {
+            "n": 10,
+            "mediana": 6.2,
+            "p95": 6.9,
+            "max": 6.9,
+            "amostras": [
+              5.7,
+              5.6,
+              6.5,
+              6.4,
+              6.9,
+              5.9,
+              5.4,
+              6.4,
+              6.2,
+              6.4
+            ]
+          },
+          "insercao_ms": {
+            "n": 10,
+            "mediana": 32.5,
+            "p95": 35.4,
+            "max": 35.4,
+            "amostras": [
+              35.4,
+              31.7,
+              32,
+              31.5,
+              33.6,
+              32.5,
+              32.6,
+              31.1,
+              32.6,
+              33.5
+            ]
+          },
+          "total_estimado_se_o_worker_fosse_4x_ms": {
+            "n": 10,
+            "mediana": 716.6,
+            "p95": 765.1,
+            "max": 765.1,
+            "amostras": [
+              765.1,
+              714.1,
+              708.1,
+              714,
+              745.7,
+              716.6,
+              726.7,
+              719.2,
+              715.8,
+              742.8
+            ]
+          },
+          "tamanho": {
+            "nos_no_layout": 219,
+            "clusters": 26,
+            "arestas": 257,
+            "svg_chars": 298489
+          }
+        },
+        "controle_layout_na_thread_principal_cpu_4x": {
+          "execucoes_ok": 5,
+          "total_ms": {
+            "n": 5,
+            "mediana": 724.8,
+            "p95": 810.8,
+            "max": 810.8,
+            "amostras": [
+              810.8,
+              790.2,
+              712.7,
+              677.3,
+              724.8
+            ]
+          },
+          "ate_quadro_ms": {
+            "n": 5,
+            "mediana": 731.4,
+            "p95": 825,
+            "max": 825,
+            "amostras": [
+              825,
+              811.1,
+              731.4,
+              685.9,
+              729.1
+            ]
+          },
+          "entrada_ms": {
+            "n": 5,
+            "mediana": 2.7,
+            "p95": 3.8,
+            "max": 3.8,
+            "amostras": [
+              3.8,
+              2.8,
+              2.3,
+              1.7,
+              2.7
+            ]
+          },
+          "layout_ms": {
+            "n": 5,
+            "mediana": 686.5,
+            "p95": 772.3,
+            "max": 772.3,
+            "amostras": [
+              772.3,
+              751.1,
+              675.2,
+              638.9,
+              686.5
+            ]
+          },
+          "layout_no_worker_ms": {
+            "n": 5,
+            "mediana": 686.5,
+            "p95": 772.3,
+            "max": 772.3,
+            "amostras": [
+              772.3,
+              750.6,
+              675.2,
+              638.9,
+              686.5
+            ]
+          },
+          "svg_ms": {
+            "n": 5,
+            "mediana": 4.6,
+            "p95": 5,
+            "max": 5,
+            "amostras": [
+              4.3,
+              4.6,
+              4.8,
+              4.3,
+              5
+            ]
+          },
+          "insercao_ms": {
+            "n": 5,
+            "mediana": 30.6,
+            "p95": 32.4,
+            "max": 32.4,
+            "amostras": [
+              30.4,
+              31.7,
+              30.4,
+              32.4,
+              30.6
+            ]
+          },
+          "tamanho": {
+            "nos_no_layout": 219,
+            "clusters": 26,
+            "arestas": 257,
+            "svg_chars": 298489
+          }
+        },
+        "mermaid_s1_p95_ms": 3597.9,
+        "ganho_sobre_mermaid_x": 15.8,
+        "ganho_sobre_mermaid_controle_x": 4.4,
+        "ganho_sobre_mermaid_worker_estimado_4x_x": 4.7
+      },
+      "completo_subtarefas": {
+        "worker": {
+          "execucoes_ok": 10,
+          "total_ms": {
+            "n": 10,
+            "mediana": 621.4,
+            "p95": 679.1,
+            "max": 679.1,
+            "amostras": [
+              679.1,
+              616.6,
+              667.5,
+              620.9,
+              614.4,
+              617.5,
+              627.2,
+              621.4,
+              662.4,
+              630.2
+            ]
+          },
+          "ate_quadro_ms": {
+            "n": 10,
+            "mediana": 627.4,
+            "p95": 680.9,
+            "max": 680.9,
+            "amostras": [
+              680.9,
+              621.8,
+              673.7,
+              625.4,
+              619.5,
+              622.4,
+              632.8,
+              627.4,
+              668.9,
+              636.1
+            ]
+          },
+          "entrada_ms": {
+            "n": 10,
+            "mediana": 4.7,
+            "p95": 5.7,
+            "max": 5.7,
+            "amostras": [
+              5.1,
+              4.8,
+              4.5,
+              4.6,
+              4.3,
+              4.7,
+              5.7,
+              4.4,
+              5.2,
+              5
+            ]
+          },
+          "layout_ms": {
+            "n": 10,
+            "mediana": 544.9,
+            "p95": 597.9,
+            "max": 597.9,
+            "amostras": [
+              597.9,
+              540.6,
+              587.7,
+              542.8,
+              538,
+              541.1,
+              547.6,
+              544.9,
+              579.9,
+              552.6
+            ]
+          },
+          "layout_no_worker_ms": {
+            "n": 10,
+            "mediana": 537.8,
+            "p95": 591,
+            "max": 591,
+            "amostras": [
+              591,
+              533.8,
+              580.9,
+              536,
+              531.1,
+              533.6,
+              541.2,
+              537.8,
+              572.6,
+              545
+            ]
+          },
+          "svg_ms": {
+            "n": 10,
+            "mediana": 9.2,
+            "p95": 10.2,
+            "max": 10.2,
+            "amostras": [
+              9.8,
+              8.9,
+              10.2,
+              9.8,
+              9.2,
+              9.2,
+              9.4,
+              9.2,
+              9.1,
+              9
+            ]
+          },
+          "insercao_ms": {
+            "n": 10,
+            "mediana": 63.6,
+            "p95": 68.2,
+            "max": 68.2,
+            "amostras": [
+              66.3,
+              62.3,
+              65.1,
+              63.7,
+              62.9,
+              62.5,
+              64.5,
+              62.9,
+              68.2,
+              63.6
+            ]
+          },
+          "total_estimado_se_o_worker_fosse_4x_ms": {
+            "n": 10,
+            "mediana": 2234.8,
+            "p95": 2452.1,
+            "max": 2452.1,
+            "amostras": [
+              2452.1,
+              2218,
+              2410.2,
+              2228.9,
+              2207.7,
+              2218.3,
+              2250.8,
+              2234.8,
+              2380.2,
+              2265.2
+            ]
+          },
+          "tamanho": {
+            "nos_no_layout": 405,
+            "clusters": 89,
+            "arestas": 443,
+            "svg_chars": 560775
+          }
+        },
+        "controle_layout_na_thread_principal_cpu_4x": {
+          "execucoes_ok": 5,
+          "total_ms": {
+            "n": 5,
+            "mediana": 2214.3,
+            "p95": 2296.4,
+            "max": 2296.4,
+            "amostras": [
+              2136.7,
+              2276.3,
+              2296.4,
+              2214.3,
+              2142
+            ]
+          },
+          "ate_quadro_ms": {
+            "n": 5,
+            "mediana": 2229.1,
+            "p95": 2315.5,
+            "max": 2315.5,
+            "amostras": [
+              2149.2,
+              2298.2,
+              2315.5,
+              2229.1,
+              2164.6
+            ]
+          },
+          "entrada_ms": {
+            "n": 5,
+            "mediana": 3.1,
+            "p95": 3.6,
+            "max": 3.6,
+            "amostras": [
+              3.6,
+              3.1,
+              3,
+              3.4,
+              3.1
+            ]
+          },
+          "layout_ms": {
+            "n": 5,
+            "mediana": 2143,
+            "p95": 2228.6,
+            "max": 2228.6,
+            "amostras": [
+              2070.7,
+              2208.3,
+              2228.6,
+              2143,
+              2076.2
+            ]
+          },
+          "layout_no_worker_ms": {
+            "n": 5,
+            "mediana": 2143,
+            "p95": 2228.6,
+            "max": 2228.6,
+            "amostras": [
+              2070.7,
+              2208.3,
+              2228.6,
+              2143,
+              2076.2
+            ]
+          },
+          "svg_ms": {
+            "n": 5,
+            "mediana": 8.4,
+            "p95": 8.6,
+            "max": 8.6,
+            "amostras": [
+              8.4,
+              8.4,
+              8.5,
+              8.6,
+              8
+            ]
+          },
+          "insercao_ms": {
+            "n": 5,
+            "mediana": 56.3,
+            "p95": 59.3,
+            "max": 59.3,
+            "amostras": [
+              54,
+              56.5,
+              56.3,
+              59.3,
+              54.7
+            ]
+          },
+          "tamanho": {
+            "nos_no_layout": 405,
+            "clusters": 89,
+            "arestas": 443,
+            "svg_chars": 560775
+          }
+        },
+        "mermaid_s1_p95_ms": 10303.8,
+        "ganho_sobre_mermaid_x": 15.2,
+        "ganho_sobre_mermaid_controle_x": 4.5,
+        "ganho_sobre_mermaid_worker_estimado_4x_x": 4.2
+      }
+    },
+    "referencia_mermaid": "p95 de docs/spike-fluxos/s1-s2.json (docs/spike-fluxos/s1-s2.json), mesmo harness, CPU 4x, 10 execuções; o Mermaid completo roda na thread principal"
+  },
+  "calibragem_do_cpu_4x": {
+    "laco_fixo_ms": {
+      "sem_throttling": {
+        "principal": 42.6,
+        "worker": 42.5
+      },
+      "cpu_4x": {
+        "principal": 176.1,
+        "worker": 43.9
+      }
+    },
+    "razao_principal": 4.13,
+    "razao_worker": 1.03,
+    "worker_sofre_o_throttling": false,
+    "leitura": "razão perto de 4 = o Worker também é desacelerado; perto de 1 = só a thread principal é. Neste caso o `layout_no_worker_ms` do caso Worker subestima um aparelho 4x mais lento, e o controle (layout na thread principal sob 4x) é o teto conservador."
+  },
+  "resposta_do_mouse": {
+    "alvo": "resposta do mouse abaixo de 100 ms durante o render (layout no Worker; o SVG e o innerHTML seguem na thread principal)",
+    "como_medir": "mesma instrumentação de s3-s4.spec.ts: atraso entre event.timeStamp e o handler de mousemove, ida e volta de page.mouse.move (um movimento a cada ~20 ms), long tasks e maior intervalo de rAF; o p95 entre execuções do pior momento de cada execução é comparado ao alvo. Cada execução renderiza o conjunto N vezes em sequência para dar janela de medição",
+    "casos": {
+      "worker_completo": {
+        "modo": "worker",
+        "conjunto": "completo",
+        "renderizacoes_seguidas_por_execucao": 6,
+        "execucoes_ok": 10,
+        "erros": [],
+        "moves_por_execucao_mediana": 35,
+        "evento_handler_max_ms": {
+          "p95_das_execucoes": 134.9,
+          "pior": 134.9
+        },
+        "roundtrip_mouse_max_ms": {
+          "p95_das_execucoes": 153.4,
+          "pior": 153.4
+        },
+        "long_task_max_ms": {
+          "p95_das_execucoes": 138,
+          "pior": 138
+        },
+        "raf_gap_max_ms": {
+          "p95_das_execucoes": 175.1,
+          "pior": 175.1
+        },
+        "resposta_do_mouse_pior_momento_ms": {
+          "p95_das_execucoes": 153.4,
+          "pior": 153.4
+        },
+        "atende_alvo_menor_que_100ms": false,
+        "render_total_ms_mediana": 207.2
+      },
+      "worker_completo_subtarefas": {
+        "modo": "worker",
+        "conjunto": "completo_subtarefas",
+        "renderizacoes_seguidas_por_execucao": 4,
+        "execucoes_ok": 10,
+        "erros": [],
+        "moves_por_execucao_mediana": 70,
+        "evento_handler_max_ms": {
+          "p95_das_execucoes": 157.3,
+          "pior": 157.3
+        },
+        "roundtrip_mouse_max_ms": {
+          "p95_das_execucoes": 160.3,
+          "pior": 160.3
+        },
+        "long_task_max_ms": {
+          "p95_das_execucoes": 149,
+          "pior": 149
+        },
+        "raf_gap_max_ms": {
+          "p95_das_execucoes": 184.2,
+          "pior": 184.2
+        },
+        "resposta_do_mouse_pior_momento_ms": {
+          "p95_das_execucoes": 160.3,
+          "pior": 160.3
+        },
+        "atende_alvo_menor_que_100ms": false,
+        "render_total_ms_mediana": 642.9
+      },
+      "controle_thread_principal_completo": {
+        "modo": "principal",
+        "conjunto": "completo",
+        "renderizacoes_seguidas_por_execucao": 6,
+        "execucoes_ok": 5,
+        "erros": [],
+        "moves_por_execucao_mediana": 6,
+        "evento_handler_max_ms": {
+          "p95_das_execucoes": 748.3,
+          "pior": 748.3
+        },
+        "roundtrip_mouse_max_ms": {
+          "p95_das_execucoes": 749,
+          "pior": 749
+        },
+        "long_task_max_ms": {
+          "p95_das_execucoes": 754,
+          "pior": 754
+        },
+        "raf_gap_max_ms": {
+          "p95_das_execucoes": 861.1,
+          "pior": 861.1
+        },
+        "resposta_do_mouse_pior_momento_ms": {
+          "p95_das_execucoes": 749,
+          "pior": 749
+        },
+        "atende_alvo_menor_que_100ms": false,
+        "render_total_ms_mediana": 709.7
+      },
+      "controle_thread_principal_completo_subtarefas": {
+        "modo": "principal",
+        "conjunto": "completo_subtarefas",
+        "renderizacoes_seguidas_por_execucao": 4,
+        "execucoes_ok": 5,
+        "erros": [],
+        "moves_por_execucao_mediana": 4,
+        "evento_handler_max_ms": {
+          "p95_das_execucoes": 2328.6,
+          "pior": 2328.6
+        },
+        "roundtrip_mouse_max_ms": {
+          "p95_das_execucoes": 2329.4,
+          "pior": 2329.4
+        },
+        "long_task_max_ms": {
+          "p95_das_execucoes": 2340,
+          "pior": 2340
+        },
+        "raf_gap_max_ms": {
+          "p95_das_execucoes": 2341.8,
+          "pior": 2341.8
+        },
+        "resposta_do_mouse_pior_momento_ms": {
+          "p95_das_execucoes": 2329.4,
+          "pior": 2329.4
+        },
+        "atende_alvo_menor_que_100ms": false,
+        "render_total_ms_mediana": 2223.1
+      }
+    }
+  },
+  "leitura": {
+    "comparacao_com_mermaid": "compare `desempenho.por_conjunto.*.worker.total_ms.p95` com `mermaid_s1_p95_ms`. O Worker não sofre o CPU 4x (`calibragem_do_cpu_4x`), então `total_estimado_se_o_worker_fosse_4x_ms` e o controle na thread principal dão o intervalo honesto para um aparelho 4x mais lento.",
+    "resposta_do_mouse": "o layout sai da thread principal e some o bloqueio de segundos do controle, mas o `innerHTML` e a geração do SVG continuam nela: o pior momento fica em ordem de 100 a 200 ms, perto do alvo de 100 ms e não abaixo dele. Reduzir exige inserir o SVG em fatias ou usar OffscreenCanvas/virtualização.",
+    "lacunas_visuais": [
+      "tamanho do texto estimado por contagem de caracteres (o Worker não tem DOM): há nós em que o texto não cabe na forma (`texto_excede_a_forma`), sobretudo gateways",
+      "dagre não reserva espaço para título nem margem de cluster: o protótipo desenha o retângulo da raia maior que a caixa do dagre, e raias vizinhas chegam a se sobrepor (`cluster_sobre_cluster_nao_aninhado`); o Mermaid corrige isso por dentro",
+      "a posição e a proporção do desenho divergem do Mermaid (a ordem dentro da raia e as larguras mudam), por isso a comparação de pixels é só grosseira",
+      "sem legenda, sem interatividade, sem foco por teclado e sem medição de texto em fonte real; arestas sem desvio de cluster",
+      "o `label-overlap` (rótulo de cluster coberto por nó) ficou verde, mas só porque o título vive numa faixa acima da caixa do dagre"
+    ]
+  },
+  "fidelidade_visual": {
+    "golden": {
+      "golden": "tests/fixtures/mermaid/golden/feature.completo.mmd",
+      "texto_gerado_igual_ao_golden": true,
+      "caracteres_do_golden": 47345,
+      "mermaid_golden_com_legenda": {
+        "render_ms_cpu_1x": 942.3,
+        "nos": 224,
+        "clusters": 27,
+        "arestas": 257,
+        "rotulos_de_aresta": 161,
+        "elementos_no_svg": 4887,
+        "svg_chars": 4288107,
+        "tamanho_natural": {
+          "largura": 60288,
+          "altura": 2665,
+          "proporcao": 22.63
+        },
+        "label_overlap": {
+          "clusters_medidos": 27,
+          "sobreposicoes": 0,
+          "exemplos": []
+        }
+      }
+    },
+    "imagens": "capturas em /var/folders/jv/78z6fpbd0jsgnzqff798zcrw0000gq/T/spike-s5 (não versionadas): <conjunto>.mermaid.png e <conjunto>.proprio.png, ambas ajustadas a 1600x1200",
+    "metodo": "o Mermaid recebe o texto de gerarDiagramaExpandido sem legenda (o protótipo não desenha legenda); contagens por g.node, g.cluster, path.flowchart-link (Mermaid) e path.edge (protótipo); label-overlap igual ao oráculo de tests/browser/label-overlap.spec.ts; comparação de pixels grosseira (grade 160x120 de luminância e presença de tinta) porque os dois layouts divergem em posição e escala, então ela mede densidade e distribuição, não identidade",
+    "por_conjunto": {
+      "visao_geral": {
+        "mermaid_sem_legenda": {
+          "render_ms_cpu_1x": 74.5,
+          "nos": 26,
+          "clusters": 0,
+          "arestas": 50,
+          "rotulos_de_aresta": 50,
+          "elementos_no_svg": 647,
+          "svg_chars": 92588,
+          "tamanho_natural": {
+            "largura": 1296,
+            "altura": 3142,
+            "proporcao": 0.41
+          },
+          "label_overlap": {
+            "clusters_medidos": 0,
+            "sobreposicoes": 0,
+            "exemplos": []
+          }
+        },
+        "proprio": {
+          "render_ms_cpu_1x": 10.3,
+          "nos": 26,
+          "clusters": 0,
+          "arestas": 50,
+          "rotulos_de_aresta": 50,
+          "elementos_no_svg": 233,
+          "svg_chars": 34139,
+          "tamanho_natural": {
+            "largura": 1550,
+            "altura": 2169,
+            "proporcao": 0.71
+          },
+          "label_overlap": {
+            "clusters_medidos": 0,
+            "sobreposicoes": 0,
+            "exemplos": []
+          },
+          "cluster_cobre_no_alheio": {
+            "quantidade": 0,
+            "exemplos": []
+          },
+          "cluster_sobre_cluster_nao_aninhado": 0,
+          "texto_excede_a_forma": {
+            "quantidade": 0,
+            "de": 26,
+            "exemplos": []
+          }
+        },
+        "diferenca": {
+          "nos_proprio_sobre_mermaid_pct": 100,
+          "arestas_proprio_sobre_mermaid_pct": 100,
+          "clusters_proprio_sobre_mermaid_pct": null,
+          "rotulos_de_aresta_proprio_sobre_mermaid_pct": 100,
+          "area_natural_proprio_sobre_mermaid_pct": 82.6,
+          "svg_chars_proprio_sobre_mermaid_pct": 36.9,
+          "elementos_no_svg_proprio_sobre_mermaid_pct": 36
+        },
+        "pixels_grosseiro": {
+          "grade": "160x120",
+          "diferenca_media_de_luminancia_pct": 5.3,
+          "tinta_mermaid_pct": 8.6,
+          "tinta_proprio_pct": 9.5,
+          "celulas_com_tinta_em_so_um_pct": 12.9,
+          "iou_da_tinta": 0.167
+        },
+        "pixels_grosseiro_esticado_sem_manter_proporcao": {
+          "grade": "160x120",
+          "diferenca_media_de_luminancia_pct": 11.1,
+          "tinta_mermaid_pct": 25.1,
+          "tinta_proprio_pct": 16.9,
+          "celulas_com_tinta_em_so_um_pct": 23.8,
+          "iou_da_tinta": 0.275
+        }
+      },
+      "cinco_raias": {
+        "mermaid_sem_legenda": {
+          "render_ms_cpu_1x": 238.6,
+          "nos": 81,
+          "clusters": 5,
+          "arestas": 99,
+          "rotulos_de_aresta": 81,
+          "elementos_no_svg": 1719,
+          "svg_chars": 1014784,
+          "tamanho_natural": {
+            "largura": 25537,
+            "altura": 1936,
+            "proporcao": 13.19
+          },
+          "label_overlap": {
+            "clusters_medidos": 5,
+            "sobreposicoes": 0,
+            "exemplos": []
+          }
+        },
+        "proprio": {
+          "render_ms_cpu_1x": 44.7,
+          "nos": 81,
+          "clusters": 5,
+          "arestas": 99,
+          "rotulos_de_aresta": 81,
+          "elementos_no_svg": 697,
+          "svg_chars": 101468,
+          "tamanho_natural": {
+            "largura": 26189,
+            "altura": 1414,
+            "proporcao": 18.52
+          },
+          "label_overlap": {
+            "clusters_medidos": 5,
+            "sobreposicoes": 0,
+            "exemplos": []
+          },
+          "cluster_cobre_no_alheio": {
+            "quantidade": 0,
+            "exemplos": []
+          },
+          "cluster_sobre_cluster_nao_aninhado": 1,
+          "texto_excede_a_forma": {
+            "quantidade": 0,
+            "de": 81,
+            "exemplos": []
+          }
+        },
+        "diferenca": {
+          "nos_proprio_sobre_mermaid_pct": 100,
+          "arestas_proprio_sobre_mermaid_pct": 100,
+          "clusters_proprio_sobre_mermaid_pct": 100,
+          "rotulos_de_aresta_proprio_sobre_mermaid_pct": 100,
+          "area_natural_proprio_sobre_mermaid_pct": 74.9,
+          "svg_chars_proprio_sobre_mermaid_pct": 10,
+          "elementos_no_svg_proprio_sobre_mermaid_pct": 40.5
+        },
+        "pixels_grosseiro": {
+          "grade": "160x120",
+          "diferenca_media_de_luminancia_pct": 0.6,
+          "tinta_mermaid_pct": 4.6,
+          "tinta_proprio_pct": 3.6,
+          "celulas_com_tinta_em_so_um_pct": 3.4,
+          "iou_da_tinta": 0.411
+        },
+        "pixels_grosseiro_esticado_sem_manter_proporcao": {
+          "grade": "160x120",
+          "diferenca_media_de_luminancia_pct": 7.5,
+          "tinta_mermaid_pct": 42.9,
+          "tinta_proprio_pct": 48.8,
+          "celulas_com_tinta_em_so_um_pct": 41.3,
+          "iou_da_tinta": 0.379
+        }
+      },
+      "completo": {
+        "mermaid_sem_legenda": {
+          "render_ms_cpu_1x": 852.8,
+          "nos": 219,
+          "clusters": 26,
+          "arestas": 257,
+          "rotulos_de_aresta": 161,
+          "elementos_no_svg": 4800,
+          "svg_chars": 4192512,
+          "tamanho_natural": {
+            "largura": 59413,
+            "altura": 2573,
+            "proporcao": 23.09
+          },
+          "label_overlap": {
+            "clusters_medidos": 26,
+            "sobreposicoes": 0,
+            "exemplos": []
+          }
+        },
+        "proprio": {
+          "render_ms_cpu_1x": 172.2,
+          "nos": 219,
+          "clusters": 26,
+          "arestas": 257,
+          "rotulos_de_aresta": 161,
+          "elementos_no_svg": 1901,
+          "svg_chars": 301789,
+          "tamanho_natural": {
+            "largura": 61780,
+            "altura": 2068,
+            "proporcao": 29.87
+          },
+          "label_overlap": {
+            "clusters_medidos": 26,
+            "sobreposicoes": 0,
+            "exemplos": []
+          },
+          "cluster_cobre_no_alheio": {
+            "quantidade": 0,
+            "exemplos": []
+          },
+          "cluster_sobre_cluster_nao_aninhado": 4,
+          "texto_excede_a_forma": {
+            "quantidade": 2,
+            "de": 219,
+            "exemplos": [
+              "com_exe_g1: texto 121x63 em 238x125",
+              "com_prf_g2: texto 122x63 em 238x125"
+            ]
+          }
+        },
+        "diferenca": {
+          "nos_proprio_sobre_mermaid_pct": 100,
+          "arestas_proprio_sobre_mermaid_pct": 100,
+          "clusters_proprio_sobre_mermaid_pct": 100,
+          "rotulos_de_aresta_proprio_sobre_mermaid_pct": 100,
+          "area_natural_proprio_sobre_mermaid_pct": 83.6,
+          "svg_chars_proprio_sobre_mermaid_pct": 7.2,
+          "elementos_no_svg_proprio_sobre_mermaid_pct": 39.6
+        },
+        "pixels_grosseiro": {
+          "grade": "160x120",
+          "diferenca_media_de_luminancia_pct": 0.4,
+          "tinta_mermaid_pct": 3,
+          "tinta_proprio_pct": 2.8,
+          "celulas_com_tinta_em_so_um_pct": 3,
+          "iou_da_tinta": 0.313
+        },
+        "pixels_grosseiro_esticado_sem_manter_proporcao": {
+          "grade": "160x120",
+          "diferenca_media_de_luminancia_pct": 7.6,
+          "tinta_mermaid_pct": 54.9,
+          "tinta_proprio_pct": 55.2,
+          "celulas_com_tinta_em_so_um_pct": 47.3,
+          "iou_da_tinta": 0.399
+        }
+      },
+      "completo_subtarefas": {
+        "mermaid_sem_legenda": {
+          "render_ms_cpu_1x": 2301.8,
+          "nos": 405,
+          "clusters": 89,
+          "arestas": 443,
+          "rotulos_de_aresta": 161,
+          "elementos_no_svg": 8712,
+          "svg_chars": 4852537,
+          "tamanho_natural": {
+            "largura": 106082,
+            "altura": 3117,
+            "proporcao": 34.03
+          },
+          "label_overlap": {
+            "clusters_medidos": 89,
+            "sobreposicoes": 0,
+            "exemplos": []
+          }
+        },
+        "proprio": {
+          "render_ms_cpu_1x": 543.2,
+          "nos": 405,
+          "clusters": 89,
+          "arestas": 443,
+          "rotulos_de_aresta": 161,
+          "elementos_no_svg": 3522,
+          "svg_chars": 566685,
+          "tamanho_natural": {
+            "largura": 109548,
+            "altura": 2650,
+            "proporcao": 41.34
+          },
+          "label_overlap": {
+            "clusters_medidos": 89,
+            "sobreposicoes": 0,
+            "exemplos": []
+          },
+          "cluster_cobre_no_alheio": {
+            "quantidade": 1,
+            "exemplos": [
+              "raia:feat_cls x com_pro_e1"
+            ]
+          },
+          "cluster_sobre_cluster_nao_aninhado": 16,
+          "texto_excede_a_forma": {
+            "quantidade": 2,
+            "de": 405,
+            "exemplos": [
+              "com_exe_g1: texto 121x63 em 238x125",
+              "com_prf_g2: texto 122x63 em 238x125"
+            ]
+          }
+        },
+        "diferenca": {
+          "nos_proprio_sobre_mermaid_pct": 100,
+          "arestas_proprio_sobre_mermaid_pct": 100,
+          "clusters_proprio_sobre_mermaid_pct": 100,
+          "rotulos_de_aresta_proprio_sobre_mermaid_pct": 100,
+          "area_natural_proprio_sobre_mermaid_pct": 87.8,
+          "svg_chars_proprio_sobre_mermaid_pct": 11.7,
+          "elementos_no_svg_proprio_sobre_mermaid_pct": 40.4
+        },
+        "pixels_grosseiro": {
+          "grade": "160x120",
+          "diferenca_media_de_luminancia_pct": 0.1,
+          "tinta_mermaid_pct": 1.7,
+          "tinta_proprio_pct": 2.5,
+          "celulas_com_tinta_em_so_um_pct": 1.1,
+          "iou_da_tinta": 0.581
+        },
+        "pixels_grosseiro_esticado_sem_manter_proporcao": {
+          "grade": "160x120",
+          "diferenca_media_de_luminancia_pct": 4.9,
+          "tinta_mermaid_pct": 43.1,
+          "tinta_proprio_pct": 68.7,
+          "celulas_com_tinta_em_so_um_pct": 32.2,
+          "iou_da_tinta": 0.553
+        }
+      }
+    }
+  }
+}

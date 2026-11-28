@@ -110,7 +110,7 @@ slots:
       - "[[gitleaks|Gitleaks (ferramenta)]]"
       - tabela:semgrep-oss
     custoBeneficio:
-      - tabela:sonarqube
+      - "[[sonarqube|SonarQube]]"
     qualidadeMaxima:
       - "[[veracode|Veracode]]"
     lacuna: ""
@@ -487,7 +487,7 @@ ferramentas:
   - "[[github_enterprise|GitHub Enterprise]]"
   - "[[gitleaks|Gitleaks (ferramenta)]]"
   - tabela:semgrep-oss
-  - tabela:sonarqube
+  - "[[sonarqube|SonarQube]]"
   - "[[veracode|Veracode]]"
   - "[[woodpecker_ci|Woodpecker CI]]"
   - "[[github_actions|GitHub Actions]]"

@@ -19,3 +19,6 @@ site/dist-*/
 playwright-report/
 test-results/
 .kiro/agents/*.bak
+
+# artefato de ferramentas externas de grafo (contem caminhos locais)
+graphify-out/

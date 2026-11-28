@@ -377,6 +377,18 @@
           "$ref": "#/$defs/IdLista",
           "description": "RACI C: papéis ouvidos antes, em conversa de mão dupla."
         },
+        "categorias_ferramenta": {
+          "$ref": "#/$defs/IdLista",
+          "description": "Ids de categoria-ferramenta que apoiam esta tarefa ou subtarefa. Agnóstico de ferramenta."
+        },
+        "guias_praticos": {
+          "$ref": "#/$defs/IdLista",
+          "description": "Ids de notas content/pt-BR/guides/*.md (tipo guia-pratico) que detalham o como fazer desta tarefa ou subtarefa."
+        },
+        "sem_ferramenta": {
+          "type": "boolean",
+          "description": "Marcador explícito de que nenhuma categoria de ferramenta se aplica a esta tarefa ou subtarefa (distingue 'sem ferramenta' de 'ainda não preenchido')."
+        },
         "informado": {
           "$ref": "#/$defs/IdLista",
           "description": "RACI I: papéis avisados depois, quando é relevante comunicar. Os destinatários dos comunicados produzidos entram automaticamente."
@@ -630,6 +642,18 @@
         "consultado": {
           "$ref": "#/$defs/IdLista",
           "description": "RACI C: papéis ouvidos antes, em conversa de mão dupla."
+        },
+        "categorias_ferramenta": {
+          "$ref": "#/$defs/IdLista",
+          "description": "Ids de categoria-ferramenta que apoiam esta tarefa ou subtarefa. Agnóstico de ferramenta."
+        },
+        "guias_praticos": {
+          "$ref": "#/$defs/IdLista",
+          "description": "Ids de notas content/pt-BR/guides/*.md (tipo guia-pratico) que detalham o como fazer desta tarefa ou subtarefa."
+        },
+        "sem_ferramenta": {
+          "type": "boolean",
+          "description": "Marcador explícito de que nenhuma categoria de ferramenta se aplica a esta tarefa ou subtarefa (distingue 'sem ferramenta' de 'ainda não preenchido')."
         },
         "informado": {
           "$ref": "#/$defs/IdLista",

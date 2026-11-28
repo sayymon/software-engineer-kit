@@ -262,6 +262,40 @@ Objetivo: escolher, com números, como renderizar o Conjunto_Expandido dentro do
 
 O spike registra o resultado também como `tests/browser/performance.spec.ts` inicial (medição, ainda sem asserção), para que os números da entrega saiam do mesmo harness.
 
+#### Resultado do spike
+
+**Estado: decisão APROVADA pelo dono (tarefa 1.7).** O relatório completo, com as tabelas de S1 a S6, a máquina e o load average de cada medição, as limitações e o que não foi verificado, está em [`docs/spike-fluxos-desempenho.md`](../../../docs/spike-fluxos-desempenho.md). Os dados brutos estão em `docs/spike-fluxos/*.json`. Todos os números são locais, medidos com a máquina carregada (load average de 1 minuto entre 2,6 e 7,0 em 8 CPUs, 0,1 GB de memória livre no fim) e **indicativos: não validam o orçamento**. O CI valida (Fase 8).
+
+| Spike | Resultado (CPU 4x, p95 de 10 execuções, salvo indicação) |
+|---|---|
+| S1 | Visão geral 509 ms, 1 raia 715 ms, 5 raias 1.116 ms, `completo` 3.598 ms, `completo` com Subtarefas 10.304 ms. O modelo linear de "Tempos por passo" subestima em 47% o `completo` com Subtarefas: o custo marginal vai de 8,6 a 30,8 ms por nó e cresce com o tamanho |
+| S2 | Nos limites padrão, `completo` com Subtarefas **falha em silêncio** (o Mermaid devolve um SVG de aviso, sem exceção). `curve` não muda o tempo além do ruído. `htmlLabels: false` custa +12% e deixa 583 tags literais. O ELK ganha 19% em `completo` e 52% com Subtarefas (3 execuções), custa 687 KiB gzip e piora a Visão geral em 26% |
+| S3 | Nenhum caminho com Mermaid mantém o mouse abaixo de 100 ms: 3.858 ms no `completo` e 10.221 ms com Subtarefas. O iframe com `sandbox` não ganhou processo próprio. O Mermaid em Worker lança `ReferenceError` (sem DOM) |
+| S4 | Cache de SVG: troca em 35 a 116 ms até `completo` e 198 ms com Subtarefas (3 execuções). Antecipar 3 raias custa 1,7 s de CPU e leva a resposta do mouse a 719 ms |
+| S5 | Protótipo com dagre em Worker: 4,4x a 16,9x mais rápido que o Mermaid (teto conservador, layout na thread principal), 21,45 KiB gzip. Resposta do mouse de 153 ms, 4 clusters de raia sobrepostos e texto fora da forma em 2 de 219 nós |
+| S6 | ESM dividida: 235,44 KiB gzip contra 960,85 KiB do bundle (-75,5%), SVG idêntico byte a byte nos 3 conjuntos testados e `label-overlap` 0, **com `handDrawnSeed` fixo** (sem a semente nem o bundle é estável). Tempo até o primeiro diagrama p95 de 688 ms contra 1.063 ms |
+
+Itens da decisão aprovada (critério numérico de go/no-go de cada item no relatório):
+
+1. **Mermaid:** ESM dividida de flowchart e dagre como alvo, com `handDrawnSeed` fixo na configuração. Bundle único como fallback, acionado se algum SVG divergir com a semente fixa ou se a pasta de chunks não puder ser copiada ao build. Renderizador próprio (O6) fora desta entrega: o Mermaid mede 3,9 s no `completo` e 10,4 s com Subtarefas, abaixo dos tetos de 5,0 s e 12 s.
+2. **Expansão:** um `mermaid.render` por Conjunto_Expandido, com cache de SVG (no máximo 6 conjuntos e 24 MiB de texto, valor a confirmar) e fila de um pedido que descarta o resultado obsoleto. Sem antecipação automática (resposta do mouse de 719 ms contra o critério de 100 ms). Sem ELK, a menos que a medição do CI passe de 12 s no `completo` com Subtarefas. Sem iframe nem Worker.
+3. **Limites do Mermaid:** manter `maxTextSize` 200.000 e `maxEdges` 1.000 (2,04x e 2,26x o maior conjunto da `feature`). Verificar o tamanho antes do render e rejeitar o SVG que traga a mensagem de limite. Subir ao próximo valor redondo quando o maior texto passar de 50% do limite (hoje 48,9%).
+4. **Tetos de 15.8:** confirmar os números. Ajustes de redação propostos: o teto de 1,0 s vale para a primeira expansão de uma Raia a partir da Visão geral, o teto de 200 ms para troca em cache vale até o `completo` e vira aviso para o `completo` com Subtarefas (198 ms medidos em 3 execuções), e a resposta do mouse durante o render não entra como teto. A base de `site/dist` precisa ser medida de novo (o `baseline.json` registra 75.308 kB contra 38.928 kB neste design).
+
+Decisão do dono (tarefa 1.7), proposta APROVADA:
+
+- Mermaid em ESM dividida (flowchart e dagre) com `handDrawnSeed` fixo na configuração do kit. O bundle único vendorizado fica como fallback.
+- Um `mermaid.render` por Conjunto_Expandido, com cache de SVG por conjunto e fila de um pedido que descarta o resultado obsoleto.
+- Fora desta entrega: ELK, antecipação de render, Worker e iframe.
+- Limites `maxTextSize` 200.000 e `maxEdges` 1.000, com verificação antes e depois do render.
+- Tetos de 15.8 mantidos, com os ajustes de redação propostos.
+- Renderizador próprio fica fora desta entrega e pode vir depois como Perspectiva.
+- O dono aceitou que o `completo` (3 a 10 s na primeira exibição) trave a aba durante o render, porque a página não abre em `completo` e as demais Views são rápidas.
+
+**Requisito de UX para a tarefa 6.4:** ao expandir o `completo`, mostrar indicador ou animação de progresso (sugestão do dono), com `role="status"`, pintado antes de o render começar (dois `requestAnimationFrame`, Requisito 20.9).
+
+Não verificado: a carga inicial da página nova, o indicador de progresso em 100 ms, o filtro do Catalogo, a rede real, as outras 11 Demandas, a paridade visual do ELK e a memória real do cache.
+
 ### Ilha `flow-app` (cliente, nova)
 
 Substitui o carregamento automático de `Diagram.astro` nas páginas de Demanda por uma ilha maior, que monta uma vez por página e governa Diagrama, Modal, Catalogo_da_Demanda, Matriz_RACI e o Fragmento_de_Estado. Reaproveita a convenção `data-island` que `docs/architecture.md` já documenta (seção "Island convention").
@@ -735,4 +769,4 @@ O dono decidiu que o orçamento inclui o Mermaid (Decisão 13), que o `completo`
 3. **Tempos por passo da expansão.** Visão geral em 2,0 s, uma raia em 1,0 s, estado em cache em 200 ms, Expandir tudo em 5,0 s com indicador em até 100 ms e `completo` com Subtarefas em 12 s (aviso). Esses tempos incluem um bloqueio da thread principal de alguns segundos em CPU 4x no Expandir tudo, porque o Mermaid não roda em Worker.
 4. **Nova View `geral` e o `visao` legado.** A aba `visao` (raia orquestradora) é substituída pela `geral` (Visão geral por clusters). O texto legado continua gerado para os goldens, e `visao` na URL vira alias de `geral`.
 5. **Teste de sobreposição (Decisão 11)**, com os Conjuntos_Expandidos na matriz.
-Resultado do spike: a preencher ao fim da fase 1. A confirmação de O2 (ou o uso do fallback O1, ou O6) depende dele.
+Resultado do spike: proposta aprovada pelo dono na tarefa 1.7. O2 (ESM dividida) é o caminho, O1 é o fallback e O6 fica fora desta entrega. Ver "Resultado do spike".

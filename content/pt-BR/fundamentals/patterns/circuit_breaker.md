@@ -70,8 +70,8 @@ variacoes: []
 ferramentas:
   - tabela:resilience4j
   - tabela:polly
-  - tabela:istio
-  - tabela:envoy
+  - "[[istio|Istio]]"
+  - "[[envoy|Envoy]]"
   - "[[spring_boot|Spring Boot]]"
 notaCompleta: []
 dataVerificacao: 2026-11-22

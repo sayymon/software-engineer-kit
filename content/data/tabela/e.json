@@ -12526,5 +12526,588 @@
       "devops-infra"
     ],
     "nota": "Visibilidade e otimização de custos de nuvem."
+  },
+  {
+    "id": "maven",
+    "nome": "Apache Maven",
+    "categorias": [
+      "Build, lint e formatação"
+    ],
+    "empresa": "Apache Software Foundation",
+    "url": "https://maven.apache.org/",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://maven.apache.org/",
+      "data": "2026-11-26"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "java"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "desenvolvimento-software"
+    ],
+    "nota": "Ferramenta de build para Java que compila, testa e documenta projetos a partir de um POM."
+  },
+  {
+    "id": "jackson",
+    "nome": "Jackson",
+    "categorias": [
+      "Validação e schemas"
+    ],
+    "empresa": "FasterXML",
+    "url": "https://github.com/FasterXML/jackson",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/FasterXML/jackson",
+      "data": "2026-11-26"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "java"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Suíte Java de processamento de dados com streaming e data binding de JSON e outros formatos."
+  },
+  {
+    "id": "serde",
+    "nome": "Serde",
+    "categorias": [
+      "Validação e schemas"
+    ],
+    "empresa": "serde (comunidade)",
+    "url": "https://serde.rs/",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/serde-rs/serde",
+      "data": "2026-11-26"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "rust"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Framework de serialização e desserialização de estruturas de dados em Rust."
+  },
+  {
+    "id": "clap",
+    "nome": "clap",
+    "categorias": [
+      "Bibliotecas de CLI"
+    ],
+    "empresa": "clap (comunidade)",
+    "url": "https://github.com/clap-rs/clap",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/clap-rs/clap",
+      "data": "2026-11-26"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "rust"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Biblioteca Rust de parsing de argumentos de linha de comando com subcomandos e ajuda automática."
+  },
+  {
+    "id": "cobra",
+    "nome": "Cobra",
+    "categorias": [
+      "Bibliotecas de CLI"
+    ],
+    "empresa": "Cobra (comunidade)",
+    "url": "https://github.com/spf13/cobra",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/spf13/cobra",
+      "data": "2026-11-26"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "go"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Biblioteca Go para criar CLIs com subcomandos, flags POSIX e autocompletar de shell."
+  },
+  {
+    "id": "testify",
+    "nome": "Testify",
+    "categorias": [
+      "Frameworks de testes"
+    ],
+    "empresa": "Testify (comunidade)",
+    "url": "https://github.com/stretchr/testify",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/stretchr/testify",
+      "data": "2026-11-26"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "go"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Kit de assertions, mocks e suítes de teste para Go."
+  },
+  {
+    "id": "cargo",
+    "nome": "Cargo",
+    "categorias": [
+      "Build, lint e formatação"
+    ],
+    "empresa": "Rust Foundation",
+    "url": "https://github.com/rust-lang/cargo",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/rust-lang/cargo",
+      "data": "2026-11-26"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "rust"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "desenvolvimento-software"
+    ],
+    "nota": "Gerenciador de pacotes e build do Rust; executa também a suíte de testes do projeto."
+  },
+  {
+    "id": "vapor",
+    "nome": "Vapor",
+    "categorias": [
+      "Frameworks de backend"
+    ],
+    "empresa": "Vapor (comunidade)",
+    "url": "https://vapor.codes/",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/vapor/vapor",
+      "data": "2026-11-26"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "cli"
+    ],
+    "linguagens": [
+      "swift"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Framework web server-side em Swift para APIs, backends e servidores HTTP."
+  },
+  {
+    "id": "blazor",
+    "nome": "Blazor",
+    "categorias": [
+      "Frameworks de frontend web"
+    ],
+    "empresa": "Microsoft",
+    "url": "https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/dotnet/aspnetcore",
+      "data": "2026-11-26"
+    },
+    "plataformas": [
+      "web",
+      "cli"
+    ],
+    "linguagens": [
+      "csharp"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Framework de frontend web em C# e .NET com componentes reutilizáveis no cliente ou no servidor."
+  },
+  {
+    "id": "logback",
+    "nome": "Logback",
+    "categorias": [
+      "Logs estruturados"
+    ],
+    "empresa": "QOS.ch",
+    "url": "https://logback.qos.ch/",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://logback.qos.ch/",
+      "data": "2026-11-26"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "java"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Framework de logging para Java, backend da SLF4J e sucessor do log4j."
+  },
+  {
+    "id": "pino",
+    "nome": "pino",
+    "categorias": [
+      "Logs estruturados"
+    ],
+    "empresa": "pino (comunidade)",
+    "url": "https://github.com/pinojs/pino",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/pinojs/pino",
+      "data": "2026-11-26"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "javascript",
+      "typescript"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Logger JSON de baixo overhead para Node.js."
+  },
+  {
+    "id": "zap",
+    "nome": "zap",
+    "categorias": [
+      "Logs estruturados"
+    ],
+    "empresa": "Uber",
+    "url": "https://github.com/uber-go/zap",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/uber-go/zap",
+      "data": "2026-11-26"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "go"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Logger estruturado de alta performance para Go, sem reflexão."
+  },
+  {
+    "id": "structlog",
+    "nome": "structlog",
+    "categorias": [
+      "Logs estruturados"
+    ],
+    "empresa": "structlog (comunidade)",
+    "url": "https://www.structlog.org/",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/hynek/structlog",
+      "data": "2026-11-26"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "python"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Biblioteca de logging estruturado para Python com renderização em JSON, logfmt e console."
+  },
+  {
+    "id": "serilog",
+    "nome": "Serilog",
+    "categorias": [
+      "Logs estruturados"
+    ],
+    "empresa": "Serilog (comunidade)",
+    "url": "https://serilog.net/",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/serilog/serilog",
+      "data": "2026-11-26"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "csharp"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Biblioteca de logging estruturado para .NET com eventos completos e sinks diversos."
+  },
+  {
+    "id": "tracing",
+    "nome": "tracing",
+    "categorias": [
+      "Logs estruturados"
+    ],
+    "empresa": "Tokio",
+    "url": "https://github.com/tokio-rs/tracing",
+    "preco": {
+      "modelo": [
+        "open-source",
+        "free"
+      ],
+      "usd": 0,
+      "unidade": "gratuito",
+      "status": "verificado",
+      "fonte": "https://github.com/tokio-rs/tracing",
+      "data": "2026-11-26"
+    },
+    "plataformas": [
+      "linux",
+      "macos",
+      "windows",
+      "cli"
+    ],
+    "linguagens": [
+      "rust"
+    ],
+    "porte": [
+      "pessoa-fisica",
+      "pequena",
+      "media",
+      "grande"
+    ],
+    "segmentos": [
+      "geral"
+    ],
+    "nota": "Framework de instrumentação e diagnóstico estruturado para Rust, mantido pelo projeto Tokio."
   }
 ]

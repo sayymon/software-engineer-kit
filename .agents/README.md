@@ -24,7 +24,7 @@ npm run agents:sync
 
 ## Regras de geração
 
-- O papel precisa existir em `papeis` de `content/guide/comum.yaml`. O script falha se `atuacao_de_agente` for `nao`.
+- O papel precisa existir em `papeis` de `content/guide/catalogos/papeis.yaml`. O script falha se `atuacao_de_agente` for `nao`.
 - `execucao` recebe edição e shell. `apoio` recebe somente leitura.
 - Todo MCP citado em `mcp:` precisa estar em `mcp.servers.json`.
 

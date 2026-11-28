@@ -126,9 +126,9 @@ nos:
           risco: 3
       categoria: "[[testes_carga_desempenho|Testes de carga e desempenho]]"
       ferramentas:
-        - tabela:k6
+        - "[[k6|Grafana k6]]"
         - "[[apache_jmeter|Apache JMeter]]"
-        - tabela:locust
+        - "[[locust|Locust]]"
   - id: prf_orq_e2
     raia: prf_orq
     tipo: fim
@@ -165,7 +165,7 @@ nos:
       categoria: "[[observabilidade_apm|Observabilidade e APM]]"
       ferramentas:
         - "[[grafana_cloud|Grafana Cloud]]"
-        - tabela:sentry
+        - "[[sentry|Sentry]]"
         - tabela:dynatrace
   - id: prf_ctx_s0
     raia: prf_ctx
@@ -402,11 +402,11 @@ stacks:
   - "[[monolito_web_relacional|Monolito web com banco relacional]]"
   - "[[api_transacional_eventos|API transacional com eventos]]"
 ferramentas:
-  - tabela:k6
+  - "[[k6|Grafana k6]]"
   - "[[apache_jmeter|Apache JMeter]]"
-  - tabela:locust
+  - "[[locust|Locust]]"
   - "[[grafana_cloud|Grafana Cloud]]"
-  - tabela:sentry
+  - "[[sentry|Sentry]]"
   - tabela:dynatrace
 casosDeUso:
   - "[[observabilidade_em_producao|Observabilidade em produção]]"

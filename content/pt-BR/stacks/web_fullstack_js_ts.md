@@ -60,7 +60,7 @@ slots:
       - tabela:solidjs
     custoBeneficio:
       - "[[react|React]]"
-      - tabela:nextjs
+      - "[[nextjs|Next.js]]"
     qualidadeMaxima:
       - "[[angular|Angular]]"
     lacuna: ""
@@ -172,7 +172,7 @@ instancias:
     linguagens:
       - typescript
     ferramentas:
-      - tabela:nextjs
+      - "[[nextjs|Next.js]]"
       - tabela:trpc
       - "[[prisma|Prisma]]"
       - "[[tailwind_css|Tailwind CSS]]"
@@ -487,7 +487,7 @@ variacoes:
 ferramentas:
   - tabela:solidjs
   - "[[react|React]]"
-  - tabela:nextjs
+  - "[[nextjs|Next.js]]"
   - "[[angular|Angular]]"
   - tabela:hono
   - "[[express|Express]]"

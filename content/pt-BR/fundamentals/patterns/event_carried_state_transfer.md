@@ -64,10 +64,10 @@ casosDeUso:
 variacoes:
   - arq-mensageria
 ferramentas:
-  - tabela:apache-kafka
+  - "[[apache_kafka|Apache Kafka]]"
   - tabela:amazon-eventbridge
   - tabela:amazon-sns
-  - tabela:nats
+  - "[[nats|NATS]]"
   - tabela:redpanda
 notaCompleta: []
 dataVerificacao: 2026-11-22

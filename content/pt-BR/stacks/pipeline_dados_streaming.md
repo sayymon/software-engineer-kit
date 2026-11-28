@@ -35,8 +35,8 @@ slots:
     categoria: "[[mensageria_streaming|Mensageria e streaming]]"
     obrigatorio: true
     maisBarata:
-      - tabela:apache-kafka
-      - tabela:nats
+      - "[[apache_kafka|Apache Kafka]]"
+      - "[[nats|NATS]]"
     custoBeneficio:
       - tabela:redpanda
       - tabela:google-pubsub
@@ -96,7 +96,7 @@ slots:
     obrigatorio: true
     maisBarata:
       - "[[opentelemetry|OpenTelemetry]]"
-      - tabela:prometheus
+      - "[[prometheus|Prometheus]]"
     custoBeneficio:
       - "[[grafana_cloud|Grafana Cloud]]"
     qualidadeMaxima:
@@ -424,8 +424,8 @@ variacoes:
   - telecom-eventos-metricas
   - banco-dados-streaming
 ferramentas:
-  - tabela:apache-kafka
-  - tabela:nats
+  - "[[apache_kafka|Apache Kafka]]"
+  - "[[nats|NATS]]"
   - tabela:redpanda
   - tabela:google-pubsub
   - "[[confluent_cloud|Confluent Cloud]]"
@@ -444,7 +444,7 @@ ferramentas:
   - tabela:clickhouse-cloud
   - "[[amazon_opensearch_service|Amazon OpenSearch Service (ferramenta)]]"
   - "[[opentelemetry|OpenTelemetry]]"
-  - tabela:prometheus
+  - "[[prometheus|Prometheus]]"
   - "[[grafana_cloud|Grafana Cloud]]"
   - "[[datadog|Datadog]]"
   - "[[podman|Podman]]"

@@ -120,7 +120,7 @@ nos:
       categoria: "[[observabilidade_apm|Observabilidade e APM]]"
       ferramentas:
         - "[[opentelemetry|OpenTelemetry]]"
-        - tabela:prometheus
+        - "[[prometheus|Prometheus]]"
         - tabela:signoz
   - id: obs_orq_e2
     raia: obs_orq
@@ -158,7 +158,7 @@ nos:
       categoria: "[[observabilidade_apm|Observabilidade e APM]]"
       ferramentas:
         - "[[grafana_cloud|Grafana Cloud]]"
-        - tabela:sentry
+        - "[[sentry|Sentry]]"
         - tabela:better-stack
   - id: obs_ctx_s0
     raia: obs_ctx
@@ -394,10 +394,10 @@ stacks:
   - "[[api_transacional_eventos|API transacional com eventos]]"
 ferramentas:
   - "[[opentelemetry|OpenTelemetry]]"
-  - tabela:prometheus
+  - "[[prometheus|Prometheus]]"
   - tabela:signoz
   - "[[grafana_cloud|Grafana Cloud]]"
-  - tabela:sentry
+  - "[[sentry|Sentry]]"
   - tabela:better-stack
 casosDeUso:
   - "[[observabilidade_em_producao|Observabilidade em produção]]"

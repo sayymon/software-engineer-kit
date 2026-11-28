@@ -10,7 +10,7 @@ software-engineer-kit é o guia de trabalho de quem constrói software na era da
 
 | Caminho | Conteúdo |
 |---|---|
-| `content/guide/comum.yaml` | Catálogos comuns: papéis, artefatos, variáveis, técnicas, requisitos |
+| `content/guide/comum.yaml`, `content/guide/catalogos/*.yaml` | `comum.yaml` guarda cabeçalho, `versao` e `ordem_das_demandas`. Os catálogos (papéis, artefatos, variáveis, técnicas, requisitos, ferramentas, fontes e decisor) vivem em `catalogos/` |
 | `content/guide/demandas/*.yaml` | Fluxos por demanda (feature, bug, incidente e demais), em raias |
 | `content/pt-BR/**`, `content/en/**` | Conteúdo (pt-BR é a fonte, en é overlay) |
 | `content/ids.lock.json` | Ids estáveis dos conceitos |
@@ -47,7 +47,7 @@ npm run skills:restore # restaura as versões fixadas no skills-lock.json
 
 ## Agentes por papel
 
-Cada papel de `papeis` em `content/guide/comum.yaml` com `atuacao_de_agente` diferente de `nao` tem um agente. Stakeholder, times dependentes e gerente de engenharia seguem humanos.
+Cada papel de `papeis` em `content/guide/catalogos/papeis.yaml` com `atuacao_de_agente` diferente de `nao` tem um agente. Stakeholder, times dependentes e gerente de engenharia seguem humanos.
 
 | Papel | Agente | Autonomia | MCPs |
 |---|---|---|---|

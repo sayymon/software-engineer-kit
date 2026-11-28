@@ -18,7 +18,7 @@ Convenções:
 
 ### Fase 0: segmentar o comum.yaml em catálogos
 
-- [ ] 0.1 Criar o script one-off `tools/guide/split-comum.ts` (determinístico, baseado em texto) que corta `content/guide/comum.yaml` em `content/guide/catalogos/`
+- [x] 0.1 Criar o script one-off `tools/guide/split-comum.ts` (determinístico, baseado em texto) que corta `content/guide/comum.yaml` em `content/guide/catalogos/`
   - cada comentário que precede uma chave de topo vai junto com ela, e os comentários do cabeçalho ficam no `comum.yaml`
   - destino por chave: `tecnicas.yaml` (`tecnicas`, `abordagens`, `padroes`, `estrategias`), `artefatos.yaml`, `variaveis.yaml`, `papeis.yaml`, `requisitos.yaml`, `ferramentas.yaml` (`categorias_ferramenta`), `fontes.yaml` e `decisor.yaml` (`decisor_construir_comprar_assinar`)
   - o `comum.yaml` mantém `versao`, `ordem_das_demandas` e o cabeçalho explicativo
@@ -26,23 +26,23 @@ Convenções:
   - verificação: duas execuções produzem saída idêntica e o modo `--dry-run` lista cada chave com o arquivo de destino
   - agentes: executor `dev`, revisores `arquiteto` e `qa`
   - _Requisitos: 15.7_
-- [ ] 0.2 Alterar `lib/guide/load.ts` para ler a constante ordenada `ARQUIVOS_DE_CATALOGO` (em `catalogos/`, na ordem que mantém a ordem das chaves do documento mesclado igual à de hoje)
+- [x] 0.2 Alterar `lib/guide/load.ts` para ler a constante ordenada `ARQUIVOS_DE_CATALOGO` (em `catalogos/`, na ordem que mantém a ordem das chaves do documento mesclado igual à de hoje)
   - `hasGuide` segue ligado ao `comum.yaml`, e o layout legado de arquivo único continua funcionando (fixtures e `--yaml <arquivo>`)
   - `GuideLoadError` claro quando falta um arquivo de catálogo ou quando uma chave aparece em dois arquivos
   - testes unitários, incluindo chave duplicada entre arquivos e ordem das chaves
   - agentes: executor `dev`, revisores `arquiteto` e `qa`
   - _Requisitos: 15.7_
-- [ ] 0.3 Rodar o corte no guia real e provar a equivalência
+- [x] 0.3 Rodar o corte no guia real e provar a equivalência
   - hashes por coleção iguais aos de `tests/guide/expected/parity.json` e ordem das chaves mesclada idêntica, no novo `tests/guide/catalogos.test.ts`
   - `npm run validate` estrito e `npm test` verdes, com goldens Mermaid e `content/ids.lock.json` sem alteração
   - agentes: executor `dev`, revisores `arquiteto` e `qa`
   - _Requisitos: 15.7, 10.6_
-- [ ] 0.4 Atualizar os leitores do caminho antigo: `lib/content/index.ts`, `lib/guide/entities.ts`, `tools/validate/checks/flows.ts`, `tools/guide/cli.ts` e `tools/agents/sync.ts` (papéis agora vêm de `catalogos/papeis.yaml`)
+- [x] 0.4 Atualizar os leitores do caminho antigo: `lib/content/index.ts`, `lib/guide/entities.ts`, `tools/validate/checks/flows.ts`, `tools/guide/cli.ts` e `tools/agents/sync.ts` (papéis agora vêm de `catalogos/papeis.yaml`)
   - ajustar mensagens de erro e testes que citam `comum.yaml`
   - verificação: `npm run validate`, `npm test` e `npm run build` verdes
   - agentes: executor `dev`, revisores `arquiteto` e `qa`
   - _Requisitos: 15.7_
-- [ ] 0.5 Atualizar os textos que citam o caminho
+- [x] 0.5 Atualizar os textos que citam o caminho
   - `AGENTS.md` (mapa do repositório), prompts de `.agents/roles/*.md` (`papeis` agora em `content/guide/catalogos/papeis.yaml`) e depois `npm run agents:sync`
   - `docs/content-contract.md`, `docs/prd.md`, `docs/reviews/guia-demandas-review.md` onde nomeia o caminho, e `.kiro/steering/product.md`
   - nesta spec: tarefas 2.5 a 2.9, `design.md` e `requirements.md`, em toda menção a `comum.yaml` que agora significa um catálogo (por exemplo `categorias_ferramenta` em `catalogos/ferramentas.yaml`)
@@ -50,7 +50,7 @@ Convenções:
   - verificação: `npm run validate` e o check `public-terms` verdes
   - agentes: executor `dev`, revisores `arquiteto` e `qa`
   - _Requisitos: 15.7_
-- [ ] 0.6 Commit `refactor(guia): segmenta o comum.yaml em catálogos`
+- [x] 0.6 Commit `refactor(guia): segmenta o comum.yaml em catálogos`
   - _Requisitos: 15.7_
 
 ### Fase 1: spike de desempenho
@@ -60,212 +60,212 @@ Convenções:
   - registrar a linha de base atual como JSON em `docs/spike-fluxos/baseline.json`
   - verificação: `npm run build` e `npx playwright test tests/browser/performance.spec.ts` produzem o JSON
   - _Requisitos: 15.8, 20.13_
-- [ ] 1.2 Medir S1 e S2 em `tests/browser/spike/s1-s2.spec.ts`
+- [x] 1.2 Medir S1 e S2 em `tests/browser/spike/s1-s2.spec.ts`
   - S1: um `mermaid.render` por Conjunto_Expandido (Visão geral sintética, 1 raia, 5 raias, `completo`) e verificação do modelo linear previsto
   - S2: `maxTextSize` e `maxEdges` elevados, `layout: 'elk'` contra dagre (com custo em kB gzip), `htmlLabels: false` e `flowchart.curve`, com efeito no tempo, no SVG e no `label-overlap`
   - gravar os números em `docs/spike-fluxos/s1-s2.json`
   - _Requisitos: 20.13, 20.9, 20.10_
-- [ ] 1.3 Medir S3 e S4 em `tests/browser/spike/s3-s4.spec.ts`
+- [x] 1.3 Medir S3 e S4 em `tests/browser/spike/s3-s4.spec.ts`
   - S3: Mermaid em iframe com `sandbox` sem `allow-same-origin` e tentativa em Worker, medindo a resposta do mouse (alvo: menos de 100 ms durante um render de 3 s)
   - S4: cache de SVG por conjunto, render antecipado com `requestIdleCallback`, custo de memória e de CPU
   - gravar os números em `docs/spike-fluxos/s3-s4.json`
   - _Requisitos: 20.9, 20.13_
-- [ ] 1.4 Medir S5 em `tests/browser/spike/s5.spec.ts`: protótipo descartável do Renderizador próprio (`@dagrejs/dagre` em Worker, SVG gerado pelo kit) para 224 nós
+- [x] 1.4 Medir S5 em `tests/browser/spike/s5.spec.ts`: protótipo descartável do Renderizador próprio (`@dagrejs/dagre` em Worker, SVG gerado pelo kit) para 224 nós
   - medir tempo, kB gzip e diferença visual contra o golden `feature.completo.mmd`
   - o protótipo vive só em `tests/browser/spike/` e não entra no build
   - gravar os números em `docs/spike-fluxos/s5.json`
   - _Requisitos: 20.13, 19.2_
-- [ ] 1.5 Medir S6 em `tests/browser/spike/s6.spec.ts`: build ESM dividida do Mermaid 11.17.2 (flowchart e dagre por `import()`) servida por `tests/browser/serve.ts`
+- [x] 1.5 Medir S6 em `tests/browser/spike/s6.spec.ts`: build ESM dividida do Mermaid 11.17.2 (flowchart e dagre por `import()`) servida por `tests/browser/serve.ts`
   - provar SVG idêntico ao do bundle único para `feature.completo`, `feature.feat_orq` e a Visão geral sintética
   - medir kB gzip pela rede, número de requisições e `label-overlap`
   - gravar os números em `docs/spike-fluxos/s6.json`
   - _Requisitos: 15.8, 15.12, 20.13_
-- [ ] 1.6 Escrever `docs/spike-fluxos-desempenho.md` com as tabelas de S1 a S6 e a seção "Resultado do spike" no `design.md`
+- [x] 1.6 Escrever `docs/spike-fluxos-desempenho.md` com as tabelas de S1 a S6 e a seção "Resultado do spike" no `design.md`
   - decisão registrada para: Mermaid (ESM dividida, bundle único como fallback ou Renderizador próprio), estratégia de expansão (um render por conjunto com cache e fila, ou outra) e confirmação ou ajuste dos tetos de 15.8
   - cada decisão traz o número que a sustenta e o critério de go/no-go
   - verificação: `npm run validate` e `validate_spec_format` do `design.md` sem erros
   - _Requisitos: 15.8, 20.13_
-- [ ] 1.7 Checkpoint: apresentar ao dono o go/no-go do spike e aguardar a decisão
+- [x] 1.7 Checkpoint: apresentar ao dono o go/no-go do spike e aguardar a decisão
   - se a decisão alterar o orçamento ou escolher o Renderizador próprio, atualizar `requirements.md` e `design.md` antes de seguir
   - _Requisitos: 15.8, 20.13_
-- [ ] 1.8 Commit `docs(site): spike de desempenho do diagrama de fluxos`
+- [x] 1.8 Commit `docs(site): spike de desempenho do diagrama de fluxos`
   - _Requisitos: 20.13_
 
 ### Fase 2: dados do guia e regras do validador (somente `feature`)
 
-- [ ] 2.1 Estender `schema/flows.schema.json` com `categorias_ferramenta`, `guias_praticos` e o marcador explícito de "sem ferramenta aplicável" (campo opcional booleano, nome fixado nesta tarefa) em `$defs/Decisao` e `$defs/Subtarefa`
+- [x] 2.1 Estender `schema/flows.schema.json` com `categorias_ferramenta`, `guias_praticos` e o marcador explícito de "sem ferramenta aplicável" (campo opcional booleano, nome fixado nesta tarefa) em `$defs/Decisao` e `$defs/Subtarefa`
   - listar os campos nas `properties`, porque `additionalProperties` é `false`
   - verificação: `npm run validate` segue verde e um documento com os campos novos passa no schema (teste em `tests/guide/`)
   - _Requisitos: 10.1, 10.2, 18.6_
-- [ ] 2.2 Acrescentar `categorias_ferramenta` e `guias_praticos` a `REF_FIELDS` em `lib/guide/entities.ts` e emitir `REF_QUEBRADA` com o id da tarefa, o campo e o id não resolvido
+- [x] 2.2 Acrescentar `categorias_ferramenta` e `guias_praticos` a `REF_FIELDS` em `lib/guide/entities.ts` e emitir `REF_QUEBRADA` com o id da tarefa, o campo e o id não resolvido
   - `guias_praticos` resolve só para notas `guia-pratico`
   - defeitos plantados em `tests/guide/defeitos/` para os dois campos, em tarefa e em subtarefa
   - _Requisitos: 10.3, 13.5_
-- [ ] 2.3 Portar as regras novas para `lib/guide/validate/`: aviso de duplicidade (`CATEGORIA_FERRAMENTA_DUPLICADA`, `GUIA_PRATICO_DUPLICADO`) e completude `SEM_FERRAMENTA_OU_GUIA`
+- [x] 2.3 Portar as regras novas para `lib/guide/validate/`: aviso de duplicidade (`CATEGORIA_FERRAMENTA_DUPLICADA`, `GUIA_PRATICO_DUPLICADO`) e completude `SEM_FERRAMENTA_OU_GUIA`
   - a completude lê a constante `DEMANDAS_COM_LIGACAO_OBRIGATORIA`, que nasce vazia (a tarefa 2.9 inclui `feature`)
   - defeitos plantados e teste de que demandas sem os campos seguem válidas
   - _Requisitos: 10.4, 10.16, 18.3, 18.6_
-- [ ] 2.4 Escrever o adendo "Atualização da etapa 3" em `docs/adr/0001-yaml-como-fonte-unica.md` e o teste de guarda de `content/ids.lock.json`
+- [x] 2.4 Escrever o adendo "Atualização da etapa 3" em `docs/adr/0001-yaml-como-fonte-unica.md` e o teste de guarda de `content/ids.lock.json`
   - o adendo registra a extensão do schema e a regra de que a ligação tarefa para ferramenta e guia vive no Guia_YAML
   - o teste compara o lock atual com o da `main` e falha se um id sumir
   - _Requisitos: 10.5, 10.6_
-- [ ] 2.5 Declarar em `content/guide/catalogos/ferramentas.yaml` as Categorias_de_Ferramenta que as tarefas da `feature` usam (`categorias_ferramenta`, hoje vazio), com nome e descrição agnósticos
+- [x] 2.5 Declarar em `content/guide/catalogos/ferramentas.yaml` as Categorias_de_Ferramenta que as tarefas da `feature` usam (`categorias_ferramenta`, hoje vazio), com nome e descrição agnósticos
   - verificação: `npm run validate`, e os ids novos entram em `content/ids.lock.json` sem remover nenhum antigo
   - _Requisitos: 10.1, 10.6_
-- [ ] 2.6 Ligar a `categorias_ferramenta` e `guias_praticos` as tarefas e subtarefas da `feature` na primeira terça parte das raias, na ordem do guia (`content/guide/demandas/feature.yaml`)
+- [x] 2.6 Ligar a `categorias_ferramenta` e `guias_praticos` as tarefas e subtarefas da `feature` na primeira terça parte das raias, na ordem do guia (`content/guide/demandas/feature.yaml`)
   - ligar só a guias que já existem em `content/pt-BR/guides/`, e marcar "sem ferramenta aplicável" quando for o caso
   - o texto dos passos permanece agnóstico, sem nome de ferramenta
   - verificação: `npm run validate` sem erro
   - _Requisitos: 10.8, 10.16, 18.3_
-- [ ] 2.7 Mesma ligação para a segunda terça parte das raias da `feature`
+- [x] 2.7 Mesma ligação para a segunda terça parte das raias da `feature`
   - _Requisitos: 10.8, 10.16, 18.3_
-- [ ] 2.8 Mesma ligação para a terceira terça parte das raias da `feature`
+- [x] 2.8 Mesma ligação para a terceira terça parte das raias da `feature`
   - _Requisitos: 10.8, 10.16, 18.3_
-- [ ] 2.9 Incluir `feature` em `DEMANDAS_COM_LIGACAO_OBRIGATORIA` e confirmar `npm run validate` estrito sem avisos de completude
+- [x] 2.9 Incluir `feature` em `DEMANDAS_COM_LIGACAO_OBRIGATORIA` e confirmar `npm run validate` estrito sem avisos de completude
   - confirmar que as outras 11 Demandas seguem sem alteração (`npm test` verde)
   - _Requisitos: 10.16, 18.3, 18.5_
-- [ ] 2.10 Commit `feat(guia): ligação de tarefas a categorias de ferramenta e guias práticos`
+- [x] 2.10 Commit `feat(guia): ligação de tarefas a categorias de ferramenta e guias práticos`
   - _Requisitos: 10.1, 10.5_
 
 ### Fase 3: Modelo_de_Grafo e `lib/flow-graph`
 
-- [ ] 3.1 Criar `lib/schema/grafo.ts` (Zod, `VERSAO_MODELO_DE_GRAFO = 1`, `ModeloDeGrafo` e tipos filhos do design) e gerar `schema/json/grafo-fluxo.json` por `tools/schema/generate.ts`
+- [x] 3.1 Criar `lib/schema/grafo.ts` (Zod, `VERSAO_MODELO_DE_GRAFO = 1`, `ModeloDeGrafo` e tipos filhos do design) e gerar `schema/json/grafo-fluxo.json` por `tools/schema/generate.ts`
   - verificação: `npm run build` regenera o JSON sem diff depois do commit
   - _Requisitos: 17.1, 17.3_
-- [ ] 3.2 Extrair `contexto()` de `lib/flow-mermaid/index.ts` para `lib/flow-graph/contexto.ts`, sem mudar comportamento
+- [x] 3.2 Extrair `contexto()` de `lib/flow-mermaid/index.ts` para `lib/flow-graph/contexto.ts`, sem mudar comportamento
   - `lib/flow-mermaid` passa a importá-lo, e `ordemFluxo`, `ordemRaias` e `raiasDoContexto` seguem importadas de `lib/flow-mermaid/order.ts`
   - verificação: `tests/mermaid-parity` verde sem edição
   - _Requisitos: 17.2, 17.7_
-- [ ] 3.3 Implementar `gerarGrafo` e `gerarGrafos` em `lib/flow-graph/index.ts`, validando o resultado contra o schema e falhando com o id da Demanda e o caminho do campo
+- [x] 3.3 Implementar `gerarGrafo` e `gerarGrafos` em `lib/flow-graph/index.ts`, validando o resultado contra o schema e falhando com o id da Demanda e o caminho do campo
   - nós e raias na ordem de exibição, campo `ordem` explícito, `temPlaybook`, subtarefas com `descreverCondicao`
   - teste unitário com o grafo real da `feature` (224 nós, 25 raias)
   - _Requisitos: 17.1, 17.2, 17.3, 17.7_
-- [ ] 3.4 Escrever `tests/flow-graph/geradores.ts` e os testes de propriedade `tests/flow-graph/grafo.props.test.ts`
+- [x] 3.4 Escrever `tests/flow-graph/geradores.ts` e os testes de propriedade `tests/flow-graph/grafo.props.test.ts`
   - **Property 1: Round trip de serialização do Modelo_de_Grafo**
   - **Property 2: O Modelo_de_Grafo não acrescenta nem perde elementos do Guia_YAML**
   - **Validates: Requirements 17.8, 17.9**
-- [ ] 3.5 Escrever o teste de propriedade `tests/flow-graph/ordem.props.test.ts`
+- [x] 3.5 Escrever o teste de propriedade `tests/flow-graph/ordem.props.test.ts`
   - **Property 3: Ordem relativa estável dentro da Raia**
   - **Validates: Requirements 17.7**
-- [ ] 3.6 Criar a rota Astro `site/src/pages/[locale]/api/flows/[id].graph.json.ts` com `getStaticPaths` sobre as Demandas não biblioteca
+- [x] 3.6 Criar a rota Astro `site/src/pages/[locale]/api/flows/[id].graph.json.ts` com `getStaticPaths` sobre as Demandas não biblioteca
   - teste que cada grafo publicado tem no máximo 200 kB gzip, e `npm run smoke` cobre as rotas novas
   - _Requisitos: 17.1, 15.8_
-- [ ] 3.7 Commit `feat(site): modelo de grafo do fluxo e API estática`
+- [x] 3.7 Commit `feat(site): modelo de grafo do fluxo e API estática`
   - _Requisitos: 17.1_
 
 ### Fase 4: Mermaid derivado do Modelo_de_Grafo, com paridade dos goldens
 
-- [ ] 4.1 Adaptar `lib/flow-mermaid/index.ts` para montar o texto a partir de `ModeloDeGrafo` em `gerarDiagramaDoGrafo` nas Views `visao`, `raia:<id>` e `completo`, sem Subtarefas
+- [x] 4.1 Adaptar `lib/flow-mermaid/index.ts` para montar o texto a partir de `ModeloDeGrafo` em `gerarDiagramaDoGrafo` nas Views `visao`, `raia:<id>` e `completo`, sem Subtarefas
   - o módulo não usa `fs` nem `node:*`, para compilar também para o cliente
   - verificação: goldens dessas Views iguais byte a byte nas 12 Demandas
   - _Requisitos: 19.6, 19.8_
-- [ ] 4.2 Cobrir Subtarefas, legenda e `mapaIds` em `gerarDiagramaDoGrafo` e manter `gerarDiagrama(doc, demandaId, visao, ...)` como camada de compatibilidade, inclusive `visoesDoGuia` e `guiaParaDoc` das 3 notas
+- [x] 4.2 Cobrir Subtarefas, legenda e `mapaIds` em `gerarDiagramaDoGrafo` e manter `gerarDiagrama(doc, demandaId, visao, ...)` como camada de compatibilidade, inclusive `visoesDoGuia` e `guiaParaDoc` das 3 notas
   - verificação: `tests/mermaid-parity` verde sem edição, com e sem Subtarefas
   - _Requisitos: 19.6, 19.8_
-- [ ] 4.3 Escrever os testes de propriedade `tests/flow-graph/mermaid.props.test.ts`
+- [x] 4.3 Escrever os testes de propriedade `tests/flow-graph/mermaid.props.test.ts`
   - **Property 4: O Texto_Mermaid é função pura do Modelo_de_Grafo**
   - **Property 5: Paridade byte a byte entre o gerador antigo e o novo caminho**
   - **Validates: Requirements 19.8, 19.9**
-- [ ] 4.4 Implementar `textoAcessivel(grafo)` em `lib/flow-graph/` e usá-lo em `site/src/render/flow.ts` para a lista ordenada de Nós por Raia com as transições, mantendo os playbooks em `<details>`
+- [x] 4.4 Implementar `textoAcessivel(grafo)` em `lib/flow-graph/` e usá-lo em `site/src/render/flow.ts` para a lista ordenada de Nós por Raia com as transições, mantendo os playbooks em `<details>`
   - teste unitário da função e do HTML gerado para a `feature`
   - _Requisitos: 2.10, 19.7_
-- [ ] 4.5 Remover do build o caminho que lê o YAML direto, deixando-o só como oráculo de teste em `tests/`, e documentar no `docs/architecture.md` que o grafo é a fonte do Texto_Mermaid
+- [x] 4.5 Remover do build o caminho que lê o YAML direto, deixando-o só como oráculo de teste em `tests/`, e documentar no `docs/architecture.md` que o grafo é a fonte do Texto_Mermaid
   - verificação: `npm run build`, `npm test` e `npm run smoke` verdes
   - _Requisitos: 19.6, 19.10_
-- [ ] 4.6 Commit `refactor(fluxos): texto mermaid derivado do modelo de grafo`
+- [x] 4.6 Commit `refactor(fluxos): texto mermaid derivado do modelo de grafo`
   - _Requisitos: 19.6, 19.8_
 
 ### Fase 5: expansão progressiva no modelo
 
-- [ ] 5.1 Implementar `lib/flow-graph/expansao.ts` (`ConjuntoExpandido`, `ClusterDeRaia`, `ArestaVisivel`, `GrafoVisivel`, `projetar`, `chaveDoConjunto`, `lerConjunto` e `normalizar`) em TypeScript puro
+- [x] 5.1 Implementar `lib/flow-graph/expansao.ts` (`ConjuntoExpandido`, `ClusterDeRaia`, `ArestaVisivel`, `GrafoVisivel`, `projetar`, `chaveDoConjunto`, `lerConjunto` e `normalizar`) em TypeScript puro
   - Raia desconhecida em `lerConjunto` é ignorada, e conjunto com todas as raias normaliza para `completo`
   - _Requisitos: 17.5, 20.2, 20.4, 20.5, 20.8_
-- [ ] 5.2 Escrever os testes de propriedade `tests/flow-graph/expansao.props.test.ts` com grafos aleatórios e os grafos reais das 12 Demandas
+- [x] 5.2 Escrever os testes de propriedade `tests/flow-graph/expansao.props.test.ts` com grafos aleatórios e os grafos reais das 12 Demandas
   - **Property 10: A expansão é monótona**
   - **Property 11: A projeção conserva arestas, Nós e extremos**
   - **Property 13: O estado de expansão faz round trip no Fragmento_de_Estado e normaliza**
   - **Validates: Requirements 20.2, 20.4, 20.5, 20.7, 20.8**
-- [ ] 5.3 Implementar `gerarDiagramaExpandido(grafo, conj, comLegenda)` em `lib/flow-mermaid/index.ts`
+- [x] 5.3 Implementar `gerarDiagramaExpandido(grafo, conj, comLegenda)` em `lib/flow-mermaid/index.ts`
   - todas as raias expandidas delegam ao caminho do `completo`, e o caso parcial gera clusters `z_CL_<raia>` com cor da raia, contagens, arestas agregadas `×N` e a legenda da Visão geral
   - texto independente da ordem de expansão
   - _Requisitos: 20.1, 20.2, 20.6, 17.5_
-- [ ] 5.4 Gerar o golden `tests/fixtures/mermaid/golden/feature.geral.mmd` e escrever `tests/flow-graph/expansao-mermaid.props.test.ts`
+- [x] 5.4 Gerar o golden `tests/fixtures/mermaid/golden/feature.geral.mmd` e escrever `tests/flow-graph/expansao-mermaid.props.test.ts`
   - **Property 12: Expandir tudo equivale ao `completo` dos goldens**
   - **Property 14: O Texto_Mermaid do conjunto não depende do caminho de expansão**
   - **Validates: Requirements 20.6, 19.8, 17.5**
-- [ ] 5.5 Escrever o teste de exemplo `tests/flow-graph/limites-mermaid.test.ts` que gera o texto de Expandir_tudo, com e sem Subtarefas, das 12 Demandas e confere `maxTextSize` e `maxEdges` configurados
+- [x] 5.5 Escrever o teste de exemplo `tests/flow-graph/limites-mermaid.test.ts` que gera o texto de Expandir_tudo, com e sem Subtarefas, das 12 Demandas e confere `maxTextSize` e `maxEdges` configurados
   - _Requisitos: 20.10_
 - [ ] 5.6 Checkpoint: pedir ao dono a revisão do golden `feature.geral.mmd` e fixá-lo depois da aprovação
   - _Requisitos: 20.1, 20.2_
-- [ ] 5.7 Commit `feat(fluxos): visao geral e expansao progressiva no modelo`
+- [x] 5.7 Commit `feat(fluxos): visao geral e expansao progressiva no modelo`
   - _Requisitos: 20.1, 20.6_
 
 ### Fase 6: ilha `flow-app` e Diagrama
 
-- [ ] 6.1 Criar `site/src/flow-app/state.ts` e `site/src/flow-app/loader.ts`
+- [x] 6.1 Criar `site/src/flow-app/state.ts` e `site/src/flow-app/loader.ts`
   - `state.ts` lê e escreve o Fragmento_de_Estado (`no`, `view`, `exp`, `sub`, `persp`, `f`) com `history.replaceState` ou `pushState`, trata `visao` como alias de `geral` e ignora Raias inexistentes
   - `loader.ts` busca `api/flows/<id>.graph.json` uma única vez por página
   - testes unitários em Vitest com jsdom, sem recarga e sem nova busca ao mudar estado
   - _Requisitos: 15.10, 20.8, 2.7_
-- [ ] 6.2 Empacotar o Mermaid no build conforme a decisão do spike (ESM dividida de flowchart e dagre, ou bundle único como fallback) em `tools/site/build.ts`
+- [x] 6.2 Empacotar o Mermaid no build conforme a decisão do spike (ESM dividida de flowchart e dagre, ou bundle único como fallback) em `tools/site/build.ts`
   - copiar para `site/dist` todos os arquivos que o Diagrama pode carregar, sem CDN, e carregar só em página com Diagrama
   - verificação: `npm run build`, `npm run smoke` e medição da carga do Diagrama
   - _Requisitos: 15.3, 15.12_
-- [ ] 6.3 Implementar `site/src/flow-app/renderer.ts` (interfaces `Renderizador`, `InstanciaRenderizador`, `EstadoDiagrama` e registro `PERSPECTIVAS`) e `perspectives/mermaid.ts`
+- [x] 6.3 Implementar `site/src/flow-app/renderer.ts` (interfaces `Renderizador`, `InstanciaRenderizador`, `EstadoDiagrama` e registro `PERSPECTIVAS`) e `perspectives/mermaid.ts`
   - `initialize` com limites elevados, `data-id` aplicado nos `g.node` e `g.cluster` pelo `mapaIds` e nós focáveis com `tabindex`
   - _Requisitos: 17.4, 17.10, 19.2, 19.3, 3.1, 20.10_
-- [ ] 6.4 Implementar `site/src/flow-app/expansao.ts`: fila com número de sequência e descarte de resultado obsoleto, cache de SVG por `chaveDoConjunto` com limite de bytes e indicador de progresso (`role="status"`, `aria-busy`, até 100 ms)
+- [x] 6.4 Implementar `site/src/flow-app/expansao.ts`: fila com número de sequência e descarte de resultado obsoleto, cache de SVG por `chaveDoConjunto` com limite de bytes e indicador de progresso (`role="status"`, `aria-busy`, até 100 ms)
   - falha de render mantém o Diagrama anterior e oferece "Tentar de novo" e a alternativa textual
   - testes unitários da fila e do cache com `mermaid.render` simulado
   - _Requisitos: 20.9, 20.10, 15.8_
-- [ ] 6.5 Reescrever a Pagina_de_Demanda (`site/src/render/flow.ts` e a página Astro) com a ilha `data-island="flow"`: seletor das 12 Demandas na ordem de `ordem_das_demandas`, Abas_de_View (`geral`, raias, `completo`) com cor da Raia, legenda e troca de Demanda sem recarregar
+- [x] 6.5 Reescrever a Pagina_de_Demanda (`site/src/render/flow.ts` e a página Astro) com a ilha `data-island="flow"`: seletor das 12 Demandas na ordem de `ordem_das_demandas`, Abas_de_View (`geral`, raias, `completo`) com cor da Raia, legenda e troca de Demanda sem recarregar
   - abre em `geral`, e a URL antiga com `visao` vira alias
   - _Requisitos: 2.1, 2.2, 2.3, 2.5, 2.7, 2.8, 2.9, 18.1_
-- [ ] 6.6 Implementar `site/src/flow-app/interaction.ts`: clique (até 3 px), arraste com `grabbing`, setas, Ctrl ou Cmd com a roda, botões de zoom e rótulo acessível dos gestos
+- [x] 6.6 Implementar `site/src/flow-app/interaction.ts`: clique (até 3 px), arraste com `grabbing`, setas, Ctrl ou Cmd com a roda, botões de zoom e rótulo acessível dos gestos
   - Enter e Espaço abrem o Nó focado (o modal chega na fase 7, e aqui o evento é emitido e testado)
   - _Requisitos: 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 3.10, 3.11_
-- [ ] 6.7 Implementar Cluster_de_Raia na ilha: clique expande no lugar, "Abrir raia" ativa `raia:<id>`, "Recolher" volta ao cluster, Enter expande, ação própria por teclado e Expandir_tudo
+- [x] 6.7 Implementar Cluster_de_Raia na ilha: clique expande no lugar, "Abrir raia" ativa `raia:<id>`, "Recolher" volta ao cluster, Enter expande, ação própria por teclado e Expandir_tudo
   - atualizar `exp=` no Fragmento_de_Estado e preservar zoom e rolagem
   - _Requisitos: 4.3, 20.3, 20.4, 20.6, 20.8, 20.11_
-- [ ] 6.8 Implementar o botão "Voltar" (histórico de Views e rolagem, desabilitado sem histórico) e o alternador "Raias" da View `completo`
+- [x] 6.8 Implementar o botão "Voltar" (histórico de Views e rolagem, desabilitado sem histórico) e o alternador "Raias" da View `completo`
   - _Requisitos: 4.4, 4.5, 4.6_
-- [ ] 6.9 Implementar o seletor de Perspectiva (opção `mermaid`, registro aberto), com escolha no Fragmento_de_Estado e no `localStorage`, preservando View, Conjunto_Expandido, Subtarefas e Nó
+- [x] 6.9 Implementar o seletor de Perspectiva (opção `mermaid`, registro aberto), com escolha no Fragmento_de_Estado e no `localStorage`, preservando View, Conjunto_Expandido, Subtarefas e Nó
   - _Requisitos: 19.1, 19.3, 19.4, 19.5_
-- [ ] 6.10 Escrever `tests/browser/diagrama-ids.spec.ts` e `tests/browser/diagrama-interacao.spec.ts`
+- [x] 6.10 Escrever `tests/browser/diagrama-ids.spec.ts` e `tests/browser/diagrama-interacao.spec.ts`
   - todo nó expõe `data-id`, clique de 3 px abre e arraste de 150 px rola sem abrir, setas, zoom com Ctrl e roda comum sem zoom, foco visível
   - _Requisitos: 3.1 a 3.11, 16.3, 16.6_
-- [ ] 6.11 Escrever `tests/browser/demanda-troca.spec.ts` e `tests/browser/ordem-views.spec.ts`
+- [x] 6.11 Escrever `tests/browser/demanda-troca.spec.ts` e `tests/browser/ordem-views.spec.ts`
   - troca de Demanda e de View sem recarregar e sem exceção no console, mesma ordem horizontal dos Nós em cada View e em cada Conjunto_Expandido, abertura por URL com View
   - _Requisitos: 2.2, 2.4, 2.5, 2.6, 2.7, 16.4_
-- [ ] 6.12 Escrever `tests/browser/expansao-progressiva.spec.ts` e `tests/browser/perspectiva.spec.ts`
+- [x] 6.12 Escrever `tests/browser/expansao-progressiva.spec.ts` e `tests/browser/perspectiva.spec.ts`
   - abre em `geral`, expandir uma raia desenha só o conjunto novo (contagem de chamadas a `mermaid.render`), recolher, Expandir tudo com indicador em até 100 ms e `data-id` igual ao golden, pedido obsoleto descartado, teclado do cluster, URL com `exp=` reaberta
   - _Requisitos: 20.1 a 20.11, 19.1, 19.3, 19.4, 19.5, 19.11_
-- [ ] 6.13 Commit `feat(site): diagrama interativo de fluxos com visao geral e expansao`
+- [x] 6.13 Commit `feat(site): diagrama interativo de fluxos com visao geral e expansao`
   - _Requisitos: 3.1, 20.1_
 
 ### Fase 7: Modal de Playbook, Subtarefas, entradas e saídas
 
-- [ ] 7.1 Ampliar `api/flows/<id>.json` (`site/src/render/api.ts`) com `papeis`, letras RACI por nó, entradas e saídas, produtores e consumidores por artefato e variável (via `rastrearDados`) e o indicador "sem produtor" (via `lacunasDeDados`)
+- [x] 7.1 Ampliar `api/flows/<id>.json` (`site/src/render/api.ts`) com `papeis`, letras RACI por nó, entradas e saídas, produtores e consumidores por artefato e variável (via `rastrearDados`) e o indicador "sem produtor" (via `lacunasDeDados`)
   - teste unitário do formato para a `feature`
   - _Requisitos: 7.10, 8.1, 8.2, 8.5, 17.6_
-- [ ] 7.2 Criar `site/src/flow-app/modal.ts` com `<dialog>` nativo, `inert` no resto da página, foco preso, Esc e botão fechar devolvendo o foco, e `no=` no Fragmento_de_Estado
+- [x] 7.2 Criar `site/src/flow-app/modal.ts` com `<dialog>` nativo, `inert` no resto da página, foco preso, Esc e botão fechar devolvendo o foco, e `no=` no Fragmento_de_Estado
   - Historico_do_Modal como pilha em memória, que persiste só o topo
   - _Requisitos: 6.5, 6.6, 6.7, 6.9, 6.10, 6.11_
-- [ ] 7.3 Renderizar o conteúdo do Modal por tipo de Nó: tarefa (nome, tipo, Raia, resumo, Fazer, Evitar, perguntas-chave na ordem do guia, entradas, saídas, técnicas e papéis com letra RACI), gateway (pergunta, saídas com condição, papel que decide), Subtarefa condicional ("Executar quando") e chamada de Raia (Raia chamada, retornos e botão para abrir a View)
+- [x] 7.3 Renderizar o conteúdo do Modal por tipo de Nó: tarefa (nome, tipo, Raia, resumo, Fazer, Evitar, perguntas-chave na ordem do guia, entradas, saídas, técnicas e papéis com letra RACI), gateway (pergunta, saídas com condição, papel que decide), Subtarefa condicional ("Executar quando") e chamada de Raia (Raia chamada, retornos e botão para abrir a View)
   - _Requisitos: 6.1, 6.2, 6.3, 6.4, 4.1, 4.2, 8.6, 6.12_
-- [ ] 7.4 Tornar clicáveis papel, técnica, artefato, variável, rito e pergunta dentro do Modal (empilha, botão voltar, link para a Pagina_Canonica) e implementar o detalhe de artefato e variável com tipo, subtipo, exemplo, produtores, consumidores, aviso "sem produtor" e a ação "destacar no Diagrama"
+- [x] 7.4 Tornar clicáveis papel, técnica, artefato, variável, rito e pergunta dentro do Modal (empilha, botão voltar, link para a Pagina_Canonica) e implementar o detalhe de artefato e variável com tipo, subtipo, exemplo, produtores, consumidores, aviso "sem produtor" e a ação "destacar no Diagrama"
   - destacar ativa a View que contém o Nó, rola até ele e aplica o destaque
   - _Requisitos: 6.5, 6.6, 6.8, 8.1, 8.2, 8.3, 8.4, 8.5, 8.7, 13.2_
-- [ ] 7.5 Implementar na ilha o alternador "Subtarefas" (expande as de toda raia expandida), a expansão por tarefa, a indicação "N subtarefas", a borda tracejada com ◆ nas condicionais e o alternador oculto quando a View não tem Subtarefas
+- [x] 7.5 Implementar na ilha o alternador "Subtarefas" (expande as de toda raia expandida), a expansão por tarefa, a indicação "N subtarefas", a borda tracejada com ◆ nas condicionais e o alternador oculto quando a View não tem Subtarefas
   - preservar View, zoom e rolagem ao alternar
   - _Requisitos: 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.8, 20.5_
-- [ ] 7.6 Escrever `tests/browser/modal-playbook.spec.ts` e `tests/browser/entradas-saidas.spec.ts`
+- [x] 7.6 Escrever `tests/browser/modal-playbook.spec.ts` e `tests/browser/entradas-saidas.spec.ts`
   - conteúdo por tipo, histórico e botão voltar, foco preso (loop de Tab), Esc devolve o foco, URL com `no=` reabre o modal, "sem produtor", destacar produtor
   - _Requisitos: 6.1 a 6.12, 8.1 a 8.7_
-- [ ] 7.7 Escrever `tests/browser/subtarefas.spec.ts`
+- [x] 7.7 Escrever `tests/browser/subtarefas.spec.ts`
   - alternador, contagem real "N subtarefas", marcador ◆, alternador oculto sem Subtarefas, estado preservado
   - _Requisitos: 5.1 a 5.6, 5.8_
-- [ ] 7.8 Commit `feat(site): modal de playbook, subtarefas e rastreio de entradas e saidas`
+- [-] 7.8 Commit `feat(site): modal de playbook, subtarefas e rastreio de entradas e saidas`
   - _Requisitos: 6.1, 5.1_
 
 ### Fase 8: motor de facetas e as três Areas

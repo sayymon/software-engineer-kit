@@ -114,9 +114,9 @@ function probes(index: SiteIndex): Probe[] {
     { kind: 'stack', route: stack.route, expect: ['class="checklist"'] },
     { kind: 'guide', route: guide.route, expect: ['data-island="mermaid"', 'vendor/mermaid/mermaid.min.js', 'mermaid-source'] },
     { kind: 'certification', route: cert.route, expect: ['data-tipo="certificacao"'] },
-    { kind: 'flow', route: flow.route, expect: ['data-island="mermaid"', 'class="matrix"'] },
-    { kind: 'flow seguranca', route: 'flows/seguranca', expect: ['data-island="mermaid"', 'data-tipo="demanda"'] },
-    { kind: 'flow spike', route: 'flows/spike', expect: ['data-island="mermaid"', 'data-tipo="demanda"'] },
+    { kind: 'flow', route: flow.route, expect: ['data-island="flow"', 'role="tablist"', 'class="matrix"'] },
+    { kind: 'flow seguranca', route: 'flows/seguranca', expect: ['data-island="flow"', 'data-tipo="demanda"'] },
+    { kind: 'flow spike', route: 'flows/spike', expect: ['data-island="flow"', 'data-tipo="demanda"'] },
     { kind: 'rito', route: rito.route, expect: ['data-tipo="rito"'] },
     { kind: 'papel', route: papel.route, expect: ['data-tipo="papel"'] },
     { kind: 'artefato', route: artefato.route, expect: ['data-tipo="artefato"'] },
@@ -211,6 +211,14 @@ async function main() {
         if (p.kind === 'guide' || p.kind === 'flow') {
           const asset = await get(origin, `${base}/vendor/mermaid/mermaid.min.js`);
           if (asset.status !== 200 || asset.text.length < 100000) fail(`${locale} ${p.kind}: mermaid asset not served (status ${asset.status})`);
+          if (p.kind === 'flow') {
+            // Split ESM build used by the Diagrama: the entry and the first chunk it imports must be served (no CDN).
+            const entry = await get(origin, `${base}/vendor/mermaid-esm/mermaid.esm.min.mjs`);
+            const chunk = /from"(\.\/chunks\/mermaid\.esm\.min\/[^"]+\.mjs)"/.exec(entry.text)?.[1];
+            const chunkRes = chunk ? await get(origin, `${base}/vendor/mermaid-esm/${chunk.slice(2)}`) : undefined;
+            if (entry.status !== 200 || !chunk || chunkRes?.status !== 200) fail(`${locale} ${p.kind}: mermaid ESM assets not served (entry ${entry.status}, chunk ${chunkRes?.status ?? 'none'})`);
+            else pass(`${locale} mermaid ESM entry and chunks`);
+          }
         }
       }
       for (const api of ['api/index.json', 'api/graph.json', ...index.ofTipo('demanda').filter((p) => p.entity.data.biblioteca !== true).map((p) => `api/flows/${p.id}.json`)]) {
@@ -219,6 +227,17 @@ async function main() {
           const json = JSON.parse(text);
           const ok = status === 200 && (api.endsWith('graph.json') ? json.nodes?.length > 0 && json.edges?.length > 0 : api.endsWith('index.json') ? json.items?.length > 0 : json.raias?.length > 0 && json.diagrams?.completo);
           if (ok) pass(`${locale} ${api}`);
+          else fail(`${locale} ${api}: unexpected payload`);
+        } catch {
+          fail(`${locale} ${api}: not JSON (status ${status})`);
+        }
+      }
+      for (const p of index.ofTipo('demanda').filter((d) => d.entity.data.biblioteca !== true)) {
+        const api = `api/flows/${p.id}.graph.json`;
+        const { status, text } = await get(origin, `${base}/${locale}/${api}`);
+        try {
+          const json = JSON.parse(text);
+          if (status === 200 && json.demanda === p.id && json.nos?.length > 0 && json.raias?.length > 0) pass(`${locale} ${api}`);
           else fail(`${locale} ${api}: unexpected payload`);
         } catch {
           fail(`${locale} ${api}: not JSON (status ${status})`);

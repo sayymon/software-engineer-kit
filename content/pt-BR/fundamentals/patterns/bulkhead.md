@@ -66,8 +66,8 @@ ferramentas:
   - tabela:resilience4j
   - tabela:polly
   - "[[kubernetes|Kubernetes (ferramenta)]]"
-  - tabela:istio
-  - tabela:envoy
+  - "[[istio|Istio]]"
+  - "[[envoy|Envoy]]"
 notaCompleta: []
 dataVerificacao: 2026-11-22
 tags:

@@ -7,9 +7,17 @@ import { fail, ok, type Check } from '../types';
 export const PUBLIC_TERMS_FILE = 'config/public-terms.txt';
 export const PRIVATE_TERMS_FILE = 'private/config/internal-terms.txt';
 /** Directories never scanned: dependencies, build output, scratch, the private folder and the vendored bundles. */
-const SKIP_DIRS = new Set(['.git', 'node_modules', '.astro', '.agents', 'private', 'vendor', '.hypothesis', '.pytest_cache', '__pycache__']);
+const SKIP_DIRS = new Set(['.git', '.worktrees', 'node_modules', '.astro', '.agents', 'private', 'vendor', '.hypothesis', '.pytest_cache', '__pycache__']);
 /** Files never scanned: the lockfile and the public ruleset itself. */
 const SKIP_FILES = new Set(['package-lock.json', '.git', PUBLIC_TERMS_FILE]);
+/** Files whose name starts with one of these prefixes are never scanned (the appsec gate files carry rule examples). */
+export const IGNORED_FILE_PREFIXES: readonly string[] = ['appsec-'];
+/** Example emails accepted as they are. Explicit allowlist: the general email rule in the public ruleset stays as strict as before. */
+export const ALLOWED_EXAMPLE_EMAILS: readonly string[] = ['john@acme.com', 'john@example.com'];
+const ALLOWED_EMAILS = new Set(ALLOWED_EXAMPLE_EMAILS);
+/** A hit is allowed only when the whole matched text is one of the allowlisted emails (case-insensitive). */
+const isAllowedHit = (h: Hit): boolean => ALLOWED_EMAILS.has(h.match.toLowerCase());
+const isIgnoredFile = (name: string): boolean => IGNORED_FILE_PREFIXES.some((p) => name.startsWith(p));
 const TEXT_EXT = new Set(['.md', '.yaml', '.yml', '.json', '.txt', '.ts', '.tsx', '.js', '.mjs', '.astro', '.css', '.html', '.toml', '.sh', '.py', '.cfg', '']);
 function files(root: string, rel = '', out: string[] = []): string[] {
   for (const name of readdirSync(join(root, rel)).sort()) {
@@ -18,7 +26,7 @@ function files(root: string, rel = '', out: string[] = []): string[] {
     if (statSync(child).isDirectory()) {
       if (SKIP_DIRS.has(name) || name.startsWith('dist')) continue;
       files(root, childRel, out);
-    } else if (TEXT_EXT.has(extname(name)) && !SKIP_FILES.has(childRel)) out.push(child);
+    } else if (TEXT_EXT.has(extname(name)) && !SKIP_FILES.has(childRel) && !isIgnoredFile(name)) out.push(child);
   }
   return out;
 }
@@ -48,7 +56,7 @@ export function scanTerms(root: string, blocklistFiles: string[]): { hits: Hit[]
     }
     hits.push(...findBlocked(readFileSync(file, 'utf8'), blocklist, { file: where, field: 'text' }));
   }
-  return { hits, scanned };
+  return { hits: hits.filter((h) => !isAllowedHit(h)), scanned };
 }
 export const terms: Check = {
   name: 'terms',

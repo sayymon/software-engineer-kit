@@ -144,7 +144,7 @@ nos:
       categoria: "[[seguranca_codigo|Segurança de código]]"
       ferramentas:
         - "[[gitleaks|Gitleaks (ferramenta)]]"
-        - tabela:trivy
+        - "[[trivy|Trivy]]"
         - tabela:semgrep-oss
   - id: seg_orq_e2
     raia: seg_orq
@@ -182,8 +182,8 @@ nos:
       categoria: "[[seguranca_codigo|Segurança de código]]"
       ferramentas:
         - "[[github_advanced_security|GitHub Advanced Security]]"
-        - tabela:snyk
-        - tabela:sonarqube
+        - "[[snyk|Snyk]]"
+        - "[[sonarqube|SonarQube]]"
   - id: seg_orq_e3
     raia: seg_orq
     tipo: fim
@@ -470,11 +470,11 @@ stacks:
   - "[[fluxo_dev_assistido_ia|Fluxo de desenvolvimento assistido por IA]]"
 ferramentas:
   - "[[gitleaks|Gitleaks (ferramenta)]]"
-  - tabela:trivy
+  - "[[trivy|Trivy]]"
   - tabela:semgrep-oss
   - "[[github_advanced_security|GitHub Advanced Security]]"
-  - tabela:snyk
-  - tabela:sonarqube
+  - "[[snyk|Snyk]]"
+  - "[[sonarqube|SonarQube]]"
   - "[[n_1password|1Password]]"
   - tabela:doppler
   - "[[bitwarden|Bitwarden]]"

@@ -609,12 +609,14 @@ decisoes:
       - id: feat_ent_t1_st1
         rotulo: "Abrir o registro com a origem e quem traz a demanda"
         papel: pm
+        categorias_ferramenta: [cf_rastreio_de_tarefas]
         saidas: [registro_da_necessidade, origem_da_demanda]
         exemplo: "Registro aberto: oportunidade de negócio trazida pela liderança comercial, aumentar a conversão de compradores recorrentes."
         status: rascunho
       - id: feat_ent_t1_st2
         rotulo: "Classificar o modelo de trabalho e a incerteza"
         papel: pm
+        sem_ferramenta: true
         apoio: [tech_lead]
         entradas: [registro_da_necessidade]
         saidas: [registro_da_necessidade, modelo_de_trabalho, modelo_de_trabalho_complementar, nivel_de_incerteza, tipo_de_feature]
@@ -623,6 +625,7 @@ decisoes:
       - id: feat_ent_t1_st3
         rotulo: "Escolher o formato do registro conforme o modelo do time"
         papel: pm
+        categorias_ferramenta: [cf_base_de_conhecimento, cf_documentacao_e_diagramas]
         entradas: [registro_da_necessidade, modelo_de_trabalho, modelo_de_trabalho_complementar, origem_da_demanda]
         saidas: [registro_da_necessidade]
         tecnicas:
@@ -636,6 +639,7 @@ decisoes:
             porque: "oportunidade de negócio precisa de retorno esperado e custo estimado antes de seguir"
         exemplo: "Como é time de produto com PM, o registro vira um PRD curto; o card no fluxo do time aponta para ele."
         status: rascunho
+    categorias_ferramenta: [cf_rastreio_de_tarefas, cf_base_de_conhecimento]
     playbook: pb_feat_ent_t1
     layout:
       coluna: 1
@@ -656,6 +660,7 @@ decisoes:
       - id: feat_ent_t2_st1
         rotulo: "Pesquisar soluções, componentes e serviços existentes"
         papel: arquiteto
+        categorias_ferramenta: [cf_base_de_conhecimento, cf_controle_de_versao]
         apoio: [dev]
         entradas: [registro_da_necessidade]
         saidas: [levantamento_de_reuso]
@@ -664,6 +669,7 @@ decisoes:
       - id: feat_ent_t2_st2
         rotulo: "Avaliar o encaixe com quem conhece cada solução"
         papel: arquiteto
+        sem_ferramenta: true
         apoio: [tech_lead]
         entradas: [levantamento_de_reuso]
         saidas: [levantamento_de_reuso, existe_solucao_reutilizavel]
@@ -673,6 +679,7 @@ decisoes:
             porque: "decisões anteriores explicam limites e escolhas das soluções existentes"
         exemplo: "O componente de cupom atende 70% da necessidade; falta a regra por histórico de compra. Resultado: parcial."
         status: rascunho
+    categorias_ferramenta: [cf_base_de_conhecimento, cf_controle_de_versao]
     playbook: pb_feat_ent_t2
     layout:
       coluna: 2
@@ -725,6 +732,7 @@ decisoes:
     - id: feat_ent_t3_st1
       rotulo: Mapear os interessados
       papel: pm
+      sem_ferramenta: true
       entradas:
       - registro_da_necessidade
       saidas:
@@ -738,6 +746,7 @@ decisoes:
     - id: feat_ent_t3_st2
       rotulo: Entender o trabalho que o usuário quer realizar
       papel: pm
+      sem_ferramenta: true
       apoio:
       - designer
       quando:
@@ -766,6 +775,7 @@ decisoes:
     - id: feat_ent_t3_st3
       rotulo: Ligar a entrega ao impacto esperado
       papel: pm
+      sem_ferramenta: true
       apoio:
       - tech_lead
       quando:
@@ -788,6 +798,7 @@ decisoes:
     - id: feat_ent_t3_st4
       rotulo: Montar o caso de negócio
       papel: pm
+      categorias_ferramenta: [cf_documentacao_e_diagramas]
       apoio:
       - stakeholder
       quando:
@@ -809,6 +820,7 @@ decisoes:
     - id: feat_ent_t3_st5
       rotulo: Definir as métricas de sucesso e o OKR e o KPI
       papel: pm
+      categorias_ferramenta: [cf_analise_de_uso_do_produto]
       apoio:
       - stakeholder
       entradas:
@@ -823,6 +835,7 @@ decisoes:
         porque: a iniciativa precisa mover um objetivo real da empresa
       exemplo: 'Move o KR de recompra do trimestre. KPI: taxa de recompra em 30 dias, de 18% para 20%.'
       status: rascunho
+    categorias_ferramenta: [cf_base_de_conhecimento, cf_analise_de_uso_do_produto]
     playbook: pb_feat_ent_t3
     layout:
       coluna: 4
@@ -880,6 +893,7 @@ decisoes:
       - id: feat_ent_t4_st1
         rotulo: "Apresentar o entendimento e registrar a aprovação"
         papel: pm
+        categorias_ferramenta: [cf_comunicacao_da_equipe]
         apoio: [stakeholder]
         entradas: [registro_da_necessidade, mapa_de_interessados, metricas_de_sucesso]
         saidas: [necessidade_validada]
@@ -888,10 +902,12 @@ decisoes:
       - id: feat_ent_t4_st2
         rotulo: "Publicar o registro e avisar o time"
         papel: pm
+        categorias_ferramenta: [cf_base_de_conhecimento, cf_comunicacao_da_equipe]
         entradas: [necessidade_validada]
         saidas: [comunicado_da_necessidade]
         exemplo: "Mensagem no canal do time com o link do registro, o KPI alvo e o próximo passo: levantamento de requisitos."
         status: rascunho
+    categorias_ferramenta: [cf_comunicacao_da_equipe, cf_base_de_conhecimento]
     playbook: pb_feat_ent_t4
     layout:
       coluna: 6
@@ -1006,6 +1022,7 @@ decisoes:
     - id: feat_lev_t1_st1
       rotulo: Classificar o contexto da elicitação
       papel: pm
+      sem_ferramenta: true
       apoio:
       - arquiteto
       saidas:
@@ -1020,6 +1037,7 @@ decisoes:
     - id: feat_lev_t1_st2
       rotulo: Chegar à necessidade real com 5 porquês
       papel: pm
+      sem_ferramenta: true
       quando:
         todos:
         - var: nivel_de_incerteza
@@ -1036,6 +1054,7 @@ decisoes:
     - id: feat_lev_t1_st3
       rotulo: Mapear os impactos entre sistemas
       papel: arquiteto
+      categorias_ferramenta: [cf_documentacao_e_diagramas]
       apoio:
       - pm
       quando:
@@ -1057,6 +1076,7 @@ decisoes:
     - id: feat_lev_t1_st4
       rotulo: Mapear o fluxo e as variações com Event Storming
       papel: arquiteto
+      categorias_ferramenta: [cf_documentacao_e_diagramas]
       apoio:
       - pm
       - dev
@@ -1079,6 +1099,7 @@ decisoes:
     - id: feat_lev_t1_st5
       rotulo: Entender o trabalho que o usuário quer realizar
       papel: pm
+      sem_ferramenta: true
       apoio:
       - designer
       quando:
@@ -1097,6 +1118,7 @@ decisoes:
     - id: feat_lev_t1_st6
       rotulo: Observar o trabalho real onde ele acontece
       papel: designer
+      sem_ferramenta: true
       apoio:
       - pm
       quando:
@@ -1115,6 +1137,7 @@ decisoes:
     - id: feat_lev_t1_st7
       rotulo: Validar as percepções com dados
       papel: engenheiro_de_dados
+      categorias_ferramenta: [cf_analise_de_uso_do_produto]
       apoio:
       - pm
       quando:
@@ -1130,6 +1153,7 @@ decisoes:
         porque: logs, métricas e funis medem o tamanho real da necessidade
       exemplo: 'Funil: 38% dos compradores recorrentes abandonam na etapa de pagamento.'
       status: rascunho
+    categorias_ferramenta: [cf_analise_de_uso_do_produto, cf_documentacao_e_diagramas]
     playbook: pb_feat_lev_t1
     layout:
       coluna: 1
@@ -1175,6 +1199,7 @@ decisoes:
     - id: feat_lev_t2_st1
       rotulo: Fatiar em histórias pequenas e independentes
       papel: pm
+      categorias_ferramenta: [cf_rastreio_de_tarefas]
       apoio:
       - tech_lead
       saidas:
@@ -1191,6 +1216,7 @@ decisoes:
     - id: feat_lev_t2_st2
       rotulo: Destrinchar as histórias com os 3 Amigos
       papel: pm
+      sem_ferramenta: true
       apoio:
       - dev
       - qa
@@ -1207,6 +1233,7 @@ decisoes:
     - id: feat_lev_t2_st3
       rotulo: Escrever os critérios de aceite como exemplos
       papel: qa
+      categorias_ferramenta: [cf_documentacao_e_diagramas]
       apoio:
       - pm
       entradas:
@@ -1226,6 +1253,7 @@ decisoes:
     - id: feat_lev_t2_st4
       rotulo: Definir a Definition of Done mínima
       papel: tech_lead
+      categorias_ferramenta: [cf_documentacao_e_diagramas]
       apoio:
       - qa
       - seguranca
@@ -1233,6 +1261,7 @@ decisoes:
       - definition_of_done
       exemplo: 'Pronto quando: critérios de aceite atendidos, gates de qualidade e segurança aprovados, requisitos funcionais e não funcionais cobertos por testes.'
       status: rascunho
+    categorias_ferramenta: [cf_rastreio_de_tarefas, cf_documentacao_e_diagramas]
     playbook: pb_feat_lev_t2
     layout:
       coluna: 3
@@ -1259,6 +1288,7 @@ decisoes:
     - id: feat_lev_t3_st1
       rotulo: Descrever os cards na ferramenta de gestão do fluxo
       papel: pm
+      categorias_ferramenta: [cf_rastreio_de_tarefas]
       apoio:
       - tech_lead
       saidas:
@@ -1268,6 +1298,7 @@ decisoes:
     - id: feat_lev_t3_st2
       rotulo: Registrar o contrato funcional e técnico de pronto
       papel: qa
+      categorias_ferramenta: [cf_documentacao_e_diagramas, cf_rastreio_de_tarefas]
       apoio:
       - arquiteto
       - seguranca
@@ -1275,6 +1306,7 @@ decisoes:
       - contrato_funcional_e_tecnico
       exemplo: 'Contrato: critérios de aceite, testes esperados por nível, análise de vulnerabilidades, metas não funcionais e o que fica fora.'
       status: rascunho
+    categorias_ferramenta: [cf_rastreio_de_tarefas, cf_documentacao_e_diagramas]
     playbook: pb_feat_lev_t3
     layout:
       coluna: 3
@@ -1327,6 +1359,7 @@ decisoes:
     - para: feat_cls_c2
       condicao: ''
     estado: {}
+    categorias_ferramenta: [cf_rastreio_de_tarefas, cf_documentacao_e_diagramas]
     playbook: pb_feat_cls_t1
     layout:
       coluna: 1
@@ -1352,6 +1385,7 @@ decisoes:
     - id: feat_cls_t1_st1
       rotulo: Classificar em funcional, não funcional, restrição ou inverso
       papel: pm
+      sem_ferramenta: true
       apoio:
       - arquiteto
       saidas:
@@ -1368,6 +1402,7 @@ decisoes:
     - id: feat_cls_t1_st2
       rotulo: Priorizar os requisitos
       papel: pm
+      categorias_ferramenta: [cf_rastreio_de_tarefas]
       apoio:
       - stakeholder
       entradas:
@@ -1393,6 +1428,7 @@ decisoes:
     - id: feat_cls_t1_st3
       rotulo: Registrar o que entra e o que fica fora do escopo
       papel: pm
+      categorias_ferramenta: [cf_documentacao_e_diagramas]
       apoio:
       - tech_lead
       entradas:
@@ -1406,6 +1442,7 @@ decisoes:
       descricao: 'Os requisitos não funcionais que ficaram no escopo ligam as variáveis que as raias comuns leem, e o tipo de feature serve de ponto de partida: performance sugere tem_requisito_de_performance; experimento sugere precisa_de_experimento; integracao sugere tem_integracao; acessibilidade sugere tem_requisito_de_acessibilidade; seguranca sugere exige_seguranca_reforcada; melhoria_funcional, performance e acessibilidade sugerem altera_comportamento_existente. Vale o que os requisitos mostram; a spec confirma.'
       porque: mantém as raias comuns desacopladas da feature, porque elas leem só as variáveis genéricas e nunca o tipo
       papel: tech_lead
+      sem_ferramenta: true
       apoio:
       - pm
       - arquiteto
@@ -1426,6 +1463,7 @@ decisoes:
     - id: feat_cls_t1_st5
       rotulo: Avaliar se a demanda é um épico
       papel: pm
+      sem_ferramenta: true
       apoio:
       - tech_lead
       entradas:
@@ -1438,6 +1476,7 @@ decisoes:
     - id: feat_cls_t1_st6
       rotulo: Criar o épico e quebrar em features
       papel: pm
+      categorias_ferramenta: [cf_rastreio_de_tarefas]
       apoio:
       - tech_lead
       - arquiteto
@@ -1596,6 +1635,7 @@ decisoes:
     - id: feat_spc_t1_st1
       rotulo: Definir os casos de avaliação e o limiar de aceite
       papel: qa
+      categorias_ferramenta: [cf_testes_automatizados]
       apoio:
       - pm
       saidas:
@@ -1609,6 +1649,7 @@ decisoes:
     - id: feat_spc_t1_st2
       rotulo: Definir o orçamento de custo por chamada e o plano B
       papel: arquiteto
+      sem_ferramenta: true
       saidas:
       - requisitos_de_ia
       exemplo: Teto de custo por chamada e regra fixa de fallback se o modelo cair ou passar do teto.
@@ -1616,12 +1657,14 @@ decisoes:
     - id: feat_spc_t1_st3
       rotulo: Mapear alucinação e dependência de fornecedor do modelo
       papel: arquiteto
+      categorias_ferramenta: [cf_documentacao_e_diagramas]
       apoio:
       - seguranca
       saidas:
       - requisitos_de_ia
       exemplo: 'Risco: sugerir cupom inexistente. Mitigação: validar contra o catálogo antes de exibir.'
       status: rascunho
+    categorias_ferramenta: [cf_testes_automatizados, cf_documentacao_e_diagramas]
     playbook: pb_feat_spc_t1
     layout:
       coluna: 2
@@ -1649,6 +1692,7 @@ decisoes:
     - id: feat_spc_t2_st1
       rotulo: Escrever as histórias e os critérios de aceite em EARS
       papel: pm
+      categorias_ferramenta: [cf_documentacao_e_diagramas]
       apoio:
       - qa
       saidas:
@@ -1666,6 +1710,7 @@ decisoes:
     - id: feat_spc_t2_st2
       rotulo: Registrar os requisitos não funcionais com metas
       papel: arquiteto
+      categorias_ferramenta: [cf_documentacao_e_diagramas]
       saidas:
       - requirements_md
       - tem_requisito_de_performance
@@ -1678,6 +1723,7 @@ decisoes:
     - id: feat_spc_t2_st3
       rotulo: Incluir o requisito probabilístico
       papel: pm
+      categorias_ferramenta: [cf_documentacao_e_diagramas]
       apoio:
       - arquiteto
       quando:
@@ -1694,6 +1740,7 @@ decisoes:
     - id: feat_spc_t2_st4
       rotulo: Revisar o requirements.md com os interessados
       papel: pm
+      categorias_ferramenta: [cf_comunicacao_da_equipe]
       apoio:
       - stakeholder
       entradas:
@@ -1702,6 +1749,7 @@ decisoes:
       - requirements_md
       exemplo: Revisão de 30 minutos com o PM e a liderança comercial; dois critérios ajustados.
       status: rascunho
+    categorias_ferramenta: [cf_documentacao_e_diagramas, cf_comunicacao_da_equipe]
     playbook: pb_feat_spc_t2
     layout:
       coluna: 3
@@ -1725,6 +1773,7 @@ decisoes:
     - id: feat_spc_t3_st1
       rotulo: Descobrir eventos, comandos e regras do domínio
       papel: arquiteto
+      categorias_ferramenta: [cf_documentacao_e_diagramas]
       apoio:
       - pm
       - dev
@@ -1746,6 +1795,7 @@ decisoes:
     - id: feat_spc_t3_st2
       rotulo: Delimitar os contextos e a linguagem ubíqua
       papel: arquiteto
+      categorias_ferramenta: [cf_documentacao_e_diagramas]
       saidas:
       - mapa_de_contextos
       - modelo_de_dominio
@@ -1758,6 +1808,7 @@ decisoes:
     - id: feat_spc_t3_st3
       rotulo: Mapear módulos e integrações entre contextos
       papel: arquiteto
+      categorias_ferramenta: [cf_documentacao_e_diagramas]
       apoio:
       - tech_lead
       saidas:
@@ -1768,6 +1819,7 @@ decisoes:
         porque: o mapa de contextos mostra quem depende de quem e como
       exemplo: Promoções consome eventos de Pedidos por mensageria; não há chamada síncrona entre os contextos.
       status: rascunho
+    categorias_ferramenta: [cf_documentacao_e_diagramas]
     playbook: pb_feat_spc_t3
     layout:
       coluna: 4
@@ -1800,6 +1852,7 @@ decisoes:
     - id: feat_spc_t4_st1
       rotulo: Desenhar a arquitetura em contexto, contêineres e componentes
       papel: arquiteto
+      categorias_ferramenta: [cf_documentacao_e_diagramas]
       saidas:
       - diagrama_de_arquitetura
       tecnicas:
@@ -1811,6 +1864,7 @@ decisoes:
     - id: feat_spc_t4_st2
       rotulo: Desenhar os diagramas de sequência dos fluxos principais
       papel: arquiteto
+      categorias_ferramenta: [cf_documentacao_e_diagramas]
       apoio:
       - dev
       saidas:
@@ -1824,6 +1878,7 @@ decisoes:
     - id: feat_spc_t4_st3
       rotulo: Definir o modelo de dados (DER) e os contratos de integração
       papel: arquiteto
+      categorias_ferramenta: [cf_documentacao_e_diagramas]
       apoio:
       - engenheiro_de_dados
       saidas:
@@ -1848,6 +1903,7 @@ decisoes:
     - id: feat_spc_t4_st4
       rotulo: Definir tecnologias, stack e estrutura do projeto
       papel: arquiteto
+      categorias_ferramenta: [cf_base_de_conhecimento]
       apoio:
       - tech_lead
       saidas:
@@ -1857,6 +1913,7 @@ decisoes:
     - id: feat_spc_t4_st5
       rotulo: Definir padrões de projeto e boas práticas
       papel: arquiteto
+      categorias_ferramenta: [cf_base_de_conhecimento]
       apoio:
       - dev
       saidas:
@@ -1871,6 +1928,7 @@ decisoes:
     - id: feat_spc_t4_st6
       rotulo: Consolidar a visão arquitetural no design.md
       papel: arquiteto
+      categorias_ferramenta: [cf_documentacao_e_diagramas]
       entradas:
       - diagrama_de_arquitetura
       - diagrama_de_sequencia
@@ -1885,6 +1943,7 @@ decisoes:
         porque: um único documento permite decompor a arquitetura em tarefas
       exemplo: design.md com contexto, diagramas, contratos, dados, stack, padrões, riscos e alternativas.
       status: rascunho
+    categorias_ferramenta: [cf_documentacao_e_diagramas, cf_base_de_conhecimento]
     playbook: pb_feat_spc_t4
     layout:
       coluna: 5
@@ -1913,6 +1972,7 @@ decisoes:
     - id: feat_spc_t5_st1
       rotulo: Escrever um ADR por decisão relevante
       papel: arquiteto
+      categorias_ferramenta: [cf_documentacao_e_diagramas, cf_controle_de_versao]
       apoio:
       - tech_lead
       saidas:
@@ -1926,6 +1986,7 @@ decisoes:
     - id: feat_spc_t5_st2
       rotulo: Reunir os stakeholders para as decisões que os afetam
       papel: arquiteto
+      categorias_ferramenta: [cf_comunicacao_da_equipe]
       apoio:
       - pm
       - stakeholder
@@ -1938,12 +1999,14 @@ decisoes:
     - id: feat_spc_t5_st3
       rotulo: Publicar a spec e avisar o time
       papel: tech_lead
+      categorias_ferramenta: [cf_base_de_conhecimento, cf_comunicacao_da_equipe]
       entradas:
       - decisoes_com_stakeholders
       saidas:
       - comunicado_da_spec
       exemplo: Mensagem no canal do time com links do requirements.md, do design.md e dos ADRs.
       status: rascunho
+    categorias_ferramenta: [cf_documentacao_e_diagramas, cf_controle_de_versao, cf_comunicacao_da_equipe, cf_base_de_conhecimento]
     playbook: pb_feat_spc_t5
     layout:
       coluna: 6
@@ -2042,6 +2105,7 @@ decisoes:
       exemplo: 'A spec de cupom de desconto vira 9 tarefas: modelo de dados, regra de validade, endpoint, tela de aplicação e testes, cada uma com menos de um dia de trabalho.'
       rotulo: Fatiar a spec em tarefas pequenas
       papel: tech_lead
+      categorias_ferramenta: [cf_rastreio_de_tarefas]
       apoio:
       - dev
       entradas:
@@ -2065,6 +2129,8 @@ decisoes:
       exemplo: 'Tarefa "validar cupom expirado": pronta quando o endpoint devolve erro 422 com a mensagem certa e o teste automatizado cobre a data limite.'
       rotulo: Definir o critério de pronto de cada tarefa
       papel: qa
+      categorias_ferramenta: [cf_testes_automatizados]
+      guias_praticos: [escrever_testes]
       apoio:
       - pm
       entradas:
@@ -2093,6 +2159,7 @@ decisoes:
       exemplo: A tela de aplicação depende do endpoint, que depende do modelo de dados. As tarefas de teste dependem de todas as outras.
       rotulo: Registrar as dependências entre tarefas
       papel: tech_lead
+      categorias_ferramenta: [cf_rastreio_de_tarefas]
       entradas:
       - lista_de_tarefas
       saidas:
@@ -2102,6 +2169,8 @@ decisoes:
       exemplo: 'Como o recurso sugere cupons por IA, entram 3 tarefas extras: avaliação com 50 casos, teto de custo por chamada e fallback para regra fixa se o modelo cair.'
       rotulo: Incluir tarefas de evals, custo e plano B (se usa IA)
       papel: arquiteto
+      categorias_ferramenta: [cf_observabilidade]
+      guias_praticos: [avaliar_modelo_ou_prompt, controlar_custo_de_llm]
       apoio:
       - qa
       entradas:
@@ -2125,6 +2194,8 @@ decisoes:
             igual: sim
         porque: mede custo e qualidade por chamada ao modelo
       status: rascunho
+    categorias_ferramenta: [cf_rastreio_de_tarefas, cf_testes_automatizados, cf_observabilidade]
+    guias_praticos: [escrever_testes, avaliar_modelo_ou_prompt, controlar_custo_de_llm]
     playbook: pb_feat_alo_t1
     layout:
       coluna: 1
@@ -2148,6 +2219,7 @@ decisoes:
     - id: feat_alo_t2_st1
       rotulo: Definir o papel principal e os de apoio de cada tarefa
       papel: tech_lead
+      sem_ferramenta: true
       apoio:
       - arquiteto
       saidas:
@@ -2157,6 +2229,7 @@ decisoes:
     - id: feat_alo_t2_st2
       rotulo: 'Marcar tarefas sensíveis: segurança, dados e arquitetura'
       papel: arquiteto
+      sem_ferramenta: true
       apoio:
       - seguranca
       entradas:
@@ -2175,12 +2248,14 @@ decisoes:
     - id: feat_alo_t2_st3
       rotulo: Consolidar os papéis que a feature precisa
       papel: tech_lead
+      sem_ferramenta: true
       entradas:
       - matriz_de_papeis
       saidas:
       - matriz_de_papeis
       exemplo: 'Papéis: Dev, QA, Arquiteto, DevSecOps e Engenharia de dados; sem Designer nesta feature.'
       status: rascunho
+    sem_ferramenta: true
     playbook: pb_feat_alo_t2
     layout:
       coluna: 2
@@ -2211,6 +2286,7 @@ decisoes:
     - id: feat_alo_t3_st1
       rotulo: Marcar as decisões que bloqueiam outras tarefas
       papel: tech_lead
+      categorias_ferramenta: [cf_rastreio_de_tarefas]
       apoio:
       - pm
       saidas:
@@ -2221,6 +2297,7 @@ decisoes:
     - id: feat_alo_t3_st2
       rotulo: Ordenar decisões, execução e integração
       papel: tech_lead
+      categorias_ferramenta: [cf_rastreio_de_tarefas]
       entradas:
       - decisoes_bloqueantes
       saidas:
@@ -2235,6 +2312,7 @@ decisoes:
     - id: feat_alo_t3_st3
       rotulo: Consolidar o mapa de tarefas, papéis e dependências
       papel: tech_lead
+      categorias_ferramenta: [cf_rastreio_de_tarefas]
       entradas:
       - ordem_execucao
       - decisoes_bloqueantes
@@ -2246,6 +2324,7 @@ decisoes:
     - id: feat_alo_t3_st4
       rotulo: Montar o cronograma (Gantt) com caminho crítico e marcos
       papel: tech_lead
+      categorias_ferramenta: [cf_rastreio_de_tarefas]
       apoio:
       - gerente_de_engenharia
       quando:
@@ -2266,6 +2345,7 @@ decisoes:
         porque: mostra o caminho crítico e os marcos no tempo
       exemplo: Cronograma de 6 semanas; o caminho crítico passa pela API de cupons do outro time.
       status: rascunho
+    categorias_ferramenta: [cf_rastreio_de_tarefas]
     playbook: pb_feat_alo_t3
     layout:
       coluna: 3
@@ -2323,6 +2403,7 @@ decisoes:
     - id: feat_ite_t1_st1
       rotulo: Reunir as evidências da reprovação
       papel: qa
+      categorias_ferramenta: [cf_testes_automatizados]
       saidas:
       - analise_da_reprovacao
       exemplo: 'Reprovação em performance: p95 de 900 ms no cenário de pico, com o perfil de execução anexado.'
@@ -2330,6 +2411,8 @@ decisoes:
     - id: feat_ite_t1_st2
       rotulo: Identificar a causa e o alcance da falha
       papel: tech_lead
+      categorias_ferramenta: [cf_observabilidade]
+      guias_praticos: [investigar_bug]
       apoio:
       - arquiteto
       entradas:
@@ -2340,6 +2423,8 @@ decisoes:
       - impacto_da_falha
       exemplo: 'Causa na implementação: consulta ao histórico sem cache. Alcance: só a feature, ainda em homologação.'
       status: rascunho
+    categorias_ferramenta: [cf_testes_automatizados, cf_observabilidade]
+    guias_praticos: [investigar_bug]
     playbook: pb_feat_ite_t1
     layout:
       coluna: 1
@@ -2384,6 +2469,7 @@ decisoes:
     - id: feat_ite_t2_st1
       rotulo: Ajustar requirements, design ou ADR
       papel: arquiteto
+      categorias_ferramenta: [cf_documentacao_e_diagramas]
       apoio:
       - pm
       saidas:
@@ -2393,10 +2479,14 @@ decisoes:
     - id: feat_ite_t2_st2
       rotulo: Atualizar o contexto dos agentes
       papel: arquiteto
+      categorias_ferramenta: [cf_base_de_conhecimento]
+      guias_praticos: [configurar_code_agents]
       saidas:
       - contexto_de_execucao
       exemplo: Contexto do projeto atualizado com a nova regra antes da próxima execução.
       status: rascunho
+    categorias_ferramenta: [cf_documentacao_e_diagramas, cf_base_de_conhecimento]
+    guias_praticos: [configurar_code_agents]
     playbook: pb_feat_ite_t2
     layout:
       coluna: 3
@@ -2420,6 +2510,7 @@ decisoes:
     - id: feat_ite_t3_st1
       rotulo: Registrar o bug com o teste que falhou
       papel: tech_lead
+      categorias_ferramenta: [cf_rastreio_de_tarefas]
       apoio:
       - qa
       saidas:
@@ -2427,6 +2518,7 @@ decisoes:
       - tarefa_de_correcao
       exemplo: 'Bug: validação de cupom sem cache estoura a meta de latência; pronto quando o teste de carga passar.'
       status: rascunho
+    categorias_ferramenta: [cf_rastreio_de_tarefas]
     playbook: pb_feat_ite_t3
     layout:
       coluna: 4
@@ -2513,6 +2605,8 @@ decisoes:
     - id: feat_ite_t4_st1
       rotulo: Abrir o incidente ou vincular ao que já está aberto
       papel: sre
+      categorias_ferramenta: [cf_observabilidade]
+      guias_praticos: [responder_incidente]
       apoio:
       - tech_lead
       saidas:
@@ -2522,10 +2616,13 @@ decisoes:
     - id: feat_ite_t4_st2
       rotulo: Registrar a correção que a feature vai precisar
       papel: tech_lead
+      categorias_ferramenta: [cf_rastreio_de_tarefas]
       saidas:
       - tarefa_de_correcao
       exemplo: 'Card: cache do histórico, com o teste de carga como critério de pronto; entra depois da mitigação.'
       status: rascunho
+    categorias_ferramenta: [cf_observabilidade, cf_rastreio_de_tarefas]
+    guias_praticos: [responder_incidente]
     playbook: pb_feat_ite_t4
     layout:
       coluna: 4

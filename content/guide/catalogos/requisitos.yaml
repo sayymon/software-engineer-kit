@@ -1,0 +1,13 @@
+requisitos:
+  - id: funcional
+    nome: Funcional
+    publico: false
+  - id: nao_funcional
+    nome: Não funcional
+    publico: false
+  - id: restricao
+    nome: Restrição
+    publico: false
+  - id: probabilistico_ia
+    nome: Probabilístico (IA)
+    publico: false

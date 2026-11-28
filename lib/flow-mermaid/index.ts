@@ -2,18 +2,15 @@
 // Port of the reference `guias_diagrama.py` generator.
 // Assembly, ids, colors (Okabe-Ito), escapes, flow order and views (`visao`, `raia:<id>`, `completo`)
 // match the Python reference byte for byte. See tests/mermaid-parity.
-import {
-  chaveNatural,
-  cmpKey,
-  demandasBiblioteca,
-  ordemFluxo,
-  ordemRaias,
-  ordenarNatural,
-  raiasDoContexto,
-} from './order';
+import { type Contexto, GeracaoError, LETRA_TIPO, contexto, isMap, lista, pyRepr } from '../flow-graph/contexto';
+import { gerarGrafo } from '../flow-graph';
+import { type ConjuntoExpandido, projetar } from '../flow-graph/expansao';
+import type { LigacaoDoGrafo, ModeloDeGrafo } from '../schema/grafo';
+import { chaveNatural, cmpKey } from './order';
 import type { Diagrama, Item } from './types';
 
 export type { Diagrama, Item } from './types';
+export { GeracaoError, LETRA_TIPO } from '../flow-graph/contexto';
 export { chaveNatural, ordemFluxo, ordemRaias, ordenarNatural } from './order';
 
 export const VISAO = 'visao';
@@ -28,13 +25,8 @@ const RESERVADAS = new Set([
 ]);
 const RE_ID_SEGURO = /^[A-Za-z][A-Za-z0-9_]*$/;
 
-/** Letter of the node id by node type. */
-export const LETRA_TIPO: Record<string, string> = { inicio: 's', tarefa: 't', bifurcacao: 'g', chamada: 'c', fim: 'e' };
 const ROTULO_RESPONSAVEL: Record<string, string> = { agente: '🤖 agente', pessoa: '👤 pessoa', ambos: '🤝 ambos' };
 
-export class GeracaoError extends Error {}
-
-const isMap = (v: unknown): v is Item => v !== null && typeof v === 'object' && !Array.isArray(v);
 /** Python truthiness for the values the reference tests with `or`. */
 const truthy = (v: unknown): boolean => !(v == null || v === '' || v === 0 || v === false || (Array.isArray(v) && v.length === 0));
 const or = <T>(v: T | null | undefined, d: T): T => (truthy(v) ? (v as T) : d);
@@ -133,71 +125,12 @@ export function corTexto(fundo: string): string {
 }
 
 // ---------------------------------------------------------------- model access
-const lista = (doc: Item, colecao: string): Item[] => (doc[colecao] ?? []).filter((x: unknown) => isMap(x) && 'id' in x);
-const porId = (itens: Item[]): Map<string, Item> => new Map(itens.map((x) => [String(x.id), x]));
-
-type Contexto = {
-  demanda: Item;
-  raias: Map<string, Item>;
-  nos: Map<string, Item>;
-  todasRaias: Map<string, Item>;
-  demandas: Map<string, Item>;
-  ordemRaias: string[];
-  ordemNos: string[];
-  papeis: Map<string, string>;
-};
-
 const ordenar = (ctx: Contexto, ids: Iterable<string>): string[] => {
   const conjunto = new Set(ids);
   return ctx.ordemNos.filter((i) => conjunto.has(i));
 };
 const corRaia = (ctx: Contexto, rid: string) => corValida((ctx.todasRaias.get(rid) as Item).cor);
 const nomeRaia = (ctx: Contexto, rid: string) => String((ctx.todasRaias.get(rid) as Item).nome || rid);
-
-function contexto(doc: Item, demandaId: string): Contexto {
-  const demandas = porId(lista(doc, 'demandas'));
-  if (!demandas.has(demandaId)) throw new GeracaoError(`demanda desconhecida: ${demandaId}`);
-  const todas = porId(lista(doc, 'raias'));
-  if (todas.size === 0) {
-    throw new GeracaoError('o documento não tem a coleção `raias`: remodele os fluxos para o padrão de raias antes de gerar');
-  }
-  if (demandasBiblioteca(doc).has(demandaId)) {
-    throw new GeracaoError(`a demanda ${demandaId} é uma biblioteca de raias: entra no diagrama de quem a chama`);
-  }
-  const noContexto = raiasDoContexto(doc, demandaId);
-  const raias = new Map([...todas].filter(([i]) => noContexto.has(i)));
-  if (raias.size === 0) throw new GeracaoError(`a demanda ${demandaId} não tem raias`);
-  const nos = new Map(lista(doc, 'decisoes').filter((d) => noContexto.has(String(d.raia))).map((d) => [String(d.id), d]));
-  const chaves = [...nos.keys()].sort((a, b) => cmpKey(chaveNatural(a), chaveNatural(b)));
-  for (const i of chaves) {
-    const n = nos.get(i) as Item;
-    if (!todas.has(n.raia)) throw new GeracaoError(`o nó ${i} referencia a raia inexistente: ${pyRepr(n.raia)}`);
-    if (!(n.tipo in LETRA_TIPO)) throw new GeracaoError(`o nó ${i} tem tipo inválido: ${pyRepr(n.tipo)}`);
-    if (n.tipo === 'chamada' && !todas.has(n.raia_chamada)) {
-      throw new GeracaoError(`a chamada ${i} referencia a raia inexistente: ${pyRepr(n.raia_chamada)}`);
-    }
-  }
-  const ordemR = ordemRaias(raias, nos);
-  const ordemN: string[] = [];
-  for (const rid of ordemR) {
-    ordemN.push(...ordemFluxo(nos, [...nos].filter(([, n]) => n.raia === rid).map(([i]) => i)));
-  }
-  const dentro = new Set(ordemN);
-  ordemN.push(...ordenarNatural([...nos.keys()].filter((i) => !dentro.has(i))));
-  const papeis = new Map(lista(doc, 'papeis').map((p) => [String(p.id), String(p.nome || p.id)]));
-  return {
-    demanda: demandas.get(demandaId) as Item,
-    raias,
-    nos,
-    todasRaias: todas,
-    demandas,
-    ordemRaias: ordemR,
-    ordemNos: ordemN,
-    papeis,
-  };
-}
-
-const pyRepr = (v: unknown): string => (typeof v === 'string' ? `'${v}'` : v == null ? 'None' : String(v));
 
 function orquestradora(ctx: Contexto): string {
   for (const i of ctx.ordemRaias) if ((ctx.raias.get(i) as Item).orquestradora === true) return i;
@@ -327,80 +260,36 @@ type Aresta = { origem: string; destino: string; rotulo: string; tracejada: bool
 const chaveAresta = (a: Aresta) => JSON.stringify([a.origem, a.destino, a.rotulo, a.tracejada]);
 const aresta = (origem: string, destino: string, rotulo: string, tracejada = false): Aresta => ({ origem, destino, rotulo, tracejada });
 
+// Setas de aresta do Mermaid: sintaxe do diagrama, não filtro de HTML. A seta reta é montada por
+// repeat() porque auditores de HTML leem a sequência fechada como fim de comentário HTML —
+// o valor em runtime é exatamente `-->`, como os testes golden provam.
+const SETA_TRACEJADA = '-.->';
+const SETA_RETA = '-'.repeat(2) + '>';
+
 function arestaTexto(a: Aresta): string {
-  const seta = a.tracejada ? '-.->' : '-->';
+  const seta = a.tracejada ? SETA_TRACEJADA : SETA_RETA;
   const rot = limparTexto(a.rotulo) ? `|"${escaparRotulo(a.rotulo)}"|` : '';
   return `${sanitizarId(a.origem)} ${seta}${rot} ${sanitizarId(a.destino)}`;
 }
 
-function arestasProximo(ctx: Contexto, ids: Set<string>): Aresta[] {
-  const out: Aresta[] = [];
-  for (const i of ordenar(ctx, ids)) {
-    for (const p of (ctx.nos.get(i) as Item).proximo ?? []) {
-      if (isMap(p) && ids.has(p.para)) out.push(aresta(i, String(p.para), String(or(p.condicao, ''))));
-    }
-  }
-  return out;
-}
+/** Cross-demand links of a node in the shape of the Modelo_de_Grafo. */
+type Ligacoes = Map<string, LigacaoDoGrafo[]>;
 
-function inicioDaRaia(ctx: Contexto, raiaId: string): string | null {
-  for (const i of ordenarNatural(ctx.nos.keys())) {
-    const n = ctx.nos.get(i) as Item;
-    if (n.raia === raiaId && n.tipo === 'inicio') return i;
-  }
-  return null;
-}
-
-function arestasChamada(ctx: Contexto, ids: Set<string>): { out: Aresta[]; cobertos: Set<string> } {
-  const chamadas = ordenar(ctx, ids).filter((i) => (ctx.nos.get(i) as Item).tipo === 'chamada');
-  const porRaia = new Map<string, number>();
-  for (const c of chamadas) {
-    const alvo = String((ctx.nos.get(c) as Item).raia_chamada);
-    porRaia.set(alvo, (porRaia.get(alvo) ?? 0) + 1);
-  }
-  const out: Aresta[] = [];
-  const cobertos = new Set<string>();
-  for (const c of chamadas) {
-    const cn = ctx.nos.get(c) as Item;
-    const alvo = String(cn.raia_chamada);
-    const ini = inicioDaRaia(ctx, alvo);
-    if (ini !== null && ids.has(ini)) out.push(aresta(c, ini, 'chama', true));
-    const fins = ordenar(ctx, ids).filter((i) => {
-      const n = ctx.nos.get(i) as Item;
-      return n.raia === alvo && n.tipo === 'fim';
-    });
-    for (const f of fins) {
-      const ret = String(or((ctx.nos.get(f) as Item).retorno, ''));
-      for (const p of cn.proximo ?? []) {
-        if (isMap(p) && ids.has(p.para) && String(or(p.condicao, '')) === ret) {
-          const rot = porRaia.get(alvo) === 1 ? `retorno: ${ret}` : `retorno: ${ret} (${c})`;
-          out.push(aresta(f, String(p.para), rot, true));
-          cobertos.add(JSON.stringify([c, String(p.para)]));
-        }
-      }
-    }
-  }
-  return { out, cobertos };
-}
-
-function pontes(ctx: Contexto, ids: Set<string>): { decl: string[]; arestas: Aresta[]; ids: string[] } {
+function pontes(ctx: Contexto, ids: Set<string>, ligacoes: Ligacoes): { decl: string[]; arestas: Aresta[]; ids: string[] } {
   const decl: string[] = [];
   const arestas: Aresta[] = [];
   const pontesIds: string[] = [];
   for (const i of ordenar(ctx, ids)) {
-    ((ctx.nos.get(i) as Item).ligacoes ?? []).forEach((lig: unknown, n: number) => {
-      if (!isMap(lig)) return;
+    (ligacoes.get(i) ?? []).forEach((lig, n) => {
       const pid = `z_LIG_${sanitizarId(i)}_${n}`;
-      const dest = ctx.demandas.get(String(lig.demanda_destino));
-      const nomeDest = or(dest?.nome, or(lig.demanda_destino, ''));
       const partes = [
-        `<b>${escaparRotulo(or(lig.rotulo, 'ligação'))}</b>`,
-        `demanda: ${escaparRotulo(nomeDest)}`,
-        `nó: ${escaparRotulo(or(lig.para, ''))}`,
+        `<b>${escaparRotulo(lig.rotulo)}</b>`,
+        `demanda: ${escaparRotulo(lig.demandaDestino)}`,
+        `nó: ${escaparRotulo(lig.para)}`,
       ];
       decl.push(`${pid}{{"${partes.join('<br/>')}"}}`);
       pontesIds.push(pid);
-      arestas.push(aresta(i, pid, escaparRotulo(or(lig.tipo, '')), true));
+      arestas.push(aresta(i, pid, escaparRotulo(lig.tipo), true));
     });
   }
   return { decl, arestas, ids: pontesIds };
@@ -416,10 +305,12 @@ function montar(
   ctx: Contexto,
   raiasVisiveis: string[],
   ids: Set<string>,
-  completo: boolean,
+  arestasBase: Aresta[],
+  ligacoes: Ligacoes,
   comPontes: boolean,
   comLegenda: boolean,
   subtarefas = false,
+  agruparRaias = true,
 ): Diagrama {
   const chamadasIds = new Set([...ids].filter((i) => (ctx.nos.get(i) as Item).tipo === 'chamada').map((i) => (ctx.nos.get(i) as Item).raia_chamada));
   const visiveis = new Set(raiasVisiveis);
@@ -441,8 +332,10 @@ function montar(
   for (const rid of raiasVisiveis) {
     const raia = ctx.raias.get(rid) as Item;
     const titulo = `<b>${escaparRotulo(or(raia.nome, rid))}</b>`;
-    linhas.push(`  subgraph ${idSg(rid)}["${titulo}"]`);
-    linhas.push('    direction LR');
+    if (agruparRaias) {
+      linhas.push(`  subgraph ${idSg(rid)}["${titulo}"]`);
+      linhas.push('    direction LR');
+    }
     for (const i of ordenar(ctx, ids)) {
       const no = ctx.nos.get(i) as Item;
       if (no.raia !== rid) continue;
@@ -463,17 +356,9 @@ function montar(
         linhas.push('    ' + declaracaoNo(ctx, no, !subtarefas));
       }
     }
-    linhas.push('  end');
+    if (agruparRaias) linhas.push('  end');
   }
-  let arestas = arestasProximo(ctx, ids);
-  if (completo) {
-    const { out, cobertos } = arestasChamada(ctx, ids);
-    arestas = arestas.filter(
-      (a) => !cobertos.has(JSON.stringify([a.origem, a.destino])) || (ctx.nos.get(a.origem) as Item).tipo !== 'chamada',
-    );
-    arestas.push(...out);
-  }
-  arestas = arestas.map((a) => aresta(saidaDe.get(a.origem) ?? a.origem, a.destino, a.rotulo, a.tracejada));
+  const arestas = arestasBase.map((a) => aresta(saidaDe.get(a.origem) ?? a.origem, a.destino, a.rotulo, a.tracejada));
   const vistas = new Set<string>();
   const unicas: Aresta[] = [];
   for (const a of [...cadeia, ...arestas]) {
@@ -486,7 +371,7 @@ function montar(
   for (const a of unicas) linhas.push('  ' + arestaTexto(a));
   let pontesIds: string[] = [];
   if (comPontes) {
-    const p = pontes(ctx, ids);
+    const p = pontes(ctx, ids, ligacoes);
     pontesIds = p.ids;
     linhas.push(...p.decl.map((d) => '  ' + d));
     linhas.push(...p.arestas.map((a) => '  ' + arestaPonteTexto(aresta(saidaDe.get(a.origem) ?? a.origem, a.destino, a.rotulo, a.tracejada))));
@@ -544,7 +429,7 @@ function montar(
   const gateways = ordenar(ctx, ids).filter((i) => (ctx.nos.get(i) as Item).tipo === 'bifurcacao').map(sanitizarId);
   if (gateways.length) linhas.push(`  class ${gateways.join(',')} gw`);
   if (pontesIds.length) linhas.push(`  class ${pontesIds.join(',')} ponte`);
-  for (const rid of raiasVisiveis) {
+  for (const rid of agruparRaias ? raiasVisiveis : []) {
     const cor = corRaia(ctx, rid);
     linhas.push(`  style ${idSg(rid)} fill:${clarear(cor, 0.85)},stroke:${cor},stroke-width:3px,color:#000000`);
   }
@@ -566,26 +451,258 @@ function montar(
 }
 
 /**
- * Generates one view: `visao`, `raia:<id>` or `completo`.
+ * Generates one view: `visao`, `raia:<id>` or `completo`. Compatibility layer: always derives the text
+ * from the Modelo_de_Grafo of the demand (`gerarDiagramaDoGrafo`).
  * `comLegenda=false` omits the legend subgraph. `subtarefas=true` expands the subtasks of each task.
  */
 export function gerarDiagrama(doc: Item, demandaId: string, visao: string, comLegenda = true, subtarefas = false): Diagrama {
-  const ctx = contexto(doc, demandaId);
+  return gerarDiagramaDoGrafo(gerarGrafo(doc, demandaId), visao, comLegenda, subtarefas);
+}
+
+/** Context-shaped view of a Modelo_de_Grafo: only what `montar` reads, no YAML involved. */
+function contextoDoGrafo(grafo: ModeloDeGrafo): Contexto {
+  const papeis = new Map<string, string>();
+  for (const n of grafo.nos) for (const s of n.subtarefas) if (s.papel !== undefined && s.papelNome !== undefined) papeis.set(s.papel, s.papelNome);
+  const raias = new Map<string, Item>(grafo.raias.map((r) => [r.id, { id: r.id, nome: r.nome, cor: r.cor, orquestradora: r.orquestradora }]));
+  const nos = new Map<string, Item>(
+    grafo.nos.map((n) => {
+      const no: Item = { id: n.id, tipo: n.tipo, rotulo: n.rotulo, raia: n.raia };
+      if (n.raiaChamada !== undefined) no.raia_chamada = n.raiaChamada;
+      if (n.retorno !== undefined) no.retorno = n.retorno;
+      if (n.tipo === 'tarefa') {
+        no.subtarefas = n.subtarefas.map((s) => {
+          const sub: Item = { id: s.id, rotulo: s.rotulo };
+          if (s.condicional) sub.quando = true;
+          if (s.papel !== undefined) sub.papel = s.papel;
+          if (s.responsavel !== undefined) sub.responsavel = s.responsavel;
+          return sub;
+        });
+      }
+      return [n.id, no];
+    }),
+  );
+  return {
+    demanda: { id: grafo.demanda, nome: grafo.nomeDemanda },
+    raias,
+    nos,
+    todasRaias: raias,
+    demandas: new Map(),
+    ordemRaias: grafo.raias.map((r) => r.id),
+    ordemNos: grafo.nos.map((n) => n.id),
+    papeis,
+  };
+}
+
+/**
+ * Text of one view derived from a Modelo_de_Grafo (`visao`, `raia:<id>` or `completo`). Pure TypeScript,
+ * no fs or node:*: it runs at build time and in the client. `subtarefas=true` expands the subtasks of each task.
+ */
+export function gerarDiagramaDoGrafo(
+  grafo: ModeloDeGrafo,
+  visao: string,
+  comLegenda = true,
+  subtarefas = false,
+  agruparRaias = true,
+): Diagrama {
+  const ctx = contextoDoGrafo(grafo);
+  const ligacoes: Ligacoes = new Map(grafo.nos.filter((n) => n.ligacoes?.length).map((n) => [n.id, n.ligacoes as LigacaoDoGrafo[]]));
+  const transicoes = (ids: Set<string>): Aresta[] =>
+    (grafo.transicoes ?? []).filter((a) => ids.has(a.origem) && ids.has(a.destino)).map((a) => aresta(a.origem, a.destino, a.rotulo, a.tracejada));
+  const daRaia = (rid: string) => new Set(grafo.nos.filter((n) => n.raia === rid).map((n) => n.id));
   if (visao === VISAO) {
-    const orq = orquestradora(ctx);
-    const ids = new Set([...ctx.nos].filter(([, n]) => n.raia === orq).map(([i]) => i));
-    return montar(ctx, [orq], ids, false, true, comLegenda, subtarefas);
+    const orq = grafo.raias.find((r) => r.orquestradora);
+    if (!orq) throw new GeracaoError(`a demanda ${grafo.demanda} não tem raia orquestradora`);
+    const ids = daRaia(orq.id);
+    return montar(ctx, [orq.id], ids, transicoes(ids), ligacoes, true, comLegenda, subtarefas);
   }
   if (visao === COMPLETO) {
-    return montar(ctx, [...ctx.ordemRaias], new Set(ctx.nos.keys()), true, true, comLegenda, subtarefas);
+    const arestas = grafo.arestas.map((a) => aresta(a.origem, a.destino, a.rotulo, a.tracejada));
+    return montar(ctx, [...ctx.ordemRaias], new Set(ctx.nos.keys()), arestas, ligacoes, true, comLegenda, subtarefas, agruparRaias);
   }
   if (visao.startsWith(PREFIXO_RAIA)) {
     const rid = visao.slice(PREFIXO_RAIA.length);
-    if (!ctx.raias.has(rid)) throw new GeracaoError(`raia desconhecida na demanda ${demandaId}: ${rid}`);
-    const ids = new Set([...ctx.nos].filter(([, n]) => n.raia === rid).map(([i]) => i));
-    return montar(ctx, [rid], ids, false, false, comLegenda, subtarefas);
+    if (!ctx.raias.has(rid)) throw new GeracaoError(`raia desconhecida na demanda ${grafo.demanda}: ${rid}`);
+    const ids = daRaia(rid);
+    return montar(ctx, [rid], ids, transicoes(ids), ligacoes, false, comLegenda, subtarefas);
   }
   throw new GeracaoError(`visão desconhecida: ${pyRepr(visao)}`);
+}
+
+// ---------------------------------------------------------- progressive expansion (Requirement 20)
+const PREFIXO_CLUSTER = 'cluster:';
+const idCluster = (raiaId: string) => `z_CL_${sanitizarId(raiaId)}`;
+const idMermaidVisivel = (id: string) => (id.startsWith(PREFIXO_CLUSTER) ? idCluster(id.slice(PREFIXO_CLUSTER.length)) : sanitizarId(id));
+const plural = (n: number, um: string, varios: string) => `${n} ${n === 1 ? um : varios}`;
+
+/** Legend of the Visão geral: element kinds only, no entry per lane (clusters carry the lane name). */
+function legendaGeral(): { texto: string[]; classes: string[] } {
+  const elementos = [
+    `${LEG}_cl["<b>raia</b>: recolhida<br/>cor da raia, com contagens"]`,
+    `${LEG}_t["<b>t</b>: tarefa"]`,
+    `${LEG}_g{"<b>g</b>: gateway"}`,
+    `${LEG}_c[["<b>c</b>: chamada de outra raia<br/>cor da raia chamada,<br/>borda da raia que chama"]]`,
+    `${LEG}_e(["<b>e</b>: fim ou retorno"])`,
+    `${LEG}_st("<b>st</b>: subtarefa")`,
+    `${LEG}_sc("<b>◆ st</b>: subtarefa condicional<br/>borda tracejada")`,
+  ];
+  return {
+    texto: [`subgraph ${LEG}["Legenda"]`, '  direction LR', '  ' + elementos.join(' ~~~ '), 'end'],
+    classes: [
+      'classDef leg fill:#FFFFFF,stroke:#333333,stroke-width:1px,color:#000000',
+      'classDef legc fill:#FFFFFF,stroke:#333333,stroke-width:4px,color:#000000',
+      'classDef legcond fill:#FFFFFF,stroke:#333333,stroke-width:2px,stroke-dasharray:4 3,color:#000000',
+      `class ${LEG}_cl,${LEG}_t,${LEG}_g,${LEG}_e,${LEG}_st leg`,
+      `class ${LEG}_c legc`,
+      `class ${LEG}_sc legcond`,
+      `style ${LEG} fill:#FAFAFA,stroke:#999999,stroke-width:1px`,
+    ],
+  };
+}
+
+/**
+ * Text for an expansion set. All lanes expanded delegates to the `completo` path (byte for byte, Property 12).
+ * `agruparRaias=false` (the "Raias" toggle, Requirement 4.6) drops the lane `subgraph`s of that `completo` path: the nodes stay, with
+ * their lane color and every edge, only the lane frames go away. It has no effect while some lane is collapsed.
+ * Otherwise expanded lanes are `subgraph`s and collapsed lanes are `z_CL_<raia>` nodes with lane color, counts and
+ * aggregated edges (`×N`). Pure function of `(grafo, conj)`: the order of expansion never matters. `mapaIds` also
+ * maps each cluster node to `cluster:<raia>`.
+ */
+export function gerarDiagramaExpandido(grafo: ModeloDeGrafo, conj: ConjuntoExpandido, comLegenda = true, agruparRaias = true): Diagrama {
+  const todas = grafo.raias.every((r) => conj.raias.has(r.id));
+  const seletivo = !conj.todasSubtarefas && conj.subtarefas.size > 0;
+  if (todas && !seletivo) return gerarDiagramaDoGrafo(grafo, COMPLETO, comLegenda, conj.todasSubtarefas, agruparRaias);
+
+  const v = projetar(grafo, conj);
+  const ids = new Set(v.nos.map((n) => n.id));
+  const ctx = contextoDoGrafo({ ...grafo, nos: grafo.nos.filter((n) => ids.has(n.id)) });
+  const ligacoes: Ligacoes = new Map(
+    grafo.nos.filter((n) => ids.has(n.id) && n.ligacoes?.length).map((n) => [n.id, n.ligacoes as LigacaoDoGrafo[]]),
+  );
+  const expandeSub = new Set(v.nos.filter((n) => n.subtarefas.length > 0).map((n) => n.id));
+  const comSub = ordenar(ctx, ids).filter((i) => expandeSub.has(i));
+  const saidaDe = new Map<string, string>();
+  for (const i of comSub) {
+    const subs = subtarefasDoNo(ctx.nos.get(i) as Item);
+    saidaDe.set(i, String(subs[subs.length - 1].id));
+  }
+  const raiasExpandidas = ctx.ordemRaias.filter((r) => conj.raias.has(r));
+  const linhas: string[] = ['flowchart LR'];
+  const leg = legendaGeral();
+  if (comLegenda) linhas.push(...leg.texto.map((x) => '  ' + x));
+
+  const cadeia: Aresta[] = [];
+  for (const rid of raiasExpandidas) {
+    linhas.push(`  subgraph ${idSg(rid)}["<b>${escaparRotulo(nomeRaia(ctx, rid))}</b>"]`);
+    linhas.push('    direction LR');
+    for (const i of ordenar(ctx, ids)) {
+      const no = ctx.nos.get(i) as Item;
+      if (no.raia !== rid) continue;
+      if (expandeSub.has(i)) {
+        linhas.push(`    subgraph ${idTs(i)}["<b>${escaparRotulo(or(no.rotulo, i))}</b>"]`);
+        linhas.push('      direction LR');
+        linhas.push('      ' + declaracaoNo(ctx, no));
+        const subs = subtarefasDoNo(no);
+        for (const sub of subs) linhas.push('      ' + declaracaoSubtarefa(sub, ctx.papeis));
+        linhas.push('    end');
+        let anterior = i;
+        for (const sub of subs) {
+          cadeia.push(aresta(anterior, String(sub.id), ''));
+          anterior = String(sub.id);
+        }
+      } else {
+        linhas.push('    ' + declaracaoNo(ctx, no, true));
+      }
+    }
+    linhas.push('  end');
+  }
+  for (const c of v.clusters) {
+    const t = c.totais;
+    const texto = `${plural(t.tarefas, 'tarefa', 'tarefas')}, ${plural(t.gateways, 'gateway', 'gateways')}, ${plural(t.subtarefas, 'subtarefa', 'subtarefas')}`;
+    linhas.push(`  ${idCluster(c.raia)}["<b>${escaparRotulo(nomeRaia(ctx, c.raia))}</b><br/>${texto}"]`);
+  }
+
+  const vistas = new Set<string>();
+  const textos: string[] = [];
+  const empilha = (k: string, t: string) => {
+    if (!vistas.has(k)) {
+      vistas.add(k);
+      textos.push('  ' + t);
+    }
+  };
+  for (const a of cadeia) empilha(chaveAresta(a), arestaTexto(a));
+  for (const a of v.arestas) {
+    const origem = saidaDe.get(a.origem) ?? a.origem;
+    const seta = a.tracejada ? SETA_TRACEJADA : SETA_RETA;
+    const rot = limparTexto(a.rotulo) ? `|"${escaparRotulo(a.rotulo)}"|` : '';
+    empilha(JSON.stringify([origem, a.destino, a.rotulo, a.tracejada]), `${idMermaidVisivel(origem)} ${seta}${rot} ${idMermaidVisivel(a.destino)}`);
+  }
+  linhas.push(...textos);
+  const p = pontes(ctx, ids, ligacoes);
+  linhas.push(...p.decl.map((d) => '  ' + d));
+  linhas.push(...p.arestas.map((a) => '  ' + arestaPonteTexto(aresta(saidaDe.get(a.origem) ?? a.origem, a.destino, a.rotulo, a.tracejada))));
+
+  for (const rid of ctx.ordemRaias) {
+    const cor = corRaia(ctx, rid);
+    linhas.push('  ' + defClasse(classeRaia(ctx, rid), cor, escurecer(cor, 0.4), 1));
+  }
+  const porIndice = (a: string, b: string) => indice(ctx, a) - indice(ctx, b);
+  const raiaDe = (i: string) => String((ctx.nos.get(i) as Item).raia);
+  const temCond = (i: string) => subtarefasDoNo(ctx.nos.get(i) as Item).some((s) => truthy(s.quando));
+  for (const rid of [...new Set(comSub.map(raiaDe))].sort(porIndice)) {
+    const cor = corRaia(ctx, rid);
+    linhas.push('  ' + defClasse(classeSub(ctx, rid), clarear(cor, 0.55), escurecer(cor, 0.4), 1) + ',font-size:12px');
+  }
+  for (const rid of [...new Set(comSub.filter(temCond).map(raiaDe))].sort(porIndice)) {
+    const cor = corRaia(ctx, rid);
+    linhas.push('  ' + defClasse(classeSubCond(ctx, rid), clarear(cor, 0.55), escurecer(cor, 0.4), 2) + ',font-size:12px,stroke-dasharray:4 3');
+  }
+  const paresMap = new Map<string, [string, string]>();
+  for (const i of ids) {
+    const n = ctx.nos.get(i) as Item;
+    if (n.tipo === 'chamada') paresMap.set(JSON.stringify([n.raia, n.raia_chamada]), [String(n.raia), String(n.raia_chamada)]);
+  }
+  const pares = [...paresMap.values()].sort((a, b) => porIndice(a[0], b[0]) || porIndice(a[1], b[1]));
+  for (const [chamadora, chamada] of pares) {
+    linhas.push('  ' + defClasse(classeChamada(ctx, chamadora, chamada), corRaia(ctx, chamada), corRaia(ctx, chamadora), 4));
+  }
+  linhas.push(`  classDef gw font-size:${FONTE_GATEWAY_PX}px`);
+  linhas.push('  classDef ponte fill:#FFFFFF,stroke:#555555,stroke-width:2px,stroke-dasharray:5 3,color:#000000');
+  if (comLegenda) linhas.push(...leg.classes.map((x) => '  ' + x));
+
+  const porClasse = new Map<string, string[]>();
+  const push = (k: string, val: string) => {
+    if (!porClasse.has(k)) porClasse.set(k, []);
+    (porClasse.get(k) as string[]).push(val);
+  };
+  for (const i of ordenar(ctx, ids)) push(classeDoNo(ctx, ctx.nos.get(i) as Item), sanitizarId(i));
+  for (const c of v.clusters) push(classeRaia(ctx, c.raia), idCluster(c.raia));
+  for (const i of comSub) {
+    for (const s of subtarefasDoNo(ctx.nos.get(i) as Item)) {
+      push((truthy(s.quando) ? classeSubCond : classeSub)(ctx, raiaDe(i)), sanitizarId(String(s.id)));
+    }
+  }
+  for (const classe of [...porClasse.keys()].sort((a, b) => cmpKey(chaveNatural(a), chaveNatural(b)))) {
+    linhas.push(`  class ${(porClasse.get(classe) as string[]).join(',')} ${classe}`);
+  }
+  const gateways = ordenar(ctx, ids).filter((i) => (ctx.nos.get(i) as Item).tipo === 'bifurcacao').map(sanitizarId);
+  if (gateways.length) linhas.push(`  class ${gateways.join(',')} gw`);
+  if (p.ids.length) linhas.push(`  class ${p.ids.join(',')} ponte`);
+  for (const rid of raiasExpandidas) {
+    const cor = corRaia(ctx, rid);
+    linhas.push(`  style ${idSg(rid)} fill:${clarear(cor, 0.85)},stroke:${cor},stroke-width:3px,color:#000000`);
+  }
+  for (const i of comSub) {
+    const cor = corRaia(ctx, raiaDe(i));
+    linhas.push(
+      `  style ${idTs(i)} fill:${clarear(cor, 0.94)},stroke:${escurecer(cor, 0.3)},` +
+        'stroke-width:1.5px,stroke-dasharray:5 3,color:#000000',
+    );
+  }
+  const mapaIds: Record<string, string> = {};
+  for (const i of ordenar(ctx, ids)) mapaIds[sanitizarId(i)] = i;
+  for (const i of comSub) for (const s of subtarefasDoNo(ctx.nos.get(i) as Item)) mapaIds[sanitizarId(String(s.id))] = String(s.id);
+  for (const c of v.clusters) mapaIds[idCluster(c.raia)] = PREFIXO_CLUSTER + c.raia;
+  return { texto: linhas.join('\n') + '\n', mapaIds };
 }
 
 /** All diagrams of the document by file name, in stable order. */
@@ -595,8 +712,9 @@ export function gerarTodos(doc: Item, comLegenda = true, subtarefas = false): Ma
     const demandaId = String(d.id);
     if (d.biblioteca === true) continue;
     if (!lista(doc, 'raias').some((r) => r.demanda === demandaId)) continue;
+    const grafo = gerarGrafo(doc, demandaId);
     for (const v of visoesDaDemanda(doc, demandaId)) {
-      saida.set(nomeArquivo(demandaId, v), gerarDiagrama(doc, demandaId, v, comLegenda, subtarefas));
+      saida.set(nomeArquivo(demandaId, v), gerarDiagramaDoGrafo(grafo, v, comLegenda, subtarefas));
     }
   }
   return saida;
@@ -629,8 +747,9 @@ export function visoesDoGuia(fm: Item, comLegenda = false): VisaoDoGuia[] {
   const doc = guiaParaDoc(fm);
   const gid = String(fm.id);
   const cores = new Map<string, string>(fm.raias.map((r: Item) => [String(r.id), corValida(r.cor)]));
+  const grafo = gerarGrafo(doc, gid);
   return visoesDaDemanda(doc, gid).map((v) => {
-    const dg = gerarDiagrama(doc, gid, v, comLegenda);
+    const dg = gerarDiagramaDoGrafo(grafo, v, comLegenda);
     const rid = v.startsWith(PREFIXO_RAIA) ? v.slice(PREFIXO_RAIA.length) : null;
     return { visao: v, raia: rid, cor: rid ? (cores.get(rid) ?? null) : null, mmd: dg.texto, mapa: dg.mapaIds };
   });

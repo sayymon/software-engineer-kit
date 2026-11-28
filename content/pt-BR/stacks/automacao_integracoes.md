@@ -78,7 +78,7 @@ slots:
       - "[[ky|ky]]"
     custoBeneficio:
       - "[[axios|Axios]]"
-      - tabela:httpx
+      - "[[httpx|HTTPX]]"
     qualidadeMaxima: []
     lacuna: "qualidadeMaxima: os clientes HTTP da categoria dessa faixa pertencem a outras linguagens, e as escolhas acima cobrem JavaScript e Python."
   - id: gateway
@@ -86,7 +86,7 @@ slots:
     categoria: "[[gateway_api_service_mesh|Gateway de API e service mesh]]"
     obrigatorio: false
     maisBarata:
-      - tabela:nginx
+      - "[[nginx|NGINX]]"
     custoBeneficio:
       - "[[kong_gateway|Kong Gateway]]"
     qualidadeMaxima:
@@ -122,7 +122,7 @@ slots:
     maisBarata:
       - "[[opentelemetry|OpenTelemetry]]"
     custoBeneficio:
-      - tabela:sentry
+      - "[[sentry|Sentry]]"
     qualidadeMaxima:
       - "[[datadog|Datadog]]"
     lacuna: ""
@@ -453,8 +453,8 @@ ferramentas:
   - tabela:prefect
   - "[[ky|ky]]"
   - "[[axios|Axios]]"
-  - tabela:httpx
-  - tabela:nginx
+  - "[[httpx|HTTPX]]"
+  - "[[nginx|NGINX]]"
   - "[[kong_gateway|Kong Gateway]]"
   - tabela:amazon-api-gateway
   - "[[bruno|Bruno]]"
@@ -465,7 +465,7 @@ ferramentas:
   - tabela:doppler
   - "[[hashicorp_vault|HashiCorp Vault]]"
   - "[[opentelemetry|OpenTelemetry]]"
-  - tabela:sentry
+  - "[[sentry|Sentry]]"
   - "[[datadog|Datadog]]"
 dataVerificacao: 2026-11-23
 tags:

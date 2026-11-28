@@ -7,15 +7,16 @@ import { describe, expect, it } from 'vitest';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const dir = join(root, '.github/workflows');
-const files = readdirSync(dir).filter((f) => f.endsWith('.yml'));
+// appsec-*.yml belong to the appsec gate and are out of scope of these checks.
+const files = readdirSync(dir).filter((f) => f.endsWith('.yml') && !f.startsWith('appsec-'));
 type Job = { name?: string; permissions?: Record<string, string>; needs?: string | string[]; steps?: { uses?: string; run?: string }[] };
 type Workflow = { on: Record<string, unknown>; permissions?: unknown; jobs: Record<string, Job> };
 const load = (f: string): Workflow => YAML.parse(readFileSync(join(dir, f), 'utf8')) as Workflow;
 const raw = (f: string): string => readFileSync(join(dir, f), 'utf8');
 
 describe('workflows', () => {
-  it('finds the three workflows', () => {
-    expect(files.sort()).toEqual(['codeql.yml', 'pr.yml', 'release.yml']);
+  it('finds the four workflows', () => {
+    expect(files.sort()).toEqual(['codeql.yml', 'pr.yml', 'release.yml', 'spike-desempenho.yml']);
   });
 
   it('pins every action to a 40 hex commit SHA', () => {

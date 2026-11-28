@@ -65,10 +65,10 @@ casosDeUso:
   - "[[setor_publico_grande_empresa|Setor público (grande empresa)]]"
 variacoes: []
 ferramentas:
-  - tabela:nginx
+  - "[[nginx|NGINX]]"
   - "[[kong_gateway|Kong Gateway]]"
-  - tabela:envoy
-  - tabela:traefik
+  - "[[envoy|Envoy]]"
+  - "[[traefik|Traefik]]"
   - tabela:amazon-api-gateway
   - "[[debezium|Debezium]]"
 notaCompleta: []

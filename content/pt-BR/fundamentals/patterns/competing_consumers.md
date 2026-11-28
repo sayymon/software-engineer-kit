@@ -60,7 +60,7 @@ variacoes:
 ferramentas:
   - "[[amazon_sqs|Amazon SQS]]"
   - "[[rabbitmq|RabbitMQ]]"
-  - tabela:apache-kafka
+  - "[[apache_kafka|Apache Kafka]]"
   - "[[bullmq|BullMQ]]"
   - tabela:celery
   - tabela:sidekiq

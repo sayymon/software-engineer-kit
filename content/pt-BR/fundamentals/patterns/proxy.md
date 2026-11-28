@@ -58,7 +58,7 @@ ferramentas:
   - "[[spring_boot|Spring Boot]]"
   - "[[spring_security|Spring Security]]"
   - tabela:retrofit
-  - tabela:nginx
+  - "[[nginx|NGINX]]"
 notaCompleta: []
 dataVerificacao: 2026-11-22
 tags:

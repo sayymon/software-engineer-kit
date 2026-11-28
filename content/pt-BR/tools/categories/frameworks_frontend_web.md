@@ -12,15 +12,15 @@ maisBarata:
   - tabela:astro
 custoBeneficio:
   - "[[react|React]]"
-  - tabela:vue
-  - tabela:nextjs
+  - "[[vue|Vue.js]]"
+  - "[[nextjs|Next.js]]"
 qualidadeMaxima:
   - "[[angular|Angular]]"
   - tabela:nuxt
-  - tabela:sveltekit
+  - "[[blazor|Blazor]]"
 essenciais:
   - "[[react|React]]"
-  - tabela:vue
+  - "[[vue|Vue.js]]"
 excecao: ""
 guia: []
 tags:
@@ -36,7 +36,7 @@ Frameworks para interfaces web, de componentes reativos a full stack com renderi
 - Cada faixa tem 3 opções; a primeira de cada faixa é a referência. As demais ferramentas da camada ficam em outras opções.
 ## 🥇 Faixas
 - **Mais barata:** [[svelte|Svelte]], SolidJS, Astro
-- **Melhor custo-benefício:** [[react|React]], Vue.js, Next.js
-- **Qualidade máxima:** [[angular|Angular]], Nuxt, SvelteKit
+- **Melhor custo-benefício:** [[react|React]], [[vue|Vue.js]], [[nextjs|Next.js]]
+- **Qualidade máxima:** [[angular|Angular]], Nuxt, [[blazor|Blazor]]
 ## 🔗 Relacionamentos
 - **Mapa:** [[hub_tools|Mapa de Ferramentas de Engenharia]]

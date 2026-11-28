@@ -68,7 +68,7 @@ ferramentas:
   - tabela:axon-server
   - tabela:axon-framework
   - tabela:marten
-  - tabela:apache-kafka
+  - "[[apache_kafka|Apache Kafka]]"
   - "[[postgresql|PostgreSQL]]"
   - tabela:apache-flink
 notaCompleta: []

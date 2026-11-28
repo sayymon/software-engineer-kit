@@ -28,8 +28,7 @@ test('linha de base de desempenho (sem asserção de limite)', async ({ browser 
       return nav.domContentLoadedEventEnd - nav.startTime;
     });
     await page.waitForFunction(() => {
-      const figs = document.querySelectorAll('figure[data-island="mermaid"]');
-      return figs.length > 0 && Array.from(figs).every((f) => f.getAttribute('data-rendered') === 'true');
+      return document.querySelector('[data-flow-stage]')?.getAttribute('data-rendered') === 'true';
     }, undefined, { timeout: 120_000 });
     const pronto = await page.evaluate(() => performance.now());
     tempos.dom_content_loaded_ms.push(inicial);

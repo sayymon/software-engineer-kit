@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT
-// Loads the guide YAML folder (content/guide) with the semantics of loader.py of the guide: comum.yaml,
-// raias-comuns.yaml, ritos.yaml, then demandas/<id>.yaml in `ordem_das_demandas` order (files outside the list go
-// last, alphabetically). Lists are concatenated, maps and scalars may appear once. YAML 1.2 core schema.
+// Loads the guide YAML folder (content/guide) with the semantics of loader.py of the guide: comum.yaml, the catalog files
+// in catalogos/ (when that folder exists, in ARQUIVOS_DE_CATALOGO order), raias-comuns.yaml, ritos.yaml, then
+// demandas/<id>.yaml in `ordem_das_demandas` order (files outside the list go last, alphabetically). Lists are
+// concatenated, maps and scalars may appear once. A top-level key of comum.yaml or of a catalog file lives in one file
+// only. Without catalogos/ the legacy single-file layout (everything in comum.yaml) loads as before. YAML 1.2 core schema.
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import YAML from 'yaml';
@@ -13,6 +15,9 @@ export const ARQUIVO_COMUM = 'comum.yaml';
 export const ARQUIVO_RAIAS_COMUNS = 'raias-comuns.yaml';
 export const ARQUIVO_RITOS = 'ritos.yaml';
 export const PASTA_DEMANDAS = 'demandas';
+export const PASTA_CATALOGOS = 'catalogos';
+/** Catalog files (inside catalogos/) in the order that keeps the merged key order equal to the one comum.yaml had as a single file. */
+export const ARQUIVOS_DE_CATALOGO: readonly string[] = ['artefatos.yaml', 'variaveis.yaml', 'papeis.yaml', 'requisitos.yaml', 'tecnicas.yaml', 'ferramentas.yaml', 'fontes.yaml', 'decisor.yaml'];
 export const CHAVE_ORDEM = 'ordem_das_demandas';
 
 export class GuideLoadError extends Error {
@@ -38,6 +43,30 @@ function readOne(file: string): GuideDoc {
 /** True when the folder holds a guide (a comum.yaml). */
 export const hasGuide = (dir: string) => existsSync(join(dir, ARQUIVO_COMUM));
 
+/** Catalog files of catalogos/ in ARQUIVOS_DE_CATALOGO order; empty in the legacy layout (no catalogos/ folder). */
+function loadCatalogFiles(dir: string, comumData: GuideDoc): GuideFile[] {
+  const catalogDir = join(dir, PASTA_CATALOGOS);
+  if (!existsSync(catalogDir)) return [];
+  const onDisk = readdirSync(catalogDir).filter((f) => f.endsWith('.yaml'));
+  for (const f of onDisk.sort()) {
+    if (!ARQUIVOS_DE_CATALOGO.includes(f)) throw new GuideLoadError(join(catalogDir, f), `unexpected catalog file; ${PASTA_CATALOGOS}/ only accepts ${ARQUIVOS_DE_CATALOGO.join(', ')}`);
+  }
+  const origin = new Map<string, string>(Object.keys(comumData).map((k) => [k, ARQUIVO_COMUM]));
+  const files: GuideFile[] = [];
+  for (const name of ARQUIVOS_DE_CATALOGO) {
+    const file = join(catalogDir, name);
+    if (!existsSync(file)) throw new GuideLoadError(file, `catalog file missing; ${PASTA_CATALOGOS}/ must hold ${ARQUIVOS_DE_CATALOGO.join(', ')}`);
+    const data = readOne(file);
+    for (const key of Object.keys(data)) {
+      const owner = origin.get(key);
+      if (owner) throw new GuideLoadError(file, `'${key}' is already defined in ${owner}; a top-level key lives in one file only`);
+      origin.set(key, `${PASTA_CATALOGOS}/${name}`);
+    }
+    files.push({ name: `${PASTA_CATALOGOS}/${name}`, file, data });
+  }
+  return files;
+}
+
 /** Guide files in merge order, each parsed. */
 export function loadGuideFiles(dir: string): GuideFile[] {
   const comum = join(dir, ARQUIVO_COMUM);
@@ -45,6 +74,7 @@ export function loadGuideFiles(dir: string): GuideFile[] {
   const first = readOne(comum);
   const order: string[] = Array.isArray(first[CHAVE_ORDEM]) ? first[CHAVE_ORDEM] : [];
   const files: GuideFile[] = [{ name: ARQUIVO_COMUM, file: comum, data: first }];
+  files.push(...loadCatalogFiles(dir, first));
   for (const extra of [ARQUIVO_RAIAS_COMUNS, ARQUIVO_RITOS]) {
     const file = join(dir, extra);
     if (existsSync(file)) files.push({ name: extra, file, data: readOne(file) });

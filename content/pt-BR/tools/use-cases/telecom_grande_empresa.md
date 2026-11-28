@@ -37,8 +37,8 @@ macro: "[[negocios_por_porte_e_segmento|Negócios por porte e segmento]]"
 faixasPadrao:
   maisBarata:
     - "[[rabbitmq|RabbitMQ]]"
-    - tabela:nats
-    - tabela:apache-kafka
+    - "[[nats|NATS]]"
+    - "[[apache_kafka|Apache Kafka]]"
   custoBeneficio:
     - "[[amazon_sqs|Amazon SQS]]"
     - tabela:google-pubsub
@@ -74,11 +74,11 @@ variacoes:
     herdaFerramentas: false
     maisBarata:
       - "[[opentelemetry|OpenTelemetry]]"
-      - tabela:prometheus
+      - "[[prometheus|Prometheus]]"
       - tabela:signoz
     custoBeneficio:
       - "[[grafana_cloud|Grafana Cloud]]"
-      - tabela:sentry
+      - "[[sentry|Sentry]]"
       - tabela:better-stack
     qualidadeMaxima:
       - "[[datadog|Datadog]]"

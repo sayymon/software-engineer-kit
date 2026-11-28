@@ -12,7 +12,7 @@ maisBarata:
   - tabela:codeberg
 custoBeneficio:
   - "[[github|GitHub (ferramenta)]]"
-  - tabela:gitlab
+  - "[[gitlab|GitLab]]"
   - tabela:bitbucket
 qualidadeMaxima:
   - "[[github_enterprise|GitHub Enterprise]]"

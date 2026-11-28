@@ -66,7 +66,7 @@ variacoes:
   - arq-mensageria
 ferramentas:
   - "[[debezium|Debezium]]"
-  - tabela:apache-kafka
+  - "[[apache_kafka|Apache Kafka]]"
   - "[[rabbitmq|RabbitMQ]]"
   - "[[amazon_sqs|Amazon SQS]]"
   - "[[temporal|Temporal]]"

@@ -84,8 +84,8 @@ variacoes:
       - tabela:astro
     custoBeneficio:
       - "[[react|React]]"
-      - tabela:vue
-      - tabela:nextjs
+      - "[[vue|Vue.js]]"
+      - "[[nextjs|Next.js]]"
     qualidadeMaxima:
       - "[[angular|Angular]]"
       - tabela:nuxt

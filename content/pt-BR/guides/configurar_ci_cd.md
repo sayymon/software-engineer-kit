@@ -127,7 +127,7 @@ nos:
       categoria: "[[ci_cd_deploy|CI-CD e deploy]]"
       ferramentas:
         - "[[woodpecker_ci|Woodpecker CI]]"
-        - tabela:jenkins
+        - "[[jenkins|Jenkins]]"
         - tabela:drone
   - id: cic_orq_e2
     raia: cic_orq
@@ -166,7 +166,7 @@ nos:
       ferramentas:
         - "[[github_actions|GitHub Actions]]"
         - tabela:circleci
-        - tabela:argo-cd
+        - "[[argo_cd|Argo CD]]"
   - id: cic_ctx_s0
     raia: cic_ctx
     tipo: inicio
@@ -403,11 +403,11 @@ stacks:
   - "[[site_conteudo_estatico|Site de conteúdo estático]]"
 ferramentas:
   - "[[woodpecker_ci|Woodpecker CI]]"
-  - tabela:jenkins
+  - "[[jenkins|Jenkins]]"
   - tabela:drone
   - "[[github_actions|GitHub Actions]]"
   - tabela:circleci
-  - tabela:argo-cd
+  - "[[argo_cd|Argo CD]]"
 casosDeUso:
   - "[[pipelines_de_ci_e_cd|Pipelines de CI e CD]]"
 variacoes:

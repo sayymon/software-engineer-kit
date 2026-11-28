@@ -9,18 +9,18 @@ grupo: Bibliotecas
 maisBarata:
   - "[[drizzle_orm|Drizzle ORM]]"
   - tabela:kysely
-  - tabela:knex
+  - "[[sqlx|sqlx]]"
 custoBeneficio:
   - "[[prisma|Prisma]]"
-  - tabela:sqlalchemy
-  - tabela:typeorm
+  - "[[sqlalchemy|SQLAlchemy]]"
+  - "[[diesel|Diesel]]"
 qualidadeMaxima:
   - "[[hibernate_orm|Hibernate ORM]]"
-  - tabela:gorm
-  - tabela:sequelize
+  - "[[gorm|GORM]]"
+  - "[[entity_framework_core|Entity Framework Core]]"
 essenciais:
   - "[[prisma|Prisma]]"
-  - tabela:sqlalchemy
+  - "[[sqlalchemy|SQLAlchemy]]"
   - "[[hibernate_orm|Hibernate ORM]]"
 excecao: ""
 guia: []
@@ -35,8 +35,8 @@ Mapeamento objeto-relacional e construtores de consulta.
 - Grupo do kit: Bibliotecas.
 - Cada faixa tem 3 opções; a primeira de cada faixa é a referência e tem nota própria.
 ## 🥇 Faixas
-- **Mais barata:** [[drizzle_orm|Drizzle ORM]], Kysely, Knex.js
-- **Melhor custo-benefício:** [[prisma|Prisma]], SQLAlchemy, TypeORM
-- **Qualidade máxima:** [[hibernate_orm|Hibernate ORM]], GORM, Sequelize
+- **Mais barata:** [[drizzle_orm|Drizzle ORM]], Kysely, [[sqlx|sqlx]]
+- **Melhor custo-benefício:** [[prisma|Prisma]], [[sqlalchemy|SQLAlchemy]], [[diesel|Diesel]]
+- **Qualidade máxima:** [[hibernate_orm|Hibernate ORM]], [[gorm|GORM]], [[entity_framework_core|Entity Framework Core]]
 ## 🔗 Relacionamentos
 - **Mapa:** [[hub_tools|Mapa de Ferramentas de Engenharia]]

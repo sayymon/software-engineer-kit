@@ -72,12 +72,12 @@ slots:
     categoria: "[[gateway_api_service_mesh|Gateway de API e service mesh]]"
     obrigatorio: true
     maisBarata:
-      - tabela:nginx
+      - "[[nginx|NGINX]]"
     custoBeneficio:
       - "[[kong_gateway|Kong Gateway]]"
-      - tabela:envoy
+      - "[[envoy|Envoy]]"
     qualidadeMaxima:
-      - tabela:istio
+      - "[[istio|Istio]]"
     lacuna: ""
   - id: obs
     papel: Observabilidade e custo
@@ -85,7 +85,7 @@ slots:
     obrigatorio: true
     maisBarata:
       - "[[opentelemetry|OpenTelemetry]]"
-      - tabela:prometheus
+      - "[[prometheus|Prometheus]]"
     custoBeneficio:
       - "[[grafana_cloud|Grafana Cloud]]"
     qualidadeMaxima:
@@ -485,12 +485,12 @@ ferramentas:
   - tabela:k3s
   - "[[kubernetes|Kubernetes (ferramenta)]]"
   - tabela:red-hat-openshift
-  - tabela:nginx
+  - "[[nginx|NGINX]]"
   - "[[kong_gateway|Kong Gateway]]"
-  - tabela:envoy
-  - tabela:istio
+  - "[[envoy|Envoy]]"
+  - "[[istio|Istio]]"
   - "[[opentelemetry|OpenTelemetry]]"
-  - tabela:prometheus
+  - "[[prometheus|Prometheus]]"
   - "[[grafana_cloud|Grafana Cloud]]"
   - "[[datadog|Datadog]]"
   - tabela:llm-guard

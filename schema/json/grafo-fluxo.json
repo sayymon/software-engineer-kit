@@ -1,0 +1,240 @@
+{
+  "title": "grafo-fluxo",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "versaoContrato": {
+      "type": "number",
+      "const": 1
+    },
+    "demanda": {
+      "type": "string"
+    },
+    "nomeDemanda": {
+      "type": "string"
+    },
+    "raias": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "cor": {
+            "type": "string",
+            "pattern": "^#[0-9a-fA-F]{6}$"
+          },
+          "ordem": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "orquestradora": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "nome",
+          "cor",
+          "ordem",
+          "orquestradora"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "nos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "inicio",
+              "tarefa",
+              "bifurcacao",
+              "chamada",
+              "fim"
+            ]
+          },
+          "rotulo": {
+            "type": "string"
+          },
+          "raia": {
+            "type": "string"
+          },
+          "ordem": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "raiaChamada": {
+            "type": "string"
+          },
+          "retorno": {
+            "type": "string"
+          },
+          "subtarefas": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+                },
+                "rotulo": {
+                  "type": "string"
+                },
+                "ordem": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                "condicional": {
+                  "type": "boolean"
+                },
+                "quando": {
+                  "type": "string"
+                },
+                "papel": {
+                  "type": "string"
+                },
+                "papelNome": {
+                  "type": "string"
+                },
+                "responsavel": {
+                  "type": "string",
+                  "enum": [
+                    "agente",
+                    "pessoa",
+                    "ambos"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "rotulo",
+                "ordem",
+                "condicional"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "ligacoes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "rotulo": {
+                  "type": "string"
+                },
+                "tipo": {
+                  "type": "string"
+                },
+                "demandaDestino": {
+                  "type": "string"
+                },
+                "para": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "rotulo",
+                "tipo",
+                "demandaDestino",
+                "para"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "temPlaybook": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "tipo",
+          "rotulo",
+          "raia",
+          "ordem",
+          "subtarefas",
+          "temPlaybook"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "arestas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "origem": {
+            "type": "string"
+          },
+          "destino": {
+            "type": "string"
+          },
+          "rotulo": {
+            "type": "string"
+          },
+          "tracejada": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "origem",
+          "destino",
+          "rotulo",
+          "tracejada"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "transicoes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "origem": {
+            "type": "string"
+          },
+          "destino": {
+            "type": "string"
+          },
+          "rotulo": {
+            "type": "string"
+          },
+          "tracejada": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "origem",
+          "destino",
+          "rotulo",
+          "tracejada"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "versaoContrato",
+    "demanda",
+    "nomeDemanda",
+    "raias",
+    "nos",
+    "arestas"
+  ],
+  "additionalProperties": false
+}

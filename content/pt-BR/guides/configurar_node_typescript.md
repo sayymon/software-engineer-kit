@@ -202,7 +202,7 @@ nos:
       categoria: "[[pacotes_ambientes_execucao|Pacotes e ambientes de execução]]"
       ferramentas:
         - tabela:bun
-        - tabela:vitest
+        - "[[vitest|Vitest]]"
   - id: nod_orq_e3
     raia: nod_orq
     tipo: fim
@@ -239,7 +239,7 @@ nos:
       categoria: "[[pacotes_ambientes_execucao|Pacotes e ambientes de execução]]"
       ferramentas:
         - tabela:nvm
-        - tabela:eslint
+        - "[[eslint|ESLint]]"
   - id: nod_orq_e4
     raia: nod_orq
     tipo: fim
@@ -276,8 +276,8 @@ nos:
       categoria: "[[pacotes_ambientes_execucao|Pacotes e ambientes de execução]]"
       ferramentas:
         - tabela:pnpm
-        - tabela:vitest
-        - tabela:eslint
+        - "[[vitest|Vitest]]"
+        - "[[eslint|ESLint]]"
   - id: nod_ctx_s0
     raia: nod_ctx
     tipo: inicio
@@ -600,9 +600,9 @@ stacks:
   - "[[site_conteudo_estatico|Site de conteúdo estático]]"
 ferramentas:
   - tabela:bun
-  - tabela:vitest
+  - "[[vitest|Vitest]]"
   - tabela:nvm
-  - tabela:eslint
+  - "[[eslint|ESLint]]"
   - tabela:pnpm
 casosDeUso:
   - "[[prototipacao_de_front_end|Prototipação de front-end]]"

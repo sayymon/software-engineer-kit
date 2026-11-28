@@ -6,6 +6,7 @@ import { existsSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { LOCALES } from '../../lib/content';
+import { MERMAID_ESM_DIR, copiarMermaidEsm } from './mermaid-esm';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const locale = process.argv[2];
@@ -31,5 +32,7 @@ if (!existsSync(join(outDir, 'index.html'))) {
   console.error(`build produced no ${outName}/index.html`);
   process.exit(1);
 }
+const esm = copiarMermaidEsm(root, outDir);
+console.log(`> mermaid ESM ${esm.versao}: ${esm.arquivos} files, ${(esm.bytes / 1024).toFixed(0)} KiB copied to ${outName}/${MERMAID_ESM_DIR}`);
 run('pagefind index', join(root, 'node_modules/.bin/pagefind'), ['--site', outDir]);
 console.log(`built ${outName}${locale ? ` (${locale})` : ' (all locales)'}`);

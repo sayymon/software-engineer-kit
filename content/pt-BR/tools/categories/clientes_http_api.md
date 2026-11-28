@@ -13,11 +13,11 @@ maisBarata:
 custoBeneficio:
   - "[[axios|Axios]]"
   - tabela:requests
-  - tabela:httpx
+  - "[[httpx|HTTPX]]"
 qualidadeMaxima:
   - "[[okhttp|OkHttp]]"
   - tabela:retrofit
-  - tabela:reqwest
+  - "[[reqwest|reqwest]]"
 essenciais:
   - "[[axios|Axios]]"
   - tabela:requests
@@ -35,7 +35,7 @@ Bibliotecas para consumir APIs HTTP.
 - Cada faixa tem 3 opções; a primeira de cada faixa é a referência e tem nota própria.
 ## 🥇 Faixas
 - **Mais barata:** [[ky|ky]], ofetch, got
-- **Melhor custo-benefício:** [[axios|Axios]], Requests, HTTPX
-- **Qualidade máxima:** [[okhttp|OkHttp]], Retrofit, reqwest
+- **Melhor custo-benefício:** [[axios|Axios]], Requests, [[httpx|HTTPX]]
+- **Qualidade máxima:** [[okhttp|OkHttp]], Retrofit, [[reqwest|reqwest]]
 ## 🔗 Relacionamentos
 - **Mapa:** [[hub_tools|Mapa de Ferramentas de Engenharia]]

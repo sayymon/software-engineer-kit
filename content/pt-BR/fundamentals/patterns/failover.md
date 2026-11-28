@@ -65,12 +65,12 @@ casosDeUso:
   - "[[telecom_grande_empresa|Telecom (grande empresa)]]"
 variacoes: []
 ferramentas:
-  - tabela:istio
-  - tabela:envoy
-  - tabela:nginx
+  - "[[istio|Istio]]"
+  - "[[envoy|Envoy]]"
+  - "[[nginx|NGINX]]"
   - "[[kubernetes|Kubernetes (ferramenta)]]"
   - tabela:amazon-api-gateway
-  - tabela:traefik
+  - "[[traefik|Traefik]]"
 notaCompleta: []
 dataVerificacao: 2026-11-22
 tags:

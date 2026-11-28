@@ -72,7 +72,7 @@ ferramentas:
   - tabela:airbyte
   - tabela:aws-dms
   - tabela:striim
-  - tabela:apache-kafka
+  - "[[apache_kafka|Apache Kafka]]"
   - tabela:apache-flink
 notaCompleta: []
 dataVerificacao: 2026-11-22

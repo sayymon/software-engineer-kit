@@ -173,12 +173,12 @@ variacoes:
     herdaFerramentas: false
     maisBarata:
       - "[[gitleaks|Gitleaks (ferramenta)]]"
-      - tabela:trivy
+      - "[[trivy|Trivy]]"
       - tabela:semgrep-oss
     custoBeneficio:
       - "[[github_advanced_security|GitHub Advanced Security]]"
-      - tabela:snyk
-      - tabela:sonarqube
+      - "[[snyk|Snyk]]"
+      - "[[sonarqube|SonarQube]]"
     qualidadeMaxima:
       - "[[veracode|Veracode]]"
       - tabela:checkmarx

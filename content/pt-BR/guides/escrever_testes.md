@@ -120,7 +120,7 @@ nos:
       categoria: "[[testes_qa|Testes e QA]]"
       ferramentas:
         - "[[playwright|Playwright]]"
-        - tabela:testcontainers
+        - "[[testcontainers|Testcontainers]]"
         - tabela:selenium
   - id: tst_orq_e2
     raia: tst_orq
@@ -395,7 +395,7 @@ stacks:
   - "[[monolito_web_relacional|Monolito web com banco relacional]]"
 ferramentas:
   - "[[playwright|Playwright]]"
-  - tabela:testcontainers
+  - "[[testcontainers|Testcontainers]]"
   - tabela:selenium
   - "[[browserstack|BrowserStack]]"
   - tabela:applitools

@@ -28,6 +28,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654630171
+      },
+      {
+        "executionId": "4678af7d-b33b-47d4-9d32-47847663619f",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795710039070
+      },
+      {
+        "executionId": "4678af7d-b33b-47d4-9d32-47847663619f",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795712562730
       }
     ],
     "1.3 Medir S3 e S4 em `tests/browser/spike/s3-s4.spec.ts`": [
@@ -35,6 +45,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654256617
+      },
+      {
+        "executionId": "4678af7d-b33b-47d4-9d32-47847663619f",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795712565617
+      },
+      {
+        "executionId": "4678af7d-b33b-47d4-9d32-47847663619f",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795713687664
       }
     ],
     "1.4 Medir S5 em `tests/browser/spike/s5.spec.ts`: protótipo descartável do Renderizador próprio (`@dagrejs/dagre` em Worker, SVG gerado pelo kit) para 224 nós": [
@@ -42,6 +62,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654256652
+      },
+      {
+        "executionId": "4678af7d-b33b-47d4-9d32-47847663619f",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795713690929
+      },
+      {
+        "executionId": "4678af7d-b33b-47d4-9d32-47847663619f",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795719491505
       }
     ],
     "1.5 Medir S6 em `tests/browser/spike/s6.spec.ts`: build ESM dividida do Mermaid 11.17.2 (flowchart e dagre por `import()`) servida por `tests/browser/serve.ts`": [
@@ -49,6 +79,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654256693
+      },
+      {
+        "executionId": "4678af7d-b33b-47d4-9d32-47847663619f",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795719494950
+      },
+      {
+        "executionId": "4678af7d-b33b-47d4-9d32-47847663619f",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795720045420
       }
     ],
     "1.6 Escrever `docs/spike-fluxos-desempenho.md` com as tabelas de S1 a S6 e a seção \"Resultado do spike\" no `design.md`": [
@@ -56,6 +96,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654256727
+      },
+      {
+        "executionId": "4678af7d-b33b-47d4-9d32-47847663619f",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795720048678
+      },
+      {
+        "executionId": "4678af7d-b33b-47d4-9d32-47847663619f",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795721741648
       }
     ],
     "1.7 Checkpoint: apresentar ao dono o go/no-go do spike e aguardar a decisão": [
@@ -63,6 +113,11 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654256759
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795734656705
       }
     ],
     "1.8 Commit `docs(site): spike de desempenho do diagrama de fluxos`": [
@@ -70,6 +125,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654256786
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795734659646
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795734756819
       }
     ],
     "2.1 Estender `schema/flows.schema.json` com `categorias_ferramenta`, `guias_praticos` e o marcador explícito de \"sem ferramenta aplicável\" (campo opcional booleano, nome fixado nesta tarefa) em `$defs/Decisao` e `$defs/Subtarefa`": [
@@ -77,6 +142,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654256812
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795659660416
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795659809529
       }
     ],
     "2.2 Acrescentar `categorias_ferramenta` e `guias_praticos` a `REF_FIELDS` em `lib/guide/entities.ts` e emitir `REF_QUEBRADA` com o id da tarefa, o campo e o id não resolvido": [
@@ -84,6 +159,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654256839
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795659815064
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795659977805
       }
     ],
     "2.3 Portar as regras novas para `lib/guide/validate/`: aviso de duplicidade (`CATEGORIA_FERRAMENTA_DUPLICADA`, `GUIA_PRATICO_DUPLICADO`) e completude `SEM_FERRAMENTA_OU_GUIA`": [
@@ -91,6 +176,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654256912
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795659983584
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795660343814
       }
     ],
     "2.4 Escrever o adendo \"Atualização da etapa 3\" em `docs/adr/0001-yaml-como-fonte-unica.md` e o teste de guarda de `content/ids.lock.json`": [
@@ -98,6 +193,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654256941
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795660351357
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795660615766
       }
     ],
     "2.5 Declarar em `content/guide/comum.yaml` as Categorias_de_Ferramenta que as tarefas da `feature` usam (`categorias_ferramenta`, hoje vazio), com nome e descrição agnósticos": [
@@ -112,6 +217,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654256992
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795660351362
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795660615778
       }
     ],
     "2.7 Mesma ligação para a segunda terça parte das raias da `feature`": [
@@ -119,6 +234,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257018
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795660618430
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795660795177
       }
     ],
     "2.8 Mesma ligação para a terceira terça parte das raias da `feature`": [
@@ -126,6 +251,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257046
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795660798061
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795660924924
       }
     ],
     "2.9 Incluir `feature` em `DEMANDAS_COM_LIGACAO_OBRIGATORIA` e confirmar `npm run validate` estrito sem avisos de completude": [
@@ -133,6 +268,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257080
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795660928242
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795660991907
       }
     ],
     "2.10 Commit `feat(guia): ligação de tarefas a categorias de ferramenta e guias práticos`": [
@@ -140,6 +285,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257103
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795660991916
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661052461
       }
     ],
     "3.1 Criar `lib/schema/grafo.ts` (Zod, `VERSAO_MODELO_DE_GRAFO = 1`, `ModeloDeGrafo` e tipos filhos do design) e gerar `schema/json/grafo-fluxo.json` por `tools/schema/generate.ts`": [
@@ -147,6 +302,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257130
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661052471
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661179301
       }
     ],
     "3.2 Extrair `contexto()` de `lib/flow-mermaid/index.ts` para `lib/flow-graph/contexto.ts`, sem mudar comportamento": [
@@ -154,6 +319,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257158
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661052476
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661179310
       }
     ],
     "3.3 Implementar `gerarGrafo` e `gerarGrafos` em `lib/flow-graph/index.ts`, validando o resultado contra o schema e falhando com o id da Demanda e o caminho do campo": [
@@ -161,6 +336,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257186
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661182804
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661332645
       }
     ],
     "3.4 Escrever `tests/flow-graph/geradores.ts` e os testes de propriedade `tests/flow-graph/grafo.props.test.ts`": [
@@ -168,6 +353,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257211
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661340519
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661474185
       }
     ],
     "3.5 Escrever o teste de propriedade `tests/flow-graph/ordem.props.test.ts`": [
@@ -175,6 +370,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257241
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661477600
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661550538
       }
     ],
     "3.6 Criar a rota Astro `site/src/pages/[locale]/api/flows/[id].graph.json.ts` com `getStaticPaths` sobre as Demandas não biblioteca": [
@@ -182,6 +387,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257265
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661340525
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661474198
       }
     ],
     "3.7 Commit `feat(site): modelo de grafo do fluxo e API estática`": [
@@ -189,6 +404,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257291
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661550552
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661620931
       }
     ],
     "4.1 Adaptar `lib/flow-mermaid/index.ts` para montar o texto a partir de `ModeloDeGrafo` em `gerarDiagramaDoGrafo` nas Views `visao`, `raia:<id>` e `completo`, sem Subtarefas": [
@@ -196,6 +421,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257321
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661625809
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661814374
       }
     ],
     "4.2 Cobrir Subtarefas, legenda e `mapaIds` em `gerarDiagramaDoGrafo` e manter `gerarDiagrama(doc, demandaId, visao, ...)` como camada de compatibilidade, inclusive `visoesDoGuia` e `guiaParaDoc` das 3 notas": [
@@ -203,6 +438,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257348
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661817773
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661921101
       }
     ],
     "4.3 Escrever os testes de propriedade `tests/flow-graph/mermaid.props.test.ts`": [
@@ -210,6 +455,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257374
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661921116
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662037564
       }
     ],
     "4.4 Implementar `textoAcessivel(grafo)` em `lib/flow-graph/` e usá-lo em `site/src/render/flow.ts` para a lista ordenada de Nós por Raia com as transições, mantendo os playbooks em `<details>`": [
@@ -217,6 +472,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257400
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661625816
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795661814383
       }
     ],
     "4.5 Remover do build o caminho que lê o YAML direto, deixando-o só como oráculo de teste em `tests/`, e documentar no `docs/architecture.md` que o grafo é a fonte do Texto_Mermaid": [
@@ -224,6 +489,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257425
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662037575
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662161345
       }
     ],
     "4.6 Commit `refactor(fluxos): texto mermaid derivado do modelo de grafo`": [
@@ -231,6 +506,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257451
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662161354
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662214227
       }
     ],
     "5.1 Implementar `lib/flow-graph/expansao.ts` (`ConjuntoExpandido`, `ClusterDeRaia`, `ArestaVisivel`, `GrafoVisivel`, `projetar`, `chaveDoConjunto`, `lerConjunto` e `normalizar`) em TypeScript puro": [
@@ -238,6 +523,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257484
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662221955
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662348523
       }
     ],
     "5.2 Escrever os testes de propriedade `tests/flow-graph/expansao.props.test.ts` com grafos aleatórios e os grafos reais das 12 Demandas": [
@@ -245,6 +540,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257521
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662353073
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662523961
       }
     ],
     "5.3 Implementar `gerarDiagramaExpandido(grafo, conj, comLegenda)` em `lib/flow-mermaid/index.ts`": [
@@ -252,6 +557,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257549
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662353080
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662523973
       }
     ],
     "5.4 Gerar o golden `tests/fixtures/mermaid/golden/feature.geral.mmd` e escrever `tests/flow-graph/expansao-mermaid.props.test.ts`": [
@@ -259,6 +574,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257579
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662528398
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662654586
       }
     ],
     "5.5 Escrever o teste de exemplo `tests/flow-graph/limites-mermaid.test.ts` que gera o texto de Expandir_tudo, com e sem Subtarefas, das 12 Demandas e confere `maxTextSize` e `maxEdges` configurados": [
@@ -266,6 +591,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257608
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662528404
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795662654596
       }
     ],
     "5.6 Checkpoint: pedir ao dono a revisão do golden `feature.geral.mmd` e fixá-lo depois da aprovação": [
@@ -280,6 +615,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257668
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795739338870
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795739404429
       }
     ],
     "6.1 Criar `site/src/flow-app/state.ts` e `site/src/flow-app/loader.ts`": [
@@ -287,6 +632,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257695
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795734763309
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795735058518
       }
     ],
     "6.2 Empacotar o Mermaid no build conforme a decisão do spike (ESM dividida de flowchart e dagre, ou bundle único como fallback) em `tools/site/build.ts`": [
@@ -294,6 +649,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257725
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795734763317
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795735058558
       }
     ],
     "6.3 Implementar `site/src/flow-app/renderer.ts` (interfaces `Renderizador`, `InstanciaRenderizador`, `EstadoDiagrama` e registro `PERSPECTIVAS`) e `perspectives/mermaid.ts`": [
@@ -301,6 +666,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257759
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795735419369
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795735635259
       }
     ],
     "6.4 Implementar `site/src/flow-app/expansao.ts`: fila com número de sequência e descarte de resultado obsoleto, cache de SVG por `chaveDoConjunto` com limite de bytes e indicador de progresso (`role=\"status\"`, `aria-busy`, até 100 ms)": [
@@ -308,6 +683,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257786
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795735635292
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795735863138
       }
     ],
     "6.5 Reescrever a Pagina_de_Demanda (`site/src/render/flow.ts` e a página Astro) com a ilha `data-island=\"flow\"`: seletor das 12 Demandas na ordem de `ordem_das_demandas`, Abas_de_View (`geral`, raias, `completo`) com cor da Raia, legenda e troca de Demanda sem recarregar": [
@@ -315,6 +700,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257813
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795735866613
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795736596941
       }
     ],
     "6.6 Implementar `site/src/flow-app/interaction.ts`: clique (até 3 px), arraste com `grabbing`, setas, Ctrl ou Cmd com a roda, botões de zoom e rótulo acessível dos gestos": [
@@ -322,6 +717,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257840
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795736605657
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795736815008
       }
     ],
     "6.7 Implementar Cluster_de_Raia na ilha: clique expande no lugar, \"Abrir raia\" ativa `raia:<id>`, \"Recolher\" volta ao cluster, Enter expande, ação própria por teclado e Expandir_tudo": [
@@ -329,6 +734,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257866
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795736815021
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795737173736
       }
     ],
     "6.8 Implementar o botão \"Voltar\" (histórico de Views e rolagem, desabilitado sem histórico) e o alternador \"Raias\" da View `completo`": [
@@ -336,6 +751,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257891
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795737173977
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795737483918
       }
     ],
     "6.9 Implementar o seletor de Perspectiva (opção `mermaid`, registro aberto), com escolha no Fragmento_de_Estado e no `localStorage`, preservando View, Conjunto_Expandido, Subtarefas e Nó": [
@@ -343,6 +768,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257920
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795737483938
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795737720850
       }
     ],
     "6.10 Escrever `tests/browser/diagrama-ids.spec.ts` e `tests/browser/diagrama-interacao.spec.ts`": [
@@ -350,6 +785,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257949
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795737724804
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795738071227
       }
     ],
     "6.11 Escrever `tests/browser/demanda-troca.spec.ts` e `tests/browser/ordem-views.spec.ts`": [
@@ -357,6 +802,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654257975
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795738071249
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795738842934
       }
     ],
     "6.12 Escrever `tests/browser/expansao-progressiva.spec.ts` e `tests/browser/perspectiva.spec.ts`": [
@@ -364,6 +819,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654258001
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795738842947
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795739338857
       }
     ],
     "6.13 Commit `feat(site): diagrama interativo de fluxos com visao geral e expansao`": [
@@ -371,6 +836,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654258028
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795739404449
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795739479913
       }
     ],
     "7.1 Ampliar `api/flows/<id>.json` (`site/src/render/api.ts`) com `papeis`, letras RACI por nó, entradas e saídas, produtores e consumidores por artefato e variável (via `rastrearDados`) e o indicador \"sem produtor\" (via `lacunasDeDados`)": [
@@ -378,6 +853,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654258057
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795739485730
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795741075923
       }
     ],
     "7.2 Criar `site/src/flow-app/modal.ts` com `<dialog>` nativo, `inert` no resto da página, foco preso, Esc e botão fechar devolvendo o foco, e `no=` no Fragmento_de_Estado": [
@@ -385,6 +870,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654258086
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795739485740
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795741075938
       }
     ],
     "7.3 Renderizar o conteúdo do Modal por tipo de Nó: tarefa (nome, tipo, Raia, resumo, Fazer, Evitar, perguntas-chave na ordem do guia, entradas, saídas, técnicas e papéis com letra RACI), gateway (pergunta, saídas com condição, papel que decide), Subtarefa condicional (\"Executar quando\") e chamada de Raia (Raia chamada, retornos e botão para abrir a View)": [
@@ -392,6 +887,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654258114
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795741080750
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795742354902
       }
     ],
     "7.4 Tornar clicáveis papel, técnica, artefato, variável, rito e pergunta dentro do Modal (empilha, botão voltar, link para a Pagina_Canonica) e implementar o detalhe de artefato e variável com tipo, subtipo, exemplo, produtores, consumidores, aviso \"sem produtor\" e a ação \"destacar no Diagrama\"": [
@@ -399,6 +904,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654258142
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795743480863
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795744613090
       }
     ],
     "7.5 Implementar na ilha o alternador \"Subtarefas\" (expande as de toda raia expandida), a expansão por tarefa, a indicação \"N subtarefas\", a borda tracejada com ◆ nas condicionais e o alternador oculto quando a View não tem Subtarefas": [
@@ -406,6 +921,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654258173
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795744613117
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795745405655
       }
     ],
     "7.6 Escrever `tests/browser/modal-playbook.spec.ts` e `tests/browser/entradas-saidas.spec.ts`": [
@@ -413,6 +938,16 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654258206
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795745412819
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795745650481
       }
     ],
     "7.7 Escrever `tests/browser/subtarefas.spec.ts`": [
@@ -420,6 +955,11 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654258299
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795745412803
       }
     ],
     "7.8 Commit `feat(site): modal de playbook, subtarefas e rastreio de entradas e saidas`": [
@@ -427,6 +967,11 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654258325
+      },
+      {
+        "executionId": "54716066-4039-4acd-8578-d3dbbc6beb56",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795745650496
       }
     ],
     "8.1 Criar `lib/facets/index.ts` com `derivarFacetas(schemas)` e `construirIndice(facetas, entidades)`, a partir de `schema/json/*.json`, sem nome de campo fixo": [
@@ -665,6 +1210,90 @@
         "executionId": "7d08495c-8cdb-4f31-b4d7-48a11a3df6c7",
         "chatSessionId": "sess_15cceb7a-fa78-4c7b-98f4-c95386c9b4b9",
         "timestamp": 1795654259374
+      }
+    ],
+    "0.1 Criar o script one-off `tools/guide/split-comum.ts` (determinístico, baseado em texto) que corta `content/guide/comum.yaml` em `content/guide/catalogos/`": [
+      {
+        "executionId": "da7c07b2-b927-444c-90bd-ac6e8ad1939b",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795658151343
+      },
+      {
+        "executionId": "da7c07b2-b927-444c-90bd-ac6e8ad1939b",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795658190127
+      }
+    ],
+    "0.2 Alterar `lib/guide/load.ts` para ler a constante ordenada `ARQUIVOS_DE_CATALOGO` (em `catalogos/`, na ordem que mantém a ordem das chaves do documento mesclado igual à de hoje)": [
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795658327536
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795658405416
+      }
+    ],
+    "0.3 Rodar o corte no guia real e provar a equivalência": [
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795658407146
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795659374377
+      }
+    ],
+    "0.4 Atualizar os leitores do caminho antigo: `lib/content/index.ts`, `lib/guide/entities.ts`, `tools/validate/checks/flows.ts`, `tools/guide/cli.ts` e `tools/agents/sync.ts` (papéis agora vêm de `catalogos/papeis.yaml`)": [
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795659377468
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795659501362
+      }
+    ],
+    "0.5 Atualizar os textos que citam o caminho": [
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795659504148
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795659602303
+      }
+    ],
+    "0.6 Commit `refactor(guia): segmenta o comum.yaml em catálogos`": [
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795659605375
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795659637906
+      }
+    ],
+    "2.5 Declarar em `content/guide/catalogos/ferramentas.yaml` as Categorias_de_Ferramenta que as tarefas da `feature` usam (`categorias_ferramenta`, hoje vazio), com nome e descrição agnósticos": [
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795659983590
+      },
+      {
+        "executionId": "c789eb07-7a56-44bc-90e9-4f457619384a",
+        "chatSessionId": "sess_d4c193d1-854b-4911-9c0b-c2c2bcdbaea8",
+        "timestamp": 1795660343833
       }
     ]
   }

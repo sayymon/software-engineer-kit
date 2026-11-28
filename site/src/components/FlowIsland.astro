@@ -1,0 +1,9 @@
+---
+// SPDX-License-Identifier: MIT
+// Loader of the flow page island (`data-island="flow"`, see render/flow.ts). Included by the layout only on pages that have the
+// Diagrama, so every other page pays nothing. Astro bundles the module below; Mermaid itself is imported by the island on demand.
+---
+<script>
+  import { iniciarIlhaDaPagina } from '../flow-app/island';
+  iniciarIlhaDaPagina();
+</script>

@@ -65,7 +65,7 @@ ferramentas:
   - tabela:apache-zookeeper
   - "[[redis|Redis (ferramenta)]]"
   - "[[kubernetes|Kubernetes (ferramenta)]]"
-  - tabela:apache-kafka
+  - "[[apache_kafka|Apache Kafka]]"
 notaCompleta: []
 dataVerificacao: 2026-11-22
 tags:

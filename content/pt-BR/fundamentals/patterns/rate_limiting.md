@@ -67,8 +67,8 @@ casosDeUso:
 variacoes: []
 ferramentas:
   - "[[kong_gateway|Kong Gateway]]"
-  - tabela:nginx
-  - tabela:envoy
+  - "[[nginx|NGINX]]"
+  - "[[envoy|Envoy]]"
   - "[[redis|Redis (ferramenta)]]"
   - tabela:amazon-api-gateway
   - tabela:resilience4j

@@ -15,9 +15,9 @@ describe('entities derived from the guide YAML', () => {
   });
   it('has one entity per guide item, with the counts of the guide at 7abed1c', () => {
     // `celula` is 48 (12 demands times 4 requirements). `tecnica` is 127 minus the 3 guide techniques merged into kit notes.
-    const expected = { demanda: 13, raia: 71, tarefa: 151, decisao: 70, no: 323, subtarefa: 293, playbook: 544, pergunta: 451, celula: 48, artefato: 201, variavel: 83, papel: 16, rito: 16, tecnica: 124, requisito: 4, 'tipo-de-artefato': 21 };
+    const expected = { demanda: 13, raia: 71, tarefa: 151, decisao: 70, no: 323, subtarefa: 293, playbook: 544, pergunta: 451, celula: 48, artefato: 201, variavel: 83, papel: 16, rito: 16, tecnica: 124, requisito: 4, 'tipo-de-artefato': 21, 'categoria-ferramenta': 12 };
     for (const [tipo, n] of Object.entries(expected)) expect(count(tipo), tipo).toBe(n);
-    for (const tipo of ['abordagem', 'estrategia', 'categoria-ferramenta', 'fonte-guia', 'padrao-guia']) expect(count(tipo), tipo).toBe(0);
+    for (const tipo of ['abordagem', 'estrategia', 'fonte-guia', 'padrao-guia']) expect(count(tipo), tipo).toBe(0);
   });
   it('agrees with the merged guide document', () => {
     const doc = loadGuideDoc(guideDir(`${root}content`));

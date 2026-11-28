@@ -43,12 +43,12 @@ macro: "[[infraestrutura_devops_e_seguranca|Infraestrutura, DevOps e segurança]
 faixasPadrao:
   maisBarata:
     - "[[woodpecker_ci|Woodpecker CI]]"
-    - tabela:jenkins
+    - "[[jenkins|Jenkins]]"
     - tabela:drone
   custoBeneficio:
     - "[[github_actions|GitHub Actions]]"
     - tabela:circleci
-    - tabela:argo-cd
+    - "[[argo_cd|Argo CD]]"
   qualidadeMaxima:
     - "[[harness|Harness]]"
     - tabela:buildkite
@@ -80,7 +80,7 @@ variacoes:
       - "[[integracao_de_apis|Integração de APIs]]"
     herdaFerramentas: false
     maisBarata:
-      - tabela:argo-cd
+      - "[[argo_cd|Argo CD]]"
       - "[[woodpecker_ci|Woodpecker CI]]"
       - "[[kubernetes|Kubernetes (ferramenta)]]"
     custoBeneficio:

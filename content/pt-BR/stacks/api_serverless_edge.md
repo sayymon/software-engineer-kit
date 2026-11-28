@@ -84,7 +84,7 @@ slots:
     categoria: "[[gateway_api_service_mesh|Gateway de API e service mesh]]"
     obrigatorio: true
     maisBarata:
-      - tabela:nginx
+      - "[[nginx|NGINX]]"
     custoBeneficio:
       - "[[kong_gateway|Kong Gateway]]"
     qualidadeMaxima:
@@ -97,7 +97,7 @@ slots:
     maisBarata:
       - "[[opentelemetry|OpenTelemetry]]"
     custoBeneficio:
-      - tabela:sentry
+      - "[[sentry|Sentry]]"
     qualidadeMaxima:
       - "[[datadog|Datadog]]"
     lacuna: ""
@@ -440,11 +440,11 @@ ferramentas:
   - "[[redis|Redis (ferramenta)]]"
   - "[[upstash|Upstash]]"
   - "[[amazon_dynamodb|Amazon DynamoDB (ferramenta)]]"
-  - tabela:nginx
+  - "[[nginx|NGINX]]"
   - "[[kong_gateway|Kong Gateway]]"
   - tabela:amazon-api-gateway
   - "[[opentelemetry|OpenTelemetry]]"
-  - tabela:sentry
+  - "[[sentry|Sentry]]"
   - "[[datadog|Datadog]]"
   - "[[opentofu|OpenTofu]]"
   - "[[terraform|Terraform]]"

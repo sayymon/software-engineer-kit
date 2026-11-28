@@ -8,11 +8,11 @@ slug: observabilidade-apm
 grupo: Desenvolvimento e entrega
 maisBarata:
   - "[[opentelemetry|OpenTelemetry]]"
-  - tabela:prometheus
+  - "[[prometheus|Prometheus]]"
   - tabela:signoz
 custoBeneficio:
   - "[[grafana_cloud|Grafana Cloud]]"
-  - tabela:sentry
+  - "[[sentry|Sentry]]"
   - tabela:better-stack
 qualidadeMaxima:
   - "[[datadog|Datadog]]"
@@ -20,7 +20,7 @@ qualidadeMaxima:
   - tabela:dynatrace
 essenciais:
   - "[[opentelemetry|OpenTelemetry]]"
-  - tabela:prometheus
+  - "[[prometheus|Prometheus]]"
   - tabela:grafana
 excecao: ""
 guia: []
@@ -35,8 +35,8 @@ Logs, métricas, traces, erros e alertas de aplicações em produção.
 - Grupo do kit: Desenvolvimento e entrega.
 - Cada faixa tem 3 opções; a primeira de cada faixa é a referência e tem nota própria.
 ## 🥇 Faixas
-- **Mais barata:** [[opentelemetry|OpenTelemetry]], Prometheus, SigNoz
-- **Melhor custo-benefício:** [[grafana_cloud|Grafana Cloud]], Sentry, Better Stack
+- **Mais barata:** [[opentelemetry|OpenTelemetry]], [[prometheus|Prometheus]], SigNoz
+- **Melhor custo-benefício:** [[grafana_cloud|Grafana Cloud]], [[sentry|Sentry]], Better Stack
 - **Qualidade máxima:** [[datadog|Datadog]], [[new_relic|New Relic (ferramenta)]], Dynatrace
 ## 🔗 Relacionamentos
 - **Mapa:** [[hub_tools|Mapa de Ferramentas de Engenharia]]

@@ -144,8 +144,8 @@ variacoes:
     herdaFerramentas: false
     maisBarata:
       - "[[rabbitmq|RabbitMQ]]"
-      - tabela:nats
-      - tabela:apache-kafka
+      - "[[nats|NATS]]"
+      - "[[apache_kafka|Apache Kafka]]"
     custoBeneficio:
       - "[[amazon_sqs|Amazon SQS]]"
       - tabela:google-pubsub

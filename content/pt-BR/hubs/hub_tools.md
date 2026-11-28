@@ -61,4 +61,5 @@ Cada categoria traz `slug` (candidato a id de `categorias_ferramenta`) e `guia` 
 - **Guias práticos:** [[hub_guides|Mapa de Guias Práticos]]
 - **Stacks:** [[hub_stacks|Mapa de Stacks de Engenharia]]
 - **Área de IA:** [[hub_ai_tools|Mapa de Ferramentas de IA]]
+- **Porta de entrada por linguagem:** [[linguagens_programacao|Linguagens de programação]]
 - **Ferramentas pessoais:** Ferramentas

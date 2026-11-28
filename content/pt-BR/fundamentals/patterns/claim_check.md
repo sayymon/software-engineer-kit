@@ -57,7 +57,7 @@ variacoes:
 ferramentas:
   - "[[amazon_s3|Amazon S3 (ferramenta)]]"
   - "[[amazon_sqs|Amazon SQS]]"
-  - tabela:apache-kafka
+  - "[[apache_kafka|Apache Kafka]]"
   - "[[rabbitmq|RabbitMQ]]"
 notaCompleta: []
 dataVerificacao: 2026-11-22

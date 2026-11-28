@@ -1,0 +1,57 @@
+{
+  "medido_em": "2026-11-26T16:28:11.373Z",
+  "pagina": "/pt-BR/flows/feature/",
+  "cpu_throttling_rate": 4,
+  "execucoes": 10,
+  "metodo": "p95 por nearest-rank; gzip nível 9 sobre o corpo de cada resposta; du -sk",
+  "tempos_p95_ms": {
+    "dom_content_loaded": 911.3,
+    "diagrama_pronto": 31441.8
+  },
+  "amostras_ms": {
+    "dom_content_loaded": [
+      911.3,
+      441.7,
+      283.5,
+      257.8,
+      376,
+      302.4,
+      290.3,
+      429.3,
+      274.9,
+      67.6
+    ],
+    "diagrama_pronto": [
+      20604.1,
+      26204.6,
+      24660.9,
+      14494.3,
+      31441.8,
+      13069.9,
+      17991.9,
+      15026,
+      18631,
+      10980.1
+    ]
+  },
+  "tamanho_gzip_kb": {
+    "carga_inicial": 21.9,
+    "carga_diagrama": 960.6
+  },
+  "recursos": {
+    "inicial": {
+      "arquivos": 2,
+      "bytes": 119359,
+      "gzipBytes": 22425
+    },
+    "diagrama": {
+      "arquivos": 1,
+      "bytes": 3572661,
+      "gzipBytes": 983687
+    }
+  },
+  "du_sk": {
+    "site/dist": 75308,
+    "site/dist/pt-BR": 24224
+  }
+}

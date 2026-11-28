@@ -40,12 +40,12 @@ macro: "[[infraestrutura_devops_e_seguranca|Infraestrutura, DevOps e segurança]
 faixasPadrao:
   maisBarata:
     - "[[gitleaks|Gitleaks (ferramenta)]]"
-    - tabela:trivy
+    - "[[trivy|Trivy]]"
     - tabela:semgrep-oss
   custoBeneficio:
     - "[[github_advanced_security|GitHub Advanced Security]]"
-    - tabela:snyk
-    - tabela:sonarqube
+    - "[[snyk|Snyk]]"
+    - "[[sonarqube|SonarQube]]"
   qualidadeMaxima:
     - "[[veracode|Veracode]]"
     - tabela:checkmarx
@@ -76,11 +76,11 @@ variacoes:
       - "[[raciocinio|Raciocínio]]"
     herdaFerramentas: false
     maisBarata:
-      - tabela:trivy
+      - "[[trivy|Trivy]]"
       - tabela:grype
       - tabela:osv-scanner
     custoBeneficio:
-      - tabela:snyk
+      - "[[snyk|Snyk]]"
       - "[[github_advanced_security|GitHub Advanced Security]]"
       - tabela:dependency-track
     qualidadeMaxima:
@@ -113,8 +113,8 @@ variacoes:
       - tabela:detect-secrets
     custoBeneficio:
       - "[[github_advanced_security|GitHub Advanced Security]]"
-      - tabela:snyk
-      - tabela:sonarqube
+      - "[[snyk|Snyk]]"
+      - "[[sonarqube|SonarQube]]"
     qualidadeMaxima:
       - "[[gitguardian|GitGuardian]]"
       - tabela:checkmarx

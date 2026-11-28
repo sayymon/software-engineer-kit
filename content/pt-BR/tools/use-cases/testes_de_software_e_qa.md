@@ -43,11 +43,11 @@ faixasPadrao:
   maisBarata:
     - "[[playwright|Playwright]]"
     - tabela:selenium
-    - tabela:k6
+    - "[[k6|Grafana k6]]"
   custoBeneficio:
     - "[[cypress|Cypress (ferramenta)]]"
-    - tabela:testcontainers
-    - tabela:locust
+    - "[[testcontainers|Testcontainers]]"
+    - "[[locust|Locust]]"
   qualidadeMaxima:
     - "[[browserstack|BrowserStack]]"
     - tabela:applitools
@@ -62,15 +62,15 @@ variacoes:
     herdaFerramentas: false
     maisBarata:
       - "[[pytest|pytest]]"
-      - tabela:vitest
-      - tabela:junit5
+      - "[[vitest|Vitest]]"
+      - "[[junit5|JUnit 5]]"
     custoBeneficio:
       - "[[jest|Jest]]"
-      - tabela:rspec
-      - tabela:phpunit
+      - "[[rspec|RSpec]]"
+      - "[[phpunit|PHPUnit]]"
     qualidadeMaxima:
       - "[[xunit_net|xUnit.net]]"
-      - tabela:kotest
+      - "[[kotest|Kotest]]"
       - tabela:hypothesis
     justificativaFerramentas: "Muda Escala típica para milhares de casos em segundos: as ferramentas acompanham esse contexto e diferem do padrão do caso."
     excecao: ""
@@ -92,16 +92,16 @@ variacoes:
       - "[[avaliacao_de_qualidade|Avaliação de qualidade]]"
     herdaFerramentas: false
     maisBarata:
-      - tabela:testcontainers
+      - "[[testcontainers|Testcontainers]]"
       - "[[podman|Podman]]"
       - "[[pytest|pytest]]"
     custoBeneficio:
       - "[[docker_desktop|Docker Desktop]]"
-      - tabela:junit5
+      - "[[junit5|JUnit 5]]"
       - "[[jest|Jest]]"
     qualidadeMaxima:
       - "[[xunit_net|xUnit.net]]"
-      - tabela:kotest
+      - "[[kotest|Kotest]]"
       - tabela:k3s
     justificativaFerramentas: "Muda Escala típica para centenas de cenários: as ferramentas acompanham esse contexto e diferem do padrão do caso."
     excecao: ""
@@ -144,13 +144,13 @@ variacoes:
       - "[[tracing|Tracing]]"
     herdaFerramentas: false
     maisBarata:
-      - tabela:locust
-      - tabela:k6
+      - "[[locust|Locust]]"
+      - "[[k6|Grafana k6]]"
       - "[[opentelemetry|OpenTelemetry]]"
     custoBeneficio:
       - "[[grafana_cloud|Grafana Cloud]]"
       - tabela:signoz
-      - tabela:prometheus
+      - "[[prometheus|Prometheus]]"
     qualidadeMaxima:
       - "[[datadog|Datadog]]"
       - "[[new_relic|New Relic (ferramenta)]]"

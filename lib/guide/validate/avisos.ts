@@ -8,6 +8,7 @@
 import type { GuideDoc } from '../index';
 import { lacunasDeDados } from '../rastreio';
 import { checarPlaybooksSemNo, regrasDePergunta } from './perguntas';
+import { checarLigacaoDuplicada, checarLigacaoObrigatoria } from './ferramentas';
 import { checarPapeis } from './raci';
 import { checarTaxonomia } from './taxonomia';
 import type { Problema } from './types';
@@ -168,6 +169,7 @@ export function checarAvisos(doc: Doc): Problema[] {
     });
   });
   checarPapeis(doc, aviso, regrasDePergunta(doc, aviso));
+  checarLigacaoDuplicada(doc, aviso);
   return avisos;
 }
 /** Completeness warnings of the whole guide; only runs with `completude` (and `avisos`), as in Python. */
@@ -176,6 +178,7 @@ export function checarCompletude(doc: Doc): Problema[] {
   const aviso = novoAviso(issues);
   checarTaxonomia(doc, aviso);
   checarPlaybooksSemNo(doc, aviso);
+  checarLigacaoObrigatoria(doc, aviso);
   const lacunas = lacunasDeDados(doc);
   for (const colecao of ['artefatos', 'variaveis'] as const) {
     list(doc[colecao]).forEach((item, i) => {

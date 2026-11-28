@@ -20,6 +20,12 @@ const raci = {
   informado: ids.optional(),
   aprova: id.optional(),
 };
+/** Tool and practical-guide links of a task or subtask (flows.schema.json: categorias_ferramenta, guias_praticos, sem_ferramenta). */
+const ferramentas = {
+  categorias_ferramenta: ids.optional(),
+  guias_praticos: ids.optional(),
+  sem_ferramenta: z.boolean().optional(),
+};
 
 export const Raia = z.strictObject({
   ...derived,
@@ -48,6 +54,7 @@ const nodeShape = {
   raia_chamada: id.optional(),
   retorno: z.string().optional(),
   ...raci,
+  ...ferramentas,
 };
 export const Tarefa = z.strictObject({ ...derived, tipo: z.literal('tarefa'), ...nodeShape, subtarefas: ids.optional() });
 export const Decisao = z.strictObject({ ...derived, tipo: z.literal('decisao'), ...nodeShape });
@@ -67,6 +74,7 @@ export const Subtarefa = z.strictObject({
   saidas: ids.optional(),
   tecnicas: raw.optional(),
   ...raci,
+  ...ferramentas,
 });
 
 export const Playbook = z.strictObject({

@@ -20,7 +20,7 @@ import {
 } from './util';
 import { renderDemand } from './flow';
 
-export type Rendered = { html: string; diagrams: number };
+export type Rendered = { html: string; diagrams: number; flow?: boolean };
 
 type Spec = { facts: string[]; rels: string[] };
 
@@ -511,6 +511,7 @@ function generic(ctx: Ctx, page: Page): string {
 
 export function renderEntity(ctx: Ctx, page: Page): Rendered {
   let diagrams = 0;
+  let flow = false;
   let middle: string;
   switch (page.tipo) {
     case 'ferramenta':
@@ -559,6 +560,7 @@ export function renderEntity(ctx: Ctx, page: Page): Rendered {
       const f = renderDemand(ctx, page);
       middle = f.html;
       diagrams = f.diagrams;
+      flow = f.flow;
       break;
     }
     case 'tecnica':
@@ -579,7 +581,5 @@ export function renderEntity(ctx: Ctx, page: Page): Rendered {
     fontes(ctx, page.entity.data) +
     inbound(ctx, page) +
     `</div>`;
-  return { html, diagrams };
+  return { html, diagrams, flow };
 }
-
-

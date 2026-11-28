@@ -7,19 +7,19 @@ descricao: Frameworks para aplicativos desktop em Windows, macOS e Linux.
 slug: frameworks-desktop
 grupo: Frameworks por camada
 maisBarata:
-  - tabela:tauri
-  - tabela:electron
+  - "[[tauri|Tauri]]"
+  - "[[electron|Electron]]"
   - tabela:avalonia-ui
 custoBeneficio:
   - "[[flutter|Flutter]]"
   - tabela:compose-multiplatform
-  - tabela:javafx
+  - "[[javafx|JavaFX (OpenJFX)]]"
 qualidadeMaxima:
-  - tabela:qt
-  - tabela:dotnet-maui
+  - "[[qt|Qt]]"
+  - "[[dotnet_maui|dotNET MAUI]]"
   - tabela:wxwidgets
 essenciais:
-  - tabela:electron
+  - "[[electron|Electron]]"
 excecao: ""
 guia: []
 tags:
@@ -34,8 +34,8 @@ Frameworks para aplicativos desktop em Windows, macOS e Linux.
 - Camada nova do kit. Preços de Avalonia UI e Qt aparecem como não verificado na data 2026-11-22.
 - Cada faixa tem 3 opções; a primeira de cada faixa é a referência. As demais ferramentas da camada ficam em outras opções.
 ## 🥇 Faixas
-- **Mais barata:** Tauri, Electron, Avalonia UI
-- **Melhor custo-benefício:** [[flutter|Flutter]], Compose Multiplatform, JavaFX (OpenJFX)
-- **Qualidade máxima:** Qt, dotNET MAUI, wxWidgets
+- **Mais barata:** [[tauri|Tauri]], [[electron|Electron]], Avalonia UI
+- **Melhor custo-benefício:** [[flutter|Flutter]], Compose Multiplatform, [[javafx|JavaFX (OpenJFX)]]
+- **Qualidade máxima:** [[qt|Qt]], [[dotnet_maui|dotNET MAUI]], wxWidgets
 ## 🔗 Relacionamentos
 - **Mapa:** [[hub_tools|Mapa de Ferramentas de Engenharia]]
